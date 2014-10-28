@@ -16,7 +16,7 @@ Begin Window Window1
    MaxHeight       =   32000
    MaximizeButton  =   True
    MaxWidth        =   32000
-   MenuBar         =   30872107
+   MenuBar         =   1253638004
    MenuBarVisible  =   True
    MinHeight       =   64
    MinimizeButton  =   True
@@ -30,12 +30,5 @@ End
 #tag EndWindow
 
 #tag WindowCode
-	#tag Event
-		Sub Open()
-		  
-		End Sub
-	#tag EndEvent
-
-
 #tag EndWindowCode
 
