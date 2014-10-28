@@ -3,6 +3,22 @@ Protected Class App
 Inherits Application
 	#tag Event
 		Sub Open()
+		  //
+		  // Create the pref folder
+		  //
+		  
+		  dim f as FolderItem = SpecialFolder.ApplicationData.Child( "Kaju Admin" )
+		  if not f.Exists then
+		    f.CreateAsFolder
+		  end if
+		  
+		  dim u as new Kaju.UpdateChecker( "", "", f )
+		  
+		  dim r as double
+		  
+		  r = Kaju.UpdateChecker.VersionToDouble( "1.2a999" )
+		  r = Kaju.UpdateChecker.VersionToDouble( "1.2b3" )
+		  r = Kaju.UpdateChecker.VersionToDouble( "1.2" )
 		  
 		End Sub
 	#tag EndEvent
