@@ -1,11 +1,11 @@
 #tag Window
-Begin Window Window1
+Begin Window KajuUpdateWindow
    BackColor       =   &cFFFFFF00
    Backdrop        =   0
-   CloseButton     =   True
+   CloseButton     =   False
    Compatibility   =   ""
    Composite       =   False
-   Frame           =   0
+   Frame           =   1
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
@@ -14,16 +14,16 @@ Begin Window Window1
    LiveResize      =   True
    MacProcID       =   0
    MaxHeight       =   32000
-   MaximizeButton  =   True
+   MaximizeButton  =   False
    MaxWidth        =   32000
-   MenuBar         =   1253638004
+   MenuBar         =   0
    MenuBarVisible  =   True
    MinHeight       =   64
-   MinimizeButton  =   True
+   MinimizeButton  =   False
    MinWidth        =   64
    Placement       =   0
-   Resizeable      =   True
-   Title           =   "Untitled"
+   Resizeable      =   False
+   Title           =   "Update"
    Visible         =   True
    Width           =   600
 End
