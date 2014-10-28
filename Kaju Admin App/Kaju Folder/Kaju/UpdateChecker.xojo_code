@@ -1,12 +1,6 @@
 #tag Class
 Protected Class UpdateChecker
 	#tag Method, Flags = &h0
-		Sub Check()
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub Constructor(updateURL As String, rsaPublicKey As String, preferencesFolder As FolderItem)
 		  
 		  self.UpdateURL = updateURL
@@ -77,6 +71,12 @@ Protected Class UpdateChecker
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub PerformCheck(honorIgnored As Boolean)
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h21
 		Private Sub SavePrefs()
 		  dim j as new JSONItem
@@ -117,16 +117,16 @@ Protected Class UpdateChecker
 		  dim j as new JSONItem
 		  for i as integer = 0 to arr.Ubound
 		    j.Append arr( i )
-		  next 
+		  next
 		  
 		  return j
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		 Shared Function VersionToDouble(version As String) As Double
+	#tag Method, Flags = &h21
+		Private Shared Function VersionToDouble(version As String) As Double
 		  // Takes a version and turns it into an double that can be compared.
-		  // Assumes that the version will have no more than 5 parts 
+		  // Assumes that the version will have no more than 5 parts
 		  // (NN.NN.NN.NN.NN) and each part will max out at 99. The version
 		  // may trail with an alpha or beta suffix, and that part will max out
 		  // at 999.
