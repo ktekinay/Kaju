@@ -179,6 +179,10 @@ Protected Class UpdateChecker
 		Private PrefFile As FolderItem
 	#tag EndProperty
 
+	#tag Property, Flags = &h0
+		Secure As Boolean
+	#tag EndProperty
+
 	#tag Property, Flags = &h21
 		Private ServerPublicKey As String
 	#tag EndProperty
