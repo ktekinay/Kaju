@@ -72,9 +72,45 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub PerformCheck(honorIgnored As Boolean)
+		Function PerformUpdate(honorIgnored As Boolean) As Boolean
+		  // Pull the data from the URL, check it, and preset the window if needed
+		  // Returns true if the app should quit in preparation of the update.
+		  //
+		  // The caller should be prepared to handle an exception in case of error.
 		  
-		End Sub
+		  //
+		  // Pull the raw data
+		  //
+		  
+		  dim http as new HTTPSecureSocket
+		  http.Secure = self.Secure
+		  dim raw as string = http.Get( self.UpdateURL, 5 )
+		  if raw = "" then
+		    raise new KajuException( KajuException.kErrorNoUpdateDataAvailable )
+		  end if
+		  
+		  raw = raw.DefineEncoding( Encodings.UTF8 )
+		  raw = ReplaceLineEndings( raw, EndOfLine.UNIX )
+		  
+		  dim firstLine as string = raw.NthField( EndOfLine.UNIX, 1 )
+		  raw = raw.Mid( firstLine.Len + 2 )
+		  
+		  dim sig as string = firstLine.Left( kUpdatePacketMarker.Len )
+		  if StrComp( sig, kUpdatePacketMarker, 0 ) <> 0 then
+		    raise new KajuException( KajuException.kErrorIncorrectPacketMarker )
+		  end if
+		  
+		  sig = firstLine.Mid( sig.Len + 1 )
+		  sig = DecodeHex( sig )
+		  if not Crypto.RSAVerifySignature( raw, sig, ServerPublicKey ) then
+		    raise new KajuException( KajuException.kErrorIncorrectPacketSignature )
+		  end if
+		  
+		  return ProcessUpdateData( raw )
+		  
+		End Function
+	#tag EndMethod
+
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
