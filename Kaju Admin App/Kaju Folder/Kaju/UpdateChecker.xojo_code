@@ -111,6 +111,17 @@ Protected Class UpdateChecker
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Function ProcessUpdateData(raw As String) As Boolean
+		  dim j as JSONItem
+		  try
+		    j = new JSONItem( raw )
+		  catch err as RuntimeException
+		    raise new KajuException( KajuException.kErrorBadUpdateData )
+		  end try
+		  
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
