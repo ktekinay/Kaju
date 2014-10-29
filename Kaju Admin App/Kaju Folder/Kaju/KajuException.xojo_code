@@ -1,5 +1,5 @@
 #tag Class
-Private Class KajuException
+Class KajuException
 Inherits RuntimeException
 	#tag Method, Flags = &h0
 		Sub Constructor(msg As String)
