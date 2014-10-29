@@ -16,9 +16,9 @@ Inherits Application
 		  
 		  dim r as double
 		  
-		  r = Kaju.UpdateChecker.VersionToDouble( "1.2a999" )
-		  r = Kaju.UpdateChecker.VersionToDouble( "1.2b3" )
-		  r = Kaju.UpdateChecker.VersionToDouble( "1.2" )
+		  r = Kaju.VersionToDouble( "1.2a999" )
+		  r = Kaju.VersionToDouble( "1.2b3" )
+		  r = Kaju.VersionToDouble( "1.2" )
 		  
 		End Sub
 	#tag EndEvent
