@@ -161,7 +161,7 @@ Protected Class UpdateChecker
 
 	#tag Method, Flags = &h21
 		Private Function StringArrayToJSON(arr() As String) As JSONItem
-		  dim j as new JSONItem
+		  dim j as new JSONItem( "[]" )
 		  for i as integer = 0 to arr.Ubound
 		    j.Append arr( i )
 		  next
