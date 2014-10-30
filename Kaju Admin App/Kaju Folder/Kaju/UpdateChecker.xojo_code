@@ -103,7 +103,7 @@ Protected Class UpdateChecker
 		  
 		  sig = firstLine.Mid( sig.Len + 1 )
 		  sig = DecodeHex( sig )
-		  if not Crypto.RSAVerifySignature( raw, sig, ServerPublicKey ) then
+		  if not Crypto.RSAVerifySignature( raw, sig, ServerPublicRSAKey ) then
 		    raise new KajuException( KajuException.kErrorIncorrectPacketSignature )
 		  end if
 		  
@@ -188,8 +188,8 @@ Protected Class UpdateChecker
 		Secure As Boolean
 	#tag EndProperty
 
-	#tag Property, Flags = &h21
-		Private ServerPublicKey As String
+	#tag Property, Flags = &h0
+		ServerPublicRSAKey As String
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
