@@ -1,8 +1,7 @@
 #tag Class
 Protected Class UpdateChecker
 	#tag Method, Flags = &h0
-		Sub Constructor(rsaPublicKey As String, preferencesFolder As FolderItem)
-		  self.ServerPublicKey = rsaPublicKey
+		Sub Constructor(preferencesFolder As FolderItem)
 		  self.PrefFile = preferencesFolder.Child( kPreferencesName )
 		  
 		  LoadPrefs()
