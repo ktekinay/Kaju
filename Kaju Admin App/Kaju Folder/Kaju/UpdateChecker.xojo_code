@@ -188,6 +188,14 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 
+	#tag Hook, Flags = &h0
+		Event ReadyToInstall()
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
+		Event RequiredUpdateDeclined()
+	#tag EndHook
+
 	#tag Property, Flags = &h21
 		Private DryRun As Boolean
 	#tag EndProperty
