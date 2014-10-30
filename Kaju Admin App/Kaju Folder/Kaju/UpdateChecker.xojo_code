@@ -109,9 +109,9 @@ Protected Class UpdateChecker
 		    raise new KajuException( KajuException.kErrorIncorrectPacketSignature )
 		  end if
 		  
-		  return ProcessUpdateData( raw )
+		  ProcessUpdateData( raw )
 		  
-		End Function
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
@@ -182,7 +182,8 @@ Protected Class UpdateChecker
 		  // Allows a dry run with the update information that would otherwise be obtained
 		  // from the UpdateURL
 		  
-		  return ProcessUpdateData( jsonString )
+		  DryRun = true
+		  ProcessUpdateData( jsonString )
 		  
 		End Function
 	#tag EndMethod
@@ -196,6 +197,11 @@ Protected Class UpdateChecker
 		Event RequiredUpdateDeclined()
 	#tag EndHook
 
+
+	#tag Property, Flags = &h0
+		DefaultImage As Picture
+	#tag EndProperty
+
 	#tag Property, Flags = &h21
 		Private DryRun As Boolean
 	#tag EndProperty
@@ -206,6 +212,10 @@ Protected Class UpdateChecker
 
 	#tag Property, Flags = &h21
 		Private IgnoreVersionsPref() As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		ImdateURL As String
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
