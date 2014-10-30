@@ -69,7 +69,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function PerformUpdate() As Boolean
+		Sub PerformUpdate()
 		  // Pull the data from the URL, check it, and preset the window if needed
 		  // Returns true if the app should quit in preparation of the update.
 		  //
