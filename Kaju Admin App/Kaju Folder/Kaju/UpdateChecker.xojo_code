@@ -185,8 +185,8 @@ Protected Class UpdateChecker
 		Private ServerPublicKey As String
 	#tag EndProperty
 
-	#tag Property, Flags = &h21
-		Private UpdateURL As String
+	#tag Property, Flags = &h0
+		UpdateURL As String
 	#tag EndProperty
 
 
