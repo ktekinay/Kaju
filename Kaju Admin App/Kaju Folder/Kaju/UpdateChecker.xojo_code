@@ -80,6 +80,10 @@ Protected Class UpdateChecker
 		  // Pull the raw data
 		  //
 		  
+		  if UpdateURL.Trim = "" then
+		    raise new KajuException( KajuException.kErrorNoUpdateDataAvailable )
+		  end if
+		  
 		  dim http as new HTTPSecureSocket
 		  http.Secure = self.Secure
 		  dim raw as string = http.Get( self.UpdateURL, 5 )
