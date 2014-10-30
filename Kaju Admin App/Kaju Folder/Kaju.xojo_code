@@ -1,6 +1,15 @@
 #tag Module
 Protected Module Kaju
 	#tag Method, Flags = &h1
+		Protected Function AppVersionString() As String
+		  // Convenience method to return the app's version as a string
+		  
+		  return VersionStringFor( App.MajorVersion, App.MinorVersion, App.BugVersion, App.StageCode, App.NonReleaseVersion )
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Sub JSONToPoperties(data As JSONItem, target As Object)
 		  // Stores the values in the JSON object to the matching property in the object.
 		  // Will only handle basic types, not objects.
@@ -21,6 +30,38 @@ Protected Module Kaju
 		  next
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Function VersionStringFor(majorVersion As Integer, minorVersion As Integer, bugVersion As Integer) As String
+		  return VersionStringFor( majorVersion, minorVersion, bugVersion, App.Final, 0 )
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Function VersionStringFor(majorVersion As Integer, minorVersion As Integer, bugVersion As Integer, stageCode As Integer, nonReleaseVersion As Integer) As String
+		  dim parts() as string
+		  parts.Append str( majorVersion )
+		  parts.Append str( minorVersion )
+		  parts.Append str( bugVersion )
+		  
+		  dim version as string = join( parts, "." )
+		  
+		  if stageCode <> App.Final then
+		    select case stageCode
+		    case App.Development
+		      version = version + "d"
+		    case App.Alpha
+		      version = version + "a"
+		    case App.Beta
+		      version = version + "b"
+		    end
+		    version = version + str( nonReleaseVersion )
+		  end if
+		  
+		  return version
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
