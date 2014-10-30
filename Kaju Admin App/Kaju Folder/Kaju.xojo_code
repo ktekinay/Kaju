@@ -1,6 +1,29 @@
 #tag Module
 Protected Module Kaju
 	#tag Method, Flags = &h1
+		Protected Sub JSONToPoperties(data As JSONItem, target As Object)
+		  // Stores the values in the JSON object to the matching property in the object.
+		  // Will only handle basic types, not objects.
+		  
+		  dim ti as Introspection.TypeInfo = Introspection.GetType( target )
+		  dim props() as Introspection.PropertyInfo = ti.GetProperties()
+		  
+		  for each prop as Introspection.PropertyInfo in props
+		    if prop.CanWrite then
+		      dim name as string = prop.Name
+		      if data.HasName( name ) then
+		        dim v as variant = data.Value( name )
+		        if not ( v IsA JSONItem ) then
+		          prop.Value( target ) = v
+		        end if
+		      end if
+		    end if
+		  next
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Function VersionToDouble(version As String) As Double
 		  // Takes a version and turns it into an double that can be compared.
 		  // Assumes that the version will have no more than 5 parts
