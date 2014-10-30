@@ -69,7 +69,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function PerformUpdate(honorIgnored As Boolean) As Boolean
+		Function PerformUpdate() As Boolean
 		  // Pull the data from the URL, check it, and preset the window if needed
 		  // Returns true if the app should quit in preparation of the update.
 		  //
@@ -171,6 +171,10 @@ Protected Class UpdateChecker
 		End Function
 	#tag EndMethod
 
+
+	#tag Property, Flags = &h0
+		HonorIgnored As Boolean = True
+	#tag EndProperty
 
 	#tag Property, Flags = &h21
 		Private IgnoreVersionsPref() As String
