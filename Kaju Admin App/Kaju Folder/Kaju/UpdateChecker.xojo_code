@@ -1,9 +1,7 @@
 #tag Class
 Protected Class UpdateChecker
 	#tag Method, Flags = &h0
-		Sub Constructor(updateURL As String, rsaPublicKey As String, preferencesFolder As FolderItem)
-		  
-		  self.UpdateURL = updateURL
+		Sub Constructor(rsaPublicKey As String, preferencesFolder As FolderItem)
 		  self.ServerPublicKey = rsaPublicKey
 		  self.PrefFile = preferencesFolder.Child( kPreferencesName )
 		  
