@@ -80,7 +80,7 @@ Protected Class UpdateChecker
 		  //
 		  
 		  if UpdateURL.Trim = "" then
-		    raise new KajuException( KajuException.kErrorNoUpdateDataAvailable )
+		    raise new KajuException( KajuException.kErrorMissingUpdateURL )
 		  end if
 		  
 		  dim http as new HTTPSecureSocket
