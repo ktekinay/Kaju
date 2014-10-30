@@ -10,6 +10,7 @@ Module=Kaju;Kaju Folder/Kaju.xojo_code;&h11400316;&h2570CF64;false
 Window=KajuUpdateWindow;Kaju Folder/KajuUpdateWindow.xojo_window;&h18AE3D9;&h2570CF64;false
 Class=UpdateChecker;Kaju Folder/Kaju/UpdateChecker.xojo_code;&h70CF0A50;&h11400316;false
 Class=KajuException;Kaju Folder/Kaju/KajuException.xojo_code;&h3047231F;&h11400316;false
+Class=UpdateInformation;Kaju Folder/Kaju/UpdateInformation.xojo_code;&h79AE1ADC;&h11400316;false
 DefaultWindow=WndAdmin
 AppMenuBar=MainMenuBar
 MajorVersion=1
