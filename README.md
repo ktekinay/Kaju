@@ -1,10 +1,10 @@
-# README #
+# README
 
 A Xojo module and Admin app to enable self-update in Xojo apps.
 
-## Specifications ##
+## Specifications
 
-### General Information ###
+### General Information
 
 Kaju is a pull system where the client gets information from known url. It is designed as a series of Xojo classes.
 
@@ -16,7 +16,7 @@ The JSON will contain all information about every available version for that lin
 
 The client will have the server's public RSA key. The server will use that key to sign the JSON and provide the signature for the binary. Each line should have its own private key.
 
-### JSON Specs ###
+### JSON Specs
 
 The JSON will contains the following fields for each version.
 
@@ -36,6 +36,7 @@ The JSON will contains the following fields for each version.
 		URL              (string)
 		Signature        (string)
 	InfoURL              (string)
+	ImageURL             (string)
 
 A sample JSON that will be returned by the server:
 
@@ -61,7 +62,7 @@ A sample JSON that will be returned by the server:
 					"URL" : "http://www.site.com/download_path_Linux" ,
 					"Signature" : "ABC123"
 				} ,
-			"Info URL" : "http://www.site.com/info"
+			"InfoURL" : "http://www.site.com/info"
 		} ,
 		{
 			"AppName" : "My App" ,
@@ -87,20 +88,28 @@ The "Info URL" is a site that will provide more information about a particular u
 
 It will be up to the implementer to enforce the "Is Required" flag on the client end. Only the release version will have a flag since development versions are always optional.
 
-## Who Did This? ##
+## How To Use It
+
+Create a new Kaju.UpdateChecker object and fill in its properties. [DEFINE THESE]
+
+Call CheckForUpdates. This will go to the UpdateURL and see if there are any updates available and ask the user about them. If the user chooses to update, the class will download and verify the binary, then raise the `ReadyToInstall` event. Within that event, the consumer just needs to perform any cleanup and quit. The class will take care of the update and relaunch the new version of the app.
+
+If the user declines an update marked as "IsRequired", the `RequiredUpdateDeclined` event will be raised and the consumer should act accordingly.
+
+## Who Did This?
 
 This project was designed and implemented by Kem Tekinay (ktekinay at mactechnologies.com) and Jeremy Cowgar (jeremy at cowgar.com).
 
 
-## Other Stuff ##
+## Other Stuff
 
-### What is this repository for? ###
+### What is this repository for?
 
 * Quick summary
 * Version
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
-### How do I get set up? ###
+### How do I get set up?
 
 * Summary of set up
 * Configuration
@@ -109,13 +118,13 @@ This project was designed and implemented by Kem Tekinay (ktekinay at mactechnol
 * How to run tests
 * Deployment instructions
 
-### Contribution guidelines ###
+### Contribution guidelines
 
 * Writing tests
 * Code review
 * Other guidelines
 
-### Who do I talk to? ###
+### Who do I talk to?
 
 * Repo owner or admin
 * Other community or team contact
