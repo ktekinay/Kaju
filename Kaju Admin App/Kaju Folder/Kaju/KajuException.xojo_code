@@ -18,6 +18,9 @@ Inherits RuntimeException
 	#tag Constant, Name = kErrorIncorrectPacketSignature, Type = String, Dynamic = False, Default = \"The RSA signature of the update packet cannot be verified.", Scope = Public
 	#tag EndConstant
 
+	#tag Constant, Name = kErrorMissingUpdateURL, Type = String, Dynamic = False, Default = \"The update URL is missing.", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = kErrorNoUpdateDataAvailable, Type = String, Dynamic = False, Default = \"Could not get update data.", Scope = Public
 	#tag EndConstant
 
