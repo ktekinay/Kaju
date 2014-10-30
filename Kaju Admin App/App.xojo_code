@@ -12,7 +12,7 @@ Inherits Application
 		    f.CreateAsFolder
 		  end if
 		  
-		  dim u as new Kaju.UpdateChecker( "", "", f )
+		  dim u as new Kaju.UpdateChecker( f )
 		  
 		  dim r as double
 		  
