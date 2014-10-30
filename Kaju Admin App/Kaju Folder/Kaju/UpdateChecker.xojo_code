@@ -114,14 +114,18 @@ Protected Class UpdateChecker
 
 	#tag Method, Flags = &h21
 		Private Function ProcessUpdateData(raw As String) As Boolean
-		  dim j as JSONItem
-		  try
-		    j = new JSONItem( raw )
-		  catch err as RuntimeException
+		  dim j as new JSONItem( raw )
+		  
+		  dim ub as integer = j.Count - 1
+		  dim info() as Kaju.UpdateInformation
+		  for i as integer = 0 to ub
+		    info.Append new Kaju.UpdateInformation( j( i ) )
+		  next
+		  
+		  
+		  Exception err as RuntimeException
 		    raise new KajuException( KajuException.kErrorBadUpdateData )
-		  end try
-		  
-		  
+		    
 		End Function
 	#tag EndMethod
 
