@@ -79,6 +79,8 @@ Protected Class UpdateChecker
 		  // Pull the raw data
 		  //
 		  
+		  DryRun = false
+		  
 		  if UpdateURL.Trim = "" then
 		    raise new KajuException( KajuException.kErrorMissingUpdateURL )
 		  end if
@@ -185,6 +187,10 @@ Protected Class UpdateChecker
 		End Function
 	#tag EndMethod
 
+
+	#tag Property, Flags = &h21
+		Private DryRun As Boolean
+	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		HonorIgnored As Boolean = True
