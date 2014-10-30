@@ -20,37 +20,59 @@ The client will have the server's public RSA key. The server will use that key t
 
 The JSON will contains the following fields for each version.
 
-	App Name           (string)
-	Version            (string)
-	Is Release         (bool)
-	Is Required        (bool, only if Is Release)
-	Requires Payment   (bool)
-	Display Notes      (string)
-	Binary Signature   (string)
-	Mac URL            (string)
-	Windows URL        (string)
-	Linux URL          (string)
+	AppName              (string)
+	Version              (string)
+	IsRelease            (bool)
+	IsRequired           (bool, only if Is Release)
+	RequiresPayment      (bool)
+	DisplayNotes         (string)
+	MacBinary            (dictionary)
+		URL              (string)
+		Signature        (string)
+	WindowsBinary        (dictionary)
+		URL              (string)
+		Signature        (string)
+	LinuxBinary          (dictionary)
+		URL              (string)
+		Signature        (string)
+	InfoURL              (string)
 
 A sample JSON that will be returned by the server:
 
 	[
 		{
-		"App Name" : "My App" ,
-		"Version" : "6.0.2",
-		"Is Release" : true ,
-		"Is Required" : false ,
-		"Display Notes" : "The release notes" ,
-		"Binary Signature" : "ABCDEF" ,
-		"Mac URL" : "http://www.site.com/download_path_Mac" ,
-		"Windows URL" : "http://www.site.com/download_path_Windows"
+			"AppName" : "My App" ,
+			"Version" : "6.0.2",
+			"IsRelease" : true ,
+			"IsRequired" : false ,
+			"DisplayNotes" : "The release notes" ,
+			"MacBinary" :
+				{
+					"URL" : "http://www.site.com/download_path_Mac" ,
+					"Signature" : "ABCDEF"
+				} ,
+			"WindowsBinary" :
+				{
+					"URL" : "http://www.site.com/download_path_Windows" ,
+					"Signature" : "123456"
+				} ,
+			"LinuxBinary" :
+				{
+					"URL" : "http://www.site.com/download_path_Linux" ,
+					"Signature" : "ABC123"
+				} ,
+			"Info URL" : "http://www.site.com/info"
 		} ,
 		{
-		"App Name" : "My App" ,
-		"Version" : "6.1b4" ,
-		"Is Release" : false ,
-		"Display Notes" : "The beta release notes" ,
-		"Binary Signature" : "0123456" ,
-		"Mac URL" : "http://www.site.com/other_download_path"
+			"AppName" : "My App" ,
+			"Version" : "6.1b4" ,
+			"IsRelease" : false ,
+			"DisplayNotes" : "The beta release notes" ,
+			"MacBinary" : 
+				{
+					"URL" : "http://www.site.com/other_download_path" ,
+					"Signature" :"0123456"
+				} 
 		}
 	] 
 
@@ -60,6 +82,8 @@ The file will be prefixed by the signature of the JSON string in hex format. The
 	[<the JSON data>]
 
 A missing or blank url means that the update does not apply to that platform. A missing boolean flag is assumed to be false.
+
+The "Info URL" is a site that will provide more information about a particular update. For example, if you offer a paid upgrade from version 5 to version 6 and want to provide more information about the new version outside of what is provided in the release notes.
 
 It will be up to the implementer to enforce the "Is Required" flag on the client end. Only the release version will have a flag since development versions are always optional.
 
