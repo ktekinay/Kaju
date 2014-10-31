@@ -9,7 +9,7 @@ Begin Window KajuUpdateWindow
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
-   Height          =   400
+   Height          =   600
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
@@ -25,7 +25,7 @@ Begin Window KajuUpdateWindow
    Resizeable      =   False
    Title           =   "Update"
    Visible         =   True
-   Width           =   600
+   Width           =   800
 End
 #tag EndWindow
 
