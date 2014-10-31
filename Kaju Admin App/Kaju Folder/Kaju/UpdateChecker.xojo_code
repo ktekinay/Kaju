@@ -5,12 +5,59 @@ Protected Class UpdateChecker
 		  self.PrefFile = preferencesFolder.Child( kPreferencesName )
 		  
 		  LoadPrefs()
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
 		Private Sub Destructor()
 		  SavePrefs()
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Execute(againstVersion As String)
+		  // Pull the data from the URL, check it, and preset the window if needed
+		  // Returns true if the app should quit in preparation of the update.
+		  //
+		  // The caller should be prepared to handle an exception in case of error.
+		  
+		  //
+		  // Pull the raw data
+		  //
+		  
+		  DryRun = false
+		  
+		  if UpdateURL.Trim = "" then
+		    raise new KajuException( KajuException.kErrorMissingUpdateURL )
+		  end if
+		  
+		  dim http as new HTTPSecureSocket
+		  http.Secure = self.Secure
+		  dim raw as string = http.Get( self.UpdateURL, 5 )
+		  if raw = "" then
+		    raise new KajuException( KajuException.kErrorNoUpdateDataAvailable )
+		  end if
+		  
+		  raw = raw.DefineEncoding( Encodings.UTF8 )
+		  raw = ReplaceLineEndings( raw, EndOfLine.UNIX )
+		  
+		  dim firstLine as string = raw.NthField( EndOfLine.UNIX, 1 )
+		  raw = raw.Mid( firstLine.Len + 2 )
+		  
+		  dim sig as string = firstLine.Left( kUpdatePacketMarker.Len )
+		  if StrComp( sig, kUpdatePacketMarker, 0 ) <> 0 then
+		    raise new KajuException( KajuException.kErrorIncorrectPacketMarker )
+		  end if
+		  
+		  sig = firstLine.Mid( sig.Len + 1 )
+		  sig = DecodeHex( sig )
+		  if not Crypto.RSAVerifySignature( raw, sig, ServerPublicRSAKey ) then
+		    raise new KajuException( KajuException.kErrorIncorrectPacketSignature )
+		  end if
+		  
+		  ProcessUpdateData( raw, againstVersion )
+		  
 		End Sub
 	#tag EndMethod
 
@@ -65,52 +112,6 @@ Protected Class UpdateChecker
 		      prop.Value( self ) = j.Value( thisName )
 		    end if
 		  next
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub PerformUpdate()
-		  // Pull the data from the URL, check it, and preset the window if needed
-		  // Returns true if the app should quit in preparation of the update.
-		  //
-		  // The caller should be prepared to handle an exception in case of error.
-		  
-		  //
-		  // Pull the raw data
-		  //
-		  
-		  DryRun = false
-		  
-		  if UpdateURL.Trim = "" then
-		    raise new KajuException( KajuException.kErrorMissingUpdateURL )
-		  end if
-		  
-		  dim http as new HTTPSecureSocket
-		  http.Secure = self.Secure
-		  dim raw as string = http.Get( self.UpdateURL, 5 )
-		  if raw = "" then
-		    raise new KajuException( KajuException.kErrorNoUpdateDataAvailable )
-		  end if
-		  
-		  raw = raw.DefineEncoding( Encodings.UTF8 )
-		  raw = ReplaceLineEndings( raw, EndOfLine.UNIX )
-		  
-		  dim firstLine as string = raw.NthField( EndOfLine.UNIX, 1 )
-		  raw = raw.Mid( firstLine.Len + 2 )
-		  
-		  dim sig as string = firstLine.Left( kUpdatePacketMarker.Len )
-		  if StrComp( sig, kUpdatePacketMarker, 0 ) <> 0 then
-		    raise new KajuException( KajuException.kErrorIncorrectPacketMarker )
-		  end if
-		  
-		  sig = firstLine.Mid( sig.Len + 1 )
-		  sig = DecodeHex( sig )
-		  if not Crypto.RSAVerifySignature( raw, sig, ServerPublicRSAKey ) then
-		    raise new KajuException( KajuException.kErrorIncorrectPacketSignature )
-		  end if
-		  
-		  ProcessUpdateData( raw )
-		  
 		End Sub
 	#tag EndMethod
 
