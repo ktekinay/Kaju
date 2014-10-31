@@ -213,6 +213,33 @@ End
 
 #tag EndWindowCode
 
+#tag Events lbUpdates
+	#tag Event
+		Sub Change()
+		  //
+		  // Fill in the viewer
+		  //
+		  
+		  if me.ListIndex = -1 then
+		    if me.ListCount <> 0 then
+		      me.ListIndex = 0
+		    end if
+		    return
+		  end if
+		  
+		  dim update as Kaju.UpdateInformation = me.RowTag( me.ListIndex )
+		  
+		  dim source as string = update.DisplayNotes
+		  if source = "" then
+		    source = "<b>NO UPDATE INFORMATION</b>"
+		  end if
+		  
+		  hvNotes.LoadPage( source, nil )
+		  
+		  btnMoreInfo.Visible = update.InfoURL <> ""
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events btnCancel
 	#tag Event
 		Sub Action()
