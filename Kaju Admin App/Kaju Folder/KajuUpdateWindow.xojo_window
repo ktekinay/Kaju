@@ -196,7 +196,59 @@ End
 	#tag Method, Flags = &h0
 		Sub ChooseUpdate(checker As Kaju.UpdateChecker, updates() As Kaju.UpdateInformation)
 		  self.Checker = checker
-		  self.Updates = updates
+		  
+		  //
+		  // Set up the listbox with the available updates.
+		  // It will set up the rest of the controls.
+		  //
+		  
+		  for i as integer = 0 to Updates.Ubound
+		    dim update as Kaju.UpdateInformation = updates( i )
+		    lbUpdates.AddRow update.Version
+		    lbUpdates.RowTag( i ) = update
+		  next
+		  
+		  lbUpdates.SortedColumn = 0
+		  lbUpdates.ColumnSortDirection( 0 ) = 1
+		  lbUpdates.Sort
+		  
+		  lbUpdates.ListIndex = 0
+		  
+		  if updates.Ubound = 0 then
+		    //
+		    // Only one update so hide the listbox
+		    //
+		    lbUpdates.Visible = false
+		    
+		    //
+		    // Move everything
+		    //
+		    
+		    dim diff as integer = hvNotes.Left - lbUpdates.Left // How far we're moving it
+		    
+		    hvNotes.Left = lbUpdates.Left
+		    btnOK.Left = btnOK.Left - diff
+		    btnCancel.Left = btnCancel.Left - diff
+		    
+		    self.Width = self.Width - diff
+		    
+		    #if not TargetMacOS then
+		      //
+		      // Switch the buttons around for other platforms
+		      //
+		      dim farLeft as integer = btnCancel.Left
+		      btnCancel.Left = btnOK.Left
+		      btnOK.Left = farLeft
+		      
+		      btnCancel.Height = btnCancel.Height + 5
+		      btnOK.Height = btnOK.Height + 5
+		      btnMoreInfo = btnMoreInfo.Height + 5
+		      
+		      self.Height = self.Height + 5
+		      
+		    #endif
+		    
+		  end if
 		  
 		End Sub
 	#tag EndMethod
