@@ -5,7 +5,7 @@ Begin Window KajuUpdateWindow
    CloseButton     =   False
    Compatibility   =   ""
    Composite       =   False
-   Frame           =   1
+   Frame           =   0
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
