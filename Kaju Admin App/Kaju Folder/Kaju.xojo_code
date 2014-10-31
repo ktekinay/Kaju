@@ -109,7 +109,7 @@ Protected Module Kaju
 		  //
 		  
 		  dim parts() as string = version.Split( "." )
-		  redim parts( 3 )
+		  redim parts( 2 )
 		  
 		  dim r as double
 		  for i as integer = 0 to parts.Ubound
