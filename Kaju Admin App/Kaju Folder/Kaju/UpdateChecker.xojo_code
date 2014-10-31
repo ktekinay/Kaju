@@ -160,6 +160,7 @@ Protected Class UpdateChecker
 		    // There are updates
 		    //
 		    
+		    KajuUpdateWindow.ChooseUpdate( self, info )
 		  end if
 		  
 		  
