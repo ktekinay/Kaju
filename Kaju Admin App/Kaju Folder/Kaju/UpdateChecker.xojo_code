@@ -120,7 +120,7 @@ Protected Class UpdateChecker
 		  dim j as new JSONItem( raw )
 		  dim versionDouble as double = Kaju.VersionToDouble( againstVersion )
 		  
-		  // 
+		  //
 		  // Get an array of the info
 		  //
 		  dim ub as integer = j.Count - 1
@@ -142,7 +142,7 @@ Protected Class UpdateChecker
 		      continue for i
 		    end if
 		    
-		    // 
+		    //
 		    // See if this update is for a higher version
 		    //
 		    if thisInfo.VersionAsDouble <= versionDouble then
