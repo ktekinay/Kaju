@@ -115,20 +115,58 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function ProcessUpdateData(raw As String) As Boolean
+		Private Sub ProcessUpdateData(raw As String, againstVersion As String)
 		  dim j as new JSONItem( raw )
+		  dim versionDouble as double = Kaju.VersionToDouble( againstVersion )
 		  
+		  // 
+		  // Get an array of the info
+		  //
 		  dim ub as integer = j.Count - 1
 		  dim info() as Kaju.UpdateInformation
 		  for i as integer = 0 to ub
-		    info.Append new Kaju.UpdateInformation( j( i ) )
+		    dim thisInfo as new Kaju.UpdateInformation( j( i ) )
+		    
+		    //
+		    // See if the binary information is present
+		    //
+		    if thisInfo.PlatformBinary is nil then
+		      continue for i
+		    end if
+		    
+		    //
+		    // See if the stage on this update is allowed
+		    //
+		    if thisInfo.StageCode < StageAllowed then
+		      contine for i
+		    end if
+		    
+		    // 
+		    // See if this update is for a higher version
+		    //
+		    if thisInfo.VersionAsDouble <= versionDouble then
+		      continue for i
+		    end if
+		    
+		    //
+		    // This is a viable update
+		    //
+		    info.Append thisInfo
 		  next
+		  
+		  if info.Ubound <> -1 then
+		    //
+		    // There are updates
+		    //
+		    
+		  end if
+		  
 		  
 		  
 		  Exception err as RuntimeException
 		    raise new KajuException( KajuException.kErrorBadUpdateData )
 		    
-		End Function
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
