@@ -206,10 +206,6 @@ End
 		Private Checker As Kaju.UpdateChecker
 	#tag EndProperty
 
-	#tag Property, Flags = &h21
-		Private Updates() As Kaju.UpdateInformation
-	#tag EndProperty
-
 
 #tag EndWindowCode
 
