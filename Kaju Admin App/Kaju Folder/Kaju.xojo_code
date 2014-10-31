@@ -69,7 +69,7 @@ Protected Module Kaju
 		  // Takes a version and turns it into an double that can be compared.
 		  // Assumes that the version will have no more than 3 parts
 		  // (NN.NN.NN) and each part will max out at 999. The version
-		  // may trail with a development, alpha, or beta suffix, and that 
+		  // may trail with a development, alpha, or beta suffix, and that
 		  // part will max out at 999.
 		  //
 		  // Examples:
