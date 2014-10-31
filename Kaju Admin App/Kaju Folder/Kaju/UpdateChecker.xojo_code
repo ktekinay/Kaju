@@ -231,6 +231,10 @@ Protected Class UpdateChecker
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		StageAllowed As Integer = App.Development
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		UpdateURL As String
 	#tag EndProperty
 
