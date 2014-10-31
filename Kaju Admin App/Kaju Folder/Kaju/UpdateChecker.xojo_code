@@ -160,7 +160,8 @@ Protected Class UpdateChecker
 		    // There are updates
 		    //
 		    
-		    KajuUpdateWindow.ChooseUpdate( self, info )
+		    dim w as new KajuUpdateWindow
+		    w.ChooseUpdate( self, info )
 		  end if
 		  
 		  
