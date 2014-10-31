@@ -216,12 +216,12 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function TestUpdate(jsonString As String) As Boolean
+		Function TestUpdate(jsonString As String, againstVersion As String) As Boolean
 		  // Allows a dry run with the update information that would otherwise be obtained
 		  // from the UpdateURL
 		  
 		  DryRun = true
-		  ProcessUpdateData( jsonString )
+		  ProcessUpdateData( jsonString, againstVersion )
 		  
 		End Function
 	#tag EndMethod
