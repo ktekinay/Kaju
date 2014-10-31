@@ -33,10 +33,6 @@ Protected Class UpdateInformation
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		IsRelease As Boolean
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
 		IsRequired As Boolean
 	#tag EndProperty
 
