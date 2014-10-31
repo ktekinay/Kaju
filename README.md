@@ -22,7 +22,6 @@ The JSON will contains the following fields for each version.
 
 	AppName              (string)
 	Version              (string)
-	IsRelease            (bool)
 	IsRequired           (bool, only if Is Release)
 	RequiresPayment      (bool)
 	DisplayNotes         (string)
@@ -44,7 +43,6 @@ A sample JSON that will be returned by the server:
 		{
 			"AppName" : "My App" ,
 			"Version" : "6.0.2",
-			"IsRelease" : true ,
 			"IsRequired" : false ,
 			"DisplayNotes" : "The release notes" ,
 			"MacBinary" :
@@ -67,7 +65,6 @@ A sample JSON that will be returned by the server:
 		{
 			"AppName" : "My App" ,
 			"Version" : "6.1b4" ,
-			"IsRelease" : false ,
 			"DisplayNotes" : "The beta release notes" ,
 			"MacBinary" : 
 				{
