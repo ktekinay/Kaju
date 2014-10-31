@@ -139,7 +139,7 @@ Protected Class UpdateChecker
 		    // See if the stage on this update is allowed
 		    //
 		    if thisInfo.StageCode < StageAllowed then
-		      contine for i
+		      continue for i
 		    end if
 		    
 		    // 
