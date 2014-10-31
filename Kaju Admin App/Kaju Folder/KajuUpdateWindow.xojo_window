@@ -10,8 +10,8 @@ Begin Window KajuUpdateWindow
    FullScreenButton=   False
    HasBackColor    =   False
    Height          =   600
-   ImplicitInstance=   True
-   LiveResize      =   True
+   ImplicitInstance=   False
+   LiveResize      =   False
    MacProcID       =   0
    MaxHeight       =   32000
    MaximizeButton  =   False
@@ -21,7 +21,7 @@ Begin Window KajuUpdateWindow
    MinHeight       =   64
    MinimizeButton  =   False
    MinWidth        =   64
-   Placement       =   0
+   Placement       =   2
    Resizeable      =   False
    Title           =   "Update"
    Visible         =   True
@@ -44,7 +44,7 @@ Begin Window KajuUpdateWindow
       GridLinesVertical=   0
       HasHeading      =   False
       HeadingIndex    =   -1
-      Height          =   559
+      Height          =   477
       HelpTag         =   ""
       Hierarchical    =   False
       Index           =   -2147483648
@@ -57,7 +57,7 @@ Begin Window KajuUpdateWindow
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
-      RequiresSelection=   False
+      RequiresSelection=   True
       Scope           =   0
       ScrollbarHorizontal=   False
       ScrollBarVertical=   True
@@ -68,9 +68,9 @@ Begin Window KajuUpdateWindow
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   14
+      Top             =   52
       Underline       =   False
-      UseFocusRing    =   True
+      UseFocusRing    =   False
       Visible         =   True
       Width           =   130
       _ScrollWidth    =   -1
@@ -78,7 +78,7 @@ Begin Window KajuUpdateWindow
    Begin HTMLViewer hvNotes
       AutoDeactivate  =   True
       Enabled         =   True
-      Height          =   495
+      Height          =   477
       HelpTag         =   ""
       Index           =   -2147483648
       Left            =   162
@@ -92,7 +92,7 @@ Begin Window KajuUpdateWindow
       TabIndex        =   1
       TabPanelIndex   =   0
       TabStop         =   True
-      Top             =   14
+      Top             =   52
       Visible         =   True
       Width           =   618
    End
@@ -101,7 +101,7 @@ Begin Window KajuUpdateWindow
       Bold            =   False
       ButtonStyle     =   "0"
       Cancel          =   False
-      Caption         =   "OK"
+      Caption         =   "Install..."
       Default         =   True
       Enabled         =   True
       Height          =   20
@@ -109,7 +109,7 @@ Begin Window KajuUpdateWindow
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   675
+      Left            =   695
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -122,10 +122,10 @@ Begin Window KajuUpdateWindow
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   537
+      Top             =   560
       Underline       =   False
       Visible         =   True
-      Width           =   80
+      Width           =   85
    End
    Begin PushButton btnCancel
       AutoDeactivate  =   True
@@ -140,7 +140,7 @@ Begin Window KajuUpdateWindow
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   571
+      Left            =   598
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -153,10 +153,10 @@ Begin Window KajuUpdateWindow
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   537
+      Top             =   560
       Underline       =   False
       Visible         =   True
-      Width           =   80
+      Width           =   85
    End
    Begin PushButton btnMoreInfo
       AutoDeactivate  =   True
@@ -171,7 +171,7 @@ Begin Window KajuUpdateWindow
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   162
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -184,7 +184,7 @@ Begin Window KajuUpdateWindow
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   537
+      Top             =   560
       Underline       =   False
       Visible         =   False
       Width           =   179
