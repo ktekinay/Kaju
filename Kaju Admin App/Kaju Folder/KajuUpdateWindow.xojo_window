@@ -296,11 +296,24 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events btnOK
+	#tag Event
+		Sub Action()
+		  dim info as Kaju.UpdateInformation = lbUpdates.RowTag( lbUpdates.ListIndex )
+		  
+		  self.Close
+		  
+		  Checker.StartInstall( info )
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events btnCancel
 	#tag Event
 		Sub Action()
 		  self.Close
 		  
+		  Checker.StartInstall( nil )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
