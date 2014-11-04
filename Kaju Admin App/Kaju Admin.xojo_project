@@ -12,7 +12,6 @@ Class=UpdateChecker;Kaju Folder/Kaju/UpdateChecker.xojo_code;&h70CF0A50;&h114003
 Class=KajuException;Kaju Folder/Kaju/KajuException.xojo_code;&h3047231F;&h11400316;false
 Class=UpdateInformation;Kaju Folder/Kaju/UpdateInformation.xojo_code;&h79AE1ADC;&h11400316;false
 Class=BinaryInformation;Kaju Folder/Kaju/BinaryInformation.xojo_code;&hE8D70B5;&h11400316;false
-DefaultWindow=WndAdmin
 AppMenuBar=MainMenuBar
 MajorVersion=1
 MinorVersion=0
