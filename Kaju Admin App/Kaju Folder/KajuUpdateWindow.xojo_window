@@ -286,6 +286,13 @@ End
 		  hvNotes.LoadPage( source, nil )
 		  
 		  btnMoreInfo.Visible = update.InfoURL <> ""
+		  
+		  dim p as Picture = update.Image
+		  if p is nil then
+		    p = Checker.DefaultImage
+		  end if
+		  
+		  self.Backdrop = p
 		End Sub
 	#tag EndEvent
 #tag EndEvents
