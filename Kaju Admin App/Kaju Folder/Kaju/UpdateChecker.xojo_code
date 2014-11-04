@@ -160,6 +160,7 @@ Protected Class UpdateChecker
 		    // There are updates
 		    //
 		    
+		    Kaju.mUpdateInProgress = true
 		    dim w as new KajuUpdateWindow
 		    w.ChooseUpdate( self, info )
 		  end if
