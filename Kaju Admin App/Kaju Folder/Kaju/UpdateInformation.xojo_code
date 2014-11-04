@@ -28,6 +28,49 @@ Protected Class UpdateInformation
 		DisplayNotes As String
 	#tag EndProperty
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  if mImage <> nil then
+			    return mImage
+			  end if
+			  
+			  dim url as string = ImageURL.Trim
+			  
+			  if url = "" then
+			    return nil
+			  end if
+			  
+			  //
+			  // Get the image
+			  //
+			  
+			  dim http as new HTTPSecureSocket
+			  http.Secure = url.Left( 5 ) = "https"
+			  
+			  dim data as string = http.Get( url, 2 )
+			  
+			  if data = "" then
+			    return nil
+			  end if
+			  
+			  mImage = Picture.FromData( data )
+			  
+			  Exception err as RuntimeException
+			    mImage = nil
+			    
+			  Finally
+			    return mImage
+			    
+			End Get
+		#tag EndGetter
+		Image As Picture
+	#tag EndComputedProperty
+
+	#tag Property, Flags = &h0
+		ImageURL As String
+	#tag EndProperty
+
 	#tag Property, Flags = &h0
 		InfoURL As String
 	#tag EndProperty
@@ -42,6 +85,10 @@ Protected Class UpdateInformation
 
 	#tag Property, Flags = &h0
 		MacBinary As Kaju.BinaryInformation
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mImage As Picture
 	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -90,7 +137,7 @@ Protected Class UpdateInformation
 			      return App.Alpha
 			    case "b"
 			      return App.Beta
-			    end 
+			    end
 			    
 			  end if
 			End Get
