@@ -25,7 +25,7 @@ Begin Window KajuUpdateWindow
    Resizeable      =   False
    Title           =   "Update"
    Visible         =   True
-   Width           =   800
+   Width           =   1024
    Begin Listbox lbUpdates
       AutoDeactivate  =   True
       AutoHideScrollbars=   True
@@ -44,14 +44,14 @@ Begin Window KajuUpdateWindow
       GridLinesVertical=   0
       HasHeading      =   False
       HeadingIndex    =   -1
-      Height          =   477
+      Height          =   467
       HelpTag         =   ""
       Hierarchical    =   False
       Index           =   -2147483648
       InitialParent   =   ""
       InitialValue    =   ""
       Italic          =   False
-      Left            =   20
+      Left            =   178
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -68,20 +68,21 @@ Begin Window KajuUpdateWindow
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   52
+      Top             =   62
       Underline       =   False
       UseFocusRing    =   False
       Visible         =   True
       Width           =   130
+      _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
    Begin HTMLViewer hvNotes
       AutoDeactivate  =   True
       Enabled         =   True
-      Height          =   477
+      Height          =   467
       HelpTag         =   ""
       Index           =   -2147483648
-      Left            =   162
+      Left            =   308
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -92,9 +93,9 @@ Begin Window KajuUpdateWindow
       TabIndex        =   1
       TabPanelIndex   =   0
       TabStop         =   True
-      Top             =   52
+      Top             =   62
       Visible         =   True
-      Width           =   618
+      Width           =   696
    End
    Begin PushButton btnOK
       AutoDeactivate  =   True
@@ -109,7 +110,7 @@ Begin Window KajuUpdateWindow
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   695
+      Left            =   919
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -140,7 +141,7 @@ Begin Window KajuUpdateWindow
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   598
+      Left            =   822
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
