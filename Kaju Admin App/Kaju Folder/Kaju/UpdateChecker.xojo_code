@@ -215,6 +215,18 @@ Protected Class UpdateChecker
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub StartInstall(info As Kaju.UpdateInformation)
+		  if info is nil then
+		    Kaju.mUpdateInProgress = false
+		    return
+		  end if
+		  
+		  mSelectedUpdate = info
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h21
 		Private Function StringArrayToJSON(arr() As String) As JSONItem
 		  dim j as new JSONItem( "[]" )
