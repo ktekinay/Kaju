@@ -208,6 +208,13 @@ Protected Class UpdateChecker
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function SelectedUpdate() As Kaju.UpdateInformation
+		  return mSelectedUpdate
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h21
 		Private Function StringArrayToJSON(arr() As String) As JSONItem
 		  dim j as new JSONItem( "[]" )
@@ -258,6 +265,10 @@ Protected Class UpdateChecker
 
 	#tag Property, Flags = &h0
 		ImdateURL As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mSelectedUpdate As Kaju.UpdateInformation
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
