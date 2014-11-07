@@ -35,6 +35,7 @@ The JSON will contains the following fields for each version.
 		URL                        (string)
 		Signature                  (string)
 	ImageURL                       (string)
+	UseTransparency                (bool, default = true)
 
 A sample JSON that will be returned by the server:
 
@@ -59,7 +60,8 @@ A sample JSON that will be returned by the server:
 					"URL" : "http://www.site.com/download_path_Linux" ,
 					"Signature" : "ABC123"
 				} ,
-			"InfoURL" : "http://www.site.com/info"
+			"ImageURL" : "http://www.site.com/image.png" ,
+			"UseTransparency" : true
 		} ,
 		{
 			"AppName" : "My App" ,
