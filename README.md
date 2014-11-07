@@ -20,22 +20,21 @@ The client will have the server's public RSA key. The server will use that key t
 
 The JSON will contains the following fields for each version.
 
-	AppName              (string)
-	Version              (string)
-	IsRequired           (bool, only if Is Release)
-	RequiresPayment      (bool)
-	DisplayNotes         (string)
-	MacBinary            (dictionary)
-		URL              (string)
-		Signature        (string)
-	WindowsBinary        (dictionary)
-		URL              (string)
-		Signature        (string)
-	LinuxBinary          (dictionary)
-		URL              (string)
-		Signature        (string)
-	InfoURL              (string)
-	ImageURL             (string)
+	AppName                        (string)
+	Version                        (string)
+	MinimumRequiredVersion         (string)
+	RequiresPayment                (bool)
+	DisplayNotes                   (string)
+	MacBinary                      (dictionary)
+		URL                        (string)
+		Signature                  (string)
+	WindowsBinary                  (dictionary)
+		URL                        (string)
+		Signature                  (string)
+	LinuxBinary                    (dictionary)
+		URL                        (string)
+		Signature                  (string)
+	ImageURL                       (string)
 
 A sample JSON that will be returned by the server:
 
@@ -43,7 +42,7 @@ A sample JSON that will be returned by the server:
 		{
 			"AppName" : "My App" ,
 			"Version" : "6.0.2",
-			"IsRequired" : false ,
+			"MinimumRequiredVersion" : "6.0.1" ,
 			"DisplayNotes" : "The release notes" ,
 			"MacBinary" :
 				{
@@ -81,9 +80,7 @@ The file will be prefixed by the signature of the JSON string in hex format. The
 
 A missing or blank url means that the update does not apply to that platform. A missing boolean flag is assumed to be false.
 
-The "Info URL" is a site that will provide more information about a particular update. For example, if you offer a paid upgrade from version 5 to version 6 and want to provide more information about the new version outside of what is provided in the release notes.
-
-It will be up to the implementer to enforce the "Is Required" flag on the client end. Only the release version will have a flag since development versions are always optional.
+It will be up to the implementer to enforce the "MinimumRequiredVersion" property on the client end. This specifies the minimum required version that a client *must* have. For example, if there v.6.0.1 is a critical release and v.6.0 should not be used anymore, that field would contain "6.0.1". Someone using v.6.0 should be forced to quit if they choose not to update, but someone using v.6.0.2 would not be.
 
 ## How To Use It
 
