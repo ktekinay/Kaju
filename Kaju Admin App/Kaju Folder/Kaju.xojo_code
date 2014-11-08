@@ -10,6 +10,16 @@ Protected Module Kaju
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Function GetTemporaryFolder() As FolderItem
+		  dim f as FolderItem = GetTemporaryFolderItem
+		  f.Delete
+		  f.CreateAsFolder
+		  return f
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Function HashOfFile(f As FolderItem) As String
 		  if f is nil or not f.IsReadable then
 		    return ""
