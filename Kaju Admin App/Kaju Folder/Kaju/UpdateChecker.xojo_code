@@ -67,6 +67,14 @@ Protected Class UpdateChecker
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub IgnoreVersion(version As String)
+		  if version <> "" and IgnoreVersionsPref.IndexOf( version ) = -1 then
+		    IgnoreVersionsPref.Append version
+		  end if
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h21
 		Private Function JSONToStringArray(data As JSONItem) As String()
 		  dim ub as integer = data.Count - 1
