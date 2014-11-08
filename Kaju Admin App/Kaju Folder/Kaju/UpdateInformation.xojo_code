@@ -72,14 +72,6 @@ Protected Class UpdateInformation
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		InfoURL As String
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		IsRequired As Boolean
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
 		LinuxBinary As Kaju.BinaryInformation
 	#tag EndProperty
 
@@ -89,6 +81,10 @@ Protected Class UpdateInformation
 
 	#tag Property, Flags = &h21
 		Private mImage As Picture
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		MinimumRequiredVersion As String
 	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -144,6 +140,10 @@ Protected Class UpdateInformation
 		#tag EndGetter
 		StageCode As Integer
 	#tag EndComputedProperty
+
+	#tag Property, Flags = &h0
+		UseTransparency As Boolean = True
+	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		Version As String
