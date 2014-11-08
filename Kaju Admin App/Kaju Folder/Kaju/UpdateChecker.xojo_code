@@ -16,6 +16,12 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function DryRun() As Boolean
+		  return mDryRun
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub Execute()
 		  // Pull the data from the URL, check it, and preset the window if needed
 		  // Returns true if the app should quit in preparation of the update.
@@ -26,7 +32,7 @@ Protected Class UpdateChecker
 		  // Pull the raw data
 		  //
 		  
-		  DryRun = false
+		  mDryRun = false
 		  
 		  if UpdateURL.Trim = "" then
 		    raise new KajuException( KajuException.kErrorMissingUpdateURL )
@@ -243,8 +249,8 @@ Protected Class UpdateChecker
 		  // Allows a dry run with the update information that would otherwise be obtained
 		  // from the UpdateURL
 		  
-		  DryRun = true
 		  ProcessUpdateData( jsonString, againstVersion )
+		  mDryRun = true
 		  
 		End Sub
 	#tag EndMethod
@@ -263,8 +269,6 @@ Protected Class UpdateChecker
 		DefaultImage As Picture
 	#tag EndProperty
 
-	#tag Property, Flags = &h21
-		Private DryRun As Boolean
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -281,6 +285,7 @@ Protected Class UpdateChecker
 
 	#tag Property, Flags = &h21
 		Private mSelectedUpdate As Kaju.UpdateInformation
+		Private mDryRun As Boolean
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
