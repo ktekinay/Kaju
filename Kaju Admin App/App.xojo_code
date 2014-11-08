@@ -25,9 +25,17 @@ Inherits Application
 		  dim vers as string = Kaju.AppVersionString
 		  vers = Kaju.VersionStringFor( 1, 3, 44 )
 		  
-		  u.TestUpdate( kTestJSON1 )
+		  'u.TestUpdate( kTestJSON1 )
 		  'u.TestUpdate( kTestJSON2 )
 		  'u.TestUpdate( kTestJSON2 )
+		  
+		  dim sh as new Kaju.ZipShell
+		  dim zipFile as FolderItem = SpecialFolder.Desktop.Child( f.Name + ".zip" )
+		  sh.Compress( f, zipFile )
+		  
+		  sh.Decompress( zipFile )
+		  
+		  MsgBox sh.ContentsOf( zipFile )
 		End Sub
 	#tag EndEvent
 
