@@ -669,7 +669,18 @@ End
 #tag Events btnSkipVersion
 	#tag Event
 		Sub Action()
-		  #pragma warning "Implement this!"
+		  dim info as Kaju.UpdateInformation = lbUpdates.RowTag( lbUpdates.ListIndex )
+		  Checker.IgnoreVersion( info.Version )
+		  
+		  if lbUpdates.ListCount = 1 then
+		    SelectedUpdate = nil
+		    self.Close
+		  else
+		    lbUpdates.RemoveRow( lbUpdates.ListIndex )
+		    lbUpdates.ListIndex = 0
+		  end if
+		  
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
