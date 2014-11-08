@@ -354,11 +354,27 @@ Begin Window KajuUpdateWindow
       ConnectionType  =   2
       Height          =   32
       Index           =   -2147483648
+      InitialParent   =   ""
       Left            =   0
       LockedInPosition=   False
       Scope           =   2
       Secure          =   False
       TabPanelIndex   =   0
+      Top             =   0
+      Width           =   32
+   End
+   Begin Kaju.ZipShell shZipper
+      Arguments       =   ""
+      Backend         =   ""
+      Canonical       =   False
+      Height          =   32
+      Index           =   -2147483648
+      Left            =   0
+      LockedInPosition=   False
+      Mode            =   1
+      Scope           =   2
+      TabPanelIndex   =   0
+      TimeOut         =   0
       Top             =   0
       Width           =   32
    End
