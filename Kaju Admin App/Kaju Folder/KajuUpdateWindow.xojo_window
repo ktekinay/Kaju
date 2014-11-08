@@ -479,6 +479,24 @@ End
 	#tag EndMethod
 
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  if mAppName = "" then
+			    mAppName = kThisApplication
+			  end if
+			  
+			  return mAppName
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mAppName = value
+			End Set
+		#tag EndSetter
+		AppName As String
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h21
 		Private Checker As Kaju.UpdateChecker
 	#tag EndProperty
@@ -486,6 +504,19 @@ End
 	#tag Property, Flags = &h21
 		Private CurrentStage As Stage
 	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private DownloadFile As FolderItem
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mAppName As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		SelectedUpdate As Kaju.UpdateInformation
+	#tag EndProperty
+
 
 	#tag Constant, Name = kAppMarker, Type = String, Dynamic = False, Default = \"<<AppName>>", Scope = Private
 	#tag EndConstant
