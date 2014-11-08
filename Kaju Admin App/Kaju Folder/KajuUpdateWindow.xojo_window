@@ -656,9 +656,53 @@ End
 #tag Events btnCancel
 	#tag Event
 		Sub Action()
+		  SelectedUpdate = nil
 		  self.Close
 		  
-		  Checker.StartInstall( nil )
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnSkipVersion
+	#tag Event
+		Sub Action()
+		  #pragma warning "Implement this!"
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events hsSocket
+	#tag Event
+		Sub ReceiveProgress(bytesReceived as integer, totalBytes as integer, newData as string)
+		  pbProgress.Maximum = totalBytes
+		  pbProgress.Value = bytesReceived
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub DownloadComplete(url as string, httpStatus as integer, headers as internetHeaders, file as folderItem)
+		  pbProgress.Maximum = -1
+		  pbProgress.Value = 0
+		  
+		  if httpStatus <> 0 then
+		    
+		    lblInstallMessage.Text = kGenericErrorMessage
+		    btnOK.Caption = kTryLaterButton
+		    pbProgress.Visible = false
+		    
+		    CurrentStage = Stage.UpdateError
+		    
+		  else
+		    //
+		    // Verify the download
+		    //
+		    
+		    dim digest as new MD5Digest
+		    
+		    
+		    
+		    CurrentStage = Stage.WaitingToQuit
+		  end if
+		  
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
