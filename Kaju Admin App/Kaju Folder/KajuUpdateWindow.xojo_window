@@ -558,11 +558,55 @@ End
 #tag Events btnOK
 	#tag Event
 		Sub Action()
-		  dim info as Kaju.UpdateInformation = lbUpdates.RowTag( lbUpdates.ListIndex )
+		  select case CurrentStage
+		  case Stage.ChoosingUpdate
+		    //
+		    // The update has been chosen
+		    //
+		    SelectedUpdate = lbUpdates.RowTag( lbUpdates.ListIndex )
+		    
+		    #pragma warning "Implement this!"
+		    
+		    btnOK.Caption = kStopButton
+		    btnCancel.Visible = false
+		    btnSkipVersion.Visible = false
+		    pbProgress.Visible = true
+		    lblInstallMessage.Visible = true
+		    
+		    CurrentStage = Stage.InstallingUpdate
+		    
+		    if not Checker.DryRun then
+		      DownloadFile = GetTemporaryFolderItem
+		      
+		      dim url as string = SelectedUpdate.PlatformBinary.URL
+		      hsSocket.Secure = url.Left( 6 ) = "https:"
+		      
+		      hsSocket.Get( url, DownloadFile )
+		    end if
+		    
+		  case Stage.InstallingUpdate
+		    //
+		    // The user chose "Stop"
+		    //
+		    SelectedUpdate = nil
+		    self.Close
+		    
+		  case Stage.WaitingToQuit
+		    //
+		    // The user chose Install
+		    //
+		    
+		    Quit
+		    
+		  case Stage.UpdateError
+		    //
+		    // There was an error so just close
+		    //
+		    SelectedUpdate = nil
+		    self.Close
+		    
+		  end
 		  
-		  self.Close
-		  
-		  Checker.StartInstall( info )
 		  
 		End Sub
 	#tag EndEvent
