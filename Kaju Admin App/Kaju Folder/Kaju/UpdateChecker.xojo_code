@@ -250,6 +250,8 @@ Protected Class UpdateChecker
 		DefaultImage As Picture
 	#tag EndProperty
 
+	#tag Property, Flags = &h0
+		DefaultUseTransparency As Boolean = True
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
