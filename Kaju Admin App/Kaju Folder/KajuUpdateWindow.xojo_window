@@ -483,6 +483,10 @@ End
 		Private Checker As Kaju.UpdateChecker
 	#tag EndProperty
 
+	#tag Property, Flags = &h21
+		Private CurrentStage As Stage
+	#tag EndProperty
+
 	#tag Constant, Name = kAppMarker, Type = String, Dynamic = False, Default = \"<<AppName>>", Scope = Private
 	#tag EndConstant
 
@@ -531,6 +535,13 @@ End
 	#tag Constant, Name = kWindowTitle, Type = String, Dynamic = False, Default = \"Update Available", Scope = Public
 	#tag EndConstant
 
+
+	#tag Enum, Name = Stage, Type = Integer, Flags = &h21
+		ChoosingUpdate
+		  InstallingUpdate
+		  WaitingToQuit
+		UpdateError
+	#tag EndEnum
 
 
 #tag EndWindowCode
