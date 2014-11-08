@@ -25,9 +25,9 @@ Inherits Application
 		  dim vers as string = Kaju.AppVersionString
 		  vers = Kaju.VersionStringFor( 1, 3, 44 )
 		  
-		  'u.TestUpdate( kTestJSON1, "1.0" )
-		  u.TestUpdate( kTestJSON2, "1.0" )
-		  'u.TestUpdate( kTestJSON2, "1.0.3" )
+		  u.TestUpdate( kTestJSON1 )
+		  'u.TestUpdate( kTestJSON2 )
+		  'u.TestUpdate( kTestJSON2 )
 		End Sub
 	#tag EndEvent
 
