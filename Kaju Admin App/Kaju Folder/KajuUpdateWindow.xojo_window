@@ -443,8 +443,38 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub DisplayVersionInfo(update As Kaju.UpdateInformation)
+		  //
+		  // Fill in the viewer
+		  //
+		  
+		  dim source as string = update.DisplayNotes
+		  if source = "" then
+		    source = "<b>NO UPDATE INFORMATION</b>"
 		  end if
 		  
+		  hvNotes.LoadPage( source, nil )
+		  
+		  dim useTransparency as boolean = update.UseTransparency
+		  dim p as Picture = update.Image
+		  if p is nil then
+		    p = Checker.DefaultImage
+		    useTransparency = Checker.DefaultUseTransparency
+		  end if
+		  
+		  if p <> nil and useTransparency then
+		    dim faded as new Picture( p.Width, p.Height, 32 )
+		    faded.Transparent = Picture.TransparentWhite
+		    faded.Graphics.Transparency = 50.0
+		    faded.Graphics.DrawPicture( p, 0, 0 )
+		    dim mask as new Picture( p.Width, p.Height )
+		    mask.Graphics.DrawPicture( p.Mask, 0, 0 )
+		    faded.Mask = mask
+		    p = faded
+		  end if
+		  
+		  self.Backdrop = p
 		End Sub
 	#tag EndMethod
 
@@ -520,22 +550,8 @@ End
 		  end if
 		  
 		  dim update as Kaju.UpdateInformation = me.RowTag( me.ListIndex )
+		  DisplayVersionInfo( update )
 		  
-		  dim source as string = update.DisplayNotes
-		  if source = "" then
-		    source = "<b>NO UPDATE INFORMATION</b>"
-		  end if
-		  
-		  hvNotes.LoadPage( source, nil )
-		  
-		  btnMoreInfo.Visible = update.InfoURL <> ""
-		  
-		  dim p as Picture = update.Image
-		  if p is nil then
-		    p = Checker.DefaultImage
-		  end if
-		  
-		  self.Backdrop = p
 		End Sub
 	#tag EndEvent
 #tag EndEvents
