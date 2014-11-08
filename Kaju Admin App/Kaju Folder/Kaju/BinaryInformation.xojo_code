@@ -8,7 +8,7 @@ Protected Class BinaryInformation
 
 
 	#tag Property, Flags = &h0
-		Signature As String
+		Hash As String
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
