@@ -214,25 +214,6 @@ Protected Class UpdateChecker
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Function SelectedUpdate() As Kaju.UpdateInformation
-		  return mSelectedUpdate
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub StartInstall(info As Kaju.UpdateInformation)
-		  if info is nil then
-		    Kaju.mUpdateInProgress = false
-		    return
-		  end if
-		  
-		  mSelectedUpdate = info
-		  
-		End Sub
-	#tag EndMethod
-
 	#tag Method, Flags = &h21
 		Private Function StringArrayToJSON(arr() As String) As JSONItem
 		  dim j as new JSONItem( "[]" )
@@ -279,12 +260,7 @@ Protected Class UpdateChecker
 		Private IgnoreVersionsPref() As String
 	#tag EndProperty
 
-	#tag Property, Flags = &h0
-		ImdateURL As String
-	#tag EndProperty
-
 	#tag Property, Flags = &h21
-		Private mSelectedUpdate As Kaju.UpdateInformation
 		Private mDryRun As Boolean
 	#tag EndProperty
 
