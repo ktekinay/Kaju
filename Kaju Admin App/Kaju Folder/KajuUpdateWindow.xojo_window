@@ -326,6 +326,42 @@ Begin Window KajuUpdateWindow
       Visible         =   False
       Width           =   334
    End
+   Begin ProgressBar pbProgress
+      AutoDeactivate  =   True
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Left            =   140
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Maximum         =   0
+      Scope           =   2
+      TabPanelIndex   =   0
+      Top             =   555
+      Value           =   0
+      Visible         =   False
+      Width           =   123
+   End
+   Begin HTTPSecureSocket hsSocket
+      CertificateFile =   
+      CertificatePassword=   ""
+      CertificateRejectionFile=   
+      ConnectionType  =   2
+      Height          =   32
+      Index           =   -2147483648
+      Left            =   0
+      LockedInPosition=   False
+      Scope           =   2
+      Secure          =   False
+      TabPanelIndex   =   0
+      Top             =   0
+      Width           =   32
+   End
 End
 #tag EndWindow
 
