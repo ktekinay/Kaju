@@ -164,6 +164,13 @@ Protected Class UpdateChecker
 		    end if
 		    
 		    //
+		    // An ignored version?
+		    //
+		    if HonorIgnored and IgnoreVersionsPref.IndexOf( thisInfo.Version ) <> -1 then
+		      continue for i
+		    end if
+		    
+		    //
 		    // This is a viable update
 		    //
 		    info.Append thisInfo
