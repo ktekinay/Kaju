@@ -690,6 +690,8 @@ End
 		  pbProgress.Maximum = totalBytes
 		  pbProgress.Value = bytesReceived
 		  
+		  
+		  #pragma unused newData
 		End Sub
 	#tag EndEvent
 	#tag Event
