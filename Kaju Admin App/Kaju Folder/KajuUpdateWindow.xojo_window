@@ -613,8 +613,6 @@ End
 		    //
 		    SelectedUpdate = lbUpdates.RowTag( lbUpdates.ListIndex )
 		    
-		    #pragma warning "Implement this!"
-		    
 		    btnOK.Caption = kStopButton
 		    btnCancel.Visible = false
 		    btnSkipVersion.Visible = false
