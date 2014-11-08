@@ -62,7 +62,7 @@ Protected Class UpdateChecker
 		    raise new KajuException( KajuException.kErrorIncorrectPacketSignature )
 		  end if
 		  
-		  ProcessUpdateData( raw, againstVersion )
+		  ProcessUpdateData( raw )
 		  
 		End Sub
 	#tag EndMethod
@@ -122,9 +122,9 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub ProcessUpdateData(raw As String, againstVersion As String)
+		Private Sub ProcessUpdateData(raw As String)
 		  dim j as new JSONItem( raw )
-		  dim versionDouble as double = Kaju.VersionToDouble( againstVersion )
+		  dim versionDouble as double = Kaju.VersionToDouble( Kaju.AppVersionString )
 		  
 		  //
 		  // Get an array of the info
@@ -245,12 +245,12 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub TestUpdate(jsonString As String, againstVersion As String)
+		Sub TestUpdate(jsonString As String)
 		  // Allows a dry run with the update information that would otherwise be obtained
 		  // from the UpdateURL
 		  
-		  ProcessUpdateData( jsonString, againstVersion )
 		  mDryRun = true
+		  ProcessUpdateData( jsonString )
 		  
 		End Sub
 	#tag EndMethod
