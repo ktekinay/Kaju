@@ -369,6 +369,23 @@ End
 	#tag Method, Flags = &h0
 		Sub ChooseUpdate(checker As Kaju.UpdateChecker, updates() As Kaju.UpdateInformation)
 		  self.Checker = checker
+		  CurrentStage = Stage.ChoosingUpdate
+		  
+		  //
+		  // Set up the labels
+		  //
+		  
+		  if Updates.Ubound = 0 then
+		    lblMain.Text = kMainNoticeOne
+		    lblSecondary.Text = kSecondaryNoticeOne
+		    lblSecondary.Text = lblSecondary.Text.ReplaceAll( kNewVersionMarker, Updates( 0 ).Version )
+		  else
+		    lblMain.Text = kMainNoticeMultiple
+		    lblSecondary.Text = kSecondaryNoticeMultiple
+		  end if
+		  
+		  lblMain.Text = lblMain.Text.ReplaceAll( kAppMarker, AppName )
+		  lblSecondary.Text = lblSecondary.Text.ReplaceAll( kThisVersionMarker, Kaju.AppVersionString )
 		  
 		  //
 		  // Set up the listbox with the available updates.
@@ -397,30 +414,35 @@ End
 		    // Move everything
 		    //
 		    
-		    dim diff as integer = hvNotes.Left - lbUpdates.Left // How far we're moving it
+		    'dim diff as integer = hvNotes.Left - lbUpdates.Left // How far we're moving it
+		    '
+		    'hvNotes.Left = lbUpdates.Left
+		    'btnOK.Left = btnOK.Left - diff
+		    'btnCancel.Left = btnCancel.Left - diff
+		    '
+		    'self.Width = self.Width - diff
 		    
-		    hvNotes.Left = lbUpdates.Left
-		    btnOK.Left = btnOK.Left - diff
-		    btnCancel.Left = btnCancel.Left - diff
+		  end if
+		  
+		  #if not TargetMacOS then
+		    //
+		    // Switch the buttons around for other platforms
+		    //
+		    dim farLeft as integer = btnCancel.Left
+		    btnCancel.Left = btnOK.Left
+		    btnOK.Left = farLeft
 		    
-		    self.Width = self.Width - diff
+		    btnCancel.Height = btnCancel.Height + 5
+		    btnOK.Height = btnOK.Height + 5
+		    btnSkipVersion = btnSkipVersion.Height + 5
 		    
-		    #if not TargetMacOS then
-		      //
-		      // Switch the buttons around for other platforms
-		      //
-		      dim farLeft as integer = btnCancel.Left
-		      btnCancel.Left = btnOK.Left
-		      btnOK.Left = farLeft
-		      
-		      btnCancel.Height = btnCancel.Height + 5
-		      btnOK.Height = btnOK.Height + 5
-		      btnMoreInfo = btnMoreInfo.Height + 5
-		      
-		      self.Height = self.Height + 5
-		      
-		    #endif
+		    self.Height = self.Height + 5
 		    
+		  #endif
+		  
+		End Sub
+	#tag EndMethod
+
 		  end if
 		  
 		End Sub
