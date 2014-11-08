@@ -30,10 +30,10 @@ The JSON will contains the following fields for each version.
 		Signature                  (string)
 	WindowsBinary                  (dictionary)
 		URL                        (string)
-		Signature                  (string)
+		Hash                       (string)
 	LinuxBinary                    (dictionary)
 		URL                        (string)
-		Signature                  (string)
+		Hash                       (string)
 	ImageURL                       (string)
 	UseTransparency                (bool, default = true)
 
@@ -58,7 +58,7 @@ A sample JSON that will be returned by the server:
 			"LinuxBinary" :
 				{
 					"URL" : "http://www.site.com/download_path_Linux" ,
-					"Signature" : "ABC123"
+					"Hash" : "ABC123"
 				} ,
 			"ImageURL" : "http://www.site.com/image.png" ,
 			"UseTransparency" : true
@@ -70,7 +70,7 @@ A sample JSON that will be returned by the server:
 			"MacBinary" : 
 				{
 					"URL" : "http://www.site.com/other_download_path" ,
-					"Signature" :"0123456"
+					"Hash" :"0123456"
 				} 
 		}
 	] 
