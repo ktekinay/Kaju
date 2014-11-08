@@ -739,8 +739,8 @@ End
 		    
 		    lblInstallMessage.Text = kProcessingFileMessage
 		    
+		    shZipper.Decompress( file )
 		    
-		    CurrentStage = Stage.WaitingToQuit
 		  end if
 		  
 		  
