@@ -23,7 +23,7 @@ Begin Window KajuUpdateWindow
    MinWidth        =   64
    Placement       =   2
    Resizeable      =   False
-   Title           =   "Update"
+   Title           =   "#kWindowTitle"
    Visible         =   True
    Width           =   1024
    Begin Listbox lbUpdates
@@ -102,7 +102,7 @@ Begin Window KajuUpdateWindow
       Bold            =   False
       ButtonStyle     =   "0"
       Cancel          =   False
-      Caption         =   "Install..."
+      Caption         =   "#kInstallButton"
       Default         =   True
       Enabled         =   True
       Height          =   20
@@ -133,7 +133,7 @@ Begin Window KajuUpdateWindow
       Bold            =   False
       ButtonStyle     =   "0"
       Cancel          =   True
-      Caption         =   "Cancel"
+      Caption         =   "#kRemindMeLaterButton"
       Default         =   False
       Enabled         =   True
       Height          =   20
@@ -164,7 +164,7 @@ Begin Window KajuUpdateWindow
       Bold            =   False
       ButtonStyle     =   "0"
       Cancel          =   False
-      Caption         =   "More Information"
+      Caption         =   "#kSkipVersionButton"
       Default         =   False
       Enabled         =   True
       Height          =   20
@@ -258,6 +258,55 @@ End
 	#tag Property, Flags = &h21
 		Private Checker As Kaju.UpdateChecker
 	#tag EndProperty
+
+	#tag Constant, Name = kAppMarker, Type = String, Dynamic = False, Default = \"<<AppName>>", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kGenericErrorMessage, Type = String, Dynamic = False, Default = \"An error has occurred.", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kInstallButton, Type = String, Dynamic = False, Default = \"Install Update", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kMainNoticeMultiple, Type = String, Dynamic = False, Default = \"New versions of <<AppName>> are available!", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kMainNoticeOne, Type = String, Dynamic = False, Default = \"A new version of <<AppName>> is available!", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kNewVersionMarker, Type = String, Dynamic = False, Default = \"<<NewVersion>>", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kReleaseNotes, Type = String, Dynamic = False, Default = \"Release Notes:", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kRemindMeLaterButton, Type = String, Dynamic = False, Default = \"Remind Me Later", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kSecondaryNoticeMultiple, Type = String, Dynamic = False, Default = \"You have version <<ThisVersion>> and there are multiple updates available. Install one\?", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kSecondaryNoticeOne, Type = String, Dynamic = False, Default = \"You have version <<ThisVersion>>. Would you like to install version <<NewVersion>>\?", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kSkipVersionButton, Type = String, Dynamic = False, Default = \"Skip Version", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kStopButton, Type = String, Dynamic = False, Default = \"Stop", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kThisApplication, Type = String, Dynamic = False, Default = \"this application", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kThisVersionMarker, Type = String, Dynamic = False, Default = \"<<ThisVersion>>", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kTryLaterButton, Type = String, Dynamic = False, Default = \"Try Later", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kWindowTitle, Type = String, Dynamic = False, Default = \"Update Available", Scope = Public
+	#tag EndConstant
+
 
 
 #tag EndWindowCode
