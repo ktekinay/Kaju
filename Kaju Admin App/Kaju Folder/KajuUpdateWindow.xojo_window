@@ -707,19 +707,28 @@ End
 		    
 		    CurrentStage = Stage.UpdateError
 		    
+		  elseif Kaju.HashOfFile( file ) <> SelectedUpdate.PlatformBinary.Hash then
+		    
+		    lblInstallMessage.Text = kBadDownloadMessage
+		    btnOK.Caption = kTryLaterButton
+		    pbProgress.Visible = false
+		    
+		    CurrentStage = Stage.UpdateError
+		    
 		  else
 		    //
-		    // Verify the download
+		    // We have the file and it appears to be good
 		    //
 		    
-		    dim digest as new MD5Digest
-		    
+		    lblInstallMessage.Text = kProcessingFileMessage
 		    
 		    
 		    CurrentStage = Stage.WaitingToQuit
 		  end if
 		  
 		  
+		  #pragma unused url
+		  #pragma unused headers
 		End Sub
 	#tag EndEvent
 #tag EndEvents
