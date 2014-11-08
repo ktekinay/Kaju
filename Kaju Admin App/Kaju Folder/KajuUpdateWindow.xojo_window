@@ -748,3 +748,15 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events shZipper
+	#tag Event
+		Sub DecompressCompleted(zipFile As FolderItem, containingFolder As FolderItem)
+		  #pragma warning "Implement this!"
+		  
+		  //
+		  // Set up the script that will handle the transfer
+		  //
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
