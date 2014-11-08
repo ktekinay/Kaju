@@ -10,6 +10,30 @@ Protected Module Kaju
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Function HashOfFile(f As FolderItem) As String
+		  if f is nil or not f.IsReadable then
+		    return ""
+		  end if
+		  
+		  dim bs as BinaryStream = BinaryStream.Open( f )
+		  
+		  const kBlock = 1000000
+		  
+		  dim hasher as new MD5Digest
+		  
+		  while not bs.EOF
+		    dim chunk as string = bs.Read( kBlock )
+		    hasher.Process( chunk )
+		  wend
+		  
+		  return EncodeHex( hasher.Value )
+		  
+		  Exception err as RuntimeException
+		    return ""
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Sub JSONToPoperties(data As JSONItem, target As Object)
 		  // Stores the values in the JSON object to the matching property in the object.
 		  // Will only handle basic types, not objects.
