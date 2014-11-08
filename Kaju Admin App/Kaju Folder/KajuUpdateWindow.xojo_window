@@ -638,7 +638,8 @@ End
 		    CurrentStage = Stage.InstallingUpdate
 		    
 		    if not Checker.DryRun then
-		      DownloadFile = GetTemporaryFolderItem
+		      dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
+		      DownloadFile = tempFolder.Child( SelectedUpdate.PlatformBinary.FileName )
 		      
 		      dim url as string = SelectedUpdate.PlatformBinary.URL
 		      hsSocket.Secure = url.Left( 6 ) = "https:"
