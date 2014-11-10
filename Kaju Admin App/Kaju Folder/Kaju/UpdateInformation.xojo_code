@@ -1,5 +1,6 @@
 #tag Class
 Protected Class UpdateInformation
+Inherits Kaju.Information
 	#tag Method, Flags = &h0
 		Sub Constructor(data As JSONItem)
 		  Kaju.JSONToPoperties( data, self )

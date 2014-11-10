@@ -15,6 +15,7 @@ Class=UpdateInformation;Kaju Folder/Kaju/UpdateInformation.xojo_code;&h79AE1ADC;
 Class=BinaryInformation;Kaju Folder/Kaju/BinaryInformation.xojo_code;&hE8D70B5;&h11400316;false
 Picture=SomePic;../External Images/SomePic.png;&h42AA5EAB;&h7AFA3CBE;false;0;&h0
 Class=ZipShell;Kaju Folder/Kaju/ZipShell.xojo_code;&hCC15E9B;&h11400316;false
+Class=Information;Kaju Folder/Kaju/Information.xojo_code;&h6497A7C4;&h11400316;false
 AppMenuBar=MainMenuBar
 MajorVersion=1
 MinorVersion=0
