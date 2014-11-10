@@ -369,6 +369,7 @@ Begin Window KajuUpdateWindow
       Canonical       =   False
       Height          =   32
       Index           =   -2147483648
+      InitialParent   =   ""
       Left            =   0
       LockedInPosition=   False
       Mode            =   1
