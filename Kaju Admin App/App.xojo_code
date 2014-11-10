@@ -29,13 +29,16 @@ Inherits Application
 		  'u.TestUpdate( kTestJSON2 )
 		  'u.TestUpdate( kTestJSON2 )
 		  
-		  dim sh as new Kaju.ZipShell
-		  dim zipFile as FolderItem = SpecialFolder.Desktop.Child( f.Name + ".zip" )
-		  sh.Compress( f, zipFile )
+		  'dim sh as new Kaju.ZipShell
+		  'dim zipFile as FolderItem = SpecialFolder.Desktop.Child( f.Name + ".zip" )
+		  'sh.Compress( f, zipFile )
+		  '
+		  'sh.Decompress( zipFile )
+		  '
+		  'MsgBox sh.ContentsOf( zipFile )
 		  
-		  sh.Decompress( zipFile )
-		  
-		  MsgBox sh.ContentsOf( zipFile )
+		  dim w as new WndAdmin
+		  w.Show
 		End Sub
 	#tag EndEvent
 
