@@ -213,55 +213,6 @@ Begin Window WndAdmin
       Visible         =   True
       Width           =   100
    End
-   Begin Listbox lbInfo
-      AutoDeactivate  =   True
-      AutoHideScrollbars=   True
-      Bold            =   False
-      Border          =   True
-      ColumnCount     =   1
-      ColumnsResizable=   False
-      ColumnWidths    =   ""
-      DataField       =   ""
-      DataSource      =   ""
-      DefaultRowHeight=   -1
-      Enabled         =   True
-      EnableDrag      =   False
-      EnableDragReorder=   False
-      GridLinesHorizontal=   0
-      GridLinesVertical=   0
-      HasHeading      =   False
-      HeadingIndex    =   -1
-      Height          =   552
-      HelpTag         =   ""
-      Hierarchical    =   False
-      Index           =   -2147483648
-      InitialParent   =   ""
-      InitialValue    =   ""
-      Italic          =   False
-      Left            =   251
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      RequiresSelection=   False
-      Scope           =   2
-      ScrollbarHorizontal=   False
-      ScrollBarVertical=   True
-      SelectionType   =   0
-      TabIndex        =   5
-      TabPanelIndex   =   0
-      TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
-      Top             =   47
-      Underline       =   False
-      UseFocusRing    =   True
-      Visible         =   True
-      Width           =   642
-      _ScrollWidth    =   -1
-   End
 End
 #tag EndWindow
 
@@ -382,14 +333,6 @@ End
 	#tag Event
 		Sub Action()
 		  DeleteVersion
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events lbInfo
-	#tag Event
-		Sub ExpandRow(row As Integer)
-		  dim info as Kaju.Information = me.RowTag( row )
-		  AddRows( info )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
