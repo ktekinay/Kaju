@@ -3,7 +3,7 @@ Protected Class BinaryInformation
 Inherits Kaju.Information
 	#tag Method, Flags = &h0
 		Sub Constructor(data As JSONItem)
-		  Kaju.JSONToPoperties( data, self )
+		  Kaju.JSONToProperties( data, self )
 		End Sub
 	#tag EndMethod
 

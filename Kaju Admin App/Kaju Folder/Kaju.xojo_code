@@ -44,7 +44,7 @@ Protected Module Kaju
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
-		Protected Sub JSONToPoperties(data As JSONItem, target As Object)
+		Protected Sub JSONToProperties(data As JSONItem, target As Object)
 		  // Stores the values in the JSON object to the matching property in the object.
 		  // Will only handle basic types, not objects.
 		  

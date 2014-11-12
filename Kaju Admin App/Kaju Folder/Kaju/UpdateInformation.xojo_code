@@ -9,7 +9,7 @@ Inherits Kaju.Information
 
 	#tag Method, Flags = &h0
 		Sub Constructor(data As JSONItem)
-		  Kaju.JSONToPoperties( data, self )
+		  Kaju.JSONToProperties( data, self )
 		  
 		  if data.HasName( "MacBinary" ) then
 		    MacBinary = new Kaju.BinaryInformation( data.Value( "MacBinary" ) )
