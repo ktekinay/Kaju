@@ -10,6 +10,16 @@ Protected Module Kaju
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Sub CancelUpdate()
+		  if InitiateOnQuit <> nil then
+		    InitiateOnQuit.ReplacementApp = nil // Will stop the update
+		    InitiateOnQuit = nil
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Function GetTemporaryFolder() As FolderItem
 		  dim f as FolderItem = GetTemporaryFolderItem
 		  f.Delete
@@ -63,6 +73,12 @@ Protected Module Kaju
 		    end if
 		  next
 		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Sub StartUpdate(initiater As Kaju.UpdateInitiater)
+		  InitiateOnQuit = initiater
 		End Sub
 	#tag EndMethod
 
@@ -176,6 +192,10 @@ Protected Module Kaju
 		End Function
 	#tag EndMethod
 
+
+	#tag Property, Flags = &h21
+		Private InitiateOnQuit As Kaju.UpdateInitiater
+	#tag EndProperty
 
 	#tag Property, Flags = &h21
 		Private mUpdateInProgress As Boolean
