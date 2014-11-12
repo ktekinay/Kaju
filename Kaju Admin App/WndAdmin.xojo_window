@@ -73,6 +73,7 @@ Begin Window WndAdmin
       UseFocusRing    =   True
       Visible         =   True
       Width           =   203
+      _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
    Begin PushButton btnNew
@@ -315,7 +316,7 @@ End
 		  dim row as integer = me.ListIndex
 		  if row <> -1 then
 		    LoadVersion( me.Cell( row, 0 ), me.RowTag( row ) )
-		  else 
+		  else
 		    ClearInfo
 		  end if
 		End Sub
