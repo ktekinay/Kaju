@@ -345,7 +345,7 @@ Begin Window KajuUpdateWindow
       LockTop         =   True
       Maximum         =   0
       Scope           =   2
-      TabIndex        =   9
+      TabIndex        =   "9"
       TabPanelIndex   =   0
       TabStop         =   True
       Top             =   555
@@ -383,7 +383,7 @@ Begin Window KajuUpdateWindow
       LockedInPosition=   False
       Mode            =   1
       Scope           =   2
-      TabIndex        =   11
+      TabIndex        =   "11"
       TabPanelIndex   =   0
       TabStop         =   True
       TimeOut         =   0
