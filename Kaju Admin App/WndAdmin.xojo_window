@@ -149,7 +149,7 @@ Begin Window WndAdmin
       CueText         =   ""
       DataField       =   "Version"
       DataSource      =   ""
-      Enabled         =   True
+      Enabled         =   False
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
@@ -254,7 +254,7 @@ Begin Window WndAdmin
          Border          =   True
          DataField       =   "ReleaseNotes"
          DataSource      =   ""
-         Enabled         =   True
+         Enabled         =   False
          Format          =   ""
          Height          =   210
          HelpTag         =   ""
@@ -360,7 +360,7 @@ Begin Window WndAdmin
       CueText         =   ""
       DataField       =   "AppName"
       DataSource      =   ""
-      Enabled         =   True
+      Enabled         =   False
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
@@ -470,7 +470,7 @@ Begin Window WndAdmin
       CueText         =   ""
       DataField       =   "MinimumRequiriedVersion"
       DataSource      =   ""
-      Enabled         =   True
+      Enabled         =   False
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
@@ -507,7 +507,7 @@ Begin Window WndAdmin
       Caption         =   "Requires Payment"
       DataField       =   "RequiresPayment"
       DataSource      =   ""
-      Enabled         =   True
+      Enabled         =   False
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
