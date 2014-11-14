@@ -4,7 +4,7 @@ Begin Window WndAdmin
    Backdrop        =   0
    CloseButton     =   True
    Compatibility   =   ""
-   Composite       =   False
+   Composite       =   True
    Frame           =   0
    FullScreen      =   False
    FullScreenButton=   False
@@ -147,7 +147,7 @@ Begin Window WndAdmin
       Bold            =   False
       Border          =   True
       CueText         =   ""
-      DataField       =   ""
+      DataField       =   "Version"
       DataSource      =   ""
       Enabled         =   True
       Format          =   ""
@@ -174,7 +174,7 @@ Begin Window WndAdmin
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   13
+      Top             =   52
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -188,7 +188,7 @@ Begin Window WndAdmin
       Enabled         =   True
       Height          =   20
       HelpTag         =   ""
-      Index           =   -2147483648
+      Index           =   0
       InitialParent   =   ""
       Italic          =   False
       Left            =   251
@@ -198,7 +198,7 @@ Begin Window WndAdmin
       LockRight       =   False
       LockTop         =   True
       Multiline       =   False
-      Scope           =   0
+      Scope           =   2
       Selectable      =   False
       TabIndex        =   4
       TabPanelIndex   =   0
@@ -208,11 +208,363 @@ Begin Window WndAdmin
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   14
+      Top             =   53
       Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   100
+   End
+   Begin TabPanel TabPanel1
+      AutoDeactivate  =   True
+      Bold            =   False
+      Enabled         =   True
+      Height          =   497
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   251
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Panels          =   ""
+      Scope           =   2
+      SmallTabs       =   False
+      TabDefinition   =   "Release Notes\rBinaries\rImage"
+      TabIndex        =   5
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   102
+      Underline       =   False
+      Value           =   0
+      Visible         =   True
+      Width           =   653
+      Begin TextArea fldReleaseNotes
+         AcceptTabs      =   False
+         Alignment       =   0
+         AutoDeactivate  =   True
+         AutomaticallyCheckSpelling=   True
+         BackColor       =   &cFFFFFF00
+         Bold            =   False
+         Border          =   True
+         DataField       =   "ReleaseNotes"
+         DataSource      =   ""
+         Enabled         =   True
+         Format          =   ""
+         Height          =   210
+         HelpTag         =   ""
+         HideSelection   =   True
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   271
+         LimitText       =   0
+         LineHeight      =   0.0
+         LineSpacing     =   1.0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Mask            =   ""
+         Multiline       =   True
+         ReadOnly        =   False
+         Scope           =   2
+         ScrollbarHorizontal=   False
+         ScrollbarVertical=   True
+         Styled          =   False
+         TabIndex        =   0
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Text            =   ""
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   140
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   True
+         Width           =   613
+      End
+      Begin HTMLViewer hvReleaseNotesPreview
+         AutoDeactivate  =   True
+         Enabled         =   True
+         Height          =   200
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Left            =   271
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Renderer        =   0
+         Scope           =   2
+         TabIndex        =   1
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Top             =   388
+         Visible         =   True
+         Width           =   613
+      End
+      Begin Label Label1
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   4
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   271
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   2
+         TabPanelIndex   =   1
+         Text            =   "Preview:"
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   362
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   100
+      End
+   End
+   Begin TextField fldAppName
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   "AppName"
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   363
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   2
+      TabIndex        =   6
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   18
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   229
+   End
+   Begin Label Label1
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   3
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   251
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   2
+      Selectable      =   False
+      TabIndex        =   7
+      TabPanelIndex   =   0
+      Text            =   "App Name:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   19
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin Label Label1
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   2
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   481
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   2
+      Selectable      =   False
+      TabIndex        =   8
+      TabPanelIndex   =   0
+      Text            =   "Minimum Required Version:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   53
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   200
+   End
+   Begin TextField fldMinRequiredVersion
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   "MinimumRequiriedVersion"
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   693
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   2
+      TabIndex        =   9
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   52
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   80
+   End
+   Begin CheckBox cbRequiresPayment
+      AutoDeactivate  =   True
+      Bold            =   False
+      Caption         =   "Requires Payment"
+      DataField       =   "RequiresPayment"
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   693
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   2
+      State           =   0
+      TabIndex        =   10
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   19
+      Underline       =   False
+      Value           =   False
+      Visible         =   True
+      Width           =   180
+   End
+   Begin Timer tmrUpdatePreview
+      Height          =   32
+      Index           =   -2147483648
+      Left            =   0
+      LockedInPosition=   False
+      Mode            =   0
+      Period          =   750
+      Scope           =   0
+      TabPanelIndex   =   0
+      Top             =   0
+      Width           =   32
+   End
+   Begin HTMLViewer hvNewWindow
+      AutoDeactivate  =   True
+      Enabled         =   False
+      Height          =   200
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Left            =   -371
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Renderer        =   0
+      Scope           =   2
+      TabIndex        =   11
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Top             =   156
+      Visible         =   False
+      Width           =   300
    End
 End
 #tag EndWindow
@@ -308,6 +660,11 @@ End
 	#tag EndMethod
 
 
+	#tag Property, Flags = &h21
+		Private Loading As Boolean
+	#tag EndProperty
+
+
 #tag EndWindowCode
 
 #tag Events lbVersions
@@ -335,5 +692,44 @@ End
 		Sub Action()
 		  DeleteVersion
 		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events fldReleaseNotes
+	#tag Event
+		Sub TextChange()
+		  tmrUpdatePreview.Mode = Timer.ModeSingle
+		  tmrUpdatePreview.Reset
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events hvReleaseNotesPreview
+	#tag Event
+		Function NewWindow() As HTMLViewer
+		  return hvNewWindow
+		End Function
+	#tag EndEvent
+	#tag Event
+		Function CancelLoad(URL as String) As Boolean
+		  return ( not self.Loading )
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events tmrUpdatePreview
+	#tag Event
+		Sub Action()
+		  self.Loading = true
+		  
+		  hvReleaseNotesPreview.LoadPage( fldReleaseNotes.Text, new FolderItem )
+		  
+		  self.Loading = false
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events hvNewWindow
+	#tag Event
+		Function CancelLoad(URL as String) As Boolean
+		  ShowURL( URL )
+		  return true
+		End Function
 	#tag EndEvent
 #tag EndEvents
