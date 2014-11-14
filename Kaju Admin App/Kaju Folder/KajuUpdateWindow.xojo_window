@@ -212,7 +212,6 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   5
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Untitled"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -247,7 +246,6 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   6
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Untitled"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -282,7 +280,6 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   7
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "#kReleaseNotes"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -317,7 +314,6 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Starting installation..."
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -345,9 +341,7 @@ Begin Window KajuUpdateWindow
       LockTop         =   True
       Maximum         =   0
       Scope           =   2
-      TabIndex        =   "9"
       TabPanelIndex   =   0
-      TabStop         =   True
       Top             =   555
       Value           =   0
       Visible         =   False
@@ -358,8 +352,7 @@ Begin Window KajuUpdateWindow
       CertificatePassword=   ""
       CertificateRejectionFile=   
       ConnectionType  =   2
-      Enabled         =   True
-      Height          =   "32"
+      Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
@@ -368,28 +361,44 @@ Begin Window KajuUpdateWindow
       Secure          =   False
       TabPanelIndex   =   0
       Top             =   0
-      Visible         =   True
-      Width           =   "32"
+      Width           =   32
    End
    Begin Kaju.ZipShell shZipper
       Arguments       =   ""
       Backend         =   ""
       Canonical       =   False
-      Enabled         =   True
-      Height          =   "32"
+      Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
       LockedInPosition=   False
       Mode            =   1
       Scope           =   2
-      TabIndex        =   "11"
       TabPanelIndex   =   0
-      TabStop         =   True
       TimeOut         =   0
       Top             =   0
-      Visible         =   True
-      Width           =   "32"
+      Width           =   32
+   End
+   Begin HTMLViewer hvNewWindow
+      AutoDeactivate  =   True
+      Enabled         =   True
+      Height          =   200
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Left            =   -345
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Renderer        =   0
+      Scope           =   2
+      TabIndex        =   9
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Top             =   119
+      Visible         =   False
+      Width           =   300
    End
 End
 #tag EndWindow
@@ -478,6 +487,8 @@ End
 		  // Fill in the viewer
 		  //
 		  
+		  self.Loading = true
+		  
 		  dim source as string = update.ReleaseNotes
 		  if source = "" then
 		    source = "<b>NO UPDATE INFORMATION</b>"
@@ -504,6 +515,8 @@ End
 		  end if
 		  
 		  self.Backdrop = p
+		  
+		  self.Loading = false
 		End Sub
 	#tag EndMethod
 
@@ -536,6 +549,10 @@ End
 
 	#tag Property, Flags = &h21
 		Private DownloadFile As FolderItem
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Loading As Boolean
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -630,6 +647,18 @@ End
 		  DisplayVersionInfo( update )
 		  
 		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events hvNotes
+	#tag Event
+		Function NewWindow() As HTMLViewer
+		  return hvNewWindow
+		End Function
+	#tag EndEvent
+	#tag Event
+		Function CancelLoad(URL as String) As Boolean
+		  return ( not Loading )
+		End Function
 	#tag EndEvent
 #tag EndEvents
 #tag Events btnOK
@@ -772,5 +801,14 @@ End
 		  //
 		  
 		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events hvNewWindow
+	#tag Event
+		Function CancelLoad(URL as String) As Boolean
+		  ShowURL( URL )
+		  return true
+		  
+		End Function
 	#tag EndEvent
 #tag EndEvents
