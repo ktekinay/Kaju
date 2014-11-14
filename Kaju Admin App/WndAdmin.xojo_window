@@ -540,7 +540,7 @@ Begin Window WndAdmin
       LockedInPosition=   False
       Mode            =   0
       Period          =   750
-      Scope           =   0
+      Scope           =   2
       TabPanelIndex   =   0
       Top             =   0
       Width           =   32
