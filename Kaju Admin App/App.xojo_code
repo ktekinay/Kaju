@@ -60,7 +60,7 @@ Inherits Application
 	#tag Constant, Name = kTestJSON1, Type = String, Dynamic = False, Default = \"[\n\t{\n\t\"Version\" : \"1.0.3\"\x2C\n\t\"MacBinary\" : \n\t\t{\n\t\t\"URL\" : \"http://www.sample.com/macdownload\"\x2C\n\t\t\"Signature\" : \"123456\"\n\t\t}\n\t} \n]", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = kTestJSON2, Type = String, Dynamic = False, Default = \"[\n\t{\n\t\"Version\" : \"1.0.3\"\x2C\n\t\"MacBinary\" : \n\t\t{\n\t\t\"URL\" : \"http://www.sample.com/macdownload\"\x2C\n\t\t\"Signature\" : \"123456\"\n\t\t}\x2C\n\t\"DisplayNotes\" : \"<b>Version 1.0.3</b><br /><br /><p>This is a <i>really</i> important update that you should have.\"\n\t} \x2C\n\t{\n\t\"Version\" : \"1.1b1\"\x2C\n\t\"MacBinary\" : \n\t\t{\n\t\t\"URL\" : \"http://www.sample.com/macdownload\"\x2C\n\t\t\"Signature\" : \"123456\"\n\t\t}\x2C\n\t\"InfoURL\" : \"http://www.sample.com/moreinfo\"\n\t}\n]", Scope = Private
+	#tag Constant, Name = kTestJSON2, Type = String, Dynamic = False, Default = \"[\n\t{\n\t\"Version\" : \"1.0.3\"\x2C\n\t\"MacBinary\" : \n\t\t{\n\t\t\"URL\" : \"http://www.sample.com/macdownload\"\x2C\n\t\t\"Signature\" : \"123456\"\n\t\t}\x2C\n\t\"ReleaseNotes\" : \"<b>Version 1.0.3</b><br /><br /><p>This is a <i>really</i> important update that you should have.\"\n\t} \x2C\n\t{\n\t\"Version\" : \"1.1b1\"\x2C\n\t\"MacBinary\" : \n\t\t{\n\t\t\"URL\" : \"http://www.sample.com/macdownload\"\x2C\n\t\t\"Signature\" : \"123456\"\n\t\t}\x2C\n\t\"InfoURL\" : \"http://www.sample.com/moreinfo\"\n\t}\n]", Scope = Private
 	#tag EndConstant
 
 

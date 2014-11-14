@@ -478,7 +478,7 @@ End
 		  // Fill in the viewer
 		  //
 		  
-		  dim source as string = update.DisplayNotes
+		  dim source as string = update.ReleaseNotes
 		  if source = "" then
 		    source = "<b>NO UPDATE INFORMATION</b>"
 		  end if

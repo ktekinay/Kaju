@@ -31,10 +31,6 @@ Inherits Kaju.Information
 		AppName As String
 	#tag EndProperty
 
-	#tag Property, Flags = &h0
-		DisplayNotes As String
-	#tag EndProperty
-
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
@@ -112,6 +108,10 @@ Inherits Kaju.Information
 		#tag EndGetter
 		PlatformBinary As Kaju.BinaryInformation
 	#tag EndComputedProperty
+
+	#tag Property, Flags = &h0
+		ReleaseNotes As String
+	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		RequiresPayment As Boolean
