@@ -566,6 +566,37 @@ Begin Window WndAdmin
       Visible         =   False
       Width           =   300
    End
+   Begin PushButton btnCopyPublicKey
+      AutoDeactivate  =   True
+      Bold            =   False
+      ButtonStyle     =   "0"
+      Cancel          =   False
+      Caption         =   "Copy RSA Public Key"
+      Default         =   False
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   718
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   2
+      TabIndex        =   12
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   614
+      Underline       =   False
+      Visible         =   True
+      Width           =   186
+   End
 End
 #tag EndWindow
 
@@ -629,6 +660,19 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub CreateRSAKeys()
+		  if RSAPrivateKey = "" then
+		    if not Crypto.RSAGenerateKeyPair( 2048, RSAPrivateKey, RSAPublicKey ) then
+		      MsgBox "Could not create RSA key pairs."
+		      self.Close
+		    end if
+		  end if
+		  
+		  return
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub DeleteVersion()
 		  
 		End Sub
@@ -651,6 +695,8 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub NewVersion()
+		  CreateRSAKeys()
+		  
 		  lbVersions.AddRow "1.0.0d1"
 		  
 		  lbVersions.RowTag( lbVersions.LastIndex ) = new Kaju.UpdateInformation
@@ -662,6 +708,14 @@ End
 
 	#tag Property, Flags = &h21
 		Private Loading As Boolean
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private RSAPrivateKey As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private RSAPublicKey As String
 	#tag EndProperty
 
 
@@ -731,5 +785,16 @@ End
 		  ShowURL( URL )
 		  return true
 		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnCopyPublicKey
+	#tag Event
+		Sub Action()
+		  CreateRSAKeys()
+		  
+		  dim c as new Clipboard
+		  c.Text = RSAPublicKey
+		  c.Close
+		End Sub
 	#tag EndEvent
 #tag EndEvents
