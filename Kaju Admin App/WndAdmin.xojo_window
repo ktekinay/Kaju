@@ -218,14 +218,14 @@ Begin Window WndAdmin
       AutoDeactivate  =   True
       Bold            =   False
       Enabled         =   True
-      Height          =   526
+      Height          =   542
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
       Left            =   251
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   True
       LockTop         =   True
@@ -239,9 +239,9 @@ Begin Window WndAdmin
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   102
+      Top             =   86
       Underline       =   False
-      Value           =   0
+      Value           =   1
       Visible         =   True
       Width           =   653
       Begin TextArea fldReleaseNotes
@@ -266,10 +266,10 @@ Begin Window WndAdmin
          LimitText       =   0
          LineHeight      =   0.0
          LineSpacing     =   1.0
-         LockBottom      =   False
+         LockBottom      =   True
          LockedInPosition=   False
          LockLeft        =   True
-         LockRight       =   False
+         LockRight       =   True
          LockTop         =   True
          Mask            =   ""
          Multiline       =   True
@@ -295,16 +295,16 @@ Begin Window WndAdmin
       Begin HTMLViewer hvReleaseNotesPreview
          AutoDeactivate  =   True
          Enabled         =   True
-         Height          =   200
+         Height          =   210
          HelpTag         =   ""
          Index           =   -2147483648
          InitialParent   =   "TabPanel1"
          Left            =   271
-         LockBottom      =   False
+         LockBottom      =   True
          LockedInPosition=   False
          LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
+         LockRight       =   True
+         LockTop         =   False
          Renderer        =   0
          Scope           =   2
          TabIndex        =   1
@@ -326,11 +326,11 @@ Begin Window WndAdmin
          InitialParent   =   "TabPanel1"
          Italic          =   False
          Left            =   271
-         LockBottom      =   False
+         LockBottom      =   True
          LockedInPosition=   False
          LockLeft        =   True
          LockRight       =   False
-         LockTop         =   True
+         LockTop         =   False
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
@@ -342,11 +342,603 @@ Begin Window WndAdmin
          TextFont        =   "SmallSystem"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   382
+         Top             =   383
          Transparent     =   False
          Underline       =   False
          Visible         =   True
          Width           =   100
+      End
+      Begin CheckBox cbMacBinary
+         AutoDeactivate  =   True
+         Bold            =   False
+         Caption         =   "Mac"
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   271
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         State           =   0
+         TabIndex        =   0
+         TabPanelIndex   =   2
+         TabStop         =   True
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   137
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   100
+      End
+      Begin TextField fldMacBinarySignature
+         AcceptTabs      =   False
+         Alignment       =   0
+         AutoDeactivate  =   True
+         AutomaticallyCheckSpelling=   False
+         BackColor       =   &cFFFFFF00
+         Bold            =   False
+         Border          =   True
+         CueText         =   "Drop binary here to calculate signature"
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   False
+         Format          =   ""
+         Height          =   22
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   414
+         LimitText       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Mask            =   ""
+         Password        =   False
+         ReadOnly        =   True
+         Scope           =   2
+         TabIndex        =   1
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   ""
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   169
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   True
+         Width           =   470
+      End
+      Begin TextField fldMacBinaryURL
+         AcceptTabs      =   False
+         Alignment       =   0
+         AutoDeactivate  =   True
+         AutomaticallyCheckSpelling=   False
+         BackColor       =   &cFFFFFF00
+         Bold            =   False
+         Border          =   True
+         CueText         =   ""
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   False
+         Format          =   ""
+         Height          =   22
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   414
+         LimitText       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Mask            =   ""
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   2
+         TabIndex        =   2
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   ""
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   203
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   True
+         Width           =   470
+      End
+      Begin Label Label1
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   5
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   305
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   3
+         TabPanelIndex   =   2
+         Text            =   "Signature:"
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   170
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   67
+      End
+      Begin Label Label1
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   6
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   305
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   4
+         TabPanelIndex   =   2
+         Text            =   "URL:"
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   204
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   67
+      End
+      Begin Label Label1
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   7
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   271
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   3
+         TabPanelIndex   =   1
+         Text            =   "Release Notes (HTML):"
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   138
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   142
+      End
+      Begin CheckBox cbWindowsBinary
+         AutoDeactivate  =   True
+         Bold            =   False
+         Caption         =   "Windows"
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   271
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         State           =   0
+         TabIndex        =   5
+         TabPanelIndex   =   2
+         TabStop         =   True
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   236
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   100
+      End
+      Begin TextField fldWindowsBinarySignature
+         AcceptTabs      =   False
+         Alignment       =   0
+         AutoDeactivate  =   True
+         AutomaticallyCheckSpelling=   False
+         BackColor       =   &cFFFFFF00
+         Bold            =   False
+         Border          =   True
+         CueText         =   "Drop binary here to calculate signature"
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   False
+         Format          =   ""
+         Height          =   22
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   414
+         LimitText       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Mask            =   ""
+         Password        =   False
+         ReadOnly        =   True
+         Scope           =   2
+         TabIndex        =   6
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   ""
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   268
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   True
+         Width           =   470
+      End
+      Begin TextField fldWindowsBinaryURL
+         AcceptTabs      =   False
+         Alignment       =   0
+         AutoDeactivate  =   True
+         AutomaticallyCheckSpelling=   False
+         BackColor       =   &cFFFFFF00
+         Bold            =   False
+         Border          =   True
+         CueText         =   ""
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   False
+         Format          =   ""
+         Height          =   22
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   414
+         LimitText       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Mask            =   ""
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   2
+         TabIndex        =   7
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   ""
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   302
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   True
+         Width           =   470
+      End
+      Begin Label Label1
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   8
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   305
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   8
+         TabPanelIndex   =   2
+         Text            =   "Signature:"
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   269
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   67
+      End
+      Begin Label Label1
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   9
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   305
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   9
+         TabPanelIndex   =   2
+         Text            =   "URL:"
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   303
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   67
+      End
+      Begin CheckBox cbLinuxBinary
+         AutoDeactivate  =   True
+         Bold            =   False
+         Caption         =   "Linux"
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   271
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         State           =   0
+         TabIndex        =   10
+         TabPanelIndex   =   2
+         TabStop         =   True
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   336
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   100
+      End
+      Begin TextField fldLinuxBinarySignature
+         AcceptTabs      =   False
+         Alignment       =   0
+         AutoDeactivate  =   True
+         AutomaticallyCheckSpelling=   False
+         BackColor       =   &cFFFFFF00
+         Bold            =   False
+         Border          =   True
+         CueText         =   "Drop binary here to calculate signature"
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   False
+         Format          =   ""
+         Height          =   22
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   414
+         LimitText       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Mask            =   ""
+         Password        =   False
+         ReadOnly        =   True
+         Scope           =   2
+         TabIndex        =   11
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   ""
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   368
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   True
+         Width           =   470
+      End
+      Begin TextField fldLinuxBinaryURL
+         AcceptTabs      =   False
+         Alignment       =   0
+         AutoDeactivate  =   True
+         AutomaticallyCheckSpelling=   False
+         BackColor       =   &cFFFFFF00
+         Bold            =   False
+         Border          =   True
+         CueText         =   ""
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   False
+         Format          =   ""
+         Height          =   22
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   414
+         LimitText       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Mask            =   ""
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   2
+         TabIndex        =   12
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   ""
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   402
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   True
+         Width           =   470
+      End
+      Begin Label Label1
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   10
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   305
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   13
+         TabPanelIndex   =   2
+         Text            =   "Signature:"
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   369
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   67
+      End
+      Begin Label Label1
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   11
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   305
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   14
+         TabPanelIndex   =   2
+         Text            =   "URL:"
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   403
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   67
       End
    End
    Begin TextField fldAppName
@@ -767,6 +1359,75 @@ End
 		Function CancelLoad(URL as String) As Boolean
 		  return ( not self.Loading )
 		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events cbMacBinary
+	#tag Event
+		Sub Action()
+		  fldMacBinarySignature.Enabled = me.Value
+		  fldMacBinaryURL.Enabled = me.Value
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events fldMacBinarySignature
+	#tag Event
+		Sub DropObject(obj As DragItem, action As Integer)
+		  if obj.FolderItemAvailable then
+		    dim f as FolderItem = obj.FolderItem
+		    me.Text = Kaju.HashOfFile( f )
+		  end if
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Open()
+		  me.AcceptFileDrop( "" )
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events cbWindowsBinary
+	#tag Event
+		Sub Action()
+		  fldWindowsBinarySignature.Enabled = me.Value
+		  fldWindowsBinaryURL.Enabled = me.Value
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events fldWindowsBinarySignature
+	#tag Event
+		Sub Open()
+		  me.AcceptFileDrop( "" )
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub DropObject(obj As DragItem, action As Integer)
+		  if obj.FolderItemAvailable then
+		    dim f as FolderItem = obj.FolderItem
+		    me.Text = Kaju.HashOfFile( f )
+		  end if
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events cbLinuxBinary
+	#tag Event
+		Sub Action()
+		  fldWindowsBinarySignature.Enabled = me.Value
+		  fldWindowsBinaryURL.Enabled = me.Value
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events fldLinuxBinarySignature
+	#tag Event
+		Sub Open()
+		  me.AcceptFileDrop( "" )
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub DropObject(obj As DragItem, action As Integer)
+		  if obj.FolderItemAvailable then
+		    dim f as FolderItem = obj.FolderItem
+		    me.Text = Kaju.HashOfFile( f )
+		  end if
+		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events tmrUpdatePreview
