@@ -9,7 +9,7 @@ Begin Window WndAdmin
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
-   Height          =   646
+   Height          =   680
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
@@ -44,7 +44,7 @@ Begin Window WndAdmin
       GridLinesVertical=   0
       HasHeading      =   False
       HeadingIndex    =   -1
-      Height          =   588
+      Height          =   614
       HelpTag         =   ""
       Hierarchical    =   False
       Index           =   -2147483648
@@ -52,7 +52,7 @@ Begin Window WndAdmin
       InitialValue    =   ""
       Italic          =   False
       Left            =   20
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
@@ -102,7 +102,7 @@ Begin Window WndAdmin
       TextFont        =   "SmallSystem"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   614
+      Top             =   640
       Underline       =   False
       Visible         =   True
       Width           =   80
@@ -121,11 +121,11 @@ Begin Window WndAdmin
       InitialParent   =   ""
       Italic          =   False
       Left            =   20
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
-      LockTop         =   True
+      LockTop         =   False
       Scope           =   2
       TabIndex        =   2
       TabPanelIndex   =   0
@@ -133,7 +133,7 @@ Begin Window WndAdmin
       TextFont        =   "SmallSystem"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   614
+      Top             =   640
       Underline       =   False
       Visible         =   True
       Width           =   80
@@ -218,16 +218,16 @@ Begin Window WndAdmin
       AutoDeactivate  =   True
       Bold            =   False
       Enabled         =   True
-      Height          =   497
+      Height          =   526
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
       Left            =   251
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   True
       Panels          =   ""
       Scope           =   2
@@ -286,7 +286,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   140
+         Top             =   160
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   True
@@ -310,7 +310,7 @@ Begin Window WndAdmin
          TabIndex        =   1
          TabPanelIndex   =   1
          TabStop         =   True
-         Top             =   388
+         Top             =   408
          Visible         =   True
          Width           =   613
       End
@@ -342,7 +342,7 @@ Begin Window WndAdmin
          TextFont        =   "SmallSystem"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   362
+         Top             =   382
          Transparent     =   False
          Underline       =   False
          Visible         =   True
@@ -536,6 +536,7 @@ Begin Window WndAdmin
    Begin Timer tmrUpdatePreview
       Height          =   32
       Index           =   -2147483648
+      InitialParent   =   ""
       Left            =   0
       LockedInPosition=   False
       Mode            =   0
@@ -580,11 +581,11 @@ Begin Window WndAdmin
       InitialParent   =   ""
       Italic          =   False
       Left            =   718
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
       Scope           =   2
       TabIndex        =   12
       TabPanelIndex   =   0
@@ -592,7 +593,7 @@ Begin Window WndAdmin
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   614
+      Top             =   640
       Underline       =   False
       Visible         =   True
       Width           =   186
