@@ -241,7 +241,7 @@ Begin Window WndAdmin
       TextUnit        =   0
       Top             =   86
       Underline       =   False
-      Value           =   1
+      Value           =   2
       Visible         =   True
       Width           =   653
       Begin TextArea fldReleaseNotes
@@ -354,7 +354,7 @@ Begin Window WndAdmin
          Caption         =   "Mac"
          DataField       =   ""
          DataSource      =   ""
-         Enabled         =   True
+         Enabled         =   False
          Height          =   20
          HelpTag         =   ""
          Index           =   -2147483648
@@ -391,7 +391,7 @@ Begin Window WndAdmin
          CueText         =   "Drop binary here to calculate signature"
          DataField       =   ""
          DataSource      =   ""
-         Enabled         =   False
+         Enabled         =   True
          Format          =   ""
          Height          =   22
          HelpTag         =   ""
@@ -420,7 +420,7 @@ Begin Window WndAdmin
          Top             =   169
          Underline       =   False
          UseFocusRing    =   True
-         Visible         =   True
+         Visible         =   False
          Width           =   470
       End
       Begin TextField fldMacBinaryURL
@@ -434,7 +434,7 @@ Begin Window WndAdmin
          CueText         =   ""
          DataField       =   ""
          DataSource      =   ""
-         Enabled         =   False
+         Enabled         =   True
          Format          =   ""
          Height          =   22
          HelpTag         =   ""
@@ -463,10 +463,10 @@ Begin Window WndAdmin
          Top             =   203
          Underline       =   False
          UseFocusRing    =   True
-         Visible         =   True
+         Visible         =   False
          Width           =   470
       End
-      Begin Label Label1
+      Begin Label lblMacBinarySignature
          AutoDeactivate  =   True
          Bold            =   False
          DataField       =   ""
@@ -474,7 +474,7 @@ Begin Window WndAdmin
          Enabled         =   True
          Height          =   20
          HelpTag         =   ""
-         Index           =   5
+         Index           =   -2147483648
          InitialParent   =   "TabPanel1"
          Italic          =   False
          Left            =   305
@@ -497,10 +497,10 @@ Begin Window WndAdmin
          Top             =   170
          Transparent     =   False
          Underline       =   False
-         Visible         =   True
+         Visible         =   False
          Width           =   67
       End
-      Begin Label Label1
+      Begin Label lblMacBinaryURL
          AutoDeactivate  =   True
          Bold            =   False
          DataField       =   ""
@@ -508,7 +508,7 @@ Begin Window WndAdmin
          Enabled         =   True
          Height          =   20
          HelpTag         =   ""
-         Index           =   6
+         Index           =   -2147483648
          InitialParent   =   "TabPanel1"
          Italic          =   False
          Left            =   305
@@ -531,7 +531,7 @@ Begin Window WndAdmin
          Top             =   204
          Transparent     =   False
          Underline       =   False
-         Visible         =   True
+         Visible         =   False
          Width           =   67
       End
       Begin Label Label1
@@ -574,7 +574,7 @@ Begin Window WndAdmin
          Caption         =   "Windows"
          DataField       =   ""
          DataSource      =   ""
-         Enabled         =   True
+         Enabled         =   False
          Height          =   20
          HelpTag         =   ""
          Index           =   -2147483648
@@ -611,7 +611,7 @@ Begin Window WndAdmin
          CueText         =   "Drop binary here to calculate signature"
          DataField       =   ""
          DataSource      =   ""
-         Enabled         =   False
+         Enabled         =   True
          Format          =   ""
          Height          =   22
          HelpTag         =   ""
@@ -640,7 +640,7 @@ Begin Window WndAdmin
          Top             =   268
          Underline       =   False
          UseFocusRing    =   True
-         Visible         =   True
+         Visible         =   False
          Width           =   470
       End
       Begin TextField fldWindowsBinaryURL
@@ -654,7 +654,7 @@ Begin Window WndAdmin
          CueText         =   ""
          DataField       =   ""
          DataSource      =   ""
-         Enabled         =   False
+         Enabled         =   True
          Format          =   ""
          Height          =   22
          HelpTag         =   ""
@@ -683,10 +683,10 @@ Begin Window WndAdmin
          Top             =   302
          Underline       =   False
          UseFocusRing    =   True
-         Visible         =   True
+         Visible         =   False
          Width           =   470
       End
-      Begin Label Label1
+      Begin Label lblWindowsBinarySignature
          AutoDeactivate  =   True
          Bold            =   False
          DataField       =   ""
@@ -694,7 +694,7 @@ Begin Window WndAdmin
          Enabled         =   True
          Height          =   20
          HelpTag         =   ""
-         Index           =   8
+         Index           =   -2147483648
          InitialParent   =   "TabPanel1"
          Italic          =   False
          Left            =   305
@@ -717,10 +717,10 @@ Begin Window WndAdmin
          Top             =   269
          Transparent     =   False
          Underline       =   False
-         Visible         =   True
+         Visible         =   False
          Width           =   67
       End
-      Begin Label Label1
+      Begin Label lblWindowsBinaryURL
          AutoDeactivate  =   True
          Bold            =   False
          DataField       =   ""
@@ -728,7 +728,7 @@ Begin Window WndAdmin
          Enabled         =   True
          Height          =   20
          HelpTag         =   ""
-         Index           =   9
+         Index           =   -2147483648
          InitialParent   =   "TabPanel1"
          Italic          =   False
          Left            =   305
@@ -751,7 +751,7 @@ Begin Window WndAdmin
          Top             =   303
          Transparent     =   False
          Underline       =   False
-         Visible         =   True
+         Visible         =   False
          Width           =   67
       End
       Begin CheckBox cbLinuxBinary
@@ -760,7 +760,7 @@ Begin Window WndAdmin
          Caption         =   "Linux"
          DataField       =   ""
          DataSource      =   ""
-         Enabled         =   True
+         Enabled         =   False
          Height          =   20
          HelpTag         =   ""
          Index           =   -2147483648
@@ -797,7 +797,7 @@ Begin Window WndAdmin
          CueText         =   "Drop binary here to calculate signature"
          DataField       =   ""
          DataSource      =   ""
-         Enabled         =   False
+         Enabled         =   True
          Format          =   ""
          Height          =   22
          HelpTag         =   ""
@@ -826,7 +826,7 @@ Begin Window WndAdmin
          Top             =   368
          Underline       =   False
          UseFocusRing    =   True
-         Visible         =   True
+         Visible         =   False
          Width           =   470
       End
       Begin TextField fldLinuxBinaryURL
@@ -840,7 +840,7 @@ Begin Window WndAdmin
          CueText         =   ""
          DataField       =   ""
          DataSource      =   ""
-         Enabled         =   False
+         Enabled         =   True
          Format          =   ""
          Height          =   22
          HelpTag         =   ""
@@ -869,10 +869,10 @@ Begin Window WndAdmin
          Top             =   402
          Underline       =   False
          UseFocusRing    =   True
-         Visible         =   True
+         Visible         =   False
          Width           =   470
       End
-      Begin Label Label1
+      Begin Label lblLinuxBinarySignature
          AutoDeactivate  =   True
          Bold            =   False
          DataField       =   ""
@@ -880,7 +880,7 @@ Begin Window WndAdmin
          Enabled         =   True
          Height          =   20
          HelpTag         =   ""
-         Index           =   10
+         Index           =   -2147483648
          InitialParent   =   "TabPanel1"
          Italic          =   False
          Left            =   305
@@ -903,10 +903,10 @@ Begin Window WndAdmin
          Top             =   369
          Transparent     =   False
          Underline       =   False
-         Visible         =   True
+         Visible         =   False
          Width           =   67
       End
-      Begin Label Label1
+      Begin Label lblLinuxBinaryURL
          AutoDeactivate  =   True
          Bold            =   False
          DataField       =   ""
@@ -914,7 +914,7 @@ Begin Window WndAdmin
          Enabled         =   True
          Height          =   20
          HelpTag         =   ""
-         Index           =   11
+         Index           =   -2147483648
          InitialParent   =   "TabPanel1"
          Italic          =   False
          Left            =   305
