@@ -1557,8 +1557,10 @@ End
 #tag Events cbMacBinary
 	#tag Event
 		Sub Action()
-		  fldMacBinarySignature.Enabled = me.Value
-		  fldMacBinaryURL.Enabled = me.Value
+		  fldMacBinarySignature.Visible = me.Value
+		  fldMacBinaryURL.Visible = me.Value
+		  lblMacBinarySignature.Visible = me.Value
+		  lblMacBinaryURL.Visible = me.Value
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1580,8 +1582,10 @@ End
 #tag Events cbWindowsBinary
 	#tag Event
 		Sub Action()
-		  fldWindowsBinarySignature.Enabled = me.Value
-		  fldWindowsBinaryURL.Enabled = me.Value
+		  fldWindowsBinarySignature.Visible = me.Value
+		  fldWindowsBinaryURL.Visible = me.Value
+		  lblWindowsBinarySignature.Visible = me.Value
+		  lblWindowsBinaryURL.Visible = me.Value
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1603,8 +1607,10 @@ End
 #tag Events cbLinuxBinary
 	#tag Event
 		Sub Action()
-		  fldWindowsBinarySignature.Enabled = me.Value
-		  fldWindowsBinaryURL.Enabled = me.Value
+		  fldLinuxBinarySignature.Visible = me.Value
+		  fldLinuxBinaryURL.Visible = me.Value
+		  lblLinuxBinarySignature.Visible = me.Value
+		  lblLinuxBinaryURL.Visible = me.Value
 		End Sub
 	#tag EndEvent
 #tag EndEvents
