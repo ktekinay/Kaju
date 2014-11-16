@@ -1282,12 +1282,21 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub ClearInfo()
-		  'fldVersion.Text = ""
-		  'lbInfo.DeleteAllRows
-		  '
-		  'fldVersion.Enabled = false
-		  'lbInfo.Enabled = false
+		  dim lastIndex as integer = ControlCount - 1
+		  for i as integer = 0 to lastIndex
+		    dim c as Control = self.Control( i )
+		    select case c
+		    case IsA TextEdit
+		      TextEdit( c ).Text = ""
+		      
+		    case IsA CheckBox
+		      CheckBox( c ).Value = false
+		      
+		    end select
+		  next i
 		  
+		  
+		  AdjustControls()
 		End Sub
 	#tag EndMethod
 
