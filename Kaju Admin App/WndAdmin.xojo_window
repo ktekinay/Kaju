@@ -1331,6 +1331,8 @@ End
 		  'fldVersion.Text = version
 		  'dim ti as Introspection.TypeInfo = Introspection.GetType( info )
 		  'AddRows( ti )
+		  
+		  AdjustControls()
 		End Sub
 	#tag EndMethod
 
