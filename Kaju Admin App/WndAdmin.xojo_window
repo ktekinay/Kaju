@@ -1256,7 +1256,7 @@ Begin Window WndAdmin
       Visible         =   True
       Width           =   180
    End
-   Begin Timer tmrUpdatePreview
+   Begin Timer tmrUpdateReleaseNotesPreview
       Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
@@ -1537,8 +1537,8 @@ End
 #tag Events fldReleaseNotes
 	#tag Event
 		Sub TextChange()
-		  tmrUpdatePreview.Mode = Timer.ModeSingle
-		  tmrUpdatePreview.Reset
+		  tmrUpdateReleaseNotesPreview.Mode = Timer.ModeSingle
+		  tmrUpdateReleaseNotesPreview.Reset
 		End Sub
 	#tag EndEvent
 #tag EndEvents
