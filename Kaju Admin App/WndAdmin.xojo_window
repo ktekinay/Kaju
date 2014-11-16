@@ -937,8 +937,139 @@ Begin Window WndAdmin
          Top             =   403
          Transparent     =   False
          Underline       =   False
-         Visible         =   True
+         Visible         =   False
          Width           =   67
+      End
+      Begin TextField fldImageURL
+         AcceptTabs      =   False
+         Alignment       =   0
+         AutoDeactivate  =   True
+         AutomaticallyCheckSpelling=   False
+         BackColor       =   &cFFFFFF00
+         Bold            =   False
+         Border          =   True
+         CueText         =   ""
+         DataField       =   "ImageURL"
+         DataSource      =   ""
+         Enabled         =   False
+         Format          =   ""
+         Height          =   22
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   350
+         LimitText       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Mask            =   ""
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   2
+         TabIndex        =   0
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Text            =   ""
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   161
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   True
+         Width           =   470
+      End
+      Begin Label Label1
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   8
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   271
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   1
+         TabPanelIndex   =   3
+         Text            =   "URL:"
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   161
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   False
+         Width           =   67
+      End
+      Begin CheckBox cbImageUseTransparency
+         AutoDeactivate  =   True
+         Bold            =   False
+         Caption         =   "Use Transparency"
+         DataField       =   "UseTransparency"
+         DataSource      =   ""
+         Enabled         =   False
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   350
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         State           =   0
+         TabIndex        =   2
+         TabPanelIndex   =   3
+         TabStop         =   True
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   129
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   180
+      End
+      Begin HTMLViewer hvImagePreview
+         AutoDeactivate  =   True
+         Enabled         =   True
+         Height          =   384
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Left            =   271
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   False
+         Renderer        =   0
+         Scope           =   2
+         TabIndex        =   3
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Top             =   224
+         Visible         =   True
+         Width           =   613
       End
    End
    Begin TextField fldAppName
@@ -1189,6 +1320,18 @@ Begin Window WndAdmin
       Underline       =   False
       Visible         =   True
       Width           =   186
+   End
+   Begin Timer tmrUpdateImagePreview
+      Height          =   32
+      Index           =   -2147483648
+      Left            =   20
+      LockedInPosition=   False
+      Mode            =   0
+      Period          =   750
+      Scope           =   2
+      TabPanelIndex   =   0
+      Top             =   20
+      Width           =   32
    End
 End
 #tag EndWindow
@@ -1480,7 +1623,27 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events tmrUpdatePreview
+#tag Events fldImageURL
+	#tag Event
+		Sub TextChange()
+		  tmrUpdateImagePreview.Mode = Timer.ModeSingle
+		  tmrUpdateImagePreview.Reset
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events hvImagePreview
+	#tag Event
+		Function NewWindow() As HTMLViewer
+		  return hvNewWindow
+		End Function
+	#tag EndEvent
+	#tag Event
+		Function CancelLoad(URL as String) As Boolean
+		  return ( not self.Loading )
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events tmrUpdateReleaseNotesPreview
 	#tag Event
 		Sub Action()
 		  self.Loading = true
@@ -1507,6 +1670,17 @@ End
 		  dim c as new Clipboard
 		  c.Text = RSAPublicKey
 		  c.Close
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events tmrUpdateImagePreview
+	#tag Event
+		Sub Action()
+		  self.Loading = true
+		  
+		  hvImagePreview.LoadURL( fldImageURL.Text )
+		  
+		  self.Loading = false
 		End Sub
 	#tag EndEvent
 #tag EndEvents
