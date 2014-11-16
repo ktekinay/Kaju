@@ -1242,6 +1242,45 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub AdjustControls()
+		  dim trueValue as boolean = lbVersions.ListIndex <> -1
+		  
+		  dim lastIndex as integer = ControlCount - 1
+		  for i as integer = 0 to lastIndex
+		    dim doIt as boolean
+		    
+		    dim c as Control = self.Control( i )
+		    select case c
+		    case IsA TextEdit
+		      if TextEdit( c ).DataField <> "" then
+		        doIt = true
+		      end if
+		      
+		    case IsA CheckBox
+		      if CheckBox( c ).DataField <> "" then
+		        doIt = true
+		      end if
+		      
+		    end select
+		    
+		    if doIt then
+		      RectControl( c ).Enabled = trueValue
+		    end if
+		  next i
+		  
+		  //
+		  // Adjust the outliers that aren't directly set
+		  //
+		  
+		  cbMacBinary.Enabled = trueValue
+		  cbWindowsBinary.Enabled = trueValue
+		  cbLinuxBinary.Enabled = trueValue
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub ClearInfo()
 		  'fldVersion.Text = ""
 		  'lbInfo.DeleteAllRows
