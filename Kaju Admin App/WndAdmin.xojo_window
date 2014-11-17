@@ -1484,6 +1484,38 @@ End
 		  cbWindowsBinary.Enabled = trueValue
 		  cbLinuxBinary.Enabled = trueValue
 		  
+		  //
+		  // Set the platform summary
+		  //
+		  
+		  if not trueValue then
+		    
+		    lblPlatform.Text = ""
+		    
+		  else
+		    
+		    Redim Platforms( -1 )
+		    if cbMacBinary.Enabled and cbMacBinary.Value then
+		      Platforms.Append "Mac"
+		    end if
+		    
+		    if cbWindowsBinary.Enabled and cbWindowsBinary.Value then
+		      Platforms.Append "Windows"
+		    end if
+		    
+		    if cbLinuxBinary.Enabled and cbLinuxBinary.Value then
+		      Platforms.Append "Linux"
+		    end if
+		    
+		    if Platforms.Ubound = -1 then
+		      lblPlatform.Italic = true
+		      lblPlatform.Text = "No platforms selected"
+		    else
+		      lblPlatform.Italic = false
+		      lblPlatform.Text = join( Platforms, ", " )
+		    end if
+		    
+		  end if
 		  
 		End Sub
 	#tag EndMethod
