@@ -1521,7 +1521,7 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub ClearInfo()
+		Private Sub ClearFields()
 		  dim lastIndex as integer = ControlCount - 1
 		  for i as integer = 0 to lastIndex
 		    dim c as Control = self.Control( i )
