@@ -1522,19 +1522,25 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub ClearFields()
+		  self.Loading = true
+		  
 		  dim lastIndex as integer = ControlCount - 1
 		  for i as integer = 0 to lastIndex
 		    dim c as Control = self.Control( i )
 		    select case c
 		    case IsA TextEdit
-		      TextEdit( c ).Text = ""
-		      
 		    case IsA CheckBox
-		      CheckBox( c ).Value = false
-		      
-		    end select
+		    else
+		      continue for i
+		    end
+		    
+		    ControlValue( c ) = nil
 		  next i
 		  
+		  hvReleaseNotesPreview.LoadPage( "", nil )
+		  hvImagePreview.LoadPage( "", nil )
+		  
+		  self.Loading = false
 		  
 		  AdjustControls()
 		End Sub
