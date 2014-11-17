@@ -380,7 +380,7 @@ Begin Window WndAdmin
          Visible         =   True
          Width           =   100
       End
-      Begin TextField fldMacBinarySignature
+      Begin TextField fldMacBinaryHash
          AcceptTabs      =   False
          Alignment       =   0
          AutoDeactivate  =   True
@@ -388,7 +388,7 @@ Begin Window WndAdmin
          BackColor       =   &cFFFFFF00
          Bold            =   False
          Border          =   True
-         CueText         =   "Drop binary here to calculate signature"
+         CueText         =   "Drop binary here to calculate Hash"
          DataField       =   ""
          DataSource      =   ""
          Enabled         =   True
@@ -466,7 +466,7 @@ Begin Window WndAdmin
          Visible         =   False
          Width           =   470
       End
-      Begin Label lblMacBinarySignature
+      Begin Label lblMacBinaryHash
          AutoDeactivate  =   True
          Bold            =   False
          DataField       =   ""
@@ -488,7 +488,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   2
-         Text            =   "Signature:"
+         Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
          TextFont        =   "System"
@@ -600,7 +600,7 @@ Begin Window WndAdmin
          Visible         =   True
          Width           =   100
       End
-      Begin TextField fldWindowsBinarySignature
+      Begin TextField fldWindowsBinaryHash
          AcceptTabs      =   False
          Alignment       =   0
          AutoDeactivate  =   True
@@ -608,7 +608,7 @@ Begin Window WndAdmin
          BackColor       =   &cFFFFFF00
          Bold            =   False
          Border          =   True
-         CueText         =   "Drop binary here to calculate signature"
+         CueText         =   "Drop binary here to calculate Hash"
          DataField       =   ""
          DataSource      =   ""
          Enabled         =   True
@@ -686,7 +686,7 @@ Begin Window WndAdmin
          Visible         =   False
          Width           =   470
       End
-      Begin Label lblWindowsBinarySignature
+      Begin Label lblWindowsBinaryHash
          AutoDeactivate  =   True
          Bold            =   False
          DataField       =   ""
@@ -708,7 +708,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   8
          TabPanelIndex   =   2
-         Text            =   "Signature:"
+         Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
          TextFont        =   "System"
@@ -786,7 +786,7 @@ Begin Window WndAdmin
          Visible         =   True
          Width           =   100
       End
-      Begin TextField fldLinuxBinarySignature
+      Begin TextField fldLinuxBinaryHash
          AcceptTabs      =   False
          Alignment       =   0
          AutoDeactivate  =   True
@@ -794,7 +794,7 @@ Begin Window WndAdmin
          BackColor       =   &cFFFFFF00
          Bold            =   False
          Border          =   True
-         CueText         =   "Drop binary here to calculate signature"
+         CueText         =   "Drop binary here to calculate Hash"
          DataField       =   ""
          DataSource      =   ""
          Enabled         =   True
@@ -872,7 +872,7 @@ Begin Window WndAdmin
          Visible         =   False
          Width           =   470
       End
-      Begin Label lblLinuxBinarySignature
+      Begin Label lblLinuxBinaryHash
          AutoDeactivate  =   True
          Bold            =   False
          DataField       =   ""
@@ -894,7 +894,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   13
          TabPanelIndex   =   2
-         Text            =   "Signature:"
+         Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
          TextFont        =   "System"
@@ -1557,14 +1557,14 @@ End
 #tag Events cbMacBinary
 	#tag Event
 		Sub Action()
-		  fldMacBinarySignature.Visible = me.Value
+		  fldMacBinaryHash.Visible = me.Value
 		  fldMacBinaryURL.Visible = me.Value
-		  lblMacBinarySignature.Visible = me.Value
+		  lblMacBinaryHash.Visible = me.Value
 		  lblMacBinaryURL.Visible = me.Value
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events fldMacBinarySignature
+#tag Events fldMacBinaryHash
 	#tag Event
 		Sub DropObject(obj As DragItem, action As Integer)
 		  if obj.FolderItemAvailable then
@@ -1582,14 +1582,14 @@ End
 #tag Events cbWindowsBinary
 	#tag Event
 		Sub Action()
-		  fldWindowsBinarySignature.Visible = me.Value
+		  fldWindowsBinaryHash.Visible = me.Value
 		  fldWindowsBinaryURL.Visible = me.Value
-		  lblWindowsBinarySignature.Visible = me.Value
+		  lblWindowsBinaryHash.Visible = me.Value
 		  lblWindowsBinaryURL.Visible = me.Value
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events fldWindowsBinarySignature
+#tag Events fldWindowsBinaryHash
 	#tag Event
 		Sub Open()
 		  me.AcceptFileDrop( "" )
@@ -1607,14 +1607,14 @@ End
 #tag Events cbLinuxBinary
 	#tag Event
 		Sub Action()
-		  fldLinuxBinarySignature.Visible = me.Value
+		  fldLinuxBinaryHash.Visible = me.Value
 		  fldLinuxBinaryURL.Visible = me.Value
-		  lblLinuxBinarySignature.Visible = me.Value
+		  lblLinuxBinaryHash.Visible = me.Value
 		  lblLinuxBinaryURL.Visible = me.Value
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events fldLinuxBinarySignature
+#tag Events fldLinuxBinaryHash
 	#tag Event
 		Sub Open()
 		  me.AcceptFileDrop( "" )
