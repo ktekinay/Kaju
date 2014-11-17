@@ -1732,6 +1732,22 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events fldVersion
+	#tag Event
+		Sub TextChange()
+		  if lbVersions.ListIndex = -1 then
+		    return
+		  end if
+		  
+		  dim v as string = me.Text.Trim
+		  if v = "" then
+		    v = "(no version)"
+		  end if
+		  
+		  lbVersions.Cell( lbVersions.ListIndex, 0 ) = v
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events fldReleaseNotes
 	#tag Event
 		Sub TextChange()
