@@ -13,6 +13,17 @@ Inherits Kaju.Information
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function ToJSON() As JSONItem
+		  dim j as new JSONItem
+		  j.Value( "Hash" ) = Hash
+		  j.Value( "URL" ) = URL
+		  
+		  return j
+		  
+		End Function
+	#tag EndMethod
+
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
