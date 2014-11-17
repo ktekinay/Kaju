@@ -1675,11 +1675,25 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub NewVersion()
+		  StoreFieldsToVersionRow()
+		  
 		  CreateRSAKeys()
 		  
 		  lbVersions.AddRow "1.0.0d1"
 		  
-		  lbVersions.RowTag( lbVersions.LastIndex ) = new Kaju.UpdateInformation
+		  dim j as new JSONItem()
+		  j.Value( "Version" ) = lbVersions.Cell( lbVersions.LastIndex, 0 )
+		  
+		  dim prevIndex as integer = LastVersionRow
+		  if prevIndex <> -1 and prevIndex < lbVersions.ListCount then
+		    dim prevItem as JSONItem = lbVersions.RowTag( prevIndex )
+		    if prevItem <> nil then
+		      dim fieldName as string = fldAppName.DataField
+		      j.Value( fieldName ) = prevItem.Lookup( fieldName, "" )
+		    end if
+		  end if
+		  
+		  lbVersions.RowTag( lbVersions.LastIndex ) = j
 		  lbVersions.ListIndex = lbVersions.LastIndex
 		  
 		End Sub
