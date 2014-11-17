@@ -1708,12 +1708,18 @@ End
 #tag Events lbVersions
 	#tag Event
 		Sub Change()
+		  StoreFieldsToVersionRow
+		  
 		  dim row as integer = me.ListIndex
-		  if row <> -1 then
-		    LoadVersion( me.Cell( row, 0 ), me.RowTag( row ) )
+		  if row <> -1 and me.RowTag( row ) <> nil then
+		    JSONToFields( me.RowTag( row ) )
 		  else
-		    ClearInfo
+		    ClearFields
 		  end if
+		  
+		  LastVersionRow = row
+		  
+		  AdjustControls()
 		End Sub
 	#tag EndEvent
 #tag EndEvents
