@@ -1,6 +1,12 @@
 #tag Class
 Protected Class BinaryInformation
 Inherits Kaju.Information
+	#tag Method, Flags = &h1000
+		Sub Constructor()
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub Constructor(data As JSONItem)
 		  Kaju.JSONToProperties( data, self )
