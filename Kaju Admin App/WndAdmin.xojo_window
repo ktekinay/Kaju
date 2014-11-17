@@ -1626,17 +1626,48 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub LoadVersion(version As String, info As Kaju.UpdateInformation)
-		  'ClearInfo()
-		  '
-		  'lbInfo.Hierarchical = true
-		  '
-		  'fldVersion.Enabled = true
-		  'lbInfo.Enabled = true
-		  '
-		  'fldVersion.Text = version
-		  'dim ti as Introspection.TypeInfo = Introspection.GetType( info )
-		  'AddRows( ti )
+		Private Sub JSONToFields(data As JSONItem)
+		  //
+		  // Handle the named controls first
+		  //
+		  
+		  ClearFields()
+		  
+		  dim lastIndex as integer = ControlCount - 1
+		  for i as integer = 0 to lastIndex
+		    dim c as Control = self.Control( i )
+		    
+		    dim fieldName as string = ControlDataField( c )
+		    if fieldName <> "" then
+		      ControlValue( c ) = data.Lookup( fieldName, nil )
+		    end if
+		    
+		  next
+		  
+		  //
+		  // Binaries
+		  //
+		  
+		  if data.HasName( Kaju.UpdateInformation.kMacBinaryName ) then
+		    cbMacBinary.Value = true
+		    dim binary as new Kaju.BinaryInformation( data.Value( Kaju.UpdateInformation.kMacBinaryName ) )
+		    fldMacBinaryHash.Text = binary.Hash
+		    fldMacBinaryURL.Text = binary.URL
+		  end if
+		  
+		  if data.HasName( Kaju.UpdateInformation.kWindowsBinaryName ) then
+		    cbMacBinary.Value = true
+		    dim binary as new Kaju.BinaryInformation( data.Value( Kaju.UpdateInformation.kWindowsBinaryName ) )
+		    fldWindowsBinaryHash.Text = binary.Hash
+		    fldWindowsBinaryURL.Text = binary.URL
+		  end if
+		  
+		  if data.HasName( Kaju.UpdateInformation.kLinuxBinaryName ) then
+		    cbMacBinary.Value = true
+		    dim binary as new Kaju.BinaryInformation( data.Value( Kaju.UpdateInformation.kLinuxBinaryName ) )
+		    fldLinuxBinaryHash.Text = binary.Hash
+		    fldLinuxBinaryURL.Text = binary.URL
+		  end if
 		  
 		  AdjustControls()
 		End Sub
