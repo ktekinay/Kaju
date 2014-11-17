@@ -241,7 +241,7 @@ Begin Window WndAdmin
       TextUnit        =   0
       Top             =   86
       Underline       =   False
-      Value           =   2
+      Value           =   1
       Visible         =   True
       Width           =   653
       Begin TextArea fldReleaseNotes
@@ -374,7 +374,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   137
+         Top             =   191
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -417,7 +417,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   169
+         Top             =   223
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
@@ -460,7 +460,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   203
+         Top             =   257
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
@@ -494,7 +494,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   170
+         Top             =   224
          Transparent     =   False
          Underline       =   False
          Visible         =   False
@@ -528,7 +528,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   204
+         Top             =   258
          Transparent     =   False
          Underline       =   False
          Visible         =   False
@@ -594,7 +594,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   236
+         Top             =   290
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -637,7 +637,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   268
+         Top             =   322
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
@@ -680,7 +680,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   302
+         Top             =   356
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
@@ -714,7 +714,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   269
+         Top             =   323
          Transparent     =   False
          Underline       =   False
          Visible         =   False
@@ -748,7 +748,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   303
+         Top             =   357
          Transparent     =   False
          Underline       =   False
          Visible         =   False
@@ -780,7 +780,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   336
+         Top             =   390
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -823,7 +823,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   368
+         Top             =   422
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
@@ -866,7 +866,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   402
+         Top             =   456
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
@@ -900,7 +900,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   369
+         Top             =   423
          Transparent     =   False
          Underline       =   False
          Visible         =   False
@@ -934,7 +934,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   403
+         Top             =   457
          Transparent     =   False
          Underline       =   False
          Visible         =   False
