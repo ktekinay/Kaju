@@ -1759,6 +1759,8 @@ End
 		  fldMacBinaryURL.Visible = me.Value
 		  lblMacBinaryHash.Visible = me.Value
 		  lblMacBinaryURL.Visible = me.Value
+		  
+		  AdjustControls()
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1784,6 +1786,8 @@ End
 		  fldWindowsBinaryURL.Visible = me.Value
 		  lblWindowsBinaryHash.Visible = me.Value
 		  lblWindowsBinaryURL.Visible = me.Value
+		  
+		  AdjustControls()
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1809,6 +1813,8 @@ End
 		  fldLinuxBinaryURL.Visible = me.Value
 		  lblLinuxBinaryHash.Visible = me.Value
 		  lblLinuxBinaryURL.Visible = me.Value
+		  
+		  AdjustControls()
 		End Sub
 	#tag EndEvent
 #tag EndEvents
