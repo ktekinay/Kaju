@@ -1335,6 +1335,40 @@ Begin Window WndAdmin
       Top             =   20
       Width           =   32
    End
+   Begin Label lblPlatform
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   577
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   13
+      TabPanelIndex   =   0
+      Text            =   "None"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   53
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   327
+   End
    Begin Label Label1
       AutoDeactivate  =   True
       Bold            =   False
