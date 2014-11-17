@@ -1325,6 +1325,7 @@ Begin Window WndAdmin
    Begin Timer tmrUpdateImagePreview
       Height          =   32
       Index           =   -2147483648
+      InitialParent   =   ""
       Left            =   20
       LockedInPosition=   False
       Mode            =   0
