@@ -1685,6 +1685,62 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub StoreFieldsToVersionRow()
+		  if LastVersionRow = -1 or LastVersionRow >= lbVersions.ListCount then
+		    return
+		  end if
+		  
+		  dim j as new JSONItem( "{}" )
+		  
+		  //
+		  // Gather the textfield data first
+		  //
+		  
+		  dim lastIndex as integer = ControlCount - 1
+		  for i as integer = 0 to lastIndex
+		    dim c as Control = self.Control( i )
+		    
+		    dim fieldName as string = ControlDataField( c )
+		    if fieldName <> "" then
+		      dim value as Variant = ControlValue( c )
+		      j.Value( fieldName ) = value
+		    end if
+		    
+		  next
+		  
+		  //
+		  // Binaries
+		  //
+		  
+		  if cbMacBinary.Value then
+		    dim binary as new Kaju.BinaryInformation
+		    binary.Hash = fldMacBinaryHash.Text.Trim
+		    binary.URL = fldMacBinaryURL.Text.Trim
+		    
+		    j.Value( Kaju.UpdateInformation.kMacBinaryName ) = binary.ToJSON
+		  end if
+		  
+		  if cbWindowsBinary.Value then
+		    dim binary as new Kaju.BinaryInformation
+		    binary.Hash = fldWindowsBinaryHash.Text.Trim
+		    binary.URL = fldWindowsBinaryURL.Text.Trim
+		    
+		    j.Value( Kaju.UpdateInformation.kWindowsBinaryName ) = binary.ToJSON
+		  end if
+		  
+		  if cbLinuxBinary.Value then
+		    dim binary as new Kaju.BinaryInformation
+		    binary.Hash = fldLinuxBinaryHash.Text.Trim
+		    binary.URL = fldLinuxBinaryURL.Text.Trim
+		    
+		    j.Value( Kaju.UpdateInformation.kLinuxBinaryName ) = binary.ToJSON
+		  end if
+		  
+		  lbVersions.RowTag( LastVersionRow ) = j
+		End Sub
+	#tag EndMethod
+
 
 	#tag Property, Flags = &h21
 		Private LastVersionRow As Integer = -1
