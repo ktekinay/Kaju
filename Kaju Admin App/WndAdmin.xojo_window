@@ -1627,6 +1627,10 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Private Platforms() As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private RSAPrivateKey As String
 	#tag EndProperty
 
