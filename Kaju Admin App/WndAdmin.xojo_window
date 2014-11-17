@@ -1467,21 +1467,9 @@ End
 		  
 		  dim lastIndex as integer = ControlCount - 1
 		  for i as integer = 0 to lastIndex
-		    dim doIt as boolean
 		    
 		    dim c as Control = self.Control( i )
-		    select case c
-		    case IsA TextEdit
-		      if TextEdit( c ).DataField <> "" then
-		        doIt = true
-		      end if
-		      
-		    case IsA CheckBox
-		      if CheckBox( c ).DataField <> "" then
-		        doIt = true
-		      end if
-		      
-		    end select
+		    dim doIt as boolean = ControlDataField( c ) <> ""
 		    
 		    if doIt then
 		      RectControl( c ).Enabled = trueValue
