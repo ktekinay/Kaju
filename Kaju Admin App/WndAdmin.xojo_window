@@ -1444,6 +1444,66 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Function ControlDataField(c As Control) As String
+		  // Returns the DataField field for a control
+		  
+		  dim value as string
+		  
+		  select case c
+		  case IsA TextEdit
+		    dim fld as TextEdit = TextEdit( c )
+		    value = fld.DataField
+		    
+		  case IsA CheckBox
+		    dim cb as CheckBox = CheckBox( c )
+		    value = cb.DataField
+		    
+		  end select
+		  
+		  return value
+		   
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function ControlValue(c As Control) As Variant
+		  dim r as Variant
+		  
+		  select case c
+		  case IsA TextEdit
+		    dim fld as TextEdit = TextEdit( c )
+		    r = fld.Text
+		    
+		  case IsA CheckBox
+		    dim cb as CheckBox = CheckBox( c )
+		    r = cb.Value
+		    
+		  end select
+		  
+		  return r
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub ControlValue(c As Control, Assigns value As Variant)
+		  select case c
+		  case IsA TextEdit
+		    dim fld as TextEdit = TextEdit( c )
+		    fld.Text = value.StringValue
+		    
+		  case IsA CheckBox
+		    dim cb as CheckBox = CheckBox( c )
+		    cb.Value = value.BooleanValue
+		    
+		  else
+		    raise new KeyNotFoundException
+		    
+		  end
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub CreateRSAKeys()
 		  if RSAPrivateKey = "" then
 		    if not Crypto.RSAGenerateKeyPair( 2048, RSAPrivateKey, RSAPublicKey ) then
