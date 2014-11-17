@@ -1687,6 +1687,10 @@ End
 
 
 	#tag Property, Flags = &h21
+		Private LastVersionRow As Integer = -1
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private Loading As Boolean
 	#tag EndProperty
 
