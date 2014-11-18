@@ -1564,7 +1564,7 @@ End
 		  end select
 		  
 		  return value
-		   
+		  
 		End Function
 	#tag EndMethod
 
@@ -1656,14 +1656,14 @@ End
 		  end if
 		  
 		  if data.HasName( Kaju.UpdateInformation.kWindowsBinaryName ) then
-		    cbMacBinary.Value = true
+		    cbWindowsBinary.Value = true
 		    dim binary as new Kaju.BinaryInformation( data.Value( Kaju.UpdateInformation.kWindowsBinaryName ) )
 		    fldWindowsBinaryHash.Text = binary.Hash
 		    fldWindowsBinaryURL.Text = binary.URL
 		  end if
 		  
 		  if data.HasName( Kaju.UpdateInformation.kLinuxBinaryName ) then
-		    cbMacBinary.Value = true
+		    cbLinuxBinary.Value = true
 		    dim binary as new Kaju.BinaryInformation( data.Value( Kaju.UpdateInformation.kLinuxBinaryName ) )
 		    fldLinuxBinaryHash.Text = binary.Hash
 		    fldLinuxBinaryURL.Text = binary.URL
