@@ -1475,6 +1475,8 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub ClearFields()
+		  dim savedDirty as boolean = self.ContentsChanged
+		  
 		  self.Loading = true
 		  
 		  dim lastIndex as integer = ControlCount - 1
@@ -1496,6 +1498,7 @@ End
 		  self.Loading = false
 		  
 		  AdjustControls()
+		  self.ContentsChanged = savedDirty
 		End Sub
 	#tag EndMethod
 
@@ -1565,6 +1568,8 @@ End
 		    if not Crypto.RSAGenerateKeyPair( 2048, RSAPrivateKey, RSAPublicKey ) then
 		      MsgBox "Could not create RSA key pairs."
 		      self.Close
+		    else
+		      self.ContentsChanged = true
 		    end if
 		  end if
 		  
@@ -1583,6 +1588,8 @@ End
 		  //
 		  // Handle the named controls first
 		  //
+		  
+		  dim savedDirty as boolean = self.ContentsChanged
 		  
 		  ClearFields()
 		  
@@ -1623,6 +1630,7 @@ End
 		  end if
 		  
 		  AdjustControls()
+		  self.ContentsChanged = savedDirty
 		End Sub
 	#tag EndMethod
 
@@ -1648,7 +1656,7 @@ End
 		  
 		  lbVersions.RowTag( lbVersions.LastIndex ) = j
 		  lbVersions.ListIndex = lbVersions.LastIndex
-		  
+		  self.ContentsChanged = true
 		End Sub
 	#tag EndMethod
 
