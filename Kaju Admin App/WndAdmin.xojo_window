@@ -1709,6 +1709,26 @@ End
 	#tag EndMethod
 
 
+	#tag ComputedProperty, Flags = &h21
+		#tag Getter
+			Get
+			  dim combined as new JSONItem( "[]" )
+			  
+			  dim lastIndex as integer = lbVersions.ListCount - 1
+			  for row as integer = 0 to lastIndex
+			    dim j as JSONItem = lbVersions.RowTag( row )
+			    if j <> nil then
+			      combined.Append j
+			    end if
+			  next
+			  
+			  return combined
+			  
+			End Get
+		#tag EndGetter
+		Private KajuJSON As JSONItem
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h21
 		Private LastVersionRow As Integer = -1
 	#tag EndProperty
