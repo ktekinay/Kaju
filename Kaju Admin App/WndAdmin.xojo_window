@@ -138,7 +138,7 @@ Begin Window WndAdmin
       Visible         =   True
       Width           =   80
    End
-   Begin TextField fldVersion
+   Begin TextFieldChanger fldVersion
       AcceptTabs      =   False
       Alignment       =   0
       AutoDeactivate  =   True
@@ -241,10 +241,10 @@ Begin Window WndAdmin
       TextUnit        =   0
       Top             =   86
       Underline       =   False
-      Value           =   1
+      Value           =   2
       Visible         =   True
       Width           =   653
-      Begin TextArea fldReleaseNotes
+      Begin TextAreaChanger fldReleaseNotes
          AcceptTabs      =   False
          Alignment       =   0
          AutoDeactivate  =   True
@@ -348,7 +348,7 @@ Begin Window WndAdmin
          Visible         =   True
          Width           =   100
       End
-      Begin CheckBox cbMacBinary
+      Begin CheckBoxChanger cbMacBinary
          AutoDeactivate  =   True
          Bold            =   False
          Caption         =   "Mac"
@@ -380,7 +380,7 @@ Begin Window WndAdmin
          Visible         =   True
          Width           =   100
       End
-      Begin TextField fldMacBinaryHash
+      Begin TextFieldChanger fldMacBinaryHash
          AcceptTabs      =   False
          Alignment       =   0
          AutoDeactivate  =   True
@@ -423,7 +423,7 @@ Begin Window WndAdmin
          Visible         =   False
          Width           =   470
       End
-      Begin TextField fldMacBinaryURL
+      Begin TextFieldChanger fldMacBinaryURL
          AcceptTabs      =   False
          Alignment       =   0
          AutoDeactivate  =   True
@@ -568,7 +568,7 @@ Begin Window WndAdmin
          Visible         =   True
          Width           =   142
       End
-      Begin CheckBox cbWindowsBinary
+      Begin CheckBoxChanger cbWindowsBinary
          AutoDeactivate  =   True
          Bold            =   False
          Caption         =   "Windows"
@@ -600,7 +600,7 @@ Begin Window WndAdmin
          Visible         =   True
          Width           =   100
       End
-      Begin TextField fldWindowsBinaryHash
+      Begin TextFieldChanger fldWindowsBinaryHash
          AcceptTabs      =   False
          Alignment       =   0
          AutoDeactivate  =   True
@@ -643,7 +643,7 @@ Begin Window WndAdmin
          Visible         =   False
          Width           =   470
       End
-      Begin TextField fldWindowsBinaryURL
+      Begin TextFieldChanger fldWindowsBinaryURL
          AcceptTabs      =   False
          Alignment       =   0
          AutoDeactivate  =   True
@@ -754,7 +754,7 @@ Begin Window WndAdmin
          Visible         =   False
          Width           =   67
       End
-      Begin CheckBox cbLinuxBinary
+      Begin CheckBoxChanger cbLinuxBinary
          AutoDeactivate  =   True
          Bold            =   False
          Caption         =   "Linux"
@@ -786,7 +786,7 @@ Begin Window WndAdmin
          Visible         =   True
          Width           =   100
       End
-      Begin TextField fldLinuxBinaryHash
+      Begin TextFieldChanger fldLinuxBinaryHash
          AcceptTabs      =   False
          Alignment       =   0
          AutoDeactivate  =   True
@@ -829,7 +829,7 @@ Begin Window WndAdmin
          Visible         =   False
          Width           =   470
       End
-      Begin TextField fldLinuxBinaryURL
+      Begin TextFieldChanger fldLinuxBinaryURL
          AcceptTabs      =   False
          Alignment       =   0
          AutoDeactivate  =   True
@@ -940,7 +940,7 @@ Begin Window WndAdmin
          Visible         =   False
          Width           =   67
       End
-      Begin TextField fldImageURL
+      Begin TextFieldChanger fldImageURL
          AcceptTabs      =   False
          Alignment       =   0
          AutoDeactivate  =   True
@@ -1017,7 +1017,7 @@ Begin Window WndAdmin
          Visible         =   False
          Width           =   67
       End
-      Begin CheckBox cbImageUseTransparency
+      Begin CheckBoxChanger cbImageUseTransparency
          AutoDeactivate  =   True
          Bold            =   False
          Caption         =   "Use Transparency"
@@ -1071,7 +1071,7 @@ Begin Window WndAdmin
          Visible         =   True
          Width           =   613
       End
-      Begin TextField fldMinRequiredVersion
+      Begin TextFieldChanger fldMinRequiredVersion
          AcceptTabs      =   False
          Alignment       =   0
          AutoDeactivate  =   True
@@ -1149,7 +1149,7 @@ Begin Window WndAdmin
          Width           =   200
       End
    End
-   Begin TextField fldAppName
+   Begin TextFieldChanger fldAppName
       AcceptTabs      =   False
       Alignment       =   0
       AutoDeactivate  =   True
@@ -1225,7 +1225,7 @@ Begin Window WndAdmin
       Visible         =   True
       Width           =   100
    End
-   Begin CheckBox cbRequiresPayment
+   Begin CheckBoxChanger cbRequiresPayment
       AutoDeactivate  =   True
       Bold            =   False
       Caption         =   "Requires Payment"
