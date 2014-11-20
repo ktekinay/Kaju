@@ -1720,6 +1720,8 @@ End
 	#tag ComputedProperty, Flags = &h21
 		#tag Getter
 			Get
+			  StoreFieldsToVersionRow()
+			  
 			  dim combined as new JSONItem( "[]" )
 			  
 			  dim lastIndex as integer = lbVersions.ListCount - 1
