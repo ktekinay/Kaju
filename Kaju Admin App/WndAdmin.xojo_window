@@ -1415,53 +1415,6 @@ End
 
 
 	#tag Method, Flags = &h21
-		Private Sub AddRows(info As Kaju.Information)
-		  '//
-		  '// Get all the UpdateInformation properties
-		  '//
-		  'dim ti as Introspection.TypeInfo = Introspection.GetType( info )
-		  'dim props() as Introspection.PropertyInfo = ti.GetProperties
-		  '
-		  'dim informationBaseTypeName as string
-		  'if true then
-		  'dim baseTI as Introspection.TypeInfo = GetTypeInfo( Kaju.Information )
-		  'informationBaseTypeName = baseTI.FullName
-		  'end if
-		  '
-		  'dim folders() as Introspection.PropertyInfo
-		  '
-		  'for each prop as Introspection.PropertyInfo in props
-		  'if prop.IsPublic and prop.CanRead and prop.CanWrite then
-		  'dim value as variant = prop.Value( info )
-		  'dim propInfo as Introspection.TypeInfo = prop.PropertyType
-		  'if propInfo.BaseType <> nil and propInfo.BaseType.FullName = informationBaseTypeName then
-		  'folders.Append prop
-		  '
-		  'elseif not propInfo.IsPrimitive then
-		  '//
-		  '// Skip it
-		  '//
-		  '
-		  'else
-		  'lbInfo.AddRow( prop.Name, value.StringValue )
-		  'end if
-		  '
-		  'end if
-		  'next
-		  '
-		  '//
-		  '// Add the folders last
-		  '//
-		  '
-		  'for each folder as Introspection.PropertyInfo in folders
-		  'lbInfo.AddFolder( folder.Name )
-		  'lbInfo.RowTag( lbInfo.LastIndex ) = folder
-		  'next
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
 		Private Sub AdjustControls()
 		  dim trueValue as boolean = lbVersions.ListIndex <> -1
 		  
