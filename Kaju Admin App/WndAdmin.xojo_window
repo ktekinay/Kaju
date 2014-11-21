@@ -1403,6 +1403,37 @@ Begin Window WndAdmin
       Visible         =   True
       Width           =   100
    End
+   Begin PushButton btnPreview
+      AutoDeactivate  =   True
+      Bold            =   False
+      ButtonStyle     =   "0"
+      Cancel          =   False
+      Caption         =   "Preview"
+      Default         =   False
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   819
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      Scope           =   2
+      TabIndex        =   15
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   640
+      Underline       =   False
+      Visible         =   True
+      Width           =   85
+   End
 End
 #tag EndWindow
 
@@ -1970,6 +2001,16 @@ End
 		  hvImagePreview.LoadURL( fldImageURL.Text )
 		  
 		  self.Loading = false
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnPreview
+	#tag Event
+		Sub Action()
+		  dim uc as new Kaju.UpdateChecker( App.PrefFolder )
+		  dim s as string = KajuJSON.ToString
+		  uc.TestUpdate( s )
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
