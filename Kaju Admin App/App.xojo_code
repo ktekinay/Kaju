@@ -43,6 +43,23 @@ Inherits Application
 	#tag EndEvent
 
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  dim f as FolderItem = SpecialFolder.ApplicationData.Child( "Kaju Admin" )
+			  
+			  if not f.Exists then
+			    f.CreateAsFolder
+			  end if
+			  
+			  return f
+			  
+			End Get
+		#tag EndGetter
+		PrefFolder As FolderItem
+	#tag EndComputedProperty
+
+
 	#tag Constant, Name = kEditClear, Type = String, Dynamic = False, Default = \"&Delete", Scope = Public
 		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"&Delete"
 		#Tag Instance, Platform = Linux, Language = Default, Definition  = \"&Delete"
