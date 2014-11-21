@@ -18,9 +18,9 @@ Begin Window WndAdmin
    MaxWidth        =   32000
    MenuBar         =   1253638004
    MenuBarVisible  =   True
-   MinHeight       =   64
+   MinHeight       =   680
    MinimizeButton  =   True
-   MinWidth        =   64
+   MinWidth        =   932
    Placement       =   0
    Resizeable      =   True
    Title           =   "Untitled"
@@ -90,11 +90,11 @@ Begin Window WndAdmin
       InitialParent   =   ""
       Italic          =   False
       Left            =   143
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
-      LockTop         =   True
+      LockTop         =   False
       Scope           =   2
       TabIndex        =   1
       TabPanelIndex   =   0
@@ -241,7 +241,7 @@ Begin Window WndAdmin
       TextUnit        =   0
       Top             =   86
       Underline       =   False
-      Value           =   2
+      Value           =   0
       Visible         =   True
       Width           =   653
       Begin TextAreaChanger fldReleaseNotes
@@ -403,7 +403,7 @@ Begin Window WndAdmin
          LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   True
-         LockRight       =   False
+         LockRight       =   True
          LockTop         =   True
          Mask            =   ""
          Password        =   False
@@ -446,7 +446,7 @@ Begin Window WndAdmin
          LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   True
-         LockRight       =   False
+         LockRight       =   True
          LockTop         =   True
          Mask            =   ""
          Password        =   False
@@ -546,11 +546,11 @@ Begin Window WndAdmin
          InitialParent   =   "TabPanel1"
          Italic          =   False
          Left            =   271
-         LockBottom      =   True
+         LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   True
          LockRight       =   False
-         LockTop         =   False
+         LockTop         =   True
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
@@ -623,7 +623,7 @@ Begin Window WndAdmin
          LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   True
-         LockRight       =   False
+         LockRight       =   True
          LockTop         =   True
          Mask            =   ""
          Password        =   False
@@ -666,7 +666,7 @@ Begin Window WndAdmin
          LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   True
-         LockRight       =   False
+         LockRight       =   True
          LockTop         =   True
          Mask            =   ""
          Password        =   False
@@ -809,7 +809,7 @@ Begin Window WndAdmin
          LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   True
-         LockRight       =   False
+         LockRight       =   True
          LockTop         =   True
          Mask            =   ""
          Password        =   False
@@ -852,7 +852,7 @@ Begin Window WndAdmin
          LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   True
-         LockRight       =   False
+         LockRight       =   True
          LockTop         =   True
          Mask            =   ""
          Password        =   False
@@ -1061,7 +1061,7 @@ Begin Window WndAdmin
          LockedInPosition=   False
          LockLeft        =   True
          LockRight       =   True
-         LockTop         =   False
+         LockTop         =   True
          Renderer        =   0
          Scope           =   2
          TabIndex        =   3
@@ -1304,11 +1304,11 @@ Begin Window WndAdmin
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   718
+      Left            =   251
       LockBottom      =   True
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   True
+      LockLeft        =   True
+      LockRight       =   False
       LockTop         =   False
       Scope           =   2
       TabIndex        =   12
