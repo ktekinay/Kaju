@@ -691,7 +691,12 @@ End
 		    
 		    CurrentStage = Stage.InstallingUpdate
 		    
-		    if not Checker.DryRun then
+		    if Checker.DryRun then
+		      
+		      lblInstallMessage.Text = "(Dry run, not really installing)"
+		      
+		    else
+		      
 		      dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
 		      DownloadFile = tempFolder.Child( SelectedUpdate.PlatformBinary.FileName )
 		      
@@ -699,6 +704,7 @@ End
 		      hsSocket.Secure = url.Left( 6 ) = "https:"
 		      
 		      hsSocket.Get( url, DownloadFile )
+		      
 		    end if
 		    
 		  case Stage.InstallingUpdate
