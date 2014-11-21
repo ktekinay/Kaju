@@ -1754,6 +1754,7 @@ End
 			  StoreFieldsToVersionRow()
 			  
 			  dim combined as new JSONItem( "[]" )
+			  combined.Compact = false
 			  
 			  dim lastIndex as integer = lbVersions.ListCount - 1
 			  for row as integer = 0 to lastIndex
