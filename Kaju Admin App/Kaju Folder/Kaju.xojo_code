@@ -202,7 +202,7 @@ Protected Module Kaju
 	#tag EndProperty
 
 
-	#tag Constant, Name = kUpdatePacketMarker, Type = String, Dynamic = False, Default = \"KAJU ", Scope = Private
+	#tag Constant, Name = kUpdatePacketMarker, Type = String, Dynamic = False, Default = \"KAJU ", Scope = Protected
 	#tag EndConstant
 
 
