@@ -1408,7 +1408,7 @@ Begin Window WndAdmin
       Bold            =   False
       ButtonStyle     =   "0"
       Cancel          =   False
-      Caption         =   "Preview"
+      Caption         =   "Preview..."
       Default         =   False
       Enabled         =   True
       Height          =   20
