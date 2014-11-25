@@ -1560,6 +1560,7 @@ End
 		    
 		  end if
 		  
+		  UpdateWindowTitle
 		End Sub
 	#tag EndMethod
 
