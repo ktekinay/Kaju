@@ -1451,6 +1451,23 @@ End
 	#tag EndEvent
 
 
+	#tag MenuHandler
+		Function FileSave() As Boolean Handles FileSave.Action
+			call DoSave()
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
+		Function FileSaveAs() As Boolean Handles FileSaveAs.Action
+			call DoSaveAs()
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+
 	#tag Method, Flags = &h21
 		Private Sub AdjustControls()
 		  dim trueValue as boolean = lbVersions.ListIndex <> -1
@@ -1621,31 +1638,88 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub DoSave()
+		Private Function DoSave() As Boolean
 		  dim f as FolderItem = Document
-		  if f is nil or not f.Exists then
-		    DoSaveAs()
-		    return
+		  if f is nil then
+		    return DoSaveAs()
 		  end if
 		  
-		  #pragma warning "Finish this"
-		End Sub
+		  dim r as boolean
+		  dim savedContentsChanged as boolean = self.ContentsChanged
+		  
+		  dim master as new JSONItem
+		  master.Compact = false
+		  
+		  master.Value( kPrivateKeyName ) = RSAPrivateKey
+		  master.Value( kPublicKeyName ) = RSAPublicKey
+		   
+		  dim data as JSONItem = KajuJSON
+		  master.Value( kDataName ) = data
+		  
+		  dim toSave as string = master.ToString
+		  
+		  dim bs as BinaryStream = BinaryStream.Create( f, true )
+		  bs.Write( toSave )
+		  bs.Close
+		  
+		  dim tis as TextInputStream = TextInputStream.Open( f )
+		  dim compare as string = tis.ReadAll
+		  tis.Close
+		  
+		  r = StrComp( toSave, compare, 0 ) = 0
+		  self.ContentsChanged = not r
+		  
+		  if not r then
+		    MsgBox "Save failed!"
+		  end if
+		  
+		  return r
+		  
+		  Exception err as RuntimeException
+		    self.ContentsChanged = savedContentsChanged
+		    return false
+		    
+		  Finally
+		    UpdateWindowTitle
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub DoSaveAs()
+		Private Function DoSaveAs() As Boolean
+		  dim ext as string = FileTypes1.KajuDocument.Extensions
+		  
 		  dim dlg as new SaveAsDialog
 		  dlg.PromptText = "Save the Kaju document as:"
+		  dlg.Filter = FileTypes1.KajuDocument
+		  dlg.SuggestedFileName = "New Version Line" + ext
+		  
 		  dim f as FolderItem = dlg.ShowModalWithin( self )
 		  
+		  dim r as boolean
 		  if f is nil then
-		    return
+		    r = false
+		    
+		  elseif f.Directory then
+		    MsgBox "You chose a folder."
+		    r = false
+		    
 		  else
+		    //
+		    // Adjust the name if needed
+		    //
+		    if not f.Exists then
+		      if f.Name.Right( ext.Len ) <> ext then
+		        f.Name = f.Name + ext
+		      end if
+		    end if
+		    
 		    Document = f
-		    DoSave()
+		    r = DoSave()
 		  end if
 		  
-		End Sub
+		  UpdateWindowTitle
+		  return r
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
