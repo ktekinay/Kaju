@@ -1788,6 +1788,25 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub UpdateWindowTitle()
+		  dim f as FolderItem = Document
+		  if f is nil then
+		    self.Title = "Untitled"
+		  else
+		    dim t as string = f.Name
+		    dim ext as string = FileTypes1.KajuDocument.Extensions
+		    
+		    if t.Right( ext.Len ) = ext then
+		      t = t.Left( t.Len - ext.Len )
+		    end if
+		    
+		    self.Title = t
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
