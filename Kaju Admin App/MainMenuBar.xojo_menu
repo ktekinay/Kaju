@@ -24,6 +24,23 @@ Begin Menu MainMenuBar
          AutoEnable = True
          Visible = True
       End
+      Begin MenuItem FileClose
+         SpecialMenu = 0
+         Text = "#App.kFileClose"
+         Index = -2147483648
+         ShortcutKey = "#App.kFileCloseShortcut"
+         Shortcut = "Cmd+#App.kFileCloseShortcut"
+         MenuModifier = True
+         AutoEnable = True
+         Visible = True
+      End
+      Begin MenuItem UntitledSeparator0
+         SpecialMenu = 0
+         Text = "-"
+         Index = -2147483648
+         AutoEnable = True
+         Visible = True
+      End
       Begin MenuItem FileSave
          SpecialMenu = 0
          Text = "#App.kFileSave"

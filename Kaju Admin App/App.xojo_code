@@ -65,6 +65,15 @@ Inherits Application
 		#Tag Instance, Platform = Linux, Language = Default, Definition  = \"&Delete"
 	#tag EndConstant
 
+	#tag Constant, Name = kFileClose, Type = String, Dynamic = False, Default = \"Close &Window", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kFileCloseShortcut, Type = String, Dynamic = False, Default = \"", Scope = Public
+		#Tag Instance, Platform = Mac OS, Language = Default, Definition  = \"Cmd+W"
+		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"Ctrl+W"
+		#Tag Instance, Platform = Linux, Language = Default, Definition  = \"Ctrl+W"
+	#tag EndConstant
+
 	#tag Constant, Name = kFileNew, Type = String, Dynamic = False, Default = \"&New Kaju Document", Scope = Public
 	#tag EndConstant
 
