@@ -1,0 +1,13 @@
+#tag FileTypeSet
+	#tag FileType
+		CodeName=KajuDocument
+		DocIcon=Kaju Admin.xojo_resources;&h0
+		Extension=.kaju
+		Flags=&h3
+		MacCreator=
+		MacType=
+		Name=KajuDocument
+		UTI=com.mactechnologies.kajudocument
+	#tag EndFileType
+
+#tag EndFileTypeSet
