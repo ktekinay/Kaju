@@ -2,6 +2,13 @@
 Protected Class App
 Inherits Application
 	#tag Event
+		Sub NewDocument()
+		  dim w as new WndAdmin
+		  w.Show
+		End Sub
+	#tag EndEvent
+
+	#tag Event
 		Sub Open()
 		  //
 		  // Create the pref folder
@@ -41,6 +48,84 @@ Inherits Application
 		  w.Show
 		End Sub
 	#tag EndEvent
+
+	#tag Event
+		Sub OpenDocument(item As FolderItem)
+		  //
+		  // See if this document is open already
+		  //
+		  
+		  dim firstAdminWindow as WndAdmin
+		  
+		  dim lastIndex as integer = WindowCount - 1
+		  for i as integer = 0 to lastIndex
+		    dim thisWnd as Window = Window( i )
+		    if thisWnd IsA WndAdmin then
+		      
+		      dim adminWnd as WndAdmin = WndAdmin( thisWnd )
+		      
+		      if adminWnd.Document <> nil and adminWnd.Document.NativePath = item.NativePath then
+		        adminWnd.Show
+		        return
+		      end if
+		      
+		      if firstAdminWindow is nil then
+		        firstAdminWindow = adminWnd
+		      end if
+		      
+		    end if
+		  next
+		  
+		  //
+		  // If we get here, it's not already open
+		  // so see if the front window can be used
+		  //
+		  
+		  if firstAdminWindow <> nil and firstAdminWindow.Document is nil and not firstAdminWindow.ContentsChanged then
+		    //
+		    // It's an empty window
+		    //
+		    firstAdminWindow.OpenDocument( item )
+		    
+		  else
+		    //
+		    // Create a new window
+		    //
+		    dim w as new WndAdmin
+		    w.OpenDocument( item )
+		    
+		  end if
+		End Sub
+	#tag EndEvent
+
+
+	#tag MenuHandler
+		Function FileNew() As Boolean Handles FileNew.Action
+			NewDocument
+			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
+		Function FileOpen() As Boolean Handles FileOpen.Action
+			dim dlg as new OpenDialog
+			dlg.MultiSelect = true
+			dlg.PromptText = "Choose a Kaju document:"
+			
+			dim f as FolderItem = dlg.ShowModal
+			
+			if f <> nil then
+			for i as integer = 1 to dlg.Count
+			OpenDocument( dlg.Item( i - 1 ) )
+			next
+			end if
+			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
 
 
 	#tag ComputedProperty, Flags = &h0
