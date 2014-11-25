@@ -6,6 +6,47 @@ Begin Menu MainMenuBar
       Index = -2147483648
       AutoEnable = True
       Visible = True
+      Begin MenuItem FileNew
+         SpecialMenu = 0
+         Text = "#App.kFileNew"
+         Index = -2147483648
+         ShortcutKey = "#App.kFileNewShortcut"
+         Shortcut = "#App.kFileNewShortcut"
+         AutoEnable = True
+         Visible = True
+      End
+      Begin MenuItem FileOpen
+         SpecialMenu = 0
+         Text = "#App.kFileOpen"
+         Index = -2147483648
+         ShortcutKey = "#App.kFileOpenShortcut"
+         Shortcut = "#App.kFileOpenShortcut"
+         AutoEnable = True
+         Visible = True
+      End
+      Begin MenuItem FileSave
+         SpecialMenu = 0
+         Text = "#App.kFileSave"
+         Index = -2147483648
+         ShortcutKey = "#App.kFileSaveShortcut"
+         Shortcut = "#App.kFileSaveShortcut"
+         AutoEnable = True
+         Visible = True
+      End
+      Begin MenuItem FileSaveAs
+         SpecialMenu = 0
+         Text = "#App.kFileSaveAs"
+         Index = -2147483648
+         AutoEnable = True
+         Visible = True
+      End
+      Begin MenuItem UntitledSeparator
+         SpecialMenu = 0
+         Text = "-"
+         Index = -2147483648
+         AutoEnable = True
+         Visible = True
+      End
       Begin QuitMenuItem FileQuit
          SpecialMenu = 0
          Text = "#App.kFileQuit"
