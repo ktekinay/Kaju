@@ -1800,16 +1800,44 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function OpenDocument(f As FolderItem) As Boolean
+		Sub OpenDocument(f As FolderItem)
 		  if f is nil or not f.Exists or f.Directory then
-		    self.Close
-		    return false
+		    raise new NilObjectException
+		  end if
+		  
+		  dim tis as TextInputStream = TextInputStream.Open( f )
+		  tis.Encoding = Encodings.UTF8
+		  
+		  dim dataString as string = tis.ReadAll
+		  tis = nil
+		  
+		  dim master as new JSONItem( dataString )
+		  RSAPrivateKey = master.Value( kPrivateKeyName )
+		  RSAPublicKey = master.Value( kPublicKeyName )
+		  
+		  dim data as JSONItem = master.Value( kDataName )
+		  dim lastIndex as integer = data.Count - 1
+		  for i as integer = 0 to lastIndex
+		    dim version as JSONItem = data( i )
+		    lbVersions.AddRow version.Value( "Version" ).StringValue
+		    lbVersions.RowTag( lbVersions.LastIndex ) = version
+		  next i
+		  
+		  if lbVersions.ListCount <> 0 then
+		    lbVersions.ListIndex = 0
 		  end if
 		  
 		  Document = f
+		  self.ContentsChanged = false
 		  
-		  #pragma warning "Finish this"
-		End Function
+		  AdjustControls
+		  
+		  Exception err as RuntimeException
+		    MsgBox "Could not open document."
+		    
+		    self.Close
+		    return
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
