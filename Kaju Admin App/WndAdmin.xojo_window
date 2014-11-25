@@ -1615,6 +1615,34 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub DoSave()
+		  dim f as FolderItem = Document
+		  if f is nil or not f.Exists then
+		    DoSaveAs()
+		    return
+		  end if
+		  
+		  #pragma warning "Finish this"
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub DoSaveAs()
+		  dim dlg as new SaveAsDialog
+		  dlg.PromptText = "Save the Kaju document as:"
+		  dim f as FolderItem = dlg.ShowModalWithin( self )
+		  
+		  if f is nil then
+		    return
+		  else
+		    Document = f
+		    DoSave()
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub JSONToFields(data As JSONItem)
 		  //
 		  // Handle the named controls first
@@ -1691,6 +1719,19 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function OpenDocument(f As FolderItem) As Boolean
+		  if f is nil or not f.Exists or f.Directory then
+		    self.Close
+		    return false
+		  end if
+		  
+		  Document = f
+		  
+		  #pragma warning "Finish this"
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h21
 		Private Sub StoreFieldsToVersionRow()
 		  if LastVersionRow = -1 or LastVersionRow >= lbVersions.ListCount then
@@ -1747,6 +1788,10 @@ End
 		End Sub
 	#tag EndMethod
 
+
+	#tag Property, Flags = &h21
+		Private Document As FolderItemAlias
+	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h21
 		#tag Getter
