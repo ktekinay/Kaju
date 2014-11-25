@@ -65,6 +65,24 @@ Inherits Application
 		#Tag Instance, Platform = Linux, Language = Default, Definition  = \"&Delete"
 	#tag EndConstant
 
+	#tag Constant, Name = kFileNew, Type = String, Dynamic = False, Default = \"&New Kaju Document", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kFileNewShortcut, Type = String, Dynamic = False, Default = \"", Scope = Public
+		#Tag Instance, Platform = Mac OS, Language = Default, Definition  = \"Cmd+N"
+		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"Ctrl+N"
+		#Tag Instance, Platform = Linux, Language = Default, Definition  = \"Ctrl+N"
+	#tag EndConstant
+
+	#tag Constant, Name = kFileOpen, Type = String, Dynamic = False, Default = \"&Open Kaju Document...", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kFileOpenShortcut, Type = String, Dynamic = False, Default = \"", Scope = Public
+		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"Ctrl+O"
+		#Tag Instance, Platform = Mac OS, Language = Default, Definition  = \"Cmd+O"
+		#Tag Instance, Platform = Linux, Language = Default, Definition  = \"Ctrl+O"
+	#tag EndConstant
+
 	#tag Constant, Name = kFileQuit, Type = String, Dynamic = False, Default = \"&Quit", Scope = Public
 		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"E&xit"
 	#tag EndConstant
@@ -72,6 +90,19 @@ Inherits Application
 	#tag Constant, Name = kFileQuitShortcut, Type = String, Dynamic = False, Default = \"", Scope = Public
 		#Tag Instance, Platform = Mac OS, Language = Default, Definition  = \"Cmd+Q"
 		#Tag Instance, Platform = Linux, Language = Default, Definition  = \"Ctrl+Q"
+		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"Ctrl+Q"
+	#tag EndConstant
+
+	#tag Constant, Name = kFileSave, Type = String, Dynamic = False, Default = \"&Save Kaju Document", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kFileSaveAs, Type = String, Dynamic = False, Default = \"Sav&e As...", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kFileSaveShortcut, Type = String, Dynamic = False, Default = \"", Scope = Public
+		#Tag Instance, Platform = Mac OS, Language = Default, Definition  = \"Cmd+S"
+		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"Ctrl+S"
+		#Tag Instance, Platform = Linux, Language = Default, Definition  = \"Ctrl+S"
 	#tag EndConstant
 
 	#tag Constant, Name = kTestJSON1, Type = String, Dynamic = False, Default = \"[\n\t{\n\t\"Version\" : \"1.0.3\"\x2C\n\t\"MacBinary\" : \n\t\t{\n\t\t\"URL\" : \"http://www.sample.com/macdownload\"\x2C\n\t\t\"Signature\" : \"123456\"\n\t\t}\n\t} \n]", Scope = Private
