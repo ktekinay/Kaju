@@ -1439,6 +1439,12 @@ End
 
 #tag WindowCode
 	#tag Event
+		Sub Activate()
+		  UpdateWindowTitle
+		End Sub
+	#tag EndEvent
+
+	#tag Event
 		Sub Open()
 		  AdjustControls()
 		End Sub
