@@ -1789,9 +1789,23 @@ End
 	#tag EndMethod
 
 
-	#tag Property, Flags = &h21
-		Private Document As FolderItemAlias
-	#tag EndProperty
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  if mDocument is nil then
+			    return nil
+			  else
+			    return mDocument.Resolve
+			  end if
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mDocument = value
+			End Set
+		#tag EndSetter
+		Document As FolderItem
+	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h21
 		#tag Getter
@@ -1822,6 +1836,10 @@ End
 
 	#tag Property, Flags = &h21
 		Private Loading As Boolean
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mDocument As FolderItemAlias
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
