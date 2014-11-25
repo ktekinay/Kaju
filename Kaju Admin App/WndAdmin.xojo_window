@@ -1452,6 +1452,14 @@ End
 
 
 	#tag MenuHandler
+		Function FileClose() As Boolean Handles FileClose.Action
+			self.Close
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
 		Function FileSave() As Boolean Handles FileSave.Action
 			call DoSave()
 			Return True
