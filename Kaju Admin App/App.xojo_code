@@ -44,8 +44,7 @@ Inherits Application
 		  '
 		  'MsgBox sh.ContentsOf( zipFile )
 		  
-		  dim w as new WndAdmin
-		  w.Show
+		  
 		End Sub
 	#tag EndEvent
 
