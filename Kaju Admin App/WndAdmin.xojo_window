@@ -1445,6 +1445,34 @@ End
 	#tag EndEvent
 
 	#tag Event
+		Function CancelClose(appQuitting as Boolean) As Boolean
+		  dim r as Boolean = false
+		  
+		  if self.ContentsChanged then
+		    dim dlg as new MessageDialog
+		    dlg.Message = "This document has been modified. Save before closing?"
+		    dlg.ActionButton.Caption = "&Save"
+		    dlg.ActionButton.Visible = true
+		    dlg.CancelButton.Visible = true
+		    dlg.AlternateActionButton.Caption = "&Don't Save"
+		    dlg.AlternateActionButton.Visible = true
+		    
+		    dim btn as MessageDialogButton = dlg.ShowModalWithin( self )
+		    if btn is dlg.CancelButton then
+		      r = true
+		    elseif btn = dlg.AlternateActionButton then
+		      r = false
+		    else
+		      r = not( DoSave() )
+		    end if
+		  end if
+		  
+		  return r
+		  
+		End Function
+	#tag EndEvent
+
+	#tag Event
 		Sub Open()
 		  AdjustControls()
 		End Sub
