@@ -102,7 +102,7 @@ Inherits Application
 		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"Ctrl+Q"
 	#tag EndConstant
 
-	#tag Constant, Name = kFileSave, Type = String, Dynamic = False, Default = \"&Save Kaju Document", Scope = Public
+	#tag Constant, Name = kFileSave, Type = String, Dynamic = False, Default = \"&Save", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kFileSaveAs, Type = String, Dynamic = False, Default = \"Sav&e As...", Scope = Public
