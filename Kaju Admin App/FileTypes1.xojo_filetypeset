@@ -10,4 +10,14 @@
 		UTI=com.mactechnologies.kajudocument
 	#tag EndFileType
 
+	#tag FileType
+		CodeName=TextHtml
+		Extension=.htm;.html
+		Flags=&h0
+		MacCreator=????
+		MacType=TEXT
+		Name=text/html
+		UTI=public.html
+	#tag EndFileType
+
 #tag EndFileTypeSet
