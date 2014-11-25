@@ -1,0 +1,23 @@
+#tag FileTypeSet
+	#tag FileType
+		CodeName=KajuDocument
+		DocIcon=Kaju Admin.xojo_resources;&h0
+		Extension=.kaju
+		Flags=&h3
+		MacCreator=
+		MacType=
+		Name=KajuDocument
+		UTI=com.mactechnologies.kajudocument
+	#tag EndFileType
+
+	#tag FileType
+		CodeName=TextHtml
+		Extension=.htm;.html
+		Flags=&h0
+		MacCreator=????
+		MacType=TEXT
+		Name=text/html
+		UTI=public.html
+	#tag EndFileType
+
+#tag EndFileTypeSet

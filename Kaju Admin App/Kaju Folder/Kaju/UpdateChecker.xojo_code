@@ -132,7 +132,7 @@ Protected Class UpdateChecker
 	#tag Method, Flags = &h21
 		Private Sub ProcessUpdateData(raw As String)
 		  dim j as new JSONItem( raw )
-		  dim versionDouble as double = Kaju.VersionToDouble( Kaju.AppVersionString )
+		  dim versionDouble as double = if( DryRun, -1.0, Kaju.VersionToDouble( Kaju.AppVersionString ) )
 		  
 		  //
 		  // Get an array of the info

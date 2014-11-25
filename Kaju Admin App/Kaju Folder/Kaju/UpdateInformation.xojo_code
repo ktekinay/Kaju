@@ -11,16 +11,16 @@ Inherits Kaju.Information
 		Sub Constructor(data As JSONItem)
 		  Kaju.JSONToProperties( data, self )
 		  
-		  if data.HasName( "MacBinary" ) then
-		    MacBinary = new Kaju.BinaryInformation( data.Value( "MacBinary" ) )
+		  if data.HasName( kMacBinaryName ) then
+		    MacBinary = new Kaju.BinaryInformation( data.Value( kMacBinaryName ) )
 		  end if
 		  
-		  if data.HasName( "WindowsBinary" ) then
-		    WindowsBinary = new Kaju.BinaryInformation( data.Value( "WindowsBinary" ) )
+		  if data.HasName( kWindowsBinaryName ) then
+		    WindowsBinary = new Kaju.BinaryInformation( data.Value( kWindowsBinaryName ) )
 		  end if
 		  
-		  if data.HasName( "LinuxBinary" ) then
-		    LinuxBinary = new Kaju.BinaryInformation( data.Value( "LinuxBinary" ) )
+		  if data.HasName( kLinuxBinaryName ) then
+		    LinuxBinary = new Kaju.BinaryInformation( data.Value( kLinuxBinaryName ) )
 		  end if
 		  
 		End Sub
@@ -29,10 +29,6 @@ Inherits Kaju.Information
 
 	#tag Property, Flags = &h0
 		AppName As String
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		DisplayNotes As String
 	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -114,6 +110,10 @@ Inherits Kaju.Information
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h0
+		ReleaseNotes As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		RequiresPayment As Boolean
 	#tag EndProperty
 
@@ -168,6 +168,16 @@ Inherits Kaju.Information
 	#tag Property, Flags = &h0
 		WindowsBinary As Kaju.BinaryInformation
 	#tag EndProperty
+
+
+	#tag Constant, Name = kLinuxBinaryName, Type = String, Dynamic = False, Default = \"LinuxBinary", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kMacBinaryName, Type = String, Dynamic = False, Default = \"MacBinary", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kWindowsBinaryName, Type = String, Dynamic = False, Default = \"WindowsBinary", Scope = Public
+	#tag EndConstant
 
 
 End Class

@@ -24,7 +24,7 @@ The JSON will contains the following fields for each version.
 	Version                        (string)
 	MinimumRequiredVersion         (string)
 	RequiresPayment                (bool)
-	DisplayNotes                   (string)
+	ReleaseNotes                   (string)
 	MacBinary                      (dictionary)
 		URL                        (string)
 		Signature                  (string)
@@ -44,7 +44,7 @@ A sample JSON that will be returned by the server:
 			"AppName" : "My App" ,
 			"Version" : "6.0.2",
 			"MinimumRequiredVersion" : "6.0.1" ,
-			"DisplayNotes" : "The release notes" ,
+			"ReleaseNotes" : "The release notes" ,
 			"MacBinary" :
 				{
 					"URL" : "http://www.site.com/download_path_Mac" ,
@@ -66,7 +66,7 @@ A sample JSON that will be returned by the server:
 		{
 			"AppName" : "My App" ,
 			"Version" : "6.1b4" ,
-			"DisplayNotes" : "The beta release notes" ,
+			"ReleaseNotes" : "The beta release notes" ,
 			"MacBinary" : 
 				{
 					"URL" : "http://www.site.com/other_download_path" ,

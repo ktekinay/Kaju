@@ -345,7 +345,7 @@ Begin Window KajuUpdateWindow
       LockTop         =   True
       Maximum         =   0
       Scope           =   2
-      TabIndex        =   "9"
+      TabIndex        =   9
       TabPanelIndex   =   0
       TabStop         =   True
       Top             =   555
@@ -383,13 +383,34 @@ Begin Window KajuUpdateWindow
       LockedInPosition=   False
       Mode            =   1
       Scope           =   2
-      TabIndex        =   "11"
+      TabIndex        =   11
       TabPanelIndex   =   0
       TabStop         =   True
       TimeOut         =   0
       Top             =   0
       Visible         =   True
       Width           =   "32"
+   End
+   Begin HTMLViewer hvNewWindow
+      AutoDeactivate  =   True
+      Enabled         =   True
+      Height          =   200
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Left            =   -345
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Renderer        =   0
+      Scope           =   2
+      TabIndex        =   9
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Top             =   119
+      Visible         =   False
+      Width           =   300
    End
 End
 #tag EndWindow
@@ -478,7 +499,9 @@ End
 		  // Fill in the viewer
 		  //
 		  
-		  dim source as string = update.DisplayNotes
+		  self.Loading = true
+		  
+		  dim source as string = update.ReleaseNotes
 		  if source = "" then
 		    source = "<b>NO UPDATE INFORMATION</b>"
 		  end if
@@ -504,6 +527,8 @@ End
 		  end if
 		  
 		  self.Backdrop = p
+		  
+		  self.Loading = false
 		End Sub
 	#tag EndMethod
 
@@ -536,6 +561,10 @@ End
 
 	#tag Property, Flags = &h21
 		Private DownloadFile As FolderItem
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Loading As Boolean
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -632,6 +661,18 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events hvNotes
+	#tag Event
+		Function NewWindow() As HTMLViewer
+		  return hvNewWindow
+		End Function
+	#tag EndEvent
+	#tag Event
+		Function CancelLoad(URL as String) As Boolean
+		  return ( not Loading )
+		End Function
+	#tag EndEvent
+#tag EndEvents
 #tag Events btnOK
 	#tag Event
 		Sub Action()
@@ -650,7 +691,12 @@ End
 		    
 		    CurrentStage = Stage.InstallingUpdate
 		    
-		    if not Checker.DryRun then
+		    if Checker.DryRun then
+		      
+		      lblInstallMessage.Text = "(Dry run, not really installing)"
+		      
+		    else
+		      
 		      dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
 		      DownloadFile = tempFolder.Child( SelectedUpdate.PlatformBinary.FileName )
 		      
@@ -658,6 +704,7 @@ End
 		      hsSocket.Secure = url.Left( 6 ) = "https:"
 		      
 		      hsSocket.Get( url, DownloadFile )
+		      
 		    end if
 		    
 		  case Stage.InstallingUpdate
@@ -772,5 +819,14 @@ End
 		  //
 		  
 		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events hvNewWindow
+	#tag Event
+		Function CancelLoad(URL as String) As Boolean
+		  ShowURL( URL )
+		  return true
+		  
+		End Function
 	#tag EndEvent
 #tag EndEvents
