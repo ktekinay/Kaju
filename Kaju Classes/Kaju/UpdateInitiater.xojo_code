@@ -49,6 +49,12 @@ Protected Class UpdateInitiater
 		  script = script.ReplaceAll( kMarkerTempFolderPath, tempFolder.ShellPath )
 		  
 		  //
+		  // Set up the PID file
+		  //
+		  dim pid as FolderItem = GetTemporaryFolderItem()
+		  script = script.ReplaceAll( kMarkerPIDFilePath, ShellQuote( pid.NativePath ) )
+		  
+		  //
 		  // Remove other platform code
 		  //
 		  dim rx as new RegEx
@@ -120,6 +126,9 @@ Protected Class UpdateInitiater
 	#tag EndConstant
 
 	#tag Constant, Name = kMarkerNewAppPath, Type = String, Dynamic = False, Default = \"<<NEW_APP_PATH>>", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kMarkerPIDFilePath, Type = String, Dynamic = False, Default = \"<<PID_FILE_PATH>>", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kMarkerPlatform, Type = String, Dynamic = False, Default = \"", Scope = Private
