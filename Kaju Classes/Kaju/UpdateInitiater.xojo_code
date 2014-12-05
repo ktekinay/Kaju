@@ -141,7 +141,7 @@ Protected Class UpdateInitiater
 	#tag Constant, Name = kMarkerAppName, Type = String, Dynamic = False, Default = \"<<APP_NAME>>", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = kMarkerAppPath, Type = String, Dynamic = False, Default = \"<<APP_PATH>>", Scope = Private
+	#tag Constant, Name = kMarkerAppParent, Type = String, Dynamic = False, Default = \"<<APP_PARENT>>", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kMarkerNewAppPath, Type = String, Dynamic = False, Default = \"<<NEW_APP_PATH>>", Scope = Private
