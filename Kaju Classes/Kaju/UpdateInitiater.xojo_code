@@ -113,6 +113,15 @@ Protected Class UpdateInitiater
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Function ShellQuote(s As String) As String
+		  s = s.ReplaceAll( "'", "'\''" )
+		  s = "'" + s + "'"
+		  
+		  return s
+		End Function
+	#tag EndMethod
+
 
 	#tag Property, Flags = &h0
 		ReplacementApp As FolderItem
