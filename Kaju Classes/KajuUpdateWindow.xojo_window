@@ -212,7 +212,6 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   5
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Untitled"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -247,7 +246,6 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   6
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Untitled"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -282,7 +280,6 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   7
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "#kReleaseNotes"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -317,7 +314,6 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Starting installation..."
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -345,9 +341,7 @@ Begin Window KajuUpdateWindow
       LockTop         =   True
       Maximum         =   0
       Scope           =   2
-      TabIndex        =   "9"
       TabPanelIndex   =   0
-      TabStop         =   True
       Top             =   555
       Value           =   0
       Visible         =   False
@@ -358,8 +352,7 @@ Begin Window KajuUpdateWindow
       CertificatePassword=   ""
       CertificateRejectionFile=   
       ConnectionType  =   2
-      Enabled         =   True
-      Height          =   "32"
+      Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
@@ -368,28 +361,23 @@ Begin Window KajuUpdateWindow
       Secure          =   False
       TabPanelIndex   =   0
       Top             =   0
-      Visible         =   True
-      Width           =   "32"
+      Width           =   32
    End
    Begin Kaju.ZipShell shZipper
       Arguments       =   ""
       Backend         =   ""
       Canonical       =   False
-      Enabled         =   True
-      Height          =   "32"
+      Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
       LockedInPosition=   False
       Mode            =   1
       Scope           =   2
-      TabIndex        =   "11"
       TabPanelIndex   =   0
-      TabStop         =   True
       TimeOut         =   0
       Top             =   0
-      Visible         =   True
-      Width           =   "32"
+      Width           =   32
    End
    Begin HTMLViewer hvNewWindow
       AutoDeactivate  =   True
@@ -670,6 +658,8 @@ End
 	#tag Event
 		Function CancelLoad(URL as String) As Boolean
 		  return ( not Loading )
+		  
+		  #pragma unused URL
 		End Function
 	#tag EndEvent
 #tag EndEvents
@@ -810,16 +800,6 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag Events shZipper
-	#tag Event
-		Sub DecompressCompleted(zipFile As FolderItem, containingFolder As FolderItem)
-		  #pragma warning "Implement this!"
-		  
-		  //
-		  // Set up the script that will handle the transfer
-		  //
-		  
-		End Sub
-	#tag EndEvent
 #tag EndEvents
 #tag Events hvNewWindow
 	#tag Event
@@ -835,6 +815,7 @@ End
 		Name="AppName"
 		Group="Behavior"
 		Type="String"
+		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackColor"
