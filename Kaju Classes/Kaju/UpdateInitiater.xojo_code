@@ -1,5 +1,12 @@
 #tag Class
 Protected Class UpdateInitiater
+	#tag Method, Flags = &h0
+		Sub Cancel()
+		  ReplacementApp = nil
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h21
 		Private Sub Destructor()
 		  RunScript
