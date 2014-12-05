@@ -570,6 +570,15 @@ End
 	#tag Constant, Name = kBadDownloadMessage, Type = String, Dynamic = False, Default = \"The downloaded file appears to be corrupted.", Scope = Private
 	#tag EndConstant
 
+	#tag Constant, Name = kCancelButton, Type = String, Dynamic = False, Default = \"&Cancel", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kDownloadingMessage, Type = String, Dynamic = False, Default = \"Downloading...", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kDryRunMessage, Type = String, Dynamic = False, Default = \"(Dry run\x2C not really installing)", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kGenericErrorMessage, Type = String, Dynamic = False, Default = \"An error has occurred.", Scope = Private
 	#tag EndConstant
 
@@ -586,6 +595,12 @@ End
 	#tag EndConstant
 
 	#tag Constant, Name = kProcessingFileMessage, Type = String, Dynamic = False, Default = \"Processing file...", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kQuitButton, Type = String, Dynamic = False, Default = \"Quit && Install", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kReadyMessage, Type = String, Dynamic = False, Default = \"Ready to install", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kReleaseNotes, Type = String, Dynamic = False, Default = \"Release Notes:", Scope = Private
