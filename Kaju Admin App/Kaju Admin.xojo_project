@@ -1,13 +1,13 @@
 Type=Desktop
 RBProjectVersion=2014.021
 MinIDEVersion=20070100
+Folder=Kaju Classes;../Kaju Classes;&h2570CF64;&h0;false
 Class=App;App.xojo_code;&h7955649;&h0;false
 MenuBar=MainMenuBar;MainMenuBar.xojo_menu;&h4AB8FF74;&h0;false
 FileTypeSet=FileTypes1;FileTypes1.xojo_filetypeset;&h352FB9F5;&h0;false
 Window=WndAdmin;WndAdmin.xojo_window;&h5D541828;&h0;false
 Folder=Images;Images;&h7AFA3CBE;&h0;false
 BuildSteps=Build Automation;Build Automation.xojo_code;&h378B80A5;&h0;false
-Folder=Kaju Classes;../Kaju Classes;&h2570CF64;&h0;false
 Module=Kaju;../Kaju Classes/Kaju.xojo_code;&h11400316;&h2570CF64;false
 Window=KajuUpdateWindow;../Kaju Classes/KajuUpdateWindow.xojo_window;&h18AE3D9;&h2570CF64;false
 Class=UpdateChecker;../Kaju Classes/Kaju/UpdateChecker.xojo_code;&h70CF0A50;&h11400316;false
