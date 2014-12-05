@@ -3,6 +3,8 @@ Protected Class ZipShell
 Inherits Shell
 	#tag Event
 		Sub Completed()
+		  ResultFolderItem = new FolderItem( ResultFolderItem.NativePath, FolderItem.PathTypeNative )
+		  
 		  select case CurrentOperation
 		  case Operation.Compressing
 		    RaiseEvent CompressCompleted( ResultFolderItem)
