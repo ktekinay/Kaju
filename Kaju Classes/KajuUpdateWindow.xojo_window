@@ -704,6 +704,8 @@ End
 		    pbProgress.Visible = true
 		    lblInstallMessage.Visible = true
 		    
+		    lbUpdates.Enabled = false
+		    
 		    CurrentStage = Stage.InstallingUpdate
 		    
 		    if Checker.DryRun then
