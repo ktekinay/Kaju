@@ -69,7 +69,7 @@ Protected Class UpdateInitiater
 		  bs.Write( script )
 		  bs = nil
 		  
-		  // 
+		  //
 		  // Adjust the permissions
 		  //
 		  #if TargetMacOS or TargetLinux then
