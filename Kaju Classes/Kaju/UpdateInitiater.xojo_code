@@ -41,12 +41,12 @@ Protected Class UpdateInitiater
 		    
 		  #endif
 		  
-		  script = script.ReplaceAll( kMarkerAppName, appFolderItem.Name )
-		  script = script.ReplaceAll( kMarkerAppPath, appFolderItem.ShellPath )
-		  script = script.ReplaceAll( kMarkerNewAppPath, ReplacementApp.ShellPath )
+		  script = script.ReplaceAll( kMarkerAppName, ShellQuote( appFolderItem.Name ) )
+		  script = script.ReplaceAll( kMarkerAppParent, ShellQuote( appFolderItem.Parent.NativePath ) )
+		  script = script.ReplaceAll( kMarkerNewAppPath, ShellQuote( ReplacementApp.NativePath ) )
 		  
 		  dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
-		  script = script.ReplaceAll( kMarkerTempFolderPath, tempFolder.ShellPath )
+		  script = script.ReplaceAll( kMarkerTempFolderPath, ShellQuote( tempFolder.NativePath ) )
 		  
 		  //
 		  // Set up the PID file
@@ -105,7 +105,7 @@ Protected Class UpdateInitiater
 		  
 		  dim cmd as string
 		  #if TargetMacOS or TargetLinux then
-		    cmd = "nohup " + scriptFile.ShellPath + " &"
+		    cmd = "nohup " + ShellQuote( scriptFile.NativePath ) + " &"
 		  #endif
 		  
 		  sh.Execute( cmd )
