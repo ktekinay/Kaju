@@ -755,6 +755,7 @@ End
 	#tag Event
 		Sub Action()
 		  SelectedUpdate = nil
+		  Kaju.CancelUpdate
 		  self.Close
 		  
 		End Sub
