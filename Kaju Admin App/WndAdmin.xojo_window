@@ -200,7 +200,7 @@ Begin Window WndAdmin
       Multiline       =   False
       Scope           =   2
       Selectable      =   False
-      TabIndex        =   4
+      TabIndex        =   12
       TabPanelIndex   =   0
       Text            =   "Version:"
       TextAlign       =   0
@@ -233,7 +233,7 @@ Begin Window WndAdmin
       Scope           =   2
       SmallTabs       =   False
       TabDefinition   =   "Release Notes\rBinaries\rImage"
-      TabIndex        =   5
+      TabIndex        =   14
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
@@ -241,7 +241,7 @@ Begin Window WndAdmin
       TextUnit        =   0
       Top             =   86
       Underline       =   False
-      Value           =   0
+      Value           =   1
       Visible         =   True
       Width           =   653
       Begin TextAreaChanger fldReleaseNotes
@@ -379,49 +379,6 @@ Begin Window WndAdmin
          Value           =   False
          Visible         =   True
          Width           =   100
-      End
-      Begin TextFieldChanger fldMacBinaryHash
-         AcceptTabs      =   False
-         Alignment       =   0
-         AutoDeactivate  =   True
-         AutomaticallyCheckSpelling=   False
-         BackColor       =   &cFFFFFF00
-         Bold            =   False
-         Border          =   True
-         CueText         =   "Drop binary here to calculate Hash"
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Format          =   ""
-         Height          =   22
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   414
-         LimitText       =   0
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         Mask            =   ""
-         Password        =   False
-         ReadOnly        =   True
-         Scope           =   2
-         TabIndex        =   1
-         TabPanelIndex   =   2
-         TabStop         =   True
-         Text            =   ""
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   223
-         Underline       =   False
-         UseFocusRing    =   True
-         Visible         =   False
-         Width           =   470
       End
       Begin TextFieldChanger fldMacBinaryURL
          AcceptTabs      =   False
@@ -599,49 +556,6 @@ Begin Window WndAdmin
          Value           =   False
          Visible         =   True
          Width           =   100
-      End
-      Begin TextFieldChanger fldWindowsBinaryHash
-         AcceptTabs      =   False
-         Alignment       =   0
-         AutoDeactivate  =   True
-         AutomaticallyCheckSpelling=   False
-         BackColor       =   &cFFFFFF00
-         Bold            =   False
-         Border          =   True
-         CueText         =   "Drop binary here to calculate Hash"
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Format          =   ""
-         Height          =   22
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   414
-         LimitText       =   0
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         Mask            =   ""
-         Password        =   False
-         ReadOnly        =   True
-         Scope           =   2
-         TabIndex        =   6
-         TabPanelIndex   =   2
-         TabStop         =   True
-         Text            =   ""
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   322
-         Underline       =   False
-         UseFocusRing    =   True
-         Visible         =   False
-         Width           =   470
       End
       Begin TextFieldChanger fldWindowsBinaryURL
          AcceptTabs      =   False
@@ -824,49 +738,6 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   422
-         Underline       =   False
-         UseFocusRing    =   True
-         Visible         =   False
-         Width           =   470
-      End
-      Begin TextFieldChanger fldLinuxBinaryURL
-         AcceptTabs      =   False
-         Alignment       =   0
-         AutoDeactivate  =   True
-         AutomaticallyCheckSpelling=   False
-         BackColor       =   &cFFFFFF00
-         Bold            =   False
-         Border          =   True
-         CueText         =   ""
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Format          =   ""
-         Height          =   22
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   414
-         LimitText       =   0
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         Mask            =   ""
-         Password        =   False
-         ReadOnly        =   False
-         Scope           =   2
-         TabIndex        =   12
-         TabPanelIndex   =   2
-         TabStop         =   True
-         Text            =   ""
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   456
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
@@ -1368,6 +1239,135 @@ Begin Window WndAdmin
          Visible         =   True
          Width           =   26
       End
+      Begin TextFieldChanger fldMacBinaryHash
+         AcceptTabs      =   False
+         Alignment       =   0
+         AutoDeactivate  =   True
+         AutomaticallyCheckSpelling=   False
+         BackColor       =   &cFFFFFF00
+         Bold            =   False
+         Border          =   True
+         CueText         =   "Drop binary here to calculate Hash"
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Format          =   ""
+         Height          =   22
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   414
+         LimitText       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         Mask            =   ""
+         Password        =   False
+         ReadOnly        =   True
+         Scope           =   0
+         TabIndex        =   1
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   ""
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   223
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   False
+         Width           =   470
+      End
+      Begin TextFieldChanger fldWindowsBinaryHash
+         AcceptTabs      =   False
+         Alignment       =   0
+         AutoDeactivate  =   True
+         AutomaticallyCheckSpelling=   False
+         BackColor       =   &cFFFFFF00
+         Bold            =   False
+         Border          =   True
+         CueText         =   "Drop binary here to calculate Hash"
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Format          =   ""
+         Height          =   22
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   414
+         LimitText       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         Mask            =   ""
+         Password        =   False
+         ReadOnly        =   True
+         Scope           =   2
+         TabIndex        =   6
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   ""
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   322
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   False
+         Width           =   470
+      End
+      Begin TextFieldChanger fldLinuxBinaryURL
+         AcceptTabs      =   False
+         Alignment       =   0
+         AutoDeactivate  =   True
+         AutomaticallyCheckSpelling=   False
+         BackColor       =   &cFFFFFF00
+         Bold            =   False
+         Border          =   True
+         CueText         =   ""
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Format          =   ""
+         Height          =   22
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   414
+         LimitText       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         Mask            =   ""
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   2
+         TabIndex        =   12
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   ""
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   456
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   False
+         Width           =   470
+      End
    End
    Begin TextFieldChanger fldAppName
       AcceptTabs      =   False
@@ -1397,7 +1397,7 @@ Begin Window WndAdmin
       Password        =   False
       ReadOnly        =   False
       Scope           =   2
-      TabIndex        =   6
+      TabIndex        =   4
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   ""
@@ -1431,7 +1431,7 @@ Begin Window WndAdmin
       Multiline       =   False
       Scope           =   2
       Selectable      =   False
-      TabIndex        =   7
+      TabIndex        =   11
       TabPanelIndex   =   0
       Text            =   "App Name:"
       TextAlign       =   0
@@ -1465,7 +1465,7 @@ Begin Window WndAdmin
       LockTop         =   True
       Scope           =   2
       State           =   0
-      TabIndex        =   10
+      TabIndex        =   5
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
@@ -1504,7 +1504,7 @@ Begin Window WndAdmin
       LockTop         =   True
       Renderer        =   0
       Scope           =   2
-      TabIndex        =   11
+      TabIndex        =   7
       TabPanelIndex   =   0
       TabStop         =   True
       Top             =   156
@@ -1531,7 +1531,7 @@ Begin Window WndAdmin
       LockRight       =   False
       LockTop         =   False
       Scope           =   2
-      TabIndex        =   12
+      TabIndex        =   8
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
@@ -1575,7 +1575,7 @@ Begin Window WndAdmin
       Multiline       =   False
       Scope           =   0
       Selectable      =   False
-      TabIndex        =   13
+      TabIndex        =   6
       TabPanelIndex   =   0
       Text            =   "None"
       TextAlign       =   0
@@ -1609,7 +1609,7 @@ Begin Window WndAdmin
       Multiline       =   False
       Scope           =   2
       Selectable      =   False
-      TabIndex        =   14
+      TabIndex        =   13
       TabPanelIndex   =   0
       Text            =   "Platforms:"
       TextAlign       =   0
@@ -1643,7 +1643,7 @@ Begin Window WndAdmin
       LockRight       =   True
       LockTop         =   False
       Scope           =   2
-      TabIndex        =   15
+      TabIndex        =   9
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
@@ -1674,7 +1674,7 @@ Begin Window WndAdmin
       LockRight       =   True
       LockTop         =   False
       Scope           =   2
-      TabIndex        =   16
+      TabIndex        =   10
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
@@ -2388,23 +2388,6 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events fldMacBinaryHash
-	#tag Event
-		Sub DropObject(obj As DragItem, action As Integer)
-		  if obj.FolderItemAvailable then
-		    dim f as FolderItem = obj.FolderItem
-		    me.Text = Kaju.HashOfFile( f )
-		  end if
-		  
-		  #pragma unused action
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub Open()
-		  me.AcceptFileDrop( "" )
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events cbWindowsBinary
 	#tag Event
 		Sub Action()
@@ -2414,23 +2397,6 @@ End
 		  lblWindowsBinaryURL.Visible = me.Value
 		  
 		  AdjustControls()
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events fldWindowsBinaryHash
-	#tag Event
-		Sub Open()
-		  me.AcceptFileDrop( "" )
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub DropObject(obj As DragItem, action As Integer)
-		  if obj.FolderItemAvailable then
-		    dim f as FolderItem = obj.FolderItem
-		    me.Text = Kaju.HashOfFile( f )
-		  end if
-		  
-		  #pragma unused action
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2449,7 +2415,7 @@ End
 #tag Events fldLinuxBinaryHash
 	#tag Event
 		Sub Open()
-		  me.AcceptFileDrop( "" )
+		  me.AcceptFileDrop( FileTypes1.ApplicationZip )
 		End Sub
 	#tag EndEvent
 	#tag Event
@@ -2499,6 +2465,40 @@ End
 	#tag Event
 		Sub Action()
 		  fldReleaseNotes.SelText = "<br />" + EndOfLine
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events fldMacBinaryHash
+	#tag Event
+		Sub DropObject(obj As DragItem, action As Integer)
+		  if obj.FolderItemAvailable then
+		    dim f as FolderItem = obj.FolderItem
+		    me.Text = Kaju.HashOfFile( f )
+		  end if
+		  
+		  #pragma unused action
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Open()
+		  me.AcceptFileDrop( FileTypes1.ApplicationZip )
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events fldWindowsBinaryHash
+	#tag Event
+		Sub Open()
+		  me.AcceptFileDrop( FileTypes1.ApplicationZip )
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub DropObject(obj As DragItem, action As Integer)
+		  if obj.FolderItemAvailable then
+		    dim f as FolderItem = obj.FolderItem
+		    me.Text = Kaju.HashOfFile( f )
+		  end if
+		  
+		  #pragma unused action
 		End Sub
 	#tag EndEvent
 #tag EndEvents
