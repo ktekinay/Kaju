@@ -80,6 +80,10 @@ Protected Class UpdateInitiater
 		  dim scriptFile as FolderItem = tempFolder.Child( scriptName )
 		  dim bs as BinaryStream = BinaryStream.Create( scriptFile, true )
 		  bs.Write( script )
+		  if bs.LastErrorCode <> 0 then
+		    MsgBox "Error writing scrip file: " + str( bs.LastErrorCode )
+		  end if
+		  bs.Close
 		  bs = nil
 		  
 		  //
