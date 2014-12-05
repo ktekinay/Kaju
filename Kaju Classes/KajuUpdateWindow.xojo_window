@@ -520,6 +520,16 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub ShowError()
+		  lblInstallMessage.Text = kGenericErrorMessage
+		  btnOK.Caption = kTryLaterButton
+		  pbProgress.Visible = false
+		  
+		  CurrentStage = Stage.UpdateError
+		End Sub
+	#tag EndMethod
+
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
@@ -783,13 +793,9 @@ End
 		  pbProgress.Maximum = -1
 		  pbProgress.Value = 0
 		  
-		  if httpStatus <> 0 then
+		  if httpStatus <> 200 then
 		    
-		    lblInstallMessage.Text = kGenericErrorMessage
-		    btnOK.Caption = kTryLaterButton
-		    pbProgress.Visible = false
-		    
-		    CurrentStage = Stage.UpdateError
+		    ShowError()
 		    
 		  elseif Kaju.HashOfFile( file ) <> SelectedUpdate.PlatformBinary.Hash then
 		    
