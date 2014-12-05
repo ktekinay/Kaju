@@ -823,6 +823,37 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag Events shZipper
+	#tag Event
+		Sub DecompressCompleted(zipFile As FolderItem, containingFolder As FolderItem)
+		  dim cnt as integer = containingFolder.Count
+		  
+		  if cnt = 0 then
+		    
+		    ShowError()
+		    
+		  else
+		    
+		    dim initiator as new Kaju.UpdateInitiater
+		    initiator.ReplacementApp = containingFolder.Item( 1 )
+		    
+		    Kaju.StartUpdate( initiator )
+		    
+		    btnOK.Caption = kQuitButton
+		    btnCancel.Visible = true
+		    btnCancel.Caption = kCancelButton
+		    
+		    pbProgress.Visible = false
+		    
+		    lblInstallMessage.Visible = true
+		    lblInstallMessage.Text = kReadyMessage
+		    
+		    CurrentStage = Stage.WaitingToQuit
+		    
+		  end if
+		  
+		  #pragma unused zipFile
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events hvNewWindow
 	#tag Event
