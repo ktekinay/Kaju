@@ -50,7 +50,7 @@ Inherits Shell
 	#tag Method, Flags = &h0
 		Function ContentsOf(zipFile As FolderItem) As String
 		  // Gets the contents of a the given zip file.
-		  // For this purpose, assumes that there is only one main item within the 
+		  // For this purpose, assumes that there is only one main item within the
 		  // file.
 		  
 		  dim sh as new Shell
