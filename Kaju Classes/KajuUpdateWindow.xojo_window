@@ -314,7 +314,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
-      Text            =   "Starting installation..."
+      Text            =   "Downloading..."
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
@@ -686,6 +686,8 @@ End
 		      lblInstallMessage.Text = "(Dry run, not really installing)"
 		      
 		    else
+		      
+		      lblInstallMessage.Text = kDownloadingMessage
 		      
 		      dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
 		      DownloadFile = tempFolder.Child( SelectedUpdate.PlatformBinary.FileName )
