@@ -708,7 +708,7 @@ End
 		    
 		    if Checker.DryRun then
 		      
-		      lblInstallMessage.Text = "(Dry run, not really installing)"
+		      lblInstallMessage.Text = kDryRunMessage
 		      
 		    else
 		      
