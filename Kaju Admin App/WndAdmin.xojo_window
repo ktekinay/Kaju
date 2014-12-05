@@ -1148,6 +1148,226 @@ Begin Window WndAdmin
          Visible         =   True
          Width           =   200
       End
+      Begin BevelButton btnStyle
+         AcceptFocus     =   True
+         AutoDeactivate  =   True
+         BackColor       =   &c00000000
+         Bevel           =   0
+         Bold            =   True
+         ButtonType      =   0
+         Caption         =   "B"
+         CaptionAlign    =   3
+         CaptionDelta    =   0
+         CaptionPlacement=   1
+         Enabled         =   True
+         HasBackColor    =   False
+         HasMenu         =   0
+         Height          =   22
+         HelpTag         =   "Bold"
+         Icon            =   0
+         IconAlign       =   0
+         IconDX          =   0
+         IconDY          =   0
+         Index           =   0
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   802
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MenuValue       =   0
+         Scope           =   0
+         TabIndex        =   4
+         TabPanelIndex   =   1
+         TabStop         =   True
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   136
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   26
+      End
+      Begin BevelButton btnStyle
+         AcceptFocus     =   True
+         AutoDeactivate  =   True
+         BackColor       =   &c00000000
+         Bevel           =   0
+         Bold            =   False
+         ButtonType      =   0
+         Caption         =   "I"
+         CaptionAlign    =   3
+         CaptionDelta    =   0
+         CaptionPlacement=   1
+         Enabled         =   True
+         HasBackColor    =   False
+         HasMenu         =   0
+         Height          =   22
+         HelpTag         =   "Italic"
+         Icon            =   0
+         IconAlign       =   0
+         IconDX          =   0
+         IconDY          =   0
+         Index           =   1
+         InitialParent   =   "TabPanel1"
+         Italic          =   True
+         Left            =   830
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MenuValue       =   0
+         Scope           =   0
+         TabIndex        =   5
+         TabPanelIndex   =   1
+         TabStop         =   True
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   136
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   26
+      End
+      Begin BevelButton btnStyle
+         AcceptFocus     =   True
+         AutoDeactivate  =   True
+         BackColor       =   &c00000000
+         Bevel           =   0
+         Bold            =   False
+         ButtonType      =   0
+         Caption         =   "U"
+         CaptionAlign    =   3
+         CaptionDelta    =   0
+         CaptionPlacement=   1
+         Enabled         =   True
+         HasBackColor    =   False
+         HasMenu         =   0
+         Height          =   22
+         HelpTag         =   "Underline"
+         Icon            =   0
+         IconAlign       =   0
+         IconDX          =   0
+         IconDY          =   0
+         Index           =   2
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   858
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MenuValue       =   0
+         Scope           =   0
+         TabIndex        =   6
+         TabPanelIndex   =   1
+         TabStop         =   True
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   136
+         Underline       =   True
+         Value           =   False
+         Visible         =   True
+         Width           =   26
+      End
+      Begin BevelButton btnBreak
+         AcceptFocus     =   True
+         AutoDeactivate  =   True
+         BackColor       =   &c00000000
+         Bevel           =   0
+         Bold            =   False
+         ButtonType      =   0
+         Caption         =   "<br />"
+         CaptionAlign    =   3
+         CaptionDelta    =   0
+         CaptionPlacement=   1
+         Enabled         =   True
+         HasBackColor    =   False
+         HasMenu         =   0
+         Height          =   22
+         HelpTag         =   "Insert break"
+         Icon            =   0
+         IconAlign       =   0
+         IconDX          =   0
+         IconDY          =   0
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   686
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MenuValue       =   0
+         Scope           =   0
+         TabIndex        =   7
+         TabPanelIndex   =   1
+         TabStop         =   True
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   136
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   50
+      End
+      Begin BevelButton btnStyle
+         AcceptFocus     =   True
+         AutoDeactivate  =   True
+         BackColor       =   &c00000000
+         Bevel           =   0
+         Bold            =   False
+         ButtonType      =   0
+         Caption         =   "p"
+         CaptionAlign    =   3
+         CaptionDelta    =   0
+         CaptionPlacement=   1
+         Enabled         =   True
+         HasBackColor    =   False
+         HasMenu         =   0
+         Height          =   22
+         HelpTag         =   "Create a paragraph tag"
+         Icon            =   0
+         IconAlign       =   0
+         IconDX          =   0
+         IconDY          =   0
+         Index           =   3
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   764
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MenuValue       =   0
+         Scope           =   0
+         TabIndex        =   8
+         TabPanelIndex   =   1
+         TabStop         =   True
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   136
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   26
+      End
    End
    Begin TextFieldChanger fldAppName
       AcceptTabs      =   False
@@ -1500,6 +1720,7 @@ End
 		  
 		  return r
 		  
+		  #pragma unused appQuitting
 		End Function
 	#tag EndEvent
 
@@ -1596,6 +1817,25 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub ApplyStyle(tag As String)
+		  tag = tag.Lowercase
+		  
+		  dim openTag as string = "<" + tag + ">"
+		  dim closeTag as string = "</" + tag + ">"
+		  
+		  dim s as string = fldReleaseNotes.SelText
+		  dim selStart as integer = fldReleaseNotes.SelStart
+		  
+		  fldReleaseNotes.SelText = openTag + s + closeTag
+		  if s = "" then // No selection so position the cursor
+		    fldReleaseNotes.SelStart = selStart + openTag.Len
+		  end if
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub ClearFields()
 		  dim savedDirty as boolean = self.ContentsChanged
 		  
@@ -1671,7 +1911,8 @@ End
 		  select case c
 		  case IsA TextEdit
 		    dim fld as TextEdit = TextEdit( c )
-		    fld.Text = value.StringValue
+		    dim sValue as string = value.StringValue.DefineEncoding( Encodings.UTF8 )
+		    fld.Text = sValue
 		    
 		  case IsA CheckBox
 		    dim cb as CheckBox = CheckBox( c )
@@ -1878,6 +2119,8 @@ End
 		  
 		  dim dataString as string = tis.ReadAll
 		  tis = nil
+		  
+		  dataString = ReplaceLineEndings( dataString, EndOfLine )
 		  
 		  dim master as new JSONItem( dataString )
 		  RSAPrivateKey = master.Value( kPrivateKeyName )
@@ -2128,6 +2371,8 @@ End
 	#tag Event
 		Function CancelLoad(URL as String) As Boolean
 		  return ( not self.Loading )
+		  
+		  #pragma unused URL
 		End Function
 	#tag EndEvent
 #tag EndEvents
@@ -2150,6 +2395,8 @@ End
 		    dim f as FolderItem = obj.FolderItem
 		    me.Text = Kaju.HashOfFile( f )
 		  end if
+		  
+		  #pragma unused action
 		End Sub
 	#tag EndEvent
 	#tag Event
@@ -2182,6 +2429,8 @@ End
 		    dim f as FolderItem = obj.FolderItem
 		    me.Text = Kaju.HashOfFile( f )
 		  end if
+		  
+		  #pragma unused action
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2209,6 +2458,8 @@ End
 		    dim f as FolderItem = obj.FolderItem
 		    me.Text = Kaju.HashOfFile( f )
 		  end if
+		  
+		  #pragma unused action
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2229,7 +2480,26 @@ End
 	#tag Event
 		Function CancelLoad(URL as String) As Boolean
 		  return ( not self.Loading )
+		  
+		  #pragma unused URL
 		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnStyle
+	#tag Event
+		Sub Action(index as Integer)
+		  dim tag as string = me.Caption
+		  ApplyStyle( tag )
+		  
+		  #pragma unused index
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnBreak
+	#tag Event
+		Sub Action()
+		  fldReleaseNotes.SelText = "<br />" + EndOfLine
+		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events tmrUpdateReleaseNotesPreview
@@ -2237,7 +2507,7 @@ End
 		Sub Action()
 		  self.Loading = true
 		  
-		  hvReleaseNotesPreview.LoadPage( fldReleaseNotes.Text, new FolderItem )
+		  hvReleaseNotesPreview.LoadPage( ControlValue( fldReleaseNotes ).StringValue, new FolderItem )
 		  
 		  self.Loading = false
 		End Sub
