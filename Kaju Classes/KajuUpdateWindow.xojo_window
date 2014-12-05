@@ -813,7 +813,8 @@ End
 		    
 		    lblInstallMessage.Text = kProcessingFileMessage
 		    
-		    shZipper.Decompress( file )
+		    dim targetFolder as FolderItem = file.Parent.Child( "decompressed" )
+		    shZipper.Decompress( file, targetFolder )
 		    
 		  end if
 		  
