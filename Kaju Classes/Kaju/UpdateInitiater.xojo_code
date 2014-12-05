@@ -109,6 +109,12 @@ Protected Class UpdateInitiater
 		  Exception err As RuntimeException
 		    MsgBox "Could not complete update - " + err.Message
 		    
+		  Finally
+		    
+		    if pid <> nil then
+		      pid.Delete
+		    end if
+		    
 		    
 		End Sub
 	#tag EndMethod
