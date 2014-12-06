@@ -43,7 +43,8 @@ Protected Class UpdateInitiater
 		  
 		  script = script.ReplaceAll( kMarkerAppName, ShellQuote( appFolderItem.Name ) )
 		  script = script.ReplaceAll( kMarkerAppParent, ShellQuote( appFolderItem.Parent.NativePath ) )
-		  script = script.ReplaceAll( kMarkerNewAppPath, ShellQuote( ReplacementApp.NativePath ) )
+		  script = script.ReplaceAll( kMarkerNewAppName, ShellQuote( ReplacementApp.Name ) )
+		  script = script.ReplaceAll( kMarkerNewAppParent, ShellQuote( ReplacementApp.Parent.NativePath ) )
 		  
 		  dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
 		  script = script.ReplaceAll( kMarkerTempFolderPath, ShellQuote( tempFolder.NativePath ) )
@@ -144,7 +145,10 @@ Protected Class UpdateInitiater
 	#tag Constant, Name = kMarkerAppParent, Type = String, Dynamic = False, Default = \"<<APP_PARENT>>", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = kMarkerNewAppPath, Type = String, Dynamic = False, Default = \"<<NEW_APP_PATH>>", Scope = Private
+	#tag Constant, Name = kMarkerNewAppName, Type = String, Dynamic = False, Default = \"<<NEW_APP_NAME>>", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kMarkerNewAppParent, Type = String, Dynamic = False, Default = \"<<NEW_APP_PARENT>>", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kMarkerPIDFilePath, Type = String, Dynamic = False, Default = \"<<PID_FILE_PATH>>", Scope = Private
@@ -163,7 +167,7 @@ Protected Class UpdateInitiater
 	#tag EndConstant
 
 	#tag Constant, Name = kUpdaterScript, Type = String, Dynamic = False, Default = \"", Scope = Private
-		#Tag Instance, Platform = Any, Language = Default, Definition  = \"#!/bin/sh\n\nAPP_NAME\x3D<<APP_NAME>>\nAPP_PARENT\x3D<<APP_PARENT>>\nNEW_APP_PATH\x3D<<NEW_APP_PATH>>\nTEMP_FOLDER\x3D<<TEMP_FOLDER_PATH>>\nPID_FILE\x3D<<PID_FILE_PATH>>\n\nAPP_PATH\x3D$APP_PARENT/$APP_NAME\nBACKUP_PATH\x3D$TEMP_FOLDER/$APP_NAME-`date +%Y%m%d%H%M%S`\n\ncounter\x3D10\nwhile [ -f $PID_FILE ]\ndo\n  /usr/bin/logger -t \'update.sh\' \"Checking to see if $PIDFILE exists\x2C $counter\"\n  sleep 1\n  \n  let counter\x3Dcounter-1\n  \n  if [ $counter \x3D\x3D 0 ]\n  then\n  \t/usr/bin/logger -t \'update.sh\' \"Could not update app\x2C it never quit\"\n  \texit 1\n  fi\ndone\n\n/usr/bin/logger -t \'update.sh\' \"Creating backup folder $BACKUP_PATH\"\nmkdir \"$BACKUP_PATH\"\n\n/usr/bin/logger -t \'update.sh\' \"Moving old application\"\nmv \"$APP_PATH\" \"$BACKUP_PATH\"\n\n/usr/bin/logger -t \'update.sh\' \"Moving in new application\"\nmv \"$NEW_APP_PATH\" \"$APP_PARENT\"\n\n#echo \"Removing temp folder\"\n#rm -fr \"$TEMP_FOLDER\"\n\n#echo \"Removing backup folder\"\n#rm -fr \"$BACKUP_PATH\"\n\n<<MAC_PLATFORM>>\nopen \"$APP_PATH\"\n<<MAC_PLATFORM>>\n<<LINUX_PLATFORM>>\n\"$APP_PATH\"\n<<LINUX_PLATFORM>>\n"
+		#Tag Instance, Platform = Any, Language = Default, Definition  = \"#!/bin/sh\n\nAPP_NAME\x3D<<APP_NAME>>\nAPP_PARENT\x3D<<APP_PARENT>>\nNEW_APP_NAME\x3D<<NEW_APP_NAME>>\nNEW_APP_PARENT\x3D<<NEW_APP_PARENT>>\nTEMP_FOLDER\x3D<<TEMP_FOLDER_PATH>>\nPID_FILE\x3D<<PID_FILE_PATH>>\n\nAPP_PATH\x3D$APP_PARENT/$APP_NAME\nNEW_APP_PATH\x3D$NEW_APP_PARENT/$NEW_APP_NAME\nBACKUP_PATH\x3D$TEMP_FOLDER/$APP_NAME-`date +%Y%m%d%H%M%S`\n\ncounter\x3D10\nwhile [ -f $PID_FILE ]\ndo\n  /usr/bin/logger -t \'update.sh\' \"Checking to see if $PIDFILE exists\x2C $counter\"\n  sleep 1\n  \n  let counter\x3Dcounter-1\n  \n  if [ $counter \x3D\x3D 0 ]\n  then\n  \t/usr/bin/logger -t \'update.sh\' \"Could not update app\x2C it never quit\"\n  \texit 1\n  fi\ndone\n\n/usr/bin/logger -t \'Kaju\' \"Creating backup folder $BACKUP_PATH\"\nmkdir \"$BACKUP_PATH\"\n\n/usr/bin/logger -t \'Kaju\' \"Moving old application\"\nmv \"$APP_PATH\" \"$BACKUP_PATH\"\n\n/usr/bin/logger -t \'Kaju\' \"Moving in new application\"\nmv \"$NEW_APP_PATH\" \"$APP_PARENT\"\n\n#echo \"Removing temp folder\"\n#rm -fr \"$TEMP_FOLDER\"\n\n#echo \"Removing backup folder\"\n#rm -fr \"$BACKUP_PATH\"\n\nlogger -t \'Kaju\' \'Starting new app\'\nAPP_PATH\x3D$APP_PARENT/$NEW_APP_NAME\n\n<<MAC_PLATFORM>>\nopen \"$APP_PATH\"\n<<MAC_PLATFORM>>\n<<LINUX_PLATFORM>>\n\"$APP_PATH\"\n<<LINUX_PLATFORM>>\n"
 	#tag EndConstant
 
 
