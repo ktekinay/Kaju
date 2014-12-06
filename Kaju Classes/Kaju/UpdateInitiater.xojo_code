@@ -110,6 +110,10 @@ Protected Class UpdateInitiater
 		  #endif
 		  
 		  sh.Execute( cmd )
+		  for i as integer = 1 to 10000
+		    sh.Poll
+		    App.YieldToNextThread
+		  next i
 		  
 		  Exception err As RuntimeException
 		    MsgBox "Could not complete update - " + err.Message
