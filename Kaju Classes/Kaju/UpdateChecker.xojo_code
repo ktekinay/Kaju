@@ -196,8 +196,6 @@ Protected Class UpdateChecker
 		    w.ChooseUpdate( self, info )
 		  end if
 		  
-		  
-		  
 		  Exception err as RuntimeException
 		    raise new KajuException( KajuException.kErrorBadUpdateData )
 		    
@@ -367,6 +365,7 @@ Protected Class UpdateChecker
 			Name="ServerPublicRSAKey"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="StageAllowed"
@@ -391,6 +390,7 @@ Protected Class UpdateChecker
 			Name="UpdateURL"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
