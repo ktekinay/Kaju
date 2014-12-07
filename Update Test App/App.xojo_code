@@ -23,6 +23,10 @@ Inherits Application
 		Private mPrefFolder As FolderItem
 	#tag EndProperty
 
+	#tag Property, Flags = &h0
+		UpdateInitiater As Kaju.UpdateInitiater
+	#tag EndProperty
+
 
 	#tag Constant, Name = kEditClear, Type = String, Dynamic = False, Default = \"&Delete", Scope = Public
 		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"&Delete"

@@ -314,7 +314,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
-      Text            =   "Starting installation..."
+      Text            =   "Downloading..."
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
@@ -472,7 +472,7 @@ End
 		    
 		    btnCancel.Height = btnCancel.Height + 5
 		    btnOK.Height = btnOK.Height + 5
-		    btnSkipVersion = btnSkipVersion.Height + 5
+		    btnSkipVersion.Height = btnSkipVersion.Height + 5
 		    
 		    self.Height = self.Height + 5
 		    
@@ -517,6 +517,16 @@ End
 		  self.Backdrop = p
 		  
 		  self.Loading = false
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub ShowError()
+		  lblInstallMessage.Text = kGenericErrorMessage
+		  btnOK.Caption = kTryLaterButton
+		  pbProgress.Visible = false
+		  
+		  CurrentStage = Stage.UpdateError
 		End Sub
 	#tag EndMethod
 
@@ -570,6 +580,15 @@ End
 	#tag Constant, Name = kBadDownloadMessage, Type = String, Dynamic = False, Default = \"The downloaded file appears to be corrupted.", Scope = Private
 	#tag EndConstant
 
+	#tag Constant, Name = kCancelButton, Type = String, Dynamic = False, Default = \"&Cancel", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kDownloadingMessage, Type = String, Dynamic = False, Default = \"Downloading...", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kDryRunMessage, Type = String, Dynamic = False, Default = \"(Dry run\x2C not really installing)", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kGenericErrorMessage, Type = String, Dynamic = False, Default = \"An error has occurred.", Scope = Private
 	#tag EndConstant
 
@@ -586,6 +605,12 @@ End
 	#tag EndConstant
 
 	#tag Constant, Name = kProcessingFileMessage, Type = String, Dynamic = False, Default = \"Processing file...", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kQuitButton, Type = String, Dynamic = False, Default = \"Quit && Install", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kReadyMessage, Type = String, Dynamic = False, Default = \"Ready to install", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kReleaseNotes, Type = String, Dynamic = False, Default = \"Release Notes:", Scope = Private
@@ -679,13 +704,17 @@ End
 		    pbProgress.Visible = true
 		    lblInstallMessage.Visible = true
 		    
+		    lbUpdates.Enabled = false
+		    
 		    CurrentStage = Stage.InstallingUpdate
 		    
 		    if Checker.DryRun then
 		      
-		      lblInstallMessage.Text = "(Dry run, not really installing)"
+		      lblInstallMessage.Text = kDryRunMessage
 		      
 		    else
+		      
+		      lblInstallMessage.Text = kDownloadingMessage
 		      
 		      dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
 		      DownloadFile = tempFolder.Child( SelectedUpdate.PlatformBinary.FileName )
@@ -706,8 +735,20 @@ End
 		    
 		  case Stage.WaitingToQuit
 		    //
-		    // The user chose Install
+		    // The user chose Install so move this window to the back
 		    //
+		    dim lastWindowIndex as integer = WindowCount - 1
+		    if not( Window( lastWindowIndex ) Is self ) then
+		      dim showIndex as integer = lastWindowIndex
+		      for windowIndex as integer = lastWindowIndex downto 0
+		        dim w as Window = Window( showIndex )
+		        if w Is self then
+		          showIndex = showIndex - 1
+		        else
+		          w.Show
+		        end if
+		      next
+		    end if
 		    
 		    Quit
 		    
@@ -728,6 +769,7 @@ End
 	#tag Event
 		Sub Action()
 		  SelectedUpdate = nil
+		  Kaju.CancelUpdate
 		  self.Close
 		  
 		End Sub
@@ -766,13 +808,9 @@ End
 		  pbProgress.Maximum = -1
 		  pbProgress.Value = 0
 		  
-		  if httpStatus <> 0 then
+		  if httpStatus <> 200 then
 		    
-		    lblInstallMessage.Text = kGenericErrorMessage
-		    btnOK.Caption = kTryLaterButton
-		    pbProgress.Visible = false
-		    
-		    CurrentStage = Stage.UpdateError
+		    ShowError()
 		    
 		  elseif Kaju.HashOfFile( file ) <> SelectedUpdate.PlatformBinary.Hash then
 		    
@@ -789,7 +827,8 @@ End
 		    
 		    lblInstallMessage.Text = kProcessingFileMessage
 		    
-		    shZipper.Decompress( file )
+		    dim targetFolder as FolderItem = file.Parent.Child( "decompressed" )
+		    shZipper.Decompress( file, targetFolder )
 		    
 		  end if
 		  
@@ -800,6 +839,37 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag Events shZipper
+	#tag Event
+		Sub DecompressCompleted(zipFile As FolderItem, containingFolder As FolderItem)
+		  dim cnt as integer = containingFolder.Count
+		  
+		  if cnt = 0 then
+		    
+		    ShowError()
+		    
+		  else
+		    
+		    dim initiator as new Kaju.UpdateInitiater
+		    initiator.ReplacementApp = containingFolder.Item( 1 )
+		    
+		    Kaju.StartUpdate( initiator )
+		    
+		    btnOK.Caption = kQuitButton
+		    btnCancel.Visible = true
+		    btnCancel.Caption = kCancelButton
+		    
+		    pbProgress.Visible = false
+		    
+		    lblInstallMessage.Visible = true
+		    lblInstallMessage.Text = kReadyMessage
+		    
+		    CurrentStage = Stage.WaitingToQuit
+		    
+		  end if
+		  
+		  #pragma unused zipFile
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events hvNewWindow
 	#tag Event

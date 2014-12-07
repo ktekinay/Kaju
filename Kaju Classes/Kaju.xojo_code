@@ -11,9 +11,9 @@ Protected Module Kaju
 
 	#tag Method, Flags = &h1
 		Protected Sub CancelUpdate()
-		  if InitiateOnQuit <> nil then
-		    InitiateOnQuit.ReplacementApp = nil // Will stop the update
-		    InitiateOnQuit = nil
+		  if App.UpdateInitiater <> nil then
+		    App.UpdateInitiater.ReplacementApp = nil // Will stop the update
+		    App.UpdateInitiater = nil
 		  end if
 		  
 		End Sub
@@ -78,7 +78,7 @@ Protected Module Kaju
 
 	#tag Method, Flags = &h1
 		Protected Sub StartUpdate(initiater As Kaju.UpdateInitiater)
-		  InitiateOnQuit = initiater
+		  App.UpdateInitiater = initiater
 		End Sub
 	#tag EndMethod
 
@@ -192,10 +192,6 @@ Protected Module Kaju
 		End Function
 	#tag EndMethod
 
-
-	#tag Property, Flags = &h21
-		Private InitiateOnQuit As Kaju.UpdateInitiater
-	#tag EndProperty
 
 	#tag Property, Flags = &h21
 		Private mUpdateInProgress As Boolean

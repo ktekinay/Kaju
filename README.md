@@ -86,9 +86,13 @@ It will be up to the implementer to enforce the "MinimumRequiredVersion" propert
 
 ## How To Use It
 
-Create a new Kaju.UpdateChecker object and fill in its properties. [DEFINE THESE]
+You only need to add one property to your App class, UpdateInitiater As Kaju.UpdateInitiater. Teh Kaju class expects to find that and will handle it for you.
 
-Call CheckForUpdates. This will go to the UpdateURL and see if there are any updates available and ask the user about them. If the user chooses to update, the class will download and verify the binary, then raise the `ReadyToInstall` event. Within that event, the consumer just needs to perform any cleanup and quit. The class will take care of the update and relaunch the new version of the app.
+Create a new Kaju.UpdateChecker object and fill in its properties. At the very least, you have to provide a FolderItem for a folder where Kaju can save its preferences, one that is unique to your app, the ServerPublicRSAKey (more on this later), and the URL where it will get its update information.
+
+Call Execute. This will go to the UpdateURL, see if there are any updates available for that version of the app, and ask the user about them. If the user chooses to update, the class will download and verify the binary, then offer the user the opportunity to Quit & Install or Cancel. If they choose to install, Quit will be called.
+
+In your windows' CancelClose event, you should call Kaju.CancelUpdate if the users cancels the closing of the window. It doesn't matter if there is actually update in progress, but you probably don't want the update to happen if the user decides to quit manually later. The update window will remain open so they can decide later.
 
 If the user declines an update marked as "IsRequired", the `RequiredUpdateDeclined` event will be raised and the consumer should act accordingly.
 
