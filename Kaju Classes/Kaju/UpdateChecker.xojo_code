@@ -179,6 +179,10 @@ Protected Class UpdateChecker
 		    //
 		    // This is a viable update
 		    //
+		    
+		    //
+		    // See if these update are required
+		    //
 		    if thisInfo.MinimumRequiredVersion <> "" and Kaju.VersionToDouble( thisInfo.MinimumRequiredVersion ) > versionDouble then
 		      mIsRequiredUpdate = true
 		    end if
