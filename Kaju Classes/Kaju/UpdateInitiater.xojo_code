@@ -23,6 +23,11 @@ Protected Class UpdateInitiater
 		  dim script as string = kUpdaterScript
 		  
 		  //
+		  // Set up a temporary folder
+		  //
+		  dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
+		  
+		  //
 		  // Get a FolderItem for the current app
 		  //
 		  dim appFolderItem as FolderItem
@@ -45,25 +50,13 @@ Protected Class UpdateInitiater
 		  script = script.ReplaceAll( kMarkerAppParent, ShellQuote( appFolderItem.Parent.NativePath ) )
 		  script = script.ReplaceAll( kMarkerNewAppName, ShellQuote( ReplacementApp.Name ) )
 		  script = script.ReplaceAll( kMarkerNewAppParent, ShellQuote( ReplacementApp.Parent.NativePath ) )
-		  
-		  dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
-		  script = script.ReplaceAll( kMarkerTempFolderPath, ShellQuote( tempFolder.NativePath ) )
+		  script = script.ReplaceAll( kMarkerTempFolder, ShellQuote( TempFolder.NativePath ) )
 		  
 		  //
 		  // Set up the PID file
 		  //
 		  dim pid as FolderItem = GetTemporaryFolderItem()
 		  script = script.ReplaceAll( kMarkerPIDFilePath, ShellQuote( pid.NativePath ) )
-		  
-		  //
-		  // Remove other platform code
-		  //
-		  dim rx as new RegEx
-		  rx.Options.ReplaceAllMatches = true
-		  rx.SearchPattern = "(?sU)(?!" + kMarkerPlatform + ")(<<(?:MAC|LINUX|WINDOWS)_PLATFORM>>).*\g1"
-		  script = rx.Replace( script )
-		  
-		  script = script.ReplaceAll( kMarkerPlatform, "" )
 		  
 		  //
 		  // Prepare for saving
@@ -158,20 +151,14 @@ Protected Class UpdateInitiater
 	#tag Constant, Name = kMarkerPIDFilePath, Type = String, Dynamic = False, Default = \"<<PID_FILE_PATH>>", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = kMarkerPlatform, Type = String, Dynamic = False, Default = \"", Scope = Private
-		#Tag Instance, Platform = Mac OS, Language = Default, Definition  = \"<<MAC_PLATFORM>>"
-		#Tag Instance, Platform = Linux, Language = Default, Definition  = \"<<LINUX_PLATFORM>>"
-		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"<<WINDOWS_PLATFORM>>"
-	#tag EndConstant
-
-	#tag Constant, Name = kMarkerTempFolderPath, Type = String, Dynamic = False, Default = \"<<TEMP_FOLDER_PATH>>", Scope = Private
+	#tag Constant, Name = kMarkerTempFolder, Type = String, Dynamic = False, Default = \"<<TEMP_FOLDER>>", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kScriptName, Type = String, Dynamic = False, Default = \"updater.sh", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kUpdaterScript, Type = String, Dynamic = False, Default = \"", Scope = Private
-		#Tag Instance, Platform = Any, Language = Default, Definition  = \"#!/bin/sh\n\nAPP_NAME\x3D<<APP_NAME>>\nAPP_PARENT\x3D<<APP_PARENT>>\nNEW_APP_NAME\x3D<<NEW_APP_NAME>>\nNEW_APP_PARENT\x3D<<NEW_APP_PARENT>>\nTEMP_FOLDER\x3D<<TEMP_FOLDER_PATH>>\nPID_FILE\x3D<<PID_FILE_PATH>>\n\nAPP_PATH\x3D$APP_PARENT/$APP_NAME\nNEW_APP_PATH\x3D$NEW_APP_PARENT/$NEW_APP_NAME\nBACKUP_PATH\x3D$TEMP_FOLDER/$APP_NAME-`date +%Y%m%d%H%M%S`\n\ncounter\x3D10\nwhile [ -f $PID_FILE ]\ndo\n  /usr/bin/logger -t \'update.sh\' \"Checking to see if $PIDFILE exists\x2C $counter\"\n  sleep 1\n  \n  let counter\x3Dcounter-1\n  \n  if [ $counter \x3D\x3D 0 ]\n  then\n  \t/usr/bin/logger -t \'update.sh\' \"Could not update app\x2C it never quit\"\n  \texit 1\n  fi\ndone\n\n/usr/bin/logger -t \'Kaju\' \"Creating backup folder $BACKUP_PATH\"\nmkdir \"$BACKUP_PATH\"\n\n/usr/bin/logger -t \'Kaju\' \"Moving old application\"\nmv \"$APP_PATH\" \"$BACKUP_PATH\"\n\n/usr/bin/logger -t \'Kaju\' \"Moving in new application\"\nmv \"$NEW_APP_PATH\" \"$APP_PARENT\"\n\n#echo \"Removing temp folder\"\n#rm -fr \"$TEMP_FOLDER\"\n\n#echo \"Removing backup folder\"\n#rm -fr \"$BACKUP_PATH\"\n\nlogger -t \'Kaju\' \'Starting new app\'\nAPP_PATH\x3D$APP_PARENT/$NEW_APP_NAME\n\n<<MAC_PLATFORM>>\nopen \"$APP_PATH\"\n<<MAC_PLATFORM>>\n<<LINUX_PLATFORM>>\n\"$APP_PATH\"\n<<LINUX_PLATFORM>>\n"
+		#Tag Instance, Platform = Mac OS, Language = Default, Definition  = \"#!/bin/sh\n\n#\n# These will be filled in by the calling app\n#\n\nAPP_NAME\x3D<<APP_NAME>>\nAPP_PARENT\x3D<<APP_PARENT>>\nNEW_APP_NAME\x3D<<NEW_APP_NAME>>\nNEW_APP_PARENT\x3D<<NEW_APP_PARENT>>\nTEMP_FOLDER_PATH\x3D<<TEMP_FOLDER>>\nPID_FILE\x3D<<PID_FILE_PATH>>\n\n#\n# -----------------\n#\n\nAPP_PATH\x3D$APP_PARENT/$APP_NAME\nNEW_APP_PATH\x3D$NEW_APP_PARENT/$NEW_APP_NAME\n\nRENAMED_APP_NAME\x3D`echo \"$APP_NAME\" | /usr/bin/sed -E s/\\.[aA][pP]{2}//`-`date +%Y%m%d%H%M%S`.app\nRENAMED_APP_PATH\x3D$APP_PARENT/$RENAMED_APP_NAME\n\nTAG_STRING\x3D\'Kaju Update Script\'\n\ncounter\x3D10\nwhile [ -f \"$PID_FILE\" ]\ndo\n  /usr/bin/logger -t \"$TAG_STRING\" \"Checking to see if $PIDFILE exists\x2C $counter\"\n  sleep 1\n  \n  let counter\x3Dcounter-1\n  \n  if [ $counter \x3D\x3D 0 ]\n  then\n  \t/usr/bin/logger -t \"$TAG_STRING\" \'ERROR: Could not update app\x2C it never quit\'\n  \texit 1\n  fi\ndone\n\nPROCEED\x3D`true`\n\n#\n# Rename the old application\n#\n/usr/bin/logger -t \"$TAG_STRING\" \"Renaming old application $APP_NAME to $RENAMED_APP_NAME\"\nmv \"$APP_PATH\" \"$RENAMED_APP_PATH\"\n\n#\n# Make sure the renamed file exists\n#\nif [ -d \"$RENAMED_APP_PATH\" ]\nthen\n  /usr/bin/logger -t \"$TAG_STRING\" \'...confirmed\'\nelse\n  /usr/bin/logger -t \"$TAG_STRING\" \"Could not rename old application to $RENAMED_APP_PATH\"\n  PROCEED\x3D`false`\nfi\n\n#\n# Move in the replacement app\n#\nif $PROCEED\nthen\n  /usr/bin/logger -t \"$TAG_STRING\" \"Moving new application $NEW_APP_NAME to folder $APP_PARENT\"\n  mv \"$NEW_APP_PATH\" \"$APP_PARENT\"\n\n  #\n  # Make sure it moved\n  #\n  if [ -d \"$APP_PARENT/$NEW_APP_NAME\" ]\n  then\n    /usr/bin/logger -t \"$TAG_STRING\" \'...confirmed\'\n  else\n    /usr/bin/logger -t \"$TAG_STRING\" \"Could not move in new application\"\n    /usr/bin/logger -t \"$TAG_STRING\" \"Attempting to restore old application and launch it\"\n    mv \"$RENAMED_APP_PATH\" \"$APP_PATH\"\n    open \"$APP_PATH\"\n    PROCEED\x3D`false`\n  fi\nfi\n\nif $PROCEED\nthen\n  /usr/bin/logger -t \"$TAG_STRING\" \"Removing old application $RENAMED_APP_NAME\"\n  rm -fr \"$RENAMED_APP_PATH\"\n  \n  APP_PATH\x3D$APP_PARENT/$NEW_APP_NAME\n  /usr/bin/logger -t \"$TAG_STRING\" \"Starting new application at $APP_PATH\"\n  \n  open \"$APP_PATH\"\nfi\n\n/usr/bin/logger -t \"$TAG_STRING\" \'Removing temp folder\'\nrm -fr \"$TEMP_FOLDER_PATH\"\n"
 	#tag EndConstant
 
 
