@@ -735,8 +735,20 @@ End
 		    
 		  case Stage.WaitingToQuit
 		    //
-		    // The user chose Install
+		    // The user chose Install so move this window to the back
 		    //
+		    dim lastWindowIndex as integer = WindowCount - 1
+		    if not( Window( lastWindowIndex ) Is self ) then
+		      dim showIndex as integer = lastWindowIndex
+		      for windowIndex as integer = lastWindowIndex downto 0
+		        dim w as Window = Window( showIndex )
+		        if w Is self then
+		          showIndex = showIndex - 1
+		        else
+		          w.Show
+		        end if
+		      next
+		    end if
 		    
 		    Quit
 		    
