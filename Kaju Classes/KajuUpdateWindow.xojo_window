@@ -778,18 +778,31 @@ End
 #tag Events btnSkipVersion
 	#tag Event
 		Sub Action()
+		  //
+		  // We can only ignore versions if we already have the minimum requried
+		  //
+		  
 		  dim info as Kaju.UpdateInformation = lbUpdates.RowTag( lbUpdates.ListIndex )
-		  Checker.IgnoreVersion( info.Version )
 		  
-		  if lbUpdates.ListCount = 1 then
-		    SelectedUpdate = nil
-		    self.Close
+		  if info.MinimumRequiredVersion <> "" and _
+		    Kaju.VersionToDouble( Kaju.AppVersionString ) < Kaju.VersionToDouble( info.MinimumRequiredVersion )  then
+		    
+		    MsgBox "You cannot skip versions until you have updated to version " + info.MinimumRequiredVersion + " or beyond."
+		    
 		  else
-		    lbUpdates.RemoveRow( lbUpdates.ListIndex )
-		    lbUpdates.ListIndex = 0
+		    
+		    Checker.IgnoreVersion( info.Version )
+		    
+		    if lbUpdates.ListCount = 1 then
+		      SelectedUpdate = nil
+		      Kaju.CancelUpdate
+		      self.Close
+		    else
+		      lbUpdates.RemoveRow( lbUpdates.ListIndex )
+		      lbUpdates.ListIndex = 0
+		    end if
+		    
 		  end if
-		  
-		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
