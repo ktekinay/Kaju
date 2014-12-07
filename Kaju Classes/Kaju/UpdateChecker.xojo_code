@@ -75,6 +75,12 @@ Protected Class UpdateChecker
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function IsReqiredUpdate() As Boolean
+		  return mIsRequiredUpdate
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h21
 		Private Function JSONToStringArray(data As JSONItem) As String()
 		  dim ub as integer = data.Count - 1
@@ -279,6 +285,10 @@ Protected Class UpdateChecker
 
 	#tag Property, Flags = &h21
 		Private mDryRun As Boolean
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mIsRequiredUpdate As Boolean
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
