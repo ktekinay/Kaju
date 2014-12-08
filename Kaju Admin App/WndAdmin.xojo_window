@@ -594,7 +594,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   356
+         Top             =   390
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
@@ -628,7 +628,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   323
+         Top             =   357
          Transparent     =   False
          Underline       =   False
          Visible         =   False
@@ -662,7 +662,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   357
+         Top             =   391
          Transparent     =   False
          Underline       =   False
          Visible         =   False
@@ -694,7 +694,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   390
+         Top             =   438
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -708,7 +708,7 @@ Begin Window WndAdmin
          BackColor       =   &cFFFFFF00
          Bold            =   False
          Border          =   True
-         CueText         =   "Drop binary here to calculate Hash"
+         CueText         =   "Drop the Linux Zip file here to calculate the hash"
          DataField       =   ""
          DataSource      =   ""
          Enabled         =   True
@@ -737,7 +737,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   422
+         Top             =   503
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
@@ -771,7 +771,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   423
+         Top             =   504
          Transparent     =   False
          Underline       =   False
          Visible         =   False
@@ -805,7 +805,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   457
+         Top             =   538
          Transparent     =   False
          Underline       =   False
          Visible         =   False
@@ -1247,7 +1247,7 @@ Begin Window WndAdmin
          BackColor       =   &cFFFFFF00
          Bold            =   False
          Border          =   True
-         CueText         =   "Drop binary here to calculate Hash"
+         CueText         =   "Drop the Mac Zip file here to calculate the hash"
          DataField       =   ""
          DataSource      =   ""
          Enabled         =   True
@@ -1290,7 +1290,7 @@ Begin Window WndAdmin
          BackColor       =   &cFFFFFF00
          Bold            =   False
          Border          =   True
-         CueText         =   "Drop binary here to calculate Hash"
+         CueText         =   "Drop the Windows Zip file here to calculate the hash"
          DataField       =   ""
          DataSource      =   ""
          Enabled         =   True
@@ -1319,7 +1319,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   322
+         Top             =   356
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
@@ -1362,11 +1362,165 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   456
+         Top             =   537
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
          Width           =   470
+      End
+      Begin TextFieldChanger fldWindowsExecutable
+         AcceptTabs      =   False
+         Alignment       =   0
+         AutoDeactivate  =   True
+         AutomaticallyCheckSpelling=   False
+         BackColor       =   &cFFFFFF00
+         Bold            =   False
+         Border          =   True
+         CueText         =   ""
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Format          =   ""
+         Height          =   22
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   414
+         LimitText       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         Mask            =   ""
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   2
+         TabIndex        =   17
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   ""
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   322
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   False
+         Width           =   470
+      End
+      Begin Label lblWindowsExecutable
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   305
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   18
+         TabPanelIndex   =   2
+         Text            =   "Executable:"
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   323
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   False
+         Width           =   67
+      End
+      Begin TextFieldChanger fldLinuxExecutable
+         AcceptTabs      =   False
+         Alignment       =   0
+         AutoDeactivate  =   True
+         AutomaticallyCheckSpelling=   False
+         BackColor       =   &cFFFFFF00
+         Bold            =   False
+         Border          =   True
+         CueText         =   ""
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Format          =   ""
+         Height          =   22
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   414
+         LimitText       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         Mask            =   ""
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   2
+         TabIndex        =   19
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   ""
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   470
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   False
+         Width           =   470
+      End
+      Begin Label lblLinuxExecutable
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   305
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   20
+         TabPanelIndex   =   2
+         Text            =   "Executable:"
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   471
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   False
+         Width           =   67
       End
    End
    Begin TextFieldChanger fldAppName
@@ -2066,6 +2220,7 @@ End
 		  if data.HasName( Kaju.UpdateInformation.kWindowsBinaryName ) then
 		    cbWindowsBinary.Value = true
 		    dim binary as new Kaju.BinaryInformation( data.Value( Kaju.UpdateInformation.kWindowsBinaryName ) )
+		    fldWindowsExecutable.Text = binary.ExecutableName
 		    fldWindowsBinaryHash.Text = binary.Hash
 		    fldWindowsBinaryURL.Text = binary.URL
 		  end if
@@ -2073,6 +2228,7 @@ End
 		  if data.HasName( Kaju.UpdateInformation.kLinuxBinaryName ) then
 		    cbLinuxBinary.Value = true
 		    dim binary as new Kaju.BinaryInformation( data.Value( Kaju.UpdateInformation.kLinuxBinaryName ) )
+		    fldLinuxExecutable.Text = binary.ExecutableName
 		    fldLinuxBinaryHash.Text = binary.Hash
 		    fldLinuxBinaryURL.Text = binary.URL
 		  end if
@@ -2189,6 +2345,7 @@ End
 		  
 		  if cbWindowsBinary.Value then
 		    dim binary as new Kaju.BinaryInformation
+		    binary.ExecutableName = fldWindowsExecutable.Text.Trim
 		    binary.Hash = fldWindowsBinaryHash.Text.Trim
 		    binary.URL = fldWindowsBinaryURL.Text.Trim
 		    
@@ -2197,6 +2354,7 @@ End
 		  
 		  if cbLinuxBinary.Value then
 		    dim binary as new Kaju.BinaryInformation
+		    binary.ExecutableName = fldLinuxExecutable.Text.Trim
 		    binary.Hash = fldLinuxBinaryHash.Text.Trim
 		    binary.URL = fldLinuxBinaryURL.Text.Trim
 		    
@@ -2391,8 +2549,10 @@ End
 #tag Events cbWindowsBinary
 	#tag Event
 		Sub Action()
+		  fldWindowsExecutable.Visible = me.Value
 		  fldWindowsBinaryHash.Visible = me.Value
 		  fldWindowsBinaryURL.Visible = me.Value
+		  lblWindowsExecutable.Visible = me.Value
 		  lblWindowsBinaryHash.Visible = me.Value
 		  lblWindowsBinaryURL.Visible = me.Value
 		  
@@ -2403,8 +2563,10 @@ End
 #tag Events cbLinuxBinary
 	#tag Event
 		Sub Action()
+		  fldLinuxExecutable.Visible = me.Value
 		  fldLinuxBinaryHash.Visible = me.Value
 		  fldLinuxBinaryURL.Visible = me.Value
+		  lblLinuxExecutable.Visible = me.Value
 		  lblLinuxBinaryHash.Visible = me.Value
 		  lblLinuxBinaryURL.Visible = me.Value
 		  
@@ -2501,6 +2663,10 @@ End
 		  #pragma unused action
 		End Sub
 	#tag EndEvent
+#tag EndEvents
+#tag Events fldWindowsExecutable
+#tag EndEvents
+#tag Events fldLinuxExecutable
 #tag EndEvents
 #tag Events tmrUpdateReleaseNotesPreview
 	#tag Event
