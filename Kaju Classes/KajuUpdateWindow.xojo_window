@@ -866,7 +866,7 @@ End
 		Sub DecompressCompleted(zipFile As FolderItem, containingFolder As FolderItem)
 		  dim cnt as integer = containingFolder.Count
 		  
-		  if cnt = 0 then
+		  if cnt = 0 or SelectedUpdate is nil then
 		    
 		    ShowError()
 		    
