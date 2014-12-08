@@ -874,6 +874,7 @@ End
 		    
 		    dim initiator as new Kaju.UpdateInitiater
 		    initiator.ReplacementAppFolder = containingFolder.Item( 1 )
+		    initiator.ReplacementExecutableName = SelectedUpdate.PlatformBinary.ExecutableName
 		    
 		    Kaju.StartUpdate( initiator )
 		    
