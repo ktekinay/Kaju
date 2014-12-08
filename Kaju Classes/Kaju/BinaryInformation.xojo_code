@@ -25,6 +25,10 @@ Inherits Kaju.Information
 	#tag EndMethod
 
 
+	#tag Property, Flags = &h0
+		ExecutableName As String
+	#tag EndProperty
+
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
@@ -56,11 +60,13 @@ Inherits Kaju.Information
 			Name="FileName"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Hash"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -99,6 +105,7 @@ Inherits Kaju.Information
 			Name="URL"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
