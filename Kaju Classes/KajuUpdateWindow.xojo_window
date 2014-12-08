@@ -863,7 +863,7 @@ End
 		  else
 		    
 		    dim initiator as new Kaju.UpdateInitiater
-		    initiator.ReplacementApp = containingFolder.Item( 1 )
+		    initiator.ReplacementAppFolder = containingFolder.Item( 1 )
 		    
 		    Kaju.StartUpdate( initiator )
 		    
