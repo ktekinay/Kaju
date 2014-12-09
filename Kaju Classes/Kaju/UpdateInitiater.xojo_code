@@ -262,10 +262,11 @@ Protected Class UpdateInitiater
 		  #endif
 		  
 		  sh.Execute( cmd )
-		  for i as integer = 1 to 10000
+		  dim targetTicks as integer = Ticks + 60
+		  while Ticks < targetTicks
 		    sh.Poll
 		    App.YieldToNextThread
-		  next i
+		  wend
 		  
 		End Sub
 	#tag EndMethod
