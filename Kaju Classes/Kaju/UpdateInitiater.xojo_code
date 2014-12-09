@@ -114,7 +114,7 @@ Protected Class UpdateInitiater
 		  dim script as string = kUpdaterScript
 		  
 		  //
-		  // Get a FolderItem for the current executable 
+		  // Get a FolderItem for the current executable
 		  //
 		  dim executable as FolderItem = App.ExecutableFile
 		  
@@ -362,6 +362,12 @@ Protected Class UpdateInitiater
 			Visible=true
 			Group="ID"
 			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ReplacementExecutableName"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"

@@ -105,7 +105,7 @@ Begin Window KajuUpdateWindow
       Caption         =   "#kInstallButton"
       Default         =   True
       Enabled         =   True
-      Height          =   25
+      Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
@@ -212,7 +212,6 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   5
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Untitled"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -247,7 +246,6 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   6
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Untitled"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -282,7 +280,6 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   7
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "#kReleaseNotes"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -317,7 +314,6 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Downloading..."
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -345,9 +341,7 @@ Begin Window KajuUpdateWindow
       LockTop         =   True
       Maximum         =   0
       Scope           =   2
-      TabIndex        =   9
       TabPanelIndex   =   0
-      TabStop         =   True
       Top             =   555
       Value           =   0
       Visible         =   False
@@ -358,8 +352,7 @@ Begin Window KajuUpdateWindow
       CertificatePassword=   ""
       CertificateRejectionFile=   
       ConnectionType  =   2
-      Enabled         =   True
-      Height          =   "32"
+      Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
@@ -368,15 +361,13 @@ Begin Window KajuUpdateWindow
       Secure          =   False
       TabPanelIndex   =   0
       Top             =   0
-      Visible         =   True
-      Width           =   "32"
+      Width           =   32
    End
    Begin Kaju.ZipShell shZipper
       Arguments       =   ""
       Backend         =   ""
       Canonical       =   False
-      Enabled         =   True
-      Height          =   "32"
+      Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
@@ -386,8 +377,7 @@ Begin Window KajuUpdateWindow
       TabPanelIndex   =   0
       TimeOut         =   0
       Top             =   0
-      Visible         =   True
-      Width           =   "32"
+      Width           =   32
    End
    Begin HTMLViewer hvNewWindow
       AutoDeactivate  =   True
@@ -1004,6 +994,7 @@ End
 		Visible=true
 		Group="ID"
 		Type="String"
+		EditorType="String"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LiveResize"
@@ -1083,6 +1074,7 @@ End
 		Visible=true
 		Group="ID"
 		Type="String"
+		EditorType="String"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Placement"
@@ -1112,6 +1104,7 @@ End
 		Visible=true
 		Group="ID"
 		Type="String"
+		EditorType="String"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Title"
