@@ -45,29 +45,22 @@ Protected Class UpdateInitiater
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub GetManifest(sourceFolder As FolderItem, excludeName As String, ByRef returnFiles() As String, ByRef returnFolders() As String)
+		Private Function GetManifest(sourceFolder As FolderItem, excludeName As String) As String()
 		  // Retrieves the names of the files and folders contained in the sourceFolder
 		  
-		  dim files() as string
-		  dim folders() as string
+		  dim r() as string
 		  
 		  dim cnt as integer = sourceFolder.Count
 		  for i as integer = 1 to cnt
 		    dim f as FolderItem = sourceFolder.Item( i )
 		    dim name as string = f.Name
 		    if name <> excludeName then
-		      if f.Directory then
-		        folders.Append name
-		      else
-		        files.Append name
-		      end if
+		      r.Append name
 		    end if
 		  next
 		  
-		  returnFiles = files
-		  returnFolders = folders
-		  
-		End Sub
+		  return r
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
