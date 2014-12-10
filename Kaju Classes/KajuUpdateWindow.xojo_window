@@ -809,6 +809,7 @@ End
 		      
 		      dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
 		      DownloadFile = tempFolder.Child( SelectedUpdate.PlatformBinary.FileName )
+		      DeleteOnClose.Append DownloadFile
 		      
 		      dim url as string = SelectedUpdate.PlatformBinary.URL
 		      hsSocket.Secure = url.Left( 6 ) = "https:"
@@ -942,6 +943,11 @@ End
 #tag Events shZipper
 	#tag Event
 		Sub DecompressCompleted(zipFile As FolderItem, containingFolder As FolderItem)
+		  //
+		  // No matter what, we don't need the zip file anymore
+		  //
+		  zipFile.Delete
+		  
 		  if CurrentStage = Stage.Cancelled then
 		    //
 		    // Do nothing
@@ -976,7 +982,6 @@ End
 		    
 		  end if
 		  
-		  #pragma unused zipFile
 		End Sub
 	#tag EndEvent
 	#tag Event
