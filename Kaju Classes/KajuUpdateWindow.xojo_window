@@ -883,6 +883,13 @@ End
 #tag Events hsSocket
 	#tag Event
 		Sub ReceiveProgress(bytesReceived as integer, totalBytes as integer, newData as string)
+		  if CurrentStage = Stage.Cancelled then
+		    //
+		    // Do nothing
+		    //
+		    return
+		  end if
+		  
 		  pbProgress.Maximum = totalBytes
 		  pbProgress.Value = bytesReceived
 		  
@@ -892,6 +899,13 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub DownloadComplete(url as string, httpStatus as integer, headers as internetHeaders, file as folderItem)
+		  if CurrentStage = Stage.Cancelled then
+		    //
+		    // Do nothing
+		    //
+		    return
+		  end if
+		  
 		  pbProgress.Maximum = -1
 		  pbProgress.Value = 0
 		  
@@ -928,6 +942,13 @@ End
 #tag Events shZipper
 	#tag Event
 		Sub DecompressCompleted(zipFile As FolderItem, containingFolder As FolderItem)
+		  if CurrentStage = Stage.Cancelled then
+		    //
+		    // Do nothing
+		    //
+		    return
+		  end if
+		  
 		  dim cnt as integer = containingFolder.Count
 		  
 		  if cnt = 0 or SelectedUpdate is nil then
@@ -960,6 +981,13 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Error()
+		  if CurrentStage = Stage.Cancelled then
+		    //
+		    // Do nothing
+		    //
+		    return
+		  end if
+		  
 		  ShowError()
 		End Sub
 	#tag EndEvent
