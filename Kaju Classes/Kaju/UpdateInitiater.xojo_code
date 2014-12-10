@@ -120,38 +120,26 @@ Protected Class UpdateInitiater
 		  dim executable as FolderItem = App.ExecutableFile
 		  
 		  script = script.ReplaceAll( kMarkerAppName, ShellQuote( executable.Name ) )
-		  script = script.ReplaceAll( kMarkerAppParent, ShellQuote( executable.Parent.NativePath ) )
+		  script = script.ReplaceAll( kMarkerAppParent, ShellPathQuote( executable.Parent ) )
 		  script = script.ReplaceAll( kMarkerNewAppName, ShellQuote( ReplacementExecutableName ) )
-		  script = script.ReplaceAll( kMarkerNewAppParent, ShellQuote( ReplacementAppFolder.NativePath ) )
-		  script = script.ReplaceAll( kMarkerTempFolder, ShellQuote( TempFolder.NativePath ) )
+		  script = script.ReplaceAll( kMarkerNewAppParent, ShellPathQuote( ReplacementAppFolder ) )
+		  script = script.ReplaceAll( kMarkerTempFolder, ShellPathQuote( TempFolder ) )
 		  
 		  script = script.ReplaceAll( kMarkerPIDFilePath, ShellQuote( pid.NativePath ) )
 		  
 		  //
 		  // Get the names of the other files/folders in the replacement folder
 		  //
-		  dim otherFiles() as string
-		  dim otherFolders() as string
-		  GetManifest( ReplacementAppFolder, ReplacementExecutableName, otherFiles, otherFolders )
+		  dim otherFiles() as string = GetManifest( ReplacementAppFolder, ReplacementExecutableName )
 		  
 		  //
-		  // Fill in the other folders array
+		  // Fill in the other array
 		  //
 		  if true then // Scope
-		    script = script.Replace( kMarkerOtherFoldersUbound, str( otherFolders.Ubound ) )
+		    script = script.Replace( kMarkerOtherUbound, str( otherFiles.Ubound ) )
 		    
-		    dim segment as string = ArrayToShellScript( otherFolders, kOtherFolderArrayVariableName )
-		    script = script.Replace( kMarkerOtherFoldersArray, segment )
-		  end if
-		  
-		  //
-		  // Fill in the other files array
-		  //
-		  if true then // Scope
-		    script = script.Replace( kMarkerOtherFilesUbound, str( otherFiles.Ubound ) )
-		    
-		    dim segment as string = ArrayToShellScript( otherFiles, kOtherFileArrayVariableName )
-		    script = script.Replace( kMarkerOtherFilesArray, segment )
+		    dim segment as string = ArrayToShellScript( otherFiles, kOtherArrayVariableName )
+		    script = script.Replace( kMarkerOtherArray, segment )
 		  end if
 		  
 		  //
@@ -191,10 +179,11 @@ Protected Class UpdateInitiater
 		  cmd = "/usr/bin/nohup " + ShellQuote( scriptFile.NativePath ) + " &"
 		  
 		  sh.Execute( cmd )
-		  for i as integer = 1 to 10000
+		  dim targetTicks as integer = Ticks + 60
+		  while Ticks < targetTicks
 		    sh.Poll
 		    App.YieldToNextThread
-		  next i
+		  wend
 		  
 		End Sub
 	#tag EndMethod
