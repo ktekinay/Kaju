@@ -558,6 +558,20 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		#tag Note
+			Files/folders that shoudl be deleted if the user cancelled
+		#tag EndNote
+		Private DeleteOnCancel() As FolderItem
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		#tag Note
+			Files/Folders that should be deleted upon window close
+		#tag EndNote
+		Private DeleteOnClose() As FolderItem
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private DownloadFile As FolderItem
 	#tag EndProperty
 
