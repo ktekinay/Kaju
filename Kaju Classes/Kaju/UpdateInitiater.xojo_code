@@ -70,11 +70,19 @@ Protected Class UpdateInitiater
 		    return
 		  end if
 		  
-		  
 		  //
 		  // Set up a temporary folder
 		  //
-		  dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
+		  dim tempFolder as FolderItem
+		  #if DebugBuild then
+		    tempFolder = SpecialFolder.Desktop.Child( "KajuTempFolder" + str( Ticks ) )
+		    if tempFolder.Exists then
+		      tempFolder.Delete
+		    end if
+		    tempFolder.CreateAsFolder
+		  #else
+		    tempFolder = Kaju.GetTemporaryFolder
+		  #endif
 		  
 		  //
 		  // Set up the PID file
