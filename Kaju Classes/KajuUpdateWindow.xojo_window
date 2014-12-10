@@ -303,7 +303,7 @@ Begin Window KajuUpdateWindow
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   284
+      Left            =   149
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -324,7 +324,7 @@ Begin Window KajuUpdateWindow
       Transparent     =   False
       Underline       =   False
       Visible         =   False
-      Width           =   334
+      Width           =   294
    End
    Begin ProgressBar pbProgress
       AutoDeactivate  =   True
@@ -333,7 +333,7 @@ Begin Window KajuUpdateWindow
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
-      Left            =   140
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -345,7 +345,7 @@ Begin Window KajuUpdateWindow
       Top             =   555
       Value           =   0
       Visible         =   False
-      Width           =   123
+      Width           =   117
    End
    Begin HTTPSecureSocket hsSocket
       CertificateFile =   
