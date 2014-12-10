@@ -592,9 +592,13 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub ShowError()
+		  lblInstallMessage.Visible = true
 		  lblInstallMessage.Text = kGenericErrorMessage
-		  btnOK.Caption = kTryLaterButton
 		  pbProgress.Visible = false
+		  
+		  btnOK.Enabled = false
+		  btnCancel.Caption = kTryLaterButton
+		  btnSkipVersion.Visible = false
 		  
 		  CurrentStage = Stage.UpdateError
 		End Sub
@@ -783,8 +787,10 @@ End
 		    //
 		    SelectedUpdate = lbUpdates.RowTag( lbUpdates.ListIndex )
 		    
-		    btnOK.Caption = kStopButton
-		    btnCancel.Visible = false
+		    btnOK.Enabled = false
+		    
+		    btnCancel.Caption = kStopButton
+		    
 		    btnSkipVersion.Visible = false
 		    pbProgress.Visible = true
 		    lblInstallMessage.Visible = true
@@ -811,13 +817,6 @@ End
 		      
 		    end if
 		    
-		  case Stage.InstallingUpdate
-		    //
-		    // The user chose "Stop"
-		    //
-		    SelectedUpdate = nil
-		    self.Close
-		    
 		  case Stage.WaitingToQuit
 		    //
 		    // The user chose Install so move this window to the back
@@ -836,13 +835,6 @@ End
 		    end if
 		    
 		    Quit
-		    
-		  case Stage.UpdateError
-		    //
-		    // There was an error so just close
-		    //
-		    SelectedUpdate = nil
-		    self.Close
 		    
 		  end
 		  
