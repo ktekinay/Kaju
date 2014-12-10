@@ -3,16 +3,24 @@ Protected Class ZipShell
 Inherits Shell
 	#tag Event
 		Sub Completed()
-		  ResultFolderItem = new FolderItem( ResultFolderItem.NativePath, FolderItem.PathTypeNative )
-		  
-		  select case CurrentOperation
-		  case Operation.Compressing
-		    RaiseEvent CompressCompleted( ResultFolderItem)
+		  if ErrorCode <> 0 then
 		    
-		  case Operation.Decompressing
-		    RaiseEvent DecompressCompleted( ZipFile, ResultFolderItem )
+		    RaiseEvent Error()
 		    
-		  end
+		  else
+		    
+		    ResultFolderItem = new FolderItem( ResultFolderItem.NativePath, FolderItem.PathTypeNative )
+		    
+		    select case CurrentOperation
+		    case Operation.Compressing
+		      RaiseEvent CompressCompleted( ResultFolderItem)
+		      
+		    case Operation.Decompressing
+		      RaiseEvent DecompressCompleted( ZipFile, ResultFolderItem )
+		      
+		    end
+		    
+		  end if
 		  
 		  ResultFolderItem = nil
 		  ZipFile = nil
@@ -123,6 +131,10 @@ Inherits Shell
 
 	#tag Hook, Flags = &h0
 		Event DecompressCompleted(zipFile As FolderItem, containingFolder As FolderItem)
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
+		Event Error()
 	#tag EndHook
 
 
