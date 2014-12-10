@@ -808,6 +808,8 @@ End
 		      lblInstallMessage.Text = kDownloadingMessage
 		      
 		      dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
+		      DeleteOnCancel.Append tempFolder
+		      
 		      DownloadFile = tempFolder.Child( SelectedUpdate.PlatformBinary.FileName )
 		      DeleteOnClose.Append DownloadFile
 		      
