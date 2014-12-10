@@ -884,6 +884,11 @@ End
 		  #pragma unused zipFile
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Error()
+		  ShowError()
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events hvNewWindow
 	#tag Event
