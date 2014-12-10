@@ -16,8 +16,12 @@ Inherits Kaju.Information
 	#tag Method, Flags = &h0
 		Function ToJSON() As JSONItem
 		  dim j as new JSONItem
+		  
 		  j.Value( "Hash" ) = Hash
 		  j.Value( "URL" ) = URL
+		  if ExecutableName <> "" then
+		    j.Value( "ExecutableName" ) = ExecutableName
+		  end if
 		  
 		  return j
 		  
@@ -56,6 +60,11 @@ Inherits Kaju.Information
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="ExecutableName"
+			Group="Behavior"
+			Type="String"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="FileName"
 			Group="Behavior"
