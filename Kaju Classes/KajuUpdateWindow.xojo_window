@@ -732,7 +732,8 @@ End
 		ChoosingUpdate
 		  InstallingUpdate
 		  WaitingToQuit
-		UpdateError
+		  UpdateError
+		Cancelled
 	#tag EndEnum
 
 
