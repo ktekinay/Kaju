@@ -92,19 +92,27 @@ Inherits Shell
 		  ResultFolderItem = toFolder
 		  ZipFile = file
 		  
+		  dim cmd as string
 		  #if TargetMacOS then
-		    dim cmd as string = kDittoCmd + "-x -k "
 		    
+		    cmd = kDittoCmd + "-x -k "
 		    cmd = cmd + file.ShellPath + " " + toFolder.ShellPath
-		    Execute cmd
 		    
-		    if Mode <> 0 then
-		      mCurrentOperation = Operation.Decompressing
-		    end if
+		  #elseif TargetLinux then
+		    
+		    cmd = kUnzipCmd + file.ShellPath + " -d " + toFolder.ShellPath
+		    
+		  #else // Windows
 		    
 		  #endif
 		  
+		  Execute cmd
 		  
+		  if Mode <> 0 then
+		    mCurrentOperation = Operation.Decompressing
+		  end if
+		  
+		  #pragma warning "Finish Windows code"
 		End Sub
 	#tag EndMethod
 
@@ -136,6 +144,9 @@ Inherits Shell
 
 	#tag Constant, Name = kPathSep, Type = String, Dynamic = False, Default = \"/", Scope = Private
 		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"\\"
+	#tag EndConstant
+
+	#tag Constant, Name = kUnzipCmd, Type = String, Dynamic = False, Default = \"/usr/bin/unzip ", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kZipInfoCmd, Type = String, Dynamic = False, Default = \"/usr/bin/zipinfo ", Scope = Private
