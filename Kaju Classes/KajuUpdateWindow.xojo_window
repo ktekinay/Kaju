@@ -404,6 +404,20 @@ End
 #tag EndWindow
 
 #tag WindowCode
+	#tag Event
+		Sub Close()
+		  if CurrentStage = Stage.Cancelled then
+		    for each f as FolderItem in DeleteOnCancel
+		      DeleteRecursive( f )
+		    next
+		  end if
+		  
+		  for each f as FolderItem in DeleteOnClose
+		    DeleteRecursive( f )
+		  next
+		End Sub
+	#tag EndEvent
+
 	#tag Method, Flags = &h0
 		Sub ChooseUpdate(checker As Kaju.UpdateChecker, updates() As Kaju.UpdateInformation)
 		  self.Checker = checker
