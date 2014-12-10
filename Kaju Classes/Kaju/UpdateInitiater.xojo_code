@@ -204,10 +204,10 @@ Protected Class UpdateInitiater
 		  appFolderItem = appFolderItem.Parent
 		  
 		  script = script.ReplaceAll( kMarkerAppName, ShellQuote( appFolderItem.Name ) )
-		  script = script.ReplaceAll( kMarkerAppParent, ShellQuote( appFolderItem.Parent.NativePath ) )
+		  script = script.ReplaceAll( kMarkerAppParent, ShellPathQuote( appFolderItem.Parent ) )
 		  script = script.ReplaceAll( kMarkerNewAppName, ShellQuote( ReplacementAppFolder.Name ) )
-		  script = script.ReplaceAll( kMarkerNewAppParent, ShellQuote( ReplacementAppFolder.Parent.NativePath ) )
-		  script = script.ReplaceAll( kMarkerTempFolder, ShellQuote( TempFolder.NativePath ) )
+		  script = script.ReplaceAll( kMarkerNewAppParent, ShellPathQuote( ReplacementAppFolder.Parent ) )
+		  script = script.ReplaceAll( kMarkerTempFolder, ShellPathQuote( TempFolder ) )
 		  
 		  script = script.ReplaceAll( kMarkerPIDFilePath, ShellQuote( pid.NativePath ) )
 		  
