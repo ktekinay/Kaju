@@ -187,9 +187,7 @@ Protected Class UpdateInitiater
 		  sh.Mode = 1 // Asynchronous
 		  
 		  dim cmd as string
-		  #if TargetMacOS or TargetLinux then
-		    cmd = "nohup " + ShellQuote( scriptFile.NativePath ) + " &"
-		  #endif
+		  cmd = "/usr/bin/nohup " + ShellQuote( scriptFile.NativePath ) + " &"
 		  
 		  sh.Execute( cmd )
 		  for i as integer = 1 to 10000
@@ -257,9 +255,7 @@ Protected Class UpdateInitiater
 		  sh.Mode = 1 // Asynchronous
 		  
 		  dim cmd as string
-		  #if TargetMacOS or TargetLinux then
-		    cmd = "nohup " + ShellQuote( scriptFile.NativePath ) + " &"
-		  #endif
+		  cmd = "nohup " + ShellQuote( scriptFile.NativePath ) + " &"
 		  
 		  sh.Execute( cmd )
 		  dim targetTicks as integer = Ticks + 60
