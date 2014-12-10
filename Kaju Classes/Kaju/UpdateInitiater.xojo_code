@@ -280,6 +280,21 @@ Protected Class UpdateInitiater
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Function ShellPathQuote(f As FolderItem) As String
+		  dim s as string = f.NativePath
+		  
+		  while s.Right( 1 ) = "/"
+		    s = s.Left( s.Len - 1 )
+		  wend
+		  
+		  s = ShellQuote( s )
+		  
+		  return s
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Function ShellQuote(s As String) As String
 		  s = s.ReplaceAll( "'", "'\''" )
 		  s = "'" + s + "'"
