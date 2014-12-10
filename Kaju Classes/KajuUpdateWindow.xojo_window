@@ -505,11 +505,11 @@ End
 		    btnCancel.Left = btnOK.Left
 		    btnOK.Left = farLeft
 		    
-		    btnCancel.Height = btnCancel.Height + 5
-		    btnOK.Height = btnOK.Height + 5
-		    btnSkipVersion.Height = btnSkipVersion.Height + 5
-		    
-		    self.Height = self.Height + 5
+		    'btnCancel.Height = btnCancel.Height + 5
+		    'btnOK.Height = btnOK.Height + 5
+		    'btnSkipVersion.Height = btnSkipVersion.Height + 5
+		    '
+		    'self.Height = self.Height + 5
 		    
 		  #endif
 		  
