@@ -418,6 +418,27 @@ End
 		End Sub
 	#tag EndEvent
 
+
+	#tag Method, Flags = &h0
+		Sub Cancel()
+		  CurrentStage = Stage.Cancelled
+		  
+		  SelectedUpdate = nil
+		  Kaju.CancelUpdate
+		  
+		  if hsSocket.IsConnected then
+		    hsSocket.Disconnect
+		  end if
+		  
+		  if shZipper.IsRunning then
+		    shZipper.Close
+		  end if
+		  
+		  self.Close
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub ChooseUpdate(checker As Kaju.UpdateChecker, updates() As Kaju.UpdateInformation)
 		  self.Checker = checker
@@ -831,10 +852,7 @@ End
 #tag Events btnCancel
 	#tag Event
 		Sub Action()
-		  SelectedUpdate = nil
-		  Kaju.CancelUpdate
-		  self.Close
-		  
+		  self.Cancel
 		End Sub
 	#tag EndEvent
 #tag EndEvents
