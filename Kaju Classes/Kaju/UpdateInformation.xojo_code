@@ -185,6 +185,7 @@ Inherits Kaju.Information
 			Name="AppName"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Image"
@@ -195,6 +196,7 @@ Inherits Kaju.Information
 			Name="ImageURL"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -214,6 +216,7 @@ Inherits Kaju.Information
 			Name="MinimumRequiredVersion"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
@@ -225,6 +228,7 @@ Inherits Kaju.Information
 			Name="ReleaseNotes"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="RequiresPayment"
@@ -259,6 +263,7 @@ Inherits Kaju.Information
 			Name="Version"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="VersionAsDouble"

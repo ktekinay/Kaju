@@ -75,6 +75,12 @@ Protected Class UpdateChecker
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function IsReqiredUpdate() As Boolean
+		  return mIsRequiredUpdate
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h21
 		Private Function JSONToStringArray(data As JSONItem) As String()
 		  dim ub as integer = data.Count - 1
@@ -173,6 +179,14 @@ Protected Class UpdateChecker
 		    //
 		    // This is a viable update
 		    //
+		    
+		    //
+		    // See if these update are required
+		    //
+		    if thisInfo.MinimumRequiredVersion <> "" and Kaju.VersionToDouble( thisInfo.MinimumRequiredVersion ) > versionDouble then
+		      mIsRequiredUpdate = true
+		    end if
+		    
 		    info.Append thisInfo
 		  next
 		  
@@ -185,8 +199,6 @@ Protected Class UpdateChecker
 		    dim w as new KajuUpdateWindow
 		    w.ChooseUpdate( self, info )
 		  end if
-		  
-		  
 		  
 		  Exception err as RuntimeException
 		    raise new KajuException( KajuException.kErrorBadUpdateData )
@@ -282,6 +294,10 @@ Protected Class UpdateChecker
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Private mIsRequiredUpdate As Boolean
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private PrefFile As FolderItem
 	#tag EndProperty
 
@@ -353,6 +369,7 @@ Protected Class UpdateChecker
 			Name="ServerPublicRSAKey"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="StageAllowed"
@@ -377,6 +394,7 @@ Protected Class UpdateChecker
 			Name="UpdateURL"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

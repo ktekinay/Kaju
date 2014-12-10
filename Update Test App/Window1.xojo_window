@@ -68,7 +68,7 @@ Begin Window Window1
       Caption         =   "Check"
       Default         =   True
       Enabled         =   True
-      Height          =   20
+      Height          =   45
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
@@ -89,7 +89,7 @@ Begin Window Window1
       Top             =   314
       Underline       =   False
       Visible         =   True
-      Width           =   80
+      Width           =   129
    End
 End
 #tag EndWindow

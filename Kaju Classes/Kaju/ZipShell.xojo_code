@@ -3,16 +3,24 @@ Protected Class ZipShell
 Inherits Shell
 	#tag Event
 		Sub Completed()
-		  ResultFolderItem = new FolderItem( ResultFolderItem.NativePath, FolderItem.PathTypeNative )
-		  
-		  select case CurrentOperation
-		  case Operation.Compressing
-		    RaiseEvent CompressCompleted( ResultFolderItem)
+		  if ErrorCode <> 0 then
 		    
-		  case Operation.Decompressing
-		    RaiseEvent DecompressCompleted( ZipFile, ResultFolderItem )
+		    RaiseEvent Error()
 		    
-		  end
+		  else
+		    
+		    ResultFolderItem = new FolderItem( ResultFolderItem.NativePath, FolderItem.PathTypeNative )
+		    
+		    select case CurrentOperation
+		    case Operation.Compressing
+		      RaiseEvent CompressCompleted( ResultFolderItem)
+		      
+		    case Operation.Decompressing
+		      RaiseEvent DecompressCompleted( ZipFile, ResultFolderItem )
+		      
+		    end
+		    
+		  end if
 		  
 		  ResultFolderItem = nil
 		  ZipFile = nil
@@ -92,19 +100,27 @@ Inherits Shell
 		  ResultFolderItem = toFolder
 		  ZipFile = file
 		  
+		  dim cmd as string
 		  #if TargetMacOS then
-		    dim cmd as string = kDittoCmd + "-x -k "
 		    
+		    cmd = kDittoCmd + "-x -k "
 		    cmd = cmd + file.ShellPath + " " + toFolder.ShellPath
-		    Execute cmd
 		    
-		    if Mode <> 0 then
-		      mCurrentOperation = Operation.Decompressing
-		    end if
+		  #elseif TargetLinux then
+		    
+		    cmd = kUnzipCmd + file.ShellPath + " -d " + toFolder.ShellPath
+		    
+		  #else // Windows
 		    
 		  #endif
 		  
+		  Execute cmd
 		  
+		  if Mode <> 0 then
+		    mCurrentOperation = Operation.Decompressing
+		  end if
+		  
+		  #pragma warning "Finish Windows code"
 		End Sub
 	#tag EndMethod
 
@@ -115,6 +131,10 @@ Inherits Shell
 
 	#tag Hook, Flags = &h0
 		Event DecompressCompleted(zipFile As FolderItem, containingFolder As FolderItem)
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
+		Event Error()
 	#tag EndHook
 
 
@@ -136,6 +156,9 @@ Inherits Shell
 
 	#tag Constant, Name = kPathSep, Type = String, Dynamic = False, Default = \"/", Scope = Private
 		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"\\"
+	#tag EndConstant
+
+	#tag Constant, Name = kUnzipCmd, Type = String, Dynamic = False, Default = \"/usr/bin/unzip ", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kZipInfoCmd, Type = String, Dynamic = False, Default = \"/usr/bin/zipinfo ", Scope = Private

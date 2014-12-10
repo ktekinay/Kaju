@@ -105,7 +105,7 @@ Begin Window KajuUpdateWindow
       Caption         =   "#kInstallButton"
       Default         =   True
       Enabled         =   True
-      Height          =   25
+      Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
@@ -778,18 +778,31 @@ End
 #tag Events btnSkipVersion
 	#tag Event
 		Sub Action()
+		  //
+		  // We can only ignore versions if we already have the minimum requried
+		  //
+		  
 		  dim info as Kaju.UpdateInformation = lbUpdates.RowTag( lbUpdates.ListIndex )
-		  Checker.IgnoreVersion( info.Version )
 		  
-		  if lbUpdates.ListCount = 1 then
-		    SelectedUpdate = nil
-		    self.Close
+		  if info.MinimumRequiredVersion <> "" and _
+		    Kaju.VersionToDouble( Kaju.AppVersionString ) < Kaju.VersionToDouble( info.MinimumRequiredVersion )  then
+		    
+		    MsgBox "You cannot skip versions until you have updated to version " + info.MinimumRequiredVersion + " or beyond."
+		    
 		  else
-		    lbUpdates.RemoveRow( lbUpdates.ListIndex )
-		    lbUpdates.ListIndex = 0
+		    
+		    Checker.IgnoreVersion( info.Version )
+		    
+		    if lbUpdates.ListCount = 1 then
+		      SelectedUpdate = nil
+		      Kaju.CancelUpdate
+		      self.Close
+		    else
+		      lbUpdates.RemoveRow( lbUpdates.ListIndex )
+		      lbUpdates.ListIndex = 0
+		    end if
+		    
 		  end if
-		  
-		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -843,14 +856,15 @@ End
 		Sub DecompressCompleted(zipFile As FolderItem, containingFolder As FolderItem)
 		  dim cnt as integer = containingFolder.Count
 		  
-		  if cnt = 0 then
+		  if cnt = 0 or SelectedUpdate is nil then
 		    
 		    ShowError()
 		    
 		  else
 		    
 		    dim initiator as new Kaju.UpdateInitiater
-		    initiator.ReplacementApp = containingFolder.Item( 1 )
+		    initiator.ReplacementAppFolder = containingFolder.Item( 1 )
+		    initiator.ReplacementExecutableName = SelectedUpdate.PlatformBinary.ExecutableName
 		    
 		    Kaju.StartUpdate( initiator )
 		    
@@ -868,6 +882,11 @@ End
 		  end if
 		  
 		  #pragma unused zipFile
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Error()
+		  ShowError()
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -980,6 +999,7 @@ End
 		Visible=true
 		Group="ID"
 		Type="String"
+		EditorType="String"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LiveResize"
@@ -1059,6 +1079,7 @@ End
 		Visible=true
 		Group="ID"
 		Type="String"
+		EditorType="String"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Placement"
@@ -1088,6 +1109,7 @@ End
 		Visible=true
 		Group="ID"
 		Type="String"
+		EditorType="String"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Title"

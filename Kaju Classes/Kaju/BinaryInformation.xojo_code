@@ -16,14 +16,22 @@ Inherits Kaju.Information
 	#tag Method, Flags = &h0
 		Function ToJSON() As JSONItem
 		  dim j as new JSONItem
+		  
 		  j.Value( "Hash" ) = Hash
 		  j.Value( "URL" ) = URL
+		  if ExecutableName <> "" then
+		    j.Value( "ExecutableName" ) = ExecutableName
+		  end if
 		  
 		  return j
 		  
 		End Function
 	#tag EndMethod
 
+
+	#tag Property, Flags = &h0
+		ExecutableName As String
+	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
@@ -53,14 +61,21 @@ Inherits Kaju.Information
 
 	#tag ViewBehavior
 		#tag ViewProperty
+			Name="ExecutableName"
+			Group="Behavior"
+			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="FileName"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Hash"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -99,6 +114,7 @@ Inherits Kaju.Information
 			Name="URL"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
