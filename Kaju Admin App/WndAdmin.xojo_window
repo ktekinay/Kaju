@@ -700,49 +700,6 @@ Begin Window WndAdmin
          Visible         =   True
          Width           =   100
       End
-      Begin TextFieldChanger fldLinuxBinaryHash
-         AcceptTabs      =   False
-         Alignment       =   0
-         AutoDeactivate  =   True
-         AutomaticallyCheckSpelling=   False
-         BackColor       =   &cFFFFFF00
-         Bold            =   False
-         Border          =   True
-         CueText         =   "Drop the Linux Zip file here to calculate the hash"
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Format          =   ""
-         Height          =   22
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   414
-         LimitText       =   0
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         Mask            =   ""
-         Password        =   False
-         ReadOnly        =   True
-         Scope           =   2
-         TabIndex        =   11
-         TabPanelIndex   =   2
-         TabStop         =   True
-         Text            =   ""
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   503
-         Underline       =   False
-         UseFocusRing    =   True
-         Visible         =   False
-         Width           =   470
-      End
       Begin Label lblLinuxBinaryHash
          AutoDeactivate  =   True
          Bold            =   False
@@ -1521,6 +1478,49 @@ Begin Window WndAdmin
          Underline       =   False
          Visible         =   False
          Width           =   67
+      End
+      Begin TextFieldChanger fldLinuxBinaryHash
+         AcceptTabs      =   False
+         Alignment       =   0
+         AutoDeactivate  =   True
+         AutomaticallyCheckSpelling=   False
+         BackColor       =   &cFFFFFF00
+         Bold            =   False
+         Border          =   True
+         CueText         =   "Drop the Linux Zip file here to calculate the hash"
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Format          =   ""
+         Height          =   22
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   414
+         LimitText       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         Mask            =   ""
+         Password        =   False
+         ReadOnly        =   True
+         Scope           =   2
+         TabIndex        =   11
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   ""
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   503
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   False
+         Width           =   470
       End
    End
    Begin TextFieldChanger fldAppName
@@ -2574,23 +2574,6 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events fldLinuxBinaryHash
-	#tag Event
-		Sub Open()
-		  me.AcceptFileDrop( FileTypes1.ApplicationZip )
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub DropObject(obj As DragItem, action As Integer)
-		  if obj.FolderItemAvailable then
-		    dim f as FolderItem = obj.FolderItem
-		    me.Text = Kaju.HashOfFile( f )
-		  end if
-		  
-		  #pragma unused action
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events fldImageURL
 	#tag Event
 		Sub TextChange()
@@ -2648,6 +2631,23 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag Events fldWindowsBinaryHash
+	#tag Event
+		Sub Open()
+		  me.AcceptFileDrop( FileTypes1.ApplicationZip )
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub DropObject(obj As DragItem, action As Integer)
+		  if obj.FolderItemAvailable then
+		    dim f as FolderItem = obj.FolderItem
+		    me.Text = Kaju.HashOfFile( f )
+		  end if
+		  
+		  #pragma unused action
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events fldLinuxBinaryHash
 	#tag Event
 		Sub Open()
 		  me.AcceptFileDrop( FileTypes1.ApplicationZip )
