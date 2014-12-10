@@ -919,6 +919,7 @@ End
 		  elseif Kaju.HashOfFile( file ) <> SelectedUpdate.PlatformBinary.Hash then
 		    
 		    lblInstallMessage.Text = kBadDownloadMessage
+		    btnOK.Enabled = false
 		    btnCancel.Caption = kTryLaterButton
 		    pbProgress.Visible = false
 		    
@@ -971,6 +972,7 @@ End
 		    
 		    Kaju.StartUpdate( initiator )
 		    
+		    btnOK.Enabled = true
 		    btnOK.Caption = kQuitButton
 		    btnCancel.Visible = true
 		    btnCancel.Caption = kCancelButton
