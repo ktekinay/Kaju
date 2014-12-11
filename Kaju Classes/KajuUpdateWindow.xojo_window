@@ -832,7 +832,7 @@ End
 		    
 		  case Stage.WaitingToQuit
 		    //
-		    // The user chose Quit & Install 
+		    // The user chose Quit & Install
 		    //
 		    
 		    Kaju.StartUpdate( self.Initiater )
@@ -982,21 +982,43 @@ End
 		    
 		  else
 		    
-		    Initiater = new Kaju.UpdateInitiater
-		    Initiater.ReplacementAppFolder = containingFolder.Item( 1 )
-		    Initiater.ReplacementExecutableName = SelectedUpdate.PlatformBinary.ExecutableName
+		    //
+		    // Find the executable
+		    //
+		    dim item as FolderItem
+		    for i as integer = 1 to containingFolder.Count
+		      dim f as FolderItem = containingFolder.Item( i )
+		      dim name as string = f.Name
+		      dim leftChars as string = name.Left( 1 )
+		      if leftChars <> "." and leftChars <> "_" then
+		        item = f
+		        exit
+		      end if
+		    next
 		    
-		    btnOK.Enabled = true
-		    btnOK.Caption = kQuitButton
-		    btnCancel.Visible = true
-		    btnCancel.Caption = kCancelButton
-		    
-		    pbProgress.Visible = false
-		    
-		    lblInstallMessage.Visible = true
-		    lblInstallMessage.Text = kReadyMessage
-		    
-		    CurrentStage = Stage.WaitingToQuit
+		    if item is nil then
+		      
+		      ShowError()
+		      
+		    else
+		      
+		      Initiater = new Kaju.UpdateInitiater
+		      Initiater.ReplacementAppFolder = item
+		      Initiater.ReplacementExecutableName = SelectedUpdate.PlatformBinary.ExecutableName
+		      
+		      btnOK.Enabled = true
+		      btnOK.Caption = kQuitButton
+		      btnCancel.Visible = true
+		      btnCancel.Caption = kCancelButton
+		      
+		      pbProgress.Visible = false
+		      
+		      lblInstallMessage.Visible = true
+		      lblInstallMessage.Text = kReadyMessage
+		      
+		      CurrentStage = Stage.WaitingToQuit
+		      
+		    end if
 		    
 		  end if
 		  
