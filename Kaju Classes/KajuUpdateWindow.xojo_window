@@ -424,6 +424,10 @@ End
 		  CurrentStage = Stage.Cancelled
 		  
 		  SelectedUpdate = nil
+		  if Initiater <> nil then
+		    Initiater.Cancel
+		    Initiater = nil
+		  end if
 		  Kaju.CancelUpdate
 		  
 		  if hsSocket.IsConnected then
