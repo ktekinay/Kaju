@@ -223,6 +223,8 @@ Inherits Shell
 	#tag EndConstant
 
 	#tag Constant, Name = kUnzipCmd, Type = String, Dynamic = False, Default = \"/usr/bin/unzip ", Scope = Private
+		#Tag Instance, Platform = Linux, Language = Default, Definition  = \"/usr/bin/unzip "
+		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"7z.exe "
 	#tag EndConstant
 
 	#tag Constant, Name = kZipInfoCmd, Type = String, Dynamic = False, Default = \"/usr/bin/zipinfo ", Scope = Private
