@@ -173,7 +173,12 @@ Inherits Shell
 			      // Find the Libs folder
 			      //
 			      dim parent as FolderItem = App.ExecutableFile.Parent
-			      f = parent.Child( App.ExecutableFile.Name + " Libs" )
+			      dim executableName as string = App.ExecutableFile.Name
+			      if executableName.Right( 4 ) = ".exe" then
+			        executableName = executableName.Left( executableName.Len - 4 )
+			      end if
+			      
+			      f = parent.Child( executableName + " Libs" )
 			      if f is nil or not f.Directory then
 			        //
 			        // Still haven't found it
