@@ -486,19 +486,6 @@ End
 		    // Only one update so hide the listbox
 		    //
 		    lbUpdates.Visible = false
-		    
-		    //
-		    // Move everything
-		    //
-		    
-		    'dim diff as integer = hvNotes.Left - lbUpdates.Left // How far we're moving it
-		    '
-		    'hvNotes.Left = lbUpdates.Left
-		    'btnOK.Left = btnOK.Left - diff
-		    'btnCancel.Left = btnCancel.Left - diff
-		    '
-		    'self.Width = self.Width - diff
-		    
 		  end if
 		  
 		  #if not TargetMacOS then
