@@ -12,6 +12,9 @@ Inherits RuntimeException
 	#tag Constant, Name = kErrorBadUpdateData, Type = String, Dynamic = False, Default = \"The update data cannot be read.", Scope = Public
 	#tag EndConstant
 
+	#tag Constant, Name = kErrorCantFindLibsFolder, Type = String, Dynamic = False, Default = \"Can\xE2\x80\x99t locate this applications Libs folder.", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = kErrorIncorrectPacketMarker, Type = String, Dynamic = False, Default = \"The update packet signature marker was incorrect.", Scope = Public
 	#tag EndConstant
 
@@ -57,6 +60,11 @@ Inherits RuntimeException
 			Visible=true
 			Group="ID"
 			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Reason"
+			Group="Behavior"
+			Type="Text"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
