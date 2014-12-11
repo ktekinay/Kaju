@@ -215,16 +215,16 @@ Inherits Shell
 	#tag EndProperty
 
 
-	#tag Constant, Name = kDittoCmd, Type = String, Dynamic = False, Default = \"/usr/bin/ditto ", Scope = Private
+	#tag Constant, Name = kDittoCmd, Type = String, Dynamic = False, Default = \"", Scope = Private
+		#Tag Instance, Platform = Mac OS, Language = Default, Definition  = \"/usr/bin/ditto "
 	#tag EndConstant
 
 	#tag Constant, Name = kPathSep, Type = String, Dynamic = False, Default = \"/", Scope = Private
 		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"\\"
 	#tag EndConstant
 
-	#tag Constant, Name = kUnzipCmd, Type = String, Dynamic = False, Default = \"/usr/bin/unzip ", Scope = Private
+	#tag Constant, Name = kUnzipCmd, Type = String, Dynamic = False, Default = \"", Scope = Private
 		#Tag Instance, Platform = Linux, Language = Default, Definition  = \"/usr/bin/unzip "
-		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"7z.exe "
 	#tag EndConstant
 
 	#tag Constant, Name = kZipInfoCmd, Type = String, Dynamic = False, Default = \"/usr/bin/zipinfo ", Scope = Private
