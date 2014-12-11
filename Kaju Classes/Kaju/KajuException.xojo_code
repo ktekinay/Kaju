@@ -15,6 +15,9 @@ Inherits RuntimeException
 	#tag Constant, Name = kErrorCantFindLibsFolder, Type = String, Dynamic = False, Default = \"Can\xE2\x80\x99t locate this applications Libs folder.", Scope = Public
 	#tag EndConstant
 
+	#tag Constant, Name = kErrorCantLocateWindowsZipUtility, Type = String, Dynamic = False, Default = \"Can\xE2\x80\x99t locate the required 7z.exe app.", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = kErrorIncorrectPacketMarker, Type = String, Dynamic = False, Default = \"The update packet signature marker was incorrect.", Scope = Public
 	#tag EndConstant
 
