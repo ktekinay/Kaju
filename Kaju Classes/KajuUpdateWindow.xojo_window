@@ -650,6 +650,10 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Private Initiater As Kaju.UpdateInitiater
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private Loading As Boolean
 	#tag EndProperty
 
@@ -822,7 +826,13 @@ End
 		    
 		  case Stage.WaitingToQuit
 		    //
-		    // The user chose Install so move this window to the back
+		    // The user chose Quit & Install 
+		    //
+		    
+		    Kaju.StartUpdate( self.Initiater )
+		    
+		    //
+		    // Move this window to the back
 		    //
 		    dim lastWindowIndex as integer = WindowCount - 1
 		    if not( Window( lastWindowIndex ) Is self ) then
@@ -966,11 +976,9 @@ End
 		    
 		  else
 		    
-		    dim initiator as new Kaju.UpdateInitiater
-		    initiator.ReplacementAppFolder = containingFolder.Item( 1 )
-		    initiator.ReplacementExecutableName = SelectedUpdate.PlatformBinary.ExecutableName
-		    
-		    Kaju.StartUpdate( initiator )
+		    Initiater = new Kaju.UpdateInitiater
+		    Initiater.ReplacementAppFolder = containingFolder.Item( 1 )
+		    Initiater.ReplacementExecutableName = SelectedUpdate.PlatformBinary.ExecutableName
 		    
 		    btnOK.Enabled = true
 		    btnOK.Caption = kQuitButton
