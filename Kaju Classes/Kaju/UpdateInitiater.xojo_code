@@ -267,11 +267,19 @@ Protected Class UpdateInitiater
 
 	#tag Method, Flags = &h21
 		Private Function ShellPathQuote(f As FolderItem) As String
+		  #if TargetWin32 then
+		    const kSlash = "\"
+		  #else
+		    const kSlash = "/"
+		  #endif
+		  
 		  dim s as string = f.NativePath
 		  
-		  while s.Right( 1 ) = "/"
-		    s = s.Left( s.Len - 1 )
+		  dim properLen as integer = s.Len
+		  while s.Mid( properLen, 1 ) = kSlash
+		    properLen = properLen - 1
 		  wend
+		  s = s.Left( properLen )
 		  
 		  s = ShellQuote( s )
 		  
@@ -282,8 +290,20 @@ Protected Class UpdateInitiater
 
 	#tag Method, Flags = &h21
 		Private Function ShellQuote(s As String) As String
-		  s = s.ReplaceAll( "'", "'\''" )
-		  s = "'" + s + "'"
+		  #if TargetWin32 then
+		    
+		    s = """" + s + """"
+		    
+		  #else
+		    
+		    const kQuote = "'"
+		    const kReplacement = "'\''"
+		    
+		    s = s.ReplaceAll( kQuote, kReplacement )
+		    s = kQuote + s + kQuote
+		    
+		  #endif
+		  
 		  
 		  return s
 		End Function
