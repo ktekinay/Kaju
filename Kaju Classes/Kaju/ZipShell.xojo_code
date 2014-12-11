@@ -143,8 +143,72 @@ Inherits Shell
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Private Shared mWindows7zNativePath As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private ResultFolderItem As FolderItem
 	#tag EndProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  const k7zFolderName = "7z"
+			  const k7zAppName = "7z.exe"
+			  
+			  dim r as string
+			  
+			  #if TargetWin32 then
+			    
+			    r = mWindows7zNativePath
+			    dim f as FolderItem
+			    if r.Trim = "" then
+			      // 
+			      // Find the Libs folder
+			      //
+			      dim parent as FolderItem = App.ExecutableFile.Parent
+			      f = parent.Child( App.ExecutableFile.Name + " Libs" )
+			      if f is nil or not f.Directory then
+			        // 
+			        // Still haven't found it
+			        //
+			        f = parent.Child( "Libs" )
+			      end if
+			      
+			      if f is nil or not f.Exists then
+			        raise new Kaju.KajuException( Kaju.KajuException.kErrorCantFindLibsFolder )
+			      end if
+			      
+			      //
+			      // f has the Libs folder
+			      //
+			      f = f.Child( k7zFolderName )
+			      if f <> nil and f.Directory then
+			        f = f.Child( k7zAppName )
+			      else
+			        f = nil // Can't find it
+			      end if
+			      
+			      if f <> nil and f.Exists then
+			        r = f.NativePath
+			      end if
+			      
+			    end if // r.Trim = ""
+			    
+			  #endif
+			  
+			  return r
+			  
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mWindows7zNativePath = value
+			  
+			End Set
+		#tag EndSetter
+		Shared Windows7zNativePath As String
+	#tag EndComputedProperty
 
 	#tag Property, Flags = &h21
 		Private ZipFile As FolderItem
