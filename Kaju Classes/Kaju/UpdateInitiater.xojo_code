@@ -203,6 +203,13 @@ Protected Class UpdateInitiater
 		  wend
 		  appFolderItem = appFolderItem.Parent
 		  
+		  //
+		  // Change the name of the replacment app to match
+		  //
+		  if ReplacementAppFolder.Name <> appFolderItem.Name then
+		    ReplacementAppFolder.Name = appFolderItem.Name
+		  end if
+		  
 		  script = script.ReplaceAll( kMarkerAppName, ShellQuote( appFolderItem.Name ) )
 		  script = script.ReplaceAll( kMarkerAppParent, ShellPathQuote( appFolderItem.Parent ) )
 		  script = script.ReplaceAll( kMarkerNewAppName, ShellQuote( ReplacementAppFolder.Name ) )
