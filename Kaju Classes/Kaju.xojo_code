@@ -12,7 +12,7 @@ Protected Module Kaju
 	#tag Method, Flags = &h1
 		Protected Sub CancelUpdate()
 		  if App.UpdateInitiater <> nil then
-		    App.UpdateInitiater.ReplacementAppFolder = nil // Will stop the update
+		    App.UpdateInitiater.Cancel
 		    App.UpdateInitiater = nil
 		  end if
 		  
