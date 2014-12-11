@@ -30,6 +30,27 @@ Protected Class UpdateChecker
 		  
 		  mDryRun = false
 		  
+		  // 
+		  // Confirm that the zip utility exists on Windows
+		  //
+		  #if TargetWin32 then
+		    if true then // Scope
+		      dim zipPath as string = Kaju.ZipShell.Windows7zNativePath
+		      if zipPath <> "" then
+		        dim f as new FolderItem( zipPath, FolderItem.PathTypeNative )
+		        if f is nil or not f.Exists then
+		          zipPath = ""
+		        end if
+		      end if
+		      
+		      if zipPath = "" then
+		        //
+		        // Can't locate it
+		        //
+		        raise new Kaju.KajuException( Kaju.KajuException.kErrorCantLocateWindowsZipUtility )
+		      end if
+		  #endif
+		  
 		  //
 		  // Pull the raw data
 		  //
