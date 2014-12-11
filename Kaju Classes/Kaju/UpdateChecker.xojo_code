@@ -28,11 +28,11 @@ Protected Class UpdateChecker
 		  //
 		  // The caller should be prepared to handle an exception in case of error.
 		  
+		  mDryRun = false
+		  
 		  //
 		  // Pull the raw data
 		  //
-		  
-		  mDryRun = false
 		  
 		  if UpdateURL.Trim = "" then
 		    raise new KajuException( KajuException.kErrorMissingUpdateURL )
