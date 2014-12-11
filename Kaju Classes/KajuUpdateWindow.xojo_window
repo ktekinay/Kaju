@@ -136,7 +136,7 @@ Begin Window KajuUpdateWindow
       Caption         =   "#kRemindMeLaterButton"
       Default         =   False
       Enabled         =   True
-      Height          =   25
+      Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
@@ -167,7 +167,7 @@ Begin Window KajuUpdateWindow
       Caption         =   "#kSkipVersionButton"
       Default         =   False
       Enabled         =   True
-      Height          =   25
+      Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
