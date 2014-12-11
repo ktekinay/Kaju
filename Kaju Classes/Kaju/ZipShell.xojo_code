@@ -112,6 +112,13 @@ Inherits Shell
 		    
 		  #else // Windows
 		    
+		    cmd = Windows7zNativePath
+		    if cmd = "" then
+		      raise new Kaju.KajuException( Kaju.KajuException.kErrorCantLocateWindowsZipUtility )
+		    end if
+		    
+		    cmd = """" + cmd + """ x -o""" + toFolder.NativePath + """ """ + file.NativePath + """"
+		    
 		  #endif
 		  
 		  Execute cmd
@@ -120,7 +127,6 @@ Inherits Shell
 		    mCurrentOperation = Operation.Decompressing
 		  end if
 		  
-		  #pragma warning "Finish Windows code"
 		End Sub
 	#tag EndMethod
 
