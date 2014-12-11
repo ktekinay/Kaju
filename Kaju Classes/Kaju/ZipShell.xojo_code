@@ -163,13 +163,13 @@ Inherits Shell
 			    r = mWindows7zNativePath
 			    dim f as FolderItem
 			    if r.Trim = "" then
-			      // 
+			      //
 			      // Find the Libs folder
 			      //
 			      dim parent as FolderItem = App.ExecutableFile.Parent
 			      f = parent.Child( App.ExecutableFile.Name + " Libs" )
 			      if f is nil or not f.Directory then
-			        // 
+			        //
 			        // Still haven't found it
 			        //
 			        f = parent.Child( "Libs" )
