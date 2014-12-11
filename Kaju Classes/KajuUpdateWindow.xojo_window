@@ -298,7 +298,7 @@ Begin Window KajuUpdateWindow
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
-      Height          =   20
+      Height          =   30
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
@@ -309,7 +309,7 @@ Begin Window KajuUpdateWindow
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
-      Multiline       =   False
+      Multiline       =   True
       Scope           =   2
       Selectable      =   False
       TabIndex        =   8
