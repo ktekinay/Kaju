@@ -35,6 +35,7 @@ Protected Class UpdateChecker
 		  //
 		  #if TargetWin32 then
 		    if true then // Scope
+		      
 		      dim zipPath as string = Kaju.ZipShell.Windows7zNativePath
 		      if zipPath <> "" then
 		        dim f as new FolderItem( zipPath, FolderItem.PathTypeNative )
@@ -49,6 +50,8 @@ Protected Class UpdateChecker
 		        //
 		        raise new Kaju.KajuException( Kaju.KajuException.kErrorCantLocateWindowsZipUtility )
 		      end if
+		      
+		    end if
 		  #endif
 		  
 		  //
