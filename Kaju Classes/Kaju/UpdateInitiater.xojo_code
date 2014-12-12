@@ -150,41 +150,36 @@ Protected Class UpdateInitiater
 		  //
 		  // Save it
 		  //
-		  dim scriptName as string = kScriptName
-		  dim scriptFile as FolderItem = tempFolder.Child( scriptName )
-		  dim bs as BinaryStream = BinaryStream.Create( scriptFile, true )
-		  bs.Write( script )
-		  if bs.LastErrorCode <> 0 then
-		    MsgBox "Error writing scrip file: " + str( bs.LastErrorCode )
+		  dim scriptFile as FolderItem = saveScript( script, tempFolder )
+		  if scriptFile <> nil then
+		    //
+		    // Adjust the permissions
+		    //
+		    dim p as new Permissions( scriptFile.Permissions )
+		    p.OwnerExecute = true
+		    p.GroupExecute = true
+		    p.OthersExecute = true
+		    scriptFile.Permissions = p
+		    
+		    //
+		    // Run the script
+		    //
+		    dim sh as new Shell
+		    sh.Mode = 1 // Asynchronous
+		    
+		    dim cmd as string
+		    cmd = "/usr/bin/nohup " + ShellQuote( scriptFile.NativePath ) + " &"
+		    
+		    sh.Execute( cmd )
+		    dim targetTicks as integer = Ticks + 60
+		    while Ticks < targetTicks
+		      sh.Poll
+		      App.YieldToNextThread
+		    wend
+		    
 		  end if
-		  bs.Close
-		  bs = nil
 		  
-		  //
-		  // Adjust the permissions
-		  //
-		  dim p as new Permissions( scriptFile.Permissions )
-		  p.OwnerExecute = true
-		  p.GroupExecute = true
-		  p.OthersExecute = true
-		  scriptFile.Permissions = p
-		  
-		  //
-		  // Run the script
-		  //
-		  dim sh as new Shell
-		  sh.Mode = 1 // Asynchronous
-		  
-		  dim cmd as string
-		  cmd = "/usr/bin/nohup " + ShellQuote( scriptFile.NativePath ) + " &"
-		  
-		  sh.Execute( cmd )
-		  dim targetTicks as integer = Ticks + 60
-		  while Ticks < targetTicks
-		    sh.Poll
-		    App.YieldToNextThread
-		  wend
-		  
+		  return
 		End Sub
 	#tag EndMethod
 
@@ -226,15 +221,36 @@ Protected Class UpdateInitiater
 		  //
 		  // Save it
 		  //
-		  dim scriptName as string = kScriptName
-		  dim scriptFile as FolderItem = tempFolder.Child( scriptName )
-		  dim bs as BinaryStream = BinaryStream.Create( scriptFile, true )
-		  bs.Write( script )
-		  if bs.LastErrorCode <> 0 then
-		    MsgBox "Error writing scrip file: " + str( bs.LastErrorCode )
+		  dim scriptFile as FolderItem = saveScript( script, tempFolder )
+		  if scriptFile <> nil then
+		    //
+		    // Adjust the permissions
+		    //
+		    dim p as new Permissions( scriptFile.Permissions )
+		    p.OwnerExecute = true
+		    p.GroupExecute = true
+		    p.OthersExecute = true
+		    scriptFile.Permissions = p
+		    
+		    //
+		    // Run the script
+		    //
+		    dim sh as new Shell
+		    sh.Mode = 1 // Asynchronous
+		    
+		    dim cmd as string
+		    cmd = "nohup " + ShellQuote( scriptFile.NativePath ) + " &"
+		    
+		    sh.Execute( cmd )
+		    dim targetTicks as integer = Ticks + 60
+		    while Ticks < targetTicks
+		      sh.Poll
+		      App.YieldToNextThread
+		    wend
+		    
 		  end if
-		  bs.Close
-		  bs = nil
+		  
+		  return
 		End Sub
 	#tag EndMethod
 
