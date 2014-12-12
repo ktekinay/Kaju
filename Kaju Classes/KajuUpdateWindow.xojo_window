@@ -549,9 +549,13 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub ShowError()
+		Private Sub ShowError(msg As String = "")
+		  if msg.Trim = "" then
+		    msg = kGenericErrorMessage
+		  end if
+		  
 		  lblInstallMessage.Visible = true
-		  lblInstallMessage.Text = kGenericErrorMessage
+		  lblInstallMessage.Text = msg
 		  pbProgress.Visible = false
 		  
 		  btnOK.Enabled = false
