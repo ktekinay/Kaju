@@ -309,11 +309,20 @@ Protected Class UpdateInitiater
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub RunScriptWindows(tempFolder As FolderItem, pid As FolderItem)
-		  dim script as string = kUpdaterScript
+		Private Function SaveScript(script As String, tempFolder As FolderItem) As FolderItem
+		  dim scriptName as string = kScriptName
+		  dim scriptFile as FolderItem = tempFolder.Child( scriptName )
+		  dim bs as BinaryStream = BinaryStream.Create( scriptFile, true )
+		  bs.Write( script )
+		  if bs.LastErrorCode <> 0 then
+		    MsgBox "Error writing script file: " + str( bs.LastErrorCode )
+		    scriptFile = nil
+		  end if
+		  bs.Close
+		  bs = nil
 		  
-		  #pragma warning "Finish Windows code"
-		End Sub
+		  return scriptFile
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
