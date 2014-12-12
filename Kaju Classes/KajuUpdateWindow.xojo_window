@@ -899,9 +899,17 @@ End
 		    
 		    lblInstallMessage.Text = kProcessingFileMessage
 		    
-		    dim targetFolder as FolderItem = file.Parent.Child( "decompressed" )
+		    dim targetFolder as FolderItem 
+		    #if TargetWin32 then
+		      dim targetFolderName as string = SelectedUpdate.AppName + "- decompressed"
+		      targetFolder = App.ExecutableFile.Parent
+		      targetFolder = targetFolder.Child( targetFolderName )
+		      Kaju.DeleteRecursive( targetFolder )
+		    #else
+		      targetFolder = file.Parent.Child( "decompressed" )
+		    #endif
 		    shZipper.Decompress( file, targetFolder )
-		    
+		    DeleteOnCancel.Append targetFolder
 		  end if
 		  
 		  
