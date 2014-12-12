@@ -235,32 +235,76 @@ Protected Class UpdateInitiater
 		  end if
 		  bs.Close
 		  bs = nil
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub RunScriptWindows(tempFolder As FolderItem, pid As FolderItem)
+		  dim script as string = kUpdaterScript
 		  
 		  //
-		  // Adjust the permissions
+		  // Get a FolderItem for the current executable
 		  //
-		  dim p as new Permissions( scriptFile.Permissions )
-		  p.OwnerExecute = true
-		  p.GroupExecute = true
-		  p.OthersExecute = true
-		  scriptFile.Permissions = p
+		  dim executable as FolderItem = App.ExecutableFile
+		  
+		  script = script.ReplaceAll( kMarkerAppName, executable.Name )
+		  script = script.ReplaceAll( kMarkerAppParent, ShellPathQuote( executable.Parent ) )
+		  script = script.ReplaceAll( kMarkerNewAppName, ReplacementExecutableName )
+		  script = script.ReplaceAll( kMarkerNewAppParent, ShellPathQuote( ReplacementAppFolder ) )
+		  script = script.ReplaceAll( kMarkerTempFolder, ShellPathQuote( TempFolder ) )
+		  
+		  script = script.ReplaceAll( kMarkerPIDFilePath, ShellPathQuote( pid ) )
 		  
 		  //
-		  // Run the script
+		  // Get the names of the other files/folders in the replacement folder
 		  //
-		  dim sh as new Shell
-		  sh.Mode = 1 // Asynchronous
+		  dim otherFiles() as string = GetManifest( ReplacementAppFolder, ReplacementExecutableName )
 		  
-		  dim cmd as string
-		  cmd = "nohup " + ShellQuote( scriptFile.NativePath ) + " &"
+		  //
+		  // Fill in the other array
+		  // Since Windows batch files don't really do array, we will pull out the section of
+		  // code that serves as a template and repeat is for each file
+		  //
+		  dim rx as new RegEx
+		  rx.SearchPattern = kMarkerWinArrayStart + "(.+)" + kMarkerWinArrayEnd
+		  rx.Options.DotMatchAll = true
+		  rx.Options.Greedy = false
 		  
-		  sh.Execute( cmd )
-		  dim targetTicks as integer = Ticks + 60
-		  while Ticks < targetTicks
-		    sh.Poll
-		    App.YieldToNextThread
-		  wend
+		  dim match as RegExMatch = rx.Search( script )
+		  dim template as string = match.SubExpressionString( 1 )
 		  
+		  dim arr() as string
+		  for each file as string in otherFiles
+		    arr.Append template.ReplaceAll( kMarkerWinOther, file )
+		  next
+		  dim replacement as string = join( arr, "" )
+		  replacement = replacement.ReplaceAll( "\", "\\" )
+		  replacement = replacement.ReplaceAll( "$", "\$" )
+		  rx.ReplacementPattern = replacement
+		  script = rx.Replace( script )
+		  
+		  //
+		  // Prepare for saving
+		  //
+		  script = ReplaceLineEndings( script, EndOfLine.Windows )
+		  
+		  //
+		  // Save it
+		  //
+		  dim scriptFile as FolderItem = SaveScript( script, tempFolder )
+		  if scriptFile <> nil then
+		    //
+		    // Run the script
+		    //
+		    scriptFile.Launch
+		    dim targetTicks as integer = Ticks + 60
+		    while Ticks < targetTicks
+		      App.YieldToNextThread
+		    wend
+		    
+		  end if
+		  
+		  return
 		End Sub
 	#tag EndMethod
 
