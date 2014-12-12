@@ -268,7 +268,7 @@ Protected Class UpdateInitiater
 		  script = script.ReplaceAll( kMarkerNewAppName, ReplacementExecutableName )
 		  script = script.ReplaceAll( kMarkerNewAppParent, ShellPathQuote( ReplacementAppFolder ) )
 		  script = script.ReplaceAll( kMarkerTempFolder, ShellPathQuote( TempFolder ) )
-		  
+		  script = script.ReplaceAll( kMarkerDecompressedFolderPath, ShellPathQuote( ReplacementAppFolder.Parent ) )
 		  script = script.ReplaceAll( kMarkerPIDFilePath, ShellPathQuote( pid ) )
 		  
 		  //
@@ -291,13 +291,29 @@ Protected Class UpdateInitiater
 		  
 		  dim arr() as string
 		  for each file as string in otherFiles
-		    arr.Append template.ReplaceAll( kMarkerWinOther, file )
+		    template = template.ReplaceAll( kMarkerWinOther, file )
+		    template = template.ReplaceAll( kMarkerWinOtherWithoutSpaces, file.ReplaceAll( " ", "_" ) )
+		    arr.Append template
 		  next
 		  dim replacement as string = join( arr, "" )
 		  replacement = replacement.ReplaceAll( "\", "\\" )
 		  replacement = replacement.ReplaceAll( "$", "\$" )
 		  rx.ReplacementPattern = replacement
 		  script = rx.Replace( script )
+		  
+		  //
+		  // Create a comma-delimited "array" of the other files
+		  //
+		  redim arr( -1 )
+		  dim pathPrefix as string = ReplacementAppFolder.NativePath
+		  if pathPrefix.Right( 1 ) <> "\" then
+		    pathPrefix = pathPrefix + "\"
+		  end if
+		  for each file as string in otherFiles
+		    arr.Append pathPrefix + file
+		  next
+		  replacement = """" + join( arr, """,""" ) + """"
+		  script = script.ReplaceAll( kMarkerOtherArray, replacement )
 		  
 		  //
 		  // Prepare for saving
