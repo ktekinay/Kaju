@@ -125,7 +125,7 @@ Protected Class UpdateInitiater
 		  script = script.ReplaceAll( kMarkerNewAppParent, ShellPathQuote( ReplacementAppFolder ) )
 		  script = script.ReplaceAll( kMarkerTempFolder, ShellPathQuote( TempFolder ) )
 		  
-		  script = script.ReplaceAll( kMarkerPIDFilePath, ShellQuote( pid.NativePath ) )
+		  script = script.ReplaceAll( kMarkerPIDFilePath, ShellPathQuote( pid ) )
 		  
 		  //
 		  // Get the names of the other files/folders in the replacement folder
@@ -216,7 +216,7 @@ Protected Class UpdateInitiater
 		  script = script.ReplaceAll( kMarkerNewAppParent, ShellPathQuote( ReplacementAppFolder.Parent ) )
 		  script = script.ReplaceAll( kMarkerTempFolder, ShellPathQuote( TempFolder ) )
 		  
-		  script = script.ReplaceAll( kMarkerPIDFilePath, ShellQuote( pid.NativePath ) )
+		  script = script.ReplaceAll( kMarkerPIDFilePath, ShellPathQuote( pid ) )
 		  
 		  //
 		  // Prepare for saving
