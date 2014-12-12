@@ -341,7 +341,9 @@ Protected Class UpdateInitiater
 		  wend
 		  s = s.Left( properLen )
 		  
-		  s = ShellQuote( s )
+		  #if not TargetWin32 then
+		    s = ShellQuote( s )
+		  #endif
 		  
 		  return s
 		  
