@@ -77,8 +77,14 @@ Protected Class UpdateInitiater
 		  #if DebugBuild then
 		    tempFolder = SpecialFolder.Desktop.Child( "KajuTempFolder" + str( Ticks ) )
 		    if tempFolder.Exists then
-		      tempFolder.Delete
+		      Kaju.DeleteRecursive( tempFolder )
 		    end if
+		    tempFolder.CreateAsFolder
+		  #elseif TargetWin32 then
+		    dim parent as FolderItem = App.ExecutableFile.Parent
+		    dim folderName as string = App.ExecutableFile.Name + "-tempfolder"
+		    tempFolder = parent.Child( folderName )
+		    Kaju.DeleteRecursive( tempFolder )
 		    tempFolder.CreateAsFolder
 		  #else
 		    tempFolder = Kaju.GetTemporaryFolder
