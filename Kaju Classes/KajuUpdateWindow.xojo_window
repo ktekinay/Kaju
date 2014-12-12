@@ -408,12 +408,12 @@ End
 		Sub Close()
 		  if CurrentStage = Stage.Cancelled then
 		    for each f as FolderItem in DeleteOnCancel
-		      DeleteRecursive( f )
+		      Kaju.DeleteRecursive( f )
 		    next
 		  end if
 		  
 		  for each f as FolderItem in DeleteOnClose
-		    DeleteRecursive( f )
+		    Kaju.DeleteRecursive( f )
 		  next
 		End Sub
 	#tag EndEvent
