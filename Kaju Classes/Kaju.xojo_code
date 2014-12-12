@@ -135,8 +135,9 @@ Protected Module Kaju
 		  dim parts() as string
 		  parts.Append str( majorVersion )
 		  parts.Append str( minorVersion )
-		  parts.Append str( bugVersion )
-		  
+		  if bugVersion > 0 then
+		    parts.Append str( bugVersion )
+		  end if
 		  dim version as string = join( parts, "." )
 		  
 		  if stageCode <> App.Final then
