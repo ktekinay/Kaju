@@ -14,6 +14,11 @@
         "Hash":"6131EA69581D967B8330B7C4E95558C1",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip"
       },
+      "WindowsBinary":{
+        "Hash":"051A8CABDA442E15BEF310EAE99689B8",
+        "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win.zip",
+        "ExecutableName":"Kaju Update Test.exe"
+      },
       "LinuxBinary":{
         "Hash":"2641A43DD169439FC5C37F265FE279E2",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux.zip",

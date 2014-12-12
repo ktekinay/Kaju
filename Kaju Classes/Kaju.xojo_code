@@ -12,10 +12,45 @@ Protected Module Kaju
 	#tag Method, Flags = &h1
 		Protected Sub CancelUpdate()
 		  if App.UpdateInitiater <> nil then
-		    App.UpdateInitiater.ReplacementAppFolder = nil // Will stop the update
+		    App.UpdateInitiater.Cancel
 		    App.UpdateInitiater = nil
 		  end if
 		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Sub DeleteRecursive(f As FolderItem)
+		  if f is nil or not f.Exists or not f.IsWriteable then
+		    return
+		  end if
+		  
+		  if f.Directory then
+		    
+		    dim files() as FolderItem
+		    dim folders() as FolderItem
+		    
+		    dim cnt as integer = f.Count
+		    for i as integer = 1 to cnt
+		      dim thisItem as FolderItem = f.Item( i )
+		      if thisItem.Directory then
+		        folders.Append thisItem
+		      else
+		        files.Append thisItem
+		      end if
+		    next
+		    
+		    for each fldr as FolderItem in folders
+		      DeleteRecursive( fldr )
+		    next
+		    
+		    for each file as FolderItem in files
+		      file.Delete
+		    next
+		    
+		  end if
+		  
+		  f.Delete
 		End Sub
 	#tag EndMethod
 
@@ -100,8 +135,9 @@ Protected Module Kaju
 		  dim parts() as string
 		  parts.Append str( majorVersion )
 		  parts.Append str( minorVersion )
-		  parts.Append str( bugVersion )
-		  
+		  if bugVersion > 0 then
+		    parts.Append str( bugVersion )
+		  end if
 		  dim version as string = join( parts, "." )
 		  
 		  if stageCode <> App.Final then

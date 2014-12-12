@@ -136,7 +136,7 @@ Begin Window KajuUpdateWindow
       Caption         =   "#kRemindMeLaterButton"
       Default         =   False
       Enabled         =   True
-      Height          =   25
+      Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
@@ -167,7 +167,7 @@ Begin Window KajuUpdateWindow
       Caption         =   "#kSkipVersionButton"
       Default         =   False
       Enabled         =   True
-      Height          =   25
+      Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
@@ -298,18 +298,18 @@ Begin Window KajuUpdateWindow
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
-      Height          =   20
+      Height          =   30
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   284
+      Left            =   149
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
-      Multiline       =   False
+      Multiline       =   True
       Scope           =   2
       Selectable      =   False
       TabIndex        =   8
@@ -324,7 +324,7 @@ Begin Window KajuUpdateWindow
       Transparent     =   False
       Underline       =   False
       Visible         =   False
-      Width           =   334
+      Width           =   294
    End
    Begin ProgressBar pbProgress
       AutoDeactivate  =   True
@@ -333,7 +333,7 @@ Begin Window KajuUpdateWindow
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
-      Left            =   140
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -345,7 +345,7 @@ Begin Window KajuUpdateWindow
       Top             =   555
       Value           =   0
       Visible         =   False
-      Width           =   123
+      Width           =   117
    End
    Begin HTTPSecureSocket hsSocket
       CertificateFile =   
@@ -404,6 +404,45 @@ End
 #tag EndWindow
 
 #tag WindowCode
+	#tag Event
+		Sub Close()
+		  if CurrentStage = Stage.Cancelled then
+		    for each f as FolderItem in DeleteOnCancel
+		      Kaju.DeleteRecursive( f )
+		    next
+		  end if
+		  
+		  for each f as FolderItem in DeleteOnClose
+		    Kaju.DeleteRecursive( f )
+		  next
+		End Sub
+	#tag EndEvent
+
+
+	#tag Method, Flags = &h0
+		Sub Cancel()
+		  CurrentStage = Stage.Cancelled
+		  
+		  SelectedUpdate = nil
+		  if Initiater <> nil then
+		    Initiater.Cancel
+		    Initiater = nil
+		  end if
+		  Kaju.CancelUpdate
+		  
+		  if hsSocket.IsConnected then
+		    hsSocket.Disconnect
+		  end if
+		  
+		  if shZipper.IsRunning then
+		    shZipper.Close
+		  end if
+		  
+		  self.Close
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub ChooseUpdate(checker As Kaju.UpdateChecker, updates() As Kaju.UpdateInformation)
 		  self.Checker = checker
@@ -447,19 +486,6 @@ End
 		    // Only one update so hide the listbox
 		    //
 		    lbUpdates.Visible = false
-		    
-		    //
-		    // Move everything
-		    //
-		    
-		    'dim diff as integer = hvNotes.Left - lbUpdates.Left // How far we're moving it
-		    '
-		    'hvNotes.Left = lbUpdates.Left
-		    'btnOK.Left = btnOK.Left - diff
-		    'btnCancel.Left = btnCancel.Left - diff
-		    '
-		    'self.Width = self.Width - diff
-		    
 		  end if
 		  
 		  #if not TargetMacOS then
@@ -470,11 +496,13 @@ End
 		    btnCancel.Left = btnOK.Left
 		    btnOK.Left = farLeft
 		    
-		    btnCancel.Height = btnCancel.Height + 5
-		    btnOK.Height = btnOK.Height + 5
-		    btnSkipVersion.Height = btnSkipVersion.Height + 5
+		    const kAddition = 10
 		    
-		    self.Height = self.Height + 5
+		    btnCancel.Height = btnCancel.Height + kAddition
+		    btnOK.Height = btnOK.Height + kAddition
+		    btnSkipVersion.Height = btnSkipVersion.Height + kAddition
+		    
+		    self.Height = self.Height + kAddition
 		    
 		  #endif
 		  
@@ -521,10 +549,18 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub ShowError()
-		  lblInstallMessage.Text = kGenericErrorMessage
-		  btnOK.Caption = kTryLaterButton
+		Private Sub ShowError(msg As String = "")
+		  if msg.Trim = "" then
+		    msg = kGenericErrorMessage
+		  end if
+		  
+		  lblInstallMessage.Visible = true
+		  lblInstallMessage.Text = msg
 		  pbProgress.Visible = false
+		  
+		  btnOK.Enabled = false
+		  btnCancel.Caption = kTryLaterButton
+		  btnSkipVersion.Visible = false
 		  
 		  CurrentStage = Stage.UpdateError
 		End Sub
@@ -558,7 +594,25 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		#tag Note
+			Files/folders that shoudl be deleted if the user cancelled
+		#tag EndNote
+		Private DeleteOnCancel() As FolderItem
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		#tag Note
+			Files/Folders that should be deleted upon window close
+		#tag EndNote
+		Private DeleteOnClose() As FolderItem
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private DownloadFile As FolderItem
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Initiater As Kaju.UpdateInitiater
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -648,7 +702,8 @@ End
 		ChoosingUpdate
 		  InstallingUpdate
 		  WaitingToQuit
-		UpdateError
+		  UpdateError
+		Cancelled
 	#tag EndEnum
 
 
@@ -698,8 +753,10 @@ End
 		    //
 		    SelectedUpdate = lbUpdates.RowTag( lbUpdates.ListIndex )
 		    
-		    btnOK.Caption = kStopButton
-		    btnCancel.Visible = false
+		    btnOK.Enabled = false
+		    
+		    btnCancel.Caption = kStopButton
+		    
 		    btnSkipVersion.Visible = false
 		    pbProgress.Visible = true
 		    lblInstallMessage.Visible = true
@@ -717,7 +774,10 @@ End
 		      lblInstallMessage.Text = kDownloadingMessage
 		      
 		      dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
+		      DeleteOnCancel.Append tempFolder
+		      
 		      DownloadFile = tempFolder.Child( SelectedUpdate.PlatformBinary.FileName )
+		      DeleteOnClose.Append DownloadFile
 		      
 		      dim url as string = SelectedUpdate.PlatformBinary.URL
 		      hsSocket.Secure = url.Left( 6 ) = "https:"
@@ -726,16 +786,15 @@ End
 		      
 		    end if
 		    
-		  case Stage.InstallingUpdate
-		    //
-		    // The user chose "Stop"
-		    //
-		    SelectedUpdate = nil
-		    self.Close
-		    
 		  case Stage.WaitingToQuit
 		    //
-		    // The user chose Install so move this window to the back
+		    // The user chose Quit & Install
+		    //
+		    
+		    Kaju.StartUpdate( self.Initiater )
+		    
+		    //
+		    // Move this window to the back
 		    //
 		    dim lastWindowIndex as integer = WindowCount - 1
 		    if not( Window( lastWindowIndex ) Is self ) then
@@ -752,13 +811,6 @@ End
 		    
 		    Quit
 		    
-		  case Stage.UpdateError
-		    //
-		    // There was an error so just close
-		    //
-		    SelectedUpdate = nil
-		    self.Close
-		    
 		  end
 		  
 		  
@@ -768,10 +820,7 @@ End
 #tag Events btnCancel
 	#tag Event
 		Sub Action()
-		  SelectedUpdate = nil
-		  Kaju.CancelUpdate
-		  self.Close
-		  
+		  self.Cancel
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -809,6 +858,13 @@ End
 #tag Events hsSocket
 	#tag Event
 		Sub ReceiveProgress(bytesReceived as integer, totalBytes as integer, newData as string)
+		  if CurrentStage = Stage.Cancelled then
+		    //
+		    // Do nothing
+		    //
+		    return
+		  end if
+		  
 		  pbProgress.Maximum = totalBytes
 		  pbProgress.Value = bytesReceived
 		  
@@ -818,6 +874,13 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub DownloadComplete(url as string, httpStatus as integer, headers as internetHeaders, file as folderItem)
+		  if CurrentStage = Stage.Cancelled then
+		    //
+		    // Do nothing
+		    //
+		    return
+		  end if
+		  
 		  pbProgress.Maximum = -1
 		  pbProgress.Value = 0
 		  
@@ -827,11 +890,7 @@ End
 		    
 		  elseif Kaju.HashOfFile( file ) <> SelectedUpdate.PlatformBinary.Hash then
 		    
-		    lblInstallMessage.Text = kBadDownloadMessage
-		    btnOK.Caption = kTryLaterButton
-		    pbProgress.Visible = false
-		    
-		    CurrentStage = Stage.UpdateError
+		    ShowError( kBadDownloadMessage )
 		    
 		  else
 		    //
@@ -840,9 +899,17 @@ End
 		    
 		    lblInstallMessage.Text = kProcessingFileMessage
 		    
-		    dim targetFolder as FolderItem = file.Parent.Child( "decompressed" )
+		    dim targetFolder as FolderItem 
+		    #if TargetWin32 then
+		      dim targetFolderName as string = SelectedUpdate.AppName + "- decompressed"
+		      targetFolder = App.ExecutableFile.Parent
+		      targetFolder = targetFolder.Child( targetFolderName )
+		      Kaju.DeleteRecursive( targetFolder )
+		    #else
+		      targetFolder = file.Parent.Child( "decompressed" )
+		    #endif
 		    shZipper.Decompress( file, targetFolder )
-		    
+		    DeleteOnCancel.Append targetFolder
 		  end if
 		  
 		  
@@ -854,6 +921,18 @@ End
 #tag Events shZipper
 	#tag Event
 		Sub DecompressCompleted(zipFile As FolderItem, containingFolder As FolderItem)
+		  //
+		  // No matter what, we don't need the zip file anymore
+		  //
+		  zipFile.Delete
+		  
+		  if CurrentStage = Stage.Cancelled then
+		    //
+		    // Do nothing
+		    //
+		    return
+		  end if
+		  
 		  dim cnt as integer = containingFolder.Count
 		  
 		  if cnt = 0 or SelectedUpdate is nil then
@@ -862,30 +941,57 @@ End
 		    
 		  else
 		    
-		    dim initiator as new Kaju.UpdateInitiater
-		    initiator.ReplacementAppFolder = containingFolder.Item( 1 )
-		    initiator.ReplacementExecutableName = SelectedUpdate.PlatformBinary.ExecutableName
+		    //
+		    // Find the executable
+		    //
+		    dim item as FolderItem
+		    for i as integer = 1 to containingFolder.Count
+		      dim f as FolderItem = containingFolder.Item( i )
+		      dim name as string = f.Name
+		      dim leftChars as string = name.Left( 1 )
+		      if leftChars <> "." and leftChars <> "_" then
+		        item = f
+		        exit
+		      end if
+		    next
 		    
-		    Kaju.StartUpdate( initiator )
-		    
-		    btnOK.Caption = kQuitButton
-		    btnCancel.Visible = true
-		    btnCancel.Caption = kCancelButton
-		    
-		    pbProgress.Visible = false
-		    
-		    lblInstallMessage.Visible = true
-		    lblInstallMessage.Text = kReadyMessage
-		    
-		    CurrentStage = Stage.WaitingToQuit
+		    if item is nil then
+		      
+		      ShowError()
+		      
+		    else
+		      
+		      Initiater = new Kaju.UpdateInitiater
+		      Initiater.ReplacementAppFolder = item
+		      Initiater.ReplacementExecutableName = SelectedUpdate.PlatformBinary.ExecutableName
+		      
+		      btnOK.Enabled = true
+		      btnOK.Caption = kQuitButton
+		      btnCancel.Visible = true
+		      btnCancel.Caption = kCancelButton
+		      
+		      pbProgress.Visible = false
+		      
+		      lblInstallMessage.Visible = true
+		      lblInstallMessage.Text = kReadyMessage
+		      
+		      CurrentStage = Stage.WaitingToQuit
+		      
+		    end if
 		    
 		  end if
 		  
-		  #pragma unused zipFile
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub Error()
+		  if CurrentStage = Stage.Cancelled then
+		    //
+		    // Do nothing
+		    //
+		    return
+		  end if
+		  
 		  ShowError()
 		End Sub
 	#tag EndEvent
