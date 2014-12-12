@@ -510,41 +510,6 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub DeleteRecursive(f As FolderItem)
-		  if f is nil or not f.Exists or not f.IsWriteable then
-		    return
-		  end if
-		  
-		  if f.Directory then
-		    
-		    dim files() as FolderItem
-		    dim folders() as FolderItem
-		    
-		    dim cnt as integer = f.Count
-		    for i as integer = 1 to cnt
-		      dim thisItem as FolderItem = f.Item( i )
-		      if thisItem.Directory then
-		        folders.Append thisItem
-		      else
-		        files.Append thisItem
-		      end if
-		    next
-		    
-		    for each fldr as FolderItem in folders
-		      DeleteRecursive( fldr )
-		    next
-		    
-		    for each file as FolderItem in files
-		      file.Delete
-		    next
-		    
-		  end if
-		  
-		  f.Delete
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
 		Private Sub DisplayVersionInfo(update As Kaju.UpdateInformation)
 		  //
 		  // Fill in the viewer
