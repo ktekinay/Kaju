@@ -416,7 +416,6 @@ End
 		    Kaju.DeleteRecursive( f )
 		  next
 		  
-		  Kaju.mUpdateInProgress = false
 		End Sub
 	#tag EndEvent
 
