@@ -638,32 +638,32 @@ End
 		    dim zipFilePath as string = zipFile.NativePath
 		    dim extractToPath as string = extractTo.NativePath
 		    
-		    Dim zipParams(1) as variant
-		    ZipParams(1) = zipFilePath
+		    dim zipParams(1) as variant
+		    zipParams(1) = zipFilePath
 		    dim extractParams(1) As variant
-		    ExtractParams(1) = extractToPath
+		    extractParams(1) = extractToPath
 		    
-		    //If the extraction location does not exist create it
-		    dim fso as New OLEObject("Scripting.FileSystemObject")
-		    If NOT fso.FolderExists(extractToPath) Then
-		      fso.CreateFolder(extractToPath)
-		    End If
+		    // If the extraction location does not exist create it
+		    dim fso as new OLEObject( "Scripting.FileSystemObject" )
+		    if not fso.FolderExists( extractToPath ) then
+		      fso.CreateFolder( extractToPath )
+		    end if
 		    
-		    dim objShell as New OLEObject("Shell.Application")
-		    dim myFolder1 as OLEObject = objShell.Invoke("NameSpace", ZipParams)
-		    dim myFolder2 as OLEObject = objShell.Invoke("NameSpace", ExtractParams)
+		    dim objShell as new OLEObject( "Shell.Application" )
+		    dim myFolder1 as OLEObject = objShell.Invoke( "NameSpace", zipParams )
+		    dim myFolder2 as OLEObject = objShell.Invoke( "NameSpace", extractParams )
 		    
 		    
 		    //More info see: http://msdn.microsoft.com/en-us/library/windows/desktop/bb787868%28v=vs.85%29.aspx
 		    //Extract the contants of the zip file.
-		    myFolder2.CopyHere(myFolder1.Items)
+		    myFolder2.CopyHere( myFolder1.Items )
 		    
 		    fso = Nil
 		    objShell = Nil
 		    
 		    AfterDecompress( zipFile, extractTo )
 		    
-		    Exception err as OLEException
+		    Exception err as RuntimeException
 		      ShowError()
 		      
 		  #else
