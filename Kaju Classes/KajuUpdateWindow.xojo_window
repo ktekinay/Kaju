@@ -631,6 +631,53 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub WindowsUnzip(zipFile As FolderItem, extractTo As FolderItem)
+		  #if TargetWin32 then
+		    
+		    dim zipFilePath as string = zipFile.NativePath
+		    dim extractToPath as string = extractTo.NativePath
+		    
+		    Dim zipParams(1) as variant
+		    ZipParams(1) = zipFilePath
+		    dim extractParams(1) As variant
+		    ExtractParams(1) = extractToPath
+		    
+		    //If the extraction location does not exist create it
+		    dim fso as New OLEObject("Scripting.FileSystemObject")
+		    If NOT fso.FolderExists(extractToPath) Then
+		      fso.CreateFolder(extractToPath)
+		    End If
+		    
+		    dim objShell as New OLEObject("Shell.Application")
+		    dim myFolder1 as OLEObject = objShell.Invoke("NameSpace", ZipParams)
+		    dim myFolder2 as OLEObject = objShell.Invoke("NameSpace", ExtractParams)
+		    
+		    
+		    //More info see: http://msdn.microsoft.com/en-us/library/windows/desktop/bb787868%28v=vs.85%29.aspx
+		    //Extract the contants of the zip file.
+		    myFolder2.CopyHere(myFolder1.Items)
+		    
+		    fso = Nil
+		    objShell = Nil
+		    
+		    AfterDecompress( zipFile, extractTo )
+		    
+		    Exception err as OLEException
+		      ShowError()
+		      
+		  #else
+		    
+		    #pragma unused zipFile
+		    #pragma unused extractTo
+		    
+		    raise new Kaju.KajuException( Kaju.KajuException.kErrorImproperFunction, CurrentMethodName )
+		    
+		  #endif
+		  
+		End Sub
+	#tag EndMethod
+
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
@@ -964,7 +1011,7 @@ End
 		    
 		    lblInstallMessage.Text = kProcessingFileMessage
 		    
-		    dim targetFolder as FolderItem 
+		    dim targetFolder as FolderItem
 		    #if TargetWin32 then
 		      dim targetFolderName as string = SelectedUpdate.AppName + "- decompressed"
 		      targetFolder = App.ExecutableFile.Parent
@@ -973,8 +1020,12 @@ End
 		    #else
 		      targetFolder = file.Parent.Child( "decompressed" )
 		    #endif
-		    shZipper.Decompress( file, targetFolder )
 		    DeleteOnCancel.Append targetFolder
+		    #if TargetWin32 then
+		      WindowsUnzip( file, targetFolder )
+		    #else
+		      shZipper.Decompress( file, targetFolder )
+		    #endif
 		  end if
 		  
 		  
