@@ -22,7 +22,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Execute()
+		Sub Execute(showWindow As Boolean = True)
 		  // Pull the data from the URL, check it, and preset the window if needed
 		  // Returns true if the app should quit in preparation of the update.
 		  //
@@ -79,7 +79,7 @@ Protected Class UpdateChecker
 		      end if
 		    end if
 		    
-		    if ProcessUpdateData( raw ) then
+		    if ProcessUpdateData( raw, showWindow ) then
 		      exit do
 		    end if
 		  loop
@@ -184,7 +184,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function ProcessUpdateData(raw As String) As Boolean
+		Private Function ProcessUpdateData(raw As String, showDialog As Boolean) As Boolean
 		  mResult = ResultType.NoUpdateAvailable // Assume this is true
 		  
 		  dim j as new JSONItem( raw )
@@ -317,13 +317,13 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub TestUpdate(jsonString As String)
+		Sub TestUpdate(jsonString As String, showWindow As Boolean = True)
 		  // Allows a dry run with the update information that would otherwise be obtained
 		  // from the UpdateURL
 		  
 		  mDryRun = true
 		  do
-		    if ProcessUpdateData( jsonString ) then
+		    if ProcessUpdateData( jsonString, showWindow ) then
 		      exit do
 		    end if
 		  loop
