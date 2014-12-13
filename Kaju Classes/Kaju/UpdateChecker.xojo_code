@@ -60,11 +60,34 @@ Protected Class UpdateChecker
 		  sig = DecodeHex( sig )
 		  if not Crypto.RSAVerifySignature( raw, sig, ServerPublicRSAKey ) then
 		    raise new KajuException( KajuException.kErrorIncorrectPacketSignature, CurrentMethodName )
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function HandleError(msg As String) As Boolean
+		  // Displays a dialog to the user with the message and asks if they want to try again now or later
+		  // Returns True to try now, False to try later
+		  
+		  dim r as boolean
+		  
+		  dim dlg as new MessageDialog
+		  dlg.ActionButton.Visible = true
+		  dlg.ActionButton.Caption = "Try Again"
+		  dlg.CancelButton.Visible = true
+		  dlg.CancelButton.Caption = "Later"
+		  dlg.AlternateActionButton.Visible = false
+		  dlg.Message = "An error has occurred. Would you like to try again now or later?"
+		  dlg.Explanation = msg
+		  
+		  dim btn as MessageDialogButton = dlg.ShowModal
+		  if btn is dlg.ActionButton then
+		    r = true
+		  else
+		    r = false
+		    mResult = ResultType.TryAgainLater
 		  end if
 		  
-		  ProcessUpdateData( raw )
-		  
-		End Sub
+		  return r
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
