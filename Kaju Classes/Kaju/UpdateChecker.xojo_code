@@ -227,9 +227,18 @@ Protected Class UpdateChecker
 		    end if
 		    
 		    //
-		    // An ignored version?
+		    // See if this update is required
 		    //
-		    if HonorIgnored and IgnoreVersionsPref.IndexOf( thisInfo.Version ) <> -1 then
+		    dim thisUpdateIsRequired as boolean
+		    if thisInfo.MinimumRequiredVersion <> "" and Kaju.VersionToDouble( thisInfo.MinimumRequiredVersion ) > versionDouble then
+		      mIsRequiredUpdate = true
+		      thisUpdateIsRequired = true
+		    end if
+		    
+		    //
+		    // An ignored version? (but only if not required)
+		    //
+		    if not thisUpdateIsRequired and HonorIgnored and IgnoreVersionsPref.IndexOf( thisInfo.Version ) <> -1 then
 		      mResult = ResultType.IgnoredUpdateAvailable
 		      continue for i
 		    end if
@@ -237,13 +246,6 @@ Protected Class UpdateChecker
 		    //
 		    // This is a viable update
 		    //
-		    
-		    //
-		    // See if these update are required
-		    //
-		    if thisInfo.MinimumRequiredVersion <> "" and Kaju.VersionToDouble( thisInfo.MinimumRequiredVersion ) > versionDouble then
-		      mIsRequiredUpdate = true
-		    end if
 		    
 		    info.Append thisInfo
 		  next
@@ -253,7 +255,9 @@ Protected Class UpdateChecker
 		    // There are updates
 		    //
 		    mResult = ResultType.UpdateAvailable
+		    if showDialog then
 		      KajuUpdateWindow.ChooseUpdate( self, info )
+		    end if
 		  end if
 		  
 		  return true
