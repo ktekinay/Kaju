@@ -124,7 +124,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function IsReqiredUpdate() As Boolean
+		Function IsRequiredUpdate() As Boolean
 		  return mIsRequiredUpdate
 		End Function
 	#tag EndMethod
