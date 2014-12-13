@@ -415,6 +415,8 @@ End
 		  for each f as FolderItem in DeleteOnClose
 		    Kaju.DeleteRecursive( f )
 		  next
+		  
+		  Kaju.mUpdateInProgress = false
 		End Sub
 	#tag EndEvent
 
@@ -899,7 +901,7 @@ End
 		    
 		    lblInstallMessage.Text = kProcessingFileMessage
 		    
-		    dim targetFolder as FolderItem 
+		    dim targetFolder as FolderItem
 		    #if TargetWin32 then
 		      dim targetFolderName as string = SelectedUpdate.AppName + "- decompressed"
 		      targetFolder = App.ExecutableFile.Parent
@@ -908,8 +910,8 @@ End
 		    #else
 		      targetFolder = file.Parent.Child( "decompressed" )
 		    #endif
-		    shZipper.Decompress( file, targetFolder )
 		    DeleteOnCancel.Append targetFolder
+		    shZipper.Decompress( file, targetFolder )
 		  end if
 		  
 		  

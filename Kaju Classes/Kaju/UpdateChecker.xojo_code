@@ -30,65 +30,89 @@ Protected Class UpdateChecker
 		  
 		  mDryRun = false
 		  
-		  // 
-		  // Confirm that the zip utility exists on Windows
-		  //
-		  #if TargetWin32 then
-		    if true then // Scope
-		      
-		      dim zipPath as string = Kaju.ZipShell.Windows7zNativePath
-		      if zipPath <> "" then
-		        dim f as new FolderItem( zipPath, FolderItem.PathTypeNative )
-		        if f is nil or not f.Exists then
-		          zipPath = ""
-		        end if
-		      end if
-		      
-		      if zipPath = "" then
-		        //
-		        // Can't locate it
-		        //
-		        raise new Kaju.KajuException( Kaju.KajuException.kErrorCantLocateWindowsZipUtility )
-		      end if
-		      
-		    end if
-		  #endif
-		  
 		  //
 		  // Pull the raw data
 		  //
 		  
 		  if UpdateURL.Trim = "" then
-		    raise new KajuException( KajuException.kErrorMissingUpdateURL )
+		    raise new KajuException( KajuException.kErrorMissingUpdateURL, CurrentMethodName )
 		  end if
 		  
-		  dim http as new HTTPSecureSocket
-		  http.Secure = self.Secure
-		  dim raw as string = http.Get( self.UpdateURL, 5 )
-		  if raw = "" then
-		    raise new KajuException( KajuException.kErrorNoUpdateDataAvailable )
-		  end if
-		  
-		  raw = raw.DefineEncoding( Encodings.UTF8 )
-		  raw = ReplaceLineEndings( raw, EndOfLine.UNIX )
-		  
-		  dim firstLine as string = raw.NthField( EndOfLine.UNIX, 1 )
-		  raw = raw.Mid( firstLine.Len + 2 )
-		  
-		  dim sig as string = firstLine.Left( kUpdatePacketMarker.Len )
-		  if StrComp( sig, kUpdatePacketMarker, 0 ) <> 0 then
-		    raise new KajuException( KajuException.kErrorIncorrectPacketMarker )
-		  end if
-		  
-		  sig = firstLine.Mid( sig.Len + 1 )
-		  sig = DecodeHex( sig )
-		  if not Crypto.RSAVerifySignature( raw, sig, ServerPublicRSAKey ) then
-		    raise new KajuException( KajuException.kErrorIncorrectPacketSignature )
-		  end if
-		  
-		  ProcessUpdateData( raw )
+		  //
+		  // Repeat the check until we get data or the user gives up
+		  //
+		  do
+		    
+		    dim http as new HTTPSecureSocket
+		    http.Secure = self.Secure
+		    dim raw as string = http.Get( self.UpdateURL, 5 )
+		    if raw = "" then
+		      if HandleError( kErrorNoUpdateData ) then
+		        continue do
+		      else
+		        exit do
+		      end if
+		    end if
+		    
+		    raw = raw.DefineEncoding( Encodings.UTF8 )
+		    raw = ReplaceLineEndings( raw, EndOfLine.UNIX )
+		    
+		    dim firstLine as string = raw.NthField( EndOfLine.UNIX, 1 )
+		    raw = raw.Mid( firstLine.Len + 2 )
+		    
+		    dim sig as string = firstLine.Left( kUpdatePacketMarker.Len )
+		    if StrComp( sig, kUpdatePacketMarker, 0 ) <> 0 then
+		      if HandleError( kErrorIncorrectPacketMarker ) then
+		        continue do
+		      else
+		        exit do
+		      end if
+		    end if
+		    
+		    sig = firstLine.Mid( sig.Len + 1 )
+		    sig = DecodeHex( sig )
+		    if not Crypto.RSAVerifySignature( raw, sig, ServerPublicRSAKey ) then
+		      if HandleError( kErrorIncorrectPacketSignature ) then
+		        continue do
+		      else
+		        exit do
+		      end if
+		    end if
+		    
+		    if ProcessUpdateData( raw ) then
+		      exit do
+		    end if
+		  loop
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function HandleError(msg As String) As Boolean
+		  // Displays a dialog to the user with the message and asks if they want to try again now or later
+		  // Returns True to try now, False to try later
+		  
+		  dim r as boolean
+		  
+		  dim dlg as new MessageDialog
+		  dlg.ActionButton.Visible = true
+		  dlg.ActionButton.Caption = "Try Again"
+		  dlg.CancelButton.Visible = true
+		  dlg.CancelButton.Caption = "Later"
+		  dlg.AlternateActionButton.Visible = false
+		  dlg.Message = "An error has occurred. Would you like to try again now or later?"
+		  dlg.Explanation = msg
+		  
+		  dim btn as MessageDialogButton = dlg.ShowModal
+		  if btn is dlg.ActionButton then
+		    r = true
+		  else
+		    r = false
+		    mResult = ResultType.TryAgainLater
+		  end if
+		  
+		  return r
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -100,7 +124,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function IsReqiredUpdate() As Boolean
+		Function IsRequiredUpdate() As Boolean
 		  return mIsRequiredUpdate
 		End Function
 	#tag EndMethod
@@ -160,7 +184,9 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub ProcessUpdateData(raw As String)
+		Private Function ProcessUpdateData(raw As String) As Boolean
+		  mResult = ResultType.NoUpdateAvailable // Assume this is true
+		  
 		  dim j as new JSONItem( raw )
 		  dim versionDouble as double = if( DryRun, -1.0, Kaju.VersionToDouble( Kaju.AppVersionString ) )
 		  
@@ -197,6 +223,7 @@ Protected Class UpdateChecker
 		    // An ignored version?
 		    //
 		    if HonorIgnored and IgnoreVersionsPref.IndexOf( thisInfo.Version ) <> -1 then
+		      mResult = ResultType.IgnoredUpdateAvailable
 		      continue for i
 		    end if
 		    
@@ -218,16 +245,31 @@ Protected Class UpdateChecker
 		    //
 		    // There are updates
 		    //
-		    
+		    mResult = ResultType.UpdateAvailable
 		    Kaju.mUpdateInProgress = true
 		    dim w as new KajuUpdateWindow
 		    w.ChooseUpdate( self, info )
 		  end if
 		  
+		  return true
+		  
 		  Exception err as RuntimeException
-		    raise new KajuException( KajuException.kErrorBadUpdateData )
+		    return not HandleError( kErrorBadUpdateData )
 		    
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ResetIgnored()
+		  redim IgnoreVersionsPref( -1 )
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function Result() As ResultType
+		  return mResult
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
@@ -282,7 +324,11 @@ Protected Class UpdateChecker
 		  // from the UpdateURL
 		  
 		  mDryRun = true
-		  ProcessUpdateData( jsonString )
+		  do
+		    if ProcessUpdateData( jsonString ) then
+		      exit do
+		    end if
+		  loop
 		  
 		End Sub
 	#tag EndMethod
@@ -322,6 +368,10 @@ Protected Class UpdateChecker
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Private mResult As ResultType
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private PrefFile As FolderItem
 	#tag EndProperty
 
@@ -342,8 +392,29 @@ Protected Class UpdateChecker
 	#tag EndProperty
 
 
+	#tag Constant, Name = kErrorBadUpdateData, Type = String, Dynamic = False, Default = \"The update data cannot be read.", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kErrorIncorrectPacketMarker, Type = String, Dynamic = False, Default = \"The update packet signature marker was incorrect.", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kErrorIncorrectPacketSignature, Type = String, Dynamic = False, Default = \"The RSA signature of the update packet cannot be verified.", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kErrorNoUpdateData, Type = String, Dynamic = False, Default = \"No update data was available.", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kPreferencesName, Type = String, Dynamic = False, Default = \"Kaju_Preferences", Scope = Private
 	#tag EndConstant
+
+
+	#tag Enum, Name = ResultType, Type = Integer, Flags = &h0
+		None
+		  NoUpdateAvailable
+		  UpdateAvailable
+		  IgnoredUpdateAvailable
+		TryAgainLater
+	#tag EndEnum
 
 
 	#tag ViewBehavior

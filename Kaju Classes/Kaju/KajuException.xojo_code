@@ -2,32 +2,21 @@
 Class KajuException
 Inherits RuntimeException
 	#tag Method, Flags = &h0
-		Sub Constructor(msg As String)
+		Sub Constructor(msg As String, methodName As String)
 		  self.Message = msg
+		  self.Stack.Append methodName
 		  
 		End Sub
 	#tag EndMethod
 
 
-	#tag Constant, Name = kErrorBadUpdateData, Type = String, Dynamic = False, Default = \"The update data cannot be read.", Scope = Public
-	#tag EndConstant
-
 	#tag Constant, Name = kErrorCantFindLibsFolder, Type = String, Dynamic = False, Default = \"Can\xE2\x80\x99t locate this applications Libs folder.", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kErrorCantLocateWindowsZipUtility, Type = String, Dynamic = False, Default = \"Can\xE2\x80\x99t locate the required 7z.exe app.", Scope = Public
-	#tag EndConstant
-
-	#tag Constant, Name = kErrorIncorrectPacketMarker, Type = String, Dynamic = False, Default = \"The update packet signature marker was incorrect.", Scope = Public
-	#tag EndConstant
-
-	#tag Constant, Name = kErrorIncorrectPacketSignature, Type = String, Dynamic = False, Default = \"The RSA signature of the update packet cannot be verified.", Scope = Public
+	#tag Constant, Name = kErrorImproperFunction, Type = String, Dynamic = False, Default = \"This function cannot be used on this platform.", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kErrorMissingUpdateURL, Type = String, Dynamic = False, Default = \"The update URL is missing.", Scope = Public
-	#tag EndConstant
-
-	#tag Constant, Name = kErrorNoUpdateDataAvailable, Type = String, Dynamic = False, Default = \"Could not get update data.", Scope = Public
 	#tag EndConstant
 
 

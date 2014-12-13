@@ -3,29 +3,7 @@ Protected Class ZipShell
 Inherits Shell
 	#tag Event
 		Sub Completed()
-		  if ErrorCode <> 0 then
-		    
-		    RaiseEvent Error()
-		    
-		  else
-		    
-		    ResultFolderItem = new FolderItem( ResultFolderItem.NativePath, FolderItem.PathTypeNative )
-		    
-		    select case CurrentOperation
-		    case Operation.Compressing
-		      RaiseEvent CompressCompleted( ResultFolderItem)
-		      
-		    case Operation.Decompressing
-		      RaiseEvent DecompressCompleted( ZipFile, ResultFolderItem )
-		      
-		    end
-		    
-		  end if
-		  
-		  ResultFolderItem = nil
-		  ZipFile = nil
-		  mCurrentOperation = Operation.None
-		  
+		  DoCompleted()
 		End Sub
 	#tag EndEvent
 
@@ -100,32 +78,116 @@ Inherits Shell
 		  ResultFolderItem = toFolder
 		  ZipFile = file
 		  
-		  dim cmd as string
-		  #if TargetMacOS then
-		    
-		    cmd = kDittoCmd + "-x -k "
-		    cmd = cmd + file.ShellPath + " " + toFolder.ShellPath
-		    
-		  #elseif TargetLinux then
-		    
-		    cmd = kUnzipCmd + file.ShellPath + " -d " + toFolder.ShellPath
-		    
-		  #else // Windows
-		    
-		    cmd = Windows7zNativePath
-		    if cmd = "" then
-		      raise new Kaju.KajuException( Kaju.KajuException.kErrorCantLocateWindowsZipUtility )
-		    end if
-		    
-		    cmd = """" + cmd + """ x -o""" + toFolder.NativePath + """ """ + file.NativePath + """"
-		    
-		  #endif
-		  
-		  Execute cmd
-		  
 		  if Mode <> 0 then
 		    mCurrentOperation = Operation.Decompressing
 		  end if
+		  
+		  #if TargetWin32 then
+		    
+		    WindowsUnzip( file, toFolder )
+		    
+		  #else
+		    
+		    dim cmd as string
+		    #if TargetMacOS then
+		      
+		      cmd = kDittoCmd + "-x -k "
+		      cmd = cmd + file.ShellPath + " " + toFolder.ShellPath
+		      
+		    #elseif TargetLinux then
+		      
+		      cmd = kUnzipCmd + file.ShellPath + " -d " + toFolder.ShellPath
+		      
+		    #endif
+		    
+		    Execute cmd
+		    
+		  #endif
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub DoCompleted()
+		  if ErrorCode <> 0 then
+		    
+		    RaiseEvent Error()
+		    
+		  else
+		    
+		    ResultFolderItem = new FolderItem( ResultFolderItem.NativePath, FolderItem.PathTypeNative )
+		    
+		    select case CurrentOperation
+		    case Operation.Compressing
+		      RaiseEvent CompressCompleted( ResultFolderItem)
+		      
+		    case Operation.Decompressing
+		      RaiseEvent DecompressCompleted( ZipFile, ResultFolderItem )
+		      
+		    end
+		    
+		  end if
+		  
+		  ResultFolderItem = nil
+		  ZipFile = nil
+		  mCurrentOperation = Operation.None
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub WindowsUnzip(zipFile As FolderItem, extractTo As FolderItem)
+		  #if TargetWin32 then
+		    
+		    dim zipFilePath as string = zipFile.NativePath
+		    dim extractToPath as string = extractTo.NativePath
+		    
+		    dim zipParams(1) as variant
+		    zipParams(1) = zipFilePath
+		    dim extractParams(1) As variant
+		    extractParams(1) = extractToPath
+		    
+		    //
+		    // If the extraction location does not exist create it
+		    //
+		    dim fso as new OLEObject( "Scripting.FileSystemObject" )
+		    if not fso.FolderExists( extractToPath ) then
+		      fso.CreateFolder( extractToPath )
+		    end if
+		    
+		    dim objShell as new OLEObject( "Shell.Application" )
+		    dim myFolder1 as OLEObject = objShell.Invoke( "NameSpace", zipParams )
+		    dim myFolder2 as OLEObject = objShell.Invoke( "NameSpace", extractParams )
+		    
+		    
+		    // More info see: http://msdn.microsoft.com/en-us/library/windows/desktop/bb787868%28v=vs.85%29.aspx
+		    // Also at http://msdn.microsoft.com/en-us/library/windows/desktop/bb787866%28v=vs.85%29.aspx
+		    
+		    //
+		    // Extract the contents of the zip file.
+		    //
+		    dim copyHereOpts as integer = _
+		    kCopyHereOptionNoProgressDialog + _
+		    kCopyHereOptionYesToAll + _
+		    kCopyHereOptionNoDirectoryConfirmation + _
+		    kCopyHereOptionNoDialogOnError
+		    myFolder2.CopyHere( myFolder1.Items, copyHereOpts )
+		    
+		    fso = Nil
+		    objShell = Nil
+		    
+		    DoCompleted()
+		    
+		    Exception err as RuntimeException
+		      RaiseEvent Error()
+		      
+		  #else
+		    
+		    #pragma unused zipFile
+		    #pragma unused extractTo
+		    
+		    raise new Kaju.KajuException( Kaju.KajuException.kErrorImproperFunction, CurrentMethodName )
+		    
+		  #endif
 		  
 		End Sub
 	#tag EndMethod
@@ -149,82 +211,25 @@ Inherits Shell
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private Shared mWindows7zNativePath As String
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
 		Private ResultFolderItem As FolderItem
 	#tag EndProperty
-
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  const k7zFolderName = "7z"
-			  const k7zAppName = "7z.exe"
-			  
-			  dim r as string
-			  
-			  #if TargetWin32 then
-			    
-			    r = mWindows7zNativePath
-			    dim f as FolderItem
-			    if r.Trim = "" then
-			      //
-			      // Find the Libs folder
-			      //
-			      dim parent as FolderItem = App.ExecutableFile.Parent
-			      dim executableName as string = App.ExecutableFile.Name
-			      if executableName.Right( 4 ) = ".exe" then
-			        executableName = executableName.Left( executableName.Len - 4 )
-			      end if
-			      
-			      f = parent.Child( executableName + " Libs" )
-			      if f is nil or not f.Directory then
-			        //
-			        // Still haven't found it
-			        //
-			        f = parent.Child( "Libs" )
-			      end if
-			      
-			      if f is nil or not f.Exists then
-			        raise new Kaju.KajuException( Kaju.KajuException.kErrorCantFindLibsFolder )
-			      end if
-			      
-			      //
-			      // f has the Libs folder
-			      //
-			      f = f.Child( k7zFolderName )
-			      if f <> nil and f.Directory then
-			        f = f.Child( k7zAppName )
-			      else
-			        f = nil // Can't find it
-			      end if
-			      
-			      if f <> nil and f.Exists then
-			        r = f.NativePath
-			      end if
-			      
-			    end if // r.Trim = ""
-			    
-			  #endif
-			  
-			  return r
-			  
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mWindows7zNativePath = value
-			  
-			End Set
-		#tag EndSetter
-		Shared Windows7zNativePath As String
-	#tag EndComputedProperty
 
 	#tag Property, Flags = &h21
 		Private ZipFile As FolderItem
 	#tag EndProperty
 
+
+	#tag Constant, Name = kCopyHereOptionNoDialogOnError, Type = Double, Dynamic = False, Default = \"1024", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kCopyHereOptionNoDirectoryConfirmation, Type = Double, Dynamic = False, Default = \"512", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kCopyHereOptionNoProgressDialog, Type = Double, Dynamic = False, Default = \"4", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kCopyHereOptionYesToAll, Type = Double, Dynamic = False, Default = \"16", Scope = Private
+	#tag EndConstant
 
 	#tag Constant, Name = kDittoCmd, Type = String, Dynamic = False, Default = \"", Scope = Private
 		#Tag Instance, Platform = Mac OS, Language = Default, Definition  = \"/usr/bin/ditto "
