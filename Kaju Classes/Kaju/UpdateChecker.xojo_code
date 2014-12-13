@@ -30,7 +30,7 @@ Protected Class UpdateChecker
 		  
 		  mDryRun = false
 		  
-		  // 
+		  //
 		  // Confirm that the zip utility exists on Windows
 		  //
 		  #if TargetWin32 then

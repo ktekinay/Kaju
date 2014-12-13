@@ -21,13 +21,14 @@ Protected Class UpdateInitiater
 		    r = join( builder, "" )
 		    
 		  #else // Windows
-		    
+		    //
+		    // No array in Windows
+		    //
+		    raise new Kaju.KajuException( Kaju.KajuException.kErrorImproperFunction, CurrentMethodName )
 		  #endif
 		  
 		  return r
 		  
-		  
-		  #pragma warning "Finish Windows code"
 		End Function
 	#tag EndMethod
 
