@@ -227,6 +227,12 @@ Protected Class UpdateChecker
 		  Exception err as RuntimeException
 		    raise new KajuException( KajuException.kErrorBadUpdateData, CurrentMethodName )
 		    
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ResetIgnored()
+		  redim IgnoreVersionsPref( -1 )
 		End Sub
 	#tag EndMethod
 
