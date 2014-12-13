@@ -10,7 +10,7 @@ Begin Window KajuUpdateWindow
    FullScreenButton=   False
    HasBackColor    =   False
    Height          =   600
-   ImplicitInstance=   False
+   ImplicitInstance=   True
    LiveResize      =   False
    MacProcID       =   0
    MaxHeight       =   32000

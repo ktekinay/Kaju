@@ -246,8 +246,7 @@ Protected Class UpdateChecker
 		    // There are updates
 		    //
 		    mResult = ResultType.UpdateAvailable
-		    dim w as new KajuUpdateWindow
-		    w.ChooseUpdate( self, info )
+		      KajuUpdateWindow.ChooseUpdate( self, info )
 		  end if
 		  
 		  return true
