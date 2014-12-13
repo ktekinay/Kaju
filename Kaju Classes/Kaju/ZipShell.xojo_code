@@ -3,29 +3,7 @@ Protected Class ZipShell
 Inherits Shell
 	#tag Event
 		Sub Completed()
-		  if ErrorCode <> 0 then
-		    
-		    RaiseEvent Error()
-		    
-		  else
-		    
-		    ResultFolderItem = new FolderItem( ResultFolderItem.NativePath, FolderItem.PathTypeNative )
-		    
-		    select case CurrentOperation
-		    case Operation.Compressing
-		      RaiseEvent CompressCompleted( ResultFolderItem)
-		      
-		    case Operation.Decompressing
-		      RaiseEvent DecompressCompleted( ZipFile, ResultFolderItem )
-		      
-		    end
-		    
-		  end if
-		  
-		  ResultFolderItem = nil
-		  ZipFile = nil
-		  mCurrentOperation = Operation.None
-		  
+		  DoCompleted()
 		End Sub
 	#tag EndEvent
 
@@ -125,16 +103,34 @@ Inherits Shell
 		    Execute cmd
 		    
 		  #endif
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub DoCompleted()
+		  if ErrorCode <> 0 then
 		    
-		    cmd = """" + cmd + """ x -o""" + toFolder.NativePath + """ """ + file.NativePath + """"
+		    RaiseEvent Error()
 		    
-		  #endif
-		  
-		  Execute cmd
-		  
-		  if Mode <> 0 then
-		    mCurrentOperation = Operation.Decompressing
+		  else
+		    
+		    ResultFolderItem = new FolderItem( ResultFolderItem.NativePath, FolderItem.PathTypeNative )
+		    
+		    select case CurrentOperation
+		    case Operation.Compressing
+		      RaiseEvent CompressCompleted( ResultFolderItem)
+		      
+		    case Operation.Decompressing
+		      RaiseEvent DecompressCompleted( ZipFile, ResultFolderItem )
+		      
+		    end
+		    
 		  end if
+		  
+		  ResultFolderItem = nil
+		  ZipFile = nil
+		  mCurrentOperation = Operation.None
+		  
 		End Sub
 	#tag EndMethod
 
