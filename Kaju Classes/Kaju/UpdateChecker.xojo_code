@@ -321,7 +321,11 @@ Protected Class UpdateChecker
 		  // from the UpdateURL
 		  
 		  mDryRun = true
-		  ProcessUpdateData( jsonString )
+		  do
+		    if ProcessUpdateData( jsonString ) then
+		      exit do
+		    end if
+		  loop
 		  
 		End Sub
 	#tag EndMethod
