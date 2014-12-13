@@ -185,6 +185,8 @@ Protected Class UpdateChecker
 
 	#tag Method, Flags = &h21
 		Private Function ProcessUpdateData(raw As String) As Boolean
+		  mResult = ResultType.NoUpdateAvailable // Assume this is true
+		  
 		  dim j as new JSONItem( raw )
 		  dim versionDouble as double = if( DryRun, -1.0, Kaju.VersionToDouble( Kaju.AppVersionString ) )
 		  
@@ -221,6 +223,7 @@ Protected Class UpdateChecker
 		    // An ignored version?
 		    //
 		    if HonorIgnored and IgnoreVersionsPref.IndexOf( thisInfo.Version ) <> -1 then
+		      mResult = ResultType.IgnoredUpdateAvailable
 		      continue for i
 		    end if
 		    
@@ -242,7 +245,7 @@ Protected Class UpdateChecker
 		    //
 		    // There are updates
 		    //
-		    
+		    mResult = ResultType.UpdateAvailable
 		    Kaju.mUpdateInProgress = true
 		    dim w as new KajuUpdateWindow
 		    w.ChooseUpdate( self, info )
