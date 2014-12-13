@@ -415,6 +415,8 @@ End
 		  for each f as FolderItem in DeleteOnClose
 		    Kaju.DeleteRecursive( f )
 		  next
+		  
+		  Kaju.mUpdateInProgress = false
 		End Sub
 	#tag EndEvent
 
