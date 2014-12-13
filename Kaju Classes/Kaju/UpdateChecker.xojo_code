@@ -237,6 +237,13 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Function Result() As ResultType
+		  return mResult
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub SavePrefs()
 		  dim j as new JSONItem
 		  
@@ -328,6 +335,10 @@ Protected Class UpdateChecker
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Private mResult As ResultType
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private PrefFile As FolderItem
 	#tag EndProperty
 
@@ -350,6 +361,15 @@ Protected Class UpdateChecker
 
 	#tag Constant, Name = kPreferencesName, Type = String, Dynamic = False, Default = \"Kaju_Preferences", Scope = Private
 	#tag EndConstant
+
+
+	#tag Enum, Name = ResultType, Type = Integer, Flags = &h0
+		None
+		  NoUpdateAvailable
+		  UpdateAvailable
+		  IgnoredUpdateAvailable
+		TryAgainLater
+	#tag EndEnum
 
 
 	#tag ViewBehavior
