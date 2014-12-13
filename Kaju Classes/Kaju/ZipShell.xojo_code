@@ -114,7 +114,7 @@ Inherits Shell
 		    
 		    cmd = Windows7zNativePath
 		    if cmd = "" then
-		      raise new Kaju.KajuException( Kaju.KajuException.kErrorCantLocateWindowsZipUtility )
+		      raise new Kaju.KajuException( Kaju.KajuException.kErrorCantLocateWindowsZipUtility, CurrentMethodName )
 		    end if
 		    
 		    cmd = """" + cmd + """ x -o""" + toFolder.NativePath + """ """ + file.NativePath + """"
@@ -187,7 +187,7 @@ Inherits Shell
 			      end if
 			      
 			      if f is nil or not f.Exists then
-			        raise new Kaju.KajuException( Kaju.KajuException.kErrorCantFindLibsFolder )
+			        raise new Kaju.KajuException( Kaju.KajuException.kErrorCantFindLibsFolder, CurrentMethodName )
 			      end if
 			      
 			      //

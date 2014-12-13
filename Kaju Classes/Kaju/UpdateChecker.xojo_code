@@ -48,7 +48,7 @@ Protected Class UpdateChecker
 		        //
 		        // Can't locate it
 		        //
-		        raise new Kaju.KajuException( Kaju.KajuException.kErrorCantLocateWindowsZipUtility )
+		        raise new Kaju.KajuException( Kaju.KajuException.kErrorCantLocateWindowsZipUtility, CurrentMethodName )
 		      end if
 		      
 		    end if
@@ -59,14 +59,14 @@ Protected Class UpdateChecker
 		  //
 		  
 		  if UpdateURL.Trim = "" then
-		    raise new KajuException( KajuException.kErrorMissingUpdateURL )
+		    raise new KajuException( KajuException.kErrorMissingUpdateURL, CurrentMethodName )
 		  end if
 		  
 		  dim http as new HTTPSecureSocket
 		  http.Secure = self.Secure
 		  dim raw as string = http.Get( self.UpdateURL, 5 )
 		  if raw = "" then
-		    raise new KajuException( KajuException.kErrorNoUpdateDataAvailable )
+		    raise new KajuException( KajuException.kErrorNoUpdateDataAvailable, CurrentMethodName )
 		  end if
 		  
 		  raw = raw.DefineEncoding( Encodings.UTF8 )
@@ -77,13 +77,13 @@ Protected Class UpdateChecker
 		  
 		  dim sig as string = firstLine.Left( kUpdatePacketMarker.Len )
 		  if StrComp( sig, kUpdatePacketMarker, 0 ) <> 0 then
-		    raise new KajuException( KajuException.kErrorIncorrectPacketMarker )
+		    raise new KajuException( KajuException.kErrorIncorrectPacketMarker, CurrentMethodName )
 		  end if
 		  
 		  sig = firstLine.Mid( sig.Len + 1 )
 		  sig = DecodeHex( sig )
 		  if not Crypto.RSAVerifySignature( raw, sig, ServerPublicRSAKey ) then
-		    raise new KajuException( KajuException.kErrorIncorrectPacketSignature )
+		    raise new KajuException( KajuException.kErrorIncorrectPacketSignature, CurrentMethodName )
 		  end if
 		  
 		  ProcessUpdateData( raw )
@@ -225,7 +225,7 @@ Protected Class UpdateChecker
 		  end if
 		  
 		  Exception err as RuntimeException
-		    raise new KajuException( KajuException.kErrorBadUpdateData )
+		    raise new KajuException( KajuException.kErrorBadUpdateData, CurrentMethodName )
 		    
 		End Sub
 	#tag EndMethod

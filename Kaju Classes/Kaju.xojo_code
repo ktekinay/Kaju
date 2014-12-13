@@ -185,7 +185,7 @@ Protected Module Kaju
 		  
 		  dim match as RegExMatch = rx.Search( version )
 		  if match is nil then // Something is wrong
-		    raise new KajuException( "Version is not properly formatted: " + version )
+		    raise new KajuException( "Version is not properly formatted: " + version, CurrentMethodName )
 		  end if
 		  
 		  version = match.SubExpressionString( 1 ) // Everything except the non-release data
