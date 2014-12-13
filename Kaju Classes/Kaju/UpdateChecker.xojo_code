@@ -270,8 +270,8 @@ Protected Class UpdateChecker
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h21
-		Private Function Result() As ResultType
+	#tag Method, Flags = &h0
+		Function Result() As ResultType
 		  return mResult
 		  
 		End Function
