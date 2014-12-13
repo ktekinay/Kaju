@@ -566,53 +566,6 @@ End
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h21
-		Private Sub WindowsUnzip(zipFile As FolderItem, extractTo As FolderItem)
-		  #if TargetWin32 then
-		    
-		    dim zipFilePath as string = zipFile.NativePath
-		    dim extractToPath as string = extractTo.NativePath
-		    
-		    dim zipParams(1) as variant
-		    zipParams(1) = zipFilePath
-		    dim extractParams(1) As variant
-		    extractParams(1) = extractToPath
-		    
-		    // If the extraction location does not exist create it
-		    dim fso as new OLEObject( "Scripting.FileSystemObject" )
-		    if not fso.FolderExists( extractToPath ) then
-		      fso.CreateFolder( extractToPath )
-		    end if
-		    
-		    dim objShell as new OLEObject( "Shell.Application" )
-		    dim myFolder1 as OLEObject = objShell.Invoke( "NameSpace", zipParams )
-		    dim myFolder2 as OLEObject = objShell.Invoke( "NameSpace", extractParams )
-		    
-		    
-		    //More info see: http://msdn.microsoft.com/en-us/library/windows/desktop/bb787868%28v=vs.85%29.aspx
-		    //Extract the contants of the zip file.
-		    myFolder2.CopyHere( myFolder1.Items )
-		    
-		    fso = Nil
-		    objShell = Nil
-		    
-		    AfterDecompress( zipFile, extractTo )
-		    
-		    Exception err as RuntimeException
-		      ShowError()
-		      
-		  #else
-		    
-		    #pragma unused zipFile
-		    #pragma unused extractTo
-		    
-		    raise new Kaju.KajuException( Kaju.KajuException.kErrorImproperFunction, CurrentMethodName )
-		    
-		  #endif
-		  
-		End Sub
-	#tag EndMethod
-
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
@@ -956,11 +909,7 @@ End
 		      targetFolder = file.Parent.Child( "decompressed" )
 		    #endif
 		    DeleteOnCancel.Append targetFolder
-		    #if TargetWin32 then
-		      WindowsUnzip( file, targetFolder )
-		    #else
-		      shZipper.Decompress( file, targetFolder )
-		    #endif
+		    shZipper.Decompress( file, targetFolder )
 		  end if
 		  
 		  

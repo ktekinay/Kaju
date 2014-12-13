@@ -100,22 +100,31 @@ Inherits Shell
 		  ResultFolderItem = toFolder
 		  ZipFile = file
 		  
-		  dim cmd as string
-		  #if TargetMacOS then
+		  if Mode <> 0 then
+		    mCurrentOperation = Operation.Decompressing
+		  end if
+		  
+		  #if TargetWin32 then
 		    
-		    cmd = kDittoCmd + "-x -k "
-		    cmd = cmd + file.ShellPath + " " + toFolder.ShellPath
+		    WindowsUnzip( file, toFolder )
 		    
-		  #elseif TargetLinux then
+		  #else
 		    
-		    cmd = kUnzipCmd + file.ShellPath + " -d " + toFolder.ShellPath
+		    dim cmd as string
+		    #if TargetMacOS then
+		      
+		      cmd = kDittoCmd + "-x -k "
+		      cmd = cmd + file.ShellPath + " " + toFolder.ShellPath
+		      
+		    #elseif TargetLinux then
+		      
+		      cmd = kUnzipCmd + file.ShellPath + " -d " + toFolder.ShellPath
+		      
+		    #endif
 		    
-		  #else // Windows
+		    Execute cmd
 		    
-		    cmd = Windows7zNativePath
-		    if cmd = "" then
-		      raise new Kaju.KajuException( Kaju.KajuException.kErrorCantLocateWindowsZipUtility, CurrentMethodName )
-		    end if
+		  #endif
 		    
 		    cmd = """" + cmd + """ x -o""" + toFolder.NativePath + """ """ + file.NativePath + """"
 		    
@@ -126,6 +135,63 @@ Inherits Shell
 		  if Mode <> 0 then
 		    mCurrentOperation = Operation.Decompressing
 		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub WindowsUnzip(zipFile As FolderItem, extractTo As FolderItem)
+		  #if TargetWin32 then
+		    
+		    dim zipFilePath as string = zipFile.NativePath
+		    dim extractToPath as string = extractTo.NativePath
+		    
+		    dim zipParams(1) as variant
+		    zipParams(1) = zipFilePath
+		    dim extractParams(1) As variant
+		    extractParams(1) = extractToPath
+		    
+		    //
+		    // If the extraction location does not exist create it
+		    //
+		    dim fso as new OLEObject( "Scripting.FileSystemObject" )
+		    if not fso.FolderExists( extractToPath ) then
+		      fso.CreateFolder( extractToPath )
+		    end if
+		    
+		    dim objShell as new OLEObject( "Shell.Application" )
+		    dim myFolder1 as OLEObject = objShell.Invoke( "NameSpace", zipParams )
+		    dim myFolder2 as OLEObject = objShell.Invoke( "NameSpace", extractParams )
+		    
+		    
+		    // More info see: http://msdn.microsoft.com/en-us/library/windows/desktop/bb787868%28v=vs.85%29.aspx
+		    // Also at http://msdn.microsoft.com/en-us/library/windows/desktop/bb787866%28v=vs.85%29.aspx
+		    
+		    //
+		    // Extract the contents of the zip file.
+		    //
+		    dim copyHereOpts as integer = _
+		    kCopyHereOptionNoProgressDialog + _
+		    kCopyHereOptionYesToAll + _
+		    kCopyHereOptionNoDirectoryConfirmation + _
+		    kCopyHereOptionNoDialogOnError
+		    myFolder2.CopyHere( myFolder1.Items, copyHereOpts )
+		    
+		    fso = Nil
+		    objShell = Nil
+		    
+		    DoCompleted()
+		    
+		    Exception err as RuntimeException
+		      RaiseEvent Error()
+		      
+		  #else
+		    
+		    #pragma unused zipFile
+		    #pragma unused extractTo
+		    
+		    raise new Kaju.KajuException( Kaju.KajuException.kErrorImproperFunction, CurrentMethodName )
+		    
+		  #endif
 		  
 		End Sub
 	#tag EndMethod
@@ -225,6 +291,18 @@ Inherits Shell
 		Private ZipFile As FolderItem
 	#tag EndProperty
 
+
+	#tag Constant, Name = kCopyHereOptionNoDialogOnError, Type = Double, Dynamic = False, Default = \"1024", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kCopyHereOptionNoDirectoryConfirmation, Type = Double, Dynamic = False, Default = \"512", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kCopyHereOptionNoProgressDialog, Type = Double, Dynamic = False, Default = \"4", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kCopyHereOptionYesToAll, Type = Double, Dynamic = False, Default = \"16", Scope = Private
+	#tag EndConstant
 
 	#tag Constant, Name = kDittoCmd, Type = String, Dynamic = False, Default = \"", Scope = Private
 		#Tag Instance, Platform = Mac OS, Language = Default, Definition  = \"/usr/bin/ditto "
