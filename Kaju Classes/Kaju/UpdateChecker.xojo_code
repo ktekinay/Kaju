@@ -28,6 +28,13 @@ Protected Class UpdateChecker
 		  //
 		  // The caller should be prepared to handle an exception in case of error.
 		  
+		  //
+		  // If there is already an update in progress, do nothing
+		  //
+		  if UpdateWindowIsOpen then
+		    return
+		  end if
+		  
 		  mDryRun = false
 		  
 		  //
@@ -321,7 +328,15 @@ Protected Class UpdateChecker
 		  // Allows a dry run with the update information that would otherwise be obtained
 		  // from the UpdateURL
 		  
+		  //
+		  // If there is already an update in progress, do nothing
+		  //
+		  if UpdateWindowIsOpen then
+		    return
+		  end if
+		  
 		  mDryRun = true
+		  
 		  do
 		    if ProcessUpdateData( jsonString, showWindow ) then
 		      exit do
