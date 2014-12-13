@@ -2,8 +2,9 @@
 Class KajuException
 Inherits RuntimeException
 	#tag Method, Flags = &h0
-		Sub Constructor(msg As String)
+		Sub Constructor(msg As String, methodName As String)
 		  self.Message = msg
+		  self.Stack.Append methodName
 		  
 		End Sub
 	#tag EndMethod
