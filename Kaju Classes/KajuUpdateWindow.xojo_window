@@ -550,6 +550,14 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub Show()
+		  // Override super's show
+		  
+		  super.Show
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub ShowError(msg As String = "")
 		  if msg.Trim = "" then
 		    msg = kGenericErrorMessage
@@ -564,6 +572,24 @@ End
 		  btnSkipVersion.Visible = false
 		  
 		  CurrentStage = Stage.UpdateError
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub ShowModal()
+		  // Override super's ShowModal
+		  
+		  // Do nothing
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub ShowModalWithin(parentWindow As Window)
+		  // Ovverride super's ShowModalWithin
+		  
+		  // Do nothing
+		  
+		  #pragma unused parentWindow
 		End Sub
 	#tag EndMethod
 
