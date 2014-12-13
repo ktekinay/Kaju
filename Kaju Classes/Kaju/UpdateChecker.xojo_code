@@ -529,6 +529,11 @@ Protected Class UpdateChecker
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
+		#tag ViewProperty
+			Name="UpdateWindowIsOpen"
+			Group="Behavior"
+			Type="Boolean"
+		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
 #tag EndClass
