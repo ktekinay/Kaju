@@ -389,6 +389,25 @@ Protected Class UpdateChecker
 		UpdateURL As String
 	#tag EndProperty
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  dim r as boolean
+			  
+			  dim lastIndex as integer = WindowCount - 1
+			  for i as integer = 0 to lastIndex
+			    if Window( i ) IsA KajuUpdateWindow then
+			      r = true
+			      exit
+			    end if
+			  next
+			  
+			  return r
+			End Get
+		#tag EndGetter
+		UpdateWindowIsOpen As Boolean
+	#tag EndComputedProperty
+
 
 	#tag Constant, Name = kErrorBadUpdateData, Type = String, Dynamic = False, Default = \"The update data cannot be read.", Scope = Private
 	#tag EndConstant
