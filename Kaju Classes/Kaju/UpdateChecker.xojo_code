@@ -389,6 +389,18 @@ Protected Class UpdateChecker
 	#tag EndProperty
 
 
+	#tag Constant, Name = kErrorBadUpdateData, Type = String, Dynamic = False, Default = \"The update data cannot be read.", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kErrorIncorrectPacketMarker, Type = String, Dynamic = False, Default = \"The update packet signature marker was incorrect.", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kErrorIncorrectPacketSignature, Type = String, Dynamic = False, Default = \"The RSA signature of the update packet cannot be verified.", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kErrorNoUpdateData, Type = String, Dynamic = False, Default = \"No update data was available.", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kPreferencesName, Type = String, Dynamic = False, Default = \"Kaju_Preferences", Scope = Private
 	#tag EndConstant
 
