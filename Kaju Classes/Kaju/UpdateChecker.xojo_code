@@ -191,7 +191,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function ProcessUpdateData(raw As String, showDialog As Boolean) As Boolean
+		Private Function ProcessUpdateData(raw As String, showWindow As Boolean) As Boolean
 		  // Return true if there was no error or if the user wants to try later
 		  
 		  mResult = ResultType.NoUpdateAvailable // Assume this is true
@@ -257,7 +257,7 @@ Protected Class UpdateChecker
 		    // There are updates
 		    //
 		    mResult = ResultType.UpdateAvailable
-		    if showDialog then
+		    if showWindow then
 		      KajuUpdateWindow.ChooseUpdate( self, info )
 		    end if
 		  end if
