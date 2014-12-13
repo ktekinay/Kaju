@@ -229,8 +229,8 @@ Protected Module Kaju
 	#tag EndMethod
 
 
-	#tag Property, Flags = &h21
-		Private mUpdateInProgress As Boolean
+	#tag Property, Flags = &h1
+		Attributes( hidden ) Protected mUpdateInProgress As Boolean
 	#tag EndProperty
 
 
