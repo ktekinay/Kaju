@@ -419,71 +419,6 @@ End
 	#tag EndEvent
 
 
-	#tag Method, Flags = &h21
-		Private Sub AfterDecompress(zipFile As FolderItem, containingFolder As FolderItem)
-		  //
-		  // No matter what, we don't need the zip file anymore
-		  //
-		  zipFile.Delete
-		  
-		  if CurrentStage = Stage.Cancelled then
-		    //
-		    // Do nothing
-		    //
-		    return
-		  end if
-		  
-		  dim cnt as integer = containingFolder.Count
-		  
-		  if cnt = 0 or SelectedUpdate is nil then
-		    
-		    ShowError()
-		    
-		  else
-		    
-		    //
-		    // Find the executable
-		    //
-		    dim item as FolderItem
-		    for i as integer = 1 to containingFolder.Count
-		      dim f as FolderItem = containingFolder.Item( i )
-		      dim name as string = f.Name
-		      dim leftChars as string = name.Left( 1 )
-		      if leftChars <> "." and leftChars <> "_" then
-		        item = f
-		        exit
-		      end if
-		    next
-		    
-		    if item is nil then
-		      
-		      ShowError()
-		      
-		    else
-		      
-		      Initiater = new Kaju.UpdateInitiater
-		      Initiater.ReplacementAppFolder = item
-		      Initiater.ReplacementExecutableName = SelectedUpdate.PlatformBinary.ExecutableName
-		      
-		      btnOK.Enabled = true
-		      btnOK.Caption = kQuitButton
-		      btnCancel.Visible = true
-		      btnCancel.Caption = kCancelButton
-		      
-		      pbProgress.Visible = false
-		      
-		      lblInstallMessage.Visible = true
-		      lblInstallMessage.Text = kReadyMessage
-		      
-		      CurrentStage = Stage.WaitingToQuit
-		      
-		    end if
-		    
-		  end if
-		  
-		End Sub
-	#tag EndMethod
-
 	#tag Method, Flags = &h0
 		Sub Cancel()
 		  CurrentStage = Stage.Cancelled
@@ -1037,7 +972,66 @@ End
 #tag Events shZipper
 	#tag Event
 		Sub DecompressCompleted(zipFile As FolderItem, containingFolder As FolderItem)
-		  AfterDecompress( zipFile, containingFolder )
+		  //
+		  // No matter what, we don't need the zip file anymore
+		  //
+		  zipFile.Delete
+		  
+		  if CurrentStage = Stage.Cancelled then
+		    //
+		    // Do nothing
+		    //
+		    return
+		  end if
+		  
+		  dim cnt as integer = containingFolder.Count
+		  
+		  if cnt = 0 or SelectedUpdate is nil then
+		    
+		    ShowError()
+		    
+		  else
+		    
+		    //
+		    // Find the executable
+		    //
+		    dim item as FolderItem
+		    for i as integer = 1 to containingFolder.Count
+		      dim f as FolderItem = containingFolder.Item( i )
+		      dim name as string = f.Name
+		      dim leftChars as string = name.Left( 1 )
+		      if leftChars <> "." and leftChars <> "_" then
+		        item = f
+		        exit
+		      end if
+		    next
+		    
+		    if item is nil then
+		      
+		      ShowError()
+		      
+		    else
+		      
+		      Initiater = new Kaju.UpdateInitiater
+		      Initiater.ReplacementAppFolder = item
+		      Initiater.ReplacementExecutableName = SelectedUpdate.PlatformBinary.ExecutableName
+		      
+		      btnOK.Enabled = true
+		      btnOK.Caption = kQuitButton
+		      btnCancel.Visible = true
+		      btnCancel.Caption = kCancelButton
+		      
+		      pbProgress.Visible = false
+		      
+		      lblInstallMessage.Visible = true
+		      lblInstallMessage.Text = kReadyMessage
+		      
+		      CurrentStage = Stage.WaitingToQuit
+		      
+		    end if
+		    
+		  end if
+		  
 		End Sub
 	#tag EndEvent
 	#tag Event
