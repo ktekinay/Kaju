@@ -38,28 +38,53 @@ Protected Class UpdateChecker
 		    raise new KajuException( KajuException.kErrorMissingUpdateURL, CurrentMethodName )
 		  end if
 		  
-		  dim http as new HTTPSecureSocket
-		  http.Secure = self.Secure
-		  dim raw as string = http.Get( self.UpdateURL, 5 )
-		  if raw = "" then
-		    raise new KajuException( KajuException.kErrorNoUpdateDataAvailable, CurrentMethodName )
-		  end if
+		  //
+		  // Repeat the check until we get data or the user gives up
+		  //
+		  do
+		    
+		    dim http as new HTTPSecureSocket
+		    http.Secure = self.Secure
+		    dim raw as string = http.Get( self.UpdateURL, 5 )
+		    if raw = "" then
+		      if HandleError( kErrorNoUpdateData ) then
+		        continue do
+		      else
+		        exit do
+		      end if
+		    end if
+		    
+		    raw = raw.DefineEncoding( Encodings.UTF8 )
+		    raw = ReplaceLineEndings( raw, EndOfLine.UNIX )
+		    
+		    dim firstLine as string = raw.NthField( EndOfLine.UNIX, 1 )
+		    raw = raw.Mid( firstLine.Len + 2 )
+		    
+		    dim sig as string = firstLine.Left( kUpdatePacketMarker.Len )
+		    if StrComp( sig, kUpdatePacketMarker, 0 ) <> 0 then
+		      if HandleError( kErrorIncorrectPacketMarker ) then
+		        continue do
+		      else
+		        exit do
+		      end if
+		    end if
+		    
+		    sig = firstLine.Mid( sig.Len + 1 )
+		    sig = DecodeHex( sig )
+		    if not Crypto.RSAVerifySignature( raw, sig, ServerPublicRSAKey ) then
+		      if HandleError( kErrorIncorrectPacketSignature ) then
+		        continue do
+		      else
+		        exit do
+		      end if
+		    end if
+		    
+		    if ProcessUpdateData( raw ) then
+		      exit do
+		    end if
+		  loop
 		  
-		  raw = raw.DefineEncoding( Encodings.UTF8 )
-		  raw = ReplaceLineEndings( raw, EndOfLine.UNIX )
-		  
-		  dim firstLine as string = raw.NthField( EndOfLine.UNIX, 1 )
-		  raw = raw.Mid( firstLine.Len + 2 )
-		  
-		  dim sig as string = firstLine.Left( kUpdatePacketMarker.Len )
-		  if StrComp( sig, kUpdatePacketMarker, 0 ) <> 0 then
-		    raise new KajuException( KajuException.kErrorIncorrectPacketMarker, CurrentMethodName )
-		  end if
-		  
-		  sig = firstLine.Mid( sig.Len + 1 )
-		  sig = DecodeHex( sig )
-		  if not Crypto.RSAVerifySignature( raw, sig, ServerPublicRSAKey ) then
-		    raise new KajuException( KajuException.kErrorIncorrectPacketSignature, CurrentMethodName )
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
@@ -159,7 +184,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub ProcessUpdateData(raw As String)
+		Private Function ProcessUpdateData(raw As String) As Boolean
 		  dim j as new JSONItem( raw )
 		  dim versionDouble as double = if( DryRun, -1.0, Kaju.VersionToDouble( Kaju.AppVersionString ) )
 		  
@@ -223,8 +248,10 @@ Protected Class UpdateChecker
 		    w.ChooseUpdate( self, info )
 		  end if
 		  
+		  return true
+		  
 		  Exception err as RuntimeException
-		    raise new KajuException( KajuException.kErrorBadUpdateData, CurrentMethodName )
+		    return not HandleError( kErrorBadUpdateData )
 		    
 		End Function
 	#tag EndMethod
