@@ -192,6 +192,8 @@ Protected Class UpdateChecker
 
 	#tag Method, Flags = &h21
 		Private Function ProcessUpdateData(raw As String, showDialog As Boolean) As Boolean
+		  // Return true if there was no error or if the user wants to try later
+		  
 		  mResult = ResultType.NoUpdateAvailable // Assume this is true
 		  
 		  dim j as new JSONItem( raw )
