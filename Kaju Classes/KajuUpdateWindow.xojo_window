@@ -685,6 +685,12 @@ End
 	#tag Constant, Name = kNewVersionMarker, Type = String, Dynamic = False, Default = \"<<NewVersion>>", Scope = Private
 	#tag EndConstant
 
+	#tag Constant, Name = kPaymentRequiredMessage, Type = String, Dynamic = False, Default = \"This update is not free and will require payment. Proceed anyway\?", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kProceedButton, Type = String, Dynamic = False, Default = \"Proceed", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kProcessingFileMessage, Type = String, Dynamic = False, Default = \"Processing file...", Scope = Private
 	#tag EndConstant
 
@@ -778,7 +784,23 @@ End
 		    //
 		    // The update has been chosen
 		    //
-		    SelectedUpdate = lbUpdates.RowTag( lbUpdates.ListIndex )
+		    
+		    if true then // Scope
+		      dim chosen as Kaju.UpdateInformation = lbUpdates.RowTag( lbUpdates.ListIndex )
+		      if chosen.RequiresPayment then
+		        dim dlg as new MessageDialog
+		        dlg.ActionButton.Visible = true
+		        dlg.ActionButton.Caption = kProceedButton
+		        dlg.CancelButton.Visible = true
+		        dlg.Message = kPaymentRequiredMessage
+		        dim btn as MessageDialogButton = dlg.ShowModalWithin( self )
+		        
+		        if btn is dlg.CancelButton then
+		          return
+		        end if
+		      end if
+		      SelectedUpdate = chosen
+		    end if
 		    
 		    btnOK.Enabled = false
 		    
