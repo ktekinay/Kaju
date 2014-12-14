@@ -34,7 +34,7 @@ Begin Window Window1
       Enabled         =   True
       Height          =   70
       HelpTag         =   ""
-      Index           =   -2147483648
+      Index           =   0
       InitialParent   =   ""
       Italic          =   False
       Left            =   20
@@ -252,6 +252,71 @@ Begin Window Window1
       Visible         =   True
       Width           =   183
    End
+   Begin PopupMenu pumStageAllowed
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      InitialValue    =   ""
+      Italic          =   False
+      Left            =   235
+      ListIndex       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   7
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   207
+      Underline       =   False
+      Visible         =   True
+      Width           =   171
+   End
+   Begin Label Label1
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   1
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   8
+      TabPanelIndex   =   0
+      Text            =   "Min. Stage Allowed:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   207
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   175
+   End
 End
 #tag EndWindow
 
@@ -283,6 +348,9 @@ End
 		  dim allowWindow as integer = if( cbAllowWindow.Value, Kaju.UpdateChecker.kAllowUpdateWindow, 0 )
 		  dim allowErrorDialog as integer = if( cbAllowErrorDialog.Value, Kaju.UpdateChecker.kAllowErrorDialog, 0 )
 		  Checker.AllowedInteraction = allowWindow + allowErrorDialog
+		  
+		  Checker.StageAllowed = pumStageAllowed.RowTag( pumStageAllowed.ListIndex )
+		  
 		  Checker.Execute()
 		  
 		  select case Checker.Result
@@ -310,6 +378,25 @@ End
 	#tag Event
 		Sub Action()
 		  Checker.ResetIgnored
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events pumStageAllowed
+	#tag Event
+		Sub Open()
+		  me.AddRow( "Development" )
+		  me.RowTag( me.ListCount - 1 ) = App.Development
+		  
+		  me.AddRow( "Alpha" )
+		  me.RowTag( me.ListCount - 1 ) = App.Alpha
+		  
+		  me.AddRow( "Beta" )
+		  me.RowTag( me.ListCount - 1 ) = App.Beta
+		  
+		  me.AddRow( "Final" )
+		  me.RowTag( me.ListCount - 1 ) = App.Final
+		  
+		  me.ListIndex = 0
 		End Sub
 	#tag EndEvent
 #tag EndEvents
