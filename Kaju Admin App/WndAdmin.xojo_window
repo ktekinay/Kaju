@@ -2081,7 +2081,14 @@ End
 		  for i as integer = 0 to lastIndex
 		    
 		    dim c as Control = self.Control( i )
-		    dim doIt as boolean = ControlDataField( c ) <> ""
+		    dim doIt as boolean
+		    if ControlDataField( c ) <> "" then
+		      doIt = true
+		    elseif c IsA btnStyle then
+		      doIt = true
+		    elseif c IsA btnList then
+		      doIt = true
+		    end if
 		    
 		    if doIt then
 		      RectControl( c ).Enabled = trueValue
@@ -2095,6 +2102,11 @@ End
 		  cbMacBinary.Enabled = trueValue
 		  cbWindowsBinary.Enabled = trueValue
 		  cbLinuxBinary.Enabled = trueValue
+		  
+		  btnDelete.Enabled = trueValue
+		  btnDuplicate.Enabled = trueValue
+		  
+		  btnBreak.Enabled = trueValue
 		  
 		  //
 		  // Set the platform summary
