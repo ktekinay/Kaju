@@ -78,41 +78,10 @@ Begin Window WndAdmin
    End
    Begin PushButton btnNew
       AutoDeactivate  =   True
-      Bold            =   False
-      ButtonStyle     =   "0"
+      Bold            =   True
+      ButtonStyle     =   "6"
       Cancel          =   False
-      Caption         =   "New"
-      Default         =   False
-      Enabled         =   True
-      Height          =   20
-      HelpTag         =   ""
-      Index           =   -2147483648
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   143
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   False
-      Scope           =   2
-      TabIndex        =   1
-      TabPanelIndex   =   0
-      TabStop         =   True
-      TextFont        =   "SmallSystem"
-      TextSize        =   0.0
-      TextUnit        =   0
-      Top             =   640
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
-   End
-   Begin PushButton btnDelete
-      AutoDeactivate  =   True
-      Bold            =   False
-      ButtonStyle     =   "0"
-      Cancel          =   False
-      Caption         =   "Delete..."
+      Caption         =   "+"
       Default         =   False
       Enabled         =   True
       Height          =   20
@@ -127,16 +96,47 @@ Begin Window WndAdmin
       LockRight       =   False
       LockTop         =   False
       Scope           =   2
-      TabIndex        =   2
+      TabIndex        =   1
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "SmallSystem"
+      TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   640
       Underline       =   False
       Visible         =   True
-      Width           =   80
+      Width           =   20
+   End
+   Begin PushButton btnDelete
+      AutoDeactivate  =   True
+      Bold            =   True
+      ButtonStyle     =   "6"
+      Cancel          =   False
+      Caption         =   "-"
+      Default         =   False
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   39
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   False
+      Scope           =   2
+      TabIndex        =   2
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   640
+      Underline       =   False
+      Visible         =   True
+      Width           =   20
    End
    Begin TextFieldChanger fldVersion
       AcceptTabs      =   False
@@ -241,7 +241,7 @@ Begin Window WndAdmin
       TextUnit        =   0
       Top             =   86
       Underline       =   False
-      Value           =   1
+      Value           =   0
       Visible         =   True
       Width           =   653
       Begin TextAreaChanger fldReleaseNotes
@@ -1131,7 +1131,7 @@ Begin Window WndAdmin
          Index           =   -2147483648
          InitialParent   =   "TabPanel1"
          Italic          =   False
-         Left            =   686
+         Left            =   601
          LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   False
@@ -1175,7 +1175,7 @@ Begin Window WndAdmin
          Index           =   3
          InitialParent   =   "TabPanel1"
          Italic          =   False
-         Left            =   764
+         Left            =   653
          LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   False
@@ -1522,6 +1522,138 @@ Begin Window WndAdmin
          Visible         =   False
          Width           =   470
       End
+      Begin BevelButton btnList
+         AcceptFocus     =   True
+         AutoDeactivate  =   True
+         BackColor       =   &c00000000
+         Bevel           =   0
+         Bold            =   False
+         ButtonType      =   0
+         Caption         =   "ul"
+         CaptionAlign    =   3
+         CaptionDelta    =   0
+         CaptionPlacement=   1
+         Enabled         =   True
+         HasBackColor    =   False
+         HasMenu         =   0
+         Height          =   22
+         HelpTag         =   "Unordered list"
+         Icon            =   0
+         IconAlign       =   0
+         IconDX          =   0
+         IconDY          =   0
+         Index           =   0
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   699
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MenuValue       =   0
+         Scope           =   0
+         TabIndex        =   9
+         TabPanelIndex   =   1
+         TabStop         =   True
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   136
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   26
+      End
+      Begin BevelButton btnList
+         AcceptFocus     =   True
+         AutoDeactivate  =   True
+         BackColor       =   &c00000000
+         Bevel           =   0
+         Bold            =   False
+         ButtonType      =   0
+         Caption         =   "ol"
+         CaptionAlign    =   3
+         CaptionDelta    =   0
+         CaptionPlacement=   1
+         Enabled         =   True
+         HasBackColor    =   False
+         HasMenu         =   0
+         Height          =   22
+         HelpTag         =   "Ordered list"
+         Icon            =   0
+         IconAlign       =   0
+         IconDX          =   0
+         IconDY          =   0
+         Index           =   1
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   727
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MenuValue       =   0
+         Scope           =   0
+         TabIndex        =   10
+         TabPanelIndex   =   1
+         TabStop         =   True
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   136
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   26
+      End
+      Begin BevelButton btnStyle
+         AcceptFocus     =   True
+         AutoDeactivate  =   True
+         BackColor       =   &c00000000
+         Bevel           =   0
+         Bold            =   False
+         ButtonType      =   0
+         Caption         =   "li"
+         CaptionAlign    =   3
+         CaptionDelta    =   0
+         CaptionPlacement=   1
+         Enabled         =   True
+         HasBackColor    =   False
+         HasMenu         =   0
+         Height          =   22
+         HelpTag         =   "List item"
+         Icon            =   0
+         IconAlign       =   0
+         IconDX          =   0
+         IconDY          =   0
+         Index           =   6
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   755
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MenuValue       =   0
+         Scope           =   0
+         TabIndex        =   11
+         TabPanelIndex   =   1
+         TabStop         =   True
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   136
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   26
+      End
    End
    Begin TextFieldChanger fldAppName
       AcceptTabs      =   False
@@ -1839,6 +1971,37 @@ Begin Window WndAdmin
       Visible         =   True
       Width           =   85
    End
+   Begin PushButton btnDuplicate
+      AutoDeactivate  =   True
+      Bold            =   False
+      ButtonStyle     =   "0"
+      Cancel          =   False
+      Caption         =   "Dupe"
+      Default         =   False
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   158
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   False
+      Scope           =   2
+      TabIndex        =   15
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "SmallSystem"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   641
+      Underline       =   False
+      Visible         =   True
+      Width           =   65
+   End
 End
 #tag EndWindow
 
@@ -1918,7 +2081,14 @@ End
 		  for i as integer = 0 to lastIndex
 		    
 		    dim c as Control = self.Control( i )
-		    dim doIt as boolean = ControlDataField( c ) <> ""
+		    dim doIt as boolean
+		    if ControlDataField( c ) <> "" then
+		      doIt = true
+		    elseif c IsA btnStyle then
+		      doIt = true
+		    elseif c IsA btnList then
+		      doIt = true
+		    end if
 		    
 		    if doIt then
 		      RectControl( c ).Enabled = trueValue
@@ -1932,6 +2102,11 @@ End
 		  cbMacBinary.Enabled = trueValue
 		  cbWindowsBinary.Enabled = trueValue
 		  cbLinuxBinary.Enabled = trueValue
+		  
+		  btnDelete.Enabled = trueValue
+		  btnDuplicate.Enabled = trueValue
+		  
+		  btnBreak.Enabled = trueValue
 		  
 		  //
 		  // Set the platform summary
@@ -1971,11 +2146,14 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub ApplyStyle(tag As String)
+		Private Sub ApplyStyle(tag As String, insertEOL As Boolean = False)
+		  dim eol as string = EndOfLine
+		  eol = if( insertEOL, eol, "" )
+		  
 		  tag = tag.Lowercase
 		  
-		  dim openTag as string = "<" + tag + ">"
-		  dim closeTag as string = "</" + tag + ">"
+		  dim openTag as string = "<" + tag + ">" + eol
+		  dim closeTag as string = eol + "</" + tag + ">"
 		  
 		  dim s as string = fldReleaseNotes.SelText
 		  dim selStart as integer = fldReleaseNotes.SelStart
@@ -2197,6 +2375,24 @@ End
 		  UpdateWindowTitle
 		  return r
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub DuplicateVersion()
+		  dim curIndex as integer = lbVersions.ListIndex
+		  if curIndex = -1 then
+		    return
+		  end if
+		  
+		  StoreFieldsToVersionRow()
+		  
+		  dim tag as Variant = lbVersions.RowTag( curIndex )
+		  dim listing as string = lbVersions.Cell( curIndex, 0 )
+		  dim newIndex as integer = curIndex + 1
+		  lbVersions.InsertRow( newIndex, listing )
+		  lbVersions.RowTag( newIndex ) = tag
+		  lbVersions.ListIndex = newIndex
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
@@ -2678,6 +2874,16 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events btnList
+	#tag Event
+		Sub Action(index as Integer)
+		  dim tag as string = me.Caption
+		  ApplyStyle( tag, true )
+		  
+		  #pragma unused index
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events tmrUpdateReleaseNotesPreview
 	#tag Event
 		Sub Action()
@@ -2759,6 +2965,13 @@ End
 		  Exception err As RuntimeException
 		    MsgBox "Could not export data."
 		    
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnDuplicate
+	#tag Event
+		Sub Action()
+		  DuplicateVersion
 		End Sub
 	#tag EndEvent
 #tag EndEvents
