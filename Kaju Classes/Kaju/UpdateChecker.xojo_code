@@ -101,21 +101,33 @@ Protected Class UpdateChecker
 		  
 		  dim r as boolean
 		  
-		  dim dlg as new MessageDialog
-		  dlg.ActionButton.Visible = true
-		  dlg.ActionButton.Caption = "Try Again"
-		  dlg.CancelButton.Visible = true
-		  dlg.CancelButton.Caption = "Later"
-		  dlg.AlternateActionButton.Visible = false
-		  dlg.Message = "An error has occurred. Would you like to try again now or later?"
-		  dlg.Explanation = msg
+		  if IsAllowed( kAllowErrorDialog ) then
+		    //
+		    // The dialog is allowed
+		    //
+		    dim dlg as new MessageDialog
+		    dlg.ActionButton.Visible = true
+		    dlg.ActionButton.Caption = "Try Again"
+		    dlg.CancelButton.Visible = true
+		    dlg.CancelButton.Caption = "Later"
+		    dlg.AlternateActionButton.Visible = false
+		    dlg.Message = "An error has occurred. Would you like to try again now or later?"
+		    dlg.Explanation = msg
+		    
+		    dim btn as MessageDialogButton = dlg.ShowModal
+		    if btn is dlg.ActionButton then
+		      r = true
+		    else
+		      r = false
+		    end if
+		    
+		  end if
 		  
-		  dim btn as MessageDialogButton = dlg.ShowModal
-		  if btn is dlg.ActionButton then
-		    r = true
-		  else
-		    r = false
-		    mResult = ResultType.TryAgainLater
+		  //
+		  // If the dialog wasn't allowed, just try again later
+		  //
+		  if not r then
+		    mResult = ResultType.Error
 		  end if
 		  
 		  return r
@@ -130,9 +142,14 @@ Protected Class UpdateChecker
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Function IsRequiredUpdate() As Boolean
-		  return mIsRequiredUpdate
+	#tag Method, Flags = &h21
+		Private Function IsAllowed(testValue As Integer) As Boolean
+		  if testValue = 0 then // Special case
+		    return AllowedInteraction = 0
+		  else
+		    dim result as integer = AllowedInteraction and testValue
+		    return result = testValue
+		  end if
 		End Function
 	#tag EndMethod
 
@@ -256,8 +273,8 @@ Protected Class UpdateChecker
 		    //
 		    // There are updates
 		    //
-		    mResult = ResultType.UpdateAvailable
-		    if showWindow then
+		    mResult = if( updateIsRequired, ResultType.RequiredUpdateAvailable, ResultType.UpdateAvailable )
+		    if IsAllowed( kAllowUpdateWindow ) then
 		      KajuUpdateWindow.ChooseUpdate( self, info )
 		    end if
 		  end if
@@ -363,6 +380,10 @@ Protected Class UpdateChecker
 
 
 	#tag Property, Flags = &h0
+		AllowedInteraction As UInt32 = kAllowAll
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		DefaultImage As Picture
 	#tag EndProperty
 
@@ -429,6 +450,18 @@ Protected Class UpdateChecker
 		UpdateWindowIsOpen As Boolean
 	#tag EndComputedProperty
 
+
+	#tag Constant, Name = kAllowAll, Type = Double, Dynamic = False, Default = \"&hFFFF", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kAllowErrorDialog, Type = Double, Dynamic = False, Default = \"&b00001000", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kAllowNone, Type = Double, Dynamic = False, Default = \"0", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kAllowUpdateWindow, Type = Double, Dynamic = False, Default = \"&b10000000", Scope = Public
+	#tag EndConstant
 
 	#tag Constant, Name = kErrorBadUpdateData, Type = String, Dynamic = False, Default = \"The update data cannot be read.", Scope = Private
 	#tag EndConstant
