@@ -78,41 +78,10 @@ Begin Window WndAdmin
    End
    Begin PushButton btnNew
       AutoDeactivate  =   True
-      Bold            =   False
-      ButtonStyle     =   "0"
+      Bold            =   True
+      ButtonStyle     =   "6"
       Cancel          =   False
-      Caption         =   "New"
-      Default         =   False
-      Enabled         =   True
-      Height          =   20
-      HelpTag         =   ""
-      Index           =   -2147483648
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   143
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   False
-      Scope           =   2
-      TabIndex        =   1
-      TabPanelIndex   =   0
-      TabStop         =   True
-      TextFont        =   "SmallSystem"
-      TextSize        =   0.0
-      TextUnit        =   0
-      Top             =   640
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
-   End
-   Begin PushButton btnDelete
-      AutoDeactivate  =   True
-      Bold            =   False
-      ButtonStyle     =   "0"
-      Cancel          =   False
-      Caption         =   "Delete..."
+      Caption         =   "+"
       Default         =   False
       Enabled         =   True
       Height          =   20
@@ -127,16 +96,47 @@ Begin Window WndAdmin
       LockRight       =   False
       LockTop         =   False
       Scope           =   2
-      TabIndex        =   2
+      TabIndex        =   1
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "SmallSystem"
+      TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   640
       Underline       =   False
       Visible         =   True
-      Width           =   80
+      Width           =   20
+   End
+   Begin PushButton btnDelete
+      AutoDeactivate  =   True
+      Bold            =   True
+      ButtonStyle     =   "6"
+      Cancel          =   False
+      Caption         =   "-"
+      Default         =   False
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   39
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   False
+      Scope           =   2
+      TabIndex        =   2
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   640
+      Underline       =   False
+      Visible         =   True
+      Width           =   20
    End
    Begin TextFieldChanger fldVersion
       AcceptTabs      =   False
