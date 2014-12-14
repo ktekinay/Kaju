@@ -241,7 +241,7 @@ Begin Window WndAdmin
       TextUnit        =   0
       Top             =   86
       Underline       =   False
-      Value           =   1
+      Value           =   0
       Visible         =   True
       Width           =   653
       Begin TextAreaChanger fldReleaseNotes
@@ -1131,7 +1131,7 @@ Begin Window WndAdmin
          Index           =   -2147483648
          InitialParent   =   "TabPanel1"
          Italic          =   False
-         Left            =   686
+         Left            =   601
          LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   False
@@ -1175,7 +1175,7 @@ Begin Window WndAdmin
          Index           =   3
          InitialParent   =   "TabPanel1"
          Italic          =   False
-         Left            =   764
+         Left            =   653
          LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   False
@@ -1521,6 +1521,138 @@ Begin Window WndAdmin
          UseFocusRing    =   True
          Visible         =   False
          Width           =   470
+      End
+      Begin BevelButton btnList
+         AcceptFocus     =   True
+         AutoDeactivate  =   True
+         BackColor       =   &c00000000
+         Bevel           =   0
+         Bold            =   False
+         ButtonType      =   0
+         Caption         =   "ul"
+         CaptionAlign    =   3
+         CaptionDelta    =   0
+         CaptionPlacement=   1
+         Enabled         =   True
+         HasBackColor    =   False
+         HasMenu         =   0
+         Height          =   22
+         HelpTag         =   "Unordered list"
+         Icon            =   0
+         IconAlign       =   0
+         IconDX          =   0
+         IconDY          =   0
+         Index           =   0
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   699
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MenuValue       =   0
+         Scope           =   0
+         TabIndex        =   9
+         TabPanelIndex   =   1
+         TabStop         =   True
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   136
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   26
+      End
+      Begin BevelButton btnList
+         AcceptFocus     =   True
+         AutoDeactivate  =   True
+         BackColor       =   &c00000000
+         Bevel           =   0
+         Bold            =   False
+         ButtonType      =   0
+         Caption         =   "ol"
+         CaptionAlign    =   3
+         CaptionDelta    =   0
+         CaptionPlacement=   1
+         Enabled         =   True
+         HasBackColor    =   False
+         HasMenu         =   0
+         Height          =   22
+         HelpTag         =   "Ordered list"
+         Icon            =   0
+         IconAlign       =   0
+         IconDX          =   0
+         IconDY          =   0
+         Index           =   1
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   727
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MenuValue       =   0
+         Scope           =   0
+         TabIndex        =   10
+         TabPanelIndex   =   1
+         TabStop         =   True
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   136
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   26
+      End
+      Begin BevelButton btnStyle
+         AcceptFocus     =   True
+         AutoDeactivate  =   True
+         BackColor       =   &c00000000
+         Bevel           =   0
+         Bold            =   False
+         ButtonType      =   0
+         Caption         =   "li"
+         CaptionAlign    =   3
+         CaptionDelta    =   0
+         CaptionPlacement=   1
+         Enabled         =   True
+         HasBackColor    =   False
+         HasMenu         =   0
+         Height          =   22
+         HelpTag         =   "List item"
+         Icon            =   0
+         IconAlign       =   0
+         IconDX          =   0
+         IconDY          =   0
+         Index           =   6
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   755
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MenuValue       =   0
+         Scope           =   0
+         TabIndex        =   11
+         TabPanelIndex   =   1
+         TabStop         =   True
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   136
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   26
       End
    End
    Begin TextFieldChanger fldAppName
@@ -2727,6 +2859,16 @@ End
 		  end if
 		  
 		  #pragma unused action
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnList
+	#tag Event
+		Sub Action(index as Integer)
+		  dim tag as string = me.Caption
+		  ApplyStyle( tag, true )
+		  
+		  #pragma unused index
 		End Sub
 	#tag EndEvent
 #tag EndEvents
