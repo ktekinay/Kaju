@@ -1971,11 +1971,14 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub ApplyStyle(tag As String)
+		Private Sub ApplyStyle(tag As String, insertEOL As Boolean = False)
+		  dim eol as string = EndOfLine
+		  eol = if( insertEOL, eol, "" )
+		  
 		  tag = tag.Lowercase
 		  
-		  dim openTag as string = "<" + tag + ">"
-		  dim closeTag as string = "</" + tag + ">"
+		  dim openTag as string = "<" + tag + ">" + eol
+		  dim closeTag as string = eol + "</" + tag + ">"
 		  
 		  dim s as string = fldReleaseNotes.SelText
 		  dim selStart as integer = fldReleaseNotes.SelStart
