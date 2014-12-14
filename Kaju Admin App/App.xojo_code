@@ -20,7 +20,6 @@ Inherits Application
 		  end if
 		  
 		  dim u as new Kaju.UpdateChecker( f )
-		  u.DefaultImage = SomePic
 		  
 		  dim r as double
 		  
