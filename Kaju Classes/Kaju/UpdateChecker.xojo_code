@@ -22,7 +22,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Execute(showWindow As Boolean = True)
+		Sub Execute()
 		  // Pull the data from the URL, check it, and preset the window if needed
 		  // Returns true if the app should quit in preparation of the update.
 		  //
@@ -86,7 +86,7 @@ Protected Class UpdateChecker
 		      end if
 		    end if
 		    
-		    if ProcessUpdateData( raw, showWindow ) then
+		    if ProcessUpdateData( raw ) then
 		      exit do
 		    end if
 		  loop
@@ -191,7 +191,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function ProcessUpdateData(raw As String, showWindow As Boolean) As Boolean
+		Private Function ProcessUpdateData(raw As String) As Boolean
 		  // Return true if there was no error or if the user wants to try later
 		  
 		  mResult = ResultType.NoUpdateAvailable // Assume this is true
@@ -330,7 +330,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub TestUpdate(jsonString As String, showWindow As Boolean = True)
+		Sub TestUpdate(jsonString As String)
 		  // Allows a dry run with the update information that would otherwise be obtained
 		  // from the UpdateURL
 		  
@@ -344,7 +344,7 @@ Protected Class UpdateChecker
 		  mDryRun = true
 		  
 		  do
-		    if ProcessUpdateData( jsonString, showWindow ) then
+		    if ProcessUpdateData( jsonString ) then
 		      exit do
 		    end if
 		  loop
