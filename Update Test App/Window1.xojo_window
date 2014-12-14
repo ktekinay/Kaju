@@ -86,7 +86,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   195
+      Top             =   272
       Underline       =   False
       Visible         =   True
       Width           =   129
@@ -151,7 +151,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   207
+      Top             =   284
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -188,10 +188,10 @@ Begin Window Window1
       Visible         =   True
       Width           =   139
    End
-   Begin CheckBox cbShowWindow
+   Begin CheckBox cbAllowWindow
       AutoDeactivate  =   True
       Bold            =   False
-      Caption         =   "Show Window"
+      Caption         =   "Allow Update Window"
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
@@ -218,7 +218,39 @@ Begin Window Window1
       Underline       =   False
       Value           =   True
       Visible         =   True
-      Width           =   141
+      Width           =   183
+   End
+   Begin CheckBox cbAllowErrorDialog
+      AutoDeactivate  =   True
+      Bold            =   False
+      Caption         =   "Allow Error Dialog"
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      State           =   1
+      TabIndex        =   6
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   175
+      Underline       =   False
+      Value           =   True
+      Visible         =   True
+      Width           =   183
    End
 End
 #tag EndWindow
@@ -248,7 +280,10 @@ End
 		Sub Action()
 		  Checker.HonorIgnored = cbHonorIgnored.Value
 		  
-		  Checker.Execute( cbShowWindow.Value )
+		  dim allowWindow as integer = if( cbAllowWindow.Value, Kaju.UpdateChecker.kAllowUpdateWindow, 0 )
+		  dim allowErrorDialog as integer = if( cbAllowErrorDialog.Value, Kaju.UpdateChecker.kAllowErrorDialog, 0 )
+		  Checker.AllowedInteraction = allowWindow + allowErrorDialog
+		  Checker.Execute()
 		  
 		  select case Checker.Result
 		  case Kaju.UpdateChecker.ResultType.IgnoredUpdateAvailable
@@ -257,12 +292,14 @@ End
 		  case Kaju.UpdateChecker.ResultType.NoUpdateAvailable
 		    lblResult.Text = "No updates available"
 		    
-		  case Kaju.UpdateChecker.ResultType.TryAgainLater
+		  case Kaju.UpdateChecker.ResultType.Error
 		    lblResult.Text = "Error, user chose to try later"
 		    
 		  case Kaju.UpdateChecker.ResultType.UpdateAvailable
 		    lblResult.Text = "Updates available"
 		    
+		  case Kaju.UpdateChecker.ResultType.RequiredUpdateAvailable
+		    lblResult.Text = "Required update available"
 		  end
 		  
 		  return
