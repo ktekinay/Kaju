@@ -2096,7 +2096,21 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub DeleteVersion()
+		  dim curIndex as integer = lbVersions.ListIndex
+		  if curIndex = -1 then
+		    return
+		  end if
 		  
+		  lbVersions.ListIndex = -1
+		  lbVersions.RemoveRow( curIndex )
+		  
+		  if curIndex > 0 then
+		    curIndex = curIndex - 1
+		  end if
+		  
+		  if curIndex < lbVersions.ListCount then
+		    lbVersions.ListIndex = curIndex
+		  end if
 		End Sub
 	#tag EndMethod
 

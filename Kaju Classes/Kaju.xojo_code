@@ -118,13 +118,6 @@ Protected Module Kaju
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
-		Protected Function UpdateInProgress() As Boolean
-		  return mUpdateInProgress
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h1
 		Protected Function VersionStringFor(majorVersion As Integer, minorVersion As Integer, bugVersion As Integer) As String
 		  return VersionStringFor( majorVersion, minorVersion, bugVersion, App.Final, 0 )
 		End Function
@@ -227,11 +220,6 @@ Protected Module Kaju
 		  
 		End Function
 	#tag EndMethod
-
-
-	#tag Property, Flags = &h1
-		Attributes( hidden ) Protected mUpdateInProgress As Boolean
-	#tag EndProperty
 
 
 	#tag Constant, Name = kUpdatePacketMarker, Type = String, Dynamic = False, Default = \"KAJU ", Scope = Protected

@@ -28,6 +28,13 @@ Protected Class UpdateChecker
 		  //
 		  // The caller should be prepared to handle an exception in case of error.
 		  
+		  //
+		  // If there is already an update in progress, do nothing
+		  //
+		  if UpdateWindowIsOpen then
+		    return
+		  end if
+		  
 		  mDryRun = false
 		  
 		  //
@@ -94,21 +101,33 @@ Protected Class UpdateChecker
 		  
 		  dim r as boolean
 		  
-		  dim dlg as new MessageDialog
-		  dlg.ActionButton.Visible = true
-		  dlg.ActionButton.Caption = "Try Again"
-		  dlg.CancelButton.Visible = true
-		  dlg.CancelButton.Caption = "Later"
-		  dlg.AlternateActionButton.Visible = false
-		  dlg.Message = "An error has occurred. Would you like to try again now or later?"
-		  dlg.Explanation = msg
+		  if IsAllowed( kAllowErrorDialog ) then
+		    //
+		    // The dialog is allowed
+		    //
+		    dim dlg as new MessageDialog
+		    dlg.ActionButton.Visible = true
+		    dlg.ActionButton.Caption = "Try Again"
+		    dlg.CancelButton.Visible = true
+		    dlg.CancelButton.Caption = "Later"
+		    dlg.AlternateActionButton.Visible = false
+		    dlg.Message = "An error has occurred. Would you like to try again now or later?"
+		    dlg.Explanation = msg
+		    
+		    dim btn as MessageDialogButton = dlg.ShowModal
+		    if btn is dlg.ActionButton then
+		      r = true
+		    else
+		      r = false
+		    end if
+		    
+		  end if
 		  
-		  dim btn as MessageDialogButton = dlg.ShowModal
-		  if btn is dlg.ActionButton then
-		    r = true
-		  else
-		    r = false
-		    mResult = ResultType.TryAgainLater
+		  //
+		  // If the dialog wasn't allowed, just try again later
+		  //
+		  if not r then
+		    mResult = ResultType.Error
 		  end if
 		  
 		  return r
@@ -123,9 +142,14 @@ Protected Class UpdateChecker
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Function IsRequiredUpdate() As Boolean
-		  return mIsRequiredUpdate
+	#tag Method, Flags = &h21
+		Private Function IsAllowed(testValue As Integer) As Boolean
+		  if testValue = 0 then // Special case
+		    return AllowedInteraction = 0
+		  else
+		    dim result as integer = AllowedInteraction and testValue
+		    return result = testValue
+		  end if
 		End Function
 	#tag EndMethod
 
@@ -185,6 +209,8 @@ Protected Class UpdateChecker
 
 	#tag Method, Flags = &h21
 		Private Function ProcessUpdateData(raw As String) As Boolean
+		  // Return true if there was no error or if the user wants to try later
+		  
 		  mResult = ResultType.NoUpdateAvailable // Assume this is true
 		  
 		  dim j as new JSONItem( raw )
@@ -195,6 +221,7 @@ Protected Class UpdateChecker
 		  //
 		  dim ub as integer = j.Count - 1
 		  dim info() as Kaju.UpdateInformation
+		  dim updateIsRequired as boolean
 		  for i as integer = 0 to ub
 		    dim thisInfo as new Kaju.UpdateInformation( j( i ) )
 		    
@@ -220,9 +247,18 @@ Protected Class UpdateChecker
 		    end if
 		    
 		    //
-		    // An ignored version?
+		    // See if this update is required
 		    //
-		    if HonorIgnored and IgnoreVersionsPref.IndexOf( thisInfo.Version ) <> -1 then
+		    dim thisUpdateIsRequired as boolean
+		    if thisInfo.MinimumRequiredVersion <> "" and Kaju.VersionToDouble( thisInfo.MinimumRequiredVersion ) > versionDouble then
+		      thisUpdateIsRequired = true
+		      updateIsRequired = true
+		    end if
+		    
+		    //
+		    // An ignored version? (but only if not required)
+		    //
+		    if not thisUpdateIsRequired and HonorIgnored and IgnoreVersionsPref.IndexOf( thisInfo.Version ) <> -1 then
 		      mResult = ResultType.IgnoredUpdateAvailable
 		      continue for i
 		    end if
@@ -231,13 +267,6 @@ Protected Class UpdateChecker
 		    // This is a viable update
 		    //
 		    
-		    //
-		    // See if these update are required
-		    //
-		    if thisInfo.MinimumRequiredVersion <> "" and Kaju.VersionToDouble( thisInfo.MinimumRequiredVersion ) > versionDouble then
-		      mIsRequiredUpdate = true
-		    end if
-		    
 		    info.Append thisInfo
 		  next
 		  
@@ -245,10 +274,10 @@ Protected Class UpdateChecker
 		    //
 		    // There are updates
 		    //
-		    mResult = ResultType.UpdateAvailable
-		    Kaju.mUpdateInProgress = true
-		    dim w as new KajuUpdateWindow
-		    w.ChooseUpdate( self, info )
+		    mResult = if( updateIsRequired, ResultType.RequiredUpdateAvailable, ResultType.UpdateAvailable )
+		    if IsAllowed( kAllowUpdateWindow ) then
+		      KajuUpdateWindow.ChooseUpdate( self, info )
+		    end if
 		  end if
 		  
 		  return true
@@ -265,8 +294,8 @@ Protected Class UpdateChecker
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h21
-		Private Function Result() As ResultType
+	#tag Method, Flags = &h0
+		Function Result() As ResultType
 		  return mResult
 		  
 		End Function
@@ -323,7 +352,15 @@ Protected Class UpdateChecker
 		  // Allows a dry run with the update information that would otherwise be obtained
 		  // from the UpdateURL
 		  
+		  //
+		  // If there is already an update in progress, do nothing
+		  //
+		  if UpdateWindowIsOpen then
+		    return
+		  end if
+		  
 		  mDryRun = true
+		  
 		  do
 		    if ProcessUpdateData( jsonString ) then
 		      exit do
@@ -342,6 +379,10 @@ Protected Class UpdateChecker
 		Event RequiredUpdateDeclined()
 	#tag EndHook
 
+
+	#tag Property, Flags = &h0
+		AllowedInteraction As UInt32 = kAllowAll
+	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		DefaultImage As Picture
@@ -364,11 +405,7 @@ Protected Class UpdateChecker
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private mIsRequiredUpdate As Boolean
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mResult As ResultType
+		Private mResult As ResultType = ResultType.NotYetChecked
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -391,6 +428,37 @@ Protected Class UpdateChecker
 		UpdateURL As String
 	#tag EndProperty
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  dim r as boolean
+			  
+			  dim lastIndex as integer = WindowCount - 1
+			  for i as integer = 0 to lastIndex
+			    if Window( i ) IsA KajuUpdateWindow then
+			      r = true
+			      exit
+			    end if
+			  next
+			  
+			  return r
+			End Get
+		#tag EndGetter
+		UpdateWindowIsOpen As Boolean
+	#tag EndComputedProperty
+
+
+	#tag Constant, Name = kAllowAll, Type = Double, Dynamic = False, Default = \"&hFFFF", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kAllowErrorDialog, Type = Double, Dynamic = False, Default = \"&b00001000", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kAllowNone, Type = Double, Dynamic = False, Default = \"0", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kAllowUpdateWindow, Type = Double, Dynamic = False, Default = \"&b10000000", Scope = Public
+	#tag EndConstant
 
 	#tag Constant, Name = kErrorBadUpdateData, Type = String, Dynamic = False, Default = \"The update data cannot be read.", Scope = Private
 	#tag EndConstant
@@ -409,11 +477,12 @@ Protected Class UpdateChecker
 
 
 	#tag Enum, Name = ResultType, Type = Integer, Flags = &h0
-		None
-		  NoUpdateAvailable
-		  UpdateAvailable
+		NotYetChecked = -9999
+		  Error = -1
+		  NoUpdateAvailable = 0
 		  IgnoredUpdateAvailable
-		TryAgainLater
+		  UpdateAvailable
+		RequiredUpdateAvailable
 	#tag EndEnum
 
 
@@ -490,6 +559,11 @@ Protected Class UpdateChecker
 			Group="Behavior"
 			Type="String"
 			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="UpdateWindowIsOpen"
+			Group="Behavior"
+			Type="Boolean"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

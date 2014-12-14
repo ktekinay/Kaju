@@ -10,7 +10,7 @@ Begin Window KajuUpdateWindow
    FullScreenButton=   False
    HasBackColor    =   False
    Height          =   600
-   ImplicitInstance=   False
+   ImplicitInstance=   True
    LiveResize      =   False
    MacProcID       =   0
    MaxHeight       =   32000
@@ -416,7 +416,6 @@ End
 		    Kaju.DeleteRecursive( f )
 		  next
 		  
-		  Kaju.mUpdateInProgress = false
 		End Sub
 	#tag EndEvent
 
@@ -551,6 +550,14 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub Show()
+		  // Override super's show
+		  
+		  super.Show
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub ShowError(msg As String = "")
 		  if msg.Trim = "" then
 		    msg = kGenericErrorMessage
@@ -565,6 +572,24 @@ End
 		  btnSkipVersion.Visible = false
 		  
 		  CurrentStage = Stage.UpdateError
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub ShowModal()
+		  // Override super's ShowModal
+		  
+		  // Do nothing
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub ShowModalWithin(parentWindow As Window)
+		  // Ovverride super's ShowModalWithin
+		  
+		  // Do nothing
+		  
+		  #pragma unused parentWindow
 		End Sub
 	#tag EndMethod
 
@@ -660,6 +685,12 @@ End
 	#tag Constant, Name = kNewVersionMarker, Type = String, Dynamic = False, Default = \"<<NewVersion>>", Scope = Private
 	#tag EndConstant
 
+	#tag Constant, Name = kPaymentRequiredMessage, Type = String, Dynamic = False, Default = \"This update is not free and will require payment. Proceed anyway\?", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kProceedButton, Type = String, Dynamic = False, Default = \"Proceed", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kProcessingFileMessage, Type = String, Dynamic = False, Default = \"Processing file...", Scope = Private
 	#tag EndConstant
 
@@ -753,7 +784,23 @@ End
 		    //
 		    // The update has been chosen
 		    //
-		    SelectedUpdate = lbUpdates.RowTag( lbUpdates.ListIndex )
+		    
+		    if true then // Scope
+		      dim chosen as Kaju.UpdateInformation = lbUpdates.RowTag( lbUpdates.ListIndex )
+		      if chosen.RequiresPayment then
+		        dim dlg as new MessageDialog
+		        dlg.ActionButton.Visible = true
+		        dlg.ActionButton.Caption = kProceedButton
+		        dlg.CancelButton.Visible = true
+		        dlg.Message = kPaymentRequiredMessage
+		        dim btn as MessageDialogButton = dlg.ShowModalWithin( self )
+		        
+		        if btn is dlg.CancelButton then
+		          return
+		        end if
+		      end if
+		      SelectedUpdate = chosen
+		    end if
 		    
 		    btnOK.Enabled = false
 		    
