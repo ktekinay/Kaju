@@ -221,6 +221,7 @@ Protected Class UpdateChecker
 		  //
 		  dim ub as integer = j.Count - 1
 		  dim info() as Kaju.UpdateInformation
+		  dim updateIsRequired as boolean
 		  for i as integer = 0 to ub
 		    dim thisInfo as new Kaju.UpdateInformation( j( i ) )
 		    
@@ -250,8 +251,8 @@ Protected Class UpdateChecker
 		    //
 		    dim thisUpdateIsRequired as boolean
 		    if thisInfo.MinimumRequiredVersion <> "" and Kaju.VersionToDouble( thisInfo.MinimumRequiredVersion ) > versionDouble then
-		      mIsRequiredUpdate = true
 		      thisUpdateIsRequired = true
+		      updateIsRequired = true
 		    end if
 		    
 		    //
@@ -404,11 +405,7 @@ Protected Class UpdateChecker
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private mIsRequiredUpdate As Boolean
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mResult As ResultType
+		Private mResult As ResultType = ResultType.NotYetChecked
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -480,11 +477,12 @@ Protected Class UpdateChecker
 
 
 	#tag Enum, Name = ResultType, Type = Integer, Flags = &h0
-		None
-		  NoUpdateAvailable
-		  UpdateAvailable
+		NotYetChecked = -9999
+		  Error = -1
+		  NoUpdateAvailable = 0
 		  IgnoredUpdateAvailable
-		TryAgainLater
+		  UpdateAvailable
+		RequiredUpdateAvailable
 	#tag EndEnum
 
 
