@@ -74,8 +74,8 @@
     {
       "Version":"1.2b2",
       "ReleaseNotes":"<p>A phony beta pointing to the same binary. Meant as a placeholder to demonstrate multiple versions.<\/p>\n\n<p><b>IMPORTANT<\/b>: The URL’s for the binaries have been intentionally switched to test the hash function. Attempting to update to this version should result in an error.<\/b>",
-      "ImageURL":"",
-      "UseTransparency":false,
+      "ImageURL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Some_Image_beta.png",
+      "UseTransparency":true,
       "MinimumRequiriedVersion":"",
       "AppName":"Kaju Update Test",
       "RequiresPayment":false,
