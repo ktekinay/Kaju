@@ -1839,6 +1839,37 @@ Begin Window WndAdmin
       Visible         =   True
       Width           =   85
    End
+   Begin PushButton btnDuplicate
+      AutoDeactivate  =   True
+      Bold            =   False
+      ButtonStyle     =   "0"
+      Cancel          =   False
+      Caption         =   "Dupe"
+      Default         =   False
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   158
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   False
+      Scope           =   2
+      TabIndex        =   15
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "SmallSystem"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   641
+      Underline       =   False
+      Visible         =   True
+      Width           =   65
+   End
 End
 #tag EndWindow
 
@@ -2200,6 +2231,24 @@ End
 		  UpdateWindowTitle
 		  return r
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub DuplicateVersion()
+		  dim curIndex as integer = lbVersions.ListIndex
+		  if curIndex = -1 then
+		    return
+		  end if
+		  
+		  StoreFieldsToVersionRow()
+		  
+		  dim tag as Variant = lbVersions.RowTag( curIndex )
+		  dim listing as string = lbVersions.Cell( curIndex, 0 )
+		  dim newIndex as integer = curIndex + 1
+		  lbVersions.InsertRow( newIndex, listing )
+		  lbVersions.RowTag( newIndex ) = tag
+		  lbVersions.ListIndex = newIndex
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
@@ -2762,6 +2811,13 @@ End
 		  Exception err As RuntimeException
 		    MsgBox "Could not export data."
 		    
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnDuplicate
+	#tag Event
+		Sub Action()
+		  DuplicateVersion
 		End Sub
 	#tag EndEvent
 #tag EndEvents
