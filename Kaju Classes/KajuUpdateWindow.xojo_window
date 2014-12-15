@@ -439,8 +439,11 @@ End
 		    shZipper.Close
 		  end if
 		  
-		  self.Close
-		  
+		  if Checker.QuitOnCancelIfRequired and Checker.Result = Kaju.UpdateChecker.ResultType.RequiredUpdateAvailable then
+		    quit
+		  else
+		    self.Close
+		  end if
 		End Sub
 	#tag EndMethod
 
