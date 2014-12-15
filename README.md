@@ -86,9 +86,9 @@ It will be up to the implementer to enforce the "MinimumRequiredVersion" propert
 
 ## Special Actions
 
-You only need to add one property to your App class, UpdateInitiater As Kaju.UpdateInitiater. The Kaju class expects to find that and will handle it for you.
+You only need to add one property to your App class, `UpdateInitiater As Kaju.UpdateInitiater`. Kaju expects to find that and will handle it for you.
 
-The only special code you'll need is in the CancelClose event of any window where the clase is actually being cancelled (the event will return `True`). In those cases, you must call `Kaju.CancelUpdate`. (It doesn't matter if there is an updating scheduled at the time you call this.) This will prevent an update from happening if the user quits later without choosing Quit & Install again.
+The only special code you'll need is in the CancelClose event of any window where the clase is actually being cancelled (the event will return `True`). In those cases, you must call `Kaju.CancelUpdate`. (It doesn't matter if there is an update scheduled at the time.) This will prevent an update from happening if the user quits later without choosing Quit & Install again.
 
 ## How To Use It
 
@@ -100,19 +100,70 @@ Since none of this is modal, the user can continue to use your app with the upda
 
 To discover what UpdateChecker found, you can check the Result method after calling Execute. It returns a value from the `Kaju.UpdateChecker.ResultType` enum.  
 
-## Required Updates
+### Required Updates
 
 If you set up a minimim required version in your update information, Kaju may find that a particular update is "required". For example, if the user is using v.1.0 and you've discovered a bug that necessitates an update to at least v.1.1, you would set that as the minimum required version. In the future, even as you release v.1.2, 1.3, etc, you would leave the minimum required as v.1.1 so Kaju knows to force the users of 1.0 to update.
 
 After calling `Kaju.UpdateChecker.Execute`, The `Result` method will tell you if a required update was found. In that case, you should take special action to make sure that your user cannot use the app until they update. To help, there is the `Kaju.UpdateChecker.QuitOnCancelIfRequired` property that is `True` by default. If the user tries to cancel a required update, the app will quit.
 
-## What Else?
+### What Else?
 
-There are other features of `Kaju.UpdateChecker` that may be helpful. One is controlling the interface that class will present to the user through the `AllowedInteraction` property. You can prevent Kaju from showing an error dialog, the update window, or both. Use the constants within Kaju.UpdateChecker to set this value.
+There are other features of `Kaju.UpdateChecker` that may be helpful. One is controlling the interface that class will present to the user through the `AllowedInteraction` property. You can prevent Kaju from showing an error dialog, the update window, or both. Use the constants within Kaju.UpdateChecker to set this value. Values can be added for better control (although, as of this writing, there are just the two values).
+
+You can control the types of updates a user may see by setting `Kaju.UpdateChecker.AllowedStage`. The stage codes are the same as those found in the `App` class, do setting it to `App.Final` means that the user will not see any development, alpha, or beta releases.
+
+### Images
+
+You can set a background image for the window in two places. Within the app, you may set `Kaju.UpdateChecker.DefaultImage` for any updates that do not specify a specific image. In the Admin app, you may specify a URL to an image for a particular version. For example, if the default image is your app's logo, but a beta should have "beta" stamped across it, you can do that.
+
+You can also set `Kaju.UpdateChecker.DefaultUseTransparency` or set "Use Transparency for an image provided through the Admin app. Transparency is set to 50% when this is true.
+
+An image will cover the entire window without cropping or scaling so provide the image accordingly.
+
+## Step By Step
+
+*  Run the included Admin app and save a new document with an appropriate name, something like "MyApp v.1.kaju". You don't have to add any updates at this time.
+* Copy the RSA public key with the appropriate button. A key pair is generated every time a new document is created and it is this key that will ensure that your app is getting legitimate, uncorrupted update information. **Do not lose this file after releasing your app!** If you do, users of older versions will no longer be able to update.
+* Open you app and add to the App instance the property `UpdateInitiater As Kaju.UpdateInitiater`. You do not need to do anything more with this property.
+* In an appropriate place, add code that looks something like this:
+
+		dim updater as new Kaju.UpdateChecker( myAppPrefFolder )
+		updater.ServerPublicRSAKey = "12345..." // The key you copied from the Admin app
+		updater.UpdateURL = "http://www...." // Where the update info is posted
+		
+		updater.Execute
+
+At a bare minimum, that's it.
+
+## The Admin App
+
+The included Admin app makes it easy to set up your update file. Start it up and use the "+" at the bottom, left to add a version. Fill in the information for the release. 
+
+When you're done, save the file, then export the data to a file. It is this file that you will post to your web site and the final URL should match the URL you included within your app.
+
+### Some Details
+
+Add an entry for each *current* version of your app. You do not need a history, and you can update entries to the latest. Remember, a user wants to update to the latest, they do not need to see every intermediate update (unless there is a reason that you want that).
+
+The release notes are done in HTML and some simple tools are provided for making that a bit easier. You can see a preview of the release notes as a you type and use the Preview button to see how Kaju will present the update window under variou circumstances. The HTML can be as simple or as complex as you'd like.
+
+### Links In Release Notes
+
+Links in the release notes will be ignored *unless* you include `target="_blank"` as part of the url. For example, `<a href="http://www.example.com" target="_blank">my site</a>` will force the link to open in the user's browser.
+
+### Binaries
+
+Your compiled apps for each platform must be zipped and named appropriately. For the Mac, zip the application. For the other platforms, zip the folder that contains the executable and supporting folders.
+
+For each version, check each platform to which it applies, provide the URL where that binary will be found, then drop each binary onto the appropriate field to calculate its hash.
+
+For Windows and Linux, you must also provide the exact name of the executable. If your app is called "My Great App", the Linux executable name will be "My Great App" and the Windows name will be "My Great App.exe".
+
+
 
 ## Who Did This?
 
-This project was designed and implemented by Kem Tekinay (ktekinay at mactechnologies.com) and Jeremy Cowgar (jeremy at cowgar.com).
+This project was designed and implemented by Kem Tekinay (ktekinay at mactechnologies.com), Jeremy Cowgar (jeremy at cowgar.com), and Luke Cowgar (lcowgar at advancedpricing.com).
 
 
 ## Other Stuff
