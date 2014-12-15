@@ -96,7 +96,7 @@
     },
     {
       "Version":"0.9",
-      "ReleaseNotes":"<p>A fake release that should never appear.<\/p>",
+      "ReleaseNotes":"<p>A fake release that should never appear. (Except in Preview.)<\/p>",
       "ImageURL":"",
       "UseTransparency":false,
       "MinimumRequiriedVersion":"",
