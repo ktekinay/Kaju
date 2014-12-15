@@ -2996,7 +2996,7 @@ End
 		  end if
 		  
 		  dim uc as new Kaju.UpdateChecker( App.PrefFolder )
-		  uc.StageAllowed = me.MenuValue
+		  uc.AllowedStage = me.MenuValue
 		  dim s as string = KajuJSON.ToString
 		  uc.TestUpdate( s )
 		  

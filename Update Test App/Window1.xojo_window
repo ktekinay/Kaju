@@ -355,7 +355,7 @@ End
 		  dim allowErrorDialog as integer = if( cbAllowErrorDialog.Value, Kaju.UpdateChecker.kAllowErrorDialog, 0 )
 		  Checker.AllowedInteraction = allowWindow + allowErrorDialog
 		  
-		  Checker.StageAllowed = pumStageAllowed.RowTag( pumStageAllowed.ListIndex )
+		  Checker.AllowedStage = pumStageAllowed.RowTag( pumStageAllowed.ListIndex )
 		  
 		  Checker.Execute()
 		  
