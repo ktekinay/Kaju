@@ -6,9 +6,9 @@ A Xojo module and Admin app to enable self-update in Xojo apps.
 
 ### General Information
 
-Kaju is a pull system where the client gets information from known url. It is designed as a series of Xojo classes.
+Kaju is a pull system where the client gets information from known url. It is designed as a series of Xojo classes in a central module.
 
-The update JSON file will be created by the admin app and placed in a folder that indicates the app name and version, or whatever other identification that's appropriate for an update line, and will create a unique URL. For example, the resulting url might be `http://www.example.com/updates/myapp5/index.html` for updates related to version 5, and `http://www.example.com/updates/myapp6/index.html` for the version 6 line. The update information in version 5 can include a link to the version 6 binary and set the "Requires Payment" flag to true so version 5 users can know that there is a new version that they will be asked to pay for. The user can still choose to ignore that and continue updating version 5 instead.
+The JSON file with update information can be created by the admin app and placed in a folder that indicates the app name and version, or whatever other identification that's appropriate for an update line, and will create a unique URL. For example, the resulting url might be `http://www.example.com/updates/myapp5/index.html` for updates related to version 5, and `http://www.example.com/updates/myapp6/index.html` for the version 6 line. The update information in version 5 can include a link to the version 6 binary and set the "Requires Payment" flag to true so version 5 users can know that there is a new version that they will be asked to pay for. The user can still choose to ignore that and continue updating version 5 instead.
 
 We recommend that the latest version of any line use a static url. That way, if the user chooses to update to new, paid version, they will always get the latest.
 
@@ -84,17 +84,31 @@ A missing or blank url means that the update does not apply to that platform. A 
 
 It will be up to the implementer to enforce the "MinimumRequiredVersion" property on the client end. This specifies the minimum required version that a client *must* have. For example, if there v.6.0.1 is a critical release and v.6.0 should not be used anymore, that field would contain "6.0.1". Someone using v.6.0 should be forced to quit if they choose not to update, but someone using v.6.0.2 would not be.
 
-## How To Use It
+## Special Actions
 
-You only need to add one property to your App class, UpdateInitiater As Kaju.UpdateInitiater. Teh Kaju class expects to find that and will handle it for you.
+You only need to add one property to your App class, UpdateInitiater As Kaju.UpdateInitiater. The Kaju class expects to find that and will handle it for you.
+
+The only special code you'll need is in the CancelClose event of any window where the clase is actually being cancelled (the event will return `True`). In those cases, you must call `Kaju.CancelUpdate`. (It doesn't matter if there is an updating scheduled at the time you call this.) This will prevent an update from happening if the user quits later without choosing Quit & Install again.
+
+## How To Use It
 
 Create a new Kaju.UpdateChecker object and fill in its properties. At the very least, you have to provide a FolderItem for a folder where Kaju can save its preferences, one that is unique to your app, the ServerPublicRSAKey (more on this later), and the URL where it will get its update information.
 
-Call Execute. This will go to the UpdateURL, see if there are any updates available for that version of the app, and ask the user about them. If the user chooses to update, the class will download and verify the binary, then offer the user the opportunity to Quit & Install or Cancel. If they choose to install, Quit will be called.
+Call Execute. That's it. Kaju will handle everything else by going to the UpdateURL to see if there are any updates available for that version of the app and ask the user about them. If the user chooses to update, the class will download and verify the binary, then offer the user the opportunity to Quit & Install or Cancel. If they choose to install, Quit will be called.
 
-In your windows' CancelClose event, you should call Kaju.CancelUpdate if the users cancels the closing of the window. It doesn't matter if there is actually update in progress, but you probably don't want the update to happen if the user decides to quit manually later. The update window will remain open so they can decide later.
+Since none of this is modal, the user can continue to use your app with the update window waiting in the background. If they do choose to install, the update window will be sent to the back so it will be closed last.
 
-If the user declines an update marked as "IsRequired", the `RequiredUpdateDeclined` event will be raised and the consumer should act accordingly.
+To discover what UpdateChecker found, you can check the Result method after calling Execute. It returns a value from the `Kaju.UpdateChecker.ResultType` enum.  
+
+## Required Updates
+
+If you set up a minimim required version in your update information, Kaju may find that a particular update is "required". For example, if the user is using v.1.0 and you've discovered a bug that necessitates an update to at least v.1.1, you would set that as the minimum required version. In the future, even as you release v.1.2, 1.3, etc, you would leave the minimum required as v.1.1 so Kaju knows to force the users of 1.0 to update.
+
+After calling `Kaju.UpdateChecker.Execute`, The `Result` method will tell you if a required update was found. In that case, you should take special action to make sure that your user cannot use the app until they update. To help, there is the `Kaju.UpdateChecker.QuitOnCancelIfRequired` property that is `True` by default. If the user tries to cancel a required update, the app will quit.
+
+## What Else?
+
+There are other features of `Kaju.UpdateChecker` that may be helpful. One is controlling the interface that class will present to the user through the `AllowedInteraction` property. You can prevent Kaju from showing an error dialog, the update window, or both. Use the constants within Kaju.UpdateChecker to set this value.
 
 ## Who Did This?
 
