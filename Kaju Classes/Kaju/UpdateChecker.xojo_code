@@ -413,6 +413,10 @@ Protected Class UpdateChecker
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		QuitOnCancelIfRequired As Boolean = True
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		Secure As Boolean
 	#tag EndProperty
 
