@@ -10,16 +10,20 @@ Inherits Application
 
 	#tag Event
 		Sub Open()
+		  return
+		  
+		  //
+		  // Some test code below
+		  //
+		  
 		  //
 		  // Create the pref folder
 		  //
 		  
-		  dim f as FolderItem = SpecialFolder.ApplicationData.Child( "Kaju Admin" )
-		  if not f.Exists then
-		    f.CreateAsFolder
-		  end if
+		  dim f as FolderItem = PrefFolder
 		  
 		  dim u as new Kaju.UpdateChecker( f )
+		  #pragma unused u
 		  
 		  dim r as double
 		  
