@@ -487,6 +487,26 @@ End
 		  CurrentStage = Stage.ChoosingUpdate
 		  
 		  //
+		  // Sort the updates
+		  //
+		  dim vers() as double
+		  for i as integer = 0 to updates.Ubound
+		    vers.Append updates( i ).VersionAsDouble
+		  next
+		  
+		  vers.SortWith( updates )
+		  
+		  //
+		  // Reverse the sort
+		  //
+		  dim reverse() as integer
+		  for i as integer = 0 to updates.Ubound
+		    reverse.Append( updates.Ubound - i )
+		  next
+		  
+		  reverse.SortWith( updates )
+		  
+		  //
 		  // Set up the labels
 		  //
 		  
@@ -512,10 +532,6 @@ End
 		    lbUpdates.AddRow update.Version
 		    lbUpdates.RowTag( i ) = update
 		  next
-		  
-		  lbUpdates.SortedColumn = 0
-		  lbUpdates.ColumnSortDirection( 0 ) = 1
-		  lbUpdates.Sort
 		  
 		  lbUpdates.ListIndex = 0
 		  
