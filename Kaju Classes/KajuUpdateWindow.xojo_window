@@ -400,6 +400,40 @@ Begin Window KajuUpdateWindow
       Visible         =   False
       Width           =   300
    End
+   Begin Label lblVersions
+      AutoDeactivate  =   True
+      Bold            =   True
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   2
+      Selectable      =   False
+      TabIndex        =   10
+      TabPanelIndex   =   0
+      Text            =   "#kVersionsLabel"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "SmallSystem"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   64
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   92
+   End
 End
 #tag EndWindow
 
@@ -728,6 +762,9 @@ End
 	#tag EndConstant
 
 	#tag Constant, Name = kTryLaterButton, Type = String, Dynamic = False, Default = \"Try Later", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kVersionsLabel, Type = String, Dynamic = False, Default = \"Versions:", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kWindowTitle, Type = String, Dynamic = False, Default = \"Update Available", Scope = Private
