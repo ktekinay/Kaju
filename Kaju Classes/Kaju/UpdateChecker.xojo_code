@@ -32,6 +32,15 @@ Protected Class UpdateChecker
 		  // If there is already an update in progress, do nothing
 		  //
 		  if UpdateWindowIsOpen then
+		    mResult = ResultType.UpdateAlreadyInProgress
+		    return
+		  end if
+		  
+		  //
+		  // Check for write permission
+		  //
+		  if not App.ExecutableFile.IsWriteable or not App.ExecutableFile.Parent.IsWriteable then
+		    mResult = ResultType.NoWritePermission
 		    return
 		  end if
 		  
@@ -356,6 +365,7 @@ Protected Class UpdateChecker
 		  // If there is already an update in progress, do nothing
 		  //
 		  if UpdateWindowIsOpen then
+		    mResult = ResultType.UpdateAlreadyInProgress
 		    return
 		  end if
 		  
@@ -482,6 +492,8 @@ Protected Class UpdateChecker
 
 	#tag Enum, Name = ResultType, Type = Integer, Flags = &h0
 		NotYetChecked = -9999
+		  UpdateAlreadyInProgress = -100
+		  NoWritePermission = -50
 		  Error = -1
 		  NoUpdateAvailable = 0
 		  IgnoredUpdateAvailable
