@@ -26,56 +26,6 @@ Begin Window KajuUpdateWindow
    Title           =   "#kWindowTitle"
    Visible         =   True
    Width           =   800
-   Begin Listbox lbUpdates
-      AutoDeactivate  =   True
-      AutoHideScrollbars=   True
-      Bold            =   False
-      Border          =   True
-      ColumnCount     =   1
-      ColumnsResizable=   False
-      ColumnWidths    =   ""
-      DataField       =   ""
-      DataSource      =   ""
-      DefaultRowHeight=   -1
-      Enabled         =   True
-      EnableDrag      =   False
-      EnableDragReorder=   False
-      GridLinesHorizontal=   0
-      GridLinesVertical=   0
-      HasHeading      =   False
-      HeadingIndex    =   -1
-      Height          =   116
-      HelpTag         =   ""
-      Hierarchical    =   False
-      Index           =   -2147483648
-      InitialParent   =   ""
-      InitialValue    =   ""
-      Italic          =   False
-      Left            =   -181
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      RequiresSelection=   True
-      Scope           =   2
-      ScrollbarHorizontal=   False
-      ScrollBarVertical=   True
-      SelectionType   =   0
-      TabIndex        =   0
-      TabPanelIndex   =   0
-      TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
-      Top             =   -44
-      Underline       =   False
-      UseFocusRing    =   False
-      Visible         =   True
-      Width           =   117
-      _ScrollOffset   =   0
-      _ScrollWidth    =   -1
-   End
    Begin HTMLViewer hvNotes
       AutoDeactivate  =   True
       Enabled         =   True
@@ -554,24 +504,16 @@ End
 		  lblSecondary.Text = lblSecondary.Text.ReplaceAll( kThisVersionMarker, Kaju.AppVersionString )
 		  
 		  //
-		  // Set up the listbox with the available updates.
+		  // Set up the menu with the available updates.
 		  // It will set up the rest of the controls.
 		  //
 		  
 		  for i as integer = 0 to Updates.Ubound
 		    dim update as Kaju.UpdateInformation = updates( i )
-		    lbUpdates.AddRow update.Version
-		    lbUpdates.RowTag( i ) = update
+		    pumUpdates.AddRow update.Version
+		    pumUpdates.RowTag( i ) = update
 		  next
 		  
-		  lbUpdates.ListIndex = 0
-		  
-		  //
-		  // Populate the popup menu
-		  //
-		  dim cells as string = lbUpdates.Cell( -1, 0 )
-		  cells = ReplaceLineEndings( cells, EndOfLine )
-		  pumUpdates.AddRows cells.Split( EndOfLine )
 		  pumUpdates.ListIndex = 0
 		  
 		  if updates.Ubound = 0 then
@@ -838,26 +780,6 @@ End
 
 #tag EndWindowCode
 
-#tag Events lbUpdates
-	#tag Event
-		Sub Change()
-		  //
-		  // Fill in the viewer
-		  //
-		  
-		  if me.ListIndex = -1 then
-		    if me.ListCount <> 0 then
-		      me.ListIndex = 0
-		    end if
-		    return
-		  end if
-		  
-		  dim update as Kaju.UpdateInformation = me.RowTag( me.ListIndex )
-		  DisplayVersionInfo( update )
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events hvNotes
 	#tag Event
 		Function NewWindow() As HTMLViewer
@@ -882,7 +804,7 @@ End
 		    //
 		    
 		    if true then // Scope
-		      dim chosen as Kaju.UpdateInformation = lbUpdates.RowTag( lbUpdates.ListIndex )
+		      dim chosen as Kaju.UpdateInformation = pumUpdates.RowTag( pumUpdates.ListIndex )
 		      if chosen.RequiresPayment then
 		        dim dlg as new MessageDialog
 		        dlg.ActionButton.Visible = true
@@ -906,7 +828,7 @@ End
 		    pbProgress.Visible = true
 		    lblInstallMessage.Visible = true
 		    
-		    lbUpdates.Enabled = false
+		    pumUpdates.Enabled = false
 		    
 		    CurrentStage = Stage.InstallingUpdate
 		    
@@ -976,7 +898,7 @@ End
 		  // We can only ignore versions if we already have the minimum requried
 		  //
 		  
-		  dim info as Kaju.UpdateInformation = lbUpdates.RowTag( lbUpdates.ListIndex )
+		  dim info as Kaju.UpdateInformation = pumUpdates.RowTag( pumUpdates.ListIndex )
 		  
 		  if info.MinimumRequiredVersion <> "" and _
 		    Kaju.VersionToDouble( Kaju.AppVersionString ) < Kaju.VersionToDouble( info.MinimumRequiredVersion )  then
@@ -987,13 +909,13 @@ End
 		    
 		    Checker.IgnoreVersion( info.Version )
 		    
-		    if lbUpdates.ListCount = 1 then
+		    if pumUpdates.ListCount = 1 then
 		      SelectedUpdate = nil
 		      Kaju.CancelUpdate
 		      self.Close
 		    else
-		      lbUpdates.RemoveRow( lbUpdates.ListIndex )
-		      lbUpdates.ListIndex = 0
+		      pumUpdates.RemoveRow( pumUpdates.ListIndex )
+		      pumUpdates.ListIndex = 0
 		    end if
 		    
 		  end if
@@ -1153,9 +1075,20 @@ End
 #tag Events pumUpdates
 	#tag Event
 		Sub Change()
-		  if me.ListIndex <> lbUpdates.ListIndex then
-		    lbUpdates.ListIndex = me.ListIndex
+		  //
+		  // Fill in the viewer
+		  //
+		  
+		  if me.ListIndex = -1 then
+		    if me.ListCount <> 0 then
+		      me.ListIndex = 0
+		    end if
+		    return
 		  end if
+		  
+		  dim update as Kaju.UpdateInformation = me.RowTag( me.ListIndex )
+		  DisplayVersionInfo( update )
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
