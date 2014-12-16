@@ -51,7 +51,7 @@ Begin Window KajuUpdateWindow
       InitialParent   =   ""
       InitialValue    =   ""
       Italic          =   False
-      Left            =   20
+      Left            =   -181
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -68,7 +68,7 @@ Begin Window KajuUpdateWindow
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   84
+      Top             =   -44
       Underline       =   False
       UseFocusRing    =   False
       Visible         =   True
@@ -432,7 +432,38 @@ Begin Window KajuUpdateWindow
       Transparent     =   True
       Underline       =   False
       Visible         =   True
-      Width           =   92
+      Width           =   117
+   End
+   Begin PopupMenu pumUpdates
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      InitialValue    =   ""
+      Italic          =   False
+      Left            =   20
+      ListIndex       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   11
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   84
+      Underline       =   False
+      Visible         =   True
+      Width           =   117
    End
 End
 #tag EndWindow
@@ -535,11 +566,20 @@ End
 		  
 		  lbUpdates.ListIndex = 0
 		  
+		  //
+		  // Populate the popup menu
+		  //
+		  dim cells as string = lbUpdates.Cell( -1, 0 )
+		  cells = ReplaceLineEndings( cells, EndOfLine )
+		  pumUpdates.AddRows cells.Split( EndOfLine )
+		  pumUpdates.ListIndex = 0
+		  
 		  if updates.Ubound = 0 then
 		    //
 		    // Only one update so hide the listbox
 		    //
-		    lbUpdates.Visible = false
+		    lblVersions.Visible = false
+		    pumUpdates.Visible = false
 		  end if
 		  
 		  #if not TargetMacOS then
@@ -1108,6 +1148,15 @@ End
 		  return true
 		  
 		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events pumUpdates
+	#tag Event
+		Sub Change()
+		  if me.ListIndex <> lbUpdates.ListIndex then
+		    lbUpdates.ListIndex = me.ListIndex
+		  end if
+		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
