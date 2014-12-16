@@ -241,7 +241,7 @@ Begin Window WndAdmin
       TextUnit        =   0
       Top             =   86
       Underline       =   False
-      Value           =   0
+      Value           =   2
       Visible         =   True
       Width           =   653
       Begin TextAreaChanger fldReleaseNotes
@@ -842,7 +842,7 @@ Begin Window WndAdmin
          Top             =   161
          Transparent     =   False
          Underline       =   False
-         Visible         =   False
+         Visible         =   True
          Width           =   67
       End
       Begin CheckBoxChanger cbImageUseTransparency
