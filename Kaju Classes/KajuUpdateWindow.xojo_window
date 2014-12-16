@@ -44,7 +44,7 @@ Begin Window KajuUpdateWindow
       GridLinesVertical=   0
       HasHeading      =   False
       HeadingIndex    =   -1
-      Height          =   445
+      Height          =   116
       HelpTag         =   ""
       Hierarchical    =   False
       Index           =   -2147483648
@@ -72,7 +72,7 @@ Begin Window KajuUpdateWindow
       Underline       =   False
       UseFocusRing    =   False
       Visible         =   True
-      Width           =   130
+      Width           =   117
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
