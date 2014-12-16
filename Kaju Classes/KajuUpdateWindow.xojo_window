@@ -820,7 +820,7 @@ End
 	#tag Constant, Name = kTryLaterButton, Type = String, Dynamic = False, Default = \"Try Later", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = kVersionsLabel, Type = String, Dynamic = False, Default = \"Versions:", Scope = Private
+	#tag Constant, Name = kVersionsLabel, Type = String, Dynamic = False, Default = \"Available Versions:", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kWindowTitle, Type = String, Dynamic = False, Default = \"Update Available", Scope = Private
