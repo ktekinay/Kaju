@@ -280,7 +280,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   7
       TabPanelIndex   =   0
-      Text            =   "#kReleaseNotes"
+      Text            =   "#kReleaseNotesLabel"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "SmallSystem"
@@ -703,7 +703,7 @@ End
 	#tag Constant, Name = kReadyMessage, Type = String, Dynamic = False, Default = \"Ready to install", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = kReleaseNotes, Type = String, Dynamic = False, Default = \"Release Notes:", Scope = Private
+	#tag Constant, Name = kReleaseNotesLabel, Type = String, Dynamic = False, Default = \"Release Notes:", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kRemindMeLaterButton, Type = String, Dynamic = False, Default = \"Remind Me Later", Scope = Private
