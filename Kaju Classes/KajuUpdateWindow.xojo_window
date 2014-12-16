@@ -378,7 +378,7 @@ Begin Window KajuUpdateWindow
       TextFont        =   "SmallSystem"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   84
+      Top             =   64
       Transparent     =   True
       Underline       =   False
       Visible         =   True
@@ -410,7 +410,7 @@ Begin Window KajuUpdateWindow
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   104
+      Top             =   84
       Underline       =   False
       Visible         =   True
       Width           =   101
