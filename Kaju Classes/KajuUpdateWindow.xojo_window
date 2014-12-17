@@ -547,7 +547,7 @@ End
 		  
 		  if updates.Ubound = 0 then
 		    //
-		    // Only one update so hide the listbox
+		    // Only one update so hide the menu
 		    //
 		    lblVersions.Visible = false
 		    pumUpdates.Visible = false
