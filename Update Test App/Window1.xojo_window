@@ -360,14 +360,20 @@ End
 		  Checker.Execute()
 		  
 		  select case Checker.Result
+		  case Kaju.UpdateChecker.ResultType.UpdateAlreadyInProgress
+		    lblResult.Text = "Update already in progress"
+		    
+		  case Kaju.UpdateChecker.ResultType.NoWritePermission
+		    lblResult.Text = "Aborted (no write permission)"
+		    
+		  case Kaju.UpdateChecker.ResultType.Error
+		    lblResult.Text = "Error, user chose to try later"
+		    
 		  case Kaju.UpdateChecker.ResultType.IgnoredUpdateAvailable
 		    lblResult.Text = "Updates available, but ignored"
 		    
 		  case Kaju.UpdateChecker.ResultType.NoUpdateAvailable
 		    lblResult.Text = "No updates available"
-		    
-		  case Kaju.UpdateChecker.ResultType.Error
-		    lblResult.Text = "Error, user chose to try later"
 		    
 		  case Kaju.UpdateChecker.ResultType.UpdateAvailable
 		    lblResult.Text = "Updates available"
