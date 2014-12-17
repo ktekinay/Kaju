@@ -609,7 +609,6 @@ End
 		  
 		  self.BackgroundImage = p
 		  
-		  self.Loading = false
 		End Sub
 	#tag EndMethod
 
@@ -837,7 +836,9 @@ End
 	#tag EndEvent
 	#tag Event
 		Function CancelLoad(URL as String) As Boolean
-		  return ( not Loading )
+		  dim r as boolean = not Loading
+		  Loading = false
+		  return r
 		  
 		  #pragma unused URL
 		End Function
