@@ -32,6 +32,15 @@ Protected Class UpdateChecker
 		  // If there is already an update in progress, do nothing
 		  //
 		  if UpdateWindowIsOpen then
+		    mResult = ResultType.UpdateAlreadyInProgress
+		    return
+		  end if
+		  
+		  //
+		  // Check for write permission
+		  //
+		  if not App.ExecutableFile.IsWriteable or not App.ExecutableFile.Parent.IsWriteable then
+		    mResult = ResultType.NoWritePermission
 		    return
 		  end if
 		  
@@ -235,7 +244,7 @@ Protected Class UpdateChecker
 		    //
 		    // See if the stage on this update is allowed
 		    //
-		    if thisInfo.StageCode < StageAllowed then
+		    if thisInfo.StageCode < AllowedStage then
 		      continue for i
 		    end if
 		    
@@ -356,6 +365,7 @@ Protected Class UpdateChecker
 		  // If there is already an update in progress, do nothing
 		  //
 		  if UpdateWindowIsOpen then
+		    mResult = ResultType.UpdateAlreadyInProgress
 		    return
 		  end if
 		  
@@ -382,6 +392,10 @@ Protected Class UpdateChecker
 
 	#tag Property, Flags = &h0
 		AllowedInteraction As UInt32 = kAllowAll
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		AllowedStage As Integer = App.Development
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -413,15 +427,15 @@ Protected Class UpdateChecker
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		QuitOnCancelIfRequired As Boolean = True
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		Secure As Boolean
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		ServerPublicRSAKey As String
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		StageAllowed As Integer = App.Development
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -478,6 +492,8 @@ Protected Class UpdateChecker
 
 	#tag Enum, Name = ResultType, Type = Integer, Flags = &h0
 		NotYetChecked = -9999
+		  UpdateAlreadyInProgress = -100
+		  NoWritePermission = -50
 		  Error = -1
 		  NoUpdateAvailable = 0
 		  IgnoredUpdateAvailable
@@ -487,6 +503,12 @@ Protected Class UpdateChecker
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="AllowedStage"
+			Group="Behavior"
+			InitialValue="App.Development"
+			Type="Integer"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DefaultImage"
 			Group="Behavior"
@@ -525,6 +547,12 @@ Protected Class UpdateChecker
 			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
+			Name="QuitOnCancelIfRequired"
+			Group="Behavior"
+			InitialValue="True"
+			Type="Boolean"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Secure"
 			Group="Behavior"
 			Type="Boolean"
@@ -534,12 +562,6 @@ Protected Class UpdateChecker
 			Group="Behavior"
 			Type="String"
 			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="StageAllowed"
-			Group="Behavior"
-			InitialValue="App.Development"
-			Type="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"

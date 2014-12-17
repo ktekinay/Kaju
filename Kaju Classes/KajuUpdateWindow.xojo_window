@@ -26,56 +26,6 @@ Begin Window KajuUpdateWindow
    Title           =   "#kWindowTitle"
    Visible         =   True
    Width           =   800
-   Begin Listbox lbUpdates
-      AutoDeactivate  =   True
-      AutoHideScrollbars=   True
-      Bold            =   False
-      Border          =   True
-      ColumnCount     =   1
-      ColumnsResizable=   False
-      ColumnWidths    =   ""
-      DataField       =   ""
-      DataSource      =   ""
-      DefaultRowHeight=   -1
-      Enabled         =   True
-      EnableDrag      =   False
-      EnableDragReorder=   False
-      GridLinesHorizontal=   0
-      GridLinesVertical=   0
-      HasHeading      =   False
-      HeadingIndex    =   -1
-      Height          =   445
-      HelpTag         =   ""
-      Hierarchical    =   False
-      Index           =   -2147483648
-      InitialParent   =   ""
-      InitialValue    =   ""
-      Italic          =   False
-      Left            =   20
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      RequiresSelection=   True
-      Scope           =   2
-      ScrollbarHorizontal=   False
-      ScrollBarVertical=   True
-      SelectionType   =   0
-      TabIndex        =   0
-      TabPanelIndex   =   0
-      TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
-      Top             =   84
-      Underline       =   False
-      UseFocusRing    =   False
-      Visible         =   True
-      Width           =   130
-      _ScrollOffset   =   0
-      _ScrollWidth    =   -1
-   End
    Begin HTMLViewer hvNotes
       AutoDeactivate  =   True
       Enabled         =   True
@@ -88,7 +38,7 @@ Begin Window KajuUpdateWindow
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
-      Renderer        =   0
+      Renderer        =   1
       Scope           =   2
       TabIndex        =   1
       TabPanelIndex   =   0
@@ -280,7 +230,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   7
       TabPanelIndex   =   0
-      Text            =   "#kReleaseNotes"
+      Text            =   "#kReleaseNotesLabel"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "SmallSystem"
@@ -400,6 +350,71 @@ Begin Window KajuUpdateWindow
       Visible         =   False
       Width           =   300
    End
+   Begin Label lblVersions
+      AutoDeactivate  =   True
+      Bold            =   True
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   2
+      Selectable      =   False
+      TabIndex        =   10
+      TabPanelIndex   =   0
+      Text            =   "#kVersionsLabel"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "SmallSystem"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   64
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   117
+   End
+   Begin PopupMenu pumUpdates
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      InitialValue    =   ""
+      Italic          =   False
+      Left            =   36
+      ListIndex       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   11
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   84
+      Underline       =   False
+      Visible         =   True
+      Width           =   101
+   End
 End
 #tag EndWindow
 
@@ -416,6 +431,63 @@ End
 		    Kaju.DeleteRecursive( f )
 		  next
 		  
+		End Sub
+	#tag EndEvent
+
+	#tag Event
+		Sub Open()
+		  #if not TargetMacOS then
+		    //
+		    // Switch the buttons around for other platforms
+		    //
+		    dim farLeft as integer = btnCancel.Left
+		    btnCancel.Left = btnOK.Left
+		    btnOK.Left = farLeft
+		    
+		    const kAddition = 10
+		    
+		    btnCancel.Height = btnCancel.Height + kAddition
+		    btnOK.Height = btnOK.Height + kAddition
+		    btnSkipVersion.Height = btnSkipVersion.Height + kAddition
+		    
+		    //
+		    // Make the pop-up menu bigger
+		    //
+		    pumUpdates.Height = pumUpdates.Height + kAddition
+		    
+		    self.Height = self.Height + kAddition
+		    
+		  #endif
+		  
+		End Sub
+	#tag EndEvent
+
+	#tag Event
+		Sub Paint(g As Graphics, areas() As REALbasic.Rect)
+		  //
+		  // Draw a border around the release notes (Mac only)
+		  //
+		  
+		  const kThickness = 1
+		  
+		  g.DrawPicture BackgroundImage, 0, 0, g.Width, g.Height
+		  
+		  dim drawLeft as integer = hvNotes.Left - kThickness
+		  dim drawTop as integer = hvNotes.Top - kThickness
+		  dim drawRight as integer = hvNotes.Left + hvNotes.Width
+		  dim drawBottom as integer = hvNotes.Top + hvNotes.Height
+		  dim drawWidth as integer = drawRight - drawLeft + kThickness
+		  dim drawHeight as integer = drawBottom - drawTop + kThickness
+		  
+		  g.PenHeight = kThickness
+		  g.PenWidth = kThickness
+		  
+		  g.ForeColor = &c00000000 // Black
+		  g.DrawRect drawLeft, drawTop, drawWidth, drawHeight
+		  
+		  #if RBVersion > 2012.02 then
+		    #pragma unused areas
+		  #endif
 		End Sub
 	#tag EndEvent
 
@@ -439,8 +511,11 @@ End
 		    shZipper.Close
 		  end if
 		  
-		  self.Close
-		  
+		  if Checker.QuitOnCancelIfRequired and Checker.Result = Kaju.UpdateChecker.ResultType.RequiredUpdateAvailable then
+		    quit
+		  else
+		    self.Close
+		  end if
 		End Sub
 	#tag EndMethod
 
@@ -448,6 +523,26 @@ End
 		Sub ChooseUpdate(checker As Kaju.UpdateChecker, updates() As Kaju.UpdateInformation)
 		  self.Checker = checker
 		  CurrentStage = Stage.ChoosingUpdate
+		  
+		  //
+		  // Sort the updates
+		  //
+		  dim vers() as double
+		  for i as integer = 0 to updates.Ubound
+		    vers.Append updates( i ).VersionAsDouble
+		  next
+		  
+		  vers.SortWith( updates )
+		  
+		  //
+		  // Reverse the sort
+		  //
+		  dim reverse() as integer
+		  for i as integer = 0 to updates.Ubound
+		    reverse.Append( updates.Ubound - i )
+		  next
+		  
+		  reverse.SortWith( updates )
 		  
 		  //
 		  // Set up the labels
@@ -466,46 +561,26 @@ End
 		  lblSecondary.Text = lblSecondary.Text.ReplaceAll( kThisVersionMarker, Kaju.AppVersionString )
 		  
 		  //
-		  // Set up the listbox with the available updates.
+		  // Set up the menu with the available updates.
 		  // It will set up the rest of the controls.
 		  //
 		  
 		  for i as integer = 0 to Updates.Ubound
 		    dim update as Kaju.UpdateInformation = updates( i )
-		    lbUpdates.AddRow update.Version
-		    lbUpdates.RowTag( i ) = update
+		    pumUpdates.AddRow update.Version
+		    pumUpdates.RowTag( i ) = update
 		  next
 		  
-		  lbUpdates.SortedColumn = 0
-		  lbUpdates.ColumnSortDirection( 0 ) = 1
-		  lbUpdates.Sort
-		  
-		  lbUpdates.ListIndex = 0
+		  pumUpdates.ListIndex = 0
 		  
 		  if updates.Ubound = 0 then
 		    //
-		    // Only one update so hide the listbox
+		    // Only one update so hide the menu
 		    //
-		    lbUpdates.Visible = false
+		    lblVersions.Visible = false
+		    pumUpdates.Visible = false
 		  end if
 		  
-		  #if not TargetMacOS then
-		    //
-		    // Switch the buttons around for other platforms
-		    //
-		    dim farLeft as integer = btnCancel.Left
-		    btnCancel.Left = btnOK.Left
-		    btnOK.Left = farLeft
-		    
-		    const kAddition = 10
-		    
-		    btnCancel.Height = btnCancel.Height + kAddition
-		    btnOK.Height = btnOK.Height + kAddition
-		    btnSkipVersion.Height = btnSkipVersion.Height + kAddition
-		    
-		    self.Height = self.Height + kAddition
-		    
-		  #endif
 		  
 		End Sub
 	#tag EndMethod
@@ -518,13 +593,9 @@ End
 		  
 		  self.Loading = true
 		  
-		  dim source as string = update.ReleaseNotes
-		  if source = "" then
-		    source = "<b>NO UPDATE INFORMATION</b>"
-		  end if
-		  
-		  hvNotes.LoadPage( source, nil )
-		  
+		  //
+		  // Get the background picture, if any
+		  //
 		  dim useTransparency as boolean = update.UseTransparency
 		  dim p as Picture = update.Image
 		  if p is nil then
@@ -535,17 +606,54 @@ End
 		  if p <> nil and useTransparency then
 		    dim faded as new Picture( p.Width, p.Height, 32 )
 		    faded.Transparent = Picture.TransparentWhite
-		    faded.Graphics.Transparency = 50.0
-		    faded.Graphics.DrawPicture( p, 0, 0 )
-		    dim mask as new Picture( p.Width, p.Height )
-		    mask.Graphics.DrawPicture( p.Mask, 0, 0 )
-		    faded.Mask = mask
-		    p = faded
+		    
+		    const kTransparencyPercent = 50.0
+		    #if TargetWin32 then
+		      if App.UseGDIPlus then
+		    #endif
+		    faded.Graphics.Transparency = kTransparencyPercent
+		    #if TargetWin32 then
+		  end if
+		  #endif
+		  
+		  faded.Graphics.DrawPicture( p, 0, 0 )
+		  
+		  #if TargetWin32 then
+		    if App.UseGDIPlus then
+		  #endif
+		  dim mask as new Picture( p.Width, p.Height )
+		  mask.Graphics.DrawPicture( p.Mask, 0, 0 )
+		  faded.Mask = mask
+		  #if TargetWin32 then
+		    end if
+		  #endif
+		  
+		  p = faded
 		  end if
 		  
-		  self.Backdrop = p
+		  self.BackgroundImage = p
 		  
-		  self.Loading = false
+		  //
+		  // Show the release notes
+		  //
+		  dim source as string = update.ReleaseNotes
+		  if source = "" then
+		    source = "<b>NO UPDATE INFORMATION</b>"
+		  end if
+		  
+		  static tempFile as FolderItem = GetTemporaryFolderItem
+		  hvNotes.LoadPage( source, tempFile )
+		  
+		  #if DebugBuild then
+		    if not tempFile.Exists then
+		      break
+		    end if
+		  #endif
+		  
+		  //
+		  // hvNotes.CancelLoad will set self.Loading back to false
+		  //
+		  
 		End Sub
 	#tag EndMethod
 
@@ -612,6 +720,22 @@ End
 		AppName As String
 	#tag EndComputedProperty
 
+	#tag ComputedProperty, Flags = &h21
+		#tag Getter
+			Get
+			  return mBackgroundImage
+			  
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mBackgroundImage = value
+			  self.Invalidate
+			End Set
+		#tag EndSetter
+		Private BackgroundImage As Picture
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h21
 		Private Checker As Kaju.UpdateChecker
 	#tag EndProperty
@@ -648,6 +772,10 @@ End
 
 	#tag Property, Flags = &h21
 		Private mAppName As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mBackgroundImage As Picture
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -700,7 +828,7 @@ End
 	#tag Constant, Name = kReadyMessage, Type = String, Dynamic = False, Default = \"Ready to install", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = kReleaseNotes, Type = String, Dynamic = False, Default = \"Release Notes:", Scope = Private
+	#tag Constant, Name = kReleaseNotesLabel, Type = String, Dynamic = False, Default = \"Release Notes:", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kRemindMeLaterButton, Type = String, Dynamic = False, Default = \"Remind Me Later", Scope = Private
@@ -727,6 +855,9 @@ End
 	#tag Constant, Name = kTryLaterButton, Type = String, Dynamic = False, Default = \"Try Later", Scope = Private
 	#tag EndConstant
 
+	#tag Constant, Name = kVersionsLabel, Type = String, Dynamic = False, Default = \"Available Versions:", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kWindowTitle, Type = String, Dynamic = False, Default = \"Update Available", Scope = Private
 	#tag EndConstant
 
@@ -742,26 +873,6 @@ End
 
 #tag EndWindowCode
 
-#tag Events lbUpdates
-	#tag Event
-		Sub Change()
-		  //
-		  // Fill in the viewer
-		  //
-		  
-		  if me.ListIndex = -1 then
-		    if me.ListCount <> 0 then
-		      me.ListIndex = 0
-		    end if
-		    return
-		  end if
-		  
-		  dim update as Kaju.UpdateInformation = me.RowTag( me.ListIndex )
-		  DisplayVersionInfo( update )
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events hvNotes
 	#tag Event
 		Function NewWindow() As HTMLViewer
@@ -770,10 +881,17 @@ End
 	#tag EndEvent
 	#tag Event
 		Function CancelLoad(URL as String) As Boolean
-		  return ( not Loading )
+		  dim r as boolean = not Loading
+		  Loading = false
+		  return r
 		  
 		  #pragma unused URL
 		End Function
+	#tag EndEvent
+	#tag Event
+		Sub Error(errorNumber as Integer, errorMessage as String)
+		  break
+		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events btnOK
@@ -786,7 +904,7 @@ End
 		    //
 		    
 		    if true then // Scope
-		      dim chosen as Kaju.UpdateInformation = lbUpdates.RowTag( lbUpdates.ListIndex )
+		      dim chosen as Kaju.UpdateInformation = pumUpdates.RowTag( pumUpdates.ListIndex )
 		      if chosen.RequiresPayment then
 		        dim dlg as new MessageDialog
 		        dlg.ActionButton.Visible = true
@@ -810,7 +928,7 @@ End
 		    pbProgress.Visible = true
 		    lblInstallMessage.Visible = true
 		    
-		    lbUpdates.Enabled = false
+		    pumUpdates.Enabled = false
 		    
 		    CurrentStage = Stage.InstallingUpdate
 		    
@@ -880,7 +998,7 @@ End
 		  // We can only ignore versions if we already have the minimum requried
 		  //
 		  
-		  dim info as Kaju.UpdateInformation = lbUpdates.RowTag( lbUpdates.ListIndex )
+		  dim info as Kaju.UpdateInformation = pumUpdates.RowTag( pumUpdates.ListIndex )
 		  
 		  if info.MinimumRequiredVersion <> "" and _
 		    Kaju.VersionToDouble( Kaju.AppVersionString ) < Kaju.VersionToDouble( info.MinimumRequiredVersion )  then
@@ -891,13 +1009,13 @@ End
 		    
 		    Checker.IgnoreVersion( info.Version )
 		    
-		    if lbUpdates.ListCount = 1 then
+		    if pumUpdates.ListCount = 1 then
 		      SelectedUpdate = nil
 		      Kaju.CancelUpdate
 		      self.Close
 		    else
-		      lbUpdates.RemoveRow( lbUpdates.ListIndex )
-		      lbUpdates.ListIndex = 0
+		      pumUpdates.RemoveRow( pumUpdates.ListIndex )
+		      pumUpdates.ListIndex = 0
 		    end if
 		    
 		  end if
@@ -1052,6 +1170,26 @@ End
 		  return true
 		  
 		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events pumUpdates
+	#tag Event
+		Sub Change()
+		  //
+		  // Fill in the viewer
+		  //
+		  
+		  if me.ListIndex = -1 then
+		    if me.ListCount <> 0 then
+		      me.ListIndex = 0
+		    end if
+		    return
+		  end if
+		  
+		  dim update as Kaju.UpdateInformation = me.RowTag( me.ListIndex )
+		  DisplayVersionInfo( update )
+		  
+		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior

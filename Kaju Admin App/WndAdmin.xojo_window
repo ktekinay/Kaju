@@ -241,7 +241,7 @@ Begin Window WndAdmin
       TextUnit        =   0
       Top             =   86
       Underline       =   False
-      Value           =   0
+      Value           =   2
       Visible         =   True
       Width           =   653
       Begin TextAreaChanger fldReleaseNotes
@@ -842,7 +842,7 @@ Begin Window WndAdmin
          Top             =   161
          Transparent     =   False
          Underline       =   False
-         Visible         =   False
+         Visible         =   True
          Width           =   67
       End
       Begin CheckBoxChanger cbImageUseTransparency
@@ -1909,37 +1909,6 @@ Begin Window WndAdmin
       Visible         =   True
       Width           =   100
    End
-   Begin PushButton btnPreview
-      AutoDeactivate  =   True
-      Bold            =   False
-      ButtonStyle     =   "0"
-      Cancel          =   False
-      Caption         =   "Preview..."
-      Default         =   False
-      Enabled         =   True
-      Height          =   20
-      HelpTag         =   ""
-      Index           =   -2147483648
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   693
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   True
-      LockTop         =   False
-      Scope           =   2
-      TabIndex        =   9
-      TabPanelIndex   =   0
-      TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
-      Top             =   639
-      Underline       =   False
-      Visible         =   True
-      Width           =   85
-   End
    Begin PushButton btnExport
       AutoDeactivate  =   True
       Bold            =   False
@@ -2001,6 +1970,50 @@ Begin Window WndAdmin
       Underline       =   False
       Visible         =   True
       Width           =   65
+   End
+   Begin BevelButton btnPreview
+      AcceptFocus     =   True
+      AutoDeactivate  =   True
+      BackColor       =   &c00000000
+      Bevel           =   0
+      Bold            =   False
+      ButtonType      =   0
+      Caption         =   "Preview..."
+      CaptionAlign    =   3
+      CaptionDelta    =   0
+      CaptionPlacement=   1
+      Enabled         =   True
+      HasBackColor    =   False
+      HasMenu         =   1
+      Height          =   22
+      HelpTag         =   ""
+      Icon            =   0
+      IconAlign       =   0
+      IconDX          =   0
+      IconDY          =   0
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   684
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      MenuValue       =   -1
+      Scope           =   0
+      TabIndex        =   16
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   639
+      Underline       =   False
+      Value           =   False
+      Visible         =   True
+      Width           =   113
    End
 End
 #tag EndWindow
@@ -2925,16 +2938,6 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events btnPreview
-	#tag Event
-		Sub Action()
-		  dim uc as new Kaju.UpdateChecker( App.PrefFolder )
-		  dim s as string = KajuJSON.ToString
-		  uc.TestUpdate( s )
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events btnExport
 	#tag Event
 		Sub Action()
@@ -2972,6 +2975,32 @@ End
 	#tag Event
 		Sub Action()
 		  DuplicateVersion
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnPreview
+	#tag Event
+		Sub Open()
+		  me.AddRow "Development"
+		  me.AddRow "Alpha"
+		  me.AddRow "Beta"
+		  me.AddRow "Final"
+		  
+		  me.MenuValue = -1
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Action()
+		  if me.MenuValue = -1 then
+		    return
+		  end if
+		  
+		  dim uc as new Kaju.UpdateChecker( App.PrefFolder )
+		  uc.AllowedStage = me.MenuValue
+		  dim s as string = KajuJSON.ToString
+		  uc.TestUpdate( s )
+		  
+		  me.MenuValue = -1
 		End Sub
 	#tag EndEvent
 #tag EndEvents
