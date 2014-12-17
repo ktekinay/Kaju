@@ -582,13 +582,9 @@ End
 		  
 		  self.Loading = true
 		  
-		  dim source as string = update.ReleaseNotes
-		  if source = "" then
-		    source = "<b>NO UPDATE INFORMATION</b>"
-		  end if
-		  
-		  hvNotes.LoadPage( source, nil )
-		  
+		  //
+		  // Get the background picture, if any
+		  //
 		  dim useTransparency as boolean = update.UseTransparency
 		  dim p as Picture = update.Image
 		  if p is nil then
@@ -599,15 +595,53 @@ End
 		  if p <> nil and useTransparency then
 		    dim faded as new Picture( p.Width, p.Height, 32 )
 		    faded.Transparent = Picture.TransparentWhite
-		    faded.Graphics.Transparency = 50.0
-		    faded.Graphics.DrawPicture( p, 0, 0 )
-		    dim mask as new Picture( p.Width, p.Height )
-		    mask.Graphics.DrawPicture( p.Mask, 0, 0 )
-		    faded.Mask = mask
-		    p = faded
+		    
+		    const kTransparencyPercent = 50.0
+		    #if TargetWin32 then
+		      if App.UseGDIPlus then
+		    #endif
+		    faded.Graphics.Transparency = kTransparencyPercent
+		    #if TargetWin32 then
+		  end if
+		  #endif
+		  
+		  faded.Graphics.DrawPicture( p, 0, 0 )
+		  
+		  #if TargetWin32 then
+		    if App.UseGDIPlus then
+		  #endif
+		  dim mask as new Picture( p.Width, p.Height )
+		  mask.Graphics.DrawPicture( p.Mask, 0, 0 )
+		  faded.Mask = mask
+		  #if TargetWin32 then
+		    end if
+		  #endif
+		  
+		  p = faded
 		  end if
 		  
 		  self.BackgroundImage = p
+		  
+		  //
+		  // Show the release notes
+		  //
+		  dim source as string = update.ReleaseNotes
+		  if source = "" then
+		    source = "<b>NO UPDATE INFORMATION</b>"
+		  end if
+		  
+		  static tempFile as FolderItem = GetTemporaryFolderItem
+		  hvNotes.LoadPage( source, tempFile )
+		  
+		  #if DebugBuild then
+		    if not tempFile.Exists then
+		      break
+		    end if
+		  #endif
+		  
+		  //
+		  // hvNotes.CancelLoad will set self.Loading back to false
+		  //
 		  
 		End Sub
 	#tag EndMethod
