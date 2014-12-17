@@ -45,6 +45,6 @@ DefaultEncoding=&h0
 AppIcon=Kaju Update Test.xojo_resources;&h0
 OSXBundleID=com.mactechnologies.kajuupdatetest
 DebuggerCommandLine=
-UseGDIPlus=False
+UseGDIPlus=True
 UseBuildsFolder=True
 IsWebProject=False
