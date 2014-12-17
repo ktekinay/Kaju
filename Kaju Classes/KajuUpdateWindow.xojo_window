@@ -434,6 +434,35 @@ End
 		End Sub
 	#tag EndEvent
 
+	#tag Event
+		Sub Paint(g As Graphics, areas() As REALbasic.Rect)
+		  //
+		  // Draw a border around the release notes (Mac only)
+		  //
+		  
+		  const kThickness = 1
+		  
+		  g.DrawPicture BackgroundImage, 0, 0, g.Width, g.Height
+		  
+		  dim drawLeft as integer = hvNotes.Left - kThickness
+		  dim drawTop as integer = hvNotes.Top - kThickness
+		  dim drawRight as integer = hvNotes.Left + hvNotes.Width
+		  dim drawBottom as integer = hvNotes.Top + hvNotes.Height
+		  dim drawWidth as integer = drawRight - drawLeft + kThickness
+		  dim drawHeight as integer = drawBottom - drawTop + kThickness
+		  
+		  g.PenHeight = kThickness
+		  g.PenWidth = kThickness
+		  
+		  g.ForeColor = &c00000000 // Black
+		  g.DrawRect drawLeft, drawTop, drawWidth, drawHeight
+		  
+		  #if RBVersion > 2012.02 then
+		    #pragma unused areas
+		  #endif
+		End Sub
+	#tag EndEvent
+
 
 	#tag Method, Flags = &h0
 		Sub Cancel()
@@ -578,7 +607,7 @@ End
 		    p = faded
 		  end if
 		  
-		  self.Backdrop = p
+		  self.BackgroundImage = p
 		  
 		  self.Loading = false
 		End Sub
@@ -647,6 +676,22 @@ End
 		AppName As String
 	#tag EndComputedProperty
 
+	#tag ComputedProperty, Flags = &h21
+		#tag Getter
+			Get
+			  return mBackgroundImage
+			  
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mBackgroundImage = value
+			  self.Invalidate
+			End Set
+		#tag EndSetter
+		Private BackgroundImage As Picture
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h21
 		Private Checker As Kaju.UpdateChecker
 	#tag EndProperty
@@ -683,6 +728,10 @@ End
 
 	#tag Property, Flags = &h21
 		Private mAppName As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mBackgroundImage As Picture
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
