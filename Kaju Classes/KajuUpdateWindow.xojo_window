@@ -842,6 +842,11 @@ End
 		  #pragma unused URL
 		End Function
 	#tag EndEvent
+	#tag Event
+		Sub Error(errorNumber as Integer, errorMessage as String)
+		  break
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events btnOK
 	#tag Event
