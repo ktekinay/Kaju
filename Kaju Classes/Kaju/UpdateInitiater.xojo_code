@@ -48,6 +48,7 @@ Protected Class UpdateInitiater
 	#tag Method, Flags = &h21
 		Private Function GetManifest(sourceFolder As FolderItem, excludeName As String) As String()
 		  // Retrieves the names of the files and folders contained in the sourceFolder
+		  // except for the excluded name and .DS_Store
 		  
 		  dim r() as string
 		  
@@ -55,7 +56,7 @@ Protected Class UpdateInitiater
 		  for i as integer = 1 to cnt
 		    dim f as FolderItem = sourceFolder.Item( i )
 		    dim name as string = f.Name
-		    if name <> excludeName then
+		    if name <> excludeName and name <> ".DS_Store" then
 		      r.Append name
 		    end if
 		  next
