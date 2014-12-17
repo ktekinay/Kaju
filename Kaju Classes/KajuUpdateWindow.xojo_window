@@ -38,7 +38,7 @@ Begin Window KajuUpdateWindow
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
-      Renderer        =   0
+      Renderer        =   1
       Scope           =   2
       TabIndex        =   1
       TabPanelIndex   =   0
