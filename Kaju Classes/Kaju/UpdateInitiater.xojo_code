@@ -295,10 +295,11 @@ Protected Class UpdateInitiater
 		  rx.Options.Greedy = false
 		  
 		  dim match as RegExMatch = rx.Search( script )
-		  dim template as string = match.SubExpressionString( 1 )
+		  dim masterTemplate as string = match.SubExpressionString( 1 )
 		  
 		  dim arr() as string
 		  for each file as string in otherFiles
+		    dim template as string = masterTemplate
 		    template = template.ReplaceAll( kMarkerWinOther, file )
 		    template = template.ReplaceAll( kMarkerWinOtherWithoutSpaces, file.ReplaceAll( " ", "_" ) )
 		    arr.Append template
