@@ -48,7 +48,6 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "This will check a predefined web site for an update. It will always show an update for 1.1 and offer to download it, but the download is, in fact, v.1.0. In other words, the app will replace itself (sometimes with an older version) just so the process can be repeated."
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -146,7 +145,6 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   3
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Press check to get a result"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -260,13 +258,13 @@ Begin Window Window1
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
-      Height          =   20
+      Height          =   30
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       InitialValue    =   ""
       Italic          =   False
-      Left            =   235
+      Left            =   191
       ListIndex       =   0
       LockBottom      =   False
       LockedInPosition=   False
@@ -280,7 +278,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   207
+      Top             =   197
       Underline       =   False
       Visible         =   True
       Width           =   171
@@ -307,7 +305,6 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Min. Stage Allowed:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -318,7 +315,7 @@ Begin Window Window1
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   175
+      Width           =   152
    End
 End
 #tag EndWindow
