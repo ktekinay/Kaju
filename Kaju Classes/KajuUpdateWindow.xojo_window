@@ -435,6 +435,34 @@ End
 	#tag EndEvent
 
 	#tag Event
+		Sub Open()
+		  #if not TargetMacOS then
+		    //
+		    // Switch the buttons around for other platforms
+		    //
+		    dim farLeft as integer = btnCancel.Left
+		    btnCancel.Left = btnOK.Left
+		    btnOK.Left = farLeft
+		    
+		    const kAddition = 10
+		    
+		    btnCancel.Height = btnCancel.Height + kAddition
+		    btnOK.Height = btnOK.Height + kAddition
+		    btnSkipVersion.Height = btnSkipVersion.Height + kAddition
+		    
+		    //
+		    // Make the pop-up menu bigger
+		    //
+		    pumUpdates.Height = pumUpdates.Height + kAddition
+		    
+		    self.Height = self.Height + kAddition
+		    
+		  #endif
+		  
+		End Sub
+	#tag EndEvent
+
+	#tag Event
 		Sub Paint(g As Graphics, areas() As REALbasic.Rect)
 		  //
 		  // Draw a border around the release notes (Mac only)
@@ -553,23 +581,6 @@ End
 		    pumUpdates.Visible = false
 		  end if
 		  
-		  #if not TargetMacOS then
-		    //
-		    // Switch the buttons around for other platforms
-		    //
-		    dim farLeft as integer = btnCancel.Left
-		    btnCancel.Left = btnOK.Left
-		    btnOK.Left = farLeft
-		    
-		    const kAddition = 10
-		    
-		    btnCancel.Height = btnCancel.Height + kAddition
-		    btnOK.Height = btnOK.Height + kAddition
-		    btnSkipVersion.Height = btnSkipVersion.Height + kAddition
-		    
-		    self.Height = self.Height + kAddition
-		    
-		  #endif
 		  
 		End Sub
 	#tag EndMethod
