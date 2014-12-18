@@ -61,29 +61,29 @@ PROCEED=$true
 #
 # Move the other items
 #
-log_cmd "Moving other items to backup $BACKUP_PARENT"
+log_cmd "Copying other items to backup $BACKUP_PARENT"
 
 counter=0
 while [ $counter -le $NEW_APP_OTHER_UB ]
 do
-  this_item=${NEW_APP_OTHER_NAME[$counter]}
-  log_cmd "Looking for item $this_item in $APP_PARENT"
-  
-  this_path=$APP_PARENT/$this_item
-  if [ -d "$this_path" ] || [ -f "$this_path" ]
-  then
-    log_cmd "...found, moving"
-    mv "$this_path" "$BACKUP_PARENT"
-    if [ $? == 0 ]
-    then
-      log_cmd "...confirmed"
-    else
-       log_cmd "...FAILED!"
-       PROCEED=$false
-       break
-    fi
-  fi
-  (( counter++ ))
+	this_item=${NEW_APP_OTHER_NAME[$counter]}
+	log_cmd "Looking for item $this_item in $APP_PARENT"
+	
+	this_path=$APP_PARENT/$this_item
+	if [ -d "$this_path" ] || [ -f "$this_path" ]
+	then
+		log_cmd "...found, copying"
+		cp -pr "$this_path" "$BACKUP_PARENT"
+		if [ $? == 0 ]
+		then
+			log_cmd "...confirmed"
+		else
+			 log_cmd "...FAILED!"
+			 PROCEED=$false
+			 break
+		fi
+	fi
+	(( counter++ ))
 done
 
 #
@@ -103,14 +103,14 @@ then
 fi
 
 #
-# Make sure there wasn't an error during the move
+# Make sure there wasn't an error during the backup
 #
 if [ $PROCEED == $true ]
 then
-  log_cmd 'All items moved to backup'
+	log_cmd 'All items backed up'
 else
-  log_cmd 'Attempting to move items back to parent'
-  mv -f "${BACKUP_PARENT}"/* "$APP_PARENT"
+	log_cmd 'Attempting to copy items back to parent'
+	rsync -a --exclude='.DS_Store' "${BACKUP_PARENT}/" "$APP_PARENT"
 fi
 
 #
@@ -118,57 +118,19 @@ fi
 #
 if [ $PROCEED == $true ]
 then
-  log_cmd  "Moving files from $NEW_APP_PARENT to folder $APP_PARENT"
-  
-  counter=0
-  while [ $counter -le $NEW_APP_OTHER_UB ]
-  do
-    this_item=${NEW_APP_OTHER_NAME[$counter]}
-    old_path="$NEW_APP_PARENT/$this_item"
-    
-    log_cmd "Moving $old_path to $APP_PARENT"
-    mv -f "$old_path" "$APP_PARENT"
-    
-    #
-    # Make sure it moved
-    #
-    if [ $? == 0 ]
-    then
-      log_cmd  '...confirmed'
-    else
-      log_cmd  "...FAILED! (Error $?)"
-      log_cmd  "Attempting to restore old application"
-      mv -f "${BACKUP_PARENT}"/* "$APP_PARENT"
-      PROCEED=$false
-      break
-    fi
-    
-    (( counter++ ))
-  done
-fi
-
-#
-# Move the executable
-#
-if [ $PROCEED == $true ]
-then
-  old_path="$NEW_APP_PARENT/$NEW_APP_NAME"
-  log_cmd "Moving $old_path to $APP_PARENT"
-  mv -f "$old_path" "$APP_PARENT"
-  
-  #
-  # Make sure it moved
-  #
-  if [ $? == 0 ]
-  then
-    log_cmd  '...confirmed'
-  else
-    log_cmd  "...FAILED! (Error $?)"
-    log_cmd  "Attempting to restore old application"
-    mv -f "${BACKUP_PARENT}"/* "$APP_PARENT"
-    PROCEED=$false
-    break
-  fi
+	log_cmd  "Copying files from $NEW_APP_PARENT to folder $APP_PARENT"
+	rsync -a --exclude='.DS_Store' "${NEW_APP_PARENT}/" "$APP_PARENT"
+	
+	if [ $? == 0 ]
+	then
+		log_cmd  '...confirmed'
+	else
+		log_cmd  "...FAILED! (Error $?)"
+		log_cmd  "Attempting to restore old application"
+		rsync -a --exclude='.DS_Store' "${BACKUP_PARENT}/" "$APP_PARENT"
+		PROCEED=$false
+		break
+	fi
 fi
 
 #
