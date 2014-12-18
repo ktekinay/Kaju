@@ -5,7 +5,7 @@
 #
 
 function log_cmd {
-  /usr/bin/logger -t "Kaju Update Script" $@
+	/usr/bin/logger -t "Kaju Update Script" $@
 }
 
 # END FUNCTIONS
@@ -44,16 +44,16 @@ mkdir "$BACKUP_PARENT"
 counter=10
 while [ -f "$PID_FILE" ]
 do
-  log_cmd  "Checking to see if $PIDFILE exists, $counter"
-  sleep 1
-  
-  let counter=counter-1
-  
-  if [ $counter == 0 ]
-  then
-  	log_cmd  'ERROR: Could not update app, it never quit'
-  	exit 1
-  fi
+	log_cmd  "Checking to see if $PIDFILE exists, $counter"
+	sleep 1
+	
+	let counter=counter-1
+	
+	if [ $counter == 0 ]
+	then
+		log_cmd  'ERROR: Could not update app, it never quit'
+		exit 1
+	fi
 done
 
 PROCEED=$true
@@ -91,15 +91,15 @@ done
 #
 if [ $PROCEED == $true ]
 then
-  log_cmd "Moving the executable $APP_NAME to backup"
-  mv "$APP_PARENT/$APP_NAME" "$BACKUP_PARENT"
-  if [ $? == 0 ]
-  then
-    log_cmd "...confirmed"
-  else
-    log_cmd "...FAILED! (Error $?)"
-    PROCEED=$false
-  fi
+	log_cmd "Moving the executable $APP_NAME to backup"
+	mv "$APP_PARENT/$APP_NAME" "$BACKUP_PARENT"
+	if [ $? == 0 ]
+	then
+		log_cmd "...confirmed"
+	else
+		log_cmd "...FAILED! (Error $?)"
+		PROCEED=$false
+	fi
 fi
 
 #
@@ -176,8 +176,8 @@ fi
 #
 if [ $PROCEED == $true ]
 then
-  log_cmd 'Removing backup'
-  rm -r "$BACKUP_PARENT"
+	log_cmd 'Removing backup'
+	rm -r "$BACKUP_PARENT"
 fi
 
 #
@@ -185,11 +185,11 @@ fi
 #
 if [ $PROCEED = $true ]
 then
-  log_cmd 'Launching new app'
-  "$APP_PARENT/$NEW_APP_NAME"
+	log_cmd 'Launching new app'
+	"$APP_PARENT/$NEW_APP_NAME"
 else
-  log_cmd 'Launching old app'
-  "$APP_PARENT/$APP_NAME"
+	log_cmd 'Launching old app'
+	"$APP_PARENT/$APP_NAME"
 fi
 
 log_cmd  'Removing temp folder'
