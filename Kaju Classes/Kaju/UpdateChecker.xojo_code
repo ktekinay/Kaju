@@ -39,9 +39,20 @@ Protected Class UpdateChecker
 		  //
 		  // Check for write permission
 		  //
-		  if not App.ExecutableFile.IsWriteable or not App.ExecutableFile.Parent.IsWriteable then
-		    mResult = ResultType.NoWritePermission
-		    return
+		  if true then // Scope
+		    
+		    dim itemsToCheck() as FolderItem
+		    itemsToCheck.Append App.ExecutableFile
+		    #if TargetMacOS then
+		      itemsToCheck.Append Kaju.TrueExecutableFile
+		    #endif
+		    for each f as FolderItem in itemsToCheck
+		      if not f.IsWriteable or not f.Parent.IsWriteable then
+		        mResult = ResultType.NoWritePermission
+		        return
+		      end if
+		    next
+		    
 		  end if
 		  
 		  mDryRun = false

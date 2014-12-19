@@ -118,6 +118,25 @@ Protected Module Kaju
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Function TrueExecutableFile() As FolderItem
+		  dim r as FolderItem = App.ExecutableFile
+		  
+		  #if TargetMacOS then
+		    
+		    r = r.Parent
+		    while r.Name <> "Contents"
+		      r = r.Parent
+		    wend
+		    
+		    r = r.Parent
+		    
+		  #endif
+		  
+		  return r
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Function VersionStringFor(majorVersion As Integer, minorVersion As Integer, bugVersion As Integer) As String
 		  return VersionStringFor( majorVersion, minorVersion, bugVersion, App.Final, 0 )
 		End Function
