@@ -48,7 +48,6 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "This will check a predefined web site for an update. It will always show an update for 1.1 and offer to download it, but the download is, in fact, v.1.0. In other words, the app will replace itself (sometimes with an older version) just so the process can be repeated."
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -146,7 +145,6 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   3
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Press check to get a result"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -307,7 +305,6 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Min. Stage Allowed:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -363,6 +360,9 @@ End
 		  case Kaju.UpdateChecker.ResultType.UpdateAlreadyInProgress
 		    lblResult.Text = "Update already in progress"
 		    
+		  case Kaju.UpdateChecker.ResultType.UnsupportedOS
+		    lblResult.Text = "This OS is not supported (missing required tools)"
+		    
 		  case Kaju.UpdateChecker.ResultType.NoWritePermission
 		    lblResult.Text = "Aborted (no write permission)"
 		    
@@ -380,6 +380,9 @@ End
 		    
 		  case Kaju.UpdateChecker.ResultType.RequiredUpdateAvailable
 		    lblResult.Text = "Required update available"
+		    
+		  else
+		    lblResult.Text = "UNKNOWN RESULT"
 		  end
 		  
 		  return
