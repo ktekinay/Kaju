@@ -118,39 +118,6 @@ IF %PROCEED% == 1 (
 	) ELSE (
 		ECHO "...confirmed" >> "%LOGGER%" 2>&1
 	)
-	
-REM 	
-REM 	FOR %%a IN (@@NEW_APP_OTHER_ARRAY@@) DO (
-REM 		ECHO "Copying %%a" >> "%LOGGER%" 2>&1
-REM 		XCOPY /y /e /k %%a "%APP_PARENT%" >> "%LOGGER%" 2>&1
-REM 		IF %ERRORLEVEL% NEQ 0 (
-REM 			ECHO "...FAILED! (Error %ERRORLEVEL%)" >> "%LOGGER%" 2>&1
-REM 			SET PROCEED=0
-REM 			GOTO :restore_from_backup
-REM 		) ELSE (
-REM 			ECHO "...confirmed" >> "%LOGGER%" 2>&1
-REM 		)
-REM 	)
-)
-
-REM
-REM Move the executable
-REM
-REM IF %PROCEED% == 1 (
-REM 	ECHO "Moving executable %NEW_APP_PARENT%\%NEW_APP_NAME% to %APP_PARENT%" >> "%LOGGER%" 2>&1
-REM 	MOVE /Y "%NEW_APP_PARENT%\%NEW_APP_NAME%" "%APP_PARENT%\" >> "%LOGGER%" 2>&1
-REM 
-REM 	REM
-REM 	REM Make sure it moved
-REM 	REM
-REM 	IF %ERRORLEVEL% NEQ 0 (
-REM 		ECHO "...FAILED! (Error %ERRORLEVEL%)" >> "%LOGGER%" 2>&1
-REM 		SET PROCEED=0
-REM 		GOTO :restore_from_backup
-REM 	) ELSE (
-REM 		ECHO "...confirmed" >> "%LOGGER%" 2>&1
-REM 	)
-REM )
 
 REM
 REM If we get here, it all worked
