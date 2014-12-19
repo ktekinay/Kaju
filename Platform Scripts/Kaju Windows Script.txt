@@ -118,6 +118,7 @@ IF %PROCEED% == 1 (
 	) ELSE (
 		ECHO "...confirmed" >> "%LOGGER%" 2>&1
 	)
+)
 
 REM
 REM If we get here, it all worked
