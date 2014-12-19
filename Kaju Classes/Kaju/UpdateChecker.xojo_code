@@ -504,6 +504,7 @@ Protected Class UpdateChecker
 	#tag Enum, Name = ResultType, Type = Integer, Flags = &h0
 		NotYetChecked = -9999
 		  UpdateAlreadyInProgress = -100
+		  UnsupportedOS = -70
 		  NoWritePermission = -50
 		  Error = -1
 		  NoUpdateAvailable = 0
