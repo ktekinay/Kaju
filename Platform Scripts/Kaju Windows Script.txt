@@ -46,7 +46,7 @@ SET PROCEED=1
 REM
 REM Move the other items
 REM
-ECHO "Moving items to backup %BACKUP_PARENT%" >> "%LOGGER%" 2>&1
+ECHO "Copying items to backup %BACKUP_PARENT%" >> "%LOGGER%" 2>&1
 
 REM We will need to manually populate these move commands. Windows Batch doesn't really handle arrays,
 REM only looping through space delimited elements of a string. Below is a template for moving one such file.
@@ -56,20 +56,20 @@ SET THIS_ITEM=@@OTHER_NAME@@
 SET THIS_PATH=%APP_PARENT%\%THIS_ITEM%
 ECHO "Looking for item %THIS_PATH%" >> "%LOGGER%" 2>&1
 IF EXIST "%THIS_PATH%" (
-	GOTO :move_@@OTHER_NAME_WO_SPACES@@
+	GOTO :copy_@@OTHER_NAME_WO_SPACES@@
 )
 ECHO "...not found as file, trying as directory" >> "%LOGGER%" 2>&1
 IF EXIST "%THIS_PATH%\NUL" (
-	GOTO :move_@@OTHER_NAME_WO_SPACES@@
+	GOTO :copy_@@OTHER_NAME_WO_SPACES@@
 ) ELSE (
 	ECHO "...NOT FOUND!" >> "%LOGGER%" 2>&1
 	GOTO :finished_with_@@OTHER_NAME_WO_SPACES@@
 )
 
-:move_@@OTHER_NAME_WO_SPACES@@
+:copy_@@OTHER_NAME_WO_SPACES@@
 
-ECHO "...found, moving" >> "%LOGGER%" 2>&1
-MOVE "%THIS_PATH%" "%BACKUP_PARENT%" >> "%LOGGER%" 2>&1
+ECHO "...found, copying" >> "%LOGGER%" 2>&1
+COPY "%THIS_PATH%" "%BACKUP_PARENT%" >> "%LOGGER%" 2>&1
 IF %ERRORLEVEL% NEQ 0 (
 	ECHO "...FAILED! (Error %ERRORLEVEL%)" >> "%LOGGER%" 2>&1
 	SET PROCEED=0
@@ -105,34 +105,12 @@ IF %PROCEED% == 1 (
 )
 
 REM
-REM Move in the replacement files
+REM Copy in the replacement files
 REM
 
 IF %PROCEED% == 1 (
-	ECHO "Moving files from %NEW_APP_PARENT% to folder %APP_PARENT%" >> "%LOGGER%" 2>&1
-	FOR %%a IN (@@NEW_APP_OTHER_ARRAY@@) DO (
-		ECHO "Moving %%a" >> "%LOGGER%" 2>&1
-		MOVE /Y %%a "%APP_PARENT%" >> "%LOGGER%" 2>&1
-		IF %ERRORLEVEL% NEQ 0 (
-			ECHO "...FAILED! (Error %ERRORLEVEL%)" >> "%LOGGER%" 2>&1
-			SET PROCEED=0
-			GOTO :restore_from_backup
-		) ELSE (
-			ECHO "...confirmed" >> "%LOGGER%" 2>&1
-		)
-	)
-)
-
-REM
-REM Move the executable
-REM
-IF %PROCEED% == 1 (
-	ECHO "Moving executable %NEW_APP_PARENT%\%NEW_APP_NAME% to %APP_PARENT%" >> "%LOGGER%" 2>&1
-	MOVE /Y "%NEW_APP_PARENT%\%NEW_APP_NAME%" "%APP_PARENT%\" >> "%LOGGER%" 2>&1
-
-	REM
-	REM Make sure it moved
-	REM
+	ECHO "Copying files from %NEW_APP_PARENT% to folder %APP_PARENT%" >> "%LOGGER%" 2>&1
+	XCOPY /y /e /k "%NEW_APP_PARENT%" "%APP_PARENT%" >> "%LOGGER%" 2>&1
 	IF %ERRORLEVEL% NEQ 0 (
 		ECHO "...FAILED! (Error %ERRORLEVEL%)" >> "%LOGGER%" 2>&1
 		SET PROCEED=0
@@ -153,7 +131,7 @@ IF %PROCEED% == 1 (
 IF %PROCEED% == 0 (
 	ECHO  "Attempting to restore old application" >> "%LOGGER%" 2>&1
 
-	MOVE /Y "%BACKUP_PARENT%"\*.* "%APP_PARENT%\" >> "%LOGGER%" 2>&1
+	XCOPY /y /e /k "%BACKUP_PARENT%" "%APP_PARENT%" >> "%LOGGER%" 2>&1
 	IF %ERRORLEVEL% EQU 0 (
 		RMDIR /S /Q "%BACKUP_PARENT%" >> "%LOGGER%" 2>&1
 	)

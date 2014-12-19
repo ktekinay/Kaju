@@ -20,6 +20,37 @@ Protected Module Kaju
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Sub DeleteDSStoreRecursive(parent As FolderItem)
+		  // Deletes the .DS_Store file wherever it occurs
+		  
+		  if parent is nil or not parent.Directory then
+		    return
+		  end if
+		  
+		  dim folderArr() as FolderItem
+		  folderArr.Append parent
+		  
+		  dim deleteArr() as FolderItem
+		  for i as integer = 0 to folderArr.Ubound
+		    dim thisFolder as FolderItem = folderArr( i )
+		    dim thisFolderCnt as integer = thisFolder.Count
+		    for fileIndex as integer = 1 to thisFolderCnt
+		      dim subFile as FolderItem = thisFolder.Item( fileIndex )
+		      if subFile.Directory then
+		        folderArr.Append subFile
+		      elseif subFile.Name = ".DS_Store" then
+		        deleteArr.Append subFile
+		      end if
+		    next
+		  next
+		  
+		  for each f as FolderItem in deleteArr
+		    f.Delete
+		  next
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Sub DeleteRecursive(f As FolderItem)
 		  if f is nil or not f.Exists or not f.IsWriteable then
 		    return
