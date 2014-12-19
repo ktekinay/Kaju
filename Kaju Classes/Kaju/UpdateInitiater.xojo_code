@@ -198,13 +198,7 @@ Protected Class UpdateInitiater
 		  //
 		  // Get a FolderItem for the current app
 		  //
-		  dim appFolderItem as FolderItem
-		  
-		  appFolderItem = App.ExecutableFile.Parent
-		  while appFolderItem.Name <> "Contents"
-		    appFolderItem = appFolderItem.Parent
-		  wend
-		  appFolderItem = appFolderItem.Parent
+		  dim appFolderItem as FolderItem = Kaju.TrueExecutable
 		  
 		  //
 		  // Change the name of the replacment app to match
