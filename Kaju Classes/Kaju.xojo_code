@@ -118,7 +118,7 @@ Protected Module Kaju
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
-		Protected Function TrueExecutable() As FolderItem
+		Protected Function TrueExecutableFile() As FolderItem
 		  dim r as FolderItem = App.ExecutableFile
 		  
 		  #if TargetMacOS then

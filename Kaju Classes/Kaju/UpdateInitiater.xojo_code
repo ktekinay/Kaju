@@ -198,7 +198,7 @@ Protected Class UpdateInitiater
 		  //
 		  // Get a FolderItem for the current app
 		  //
-		  dim appFolderItem as FolderItem = Kaju.TrueExecutable
+		  dim appFolderItem as FolderItem = Kaju.TrueExecutableFile
 		  
 		  //
 		  // Change the name of the replacment app to match
