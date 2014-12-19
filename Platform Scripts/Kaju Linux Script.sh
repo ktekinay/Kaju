@@ -149,6 +149,8 @@ fi
 #
 if [ $PROCEED = $true ]
 then
+	log_cmd 'Making the new app executable'
+	chmod +x "$APP_PARENT/$NEW_APP_NAME"
 	log_cmd 'Launching new app'
 	"$APP_PARENT/$NEW_APP_NAME"
 else
