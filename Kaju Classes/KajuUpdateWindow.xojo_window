@@ -1123,6 +1123,13 @@ End
 		  else
 		    
 		    //
+		    // Delete .DS_Store files
+		    //
+		    #if not TargetMacOS then
+		      Kaju.DeleteDSStoreRecursive( containingFolder )
+		    #endif
+		    
+		    //
 		    // Find the executable
 		    //
 		    dim item as FolderItem
