@@ -1,6 +1,41 @@
 #tag Class
 Protected Class UpdateChecker
 	#tag Method, Flags = &h0
+		 Shared Function ConfirmOSSupport() As Boolean
+		  // Ensures that the right tools are available on the current OS
+		  
+		  dim r as boolean = true // Assume it's fine
+		  
+		  #if TargetMacOS then
+		    
+		    r = true // If this app can run, it has the right tools
+		    
+		  #elseif TargetWin32 then
+		    
+		    dim sh as new Shell
+		    sh.Execute "XCOPY /?"
+		    r = sh.ErrorCode = 0
+		    
+		  #else // Linux
+		    
+		    dim cmds() as string = array( "rsync --version", "/usr/bin/logger --version" )
+		    
+		    dim sh as new shell
+		    for each cmd as string in cmds
+		      sh.Execute cmd
+		      if sh.ErrorCode <> 0 then
+		        r = false
+		        exit
+		      end if
+		    next
+		    
+		  #endif
+		  
+		  return r
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub Constructor(preferencesFolder As FolderItem)
 		  self.PrefFile = preferencesFolder.Child( kPreferencesName )
 		  
@@ -33,6 +68,14 @@ Protected Class UpdateChecker
 		  //
 		  if UpdateWindowIsOpen then
 		    mResult = ResultType.UpdateAlreadyInProgress
+		    return
+		  end if
+		  
+		  //
+		  // Make sure the OS is supported
+		  //
+		  if not ConfirmOSSupport() then
+		    mResult = ResultType.UnsupportedOS
 		    return
 		  end if
 		  
