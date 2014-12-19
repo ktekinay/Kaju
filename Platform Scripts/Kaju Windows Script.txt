@@ -110,7 +110,7 @@ REM
 
 IF %PROCEED% == 1 (
 	ECHO "Copying files from %NEW_APP_PARENT% to folder %APP_PARENT%" >> "%LOGGER%" 2>&1
-	XCOPY /y /e /k "%NEW_APP_PARENT%" "%APP_PARENT%"
+	XCOPY /y /e /k "%NEW_APP_PARENT%" "%APP_PARENT%" >> "%LOGGER%" 2>&1
 	IF %ERRORLEVEL% NEQ 0 (
 		ECHO "...FAILED! (Error %ERRORLEVEL%)" >> "%LOGGER%" 2>&1
 		SET PROCEED=0
