@@ -891,6 +891,9 @@ End
 	#tag Event
 		Sub Error(errorNumber as Integer, errorMessage as String)
 		  break
+		  
+		  #pragma unused errorNumber
+		  #pragma unused errorMessage
 		End Sub
 	#tag EndEvent
 #tag EndEvents
