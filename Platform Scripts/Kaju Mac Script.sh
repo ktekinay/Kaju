@@ -34,6 +34,8 @@ NEW_APP_PATH=$NEW_APP_PARENT/$NEW_APP_NAME
 RENAMED_APP_NAME=`echo "$APP_NAME" | /usr/bin/sed -E s/\.[aA][pP]{2}//`-`date +%Y%m%d%H%M%S`.app
 RENAMED_APP_PATH=$APP_PARENT/$RENAMED_APP_NAME
 
+log_cmd "STARTING UPDATE OF $APP_NAME"
+
 counter=10
 while [ -f "$PID_FILE" ]
 do
