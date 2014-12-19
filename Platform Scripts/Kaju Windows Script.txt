@@ -136,21 +136,21 @@ REM 	)
 REM
 REM Move the executable
 REM
-IF %PROCEED% == 1 (
-	ECHO "Moving executable %NEW_APP_PARENT%\%NEW_APP_NAME% to %APP_PARENT%" >> "%LOGGER%" 2>&1
-	MOVE /Y "%NEW_APP_PARENT%\%NEW_APP_NAME%" "%APP_PARENT%\" >> "%LOGGER%" 2>&1
-
-	REM
-	REM Make sure it moved
-	REM
-	IF %ERRORLEVEL% NEQ 0 (
-		ECHO "...FAILED! (Error %ERRORLEVEL%)" >> "%LOGGER%" 2>&1
-		SET PROCEED=0
-		GOTO :restore_from_backup
-	) ELSE (
-		ECHO "...confirmed" >> "%LOGGER%" 2>&1
-	)
-)
+REM IF %PROCEED% == 1 (
+REM 	ECHO "Moving executable %NEW_APP_PARENT%\%NEW_APP_NAME% to %APP_PARENT%" >> "%LOGGER%" 2>&1
+REM 	MOVE /Y "%NEW_APP_PARENT%\%NEW_APP_NAME%" "%APP_PARENT%\" >> "%LOGGER%" 2>&1
+REM 
+REM 	REM
+REM 	REM Make sure it moved
+REM 	REM
+REM 	IF %ERRORLEVEL% NEQ 0 (
+REM 		ECHO "...FAILED! (Error %ERRORLEVEL%)" >> "%LOGGER%" 2>&1
+REM 		SET PROCEED=0
+REM 		GOTO :restore_from_backup
+REM 	) ELSE (
+REM 		ECHO "...confirmed" >> "%LOGGER%" 2>&1
+REM 	)
+REM )
 
 REM
 REM If we get here, it all worked
