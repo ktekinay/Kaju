@@ -305,20 +305,6 @@ Protected Class UpdateInitiater
 		  script = rx.Replace( script )
 		  
 		  //
-		  // Create a comma-delimited "array" of the other files
-		  //
-		  redim arr( -1 )
-		  dim pathPrefix as string = ReplacementAppFolder.NativePath
-		  if pathPrefix.Right( 1 ) <> "\" then
-		    pathPrefix = pathPrefix + "\"
-		  end if
-		  for each file as string in otherFiles
-		    arr.Append pathPrefix + file
-		  next
-		  replacement = """" + join( arr, """,""" ) + """"
-		  script = script.ReplaceAll( kMarkerOtherArray, replacement )
-		  
-		  //
 		  // Prepare for saving
 		  //
 		  script = ReplaceLineEndings( script, EndOfLine.Windows )
