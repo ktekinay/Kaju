@@ -41,6 +41,8 @@ APP_PATH=$APP_PARENT/$APP_NAME
 BACKUP_PARENT=$APP_PARENT/${APP_NAME}-`date +%Y%m%d%H%M%S`
 mkdir "$BACKUP_PARENT"
 
+log_cmd "STARTING UPDATE OF $APP_NAME"
+
 counter=10
 while [ -f "$PID_FILE" ]
 do
