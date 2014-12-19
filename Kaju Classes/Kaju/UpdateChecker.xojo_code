@@ -39,7 +39,8 @@ Protected Class UpdateChecker
 		  //
 		  // Check for write permission
 		  //
-		  if not App.ExecutableFile.IsWriteable or not App.ExecutableFile.Parent.IsWriteable then
+		  if not App.ExecutableFile.IsWriteable or not App.ExecutableFile.Parent.IsWriteable or _
+		    not Kaju.TrueExecutable.IsWriteable then
 		    mResult = ResultType.NoWritePermission
 		    return
 		  end if
