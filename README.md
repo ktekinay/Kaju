@@ -205,9 +205,19 @@ There is only one class (`Kaju.UpdateChecker`) and one method in the Kaju module
 
 **Class:** Kaju.UpdateChecker
 
-|Property|Type|Description|
-|:---|:---:|:---|
-|UpdateURL|
+|Property|Type|Description|Required|
+|:---|:---:|:---|---:|
+|AllowedInteraction|UInt32|Determines what windows Kaju is allowed to display; Use the available constants||
+|AllowedStage|Integer|What stage of updates the user may see (App.Final, App.Beta, App.Alpha, or App.Development)||
+|DefaultImage|Picture|The background image that will be displayed in the window when an image is not provided by the update||
+|DefaultUseTransparency|Boolean|If `True`, transparency will be set to 50%||
+|HonorIgnored|Boolean|If `False`, the user will be presented with updates they previously set to "ignore"||
+|QuitOnCancelIfRequired|Boolean|When `True` (default), a user who attempts to cancel a required update will quit the app||
+|Secure|Boolean|Use a secure connection||
+|ServerPublicRSAKey|String|The public key as provided by the Admin app|**yes**|
+|UpdateURL|String|The URL where the update info will be found|**yes**|
+|UpdateWindowIsOpen|Boolean|Read-only property to determine if the update window is currently open||
+
 
 |Method|Description|
 |:-----|:---------|
