@@ -146,7 +146,7 @@ The JSON will contain these fields for each version.
 
 A sample JSON that will be returned by the server:
 
-```json
+```JSON
 [
 	{
 		"AppName" : "My App" ,
