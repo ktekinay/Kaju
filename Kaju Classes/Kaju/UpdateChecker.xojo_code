@@ -81,7 +81,11 @@ Protected Class UpdateChecker
 		    dim http as new HTTPSecureSocket
 		    http.Secure = self.Secure
 		    dim raw as string = http.Get( self.UpdateURL, 5 )
-		    if raw = "" then
+		    if http.HTTPStatusCode = 404 then // Not found
+		      mResult = ResultType.NoUpdateAvailable
+		      exit do
+		      
+		    elseif raw = "" then
 		      if HandleError( kErrorNoUpdateData ) then
 		        continue do
 		      else
