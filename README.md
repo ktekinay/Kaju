@@ -203,7 +203,7 @@ We recommend that the latest version of any line use a static URL. For example, 
 
 There is only one class (`Kaju.UpdateChecker`) and one method in the Kaju module (`CancelUpdate`) that you will need to deal with.
 
-**Class:** Kaju.UpdateChecker
+**Class:** `Kaju.UpdateChecker`
 
 |Property|Type|Description|Required|
 |:---|:---:|:---|---:|
@@ -218,11 +218,24 @@ There is only one class (`Kaju.UpdateChecker`) and one method in the Kaju module
 |UpdateURL|String|The URL where the update info will be found|**yes**|
 |UpdateWindowIsOpen|Boolean|Read-only property to determine if the update window is currently open||
 
-
 |Method|Description|
 |:-----|:---------|
 |Constructor(preferencesFolder As FolderItem)|Create the new instance around the given preferences folder|
-|
+|Execute|Start the update process|
+|ResetIgnored|Reset the list of ignored updates|
+|Result As ResultType|The result of the last Execute|
+
+|Shared Method|Description|
+|:---|:---|
+|OSIsSupported As Boolean|Reports if the OS has the right tools installed|
+
+**Module:** `Kaju`
+
+|Method|Description|
+|:---|:---|
+|CancelUpdate|Cancels any pending update; use in your windows' CancelClose event|
+
+There are other methods in the Kaju module that you might find useful but we are not documenting them.
 
 ## Contributions
 
