@@ -163,7 +163,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub IgnoreVersion(version As String)
+		Attributes( hidden )  Sub IgnoreVersion(version As String)
 		  if version <> "" and IgnoreVersionsPref.IndexOf( version ) = -1 then
 		    IgnoreVersionsPref.Append version
 		  end if
