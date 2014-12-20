@@ -14,7 +14,7 @@ Open the included Admin App or Test App, copy the Kaju Classes folder, then past
 
 ### Special Actions
 
-You only need to add one property to your App class, `UpdateInitiater As Kaju.UpdateInitiater`. Kaju expects to find that and will handle it for you.
+You need to add one property to your App class, `UpdateInitiater As Kaju.UpdateInitiater`. Kaju expects to find that and will handle it for you.
 
 The only special code you'll need is in the `CancelClose` event of any window where the close is actually being cancelled, i.e., where you have the event return `True`. In those cases, you must call `Kaju.CancelUpdate`. (It doesn't matter if there is an update scheduled at the time.) This will prevent an update from happening if the user quits later without choosing Quit & Install again. That code should look something like this:
 
