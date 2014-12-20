@@ -259,6 +259,8 @@ This project was designed and implemented by:
 * Luke Cowgar (lcowgar at advancedpricing.com)
 * Jeremy Cowgar (jeremy at cowgar.com)
 
+With thanks to John Hansen and Paul Lefebvre.
+
 ## FAQ
 
 **How much does this cost?**
@@ -270,3 +272,11 @@ You may freely use this in any project, but don't come back to us if it erases y
 **How does it work?**
 
 Kaju uses a shell script on all platforms that is initiated when the app quits. The script backs up the original app, copies the files of the new app over the old, deletes the backup, and starts the new app. If anything goes wrong, the old app is restored and started instead.
+
+**Does the end user have to install any additional apps?**
+
+No.
+
+**Really?!? Even on Windows?**
+
+No. Thanks to John Hansen and code he provided on the [Xojo Forums](https://forum.xojo.com), Windows will even unzip the downloaded file without any extra help.
