@@ -136,22 +136,22 @@ Protected Module Kaju
 		  dim folders() as FolderItem
 		  folders.Append parent
 		  
-		  for i as integer = 0 to folders.Ubound
-		    dim thisFolder as FolderItem = folders( i )
+		  for folderIndex as integer = 0 to folders.Ubound
+		    dim thisFolder as FolderItem = folders( folderIndex )
 		    
 		    dim folderCnt as integer = thisFolder.Count
-		    for fileIndex as integer = 1 to folderCnt
-		      dim f as FolderItem = thisFolder.Item( fileIndex )
+		    for itemIndex as integer = 1 to folderCnt
+		      dim f as FolderItem = thisFolder.Item( itemIndex )
 		      if not f.IsWriteable then
 		        r = false
-		        exit for i
+		        exit for folderIndex
 		      end if
 		      
 		      if f.Directory then
 		        folders.Append f
 		      end if
-		    next fileIndex
-		  next i
+		    next itemIndex
+		  next folderIndex
 		  
 		  return r
 		End Function
