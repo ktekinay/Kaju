@@ -239,10 +239,11 @@ There are other methods in the Kaju module that you might find useful but we are
 
 ## Contributions
 
-* Writing tests
-* Code review
-* Other guidelines
+Contributions to this project are welcome. Fork it to your own repo, then submit changes. However, be forewarned that only those changes that we deem universally useful will be included.
 
 ## Who Did This?
 
-This project was designed and implemented by Kem Tekinay (ktekinay at mactechnologies.com), Jeremy Cowgar (jeremy at cowgar.com), and Luke Cowgar (lcowgar at advancedpricing.com).
+This project was designed and implemented by:
+* Kem Tekinay (ktekinay at mactechnologies.com)
+* Luke Cowgar (lcowgar at advancedpricing.com).
+* Jeremy Cowgar (jeremy at cowgar.com)
