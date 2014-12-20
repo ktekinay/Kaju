@@ -203,7 +203,11 @@ We recommend that the latest version of any line use a static URL. For example, 
 
 There is only one class (`Kaju.UpdateChecker`) and one method in the Kaju module (`CancelUpdate`) that you will need to deal with.
 
-this|that|the other
+**Class:** Kaju.UpdateChecker
+
+|Method|Description|
+--------------------
+|Constructor(preferencesFolder As FolderItem)|Create the new instance around the given preferences folder|
 
 ## Contributions
 
