@@ -75,6 +75,10 @@ You can also set `Kaju.UpdateChecker.DefaultUseTransparency` or set "Use Transpa
 
 An image will cover the entire window without cropping or scaling starting at the upper, left corner. Accordingly, you can provide an entire background image or just an icon.
 
+### Limitations
+
+Kaju does not elevate permissions. If the user does not have write permission for the executable or its parent, `ResultType.NoWritePermission` will be returned in `Kaju.UpdateChecker.Result`.
+
 ## Step By Step
 
 * Copy the Kaju Classes folder into your project.
@@ -213,16 +217,16 @@ There is only one class (`Kaju.UpdateChecker`) and one method in the Kaju module
 
 |Property|Type|Description|Required|
 |:---|:---:|:---|---:|
-|AllowedInteraction|UInt32|Determines what windows Kaju is allowed to display; Use the available constants||
-|AllowedStage|Integer|What stage of updates the user may see (App.Final, App.Beta, App.Alpha, or App.Development)||
-|DefaultImage|Picture|The background image that will be displayed in the window when an image is not provided by the update||
-|DefaultUseTransparency|Boolean|If `True`, transparency will be set to 50%||
-|HonorIgnored|Boolean|If `False`, the user will be presented with updates they previously set to "ignore"||
-|QuitOnCancelIfRequired|Boolean|When `True` (default), a user who attempts to cancel a required update will quit the app||
-|Secure|Boolean|Use a secure connection||
+|AllowedInteraction|UInt32|Determines what windows Kaju is allowed to display; Use the available constants|n|
+|AllowedStage|Integer|What stage of updates the user may see (App.Final, App.Beta, App.Alpha, or App.Development)|n|
+|DefaultImage|Picture|The background image that will be displayed in the window when an image is not provided by the update|n|
+|DefaultUseTransparency|Boolean|If `True`, transparency will be set to 50%|n|
+|HonorIgnored|Boolean|If `False`, the user will be presented with updates they previously set to "ignore"|n|
+|QuitOnCancelIfRequired|Boolean|When `True` (default), a user who attempts to cancel a required update will quit the app|n|
+|Secure|Boolean|Use a secure connection|n|
 |ServerPublicRSAKey|String|The public key as provided by the Admin app|**yes**|
 |UpdateURL|String|The URL where the update info will be found|**yes**|
-|UpdateWindowIsOpen|Boolean|Read-only property to determine if the update window is currently open||
+|UpdateWindowIsOpen|Boolean|Read-only property to determine if the update window is currently open|n|
 
 |Method|Description|
 |:-----|:---------|
@@ -255,3 +259,14 @@ This project was designed and implemented by:
 * Luke Cowgar (lcowgar at advancedpricing.com)
 * Jeremy Cowgar (jeremy at cowgar.com)
 
+## FAQ
+
+**How much does this cost?**
+
+One-TRILLION dollars!! Or nothing, your choice.
+
+You may freely use this in any project, but don't come back to us if it erases your hard drive or paints your house yellow or something. See the included LICENSE.txt file for details.
+
+**How does it work?**
+
+Kaju uses a shell script on all platforms that is initiated when the app quits. The script backs up the original app, copies the files of the new app over the old, deletes the backup, and starts the new app. If anything goes wrong, the old app is restored and started instead.
