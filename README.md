@@ -205,9 +205,14 @@ There is only one class (`Kaju.UpdateChecker`) and one method in the Kaju module
 
 **Class:** Kaju.UpdateChecker
 
+|Property|Type|Description|
+|:---|:---:|:---|
+|UpdateURL|
+
 |Method|Description|
-|-----|----------|
+|:-----|:---------|
 |Constructor(preferencesFolder As FolderItem)|Create the new instance around the given preferences folder|
+|
 
 ## Contributions
 
