@@ -120,6 +120,44 @@ Protected Module Kaju
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Function IsWriteableRecursive(parent As FolderItem) As Boolean
+		  // Checks every file and folder to make sure it's writeable starting at parent
+		  
+		  if parent is nil then
+		    return false
+		  end if
+		  
+		  if not parent.Directory or not parent.IsWriteable then
+		    return parent.IsWriteable
+		  end if
+		  
+		  dim r as boolean = true // Assume it's all writeable
+		  
+		  dim folders() as FolderItem
+		  folders.Append parent
+		  
+		  for i as integer = 0 to folders.Ubound
+		    dim thisFolder as FolderItem = folders( i )
+		    
+		    dim folderCnt as integer = thisFolder.Count
+		    for fileIndex as integer = 1 to folderCnt
+		      dim f as FolderItem = thisFolder.Item( fileIndex )
+		      if not f.IsWriteable then
+		        r = false
+		        exit for i
+		      end if
+		      
+		      if f.Directory then
+		        folders.Append f
+		      end if
+		    next fileIndex
+		  next i
+		  
+		  return r
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Sub JSONToProperties(data As JSONItem, target As Object)
 		  // Stores the values in the JSON object to the matching property in the object.
 		  // Will only handle basic types, not objects.
