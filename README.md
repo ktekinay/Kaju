@@ -18,14 +18,16 @@ You need to add one property to your App class, `UpdateInitiater As Kaju.UpdateI
 
 The only special code you'll need is in the `CancelClose` event of any window where the close is actually being cancelled, i.e., where you have the event return `True`. In those cases, you must call `Kaju.CancelUpdate`. (It doesn't matter if there is an update scheduled at the time.) This will prevent an update from happening if the user quits later without choosing Quit & Install again. That code should look something like this:
 
-	Event CancelClose(appQuitting As Boolean) As Boolean
-		// You've determined that you need to cancel the
-		// close, so...
-		if appQuitting then // This "if" is not strictly necessary
-			Kaju.CancelUpdate
-		end if
-		return true
-	End Event
+```Xojo
+Event CancelClose(appQuitting As Boolean) As Boolean
+	// You've determined that you need to cancel the
+	// close, so...
+	if appQuitting then // This "if" is not strictly necessary
+		Kaju.CancelUpdate
+	end if
+	return true
+End Event
+```
 
 ### Implementation
 
@@ -81,11 +83,13 @@ An image will cover the entire window without cropping or scaling starting at th
 * Copy the RSA public key with the appropriate button. A key pair is generated every time a new document is created and it is this key that will ensure that your app is getting legitimate, uncorrupted update information. **Do not lose this file after releasing your app!** If you do, users of older versions will no longer be able to update.
 * In an appropriate place, add code that looks something like this:
 
-		dim updater as new Kaju.UpdateChecker( myAppPrefFolder )
-		updater.ServerPublicRSAKey = "12345..." // The key you copied from the Admin app
-		updater.UpdateURL = "http://www...." // Where the update info will be posted
-		
-		updater.Execute
+```Xojo
+dim updater as new Kaju.UpdateChecker( myAppPrefFolder )
+updater.ServerPublicRSAKey = "12345..." // The key you copied from the Admin app
+updater.UpdateURL = "http://www...." // Where the update info will be posted
+
+updater.Execute
+```
 
 At a bare minimum, that's it.
 
@@ -142,43 +146,45 @@ The JSON will contain these fields for each version.
 
 A sample JSON that will be returned by the server:
 
-	[
-		{
-			"AppName" : "My App" ,
-			"Version" : "6.0.2",
-			"MinimumRequiredVersion" : "6.0.1" ,
-			"ReleaseNotes" : "The release notes" ,
-			"MacBinary" :
-				{
-					"URL" : "http://www.site.com/download_path_Mac" ,
-					"Signature" : "ABCDEF"
-				} ,
-			"WindowsBinary" :
-				{
-					"ExecutableName" : "My App.exe" ,
-					"URL" : "http://www.site.com/download_path_Windows" ,
-					"Signature" : "123456"
-				} ,
-			"LinuxBinary" :
-				{
-					"ExecutableName" : "My App" ,
-					"URL" : "http://www.site.com/download_path_Linux" ,
-					"Hash" : "ABC123"
-				} ,
-			"ImageURL" : "http://www.site.com/image.png" ,
-			"UseTransparency" : true
-		} ,
-		{
-			"AppName" : "My App" ,
-			"Version" : "6.1b4" ,
-			"ReleaseNotes" : "The beta release notes" ,
-			"MacBinary" : 
-				{
-					"URL" : "http://www.site.com/other_download_path" ,
-					"Hash" :"0123456"
-				} 
-		}
-	] 
+```json
+[
+	{
+		"AppName" : "My App" ,
+		"Version" : "6.0.2",
+		"MinimumRequiredVersion" : "6.0.1" ,
+		"ReleaseNotes" : "The release notes" ,
+		"MacBinary" :
+			{
+				"URL" : "http://www.site.com/download_path_Mac" ,
+				"Signature" : "ABCDEF"
+			} ,
+		"WindowsBinary" :
+			{
+				"ExecutableName" : "My App.exe" ,
+				"URL" : "http://www.site.com/download_path_Windows" ,
+				"Signature" : "123456"
+			} ,
+		"LinuxBinary" :
+			{
+				"ExecutableName" : "My App" ,
+				"URL" : "http://www.site.com/download_path_Linux" ,
+				"Hash" : "ABC123"
+			} ,
+		"ImageURL" : "http://www.site.com/image.png" ,
+		"UseTransparency" : true
+	} ,
+	{
+		"AppName" : "My App" ,
+		"Version" : "6.1b4" ,
+		"ReleaseNotes" : "The beta release notes" ,
+		"MacBinary" : 
+			{
+				"URL" : "http://www.site.com/other_download_path" ,
+				"Hash" :"0123456"
+			} 
+	}
+] 
+```
 
 **NOTE**: The ExecutableName will be used by the updater scripts while the AppName is what will display in the updater window. These may be the same or different. Since the ExecutableName of the Mac app can be discovered, it is not needed for the Mac binary.
 
@@ -244,6 +250,8 @@ Contributions to this project are welcome. Fork it to your own repo, then submit
 ## Who Did This?
 
 This project was designed and implemented by:
+
 * Kem Tekinay (ktekinay at mactechnologies.com)
-* Luke Cowgar (lcowgar at advancedpricing.com).
+* Luke Cowgar (lcowgar at advancedpricing.com)
 * Jeremy Cowgar (jeremy at cowgar.com)
+
