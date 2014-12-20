@@ -49,17 +49,19 @@ Protected Class UpdateChecker
 		  //
 		  if true then // Scope
 		    
-		    dim itemsToCheck() as FolderItem
-		    itemsToCheck.Append App.ExecutableFile
+		    dim executable as FolderItem = Kaju.TrueExecutableFile
+		    
 		    #if TargetMacOS then
-		      itemsToCheck.Append Kaju.TrueExecutableFile
-		    #endif
-		    for each f as FolderItem in itemsToCheck
-		      if not f.IsWriteable or not f.Parent.IsWriteable then
+		      if not executable.Parent.IsWriteable or not Kaju.IsWriteableRecursive( executable ) then
 		        mResult = ResultType.NoWritePermission
 		        return
 		      end if
-		    next
+		    #else
+		      if not Kaju.IsWriteableRecursive( executable.Parent ) then
+		        mResult = ResultType.NoWritePermission
+		        return
+		      end if
+		    #endif 
 		    
 		  end if
 		  
