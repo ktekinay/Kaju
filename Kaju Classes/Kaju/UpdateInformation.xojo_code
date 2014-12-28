@@ -3,7 +3,18 @@ Protected Class UpdateInformation
 Inherits Kaju.Information
 	#tag Event
 		Function IsInvalid(ByRef reason As String) As Boolean
+		  static rxVersion as RegEx
+		  if rxVersion is nil then
+		    rxVersion = new RegEx
+		    rxVersion.SearchPattern = "(?mi-Us)\A\d+(\.\d+){0,2}([dab]\d+)?\z"
+		  end if
+		  
 		  dim r as boolean
+		  
+		  if not r and rxVersion.Search( Version ) is nil then
+		    reason = "Version must be in one of these forms: 1, 1.2, 1.2.3, 1.2d4, 1.2a4, 1.2b4, 1.2.4b4, etc."
+		    r = true
+		  end if
 		  
 		  if not r and AppName.Trim = "" then
 		    reason = "Missing app name"
