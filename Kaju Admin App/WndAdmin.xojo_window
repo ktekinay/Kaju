@@ -202,7 +202,6 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   12
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Version:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -242,7 +241,7 @@ Begin Window WndAdmin
       TextUnit        =   0
       Top             =   86
       Underline       =   False
-      Value           =   2
+      Value           =   1
       Visible         =   True
       Width           =   653
       Begin TextAreaChanger fldReleaseNotes
@@ -337,7 +336,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   2
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   "Preview:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -447,7 +445,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -482,7 +479,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -517,7 +513,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   "Release Notes (HTML):"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -627,7 +622,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   8
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -662,7 +656,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   9
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -729,7 +722,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   13
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -764,7 +756,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   14
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -842,7 +833,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   1
          TabPanelIndex   =   3
-         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -974,7 +964,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   16
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Minimum Required Version:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1248,7 +1237,7 @@ Begin Window WndAdmin
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
-         Width           =   470
+         Width           =   350
       End
       Begin TextFieldChanger fldWindowsBinaryHash
          AcceptTabs      =   False
@@ -1291,7 +1280,7 @@ Begin Window WndAdmin
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
-         Width           =   470
+         Width           =   350
       End
       Begin TextFieldChanger fldLinuxBinaryURL
          AcceptTabs      =   False
@@ -1401,7 +1390,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   18
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Executable:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1479,7 +1467,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   20
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Executable:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1533,7 +1520,7 @@ Begin Window WndAdmin
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
-         Width           =   470
+         Width           =   350
       End
       Begin BevelButton btnList
          AcceptFocus     =   True
@@ -1667,6 +1654,99 @@ Begin Window WndAdmin
          Visible         =   True
          Width           =   26
       End
+      Begin PushButton btnMacHashFromURL
+         AutoDeactivate  =   True
+         Bold            =   False
+         ButtonStyle     =   "0"
+         Cancel          =   False
+         Caption         =   "From URL"
+         Default         =   False
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   804
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   21
+         TabPanelIndex   =   2
+         TabStop         =   True
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   223
+         Underline       =   False
+         Visible         =   False
+         Width           =   80
+      End
+      Begin PushButton btnWindowsHashFromURL
+         AutoDeactivate  =   True
+         Bold            =   False
+         ButtonStyle     =   "0"
+         Cancel          =   False
+         Caption         =   "From URL"
+         Default         =   False
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   804
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   22
+         TabPanelIndex   =   2
+         TabStop         =   True
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   356
+         Underline       =   False
+         Visible         =   False
+         Width           =   80
+      End
+      Begin PushButton btnLinuxHashFromURL
+         AutoDeactivate  =   True
+         Bold            =   False
+         ButtonStyle     =   "0"
+         Cancel          =   False
+         Caption         =   "From URL"
+         Default         =   False
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   804
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   23
+         TabPanelIndex   =   2
+         TabStop         =   True
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   503
+         Underline       =   False
+         Visible         =   False
+         Width           =   80
+      End
    End
    Begin TextFieldChanger fldAppName
       AcceptTabs      =   False
@@ -1732,7 +1812,6 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   11
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "App Name:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -1778,8 +1857,7 @@ Begin Window WndAdmin
       Width           =   180
    End
    Begin Timer tmrUpdateReleaseNotesPreview
-      Enabled         =   True
-      Height          =   "32"
+      Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
@@ -1789,8 +1867,7 @@ Begin Window WndAdmin
       Scope           =   2
       TabPanelIndex   =   0
       Top             =   0
-      Visible         =   True
-      Width           =   "32"
+      Width           =   32
    End
    Begin HTMLViewer hvNewWindow
       AutoDeactivate  =   True
@@ -1845,8 +1922,7 @@ Begin Window WndAdmin
       Width           =   186
    End
    Begin Timer tmrUpdateImagePreview
-      Enabled         =   True
-      Height          =   "32"
+      Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   20
@@ -1856,8 +1932,7 @@ Begin Window WndAdmin
       Scope           =   2
       TabPanelIndex   =   0
       Top             =   20
-      Visible         =   True
-      Width           =   "32"
+      Width           =   32
    End
    Begin Label lblPlatform
       AutoDeactivate  =   True
@@ -1881,7 +1956,6 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   6
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "None"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -1916,7 +1990,6 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   13
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Platforms:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -2142,6 +2215,27 @@ End
 		  btnBreak.Enabled = trueValue
 		  
 		  //
+		  // GetFromHash buttons
+		  //
+		  if cbMacBinary.Enabled and cbMacBinary.Value and fldMacBinaryURL.Text.Trim <> "" then
+		    btnMacHashFromURL.Enabled = trueValue
+		  else
+		    btnMacHashFromURL.Enabled = false
+		  end if
+		  
+		  if cbWindowsBinary.Enabled and cbWindowsBinary.Value and fldWindowsBinaryURL.Text.Trim <> "" then
+		    btnWindowsHashFromURL.Enabled = trueValue
+		  else
+		    btnWindowsHashFromURL.Enabled = false
+		  end if
+		  
+		  if cbLinuxBinary.Enabled and cbLinuxBinary.Value and fldLinuxBinaryURL.Text.Trim <> "" then
+		    btnLinuxHashFromURL.Enabled = trueValue
+		  else
+		    btnWindowsHashFromURL.Enabled = false
+		  end if
+		  
+		  //
 		  // Set the platform summary
 		  //
 		  
@@ -2175,6 +2269,7 @@ End
 		  end if
 		  
 		  UpdateWindowTitle
+		  
 		End Sub
 	#tag EndMethod
 
@@ -2429,6 +2524,78 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub HashFromURL(url As String, hashField As TextField)
+		  url = url.Trim
+		  
+		  if url = "" then
+		    return
+		  end if
+		  
+		  hashField.Text = ""
+		  
+		  dim http as new HTTPSecureSocket
+		  if url.Left( 6 ) = "https:" then
+		    http.Secure = true
+		  else
+		    http.Secure = false
+		  end if
+		  
+		  dim file as FolderItem = GetTemporaryFolderItem
+		  dim r as boolean = http.Get( url, file, 5 )
+		  if not r or http.LastErrorCode <> 0 then
+		    
+		    MsgBox "Could not get the executable from that url: " + str( http.LastErrorCode )
+		    
+		  else
+		    
+		    dim hash as string = Kaju.HashOfFile( file )
+		    hashField.Text = hash
+		    
+		  end if
+		  
+		  Exception err As RuntimeException
+		    MsgBox err.Message
+		    
+		  Finally
+		    if file <> nil and file.Exists then
+		      file.Delete
+		    end if
+		    
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function IsDataValid() As Boolean
+		  StoreFieldsToVersionRow()
+		  
+		  dim r as boolean = true // Assume it's fine
+		  
+		  if lbVersions.ListCount = 0 then
+		    return r
+		  end if
+		  
+		  dim msg as string
+		  dim lastRow as integer = lbVersions.ListCount - 1
+		  for row as integer = 0 to lastRow
+		    dim j as JSONItem = lbVersions.RowTag( row )
+		    dim u as new Kaju.UpdateInformation( j )
+		    if not u.IsValid then
+		      r = false
+		      msg = u.InvalidReason
+		      lbVersions.ListIndex = row
+		      exit for row
+		    end if
+		  next
+		  
+		  if not r then
+		    MsgBox msg
+		  end if
+		  
+		  return r
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub JSONToFields(data As JSONItem)
 		  //
 		  // Handle the named controls first
@@ -2455,14 +2622,14 @@ End
 		  
 		  if data.HasName( Kaju.UpdateInformation.kMacBinaryName ) then
 		    cbMacBinary.Value = true
-		    dim binary as new Kaju.BinaryInformation( data.Value( Kaju.UpdateInformation.kMacBinaryName ) )
+		    dim binary as new Kaju.BinaryInformation( false, data.Value( Kaju.UpdateInformation.kMacBinaryName ) )
 		    fldMacBinaryHash.Text = binary.Hash
 		    fldMacBinaryURL.Text = binary.URL
 		  end if
 		  
 		  if data.HasName( Kaju.UpdateInformation.kWindowsBinaryName ) then
 		    cbWindowsBinary.Value = true
-		    dim binary as new Kaju.BinaryInformation( data.Value( Kaju.UpdateInformation.kWindowsBinaryName ) )
+		    dim binary as new Kaju.BinaryInformation( true, data.Value( Kaju.UpdateInformation.kWindowsBinaryName ) )
 		    fldWindowsExecutable.Text = binary.ExecutableName
 		    fldWindowsBinaryHash.Text = binary.Hash
 		    fldWindowsBinaryURL.Text = binary.URL
@@ -2470,7 +2637,7 @@ End
 		  
 		  if data.HasName( Kaju.UpdateInformation.kLinuxBinaryName ) then
 		    cbLinuxBinary.Value = true
-		    dim binary as new Kaju.BinaryInformation( data.Value( Kaju.UpdateInformation.kLinuxBinaryName ) )
+		    dim binary as new Kaju.BinaryInformation( true, data.Value( Kaju.UpdateInformation.kLinuxBinaryName ) )
 		    fldLinuxExecutable.Text = binary.ExecutableName
 		    fldLinuxBinaryHash.Text = binary.Hash
 		    fldLinuxBinaryURL.Text = binary.URL
@@ -2579,7 +2746,7 @@ End
 		  //
 		  
 		  if cbMacBinary.Value then
-		    dim binary as new Kaju.BinaryInformation
+		    dim binary as new Kaju.BinaryInformation( false )
 		    binary.Hash = fldMacBinaryHash.Text.Trim
 		    binary.URL = fldMacBinaryURL.Text.Trim
 		    
@@ -2587,7 +2754,7 @@ End
 		  end if
 		  
 		  if cbWindowsBinary.Value then
-		    dim binary as new Kaju.BinaryInformation
+		    dim binary as new Kaju.BinaryInformation( true )
 		    binary.ExecutableName = fldWindowsExecutable.Text.Trim
 		    binary.Hash = fldWindowsBinaryHash.Text.Trim
 		    binary.URL = fldWindowsBinaryURL.Text.Trim
@@ -2596,7 +2763,7 @@ End
 		  end if
 		  
 		  if cbLinuxBinary.Value then
-		    dim binary as new Kaju.BinaryInformation
+		    dim binary as new Kaju.BinaryInformation( true )
 		    binary.ExecutableName = fldLinuxExecutable.Text.Trim
 		    binary.Hash = fldLinuxBinaryHash.Text.Trim
 		    binary.URL = fldLinuxBinaryURL.Text.Trim
@@ -2784,8 +2951,16 @@ End
 		  fldMacBinaryURL.Visible = me.Value
 		  lblMacBinaryHash.Visible = me.Value
 		  lblMacBinaryURL.Visible = me.Value
+		  btnMacHashFromURL.Visible = me.Value
 		  
 		  AdjustControls()
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events fldMacBinaryURL
+	#tag Event
+		Sub TextChange()
+		  btnMacHashFromURL.Enabled = me.Text.Trim <> ""
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2798,8 +2973,16 @@ End
 		  lblWindowsExecutable.Visible = me.Value
 		  lblWindowsBinaryHash.Visible = me.Value
 		  lblWindowsBinaryURL.Visible = me.Value
+		  btnWindowsHashFromURL.Visible = me.Value
 		  
 		  AdjustControls()
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events fldWindowsBinaryURL
+	#tag Event
+		Sub TextChange()
+		  btnWindowsHashFromURL.Enabled = me.Text.Trim <> ""
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2812,6 +2995,7 @@ End
 		  lblLinuxExecutable.Visible = me.Value
 		  lblLinuxBinaryHash.Visible = me.Value
 		  lblLinuxBinaryURL.Visible = me.Value
+		  btnLinuxHashFromURL.Visible = me.Value
 		  
 		  AdjustControls()
 		End Sub
@@ -2890,6 +3074,13 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events fldLinuxBinaryURL
+	#tag Event
+		Sub TextChange()
+		  btnLinuxHashFromURL.Enabled = me.Text.Trim <> ""
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events fldLinuxBinaryHash
 	#tag Event
 		Sub Open()
@@ -2914,6 +3105,27 @@ End
 		  ApplyStyle( tag, true )
 		  
 		  #pragma unused index
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnMacHashFromURL
+	#tag Event
+		Sub Action()
+		  HashFromURL( fldMacBinaryURL.Text, fldMacBinaryHash )
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnWindowsHashFromURL
+	#tag Event
+		Sub Action()
+		  HashFromURL( fldWindowsBinaryURL.Text, fldWindowsBinaryHash )
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnLinuxHashFromURL
+	#tag Event
+		Sub Action()
+		  HashFromURL( fldLinuxBinaryURL.Text, fldLinuxBinaryHash )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2961,6 +3173,10 @@ End
 #tag Events btnExport
 	#tag Event
 		Sub Action()
+		  if not IsDataValid() then
+		    return
+		  end if
+		  
 		  dim dlg as new SaveAsDialog
 		  dlg.PromptText = "Export the file that will be served to your app through your web site:"
 		  dlg.Filter = FileTypes1.TextHtml

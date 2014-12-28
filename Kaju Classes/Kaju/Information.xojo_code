@@ -8,6 +8,13 @@ Protected Class Information
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function InvalidReason() As String
+		  return mInvalidReason
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function ToJSON() As JSONItem
 		  dim ti as Introspection.TypeInfo = Introspection.GetType( self )
 		  dim props() as Introspection.PropertyInfo = ti.GetProperties
@@ -41,6 +48,29 @@ Protected Class Information
 		  
 		End Function
 	#tag EndMethod
+
+
+	#tag Hook, Flags = &h0
+		Event IsInvalid(ByRef reason As String) As Boolean
+	#tag EndHook
+
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  dim reason as string
+			  dim r as boolean = not RaiseEvent IsInvalid( reason )
+			  mInvalidReason = reason
+			  
+			  return r
+			End Get
+		#tag EndGetter
+		IsValid As Boolean
+	#tag EndComputedProperty
+
+	#tag Property, Flags = &h21
+		Private mInvalidReason As String
+	#tag EndProperty
 
 
 	#tag ViewBehavior

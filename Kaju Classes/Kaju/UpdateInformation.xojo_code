@@ -1,6 +1,46 @@
 #tag Class
 Protected Class UpdateInformation
 Inherits Kaju.Information
+	#tag Event
+		Function IsInvalid(ByRef reason As String) As Boolean
+		  static rxVersion as RegEx
+		  if rxVersion is nil then
+		    rxVersion = new RegEx
+		    rxVersion.SearchPattern = "(?mi-Us)\A\d+(\.\d+){0,2}([dab]\d+)?\z"
+		  end if
+		  
+		  dim r as boolean
+		  
+		  if not r and rxVersion.Search( Version ) is nil then
+		    reason = "Version must be in one of these forms: 1, 1.2, 1.2.3, 1.2d4, 1.2a4, 1.2b4, 1.2.4b4, etc."
+		    r = true
+		  end if
+		  
+		  if not r and AppName.Trim = "" then
+		    reason = "Missing app name"
+		    r = true
+		  end if
+		  
+		  if not r and MacBinary <> nil and not MacBinary.IsValid then
+		    reason = "Mac Binary information is not valid: " + MacBinary.InvalidReason
+		    r = true
+		  end if
+		  
+		  if not r and WindowsBinary <> nil and not WindowsBinary.IsValid then
+		    reason = "Windows Binary information is not valid: " + WindowsBinary.InvalidReason
+		    r = true
+		  end if
+		  
+		  if not r and LinuxBinary <> nil and not LinuxBinary.IsValid then
+		    reason = "Linux Binary information is not valid: " + LinuxBinary.InvalidReason
+		    r = true
+		  end if
+		  
+		  return r
+		End Function
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h1000
 		Sub Constructor()
 		  
@@ -12,15 +52,15 @@ Inherits Kaju.Information
 		  Kaju.JSONToProperties( data, self )
 		  
 		  if data.HasName( kMacBinaryName ) then
-		    MacBinary = new Kaju.BinaryInformation( data.Value( kMacBinaryName ) )
+		    MacBinary = new Kaju.BinaryInformation( false, data.Value( kMacBinaryName ) )
 		  end if
 		  
 		  if data.HasName( kWindowsBinaryName ) then
-		    WindowsBinary = new Kaju.BinaryInformation( data.Value( kWindowsBinaryName ) )
+		    WindowsBinary = new Kaju.BinaryInformation( true, data.Value( kWindowsBinaryName ) )
 		  end if
 		  
 		  if data.HasName( kLinuxBinaryName ) then
-		    LinuxBinary = new Kaju.BinaryInformation( data.Value( kLinuxBinaryName ) )
+		    LinuxBinary = new Kaju.BinaryInformation( true, data.Value( kLinuxBinaryName ) )
 		  end if
 		  
 		End Sub
