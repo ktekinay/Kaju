@@ -2973,6 +2973,10 @@ End
 #tag Events btnExport
 	#tag Event
 		Sub Action()
+		  if not IsDataValid() then
+		    return
+		  end if
+		  
 		  dim dlg as new SaveAsDialog
 		  dlg.PromptText = "Export the file that will be served to your app through your web site:"
 		  dlg.Filter = FileTypes1.TextHtml
