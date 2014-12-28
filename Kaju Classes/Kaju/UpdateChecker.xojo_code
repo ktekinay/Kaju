@@ -49,17 +49,19 @@ Protected Class UpdateChecker
 		  //
 		  if true then // Scope
 		    
-		    dim itemsToCheck() as FolderItem
-		    itemsToCheck.Append App.ExecutableFile
+		    dim executable as FolderItem = Kaju.TrueExecutableFile
+		    
 		    #if TargetMacOS then
-		      itemsToCheck.Append Kaju.TrueExecutableFile
-		    #endif
-		    for each f as FolderItem in itemsToCheck
-		      if not f.IsWriteable or not f.Parent.IsWriteable then
+		      if not executable.Parent.IsWriteable or not Kaju.IsWriteableRecursive( executable ) then
 		        mResult = ResultType.NoWritePermission
 		        return
 		      end if
-		    next
+		    #else
+		      if not Kaju.IsWriteableRecursive( executable.Parent ) then
+		        mResult = ResultType.NoWritePermission
+		        return
+		      end if
+		    #endif 
 		    
 		  end if
 		  
@@ -81,7 +83,11 @@ Protected Class UpdateChecker
 		    dim http as new HTTPSecureSocket
 		    http.Secure = self.Secure
 		    dim raw as string = http.Get( self.UpdateURL, 5 )
-		    if raw = "" then
+		    if http.HTTPStatusCode = 404 then // Not found
+		      mResult = ResultType.NoUpdateAvailable
+		      exit do
+		      
+		    elseif raw = "" then
 		      if HandleError( kErrorNoUpdateData ) then
 		        continue do
 		      else
@@ -163,7 +169,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub IgnoreVersion(version As String)
+		Attributes( hidden )  Sub IgnoreVersion(version As String)
 		  if version <> "" and IgnoreVersionsPref.IndexOf( version ) = -1 then
 		    IgnoreVersionsPref.Append version
 		  end if

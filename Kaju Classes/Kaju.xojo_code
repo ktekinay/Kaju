@@ -120,6 +120,44 @@ Protected Module Kaju
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Function IsWriteableRecursive(parent As FolderItem) As Boolean
+		  // Checks every file and folder to make sure it's writeable starting at parent
+		  
+		  if parent is nil then
+		    return false
+		  end if
+		  
+		  if not parent.Directory or not parent.IsWriteable then
+		    return parent.IsWriteable
+		  end if
+		  
+		  dim r as boolean = true // Assume it's all writeable
+		  
+		  dim folders() as FolderItem
+		  folders.Append parent
+		  
+		  for folderIndex as integer = 0 to folders.Ubound
+		    dim thisFolder as FolderItem = folders( folderIndex )
+		    
+		    dim folderCnt as integer = thisFolder.Count
+		    for itemIndex as integer = 1 to folderCnt
+		      dim f as FolderItem = thisFolder.Item( itemIndex )
+		      if not f.IsWriteable then
+		        r = false
+		        exit for folderIndex
+		      end if
+		      
+		      if f.Directory then
+		        folders.Append f
+		      end if
+		    next itemIndex
+		  next folderIndex
+		  
+		  return r
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Sub JSONToProperties(data As JSONItem, target As Object)
 		  // Stores the values in the JSON object to the matching property in the object.
 		  // Will only handle basic types, not objects.
@@ -270,6 +308,33 @@ Protected Module Kaju
 		  
 		End Function
 	#tag EndMethod
+
+
+	#tag Note, Name = License
+		
+		The MIT License (MIT)
+		
+		Copyright (c) 2014 by Kem Tekinay. All rights reserved.
+		
+		Permission is hereby granted, free of charge, to any person obtaining a copy
+		of this software and associated documentation files (the "Software"), to deal
+		in the Software without restriction, including without limitation the rights
+		to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+		copies of the Software, and to permit persons to whom the Software is
+		furnished to do so, subject to the following conditions:
+		
+		The above copyright notice and this permission notice shall be included in all
+		copies or substantial portions of the Software.
+		
+		THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+		IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+		FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+		AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+		LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+		OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+		SOFTWARE.
+		
+	#tag EndNote
 
 
 	#tag Constant, Name = kUpdatePacketMarker, Type = String, Dynamic = False, Default = \"KAJU ", Scope = Protected
