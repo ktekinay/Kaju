@@ -1,14 +1,22 @@
 #tag Class
 Protected Class BinaryInformation
 Inherits Kaju.Information
-	#tag Method, Flags = &h1000
-		Sub Constructor()
 		  
+	#tag Method, Flags = &h1021
+		Private Sub Constructor()
+		  // Must use one of the other contructors
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1000
+		Sub Constructor(executableNameRequired As Boolean)
+		  IsExecutableNameRequired = executableNameRequired
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Constructor(data As JSONItem)
+		Sub Constructor(executableNameRequired As Boolean, data As JSONItem)
+		  self.Constructor( executableNameRequired )
 		  Kaju.JSONToProperties( data, self )
 		End Sub
 	#tag EndMethod
@@ -54,6 +62,10 @@ Inherits Kaju.Information
 		Hash As String
 	#tag EndProperty
 
+	#tag Property, Flags = &h21
+		Private IsExecutableNameRequired As Boolean
+	#tag EndProperty
+
 	#tag Property, Flags = &h0
 		URL As String
 	#tag EndProperty
@@ -64,6 +76,7 @@ Inherits Kaju.Information
 			Name="ExecutableName"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="FileName"
