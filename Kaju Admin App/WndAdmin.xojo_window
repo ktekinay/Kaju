@@ -2410,6 +2410,47 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub HashFromURL(url As String, hashField As TextField)
+		  url = url.Trim
+		  
+		  if url = "" then
+		    return
+		  end if
+		  
+		  hashField.Text = ""
+		  
+		  dim http as new HTTPSecureSocket
+		  if url.Left( 6 ) = "https:" then
+		    http.Secure = true
+		  else
+		    http.Secure = false
+		  end if
+		  
+		  dim file as FolderItem = GetTemporaryFolderItem
+		  dim r as boolean = http.Get( url, file, 5 )
+		  if not r or http.LastErrorCode <> 0 then
+		    
+		    MsgBox "Could not get the executable from that url: " + str( http.LastErrorCode )
+		    
+		  else
+		    
+		    dim hash as string = Kaju.HashOfFile( file )
+		    hashField.Text = hash
+		    
+		  end if
+		  
+		  Exception err As RuntimeException
+		    MsgBox err.Message
+		    
+		  Finally
+		    if file <> nil and file.Exists then
+		      file.Delete
+		    end if
+		    
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Function IsDataValid() As Boolean
 		  StoreFieldsToVersionRow()
 		  
