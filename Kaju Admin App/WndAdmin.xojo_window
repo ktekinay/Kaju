@@ -2455,14 +2455,14 @@ End
 		  
 		  if data.HasName( Kaju.UpdateInformation.kMacBinaryName ) then
 		    cbMacBinary.Value = true
-		    dim binary as new Kaju.BinaryInformation( data.Value( Kaju.UpdateInformation.kMacBinaryName ) )
+		    dim binary as new Kaju.BinaryInformation( false, data.Value( Kaju.UpdateInformation.kMacBinaryName ) )
 		    fldMacBinaryHash.Text = binary.Hash
 		    fldMacBinaryURL.Text = binary.URL
 		  end if
 		  
 		  if data.HasName( Kaju.UpdateInformation.kWindowsBinaryName ) then
 		    cbWindowsBinary.Value = true
-		    dim binary as new Kaju.BinaryInformation( data.Value( Kaju.UpdateInformation.kWindowsBinaryName ) )
+		    dim binary as new Kaju.BinaryInformation( true, data.Value( Kaju.UpdateInformation.kWindowsBinaryName ) )
 		    fldWindowsExecutable.Text = binary.ExecutableName
 		    fldWindowsBinaryHash.Text = binary.Hash
 		    fldWindowsBinaryURL.Text = binary.URL
@@ -2470,7 +2470,7 @@ End
 		  
 		  if data.HasName( Kaju.UpdateInformation.kLinuxBinaryName ) then
 		    cbLinuxBinary.Value = true
-		    dim binary as new Kaju.BinaryInformation( data.Value( Kaju.UpdateInformation.kLinuxBinaryName ) )
+		    dim binary as new Kaju.BinaryInformation( true, data.Value( Kaju.UpdateInformation.kLinuxBinaryName ) )
 		    fldLinuxExecutable.Text = binary.ExecutableName
 		    fldLinuxBinaryHash.Text = binary.Hash
 		    fldLinuxBinaryURL.Text = binary.URL
@@ -2579,7 +2579,7 @@ End
 		  //
 		  
 		  if cbMacBinary.Value then
-		    dim binary as new Kaju.BinaryInformation
+		    dim binary as new Kaju.BinaryInformation( false )
 		    binary.Hash = fldMacBinaryHash.Text.Trim
 		    binary.URL = fldMacBinaryURL.Text.Trim
 		    
@@ -2587,7 +2587,7 @@ End
 		  end if
 		  
 		  if cbWindowsBinary.Value then
-		    dim binary as new Kaju.BinaryInformation
+		    dim binary as new Kaju.BinaryInformation( true )
 		    binary.ExecutableName = fldWindowsExecutable.Text.Trim
 		    binary.Hash = fldWindowsBinaryHash.Text.Trim
 		    binary.URL = fldWindowsBinaryURL.Text.Trim
@@ -2596,7 +2596,7 @@ End
 		  end if
 		  
 		  if cbLinuxBinary.Value then
-		    dim binary as new Kaju.BinaryInformation
+		    dim binary as new Kaju.BinaryInformation( true )
 		    binary.ExecutableName = fldLinuxExecutable.Text.Trim
 		    binary.Hash = fldLinuxBinaryHash.Text.Trim
 		    binary.URL = fldLinuxBinaryURL.Text.Trim
