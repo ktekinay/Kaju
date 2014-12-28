@@ -52,15 +52,15 @@ Inherits Kaju.Information
 		  Kaju.JSONToProperties( data, self )
 		  
 		  if data.HasName( kMacBinaryName ) then
-		    MacBinary = new Kaju.BinaryInformation( data.Value( kMacBinaryName ) )
+		    MacBinary = new Kaju.BinaryInformation( false, data.Value( kMacBinaryName ) )
 		  end if
 		  
 		  if data.HasName( kWindowsBinaryName ) then
-		    WindowsBinary = new Kaju.BinaryInformation( data.Value( kWindowsBinaryName ) )
+		    WindowsBinary = new Kaju.BinaryInformation( true, data.Value( kWindowsBinaryName ) )
 		  end if
 		  
 		  if data.HasName( kLinuxBinaryName ) then
-		    LinuxBinary = new Kaju.BinaryInformation( data.Value( kLinuxBinaryName ) )
+		    LinuxBinary = new Kaju.BinaryInformation( true, data.Value( kLinuxBinaryName ) )
 		  end if
 		  
 		End Sub
