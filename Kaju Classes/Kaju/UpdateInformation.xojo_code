@@ -1,6 +1,35 @@
 #tag Class
 Protected Class UpdateInformation
 Inherits Kaju.Information
+	#tag Event
+		Function IsInvalid(ByRef reason As String) As Boolean
+		  dim r as boolean
+		  
+		  if not r and AppName.Trim = "" then
+		    reason = "Missing app name"
+		    r = true
+		  end if
+		  
+		  if not r and MacBinary <> nil and not MacBinary.IsValid then
+		    reason = "Mac Binary information is not valid: " + MacBinary.InvalidReason
+		    r = true
+		  end if
+		  
+		  if not r and WindowsBinary <> nil and not WindowsBinary.IsValid then
+		    reason = "Windows Binary information is not valid: " + WindowsBinary.InvalidReason
+		    r = true
+		  end if
+		  
+		  if not r and LinuxBinary <> nil and not LinuxBinary.IsValid then
+		    reason = "Linux Binary information is not valid: " + LinuxBinary.InvalidReason
+		    r = true
+		  end if
+		  
+		  
+		End Function
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h1000
 		Sub Constructor()
 		  
