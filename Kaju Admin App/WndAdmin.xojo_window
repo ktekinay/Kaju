@@ -2215,6 +2215,27 @@ End
 		  btnBreak.Enabled = trueValue
 		  
 		  //
+		  // GetFromHash buttons
+		  //
+		  if cbMacBinary.Enabled and cbMacBinary.Value and fldMacBinaryURL.Text.Trim <> "" then
+		    btnMacHashFromURL.Enabled = trueValue
+		  else
+		    btnMacHashFromURL.Enabled = false
+		  end if
+		  
+		  if cbWindowsBinary.Enabled and cbWindowsBinary.Value and fldWindowsBinaryURL.Text.Trim <> "" then
+		    btnWindowsHashFromURL.Enabled = trueValue
+		  else
+		    btnWindowsHashFromURL.Enabled = false
+		  end if
+		  
+		  if cbLinuxBinary.Enabled and cbLinuxBinary.Value and fldLinuxBinaryURL.Text.Trim <> "" then
+		    btnLinuxHashFromURL.Enabled = trueValue
+		  else
+		    btnWindowsHashFromURL.Enabled = false
+		  end if
+		  
+		  //
 		  // Set the platform summary
 		  //
 		  
@@ -2930,8 +2951,16 @@ End
 		  fldMacBinaryURL.Visible = me.Value
 		  lblMacBinaryHash.Visible = me.Value
 		  lblMacBinaryURL.Visible = me.Value
+		  btnMacHashFromURL.Visible = me.Value
 		  
 		  AdjustControls()
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events fldMacBinaryURL
+	#tag Event
+		Sub TextChange()
+		  btnMacHashFromURL.Enabled = me.Text.Trim <> ""
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2944,8 +2973,16 @@ End
 		  lblWindowsExecutable.Visible = me.Value
 		  lblWindowsBinaryHash.Visible = me.Value
 		  lblWindowsBinaryURL.Visible = me.Value
+		  btnWindowsHashFromURL.Visible = me.Value
 		  
 		  AdjustControls()
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events fldWindowsBinaryURL
+	#tag Event
+		Sub TextChange()
+		  btnWindowsHashFromURL.Enabled = me.Text.Trim <> ""
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2958,6 +2995,7 @@ End
 		  lblLinuxExecutable.Visible = me.Value
 		  lblLinuxBinaryHash.Visible = me.Value
 		  lblLinuxBinaryURL.Visible = me.Value
+		  btnLinuxHashFromURL.Visible = me.Value
 		  
 		  AdjustControls()
 		End Sub
@@ -3033,6 +3071,13 @@ End
 		  end if
 		  
 		  #pragma unused action
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events fldLinuxBinaryURL
+	#tag Event
+		Sub TextChange()
+		  btnLinuxHashFromURL.Enabled = me.Text.Trim <> ""
 		End Sub
 	#tag EndEvent
 #tag EndEvents
