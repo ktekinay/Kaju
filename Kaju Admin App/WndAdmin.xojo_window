@@ -2410,6 +2410,37 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Function IsDataValid() As Boolean
+		  StoreFieldsToVersionRow()
+		  
+		  dim r as boolean = true // Assume it's fine
+		  
+		  if lbVersions.ListCount = 0 then
+		    return r
+		  end if
+		  
+		  dim msg as string
+		  dim lastRow as integer = lbVersions.ListCount - 1
+		  for row as integer = 0 to lastRow
+		    dim j as JSONItem = lbVersions.RowTag( row )
+		    dim u as new Kaju.UpdateInformation( j )
+		    if not u.IsValid then
+		      r = false
+		      msg = u.InvalidReason
+		      lbVersions.ListIndex = row
+		      exit for row
+		    end if
+		  next
+		  
+		  if not r then
+		    MsgBox msg
+		  end if
+		  
+		  return r
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub JSONToFields(data As JSONItem)
 		  //
 		  // Handle the named controls first
