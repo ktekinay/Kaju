@@ -36,7 +36,7 @@ Inherits Kaju.Information
 		    r = true
 		  end if
 		  
-		  
+		  return r
 		End Function
 	#tag EndEvent
 
