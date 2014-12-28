@@ -1237,7 +1237,7 @@ Begin Window WndAdmin
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
-         Width           =   470
+         Width           =   350
       End
       Begin TextFieldChanger fldWindowsBinaryHash
          AcceptTabs      =   False
@@ -1280,7 +1280,7 @@ Begin Window WndAdmin
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
-         Width           =   470
+         Width           =   350
       End
       Begin TextFieldChanger fldLinuxBinaryURL
          AcceptTabs      =   False
@@ -1520,7 +1520,7 @@ Begin Window WndAdmin
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   False
-         Width           =   470
+         Width           =   350
       End
       Begin BevelButton btnList
          AcceptFocus     =   True
