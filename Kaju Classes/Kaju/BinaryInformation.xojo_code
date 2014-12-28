@@ -1,7 +1,31 @@
 #tag Class
 Protected Class BinaryInformation
 Inherits Kaju.Information
+	#tag Event
+		Function IsInvalid(ByRef reason As String) As Boolean
+		  dim r as boolean
 		  
+		  if not r and Hash.Trim = "" then
+		    reason = "Missing Hash"
+		    r = true
+		  end if
+		  
+		  if not r and URL.Trim = "" then
+		    reason = "Missing URL"
+		    r = true
+		  end if
+		  
+		  if not r and IsExecutableNameRequired and ExecutableName.Trim = "" then
+		    reason = "Missing Executable Name"
+		    r = true
+		  end if
+		  
+		  return r
+		  
+		End Function
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h1021
 		Private Sub Constructor()
 		  // Must use one of the other contructors
