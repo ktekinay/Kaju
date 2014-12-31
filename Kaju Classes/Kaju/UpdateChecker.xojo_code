@@ -61,7 +61,7 @@ Protected Class UpdateChecker
 		        mResult = ResultType.NoWritePermission
 		        return
 		      end if
-		    #endif 
+		    #endif
 		    
 		  end if
 		  
