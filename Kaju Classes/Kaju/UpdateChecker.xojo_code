@@ -61,18 +61,28 @@ Protected Class UpdateChecker
 		        mResult = ResultType.NoWritePermission
 		        return
 		      end if
-		    #endif 
+		    #endif
 		    
 		  end if
 		  
 		  mDryRun = false
 		  
 		  //
-		  // Pull the raw data
+		  // Make sure we have some URL
 		  //
 		  
 		  if UpdateURL.Trim = "" then
 		    raise new KajuException( KajuException.kErrorMissingUpdateURL, CurrentMethodName )
+		  end if
+		  
+		  //
+		  // Look for redirection
+		  //
+		  dim url as string = self.UpdateURL
+		  if AllowRedirection then
+		    dim redirector as new HTTPSecureSocket
+		    redirector.Secure = self.Secure
+		    url = redirector.GetRedirectAddressKaju( url, 5 )
 		  end if
 		  
 		  //
@@ -82,7 +92,8 @@ Protected Class UpdateChecker
 		    
 		    dim http as new HTTPSecureSocket
 		    http.Secure = self.Secure
-		    dim raw as string = http.Get( self.UpdateURL, 5 )
+		    
+		    dim raw as string = http.Get( url, 5 )
 		    if http.HTTPStatusCode = 404 then // Not found
 		      mResult = ResultType.NoUpdateAvailable
 		      exit do
@@ -459,6 +470,10 @@ Protected Class UpdateChecker
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		AllowRedirection As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		DefaultImage As Picture
 	#tag EndProperty
 
@@ -569,6 +584,12 @@ Protected Class UpdateChecker
 			Group="Behavior"
 			InitialValue="App.Development"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AllowRedirection"
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DefaultImage"
