@@ -76,13 +76,24 @@ Protected Class UpdateChecker
 		  end if
 		  
 		  //
+		  // Look for redirection
+		  //
+		  dim url as string = self.UpdateURL
+		  if AllowRedirection then
+		    dim redirector as new HTTPSecureSocket
+		    redirector.Secure = self.Secure
+		    url = redirector.GetRedirectAddress( url, 5 )
+		  end if
+		  
+		  //
 		  // Repeat the check until we get data or the user gives up
 		  //
 		  do
 		    
 		    dim http as new HTTPSecureSocket
 		    http.Secure = self.Secure
-		    dim raw as string = http.Get( self.UpdateURL, 5 )
+		    
+		    dim raw as string = http.Get( url, 5 )
 		    if http.HTTPStatusCode = 404 then // Not found
 		      mResult = ResultType.NoUpdateAvailable
 		      exit do
