@@ -459,6 +459,10 @@ Protected Class UpdateChecker
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		AllowRedirection As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		DefaultImage As Picture
 	#tag EndProperty
 
