@@ -952,6 +952,14 @@ End
 		      dim url as string = SelectedUpdate.PlatformBinary.URL
 		      hsSocket.Secure = url.Left( 6 ) = "https:"
 		      
+		      //
+		      // Check for redirection
+		      //
+		      url = hsSocket.GetRedirectAddress( url, 5 )
+		      
+		      // 
+		      // Start the download
+		      //
 		      hsSocket.Get( url, DownloadFile )
 		      
 		    end if
