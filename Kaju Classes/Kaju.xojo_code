@@ -85,6 +85,39 @@ Protected Module Kaju
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function GetRedirectAddress(Extends h As HTTPSecureSocket, url As String, timeout As Integer, maximumIterations As Integer = kDefaultMaximumIterations) As String
+		  // Gets the redirect address for a url
+		  // Will give up after maximumIterations interations.
+		  // Put a 0 (or less) in there for infinite
+		  
+		  if url = "" then return url
+		  
+		  dim isFinite as boolean = true
+		  if maximumIterations < 1 then
+		    isFinite = false
+		  end if
+		  
+		  do
+		    dim headers as InternetHeaders = h.GetHeaders( url, timeout )
+		    if headers is nil then
+		      url = ""
+		      exit
+		    elseif headers.Value( "Location" ) <> "" then
+		      url = headers.Value( "Location" )
+		    else
+		      exit
+		    end if
+		    if isFinite then
+		      maximumIterations = maximumIterations - 1
+		    end if
+		  loop until isFinite and maximumIterations = 0 // Will never end if maxiumIterations < 0 to start 
+		  
+		  return url
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1
 		Protected Function GetTemporaryFolder() As FolderItem
 		  dim f as FolderItem = GetTemporaryFolderItem
@@ -336,6 +369,9 @@ Protected Module Kaju
 		
 	#tag EndNote
 
+
+	#tag Constant, Name = kDefaultMaximumIterations, Type = Double, Dynamic = False, Default = \"5", Scope = Protected
+	#tag EndConstant
 
 	#tag Constant, Name = kUpdatePacketMarker, Type = String, Dynamic = False, Default = \"KAJU ", Scope = Protected
 	#tag EndConstant
