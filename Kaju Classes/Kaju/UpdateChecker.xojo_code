@@ -68,7 +68,7 @@ Protected Class UpdateChecker
 		  mDryRun = false
 		  
 		  //
-		  // Pull the raw data
+		  // Make sure we have some URL
 		  //
 		  
 		  if UpdateURL.Trim = "" then
