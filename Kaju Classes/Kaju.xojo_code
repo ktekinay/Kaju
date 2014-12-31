@@ -86,7 +86,7 @@ Protected Module Kaju
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function GetRedirectAddress(Extends h As HTTPSecureSocket, url As String, timeout As Integer, maximumIterations As Integer = kDefaultMaximumIterations) As String
+		Function GetRedirectAddressKaju(Extends h As HTTPSecureSocket, url As String, timeout As Integer, maximumIterations As Integer = kDefaultMaximumIterations) As String
 		  // Gets the redirect address for a url
 		  // Will give up after maximumIterations interations.
 		  // Put a 0 (or less) in there for infinite
@@ -111,7 +111,7 @@ Protected Module Kaju
 		    if isFinite then
 		      maximumIterations = maximumIterations - 1
 		    end if
-		  loop until isFinite and maximumIterations = 0 // Will never end if maxiumIterations < 0 to start 
+		  loop until isFinite and maximumIterations = 0 // Will never end if maxiumIterations < 0 to start
 		  
 		  return url
 		  

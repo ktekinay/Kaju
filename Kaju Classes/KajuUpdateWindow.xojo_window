@@ -955,9 +955,9 @@ End
 		      //
 		      // Check for redirection
 		      //
-		      url = hsSocket.GetRedirectAddress( url, 5 )
+		      url = hsSocket.GetRedirectAddressKaju( url, 5 )
 		      
-		      // 
+		      //
 		      // Start the download
 		      //
 		      hsSocket.Get( url, DownloadFile )

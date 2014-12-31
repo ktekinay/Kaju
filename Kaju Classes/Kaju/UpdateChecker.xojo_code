@@ -82,7 +82,7 @@ Protected Class UpdateChecker
 		  if AllowRedirection then
 		    dim redirector as new HTTPSecureSocket
 		    redirector.Secure = self.Secure
-		    url = redirector.GetRedirectAddress( url, 5 )
+		    url = redirector.GetRedirectAddressKaju( url, 5 )
 		  end if
 		  
 		  //
@@ -584,6 +584,12 @@ Protected Class UpdateChecker
 			Group="Behavior"
 			InitialValue="App.Development"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AllowRedirection"
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DefaultImage"
