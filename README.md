@@ -63,6 +63,8 @@ If an update was found, the update window will have opened. You can check throug
 
 The user can choose to ignore certain versions as long as they are not marked as required. You can set `HonorIgnored` to `False` to bypass that temporarily and present even ignored versions to your user, or you can clear the database of ignored versions entirely with the `ResetIgnored` method.
 
+You may choose to specify an update URL that redirects to another location. By default, Kaju will not allow that, but if you really need to do it, set the `Kaju.UpdateChecker.AllowRedirection` property to `True`. (The Kaju module implements the global `GetRedirectAddressKaju` function that can be used anywhere in your project.)
+
 ### One At A Time
 
 You can create several instances of `Kaju.UpdateChecker` if you'd like, but only one update can run at any time. If an update is already in progress, `Execute` won't do anything and will let you know through the `Result`.
@@ -219,9 +221,10 @@ There is only one class (`Kaju.UpdateChecker`) and one method in the Kaju module
 |:---|:---:|:---|---:|
 |AllowedInteraction|UInt32|Determines what windows Kaju is allowed to display; Use the available constants|n|
 |AllowedStage|Integer|What stage of updates the user may see (App.Final, App.Beta, App.Alpha, or App.Development)|n|
+|AllowRedirection|Boolean|If `True`, the `UpdateURL` may redirect to another URL (default: `False`)|n|
 |DefaultImage|Picture|The background image that will be displayed in the window when an image is not provided by the update|n|
 |DefaultUseTransparency|Boolean|If `True`, transparency will be set to 50%|n|
-|HonorIgnored|Boolean|If `False`, the user will be presented with updates they previously set to "ignore"|n|
+|HonorIgnored|Boolean|If `False`, the user will be presented with updates they previously set to "ignore" (default: `True`)|n|
 |QuitOnCancelIfRequired|Boolean|When `True` (default), a user who attempts to cancel a required update will quit the app|n|
 |Secure|Boolean|Use a secure connection|n|
 |ServerPublicRSAKey|String|The public key as provided by the Admin app|**yes**|
