@@ -87,7 +87,7 @@ Kaju does not elevate permissions. If the user does not have write permission fo
 * Add to your App instance the property `UpdateInitiater As Kaju.UpdateInitiater`. You do not need to do anything more with this property.
 * Run the Kaju Admin app through the included project and save a new document with an appropriate name, something like "MyApp v.1.kaju". You don't have to add any updates at this time.
 * Copy the RSA public key with the appropriate button. A key pair is generated every time a new document is created and it is this key that will ensure that your app is getting legitimate, uncorrupted update information. **Do not lose this file after releasing your app!** If you do, users of older versions will no longer be able to update.
-* In an appropriate place, add code that looks something like this:
+* In an appropriate place within your project, add code that looks something like this:
 
 ```Xojo
 dim updater as new Kaju.UpdateChecker( myAppPrefFolder )
@@ -111,6 +111,8 @@ Add an entry for each *current* version of your app. You do not need a history s
 
 The release notes are created in HTML and some simple tools are provided for making that a bit easier. You can see a preview of the release notes as a you type and use the Preview button to see how Kaju will present the update window under various circumstances. The HTML can be as simple or as complex as you'd like.
 
+**Note**: WebKit is used on all platforms to ensure consistency. This will increase the size of your project on Windows and Linux.
+
 ### Links In Release Notes
 
 Links in the release notes will be ignored *unless* you include `target="_blank"` as part of the URL. For example, `<a href="http://www.example.com" target="_blank">my site</a>` will force the link to open in the user's browser.
@@ -119,11 +121,11 @@ Links in the release notes will be ignored *unless* you include `target="_blank"
 
 Your compiled apps for each platform must be zipped and named appropriately. For the Mac, zip the application. For the other platforms, zip the folder that contains the executable and supporting folders.
 
-For each version in your admin file, check each platform to which it applies, provide the URL where that binary will be found, then drop each binary onto the appropriate field to calculate its hash.
+For each version in your admin file, check each platform to which it applies, provide the URL where that binary will be found, then drop each binary onto the appropriate field to calculate its hash. You can also post the binary to your web site, enter the URL, then use the button to calculate the hash from the URL. (It will download the binary, calculate the hash, then delete it.)
+
+**Note**: If the URL to a binary starts with "https:", a secure connection will be used automatically.
 
 For Windows and Linux, you must also provide the exact name of the executable. If your app is called "My Great App", the Linux executable name will be "My Great App" and the Windows name will be "My Great App.exe".
-
-Put these zip files on your web site according to its URL.
 
 ## JSON Specs
 
@@ -192,16 +194,20 @@ A sample JSON that will be returned by the server:
 ] 
 ```
 
-**NOTE**: The ExecutableName will be used by the updater scripts while the AppName is what will display in the updater window. These may be the same or different. Since the ExecutableName of the Mac app can be discovered, it is not needed for the Mac binary.
+**NOTE**: The ExecutableName will be used by the updater script while the AppName is what will display in the updater window. These may be the same or different. Since the ExecutableName of the Mac app can be discovered, it is not needed for the Mac binary.
 
 The file will be prefixed by the signature of the JSON string in hex format. The entire file would look something like this:
 
-	KAJU ABCDEF
-	[<the JSON data>]
+```JSON
+KAJU ABCDEF
+[
+	<the JSON data>
+]
+```
 
 If an update does not apply to a particular platform, it will be missing binary information for that platform and will be ignored.
 
-The JSON will contain all information about every available version for that line. For example, there might be a release 6.0.1, but a beta 6.1b4 and an alpha 6.2a8. Kaju will download all of that information and determine which ones are appropriate to present as options to the user.
+The JSON will contain all information about every available version for that line. For example, there might be a release 6.0.1, a beta 6.1b4, and an alpha 6.2a8. Kaju will download all of that information and determine which ones are appropriate to present as options to the user.
 
 ### "RequiresPayment" Flag
 
@@ -213,7 +219,7 @@ We recommend that the latest version of any line use a static URL. For example, 
 
 ## The Classes
 
-There is only one class (`Kaju.UpdateChecker`) and one method in the Kaju module (`CancelUpdate`) that you will need to deal with.
+There is only one class (`Kaju.UpdateChecker`) and one method in the Kaju module (`CancelUpdate`) that are of concern. The other classes and methods support these.
 
 **Class:** `Kaju.UpdateChecker`
 
@@ -225,9 +231,9 @@ There is only one class (`Kaju.UpdateChecker`) and one method in the Kaju module
 |DefaultImage|Picture|The background image that will be displayed in the window when an image is not provided by the update|n|
 |DefaultUseTransparency|Boolean|If `True`, transparency will be set to 50%|n|
 |HonorIgnored|Boolean|If `False`, the user will be presented with updates they previously set to "ignore" (default: `True`)|n|
-|QuitOnCancelIfRequired|Boolean|When `True` (default), a user who attempts to cancel a required update will quit the app|n|
-|Secure|Boolean|Use a secure connection|n|
-|ServerPublicRSAKey|String|The public key as provided by the Admin app|**yes**|
+|QuitOnCancelIfRequired|Boolean|When `True` (default), canceling a required update will call Quit|n|
+|Secure|Boolean|Use a secure connection when fetching the update data (turns on `HTTPSecureSocket.Secure`)|n|
+|ServerPublicRSAKey|String|The public key as found in the Admin app file|**yes**|
 |UpdateURL|String|The URL where the update info will be found|**yes**|
 |UpdateWindowIsOpen|Boolean|Read-only property to determine if the update window is currently open|n|
 
