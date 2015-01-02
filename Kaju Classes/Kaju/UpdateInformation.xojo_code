@@ -248,6 +248,11 @@ Inherits Kaju.Information
 			Type="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
+			Name="IsValid"
+			Group="Behavior"
+			Type="Boolean"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Left"
 			Visible=true
 			Group="Position"
