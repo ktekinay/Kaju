@@ -89,9 +89,11 @@ Inherits Kaju.Information
 			  //
 			  
 			  dim http as new HTTPSecureSocket
-			  http.Secure = url.Left( 5 ) = "https"
+			  url = http.GetRedirectAddressKaju( url, 5 )
 			  
-			  dim data as string = http.Get( url, 2 )
+			  http.Secure = Kaju.IsURLSecure( url )
+			  
+			  dim data as string = http.Get( url, 5 )
 			  
 			  if data = "" then
 			    return nil
@@ -244,6 +246,11 @@ Inherits Kaju.Information
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IsValid"
+			Group="Behavior"
+			Type="Boolean"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
