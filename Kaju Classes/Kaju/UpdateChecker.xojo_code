@@ -81,7 +81,6 @@ Protected Class UpdateChecker
 		  dim url as string = self.UpdateURL
 		  if AllowRedirection then
 		    dim redirector as new HTTPSecureSocket
-		    redirector.Secure = self.Secure
 		    url = redirector.GetRedirectAddressKaju( url, 5 )
 		  end if
 		  
@@ -91,7 +90,7 @@ Protected Class UpdateChecker
 		  do
 		    
 		    dim http as new HTTPSecureSocket
-		    http.Secure = self.Secure
+		    http.Secure = Kaju.IsURLSecure( url )
 		    
 		    dim raw as string = http.Get( url, 5 )
 		    if http.HTTPStatusCode = 404 then // Not found

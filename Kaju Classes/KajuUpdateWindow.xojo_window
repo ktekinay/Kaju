@@ -950,7 +950,6 @@ End
 		      DeleteOnClose.Append DownloadFile
 		      
 		      dim url as string = SelectedUpdate.PlatformBinary.URL
-		      hsSocket.Secure = url.Left( 6 ) = "https:"
 		      
 		      //
 		      // Check for redirection
@@ -960,6 +959,7 @@ End
 		      //
 		      // Start the download
 		      //
+		      hsSocket.Secure = Kaju.IsURLSecure( url )
 		      hsSocket.Get( url, DownloadFile )
 		      
 		    end if
