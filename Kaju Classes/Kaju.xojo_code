@@ -153,6 +153,12 @@ Protected Module Kaju
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Function IsURLSecure(url As String) As Boolean
+		  return url.Trim.Left( 6 ) = "https:"
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Function IsWriteableRecursive(parent As FolderItem) As Boolean
 		  // Checks every file and folder to make sure it's writeable starting at parent
 		  
