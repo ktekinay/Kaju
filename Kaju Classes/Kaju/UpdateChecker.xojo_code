@@ -505,10 +505,6 @@ Protected Class UpdateChecker
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Secure As Boolean
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
 		ServerPublicRSAKey As String
 	#tag EndProperty
 
