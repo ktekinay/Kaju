@@ -3206,6 +3206,7 @@ End
 		  
 		  dim data as JSONItem = KajuJSON
 		  data.Compact = false
+		  data.EscapeSlashes = false
 		  dim dataString as string = data.ToString
 		  
 		  dim sig as string = Crypto.RSASign( dataString, RSAPrivateKey )
