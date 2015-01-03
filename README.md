@@ -63,7 +63,7 @@ If an update was found, the update window will have opened. You can check throug
 
 The user can choose to ignore certain versions as long as they are not marked as required. You can set `HonorIgnored` to `False` to bypass that temporarily and present even ignored versions to your user, or you can clear the database of ignored versions entirely with the `ResetIgnored` method.
 
-You may choose to specify an update URL that redirects to another location. By default, Kaju will not allow that, but if you really need to do it, set the `Kaju.UpdateChecker.AllowRedirection` property to `True`. (The Kaju module implements the global `GetRedirectAddressKaju` function that can be used anywhere in your project.)
+You may choose to specify an update URL that redirects to another location. By default, Kaju will not allow that, but if you really need to do it, set the `Kaju.UpdateChecker.AllowRedirection` property to `True`. 
 
 ### One At A Time
 
