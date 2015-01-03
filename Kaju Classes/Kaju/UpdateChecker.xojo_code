@@ -415,6 +415,32 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub SeparatePacket(raw As String, ByRef firstLine As String, ByRef remainder As String)
+		  // Separate the incoming packet by the EOL when we don't know exactly what 
+		  // the EOL is.
+		  
+		  dim rx as new RegEx
+		  rx.SearchPattern = "\A([^\r\n]*)\R([\s\S]*)\z"
+		  
+		  dim match as RegExMatch = rx.Search( raw )
+		  if match is nil then
+		    //
+		    // Really shouldn't happen
+		    //
+		    firstLine = raw
+		    remainder = ""
+		    
+		  else
+		    
+		    firstLine = match.SubExpressionString( 1 )
+		    remainder = match.SubExpressionString( 2 )
+		    
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Function StringArrayToJSON(arr() As String) As JSONItem
 		  dim j as new JSONItem( "[]" )
 		  for i as integer = 0 to arr.Ubound
