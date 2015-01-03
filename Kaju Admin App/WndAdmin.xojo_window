@@ -2553,10 +2553,8 @@ End
 		  
 		  hashField.Text = ""
 		  
-		  dim http as new HTTPSecureSocket
-		  url = http.GetRedirectAddressKaju( url, 5 )
-		  
-		  http.Secure = Kaju.IsURLSecure( url )
+		  dim http as new Kaju.HTTPSSocket
+		  url = http.GetRedirectAddress( url, 5 )
 		  
 		  dim file as FolderItem = GetTemporaryFolderItem
 		  dim r as boolean = http.Get( url, file, 5 )

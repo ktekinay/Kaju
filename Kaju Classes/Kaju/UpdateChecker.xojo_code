@@ -80,8 +80,8 @@ Protected Class UpdateChecker
 		  //
 		  dim url as string = self.UpdateURL
 		  if AllowRedirection then
-		    dim redirector as new HTTPSecureSocket
-		    url = redirector.GetRedirectAddressKaju( url, 5 )
+		    dim redirector as new Kaju.HTTPSSocket
+		    url = redirector.GetRedirectAddress( url, 5 )
 		  end if
 		  
 		  //
@@ -89,8 +89,7 @@ Protected Class UpdateChecker
 		  //
 		  do
 		    
-		    dim http as new HTTPSecureSocket
-		    http.Secure = Kaju.IsURLSecure( url )
+		    dim http as new Kaju.HTTPSSocket
 		    
 		    dim raw as string = http.Get( url, 5 )
 		    if http.HTTPStatusCode = 404 then // Not found
@@ -627,11 +626,6 @@ Protected Class UpdateChecker
 			Name="QuitOnCancelIfRequired"
 			Group="Behavior"
 			InitialValue="True"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Secure"
-			Group="Behavior"
 			Type="Boolean"
 		#tag EndViewProperty
 		#tag ViewProperty
