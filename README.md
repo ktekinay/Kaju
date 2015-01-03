@@ -81,6 +81,12 @@ An image will cover the entire window without cropping or scaling starting at th
 
 Kaju does not elevate permissions. If the user does not have write permission for the executable or its parent, `ResultType.NoWritePermission` will be returned in `Kaju.UpdateChecker.Result`.
 
+### Platform Differences
+
+Kaju will act the same way across plaforms except for one point: Since the Mac executable is always one package, it will be replaced entirely. Anything stored within the package that was put there after initial installation will be deleted.
+
+On Windows and Linux, since executable folders can be combined, only the files that are found in the update will be replaced. Any additional files or even older, no-longer-used files, will remain untouched. If you want to make sure some older file is removed by the update, put an empty placeholder into the update package.
+
 ## Step By Step
 
 * Copy the Kaju Classes folder into your project.
