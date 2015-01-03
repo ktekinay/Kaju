@@ -22,6 +22,7 @@ Class=TextFieldChanger;Controls/TextFieldChanger.xojo_code;&h4D090F7E;&hE8B14E5;
 Class=TextAreaChanger;Controls/TextAreaChanger.xojo_code;&hDD8825B;&hE8B14E5;false
 Class=CheckBoxChanger;Controls/CheckBoxChanger.xojo_code;&h5115CD40;&hE8B14E5;false
 Class=FolderItemAlias;Other Classes/FolderItemAlias.xojo_code;&h53EF1AE5;&h6AF5D169;false
+Class=HTTPSSocket;../Kaju Classes/Kaju/HTTPSSocket.xojo_code;&h5ACDFAEB;&h11400316;false
 AppMenuBar=MainMenuBar
 MajorVersion=1
 MinorVersion=0
