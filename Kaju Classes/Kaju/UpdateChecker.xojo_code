@@ -105,10 +105,11 @@ Protected Class UpdateChecker
 		    end if
 		    
 		    raw = raw.DefineEncoding( Encodings.UTF8 )
-		    raw = ReplaceLineEndings( raw, EndOfLine.UNIX )
 		    
-		    dim firstLine as string = raw.NthField( EndOfLine.UNIX, 1 )
-		    raw = raw.Mid( firstLine.Len + 2 )
+		    dim firstLine as string 
+		    dim remainder as string
+		    SeparatePacket( raw, firstLine, remainder )
+		    raw = remainder
 		    
 		    dim sig as string = firstLine.Left( kUpdatePacketMarker.Len )
 		    if StrComp( sig, kUpdatePacketMarker, 0 ) <> 0 then
