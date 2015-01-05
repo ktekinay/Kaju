@@ -275,6 +275,8 @@ This project was designed and implemented by:
 
 With thanks to John Hansen and Paul Lefebvre.
 
+With special thanks to [Advanced Medical Pricing Solutions, Inc.](http://www.advancedpricing.com), for making this possible.
+
 ## FAQ
 
 **How much does this cost?**
