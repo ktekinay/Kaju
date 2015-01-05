@@ -296,3 +296,9 @@ No.
 **Really?!? Even on Windows?**
 
 No. Thanks to John Hansen and code he provided on the [Xojo Forums](https://forum.xojo.com), Windows will even unzip the downloaded file without any extra help.
+
+## Release Notes
+
+1.0 (Jan. 5, 2015)
+
+- Initial release.
