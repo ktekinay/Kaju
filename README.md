@@ -51,11 +51,11 @@ If Kaju cannot find the tools it needs, the `Result` will be set to `Unsupported
 
 If you set up a minimim required version in your update information, Kaju may find that a particular update is "required". For example, if the user is using v.1.0 and you've discovered a bug that necessitates an update to at least v.1.1, you would set that as the minimum required version. In the future, even as you release v.1.2, 1.3, etc, you would leave the minimum required as v.1.1 so Kaju knows to force the users of 1.0 to update.
 
-After calling `Kaju.UpdateChecker.Execute`, The `Result` method will tell you if a required update was found. In that case, it's up to you to take special action to make sure that your cannot be used until it is updated. To help, there is the `Kaju.UpdateChecker.QuitOnCancelIfRequired` property that is `True` by default. If the user tries to cancel a required update, the app will quit.
+After calling `Kaju.UpdateChecker.Execute`, the `Result` method will tell you if a required update was found. In that case, it's up to you to take special actions to make sure that your app cannot be used until it is updated. To help, there is the `Kaju.UpdateChecker.QuitOnCancelIfRequired` property that is `True` by default. If the user tries to cancel a required update, the app will quit.
 
 ### Other Features
 
-There are other features of `Kaju.UpdateChecker` that may be helpful. One is controlling the interface that class will present to the user through the `AllowedInteraction` property. You can prevent Kaju from showing an error dialog, the update window, or both. Use the constants within `Kaju.UpdateChecker` to set this value. Values can be added for better control (although, as of this writing, there are just the two values).
+There are other features of `Kaju.UpdateChecker` that may be helpful. You can control the interface that will be presented to the user through the `AllowedInteraction` property. You can prevent Kaju from showing an error dialog, the update window, or both. Use the constants within `Kaju.UpdateChecker` to set this value. Values can be added together for better control (although, as of this writing, there are just the two values).
 
 You can control the types of updates a user may see by setting `Kaju.UpdateChecker.AllowedStage`. The stage codes are the same as those found in the `App` class, so setting that property to `App.Final` means that the user will not see any development, alpha, or beta releases.
 
