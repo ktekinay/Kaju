@@ -306,3 +306,4 @@ No. Thanks to John Hansen and code he provided on the [Xojo Forums](https://foru
 1.0.1 (Jan. 5, 2015)
 
 - Fixed redirect bug.
+- The URL will set Secure and the Port (can override in the URL itself).
