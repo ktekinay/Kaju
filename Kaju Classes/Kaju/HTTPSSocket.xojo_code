@@ -62,7 +62,6 @@ Inherits HTTPSecureSocket
 		  do
 		    dim headers as InternetHeaders = GetHeaders( url, timeout )
 		    if headers is nil then
-		      url = ""
 		      exit
 		    elseif headers.Value( "Location" ) <> "" then
 		      url = headers.Value( "Location" )
