@@ -3,35 +3,35 @@ Protected Class HTTPSSocket
 Inherits HTTPSecureSocket
 	#tag Method, Flags = &h0
 		Sub Get(url As String)
-		  self.Secure = IsURLSecure( url )
+		  SetSecure( url )
 		  super.Get( url )
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Get(url As String, file As FolderItem)
-		  self.Secure = IsURLSecure( url )
+		  SetSecure( url )
 		  super.Get( url, file )
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Get(url As String, file As FolderItem, timeout As Integer) As Boolean
-		  self.Secure = IsURLSecure( url )
+		  SetSecure( url )
 		  return super.Get( url, file, timeout )
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Get(url As String, timeout As Integer) As String
-		  self.Secure = IsURLSecure( url )
+		  SetSecure( url )
 		  return super.Get( url, timeout )
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub GetHeaders(url As String)
-		  self.Secure = IsURLSecure( url )
+		  SetSecure( url )
 		  super.GetHeaders( url )
 		  
 		End Sub
@@ -39,7 +39,7 @@ Inherits HTTPSecureSocket
 
 	#tag Method, Flags = &h0
 		Function GetHeaders(url As String, timeout As Integer) As InternetHeaders
-		  self.Secure = IsURLSecure( url )
+		  SetSecure( url )
 		  return super.GetHeaders( url, timeout )
 		End Function
 	#tag EndMethod
@@ -62,7 +62,6 @@ Inherits HTTPSecureSocket
 		  do
 		    dim headers as InternetHeaders = GetHeaders( url, timeout )
 		    if headers is nil then
-		      url = ""
 		      exit
 		    elseif headers.Value( "Location" ) <> "" then
 		      url = headers.Value( "Location" )
@@ -79,38 +78,44 @@ Inherits HTTPSecureSocket
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h21
-		Private Function IsURLSecure(url As String) As Boolean
-		  return ForceSecure or url.Trim.Left( 8 ) = "https://"
-		End Function
-	#tag EndMethod
-
 	#tag Method, Flags = &h0
 		Sub SendRequest(method As String, url As String)
-		  self.Secure = IsURLSecure( url )
+		  SetSecure( url )
 		  super.SendRequest( method, url )
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub SendRequest(method As String, url As String, file As FolderItem)
-		  self.Secure = IsURLSecure( url )
+		  SetSecure( url )
 		  super.SendRequest( method, url, file )
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function SendRequest(method As String, url As String, file As FolderItem, timeout As Integer) As Boolean
-		  self.Secure = IsURLSecure( url )
+		  SetSecure( url )
 		  return super.SendRequest( method, url, file, timeout )
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function SendRequest(method As String, url As String, timeout As Integer) As String
-		  self.Secure = IsURLSecure( url )
+		  SetSecure( url )
 		  return super.SendRequest( method, url, timeout )
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub SetSecure(url As String)
+		  if ForceSecure or url.Trim.Left( 8 ) = "https://" then
+		    self.Secure = true
+		    self.Port = 443
+		  else
+		    self.Secure = false
+		    self.Port = 80
+		  end if
+		End Sub
 	#tag EndMethod
 
 
@@ -154,7 +159,7 @@ Inherits HTTPSecureSocket
 		#tag ViewProperty
 			Name="ForceSecure"
 			Group="Behavior"
-			Type="Integer"
+			Type="Boolean"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
