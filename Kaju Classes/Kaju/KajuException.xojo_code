@@ -10,13 +10,16 @@ Inherits RuntimeException
 	#tag EndMethod
 
 
-	#tag Constant, Name = kErrorCantFindLibsFolder, Type = String, Dynamic = False, Default = \"Can\xE2\x80\x99t locate this applications Libs folder.", Scope = Public
+	#tag Constant, Name = kErrorCantFindLibsFolder, Type = String, Dynamic = True, Default = \"Can\xE2\x80\x99t locate this applications Libs folder.", Scope = Public
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Kann den Applications Libs Ordner dieser Anwendung nicht finden."
 	#tag EndConstant
 
-	#tag Constant, Name = kErrorImproperFunction, Type = String, Dynamic = False, Default = \"This function cannot be used on this platform.", Scope = Public
+	#tag Constant, Name = kErrorImproperFunction, Type = String, Dynamic = True, Default = \"This function cannot be used on this platform.", Scope = Public
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Diese Funktion kann auf dieser Platform nicht benutzt werden."
 	#tag EndConstant
 
-	#tag Constant, Name = kErrorMissingUpdateURL, Type = String, Dynamic = False, Default = \"The update URL is missing.", Scope = Public
+	#tag Constant, Name = kErrorMissingUpdateURL, Type = String, Dynamic = True, Default = \"The update URL is missing.", Scope = Public
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Die Update URL fehlt."
 	#tag EndConstant
 
 
