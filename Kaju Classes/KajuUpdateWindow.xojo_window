@@ -302,6 +302,7 @@ Begin Window KajuUpdateWindow
       CertificatePassword=   ""
       CertificateRejectionFile=   
       ConnectionType  =   2
+      ForceSecure     =   False
       Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
@@ -786,79 +787,102 @@ End
 	#tag Constant, Name = kAppMarker, Type = String, Dynamic = False, Default = \"<<AppName>>", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = kBadDownloadMessage, Type = String, Dynamic = False, Default = \"The downloaded file appears to be corrupted.", Scope = Private
+	#tag Constant, Name = kBadDownloadMessage, Type = String, Dynamic = True, Default = \"The downloaded file appears to be corrupted.", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Die heruntergeladene Datei scheint defekt zu sein."
 	#tag EndConstant
 
-	#tag Constant, Name = kCancelButton, Type = String, Dynamic = False, Default = \"&Cancel", Scope = Private
+	#tag Constant, Name = kCancelButton, Type = String, Dynamic = True, Default = \"&Cancel", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"&Abbrechen"
 	#tag EndConstant
 
-	#tag Constant, Name = kDownloadingMessage, Type = String, Dynamic = False, Default = \"Downloading...", Scope = Private
+	#tag Constant, Name = kDownloadingMessage, Type = String, Dynamic = True, Default = \"Downloading...", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Herunterladen..."
 	#tag EndConstant
 
-	#tag Constant, Name = kDryRunMessage, Type = String, Dynamic = False, Default = \"(Dry run\x2C not really installing)", Scope = Private
+	#tag Constant, Name = kDryRunMessage, Type = String, Dynamic = True, Default = \"(Dry run\x2C not really installing)", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"(Testlauf\x2C keine wirkliche Installation)"
 	#tag EndConstant
 
-	#tag Constant, Name = kGenericErrorMessage, Type = String, Dynamic = False, Default = \"An error has occurred.", Scope = Private
+	#tag Constant, Name = kGenericErrorMessage, Type = String, Dynamic = True, Default = \"An error has occurred.", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Es ist ein Fehler aufgetreten."
 	#tag EndConstant
 
-	#tag Constant, Name = kInstallButton, Type = String, Dynamic = False, Default = \"Install Update", Scope = Private
+	#tag Constant, Name = kInstallButton, Type = String, Dynamic = True, Default = \"Install Update", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Update installieren"
 	#tag EndConstant
 
-	#tag Constant, Name = kMainNoticeMultiple, Type = String, Dynamic = False, Default = \"New versions of <<AppName>> are available!", Scope = Private
+	#tag Constant, Name = kMainNoticeMultiple, Type = String, Dynamic = True, Default = \"New versions of <<AppName>> are available!", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Neue <<AppName>> Versionen sind verf\xC3\xBCgbar!"
 	#tag EndConstant
 
-	#tag Constant, Name = kMainNoticeOne, Type = String, Dynamic = False, Default = \"A new version of <<AppName>> is available!", Scope = Private
+	#tag Constant, Name = kMainNoticeOne, Type = String, Dynamic = True, Default = \"A new version of <<AppName>> is available!", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Eine neue <<AppName>> Version ist verf\xC3\xBCgbar!"
 	#tag EndConstant
 
 	#tag Constant, Name = kNewVersionMarker, Type = String, Dynamic = False, Default = \"<<NewVersion>>", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = kPaymentRequiredMessage, Type = String, Dynamic = False, Default = \"This update is not free and will require payment. Proceed anyway\?", Scope = Private
+	#tag Constant, Name = kPaymentRequiredMessage, Type = String, Dynamic = True, Default = \"This update is not free and will require payment. Proceed anyway\?", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Das ist ein kostenpflichtiges Update. Dennoch installieren\?"
 	#tag EndConstant
 
-	#tag Constant, Name = kProceedButton, Type = String, Dynamic = False, Default = \"Proceed", Scope = Private
+	#tag Constant, Name = kProceedButton, Type = String, Dynamic = True, Default = \"Proceed", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Weiter"
 	#tag EndConstant
 
-	#tag Constant, Name = kProcessingFileMessage, Type = String, Dynamic = False, Default = \"Processing file...", Scope = Private
+	#tag Constant, Name = kProcessingFileMessage, Type = String, Dynamic = True, Default = \"Processing file...", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Verarbeite Datei..."
 	#tag EndConstant
 
-	#tag Constant, Name = kQuitButton, Type = String, Dynamic = False, Default = \"Quit && Install", Scope = Private
+	#tag Constant, Name = kQuitButton, Type = String, Dynamic = True, Default = \"Quit && Install", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Beenden && Installieren"
 	#tag EndConstant
 
-	#tag Constant, Name = kReadyMessage, Type = String, Dynamic = False, Default = \"Ready to install", Scope = Private
+	#tag Constant, Name = kReadyMessage, Type = String, Dynamic = True, Default = \"Ready to install", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Zum Update bereit"
 	#tag EndConstant
 
-	#tag Constant, Name = kReleaseNotesLabel, Type = String, Dynamic = False, Default = \"Release Notes:", Scope = Private
+	#tag Constant, Name = kReleaseNotesLabel, Type = String, Dynamic = True, Default = \"Release Notes:", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Informationen zur Ver\xC3\xB6ffentlichung:"
 	#tag EndConstant
 
-	#tag Constant, Name = kRemindMeLaterButton, Type = String, Dynamic = False, Default = \"Remind Me Later", Scope = Private
+	#tag Constant, Name = kRemindMeLaterButton, Type = String, Dynamic = True, Default = \"Remind Me Later", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Jetzt nicht"
 	#tag EndConstant
 
-	#tag Constant, Name = kSecondaryNoticeMultiple, Type = String, Dynamic = False, Default = \"You have version <<ThisVersion>> and there are multiple updates available. Install one\?", Scope = Private
+	#tag Constant, Name = kSecondaryNoticeMultiple, Type = String, Dynamic = True, Default = \"You have version <<ThisVersion>> and there are multiple updates available. Install one\?", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sie haben Version <<ThisVersion>> und es stehen mehrere Updates zur Verf\xC3\xBCgung. Ein Update installieren\?"
 	#tag EndConstant
 
-	#tag Constant, Name = kSecondaryNoticeOne, Type = String, Dynamic = False, Default = \"You have version <<ThisVersion>>. Would you like to install version <<NewVersion>>\?", Scope = Private
+	#tag Constant, Name = kSecondaryNoticeOne, Type = String, Dynamic = True, Default = \"You have version <<ThisVersion>>. Would you like to install version <<NewVersion>>\?", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sie haben Version <<ThisVersion>>. M\xC3\xB6chten Sie die Version <<NewVersion>> installieren\?"
 	#tag EndConstant
 
-	#tag Constant, Name = kSkipVersionButton, Type = String, Dynamic = False, Default = \"Skip Version", Scope = Private
+	#tag Constant, Name = kSkipVersionButton, Type = String, Dynamic = True, Default = \"Skip Version", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Version \xC3\xBCberspringen"
 	#tag EndConstant
 
-	#tag Constant, Name = kStopButton, Type = String, Dynamic = False, Default = \"Stop", Scope = Private
+	#tag Constant, Name = kStopButton, Type = String, Dynamic = True, Default = \"Stop", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Stopp"
 	#tag EndConstant
 
-	#tag Constant, Name = kThisApplication, Type = String, Dynamic = False, Default = \"this application", Scope = Private
+	#tag Constant, Name = kThisApplication, Type = String, Dynamic = True, Default = \"this application", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"diese Anwendung"
 	#tag EndConstant
 
 	#tag Constant, Name = kThisVersionMarker, Type = String, Dynamic = False, Default = \"<<ThisVersion>>", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = kTryLaterButton, Type = String, Dynamic = False, Default = \"Try Later", Scope = Private
+	#tag Constant, Name = kTryLaterButton, Type = String, Dynamic = True, Default = \"Try Later", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sp\xC3\xA4ter erneut versuchen"
 	#tag EndConstant
 
-	#tag Constant, Name = kVersionsLabel, Type = String, Dynamic = False, Default = \"Available Versions:", Scope = Private
+	#tag Constant, Name = kVersionsLabel, Type = String, Dynamic = True, Default = \"Available Versions:", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Verf\xC3\xBCgbare Versionen:"
 	#tag EndConstant
 
-	#tag Constant, Name = kWindowTitle, Type = String, Dynamic = False, Default = \"Update Available", Scope = Private
+	#tag Constant, Name = kWindowTitle, Type = String, Dynamic = True, Default = \"Update Available", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Update verf\xC3\xBCgbar"
 	#tag EndConstant
 
 

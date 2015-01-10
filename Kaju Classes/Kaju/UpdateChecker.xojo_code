@@ -106,7 +106,7 @@ Protected Class UpdateChecker
 		    
 		    raw = raw.DefineEncoding( Encodings.UTF8 )
 		    
-		    dim firstLine as string 
+		    dim firstLine as string
 		    dim remainder as string
 		    SeparatePacket( raw, firstLine, remainder )
 		    raw = remainder
@@ -417,7 +417,7 @@ Protected Class UpdateChecker
 
 	#tag Method, Flags = &h21
 		Private Sub SeparatePacket(raw As String, ByRef firstLine As String, ByRef remainder As String)
-		  // Separate the incoming packet by the EOL when we don't know exactly what 
+		  // Separate the incoming packet by the EOL when we don't know exactly what
 		  // the EOL is.
 		  
 		  dim rx as new RegEx
@@ -570,16 +570,20 @@ Protected Class UpdateChecker
 	#tag Constant, Name = kAllowUpdateWindow, Type = Double, Dynamic = False, Default = \"&b10000000", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kErrorBadUpdateData, Type = String, Dynamic = False, Default = \"The update data cannot be read.", Scope = Private
+	#tag Constant, Name = kErrorBadUpdateData, Type = String, Dynamic = True, Default = \"The update data cannot be read.", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Update Informationen k\xC3\xB6nnen nicht gelesen werden."
 	#tag EndConstant
 
-	#tag Constant, Name = kErrorIncorrectPacketMarker, Type = String, Dynamic = False, Default = \"The update packet signature marker was incorrect.", Scope = Private
+	#tag Constant, Name = kErrorIncorrectPacketMarker, Type = String, Dynamic = True, Default = \"The update packet signature marker was incorrect.", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Die Update Paket Signatur war inkorrekt."
 	#tag EndConstant
 
-	#tag Constant, Name = kErrorIncorrectPacketSignature, Type = String, Dynamic = False, Default = \"The RSA signature of the update packet cannot be verified.", Scope = Private
+	#tag Constant, Name = kErrorIncorrectPacketSignature, Type = String, Dynamic = True, Default = \"The RSA signature of the update packet cannot be verified.", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Die RSA Signatur des Update Paket kann nicht verifiziert werden."
 	#tag EndConstant
 
-	#tag Constant, Name = kErrorNoUpdateData, Type = String, Dynamic = False, Default = \"No update data was available.", Scope = Private
+	#tag Constant, Name = kErrorNoUpdateData, Type = String, Dynamic = True, Default = \"No update data was available.", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Es standen keine Update Informationen zur Verf\xC3\xBCgung."
 	#tag EndConstant
 
 	#tag Constant, Name = kPreferencesName, Type = String, Dynamic = False, Default = \"Kaju_Preferences", Scope = Private
