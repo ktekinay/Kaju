@@ -12,27 +12,27 @@ Inherits Kaju.Information
 		  dim r as boolean
 		  
 		  if not r and rxVersion.Search( Version ) is nil then
-		    reason = kVersionMustBeInFormReason + ": 1, 1.2, 1.2.3, 1.2d4, 1.2a4, 1.2b4, 1.2.4b4, etc."
+		    reason = KajuLocale.kVersionMustBeInFormReason + ": 1, 1.2, 1.2.3, 1.2d4, 1.2a4, 1.2b4, 1.2.4b4, etc."
 		    r = true
 		  end if
 		  
 		  if not r and AppName.Trim = "" then
-		    reason = kMissingAppNameReason
+		    reason = KajuLocale.kMissingAppNameReason
 		    r = true
 		  end if
 		  
 		  if not r and MacBinary <> nil and not MacBinary.IsValid then
-		    reason = "Mac " + kBinaryInfoInvalidReason + ": " + MacBinary.InvalidReason
+		    reason = "Mac " + KajuLocale.kBinaryInfoInvalidReason + ": " + MacBinary.InvalidReason
 		    r = true
 		  end if
 		  
 		  if not r and WindowsBinary <> nil and not WindowsBinary.IsValid then
-		    reason = "Windows " + kBinaryInfoInvalidReason + ": " + WindowsBinary.InvalidReason
+		    reason = "Windows " + KajuLocale.kBinaryInfoInvalidReason + ": " + WindowsBinary.InvalidReason
 		    r = true
 		  end if
 		  
 		  if not r and LinuxBinary <> nil and not LinuxBinary.IsValid then
-		    reason = "Linux " + kBinaryInfoInvalidReason + ": " + LinuxBinary.InvalidReason
+		    reason = "Linux " + KajuLocale.kBinaryInfoInvalidReason + ": " + LinuxBinary.InvalidReason
 		    r = true
 		  end if
 		  
@@ -210,22 +210,10 @@ Inherits Kaju.Information
 	#tag EndProperty
 
 
-	#tag Constant, Name = kBinaryInfoInvalidReason, Type = String, Dynamic = True, Default = \"Binary information is not valid", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Bin\xC3\xA4re Informationen sind nicht valide"
-	#tag EndConstant
-
 	#tag Constant, Name = kLinuxBinaryName, Type = String, Dynamic = False, Default = \"LinuxBinary", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kMacBinaryName, Type = String, Dynamic = False, Default = \"MacBinary", Scope = Public
-	#tag EndConstant
-
-	#tag Constant, Name = kMissingAppNameReason, Type = String, Dynamic = True, Default = \"Missing app name", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"App Name fehlt"
-	#tag EndConstant
-
-	#tag Constant, Name = kVersionMustBeInFormReason, Type = String, Dynamic = True, Default = \"Version must be in one of these forms", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Version muss in einer der folgenden Formen eingegeben werden"
 	#tag EndConstant
 
 	#tag Constant, Name = kWindowsBinaryName, Type = String, Dynamic = False, Default = \"WindowsBinary", Scope = Public

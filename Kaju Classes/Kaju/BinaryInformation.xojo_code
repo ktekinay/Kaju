@@ -6,17 +6,17 @@ Inherits Kaju.Information
 		  dim r as boolean
 		  
 		  if not r and Hash.Trim = "" then
-		    reason = kMissingReason + " Hash"
+		    reason = KajuLocale.kMissingReason + " Hash"
 		    r = true
 		  end if
 		  
 		  if not r and URL.Trim = "" then
-		    reason = kMissingReason + " URL"
+		    reason = KajuLocale.kMissingReason + " URL"
 		    r = true
 		  end if
 		  
 		  if not r and IsExecutableNameRequired and ExecutableName.Trim = "" then
-		    reason = kMissingReason + " Executable Name"
+		    reason = KajuLocale.kMissingReason + " Executable Name"
 		    r = true
 		  end if
 		  
@@ -93,10 +93,6 @@ Inherits Kaju.Information
 	#tag Property, Flags = &h0
 		URL As String
 	#tag EndProperty
-
-
-	#tag Constant, Name = kMissingReason, Type = String, Dynamic = False, Default = \"Missing", Scope = Private
-	#tag EndConstant
 
 
 	#tag ViewBehavior

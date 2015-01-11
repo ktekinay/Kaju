@@ -97,7 +97,7 @@ Protected Class UpdateChecker
 		      exit do
 		      
 		    elseif raw = "" then
-		      if HandleError( kErrorNoUpdateData ) then
+		      if HandleError( KajuLocale.kErrorNoUpdateData ) then
 		        continue do
 		      else
 		        exit do
@@ -113,7 +113,7 @@ Protected Class UpdateChecker
 		    
 		    dim sig as string = firstLine.Left( kUpdatePacketMarker.Len )
 		    if StrComp( sig, kUpdatePacketMarker, 0 ) <> 0 then
-		      if HandleError( kErrorIncorrectPacketMarker ) then
+		      if HandleError( KajuLocale.kErrorIncorrectPacketMarker ) then
 		        continue do
 		      else
 		        exit do
@@ -123,7 +123,7 @@ Protected Class UpdateChecker
 		    sig = firstLine.Mid( sig.Len + 1 )
 		    sig = DecodeHex( sig )
 		    if not Crypto.RSAVerifySignature( raw, sig, ServerPublicRSAKey ) then
-		      if HandleError( kErrorIncorrectPacketSignature ) then
+		      if HandleError( KajuLocale.kErrorIncorrectPacketSignature ) then
 		        continue do
 		      else
 		        exit do
@@ -151,11 +151,11 @@ Protected Class UpdateChecker
 		    //
 		    dim dlg as new MessageDialog
 		    dlg.ActionButton.Visible = true
-		    dlg.ActionButton.Caption = kTryAgainButton
+		    dlg.ActionButton.Caption = KajuLocale.kTryAgainButton
 		    dlg.CancelButton.Visible = true
-		    dlg.CancelButton.Caption = kLaterButton
+		    dlg.CancelButton.Caption = KajuLocale.kLaterButton
 		    dlg.AlternateActionButton.Visible = false
-		    dlg.Message = kErrorOccurredMessage
+		    dlg.Message = KajuLocale.kErrorOccurredMessage
 		    dlg.Explanation = msg
 		    
 		    dim btn as MessageDialogButton = dlg.ShowModal
@@ -362,7 +362,7 @@ Protected Class UpdateChecker
 		  return true
 		  
 		  Exception err as RuntimeException
-		    return not HandleError( kErrorBadUpdateData )
+		    return not HandleError( KajuLocale.kErrorBadUpdateData )
 		    
 		End Function
 	#tag EndMethod
@@ -570,35 +570,7 @@ Protected Class UpdateChecker
 	#tag Constant, Name = kAllowUpdateWindow, Type = Double, Dynamic = False, Default = \"&b10000000", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kErrorBadUpdateData, Type = String, Dynamic = True, Default = \"The update data cannot be read.", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Update Informationen k\xC3\xB6nnen nicht gelesen werden."
-	#tag EndConstant
-
-	#tag Constant, Name = kErrorIncorrectPacketMarker, Type = String, Dynamic = True, Default = \"The update packet signature marker was incorrect.", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Die Update Paket Signatur war inkorrekt."
-	#tag EndConstant
-
-	#tag Constant, Name = kErrorIncorrectPacketSignature, Type = String, Dynamic = True, Default = \"The RSA signature of the update packet cannot be verified.", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Die RSA Signatur des Update Paket kann nicht verifiziert werden."
-	#tag EndConstant
-
-	#tag Constant, Name = kErrorNoUpdateData, Type = String, Dynamic = True, Default = \"No update data was available.", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Es standen keine Update Informationen zur Verf\xC3\xBCgung."
-	#tag EndConstant
-
-	#tag Constant, Name = kErrorOccurredMessage, Type = String, Dynamic = True, Default = \"An error has occurred. Would you like to try again now or later\?", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Es ist ein Fehler aufgetreten. M\xC3\xB6chten Sie es jetzt oder sp\xC3\xA4ter noch einmal versuchen\?"
-	#tag EndConstant
-
-	#tag Constant, Name = kLaterButton, Type = String, Dynamic = True, Default = \"Later", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sp\xC3\xA4ter"
-	#tag EndConstant
-
 	#tag Constant, Name = kPreferencesName, Type = String, Dynamic = False, Default = \"Kaju_Preferences", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kTryAgainButton, Type = String, Dynamic = True, Default = \"Try Again", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Erneut versuchen"
 	#tag EndConstant
 
 

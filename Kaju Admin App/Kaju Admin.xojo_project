@@ -8,6 +8,7 @@ FileTypeSet=FileTypes1;FileTypes1.xojo_filetypeset;&h352FB9F5;&h0;false
 Window=WndAdmin;WndAdmin.xojo_window;&h5D541828;&h0;false
 BuildSteps=Build Automation;Build Automation.xojo_code;&h378B80A5;&h0;false
 Module=Kaju;../Kaju Classes/Kaju.xojo_code;&h11400316;&h2570CF64;false
+Module=KajuLocale;../Kaju Classes/KajuLocale.xojo_code;&h20D2554;&h2570CF64;false
 Window=KajuUpdateWindow;../Kaju Classes/KajuUpdateWindow.xojo_window;&h18AE3D9;&h2570CF64;false
 Class=UpdateChecker;../Kaju Classes/Kaju/UpdateChecker.xojo_code;&h70CF0A50;&h11400316;false
 Class=KajuException;../Kaju Classes/Kaju/KajuException.xojo_code;&h3047231F;&h11400316;false
