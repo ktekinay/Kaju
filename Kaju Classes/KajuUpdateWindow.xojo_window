@@ -550,16 +550,16 @@ End
 		  //
 		  
 		  if Updates.Ubound = 0 then
-		    lblMain.Text = kMainNoticeOne
-		    lblSecondary.Text = kSecondaryNoticeOne
-		    lblSecondary.Text = lblSecondary.Text.ReplaceAll( kNewVersionMarker, Updates( 0 ).Version )
+		    lblMain.Text = KajuLocale.kMainNoticeOne
+		    lblSecondary.Text = KajuLocale.kSecondaryNoticeOne
+		    lblSecondary.Text = lblSecondary.Text.ReplaceAll( KajuLocale.kNewVersionMarker, Updates( 0 ).Version )
 		  else
-		    lblMain.Text = kMainNoticeMultiple
-		    lblSecondary.Text = kSecondaryNoticeMultiple
+		    lblMain.Text = KajuLocale.kMainNoticeMultiple
+		    lblSecondary.Text = KajuLocale.kSecondaryNoticeMultiple
 		  end if
 		  
-		  lblMain.Text = lblMain.Text.ReplaceAll( kAppMarker, AppName )
-		  lblSecondary.Text = lblSecondary.Text.ReplaceAll( kThisVersionMarker, Kaju.AppVersionString )
+		  lblMain.Text = lblMain.Text.ReplaceAll( KajuLocale.kAppMarker, AppName )
+		  lblSecondary.Text = lblSecondary.Text.ReplaceAll( KajuLocale.kThisVersionMarker, Kaju.AppVersionString )
 		  
 		  //
 		  // Set up the menu with the available updates.
@@ -639,7 +639,7 @@ End
 		  //
 		  dim source as string = update.ReleaseNotes
 		  if source = "" then
-		    source = "<b>" + kNoUpdateInfoMessage + "</b>"
+		    source = "<b>" + KajuLocale.kNoUpdateInfoMessage + "</b>"
 		  end if
 		  
 		  static tempFile as FolderItem = GetTemporaryFolderItem
@@ -669,7 +669,7 @@ End
 	#tag Method, Flags = &h21
 		Private Sub ShowError(msg As String = "")
 		  if msg.Trim = "" then
-		    msg = kGenericErrorMessage
+		    msg = KajuLocale.kGenericErrorMessage
 		  end if
 		  
 		  lblInstallMessage.Visible = true
@@ -677,7 +677,7 @@ End
 		  pbProgress.Visible = false
 		  
 		  btnOK.Enabled = false
-		  btnCancel.Caption = kTryLaterButton
+		  btnCancel.Caption = KajuLocale.kTryLaterButton
 		  btnSkipVersion.Visible = false
 		  
 		  CurrentStage = Stage.UpdateError
@@ -707,7 +707,7 @@ End
 		#tag Getter
 			Get
 			  if mAppName = "" then
-			    mAppName = kThisApplication
+			    mAppName = KajuLocale.kThisApplication
 			  end if
 			  
 			  return mAppName
@@ -784,119 +784,6 @@ End
 	#tag EndProperty
 
 
-	#tag Constant, Name = kAppMarker, Type = String, Dynamic = False, Default = \"<<AppName>>", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kBadDownloadMessage, Type = String, Dynamic = True, Default = \"The downloaded file appears to be corrupted.", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Die heruntergeladene Datei scheint defekt zu sein."
-	#tag EndConstant
-
-	#tag Constant, Name = kCancelButton, Type = String, Dynamic = True, Default = \"&Cancel", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"&Abbrechen"
-	#tag EndConstant
-
-	#tag Constant, Name = kCannotSkipVersionsMessage, Type = String, Dynamic = True, Default = \"You cannot skip versions until you have updated to version <<Version>> or beyond.", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sie k\xC3\xB6nnen keine Versionen \xC3\xBCberspringen bevor Sie nicht mindestens <<Version>> oder h\xC3\xB6her installiert haben."
-	#tag EndConstant
-
-	#tag Constant, Name = kDownloadingMessage, Type = String, Dynamic = True, Default = \"Downloading...", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Herunterladen..."
-	#tag EndConstant
-
-	#tag Constant, Name = kDryRunMessage, Type = String, Dynamic = True, Default = \"(Dry run\x2C not really installing)", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"(Testlauf\x2C keine wirkliche Installation)"
-	#tag EndConstant
-
-	#tag Constant, Name = kGenericErrorMessage, Type = String, Dynamic = True, Default = \"An error has occurred.", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Es ist ein Fehler aufgetreten."
-	#tag EndConstant
-
-	#tag Constant, Name = kInstallButton, Type = String, Dynamic = True, Default = \"Install Update", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Update installieren"
-	#tag EndConstant
-
-	#tag Constant, Name = kMainNoticeMultiple, Type = String, Dynamic = True, Default = \"New versions of <<AppName>> are available!", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Neue <<AppName>> Versionen sind verf\xC3\xBCgbar!"
-	#tag EndConstant
-
-	#tag Constant, Name = kMainNoticeOne, Type = String, Dynamic = True, Default = \"A new version of <<AppName>> is available!", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Eine neue <<AppName>> Version ist verf\xC3\xBCgbar!"
-	#tag EndConstant
-
-	#tag Constant, Name = kNewVersionMarker, Type = String, Dynamic = False, Default = \"<<NewVersion>>", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kNoUpdateInfoMessage, Type = String, Dynamic = True, Default = \"NO UPDATE INFORMATION", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"KEINE UPDATE INFORMATIONEN"
-	#tag EndConstant
-
-	#tag Constant, Name = kPaymentRequiredMessage, Type = String, Dynamic = True, Default = \"This update is not free and will require payment. Proceed anyway\?", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Das ist ein kostenpflichtiges Update. Dennoch installieren\?"
-	#tag EndConstant
-
-	#tag Constant, Name = kProceedButton, Type = String, Dynamic = True, Default = \"Proceed", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Weiter"
-	#tag EndConstant
-
-	#tag Constant, Name = kProcessingFileMessage, Type = String, Dynamic = True, Default = \"Processing file...", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Verarbeite Datei..."
-	#tag EndConstant
-
-	#tag Constant, Name = kQuitButton, Type = String, Dynamic = True, Default = \"Quit && Install", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Beenden && Installieren"
-	#tag EndConstant
-
-	#tag Constant, Name = kReadyMessage, Type = String, Dynamic = True, Default = \"Ready to install", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Zum Update bereit"
-	#tag EndConstant
-
-	#tag Constant, Name = kReleaseNotesLabel, Type = String, Dynamic = True, Default = \"Release Notes:", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Informationen zur Ver\xC3\xB6ffentlichung:"
-	#tag EndConstant
-
-	#tag Constant, Name = kRemindMeLaterButton, Type = String, Dynamic = True, Default = \"Remind Me Later", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Jetzt nicht"
-	#tag EndConstant
-
-	#tag Constant, Name = kSecondaryNoticeMultiple, Type = String, Dynamic = True, Default = \"You have version <<ThisVersion>> and there are multiple updates available. Install one\?", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sie haben Version <<ThisVersion>> und es stehen mehrere Updates zur Verf\xC3\xBCgung. Ein Update installieren\?"
-	#tag EndConstant
-
-	#tag Constant, Name = kSecondaryNoticeOne, Type = String, Dynamic = True, Default = \"You have version <<ThisVersion>>. Would you like to install version <<NewVersion>>\?", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sie haben Version <<ThisVersion>>. M\xC3\xB6chten Sie die Version <<NewVersion>> installieren\?"
-	#tag EndConstant
-
-	#tag Constant, Name = kSkipVersionButton, Type = String, Dynamic = True, Default = \"Skip Version", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Version \xC3\xBCberspringen"
-	#tag EndConstant
-
-	#tag Constant, Name = kStopButton, Type = String, Dynamic = True, Default = \"Stop", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Stopp"
-	#tag EndConstant
-
-	#tag Constant, Name = kThisApplication, Type = String, Dynamic = True, Default = \"this application", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"diese Anwendung"
-	#tag EndConstant
-
-	#tag Constant, Name = kThisVersionMarker, Type = String, Dynamic = False, Default = \"<<ThisVersion>>", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kTryLaterButton, Type = String, Dynamic = True, Default = \"Try Later", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sp\xC3\xA4ter erneut versuchen"
-	#tag EndConstant
-
-	#tag Constant, Name = kVersionMarker, Type = String, Dynamic = False, Default = \"<<Version>>", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kVersionsLabel, Type = String, Dynamic = True, Default = \"Available Versions:", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Verf\xC3\xBCgbare Versionen:"
-	#tag EndConstant
-
-	#tag Constant, Name = kWindowTitle, Type = String, Dynamic = True, Default = \"Update Available", Scope = Private
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Update verf\xC3\xBCgbar"
-	#tag EndConstant
-
-
 	#tag Enum, Name = Stage, Type = Integer, Flags = &h21
 		ChoosingUpdate
 		  InstallingUpdate
@@ -946,9 +833,9 @@ End
 		      if chosen.RequiresPayment then
 		        dim dlg as new MessageDialog
 		        dlg.ActionButton.Visible = true
-		        dlg.ActionButton.Caption = kProceedButton
+		        dlg.ActionButton.Caption = KajuLocale.kProceedButton
 		        dlg.CancelButton.Visible = true
-		        dlg.Message = kPaymentRequiredMessage
+		        dlg.Message = KajuLocale.kPaymentRequiredMessage
 		        dim btn as MessageDialogButton = dlg.ShowModalWithin( self )
 		        
 		        if btn is dlg.CancelButton then
@@ -960,7 +847,7 @@ End
 		    
 		    btnOK.Enabled = false
 		    
-		    btnCancel.Caption = kStopButton
+		    btnCancel.Caption = KajuLocale.kStopButton
 		    
 		    btnSkipVersion.Visible = false
 		    pbProgress.Visible = true
@@ -972,11 +859,11 @@ End
 		    
 		    if Checker.DryRun then
 		      
-		      lblInstallMessage.Text = kDryRunMessage
+		      lblInstallMessage.Text = KajuLocale.kDryRunMessage
 		      
 		    else
 		      
-		      lblInstallMessage.Text = kDownloadingMessage
+		      lblInstallMessage.Text = KajuLocale.kDownloadingMessage
 		      
 		      dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
 		      DeleteOnCancel.Append tempFolder
@@ -1047,8 +934,8 @@ End
 		  
 		  if info.MinimumRequiredVersion <> "" and _
 		    Kaju.VersionToDouble( Kaju.AppVersionString ) < Kaju.VersionToDouble( info.MinimumRequiredVersion ) then
-		    dim msg as string = kCannotSkipVersionsMessage
-		    msg = msg.ReplaceAll( kVersionMarker, info.MinimumRequiredVersion )
+		    dim msg as string = KajuLocale.kCannotSkipVersionsMessage
+		    msg = msg.ReplaceAll( KajuLocale.kVersionMarker, info.MinimumRequiredVersion )
 		    MsgBox msg
 		    
 		  else
@@ -1103,14 +990,14 @@ End
 		    
 		  elseif Kaju.HashOfFile( file ) <> SelectedUpdate.PlatformBinary.Hash then
 		    
-		    ShowError( kBadDownloadMessage )
+		    ShowError( KajuLocale.kBadDownloadMessage )
 		    
 		  else
 		    //
 		    // We have the file and it appears to be good
 		    //
 		    
-		    lblInstallMessage.Text = kProcessingFileMessage
+		    lblInstallMessage.Text = KajuLocale.kProcessingFileMessage
 		    
 		    dim targetFolder as FolderItem
 		    #if TargetWin32 then
@@ -1186,14 +1073,14 @@ End
 		      Initiater.ReplacementExecutableName = SelectedUpdate.PlatformBinary.ExecutableName
 		      
 		      btnOK.Enabled = true
-		      btnOK.Caption = kQuitButton
+		      btnOK.Caption = KajuLocale.kQuitButton
 		      btnCancel.Visible = true
-		      btnCancel.Caption = kCancelButton
+		      btnCancel.Caption = KajuLocale.kCancelButton
 		      
 		      pbProgress.Visible = false
 		      
 		      lblInstallMessage.Visible = true
-		      lblInstallMessage.Text = kReadyMessage
+		      lblInstallMessage.Text = KajuLocale.kReadyMessage
 		      
 		      CurrentStage = Stage.WaitingToQuit
 		      
