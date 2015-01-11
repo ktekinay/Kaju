@@ -639,7 +639,7 @@ End
 		  //
 		  dim source as string = update.ReleaseNotes
 		  if source = "" then
-		    source = "<b>NO UPDATE INFORMATION</b>"
+		    source = kNoUpdateInfoMessage
 		  end if
 		  
 		  static tempFile as FolderItem = GetTemporaryFolderItem
@@ -795,6 +795,9 @@ End
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"&Abbrechen"
 	#tag EndConstant
 
+	#tag Constant, Name = kCannotSkipVersionsMessage, Type = String, Dynamic = True, Default = \"You cannot skip versions until you have updated to version <<Version>> or beyond.", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kDownloadingMessage, Type = String, Dynamic = True, Default = \"Downloading...", Scope = Private
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Herunterladen..."
 	#tag EndConstant
@@ -820,6 +823,9 @@ End
 	#tag EndConstant
 
 	#tag Constant, Name = kNewVersionMarker, Type = String, Dynamic = False, Default = \"<<NewVersion>>", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kNoUpdateInfoMessage, Type = String, Dynamic = True, Default = \"<b>NO UPDATE INFORMATION</b>", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kPaymentRequiredMessage, Type = String, Dynamic = True, Default = \"This update is not free and will require payment. Proceed anyway\?", Scope = Private
@@ -875,6 +881,9 @@ End
 
 	#tag Constant, Name = kTryLaterButton, Type = String, Dynamic = True, Default = \"Try Later", Scope = Private
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sp\xC3\xA4ter erneut versuchen"
+	#tag EndConstant
+
+	#tag Constant, Name = kVersionMarker, Type = String, Dynamic = False, Default = \"<<Version>>", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kVersionsLabel, Type = String, Dynamic = True, Default = \"Available Versions:", Scope = Private
@@ -1035,9 +1044,10 @@ End
 		  dim info as Kaju.UpdateInformation = pumUpdates.RowTag( pumUpdates.ListIndex )
 		  
 		  if info.MinimumRequiredVersion <> "" and _
-		    Kaju.VersionToDouble( Kaju.AppVersionString ) < Kaju.VersionToDouble( info.MinimumRequiredVersion )  then
-		    
-		    MsgBox "You cannot skip versions until you have updated to version " + info.MinimumRequiredVersion + " or beyond."
+		    Kaju.VersionToDouble( Kaju.AppVersionString ) < Kaju.VersionToDouble( info.MinimumRequiredVersion ) then
+		    dim msg as string = kCannotSkipVersionsMessage
+		    msg = msg.ReplaceAll( kVersionMarker, info.MinimumRequiredVersion )
+		    MsgBox msg
 		    
 		  else
 		    

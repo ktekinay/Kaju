@@ -151,11 +151,11 @@ Protected Class UpdateChecker
 		    //
 		    dim dlg as new MessageDialog
 		    dlg.ActionButton.Visible = true
-		    dlg.ActionButton.Caption = "Try Again"
+		    dlg.ActionButton.Caption = kTryAgainButton
 		    dlg.CancelButton.Visible = true
-		    dlg.CancelButton.Caption = "Later"
+		    dlg.CancelButton.Caption = kLaterButton
 		    dlg.AlternateActionButton.Visible = false
-		    dlg.Message = "An error has occurred. Would you like to try again now or later?"
+		    dlg.Message = kErrorOccurredMessage
 		    dlg.Explanation = msg
 		    
 		    dim btn as MessageDialogButton = dlg.ShowModal
@@ -586,7 +586,16 @@ Protected Class UpdateChecker
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Es standen keine Update Informationen zur Verf\xC3\xBCgung."
 	#tag EndConstant
 
+	#tag Constant, Name = kErrorOccurredMessage, Type = String, Dynamic = True, Default = \"An error has occurred. Would you like to try again now or later\?", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kLaterButton, Type = String, Dynamic = True, Default = \"Later", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kPreferencesName, Type = String, Dynamic = False, Default = \"Kaju_Preferences", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kTryAgainButton, Type = String, Dynamic = True, Default = \"Try Again", Scope = Private
 	#tag EndConstant
 
 

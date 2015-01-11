@@ -6,17 +6,17 @@ Inherits Kaju.Information
 		  dim r as boolean
 		  
 		  if not r and Hash.Trim = "" then
-		    reason = "Missing Hash"
+		    reason = kMissingReason + " Hash"
 		    r = true
 		  end if
 		  
 		  if not r and URL.Trim = "" then
-		    reason = "Missing URL"
+		    reason = kMissingReason + " URL"
 		    r = true
 		  end if
 		  
 		  if not r and IsExecutableNameRequired and ExecutableName.Trim = "" then
-		    reason = "Missing Executable Name"
+		    reason = kMissingReason + " Executable Name"
 		    r = true
 		  end if
 		  
@@ -95,6 +95,10 @@ Inherits Kaju.Information
 	#tag EndProperty
 
 
+	#tag Constant, Name = kMissingReason, Type = String, Dynamic = False, Default = \"Missing", Scope = Private
+	#tag EndConstant
+
+
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="ExecutableName"
@@ -120,6 +124,11 @@ Inherits Kaju.Information
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IsValid"
+			Group="Behavior"
+			Type="Boolean"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
