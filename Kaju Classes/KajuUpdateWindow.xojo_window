@@ -639,7 +639,7 @@ End
 		  //
 		  dim source as string = update.ReleaseNotes
 		  if source = "" then
-		    source = kNoUpdateInfoMessage
+		    source = "<b>" + kNoUpdateInfoMessage + "</b>"
 		  end if
 		  
 		  static tempFile as FolderItem = GetTemporaryFolderItem
@@ -796,6 +796,7 @@ End
 	#tag EndConstant
 
 	#tag Constant, Name = kCannotSkipVersionsMessage, Type = String, Dynamic = True, Default = \"You cannot skip versions until you have updated to version <<Version>> or beyond.", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sie k\xC3\xB6nnen keine Versionen \xC3\xBCberspringen bevor Sie nicht mindestens <<Version>> oder h\xC3\xB6her installiert haben."
 	#tag EndConstant
 
 	#tag Constant, Name = kDownloadingMessage, Type = String, Dynamic = True, Default = \"Downloading...", Scope = Private
@@ -825,7 +826,8 @@ End
 	#tag Constant, Name = kNewVersionMarker, Type = String, Dynamic = False, Default = \"<<NewVersion>>", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = kNoUpdateInfoMessage, Type = String, Dynamic = True, Default = \"<b>NO UPDATE INFORMATION</b>", Scope = Private
+	#tag Constant, Name = kNoUpdateInfoMessage, Type = String, Dynamic = True, Default = \"NO UPDATE INFORMATION", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"KEINE UPDATE INFORMATIONEN"
 	#tag EndConstant
 
 	#tag Constant, Name = kPaymentRequiredMessage, Type = String, Dynamic = True, Default = \"This update is not free and will require payment. Proceed anyway\?", Scope = Private

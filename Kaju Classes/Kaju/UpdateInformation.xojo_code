@@ -211,6 +211,7 @@ Inherits Kaju.Information
 
 
 	#tag Constant, Name = kBinaryInfoInvalidReason, Type = String, Dynamic = True, Default = \"Binary information is not valid", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Bin\xC3\xA4re Informationen sind nicht valide"
 	#tag EndConstant
 
 	#tag Constant, Name = kLinuxBinaryName, Type = String, Dynamic = False, Default = \"LinuxBinary", Scope = Public
@@ -220,9 +221,11 @@ Inherits Kaju.Information
 	#tag EndConstant
 
 	#tag Constant, Name = kMissingAppNameReason, Type = String, Dynamic = True, Default = \"Missing app name", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"App Name fehlt"
 	#tag EndConstant
 
 	#tag Constant, Name = kVersionMustBeInFormReason, Type = String, Dynamic = True, Default = \"Version must be in one of these forms", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Version muss in einer der folgenden Formen eingegeben werden"
 	#tag EndConstant
 
 	#tag Constant, Name = kWindowsBinaryName, Type = String, Dynamic = False, Default = \"WindowsBinary", Scope = Public

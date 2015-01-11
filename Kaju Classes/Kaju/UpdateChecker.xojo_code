@@ -587,15 +587,18 @@ Protected Class UpdateChecker
 	#tag EndConstant
 
 	#tag Constant, Name = kErrorOccurredMessage, Type = String, Dynamic = True, Default = \"An error has occurred. Would you like to try again now or later\?", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Es ist ein Fehler aufgetreten. M\xC3\xB6chten Sie es jetzt oder sp\xC3\xA4ter noch einmal versuchen\?"
 	#tag EndConstant
 
 	#tag Constant, Name = kLaterButton, Type = String, Dynamic = True, Default = \"Later", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sp\xC3\xA4ter"
 	#tag EndConstant
 
 	#tag Constant, Name = kPreferencesName, Type = String, Dynamic = False, Default = \"Kaju_Preferences", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kTryAgainButton, Type = String, Dynamic = True, Default = \"Try Again", Scope = Private
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Erneut versuchen"
 	#tag EndConstant
 
 
