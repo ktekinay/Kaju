@@ -68,11 +68,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sp\xC3\xA4ter"
 	#tag EndConstant
 
-	#tag Constant, Name = kMainNoticeMultiple, Type = String, Dynamic = True, Default = \"New versions of <<AppName>> are available!", Scope = Protected
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Neue <<AppName>> Versionen sind verf\xC3\xBCgbar!"
-	#tag EndConstant
-
-	#tag Constant, Name = kMainNoticeOne, Type = String, Dynamic = True, Default = \"A new version of <<AppName>> is available!", Scope = Protected
+	#tag Constant, Name = kMainNotice, Type = String, Dynamic = True, Default = \"A new version of <<AppName>> is available!", Scope = Protected
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Eine neue <<AppName>> Version ist verf\xC3\xBCgbar!"
 	#tag EndConstant
 
