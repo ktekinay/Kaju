@@ -301,6 +301,19 @@ No.
 
 No. Thanks to John Hansen and code he provided on the [Xojo Forums](https://forum.xojo.com), Windows will even unzip the downloaded file without any extra help.
 
+**How do I contribute?**
+
+For the appropriate branch to your GitHub account. Use "develop" for general fixes and additions and "translations" to add a language translation. Make your changes, then submit a pull request. We'll look it over and merge what's appropriate or provide feedback.
+
+**I want to submit a translation. What should be translated?**
+
+There are two places to look for strings that need translation:
+
+1. The constants in the KajuLocale module.
+1. The error messages in KajuException.
+
+Add a translation for each, then submit a pull request as outlined above.
+
 ## Release Notes
 
 1.0 (Jan. 5, 2015)
@@ -311,3 +324,10 @@ No. Thanks to John Hansen and code he provided on the [Xojo Forums](https://foru
 
 - Fixed redirect bug.
 - The URL will set Secure and the Port (can override in the URL itself).
+
+1.1 (Jan. 11, 2015)
+
+- Moved user-presented strings to KajuLocale module for easier translation.
+- Fixed bug where the app name was not being presented in the Update window.
+- Changed behavior of how the "A never version of..." message is presented in the Update window.
+- German translation.
