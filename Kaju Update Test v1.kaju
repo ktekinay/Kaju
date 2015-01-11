@@ -27,11 +27,11 @@
     },
     {
       "Version":"1.2.2d5",
-      "ReleaseNotes":"<p>A phony development version pointing to the same binary. Meant as a placeholder to demonstrate multiple versions.<\/p>",
+      "ReleaseNotes":"<p>A phony development version pointing to the same binary. Meant as a placeholder to demonstrate multiple versions.<\/p>\n\n<p>Note that this version has a name change.<\/p>",
       "ImageURL":"",
       "UseTransparency":false,
       "MinimumRequiriedVersion":"",
-      "AppName":"Kaju Update Test",
+      "AppName":"New Kaju Update Test",
       "RequiresPayment":false,
       "MacBinary":{
         "Hash":"B8BD64A5344FD70D6589F524ABAD4641",
