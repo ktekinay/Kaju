@@ -546,22 +546,6 @@ End
 		  reverse.SortWith( updates )
 		  
 		  //
-		  // Set up the labels
-		  //
-		  
-		  if Updates.Ubound = 0 then
-		    lblMain.Text = KajuLocale.kMainNoticeOne
-		    lblSecondary.Text = KajuLocale.kSecondaryNoticeOne
-		    lblSecondary.Text = lblSecondary.Text.ReplaceAll( KajuLocale.kNewVersionMarker, Updates( 0 ).Version )
-		  else
-		    lblMain.Text = KajuLocale.kMainNoticeMultiple
-		    lblSecondary.Text = KajuLocale.kSecondaryNoticeMultiple
-		  end if
-		  
-		  lblMain.Text = lblMain.Text.ReplaceAll( KajuLocale.kAppMarker, AppName )
-		  lblSecondary.Text = lblSecondary.Text.ReplaceAll( KajuLocale.kThisVersionMarker, Kaju.AppVersionString )
-		  
-		  //
 		  // Set up the menu with the available updates.
 		  // It will set up the rest of the controls.
 		  //
@@ -593,6 +577,21 @@ End
 		  //
 		  
 		  self.Loading = true
+		  
+		  //
+		  // Set up the main labels
+		  //
+		  AppName = update.AppName
+		  if pumUpdates.ListCount = 1 then
+		    lblSecondary.Text = KajuLocale.kSecondaryNoticeOne
+		    lblSecondary.Text = lblSecondary.Text.ReplaceAll( KajuLocale.kNewVersionMarker, update.Version )
+		  else
+		    lblSecondary.Text = KajuLocale.kSecondaryNoticeMultiple
+		  end if
+		  
+		  lblMain.Text = KajuLocale.kMainNotice
+		  lblMain.Text = lblMain.Text.ReplaceAll( KajuLocale.kAppMarker, AppName )
+		  lblSecondary.Text = lblSecondary.Text.ReplaceAll( KajuLocale.kThisVersionMarker, Kaju.AppVersionString )
 		  
 		  //
 		  // Get the background picture, if any
