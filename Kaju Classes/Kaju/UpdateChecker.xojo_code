@@ -97,7 +97,7 @@ Protected Class UpdateChecker
 		      exit do
 		      
 		    elseif raw = "" then
-		      if HandleError( kErrorNoUpdateData ) then
+		      if HandleError( KajuLocale.kErrorNoUpdateData ) then
 		        continue do
 		      else
 		        exit do
@@ -106,14 +106,14 @@ Protected Class UpdateChecker
 		    
 		    raw = raw.DefineEncoding( Encodings.UTF8 )
 		    
-		    dim firstLine as string 
+		    dim firstLine as string
 		    dim remainder as string
 		    SeparatePacket( raw, firstLine, remainder )
 		    raw = remainder
 		    
 		    dim sig as string = firstLine.Left( kUpdatePacketMarker.Len )
 		    if StrComp( sig, kUpdatePacketMarker, 0 ) <> 0 then
-		      if HandleError( kErrorIncorrectPacketMarker ) then
+		      if HandleError( KajuLocale.kErrorIncorrectPacketMarker ) then
 		        continue do
 		      else
 		        exit do
@@ -123,7 +123,7 @@ Protected Class UpdateChecker
 		    sig = firstLine.Mid( sig.Len + 1 )
 		    sig = DecodeHex( sig )
 		    if not Crypto.RSAVerifySignature( raw, sig, ServerPublicRSAKey ) then
-		      if HandleError( kErrorIncorrectPacketSignature ) then
+		      if HandleError( KajuLocale.kErrorIncorrectPacketSignature ) then
 		        continue do
 		      else
 		        exit do
@@ -151,11 +151,11 @@ Protected Class UpdateChecker
 		    //
 		    dim dlg as new MessageDialog
 		    dlg.ActionButton.Visible = true
-		    dlg.ActionButton.Caption = "Try Again"
+		    dlg.ActionButton.Caption = KajuLocale.kTryAgainButton
 		    dlg.CancelButton.Visible = true
-		    dlg.CancelButton.Caption = "Later"
+		    dlg.CancelButton.Caption = KajuLocale.kLaterButton
 		    dlg.AlternateActionButton.Visible = false
-		    dlg.Message = "An error has occurred. Would you like to try again now or later?"
+		    dlg.Message = KajuLocale.kErrorOccurredMessage
 		    dlg.Explanation = msg
 		    
 		    dim btn as MessageDialogButton = dlg.ShowModal
@@ -362,7 +362,7 @@ Protected Class UpdateChecker
 		  return true
 		  
 		  Exception err as RuntimeException
-		    return not HandleError( kErrorBadUpdateData )
+		    return not HandleError( KajuLocale.kErrorBadUpdateData )
 		    
 		End Function
 	#tag EndMethod
@@ -417,7 +417,7 @@ Protected Class UpdateChecker
 
 	#tag Method, Flags = &h21
 		Private Sub SeparatePacket(raw As String, ByRef firstLine As String, ByRef remainder As String)
-		  // Separate the incoming packet by the EOL when we don't know exactly what 
+		  // Separate the incoming packet by the EOL when we don't know exactly what
 		  // the EOL is.
 		  
 		  dim rx as new RegEx
@@ -568,18 +568,6 @@ Protected Class UpdateChecker
 	#tag EndConstant
 
 	#tag Constant, Name = kAllowUpdateWindow, Type = Double, Dynamic = False, Default = \"&b10000000", Scope = Public
-	#tag EndConstant
-
-	#tag Constant, Name = kErrorBadUpdateData, Type = String, Dynamic = False, Default = \"The update data cannot be read.", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kErrorIncorrectPacketMarker, Type = String, Dynamic = False, Default = \"The update packet signature marker was incorrect.", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kErrorIncorrectPacketSignature, Type = String, Dynamic = False, Default = \"The RSA signature of the update packet cannot be verified.", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kErrorNoUpdateData, Type = String, Dynamic = False, Default = \"No update data was available.", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kPreferencesName, Type = String, Dynamic = False, Default = \"Kaju_Preferences", Scope = Private

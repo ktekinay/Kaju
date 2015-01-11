@@ -23,7 +23,7 @@ Begin Window KajuUpdateWindow
    MinWidth        =   64
    Placement       =   2
    Resizeable      =   False
-   Title           =   "#kWindowTitle"
+   Title           =   "#KajuLocale.kWindowTitle"
    Visible         =   True
    Width           =   800
    Begin HTMLViewer hvNotes
@@ -52,7 +52,7 @@ Begin Window KajuUpdateWindow
       Bold            =   False
       ButtonStyle     =   "0"
       Cancel          =   False
-      Caption         =   "#kInstallButton"
+      Caption         =   "#KajuLocale.kInstallButton"
       Default         =   True
       Enabled         =   True
       Height          =   20
@@ -83,7 +83,7 @@ Begin Window KajuUpdateWindow
       Bold            =   False
       ButtonStyle     =   "0"
       Cancel          =   True
-      Caption         =   "#kRemindMeLaterButton"
+      Caption         =   "#KajuLocale.kRemindMeLaterButton"
       Default         =   False
       Enabled         =   True
       Height          =   20
@@ -114,7 +114,7 @@ Begin Window KajuUpdateWindow
       Bold            =   False
       ButtonStyle     =   "0"
       Cancel          =   False
-      Caption         =   "#kSkipVersionButton"
+      Caption         =   "#KajuLocale.kSkipVersionButton"
       Default         =   False
       Enabled         =   True
       Height          =   20
@@ -230,7 +230,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   7
       TabPanelIndex   =   0
-      Text            =   "#kReleaseNotesLabel"
+      Text            =   "#KajuLocale.kReleaseNotesLabel"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "SmallSystem"
@@ -264,7 +264,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
-      Text            =   "Downloading..."
+      Text            =   "#KajuLocale.kDownloadingMessage"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
@@ -302,6 +302,7 @@ Begin Window KajuUpdateWindow
       CertificatePassword=   ""
       CertificateRejectionFile=   
       ConnectionType  =   2
+      ForceSecure     =   False
       Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
@@ -372,7 +373,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   10
       TabPanelIndex   =   0
-      Text            =   "#kVersionsLabel"
+      Text            =   "#KajuLocale.kVersionsLabel"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "SmallSystem"
@@ -410,7 +411,7 @@ Begin Window KajuUpdateWindow
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   84
+      Top             =   87
       Underline       =   False
       Visible         =   True
       Width           =   101
@@ -545,22 +546,6 @@ End
 		  reverse.SortWith( updates )
 		  
 		  //
-		  // Set up the labels
-		  //
-		  
-		  if Updates.Ubound = 0 then
-		    lblMain.Text = kMainNoticeOne
-		    lblSecondary.Text = kSecondaryNoticeOne
-		    lblSecondary.Text = lblSecondary.Text.ReplaceAll( kNewVersionMarker, Updates( 0 ).Version )
-		  else
-		    lblMain.Text = kMainNoticeMultiple
-		    lblSecondary.Text = kSecondaryNoticeMultiple
-		  end if
-		  
-		  lblMain.Text = lblMain.Text.ReplaceAll( kAppMarker, AppName )
-		  lblSecondary.Text = lblSecondary.Text.ReplaceAll( kThisVersionMarker, Kaju.AppVersionString )
-		  
-		  //
 		  // Set up the menu with the available updates.
 		  // It will set up the rest of the controls.
 		  //
@@ -592,6 +577,21 @@ End
 		  //
 		  
 		  self.Loading = true
+		  
+		  //
+		  // Set up the main labels
+		  //
+		  AppName = update.AppName
+		  if pumUpdates.ListCount = 1 then
+		    lblSecondary.Text = KajuLocale.kSecondaryNoticeOne
+		    lblSecondary.Text = lblSecondary.Text.ReplaceAll( KajuLocale.kNewVersionMarker, update.Version )
+		  else
+		    lblSecondary.Text = KajuLocale.kSecondaryNoticeMultiple
+		  end if
+		  
+		  lblMain.Text = KajuLocale.kMainNotice
+		  lblMain.Text = lblMain.Text.ReplaceAll( KajuLocale.kAppMarker, AppName )
+		  lblSecondary.Text = lblSecondary.Text.ReplaceAll( KajuLocale.kThisVersionMarker, Kaju.AppVersionString )
 		  
 		  //
 		  // Get the background picture, if any
@@ -638,7 +638,7 @@ End
 		  //
 		  dim source as string = update.ReleaseNotes
 		  if source = "" then
-		    source = "<b>NO UPDATE INFORMATION</b>"
+		    source = "<b>" + KajuLocale.kNoUpdateInfoMessage + "</b>"
 		  end if
 		  
 		  static tempFile as FolderItem = GetTemporaryFolderItem
@@ -668,7 +668,7 @@ End
 	#tag Method, Flags = &h21
 		Private Sub ShowError(msg As String = "")
 		  if msg.Trim = "" then
-		    msg = kGenericErrorMessage
+		    msg = KajuLocale.kGenericErrorMessage
 		  end if
 		  
 		  lblInstallMessage.Visible = true
@@ -676,7 +676,7 @@ End
 		  pbProgress.Visible = false
 		  
 		  btnOK.Enabled = false
-		  btnCancel.Caption = kTryLaterButton
+		  btnCancel.Caption = KajuLocale.kTryLaterButton
 		  btnSkipVersion.Visible = false
 		  
 		  CurrentStage = Stage.UpdateError
@@ -706,7 +706,7 @@ End
 		#tag Getter
 			Get
 			  if mAppName = "" then
-			    mAppName = kThisApplication
+			    mAppName = KajuLocale.kThisApplication
 			  end if
 			  
 			  return mAppName
@@ -783,85 +783,6 @@ End
 	#tag EndProperty
 
 
-	#tag Constant, Name = kAppMarker, Type = String, Dynamic = False, Default = \"<<AppName>>", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kBadDownloadMessage, Type = String, Dynamic = False, Default = \"The downloaded file appears to be corrupted.", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kCancelButton, Type = String, Dynamic = False, Default = \"&Cancel", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kDownloadingMessage, Type = String, Dynamic = False, Default = \"Downloading...", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kDryRunMessage, Type = String, Dynamic = False, Default = \"(Dry run\x2C not really installing)", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kGenericErrorMessage, Type = String, Dynamic = False, Default = \"An error has occurred.", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kInstallButton, Type = String, Dynamic = False, Default = \"Install Update", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kMainNoticeMultiple, Type = String, Dynamic = False, Default = \"New versions of <<AppName>> are available!", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kMainNoticeOne, Type = String, Dynamic = False, Default = \"A new version of <<AppName>> is available!", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kNewVersionMarker, Type = String, Dynamic = False, Default = \"<<NewVersion>>", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kPaymentRequiredMessage, Type = String, Dynamic = False, Default = \"This update is not free and will require payment. Proceed anyway\?", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kProceedButton, Type = String, Dynamic = False, Default = \"Proceed", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kProcessingFileMessage, Type = String, Dynamic = False, Default = \"Processing file...", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kQuitButton, Type = String, Dynamic = False, Default = \"Quit && Install", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kReadyMessage, Type = String, Dynamic = False, Default = \"Ready to install", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kReleaseNotesLabel, Type = String, Dynamic = False, Default = \"Release Notes:", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kRemindMeLaterButton, Type = String, Dynamic = False, Default = \"Remind Me Later", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kSecondaryNoticeMultiple, Type = String, Dynamic = False, Default = \"You have version <<ThisVersion>> and there are multiple updates available. Install one\?", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kSecondaryNoticeOne, Type = String, Dynamic = False, Default = \"You have version <<ThisVersion>>. Would you like to install version <<NewVersion>>\?", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kSkipVersionButton, Type = String, Dynamic = False, Default = \"Skip Version", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kStopButton, Type = String, Dynamic = False, Default = \"Stop", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kThisApplication, Type = String, Dynamic = False, Default = \"this application", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kThisVersionMarker, Type = String, Dynamic = False, Default = \"<<ThisVersion>>", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kTryLaterButton, Type = String, Dynamic = False, Default = \"Try Later", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kVersionsLabel, Type = String, Dynamic = False, Default = \"Available Versions:", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kWindowTitle, Type = String, Dynamic = False, Default = \"Update Available", Scope = Private
-	#tag EndConstant
-
-
 	#tag Enum, Name = Stage, Type = Integer, Flags = &h21
 		ChoosingUpdate
 		  InstallingUpdate
@@ -911,9 +832,9 @@ End
 		      if chosen.RequiresPayment then
 		        dim dlg as new MessageDialog
 		        dlg.ActionButton.Visible = true
-		        dlg.ActionButton.Caption = kProceedButton
+		        dlg.ActionButton.Caption = KajuLocale.kProceedButton
 		        dlg.CancelButton.Visible = true
-		        dlg.Message = kPaymentRequiredMessage
+		        dlg.Message = KajuLocale.kPaymentRequiredMessage
 		        dim btn as MessageDialogButton = dlg.ShowModalWithin( self )
 		        
 		        if btn is dlg.CancelButton then
@@ -925,7 +846,7 @@ End
 		    
 		    btnOK.Enabled = false
 		    
-		    btnCancel.Caption = kStopButton
+		    btnCancel.Caption = KajuLocale.kStopButton
 		    
 		    btnSkipVersion.Visible = false
 		    pbProgress.Visible = true
@@ -937,11 +858,11 @@ End
 		    
 		    if Checker.DryRun then
 		      
-		      lblInstallMessage.Text = kDryRunMessage
+		      lblInstallMessage.Text = KajuLocale.kDryRunMessage
 		      
 		    else
 		      
-		      lblInstallMessage.Text = kDownloadingMessage
+		      lblInstallMessage.Text = KajuLocale.kDownloadingMessage
 		      
 		      dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
 		      DeleteOnCancel.Append tempFolder
@@ -1011,9 +932,10 @@ End
 		  dim info as Kaju.UpdateInformation = pumUpdates.RowTag( pumUpdates.ListIndex )
 		  
 		  if info.MinimumRequiredVersion <> "" and _
-		    Kaju.VersionToDouble( Kaju.AppVersionString ) < Kaju.VersionToDouble( info.MinimumRequiredVersion )  then
-		    
-		    MsgBox "You cannot skip versions until you have updated to version " + info.MinimumRequiredVersion + " or beyond."
+		    Kaju.VersionToDouble( Kaju.AppVersionString ) < Kaju.VersionToDouble( info.MinimumRequiredVersion ) then
+		    dim msg as string = KajuLocale.kCannotSkipVersionsMessage
+		    msg = msg.ReplaceAll( KajuLocale.kVersionMarker, info.MinimumRequiredVersion )
+		    MsgBox msg
 		    
 		  else
 		    
@@ -1067,14 +989,14 @@ End
 		    
 		  elseif Kaju.HashOfFile( file ) <> SelectedUpdate.PlatformBinary.Hash then
 		    
-		    ShowError( kBadDownloadMessage )
+		    ShowError( KajuLocale.kBadDownloadMessage )
 		    
 		  else
 		    //
 		    // We have the file and it appears to be good
 		    //
 		    
-		    lblInstallMessage.Text = kProcessingFileMessage
+		    lblInstallMessage.Text = KajuLocale.kProcessingFileMessage
 		    
 		    dim targetFolder as FolderItem
 		    #if TargetWin32 then
@@ -1150,14 +1072,14 @@ End
 		      Initiater.ReplacementExecutableName = SelectedUpdate.PlatformBinary.ExecutableName
 		      
 		      btnOK.Enabled = true
-		      btnOK.Caption = kQuitButton
+		      btnOK.Caption = KajuLocale.kQuitButton
 		      btnCancel.Visible = true
-		      btnCancel.Caption = kCancelButton
+		      btnCancel.Caption = KajuLocale.kCancelButton
 		      
 		      pbProgress.Visible = false
 		      
 		      lblInstallMessage.Visible = true
-		      lblInstallMessage.Text = kReadyMessage
+		      lblInstallMessage.Text = KajuLocale.kReadyMessage
 		      
 		      CurrentStage = Stage.WaitingToQuit
 		      

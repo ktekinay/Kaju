@@ -6,17 +6,17 @@ Inherits Kaju.Information
 		  dim r as boolean
 		  
 		  if not r and Hash.Trim = "" then
-		    reason = "Missing Hash"
+		    reason = KajuLocale.kMissingReason + " Hash"
 		    r = true
 		  end if
 		  
 		  if not r and URL.Trim = "" then
-		    reason = "Missing URL"
+		    reason = KajuLocale.kMissingReason + " URL"
 		    r = true
 		  end if
 		  
 		  if not r and IsExecutableNameRequired and ExecutableName.Trim = "" then
-		    reason = "Missing Executable Name"
+		    reason = KajuLocale.kMissingReason + " Executable Name"
 		    r = true
 		  end if
 		  
@@ -120,6 +120,11 @@ Inherits Kaju.Information
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IsValid"
+			Group="Behavior"
+			Type="Boolean"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
