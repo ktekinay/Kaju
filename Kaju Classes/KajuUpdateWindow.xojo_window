@@ -230,7 +230,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   7
       TabPanelIndex   =   0
-      Text            =   "#KajuLocale.#kReleaseNotesLabel"
+      Text            =   "#KajuLocale.kReleaseNotesLabel"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "SmallSystem"
