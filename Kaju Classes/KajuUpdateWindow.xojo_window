@@ -23,7 +23,7 @@ Begin Window KajuUpdateWindow
    MinWidth        =   64
    Placement       =   2
    Resizeable      =   False
-   Title           =   "#kWindowTitle"
+   Title           =   "#KajuLocale.kWindowTitle"
    Visible         =   True
    Width           =   800
    Begin HTMLViewer hvNotes
@@ -52,7 +52,7 @@ Begin Window KajuUpdateWindow
       Bold            =   False
       ButtonStyle     =   "0"
       Cancel          =   False
-      Caption         =   "#kInstallButton"
+      Caption         =   "#KajuLocale.kInstallButton"
       Default         =   True
       Enabled         =   True
       Height          =   20
@@ -83,7 +83,7 @@ Begin Window KajuUpdateWindow
       Bold            =   False
       ButtonStyle     =   "0"
       Cancel          =   True
-      Caption         =   "#kRemindMeLaterButton"
+      Caption         =   "#KajuLocale.kRemindMeLaterButton"
       Default         =   False
       Enabled         =   True
       Height          =   20
@@ -114,7 +114,7 @@ Begin Window KajuUpdateWindow
       Bold            =   False
       ButtonStyle     =   "0"
       Cancel          =   False
-      Caption         =   "#kSkipVersionButton"
+      Caption         =   "#KajuLocale.kSkipVersionButton"
       Default         =   False
       Enabled         =   True
       Height          =   20
@@ -230,7 +230,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   7
       TabPanelIndex   =   0
-      Text            =   "#kReleaseNotesLabel"
+      Text            =   "#KajuLocale.#kReleaseNotesLabel"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "SmallSystem"
@@ -264,7 +264,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
-      Text            =   "#kDownloadingMessage"
+      Text            =   "#KajuLocale.kDownloadingMessage"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
@@ -373,7 +373,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   10
       TabPanelIndex   =   0
-      Text            =   "#kVersionsLabel"
+      Text            =   "#KajuLocale.kVersionsLabel"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "SmallSystem"
@@ -411,7 +411,7 @@ Begin Window KajuUpdateWindow
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   84
+      Top             =   87
       Underline       =   False
       Visible         =   True
       Width           =   101
