@@ -264,7 +264,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
-      Text            =   "Downloading..."
+      Text            =   "#kDownloadingMessage"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
