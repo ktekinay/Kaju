@@ -18,7 +18,7 @@ Protected Module KajuLocale
 	#tag EndConstant
 
 	#tag Constant, Name = kBinaryInfoInvalidReason, Type = String, Dynamic = True, Default = \"Binary information is not valid", Scope = Protected
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Bin\xC3\xA4re Informationen sind nicht valide"
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Bin\xC3\xA4re Informationen sind ung\xC3\xBCltig"
 		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Les informations binaires du fichier ne sont pas valides"
 	#tag EndConstant
 
@@ -28,7 +28,7 @@ Protected Module KajuLocale
 	#tag EndConstant
 
 	#tag Constant, Name = kCannotSkipVersionsMessage, Type = String, Dynamic = True, Default = \"You cannot skip versions until you have updated to version <<Version>> or beyond.", Scope = Protected
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sie k\xC3\xB6nnen keine Versionen \xC3\xBCberspringen bevor Sie nicht mindestens <<Version>> oder h\xC3\xB6her installiert haben."
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sie k\xC3\xB6nnen keine Version \xC3\xBCberspringen bevor Sie nicht mindestens <<Version>> oder h\xC3\xB6her installiert haben."
 		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Vous ne pouvez pas sautter cette version avant d\'avoir mis \xC3\xA0 jour en <<Version>> ou sup\xC3\xA9rieur."
 	#tag EndConstant
 
@@ -38,7 +38,7 @@ Protected Module KajuLocale
 	#tag EndConstant
 
 	#tag Constant, Name = kDryRunMessage, Type = String, Dynamic = True, Default = \"(Dry run\x2C not really installing)", Scope = Protected
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"(Testlauf\x2C keine wirkliche Installation)"
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"(Testlauf\x2C keine Installation)"
 		#Tag Instance, Platform = Any, Language = fr, Definition  = \"(Essai\x2C pas d\'installation)"
 	#tag EndConstant
 
@@ -92,7 +92,8 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Le nom de l\'application est manquant"
 	#tag EndConstant
 
-	#tag Constant, Name = kMissingReason, Type = String, Dynamic = False, Default = \"Missing", Scope = Protected
+	#tag Constant, Name = kMissingReason, Type = String, Dynamic = True, Default = \"Missing", Scope = Protected
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Fehlt"
 	#tag EndConstant
 
 	#tag Constant, Name = kNewVersionMarker, Type = String, Dynamic = False, Default = \"<<NewVersion>>", Scope = Protected
@@ -144,7 +145,7 @@ Protected Module KajuLocale
 	#tag EndConstant
 
 	#tag Constant, Name = kSecondaryNoticeOne, Type = String, Dynamic = True, Default = \"You have version <<ThisVersion>>. Would you like to install version <<NewVersion>>\?", Scope = Protected
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sie haben Version <<ThisVersion>>. M\xC3\xB6chten Sie die Version <<NewVersion>> installieren\?"
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sie haben Version <<ThisVersion>>. M\xC3\xB6chten Sie Version <<NewVersion>> installieren\?"
 		#Tag Instance, Platform = Any, Language = Default, Definition  = \"Vous utilisez la version <<ThisVersion>>. Voulez-vous installer la version <<NewVersion>> \?"
 	#tag EndConstant
 
@@ -182,7 +183,7 @@ Protected Module KajuLocale
 	#tag EndConstant
 
 	#tag Constant, Name = kVersionMustBeInFormReason, Type = String, Dynamic = True, Default = \"Version must be in one of these forms", Scope = Protected
-		#Tag Instance, Platform = Any, Language = de, Definition  = \"Version muss in einer der folgenden Formen eingegeben werden"
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Version muss in einem der folgenden Formate eingegeben werden"
 		#Tag Instance, Platform = Any, Language = fr, Definition  = \"La version doit \xC3\xAAtre dans une de ces formes"
 	#tag EndConstant
 
