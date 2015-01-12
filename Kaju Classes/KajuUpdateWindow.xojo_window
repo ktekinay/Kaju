@@ -416,6 +416,18 @@ Begin Window KajuUpdateWindow
       Visible         =   True
       Width           =   101
    End
+   Begin Timer tmrTimeout
+      Height          =   32
+      Index           =   -2147483648
+      Left            =   0
+      LockedInPosition=   False
+      Mode            =   0
+      Period          =   5000
+      Scope           =   0
+      TabPanelIndex   =   0
+      Top             =   0
+      Width           =   32
+   End
 End
 #tag EndWindow
 
