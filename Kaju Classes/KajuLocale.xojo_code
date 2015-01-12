@@ -170,7 +170,7 @@ Protected Module KajuLocale
 
 	#tag Constant, Name = kTimedOutMessage, Type = String, Dynamic = False, Default = \"The operation has timed out.", Scope = Protected
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Der Vorgang wurde wegen Zeit\xC3\xBCberschreitung abgebrochen."
-		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Le serveur ne r\xC3\xA9pond pas."
+		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Maximum d\xC3\xA9lai expir\xC3\xA9."
 	#tag EndConstant
 
 	#tag Constant, Name = kTryAgainButton, Type = String, Dynamic = True, Default = \"Try Again", Scope = Protected
