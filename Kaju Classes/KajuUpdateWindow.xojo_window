@@ -416,6 +416,19 @@ Begin Window KajuUpdateWindow
       Visible         =   True
       Width           =   101
    End
+   Begin Timer tmrTimeout
+      Height          =   32
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Left            =   0
+      LockedInPosition=   False
+      Mode            =   0
+      Period          =   5000
+      Scope           =   0
+      TabPanelIndex   =   0
+      Top             =   0
+      Width           =   32
+   End
 End
 #tag EndWindow
 
@@ -511,6 +524,8 @@ End
 		  if shZipper.IsRunning then
 		    shZipper.Close
 		  end if
+		  
+		  tmrTimeout.Mode = Timer.ModeOff
 		  
 		  if Checker.QuitOnCancelIfRequired and Checker.Result = Kaju.UpdateChecker.ResultType.RequiredUpdateAvailable then
 		    quit
@@ -882,6 +897,12 @@ End
 		      //
 		      hsSocket.Get( url, DownloadFile )
 		      
+		      //
+		      // Start the timeout timer
+		      //
+		      tmrTimeout.Reset
+		      tmrTimeout.Mode = Timer.ModeSingle
+		      
 		    end if
 		    
 		  case Stage.WaitingToQuit
@@ -967,6 +988,7 @@ End
 		  pbProgress.Maximum = totalBytes
 		  pbProgress.Value = bytesReceived
 		  
+		  tmrTimeout.Reset
 		  
 		  #pragma unused newData
 		End Sub
@@ -982,6 +1004,8 @@ End
 		  
 		  pbProgress.Maximum = -1
 		  pbProgress.Value = 0
+		  
+		  tmrTimeout.Mode = Timer.ModeOff
 		  
 		  if httpStatus <> 200 then
 		    
@@ -1127,6 +1151,18 @@ End
 		  
 		  dim update as Kaju.UpdateInformation = me.RowTag( me.ListIndex )
 		  DisplayVersionInfo( update )
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events tmrTimeout
+	#tag Event
+		Sub Action()
+		  if hsSocket.IsConnected then
+		    hsSocket.Disconnect
+		  end if
+		  
+		  ShowError( KajuLocale.kTimedOutMessage )
 		  
 		End Sub
 	#tag EndEvent

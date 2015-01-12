@@ -137,6 +137,9 @@ Protected Module KajuLocale
 	#tag Constant, Name = kThisVersionMarker, Type = String, Dynamic = False, Default = \"<<ThisVersion>>", Scope = Protected
 	#tag EndConstant
 
+	#tag Constant, Name = kTimedOutMessage, Type = String, Dynamic = False, Default = \"The operation has timed out.", Scope = Protected
+	#tag EndConstant
+
 	#tag Constant, Name = kTryAgainButton, Type = String, Dynamic = True, Default = \"Try Again", Scope = Protected
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Erneut versuchen"
 	#tag EndConstant
