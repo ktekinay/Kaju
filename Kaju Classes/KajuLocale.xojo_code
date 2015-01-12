@@ -92,8 +92,9 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Le nom de l\'application est manquant"
 	#tag EndConstant
 
-	#tag Constant, Name = kMissingReason, Type = String, Dynamic = True, Default = \"Missing", Scope = Protected
+	#tag Constant, Name = kMissingReason, Type = String, Dynamic = False, Default = \"Missing", Scope = Protected
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Fehlt"
+		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Manquant"
 	#tag EndConstant
 
 	#tag Constant, Name = kNewVersionMarker, Type = String, Dynamic = False, Default = \"<<NewVersion>>", Scope = Protected
@@ -156,6 +157,7 @@ Protected Module KajuLocale
 
 	#tag Constant, Name = kStopButton, Type = String, Dynamic = True, Default = \"Stop", Scope = Protected
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Stopp"
+		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Stop"
 	#tag EndConstant
 
 	#tag Constant, Name = kThisApplication, Type = String, Dynamic = True, Default = \"this application", Scope = Protected
@@ -167,6 +169,8 @@ Protected Module KajuLocale
 	#tag EndConstant
 
 	#tag Constant, Name = kTimedOutMessage, Type = String, Dynamic = False, Default = \"The operation has timed out.", Scope = Protected
+		#Tag Instance, Platform = Any, Language = de, Definition  = \"Der Vorgang wurde wegen Zeit\xC3\xBCberschreitung abgebrochen."
+		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Maximum d\xC3\xA9lai expir\xC3\xA9."
 	#tag EndConstant
 
 	#tag Constant, Name = kTryAgainButton, Type = String, Dynamic = True, Default = \"Try Again", Scope = Protected
