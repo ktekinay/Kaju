@@ -336,4 +336,6 @@ Add a translation for each, then submit a pull request as outlined above.
 1.2
 
 - Added timeout timer for downloads.
+- Fixed transparency issue on Windows.
+- Fixed some German translations.
 - Added French translation.
