@@ -7,20 +7,20 @@
       "ReleaseNotes":"<p>This is a fake update for v.1.1 (10). It will really point to a binary of 1.0. (This demonstrates the use of the optional build number for final versions.)<\/p>\n\r<p>In other words, the app will replace itself.<\/p>\n\n<p><b>NOTE<\/b>: The update will warn you that the update will require a payment. <u>THIS IS A LIE!!<\/u> It’s only set that way to test the “Requires Payment” option.<\/p>\n\n<h3>Changes<\/h3>\n<ul>\n<li>There really aren’t any.<\/li>\n<li>This is just here as a placeholder.<\/li>\n<\/ul>",
       "ImageURL":"",
       "UseTransparency":false,
-      "MinimumRequiriedVersion":"",
+      "MinimumRequiredVersion":"",
       "AppName":"Kaju Update Test",
       "RequiresPayment":true,
       "MacBinary":{
-        "Hash":"770CBE477DFB2F24040697997835CE00",
+        "Hash":"2C80536567D2B90B74F7ED56F746AA30",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip"
       },
       "WindowsBinary":{
-        "Hash":"DAE0E76052F66DDB4784E01830A02D14",
+        "Hash":"851D6E8018EF28F7243A3E77B4F4C7EA",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win.zip",
         "ExecutableName":"Kaju Update Test.exe"
       },
       "LinuxBinary":{
-        "Hash":"070DF4E3FC0B42F646999C613EE2B2F8",
+        "Hash":"CFD0758AD8365C6940419A52B2AB1ECC",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux.zip",
         "ExecutableName":"Kaju Update Test"
       }
@@ -30,20 +30,20 @@
       "ReleaseNotes":"<p>A phony development version pointing to the same binary. Meant as a placeholder to demonstrate multiple versions.<\/p>\n\n<p>Note that this version has a name change.<\/p>",
       "ImageURL":"",
       "UseTransparency":false,
-      "MinimumRequiriedVersion":"",
+      "MinimumRequiredVersion":"",
       "AppName":"New Kaju Update Test",
       "RequiresPayment":false,
       "MacBinary":{
-        "Hash":"770CBE477DFB2F24040697997835CE00",
+        "Hash":"2C80536567D2B90B74F7ED56F746AA30",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip"
       },
       "WindowsBinary":{
-        "Hash":"DAE0E76052F66DDB4784E01830A02D14",
+        "Hash":"851D6E8018EF28F7243A3E77B4F4C7EA",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win.zip",
         "ExecutableName":"Kaju Update Test.exe"
       },
       "LinuxBinary":{
-        "Hash":"070DF4E3FC0B42F646999C613EE2B2F8",
+        "Hash":"CFD0758AD8365C6940419A52B2AB1ECC",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux.zip",
         "ExecutableName":"Kaju Update Test"
       }
@@ -53,20 +53,20 @@
       "ReleaseNotes":"<p>A phony alpha pointing to the same binary. Meant as a placeholder to demonstrate multiple versions.<\/p>",
       "ImageURL":"",
       "UseTransparency":false,
-      "MinimumRequiriedVersion":"",
+      "MinimumRequiredVersion":"",
       "AppName":"Kaju Update Test",
       "RequiresPayment":false,
       "MacBinary":{
-        "Hash":"770CBE477DFB2F24040697997835CE00",
+        "Hash":"2C80536567D2B90B74F7ED56F746AA30",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip"
       },
       "WindowsBinary":{
-        "Hash":"DAE0E76052F66DDB4784E01830A02D14",
+        "Hash":"851D6E8018EF28F7243A3E77B4F4C7EA",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win.zip",
         "ExecutableName":"Kaju Update Test.exe"
       },
       "LinuxBinary":{
-        "Hash":"070DF4E3FC0B42F646999C613EE2B2F8",
+        "Hash":"CFD0758AD8365C6940419A52B2AB1ECC",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux.zip",
         "ExecutableName":"Kaju Update Test"
       }
@@ -76,7 +76,7 @@
       "ReleaseNotes":"<p>A phony beta pointing to the same binary. Meant as a placeholder to demonstrate multiple versions.<\/p>\n\n<p><b>IMPORTANT<\/b>: The URL’s for the binaries have been intentionally switched to test the hash function. Attempting to update to this version should result in an error.<\/b>",
       "ImageURL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Some_Image_beta.png",
       "UseTransparency":true,
-      "MinimumRequiriedVersion":"",
+      "MinimumRequiredVersion":"",
       "AppName":"Kaju Update Test",
       "RequiresPayment":false,
       "MacBinary":{
@@ -99,20 +99,20 @@
       "ReleaseNotes":"<p>A fake release that should never appear. (Except in Preview.)<\/p>",
       "ImageURL":"",
       "UseTransparency":false,
-      "MinimumRequiriedVersion":"",
+      "MinimumRequiredVersion":"",
       "AppName":"Kaju Update Test",
       "RequiresPayment":false,
       "MacBinary":{
-        "Hash":"770CBE477DFB2F24040697997835CE00",
+        "Hash":"2C80536567D2B90B74F7ED56F746AA30",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip"
       },
       "WindowsBinary":{
-        "Hash":"DAE0E76052F66DDB4784E01830A02D14",
+        "Hash":"851D6E8018EF28F7243A3E77B4F4C7EA",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win.zip",
         "ExecutableName":"Kaju Update Test.exe"
       },
       "LinuxBinary":{
-        "Hash":"070DF4E3FC0B42F646999C613EE2B2F8",
+        "Hash":"CFD0758AD8365C6940419A52B2AB1ECC",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux.zip",
         "ExecutableName":"Kaju Update Test"
       }
