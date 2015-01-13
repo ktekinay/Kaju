@@ -349,3 +349,7 @@ Add a translation for each, then submit a pull request as outlined above.
 
 - Final versions can use the non-release number as a build number.
 - Fixed translations that were marked as "default".
+
+1.3.1 (Jan. 13, 2015)
+
+- Fixed bug that prevented MinimumRequiredVersion from working.
