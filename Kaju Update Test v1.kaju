@@ -7,7 +7,7 @@
       "ReleaseNotes":"<p>This is a fake update for v.1.1 (10). It will really point to a binary of 1.0. (This demonstrates the use of the optional build number for final versions.)<\/p>\n\r<p>In other words, the app will replace itself.<\/p>\n\n<p><b>NOTE<\/b>: The update will warn you that the update will require a payment. <u>THIS IS A LIE!!<\/u> It’s only set that way to test the “Requires Payment” option.<\/p>\n\n<h3>Changes<\/h3>\n<ul>\n<li>There really aren’t any.<\/li>\n<li>This is just here as a placeholder.<\/li>\n<\/ul>",
       "ImageURL":"",
       "UseTransparency":false,
-      "MinimumRequiriedVersion":"",
+      "MinimumRequiriedVersion":"1.2b2",
       "AppName":"Kaju Update Test",
       "RequiresPayment":true,
       "MacBinary":{
