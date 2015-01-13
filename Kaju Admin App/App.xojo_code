@@ -31,9 +31,11 @@ Inherits Application
 		  r = Kaju.VersionToDouble( "1.2b3" )
 		  r = Kaju.VersionToDouble( "1.2" )
 		  r = Kaju.VersionToDouble( "1.3.999d777" )
+		  r = Kaju.VersionToDouble( "1.4 (45)" )
 		  
 		  dim vers as string = Kaju.AppVersionString
 		  vers = Kaju.VersionStringFor( 1, 3, 44 )
+		  vers = Kaju.VersionStringFor( 1, 4, 0, App.Final, 22 )
 		  
 		  'u.TestUpdate( kTestJSON1 )
 		  'u.TestUpdate( kTestJSON2 )

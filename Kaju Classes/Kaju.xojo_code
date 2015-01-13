@@ -221,7 +221,14 @@ Protected Module Kaju
 		  end if
 		  dim version as string = join( parts, "." )
 		  
-		  if stageCode <> App.Final then
+		  if stageCode = App.Final then
+		    
+		    if nonReleaseVersion > 0 then
+		      version = version + " (" + str( nonReleaseVersion ) + ")"
+		    end if
+		    
+		  else
+		    
 		    select case stageCode
 		    case App.Development
 		      version = version + "d"
@@ -244,7 +251,8 @@ Protected Module Kaju
 		  // Assumes that the version will have no more than 3 parts
 		  // (NN.NN.NN) and each part will max out at 999. The version
 		  // may trail with a development, alpha, or beta suffix, and that
-		  // part will max out at 999.
+		  // part will max out at 999. If a final, it may trail with a build 
+		  // number.
 		  //
 		  // Examples:
 		  //  1.2
@@ -253,6 +261,7 @@ Protected Module Kaju
 		  //  1.3a16
 		  //  1.3d343
 		  //  1.99.9a101
+		  //  1.1.0 (254)
 		  
 		  if version = "" then
 		    return 0.0
@@ -261,7 +270,7 @@ Protected Module Kaju
 		  static rx as RegEx
 		  if rx is nil then
 		    rx = new RegEx
-		    rx.SearchPattern = "(?mi-Us)^([\d.]+)(?:([dab])(\d+))?$"
+		    rx.SearchPattern = "(?mi-Us)^([\d.]+)(?|([dab])(\d+)|( )\((\d+)\))?$"
 		  end if
 		  
 		  dim match as RegExMatch = rx.Search( version )
@@ -300,8 +309,8 @@ Protected Module Kaju
 		    r = r + 0.1 + ( nonRelease.Val / kDivider )
 		  case "b"
 		    r = r + 0.2 + ( nonRelease.Val / kDivider )
-		  else // Release
-		    r = r + 0.4999
+		  case " " // Release
+		    r = r + 0.4 + ( nonRelease.Val / kDivider )
 		  end
 		  
 		  return r

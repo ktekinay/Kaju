@@ -116,6 +116,29 @@
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux.zip",
         "ExecutableName":"Kaju Update Test"
       }
+    },
+    {
+      "Version":"1.1 (45)",
+      "ReleaseNotes":"<p>Demonstrates using a build number.<\/p>",
+      "ImageURL":"",
+      "UseTransparency":false,
+      "MinimumRequiriedVersion":"",
+      "AppName":"Kaju Update Test",
+      "RequiresPayment":false,
+      "MacBinary":{
+        "Hash":"114C37B75F89AE3615F127400CD31EA2",
+        "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip"
+      },
+      "WindowsBinary":{
+        "Hash":"950C04FE1B3CFED190A338DCF4F926A3",
+        "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win.zip",
+        "ExecutableName":"Kaju Test App.exe"
+      },
+      "LinuxBinary":{
+        "Hash":"94B65B5F78351C295E61B4764FCE7B3A",
+        "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux.zip",
+        "ExecutableName":"Kaju Test App"
+      }
     }
   ]
 }
