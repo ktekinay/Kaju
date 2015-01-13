@@ -12,7 +12,7 @@ Inherits Kaju.Information
 		  dim r as boolean
 		  
 		  if not r and rxVersion.Search( Version ) is nil then
-		    reason = KajuLocale.kVersionMustBeInFormReason + ": 1, 1.2, 1.2.3, 1.2d4, 1.2a4, 1.2b4, 1.2.4b4, etc."
+		    reason = KajuLocale.kVersionMustBeInFormReason + ": 1, 1.2, 1.2.3, 1.2d4, 1.2a4, 1.2b4, 1.2.4b4, 1.3.4 (232), etc."
 		    r = true
 		  end if
 		  
