@@ -144,7 +144,7 @@ Protected Module KajuLocale
 	#tag Constant, Name = kQuitButton, Type = String, Dynamic = True, Default = \"Quit && Install", Scope = Protected
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Beenden && Installieren"
 		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Quitter && Installer"
-		#Tag Instance, Platform = Any, Language = Default, Definition  = \"Salir && Instalar"
+		#Tag Instance, Platform = Any, Language = es, Definition  = \"Salir && Instalar"
 	#tag EndConstant
 
 	#tag Constant, Name = kReadyMessage, Type = String, Dynamic = True, Default = \"Ready to install", Scope = Protected
@@ -173,7 +173,7 @@ Protected Module KajuLocale
 
 	#tag Constant, Name = kSecondaryNoticeOne, Type = String, Dynamic = True, Default = \"You have version <<ThisVersion>>. Would you like to install version <<NewVersion>>\?", Scope = Protected
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Sie haben Version <<ThisVersion>>. M\xC3\xB6chten Sie Version <<NewVersion>> installieren\?"
-		#Tag Instance, Platform = Any, Language = Default, Definition  = \"Vous utilisez la version <<ThisVersion>>. Voulez-vous installer la version <<NewVersion>> \?"
+		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Vous utilisez la version <<ThisVersion>>. Voulez-vous installer la version <<NewVersion>> \?"
 		#Tag Instance, Platform = Any, Language = es, Definition  = \"La versi\xC3\xB3n utilizada actualmente es <<ThisVersion>>. \xC2\xBFActualizar a la versi\xC3\xB3n <<NewVersion>>\?"
 	#tag EndConstant
 
