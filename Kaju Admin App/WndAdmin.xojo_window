@@ -918,7 +918,7 @@ Begin Window WndAdmin
          Bold            =   False
          Border          =   True
          CueText         =   ""
-         DataField       =   "MinimumRequiriedVersion"
+         DataField       =   "MinimumRequiredVersion"
          DataSource      =   ""
          Enabled         =   False
          Format          =   ""
