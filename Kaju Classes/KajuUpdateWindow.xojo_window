@@ -527,7 +527,7 @@ End
 		  
 		  tmrTimeout.Mode = Timer.ModeOff
 		  
-		  if Checker.QuitOnCancelIfRequired and Checker.Result = Kaju.UpdateChecker.ResultType.RequiredUpdateAvailable then
+		  if Checker.QuitOnCancelIfRequired and not Checker.DryRun and Checker.Result = Kaju.UpdateChecker.ResultType.RequiredUpdateAvailable then
 		    quit
 		  else
 		    self.Close
