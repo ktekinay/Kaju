@@ -191,7 +191,7 @@ Protected Module KajuLocale
 
 	#tag Constant, Name = kThisApplication, Type = String, Dynamic = True, Default = \"this application", Scope = Protected
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"diese Anwendung"
-		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Cette application"
+		#Tag Instance, Platform = Any, Language = fr, Definition  = \"cette application"
 		#Tag Instance, Platform = Any, Language = es, Definition  = \"esta aplicaci\xC3\xB3n"
 	#tag EndConstant
 
@@ -228,7 +228,7 @@ Protected Module KajuLocale
 	#tag Constant, Name = kVersionsLabel, Type = String, Dynamic = True, Default = \"Available Versions:", Scope = Protected
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Verf\xC3\xBCgbare Versionen:"
 		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Versions disponibles :"
-		#Tag Instance, Platform = Any, Language = es, Definition  = \"Versiones disponibles"
+		#Tag Instance, Platform = Any, Language = es, Definition  = \"Versiones disponibles:"
 	#tag EndConstant
 
 	#tag Constant, Name = kWindowTitle, Type = String, Dynamic = True, Default = \"Update Available", Scope = Protected
