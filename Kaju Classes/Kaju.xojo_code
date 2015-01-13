@@ -221,7 +221,14 @@ Protected Module Kaju
 		  end if
 		  dim version as string = join( parts, "." )
 		  
-		  if stageCode <> App.Final then
+		  if stageCode = App.Final then
+		    
+		    if nonReleaseVersion > 0 then
+		      version = version + " (" + str( nonReleaseVersion ) + ")"
+		    end if
+		    
+		  else
+		    
 		    select case stageCode
 		    case App.Development
 		      version = version + "d"
