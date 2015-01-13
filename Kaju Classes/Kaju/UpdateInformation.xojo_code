@@ -6,7 +6,7 @@ Inherits Kaju.Information
 		  static rxVersion as RegEx
 		  if rxVersion is nil then
 		    rxVersion = new RegEx
-		    rxVersion.SearchPattern = "(?mi-Us)\A\d+(\.\d+){0,2}([dab]\d+)?\z"
+		    rxVersion.SearchPattern = "(?mi-Us)\A\d+(\.\d+){0,2}(?:[dab]\d+|\x20\(\d+\))?\z"
 		  end if
 		  
 		  dim r as boolean
