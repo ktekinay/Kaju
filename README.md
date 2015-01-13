@@ -332,7 +332,7 @@ Add a translation for each, then submit a pull request as outlined above.
 - Moved user-presented strings to KajuLocale module for easier translation.
 - Fixed bug where the app name was not being presented in the Update window.
 - Changed behavior of how the "A never version of..." message is presented in the Update window.
-- German translation.
+- Added German translation.
 
 1.2 (Jan. 12, 2015)
 
@@ -340,3 +340,7 @@ Add a translation for each, then submit a pull request as outlined above.
 - Fixed transparency issue on Windows.
 - Fixed some German translations.
 - Added French translation.
+
+1.2.1 (Jan. 13, 2015)
+
+- Added Spanish translation.
