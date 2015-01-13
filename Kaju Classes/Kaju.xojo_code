@@ -251,7 +251,7 @@ Protected Module Kaju
 		  // Assumes that the version will have no more than 3 parts
 		  // (NN.NN.NN) and each part will max out at 999. The version
 		  // may trail with a development, alpha, or beta suffix, and that
-		  // part will max out at 999. If a final, it may trail with a build 
+		  // part will max out at 999. If a final, it may trail with a build
 		  // number.
 		  //
 		  // Examples:
