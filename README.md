@@ -333,7 +333,7 @@ Add a translation for each, then submit a pull request as outlined above.
 - Changed behavior of how the "A never version of..." message is presented in the Update window.
 - German translation.
 
-1.2
+1.2 (Jan. 12, 2015)
 
 - Added timeout timer for downloads.
 - Fixed transparency issue on Windows.
