@@ -279,6 +279,7 @@ Translations to other languages by:
 
 * Sascha Schneppmueller (German)
 * Valdemar De SOUSA (French)
+* Julen Ibarretxe Uriguen (Spanish)
 
 With special thanks to [Advanced Medical Pricing Solutions, Inc.](http://www.advancedpricing.com), for making this possible.
 
