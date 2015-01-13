@@ -278,6 +278,7 @@ With thanks to John Hansen and Paul Lefebvre.
 Translations to other languages by:
 
 * Sascha Schneppmueller (German)
+* Valdemar De SOUSA (French)
 
 With special thanks to [Advanced Medical Pricing Solutions, Inc.](http://www.advancedpricing.com), for making this possible.
 
@@ -331,3 +332,10 @@ Add a translation for each, then submit a pull request as outlined above.
 - Fixed bug where the app name was not being presented in the Update window.
 - Changed behavior of how the "A never version of..." message is presented in the Update window.
 - German translation.
+
+1.2 (Jan. 12, 2015)
+
+- Added timeout timer for downloads.
+- Fixed transparency issue on Windows.
+- Fixed some German translations.
+- Added French translation.
