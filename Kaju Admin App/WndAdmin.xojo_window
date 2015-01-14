@@ -1685,37 +1685,6 @@ Begin Window WndAdmin
          Visible         =   False
          Width           =   80
       End
-      Begin PushButton btnWindowsHashFromURL
-         AutoDeactivate  =   True
-         Bold            =   False
-         ButtonStyle     =   "0"
-         Cancel          =   False
-         Caption         =   "From URL"
-         Default         =   False
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   804
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Scope           =   2
-         TabIndex        =   22
-         TabPanelIndex   =   2
-         TabStop         =   True
-         TextFont        =   "SmallSystem"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   356
-         Underline       =   False
-         Visible         =   False
-         Width           =   80
-      End
       Begin PushButton btnLinuxHashFromURL
          AutoDeactivate  =   True
          Bold            =   False
@@ -1743,6 +1712,37 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   503
+         Underline       =   False
+         Visible         =   False
+         Width           =   80
+      End
+      Begin PushButton btnWindowsHashFromURL
+         AutoDeactivate  =   True
+         Bold            =   False
+         ButtonStyle     =   "0"
+         Cancel          =   False
+         Caption         =   "From URL"
+         Default         =   False
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   804
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   24
+         TabPanelIndex   =   2
+         TabStop         =   True
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   358
          Underline       =   False
          Visible         =   False
          Width           =   80
@@ -3111,17 +3111,17 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events btnWindowsHashFromURL
-	#tag Event
-		Sub Action()
-		  HashFromURL( fldWindowsBinaryURL.Text, fldWindowsBinaryHash )
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events btnLinuxHashFromURL
 	#tag Event
 		Sub Action()
 		  HashFromURL( fldLinuxBinaryURL.Text, fldLinuxBinaryHash )
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnWindowsHashFromURL
+	#tag Event
+		Sub Action()
+		  HashFromURL( fldWindowsBinaryURL.Text, fldWindowsBinaryHash )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
