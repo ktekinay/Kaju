@@ -357,3 +357,4 @@ Add a translation for each, then submit a pull request as outlined above.
 1.3.2
 
 - Fixed Admin app bugs.
+- Download progress bar will now update properly on all platforms.
