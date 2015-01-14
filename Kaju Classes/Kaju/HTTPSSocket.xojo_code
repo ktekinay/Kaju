@@ -110,10 +110,10 @@ Inherits HTTPSecureSocket
 		Private Sub SetSecure(url As String)
 		  if ForceSecure or url.Trim.Left( 8 ) = "https://" then
 		    self.Secure = true
-		    self.DefaultPort = 443
+		    self.Port = 443
 		  else
 		    self.Secure = false
-		    self.DefaultPort = 80
+		    self.Port = 80
 		  end if
 		End Sub
 	#tag EndMethod
