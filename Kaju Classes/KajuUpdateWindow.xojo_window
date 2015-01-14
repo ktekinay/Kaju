@@ -1052,6 +1052,18 @@ End
 		  #pragma unused headers
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Error(code as integer)
+		  if me.IsConnected then
+		    me.Disconnect
+		  end if
+		  
+		  tmrTimeout.Mode = Timer.ModeOff
+		  
+		  ShowError( KajuLocale.kGenericErrorMessage + "  (" + str( code ) + ")" )
+		  
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events shZipper
 	#tag Event
