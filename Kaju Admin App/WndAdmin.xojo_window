@@ -2215,7 +2215,7 @@ End
 		  btnBreak.Enabled = trueValue
 		  
 		  //
-		  // GetFromHash buttons
+		  // HashFromURL buttons
 		  //
 		  if cbMacBinary.Enabled and cbMacBinary.Value and fldMacBinaryURL.Text.Trim <> "" then
 		    btnMacHashFromURL.Enabled = trueValue
