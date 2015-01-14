@@ -2844,12 +2844,34 @@ End
 		Private LastVersionRow As Integer = -1
 	#tag EndProperty
 
-	#tag Property, Flags = &h21
-		Private Loading As Boolean
-	#tag EndProperty
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mLoading > 0
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  if value then
+			    mLoading = mLoading + 1
+			  else
+			    mLoading = mLoading - 1
+			    if mLoading < 0 then
+			      mLoading = 0
+			    end if
+			  end if
+			  
+			End Set
+		#tag EndSetter
+		Loading As Boolean
+	#tag EndComputedProperty
 
 	#tag Property, Flags = &h21
 		Private mDocument As FolderItemAlias
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mLoading As Integer
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
