@@ -2964,7 +2964,7 @@ End
 #tag Events fldMacBinaryURL
 	#tag Event
 		Sub TextChange()
-		  btnMacHashFromURL.Enabled = me.Text.Trim <> ""
+		  AdjustControls()
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2986,7 +2986,7 @@ End
 #tag Events fldWindowsBinaryURL
 	#tag Event
 		Sub TextChange()
-		  btnWindowsHashFromURL.Enabled = me.Text.Trim <> ""
+		  AdjustControls()
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -3081,7 +3081,7 @@ End
 #tag Events fldLinuxBinaryURL
 	#tag Event
 		Sub TextChange()
-		  btnLinuxHashFromURL.Enabled = me.Text.Trim <> ""
+		  AdjustControls()
 		End Sub
 	#tag EndEvent
 #tag EndEvents
