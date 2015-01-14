@@ -2541,7 +2541,7 @@ End
 		  url = http.GetRedirectAddress( url, 5 )
 		  
 		  dim file as FolderItem = GetTemporaryFolderItem
-		  dim r as boolean = http.Get( url, file, 5 )
+		  dim r as boolean = http.Get( url, file, 30 )
 		  if not r or http.LastErrorCode <> 0 then
 		    
 		    MsgBox "Could not get the executable from that url: " + str( http.LastErrorCode )
@@ -3370,6 +3370,11 @@ End
 		InitialValue="True"
 		Type="Boolean"
 		EditorType="Boolean"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Loading"
+		Group="Behavior"
+		Type="Boolean"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="MacProcID"
