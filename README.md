@@ -353,3 +353,7 @@ Add a translation for each, then submit a pull request as outlined above.
 1.3.1 (Jan. 13, 2015)
 
 - Fixed bug that prevented MinimumRequiredVersion from working.
+
+1.3.2
+
+- Fixed Admin app bugs.
