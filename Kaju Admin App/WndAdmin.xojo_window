@@ -2181,6 +2181,10 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub AdjustControls()
+		  if self.Loading then
+		    return
+		  end if
+		  
 		  dim trueValue as boolean = lbVersions.ListIndex <> -1
 		  
 		  dim lastIndex as integer = ControlCount - 1
@@ -2601,6 +2605,8 @@ End
 		  
 		  ClearFields()
 		  
+		  self.Loading = true
+		  
 		  dim lastIndex as integer = ControlCount - 1
 		  for i as integer = 0 to lastIndex
 		    dim c as Control = self.Control( i )
@@ -2638,6 +2644,8 @@ End
 		    fldLinuxBinaryHash.Text = binary.Hash
 		    fldLinuxBinaryURL.Text = binary.URL
 		  end if
+		  
+		  self.Loading = false
 		  
 		  AdjustControls()
 		  self.ContentsChanged = savedDirty
