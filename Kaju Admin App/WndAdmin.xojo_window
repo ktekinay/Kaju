@@ -2232,7 +2232,7 @@ End
 		  if cbLinuxBinary.Enabled and cbLinuxBinary.Value and fldLinuxBinaryURL.Text.Trim <> "" then
 		    btnLinuxHashFromURL.Enabled = trueValue
 		  else
-		    btnWindowsHashFromURL.Enabled = false
+		    btnLinuxHashFromURL.Enabled = false
 		  end if
 		  
 		  //
