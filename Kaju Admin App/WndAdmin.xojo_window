@@ -1685,37 +1685,6 @@ Begin Window WndAdmin
          Visible         =   False
          Width           =   80
       End
-      Begin PushButton btnWindowsHashFromURL
-         AutoDeactivate  =   True
-         Bold            =   False
-         ButtonStyle     =   "0"
-         Cancel          =   False
-         Caption         =   "From URL"
-         Default         =   False
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   804
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Scope           =   2
-         TabIndex        =   22
-         TabPanelIndex   =   2
-         TabStop         =   True
-         TextFont        =   "SmallSystem"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   356
-         Underline       =   False
-         Visible         =   False
-         Width           =   80
-      End
       Begin PushButton btnLinuxHashFromURL
          AutoDeactivate  =   True
          Bold            =   False
@@ -1743,6 +1712,37 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   503
+         Underline       =   False
+         Visible         =   False
+         Width           =   80
+      End
+      Begin PushButton btnWindowsHashFromURL
+         AutoDeactivate  =   True
+         Bold            =   False
+         ButtonStyle     =   "0"
+         Cancel          =   False
+         Caption         =   "From URL"
+         Default         =   False
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   804
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   24
+         TabPanelIndex   =   2
+         TabStop         =   True
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   358
          Underline       =   False
          Visible         =   False
          Width           =   80
@@ -2181,6 +2181,10 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub AdjustControls()
+		  if self.Loading then
+		    return
+		  end if
+		  
 		  dim trueValue as boolean = lbVersions.ListIndex <> -1
 		  
 		  dim lastIndex as integer = ControlCount - 1
@@ -2215,7 +2219,7 @@ End
 		  btnBreak.Enabled = trueValue
 		  
 		  //
-		  // GetFromHash buttons
+		  // HashFromURL buttons
 		  //
 		  if cbMacBinary.Enabled and cbMacBinary.Value and fldMacBinaryURL.Text.Trim <> "" then
 		    btnMacHashFromURL.Enabled = trueValue
@@ -2232,7 +2236,7 @@ End
 		  if cbLinuxBinary.Enabled and cbLinuxBinary.Value and fldLinuxBinaryURL.Text.Trim <> "" then
 		    btnLinuxHashFromURL.Enabled = trueValue
 		  else
-		    btnWindowsHashFromURL.Enabled = false
+		    btnLinuxHashFromURL.Enabled = false
 		  end if
 		  
 		  //
@@ -2601,6 +2605,8 @@ End
 		  
 		  ClearFields()
 		  
+		  self.Loading = true
+		  
 		  dim lastIndex as integer = ControlCount - 1
 		  for i as integer = 0 to lastIndex
 		    dim c as Control = self.Control( i )
@@ -2638,6 +2644,8 @@ End
 		    fldLinuxBinaryHash.Text = binary.Hash
 		    fldLinuxBinaryURL.Text = binary.URL
 		  end if
+		  
+		  self.Loading = false
 		  
 		  AdjustControls()
 		  self.ContentsChanged = savedDirty
@@ -2836,12 +2844,34 @@ End
 		Private LastVersionRow As Integer = -1
 	#tag EndProperty
 
-	#tag Property, Flags = &h21
-		Private Loading As Boolean
-	#tag EndProperty
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mLoading > 0
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  if value then
+			    mLoading = mLoading + 1
+			  else
+			    mLoading = mLoading - 1
+			    if mLoading < 0 then
+			      mLoading = 0
+			    end if
+			  end if
+			  
+			End Set
+		#tag EndSetter
+		Loading As Boolean
+	#tag EndComputedProperty
 
 	#tag Property, Flags = &h21
 		Private mDocument As FolderItemAlias
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mLoading As Integer
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -2956,7 +2986,7 @@ End
 #tag Events fldMacBinaryURL
 	#tag Event
 		Sub TextChange()
-		  btnMacHashFromURL.Enabled = me.Text.Trim <> ""
+		  AdjustControls()
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2978,7 +3008,7 @@ End
 #tag Events fldWindowsBinaryURL
 	#tag Event
 		Sub TextChange()
-		  btnWindowsHashFromURL.Enabled = me.Text.Trim <> ""
+		  AdjustControls()
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -3073,7 +3103,7 @@ End
 #tag Events fldLinuxBinaryURL
 	#tag Event
 		Sub TextChange()
-		  btnLinuxHashFromURL.Enabled = me.Text.Trim <> ""
+		  AdjustControls()
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -3111,17 +3141,17 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events btnWindowsHashFromURL
-	#tag Event
-		Sub Action()
-		  HashFromURL( fldWindowsBinaryURL.Text, fldWindowsBinaryHash )
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events btnLinuxHashFromURL
 	#tag Event
 		Sub Action()
 		  HashFromURL( fldLinuxBinaryURL.Text, fldLinuxBinaryHash )
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnWindowsHashFromURL
+	#tag Event
+		Sub Action()
+		  HashFromURL( fldWindowsBinaryURL.Text, fldWindowsBinaryHash )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
