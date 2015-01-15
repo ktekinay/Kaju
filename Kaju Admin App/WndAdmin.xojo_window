@@ -202,6 +202,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   12
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Version:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -336,6 +337,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   2
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   "Preview:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -445,6 +447,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -479,6 +482,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -513,6 +517,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   "Release Notes (HTML):"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -622,6 +627,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   8
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -656,6 +662,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   9
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -722,6 +729,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   13
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -756,6 +764,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   14
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -833,6 +842,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   1
          TabPanelIndex   =   3
+         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -964,6 +974,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   16
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "Minimum Required Version:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1390,6 +1401,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   18
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "Executable:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1467,6 +1479,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   20
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "Executable:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1685,37 +1698,6 @@ Begin Window WndAdmin
          Visible         =   False
          Width           =   80
       End
-      Begin PushButton btnWindowsHashFromURL
-         AutoDeactivate  =   True
-         Bold            =   False
-         ButtonStyle     =   "0"
-         Cancel          =   False
-         Caption         =   "From URL"
-         Default         =   False
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   804
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Scope           =   2
-         TabIndex        =   22
-         TabPanelIndex   =   2
-         TabStop         =   True
-         TextFont        =   "SmallSystem"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   356
-         Underline       =   False
-         Visible         =   False
-         Width           =   80
-      End
       Begin PushButton btnLinuxHashFromURL
          AutoDeactivate  =   True
          Bold            =   False
@@ -1743,6 +1725,37 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   503
+         Underline       =   False
+         Visible         =   False
+         Width           =   80
+      End
+      Begin PushButton btnWindowsHashFromURL
+         AutoDeactivate  =   True
+         Bold            =   False
+         ButtonStyle     =   "0"
+         Cancel          =   False
+         Caption         =   "From URL"
+         Default         =   False
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   804
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   24
+         TabPanelIndex   =   2
+         TabStop         =   True
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   358
          Underline       =   False
          Visible         =   False
          Width           =   80
@@ -1812,6 +1825,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   11
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "App Name:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -1857,7 +1871,8 @@ Begin Window WndAdmin
       Width           =   180
    End
    Begin Timer tmrUpdateReleaseNotesPreview
-      Height          =   32
+      Enabled         =   True
+      Height          =   "32"
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
@@ -1867,7 +1882,8 @@ Begin Window WndAdmin
       Scope           =   2
       TabPanelIndex   =   0
       Top             =   0
-      Width           =   32
+      Visible         =   True
+      Width           =   "32"
    End
    Begin HTMLViewer hvNewWindow
       AutoDeactivate  =   True
@@ -1922,7 +1938,8 @@ Begin Window WndAdmin
       Width           =   186
    End
    Begin Timer tmrUpdateImagePreview
-      Height          =   32
+      Enabled         =   True
+      Height          =   "32"
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   20
@@ -1932,7 +1949,8 @@ Begin Window WndAdmin
       Scope           =   2
       TabPanelIndex   =   0
       Top             =   20
-      Width           =   32
+      Visible         =   True
+      Width           =   "32"
    End
    Begin Label lblPlatform
       AutoDeactivate  =   True
@@ -1956,6 +1974,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   6
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "None"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -1990,6 +2009,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   13
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Platforms:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -2181,6 +2201,10 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub AdjustControls()
+		  if self.Loading then
+		    return
+		  end if
+		  
 		  dim trueValue as boolean = lbVersions.ListIndex <> -1
 		  
 		  dim lastIndex as integer = ControlCount - 1
@@ -2215,7 +2239,7 @@ End
 		  btnBreak.Enabled = trueValue
 		  
 		  //
-		  // GetFromHash buttons
+		  // HashFromURL buttons
 		  //
 		  if cbMacBinary.Enabled and cbMacBinary.Value and fldMacBinaryURL.Text.Trim <> "" then
 		    btnMacHashFromURL.Enabled = trueValue
@@ -2232,7 +2256,7 @@ End
 		  if cbLinuxBinary.Enabled and cbLinuxBinary.Value and fldLinuxBinaryURL.Text.Trim <> "" then
 		    btnLinuxHashFromURL.Enabled = trueValue
 		  else
-		    btnWindowsHashFromURL.Enabled = false
+		    btnLinuxHashFromURL.Enabled = false
 		  end if
 		  
 		  //
@@ -2537,7 +2561,7 @@ End
 		  url = http.GetRedirectAddress( url, 5 )
 		  
 		  dim file as FolderItem = GetTemporaryFolderItem
-		  dim r as boolean = http.Get( url, file, 5 )
+		  dim r as boolean = http.Get( url, file, 30 )
 		  if not r or http.LastErrorCode <> 0 then
 		    
 		    MsgBox "Could not get the executable from that url: " + str( http.LastErrorCode )
@@ -2601,6 +2625,8 @@ End
 		  
 		  ClearFields()
 		  
+		  self.Loading = true
+		  
 		  dim lastIndex as integer = ControlCount - 1
 		  for i as integer = 0 to lastIndex
 		    dim c as Control = self.Control( i )
@@ -2638,6 +2664,8 @@ End
 		    fldLinuxBinaryHash.Text = binary.Hash
 		    fldLinuxBinaryURL.Text = binary.URL
 		  end if
+		  
+		  self.Loading = false
 		  
 		  AdjustControls()
 		  self.ContentsChanged = savedDirty
@@ -2836,12 +2864,34 @@ End
 		Private LastVersionRow As Integer = -1
 	#tag EndProperty
 
-	#tag Property, Flags = &h21
-		Private Loading As Boolean
-	#tag EndProperty
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mLoading > 0
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  if value then
+			    mLoading = mLoading + 1
+			  else
+			    mLoading = mLoading - 1
+			    if mLoading < 0 then
+			      mLoading = 0
+			    end if
+			  end if
+			  
+			End Set
+		#tag EndSetter
+		Loading As Boolean
+	#tag EndComputedProperty
 
 	#tag Property, Flags = &h21
 		Private mDocument As FolderItemAlias
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mLoading As Integer
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -2956,7 +3006,7 @@ End
 #tag Events fldMacBinaryURL
 	#tag Event
 		Sub TextChange()
-		  btnMacHashFromURL.Enabled = me.Text.Trim <> ""
+		  AdjustControls()
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2978,7 +3028,7 @@ End
 #tag Events fldWindowsBinaryURL
 	#tag Event
 		Sub TextChange()
-		  btnWindowsHashFromURL.Enabled = me.Text.Trim <> ""
+		  AdjustControls()
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -3073,7 +3123,7 @@ End
 #tag Events fldLinuxBinaryURL
 	#tag Event
 		Sub TextChange()
-		  btnLinuxHashFromURL.Enabled = me.Text.Trim <> ""
+		  AdjustControls()
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -3111,17 +3161,17 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events btnWindowsHashFromURL
-	#tag Event
-		Sub Action()
-		  HashFromURL( fldWindowsBinaryURL.Text, fldWindowsBinaryHash )
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events btnLinuxHashFromURL
 	#tag Event
 		Sub Action()
 		  HashFromURL( fldLinuxBinaryURL.Text, fldLinuxBinaryHash )
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnWindowsHashFromURL
+	#tag Event
+		Sub Action()
+		  HashFromURL( fldWindowsBinaryURL.Text, fldWindowsBinaryHash )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -3340,6 +3390,11 @@ End
 		InitialValue="True"
 		Type="Boolean"
 		EditorType="Boolean"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Loading"
+		Group="Behavior"
+		Type="Boolean"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="MacProcID"

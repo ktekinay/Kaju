@@ -985,6 +985,18 @@ End
 		    return
 		  end if
 		  
+		  //
+		  // Have to get the value below 65536
+		  //
+		  
+		  const kMaxAllowed = 1000
+		  
+		  if totalBytes > kMaxAllowed then
+		    dim mult as integer = totalBytes \ kMaxAllowed
+		    totalBytes = totalBytes \ mult
+		    bytesReceived = bytesReceived \ mult
+		  end if
+		  
 		  pbProgress.Maximum = totalBytes
 		  pbProgress.Value = bytesReceived
 		  
@@ -1038,6 +1050,18 @@ End
 		  
 		  #pragma unused url
 		  #pragma unused headers
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Error(code as integer)
+		  if me.IsConnected then
+		    me.Disconnect
+		  end if
+		  
+		  tmrTimeout.Mode = Timer.ModeOff
+		  
+		  ShowError( KajuLocale.kGenericErrorMessage + "  (" + str( code ) + ")" )
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
