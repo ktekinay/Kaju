@@ -354,7 +354,7 @@ Add a translation for each, then submit a pull request as outlined above.
 
 - Fixed bug that prevented MinimumRequiredVersion from working.
 
-1.3.2
+1.3.2 (Jan. 15, 2015)
 
 - Fixed Admin app bugs.
 - Download progress bar will now update properly on all platforms.
