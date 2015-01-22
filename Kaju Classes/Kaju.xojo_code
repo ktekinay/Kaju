@@ -309,7 +309,7 @@ Protected Module Kaju
 		    r = r + 0.1 + ( nonRelease.Val / kDivider )
 		  case "b"
 		    r = r + 0.2 + ( nonRelease.Val / kDivider )
-		  case " " // Release
+		  else // Release
 		    r = r + 0.4 + ( nonRelease.Val / kDivider )
 		  end
 		  
