@@ -129,6 +129,7 @@ Protected Class UpdateInitiater
 		  
 		  script = script.ReplaceAll( kMarkerAppName, ShellQuote( executable.Name ) )
 		  script = script.ReplaceAll( kMarkerAppParent, ShellPathQuote( executable.Parent ) )
+		  script = script.ReplaceAll( kMarkerAppVersion, ShellQuote( Kaju.AppVersionString ) )
 		  script = script.ReplaceAll( kMarkerNewAppName, ShellQuote( ReplacementExecutableName ) )
 		  script = script.ReplaceAll( kMarkerNewAppParent, ShellPathQuote( ReplacementAppFolder ) )
 		  script = script.ReplaceAll( kMarkerTempFolder, ShellPathQuote( TempFolder ) )
@@ -209,6 +210,7 @@ Protected Class UpdateInitiater
 		  
 		  script = script.ReplaceAll( kMarkerAppName, ShellQuote( appFolderItem.Name ) )
 		  script = script.ReplaceAll( kMarkerAppParent, ShellPathQuote( appFolderItem.Parent ) )
+		  script = script.ReplaceAll( kMarkerAppVersion, ShellQuote( Kaju.AppVersionString ) )
 		  script = script.ReplaceAll( kMarkerNewAppName, ShellQuote( ReplacementAppFolder.Name ) )
 		  script = script.ReplaceAll( kMarkerNewAppParent, ShellPathQuote( ReplacementAppFolder.Parent ) )
 		  script = script.ReplaceAll( kMarkerTempFolder, ShellPathQuote( TempFolder ) )
@@ -267,6 +269,7 @@ Protected Class UpdateInitiater
 		  
 		  script = script.ReplaceAll( kMarkerAppName, executable.Name )
 		  script = script.ReplaceAll( kMarkerAppParent, ShellPathQuote( executable.Parent ) )
+		  script = script.ReplaceAll( kMarkerAppVersion, ShellQuote( Kaju.AppVersionString ) )
 		  script = script.ReplaceAll( kMarkerNewAppName, ReplacementExecutableName )
 		  script = script.ReplaceAll( kMarkerNewAppParent, ShellPathQuote( ReplacementAppFolder ) )
 		  script = script.ReplaceAll( kMarkerTempFolder, ShellPathQuote( TempFolder ) )
@@ -406,6 +409,9 @@ Protected Class UpdateInitiater
 	#tag EndConstant
 
 	#tag Constant, Name = kMarkerAppParent, Type = String, Dynamic = False, Default = \"@@APP_PARENT@@", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kMarkerAppVersion, Type = String, Dynamic = False, Default = \"@@APP_VERSION@@", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kMarkerDecompressedFolderPath, Type = String, Dynamic = False, Default = \"@@DECOMPRESSED_FOLDER@@", Scope = Private
