@@ -16,6 +16,7 @@ function log_cmd {
 
 APP_NAME=@@APP_NAME@@
 APP_PARENT=@@APP_PARENT@@
+APP_VERSION=@@APP_VERSION@@
 NEW_APP_NAME=@@NEW_APP_NAME@@
 NEW_APP_PARENT=@@NEW_APP_PARENT@@
 TEMP_FOLDER_PATH=@@TEMP_FOLDER@@
@@ -152,10 +153,10 @@ then
 	log_cmd 'Making the new app executable'
 	chmod +x "$APP_PARENT/$NEW_APP_NAME"
 	log_cmd 'Launching new app'
-	"$APP_PARENT/$NEW_APP_NAME"
+	"$APP_PARENT/$NEW_APP_NAME" --kaju-success "$APP_VERSION"
 else
 	log_cmd 'Launching old app'
-	"$APP_PARENT/$APP_NAME"
+	"$APP_PARENT/$APP_NAME" --kaju-fail
 fi
 
 log_cmd  'Removing temp folder'
