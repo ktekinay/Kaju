@@ -8,6 +8,16 @@ Inherits Application
 		    mPrefFolder.CreateAsFolder
 		  end if
 		  
+		  //
+		  // See if this was a launch after an attempted update
+		  //
+		  dim fromVersion as string
+		  if Kaju.DidLastUpdateSucceed( fromVersion ) then
+		    MsgBox "You have successfully updated from version " + fromVersion + "."
+		  elseif Kaju.DidLastUpdateFail then
+		    MsgBox "The last update failed. Please try again."
+		  end if
+		  
 		End Sub
 	#tag EndEvent
 

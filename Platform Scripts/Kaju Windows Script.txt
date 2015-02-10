@@ -6,6 +6,7 @@ REM
 
 SET APP_NAME=@@APP_NAME@@
 SET APP_PARENT=@@APP_PARENT@@
+SET APP_VERSION=@@APP_VERSION@@
 SET NEW_APP_NAME=@@NEW_APP_NAME@@
 SET NEW_APP_PARENT=@@NEW_APP_PARENT@@
 SET TEMP_FOLDER_PATH=@@TEMP_FOLDER@@
@@ -110,7 +111,7 @@ REM
 
 IF %PROCEED% == 1 (
 	ECHO "Copying files from %NEW_APP_PARENT% to folder %APP_PARENT%" >> "%LOGGER%" 2>&1
-	XCOPY /y /e /k "%NEW_APP_PARENT%" "%APP_PARENT%" >> "%LOGGER%" 2>&1
+	XCOPY /g /y /e /k "%NEW_APP_PARENT%" "%APP_PARENT%" >> "%LOGGER%" 2>&1
 	IF %ERRORLEVEL% NEQ 0 (
 		ECHO "...FAILED! (Error %ERRORLEVEL%)" >> "%LOGGER%" 2>&1
 		SET PROCEED=0
@@ -131,7 +132,7 @@ IF %PROCEED% == 1 (
 IF %PROCEED% == 0 (
 	ECHO  "Attempting to restore old application" >> "%LOGGER%" 2>&1
 
-	XCOPY /y /e /k "%BACKUP_PARENT%" "%APP_PARENT%" >> "%LOGGER%" 2>&1
+	XCOPY /g /y /e /k "%BACKUP_PARENT%" "%APP_PARENT%" >> "%LOGGER%" 2>&1
 	IF %ERRORLEVEL% EQU 0 (
 		RMDIR /S /Q "%BACKUP_PARENT%" >> "%LOGGER%" 2>&1
 	)
@@ -155,10 +156,10 @@ REM
 :launch_application
 IF %PROCEED% == 1 (
 	ECHO "Launching new app" >> "%LOGGER%" 2>&1
-	START "" "%APP_PARENT%\%NEW_APP_NAME%"
+	START "" "%APP_PARENT%\%NEW_APP_NAME%" --kaju-success %APP_VERSION%
 ) ELSE (
 	ECHO "Launching old app" >> "%LOGGER%" 2>&1
-	START "" "%APP_PATH%"
+	START "" "%APP_PATH%" --kaju-fail
 )
 
 ECHO "Removing temp folder" >> "%LOGGER%" 2>&1
