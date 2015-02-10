@@ -269,7 +269,7 @@ Protected Class UpdateInitiater
 		  
 		  script = script.ReplaceAll( kMarkerAppName, executable.Name )
 		  script = script.ReplaceAll( kMarkerAppParent, ShellPathQuote( executable.Parent ) )
-		  script = script.ReplaceAll( kMarkerAppVersion, ShellQuote( Kaju.AppVersionString ) )
+		  script = script.ReplaceAll( kMarkerAppVersion, Kaju.AppVersionString ) 
 		  script = script.ReplaceAll( kMarkerNewAppName, ReplacementExecutableName )
 		  script = script.ReplaceAll( kMarkerNewAppParent, ShellPathQuote( ReplacementAppFolder ) )
 		  script = script.ReplaceAll( kMarkerTempFolder, ShellPathQuote( TempFolder ) )
