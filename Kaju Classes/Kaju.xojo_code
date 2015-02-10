@@ -87,25 +87,28 @@ Protected Module Kaju
 
 	#tag Method, Flags = &h1
 		Protected Function DidLastUpdateFail() As Boolean
-		  dim args() as string = System.CommandLine.Split( " " )
-		  dim pos as integer = args.IndexOf( kSwitchUpdateFailed )
-		  
-		  return pos <> -1
+		  dim marker as string = kSwitchUpdateFailed
+		  dim args as string = System.CommandLine
+		  dim pos as integer = args.InStrB( marker )
+		  return pos <> 0
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
 		Protected Function DidLastUpdateSucceed(ByRef fromVersion As String) As Boolean
-		  dim args() as string = System.CommandLine.Split( " " )
-		  dim pos as integer = args.IndexOf( kSwitchUpdateSucceeded )
+		  dim marker as string = kSwitchUpdateSucceeded
+		  dim args as string = System.CommandLine
+		  dim pos as integer = args.InStrB( marker )
 		  
-		  if pos <> -1 then
-		    fromVersion = args( pos + 1 )
+		  if pos <> 0 then
+		    fromVersion = args.MidB( pos + marker.LenB + 1 )
+		    fromVersion = fromVersion.Trim
 		    return true
 		  else
 		    return false
 		  end if
+		  
 		End Function
 	#tag EndMethod
 
