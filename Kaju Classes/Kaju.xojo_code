@@ -86,6 +86,30 @@ Protected Module Kaju
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Function DidLastUpdateFail() As Boolean
+		  dim args() as string = System.CommandLine.Split( " " )
+		  dim pos as integer = args.IndexOf( kSwitchUpdateFailed )
+		  
+		  return pos <> -1
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Function DidLastUpdateSucceed(ByRef fromVersion As String) As Boolean
+		  dim args() as string = System.CommandLine.Split( " " )
+		  dim pos as integer = args.IndexOf( kSwitchUpdateSucceeded )
+		  
+		  if pos <> -1 then
+		    vers = args( pos + 1 )
+		    return true
+		  else
+		    return false
+		  end if
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Function GetTemporaryFolder() As FolderItem
 		  dim f as FolderItem = GetTemporaryFolderItem
 		  f.Delete
@@ -345,6 +369,12 @@ Protected Module Kaju
 		
 	#tag EndNote
 
+
+	#tag Constant, Name = kSwitchUpdateFailed, Type = String, Dynamic = False, Default = \"--kaju-fail", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kSwitchUpdateSucceeded, Type = String, Dynamic = False, Default = \"--kaju-success", Scope = Private
+	#tag EndConstant
 
 	#tag Constant, Name = kUpdatePacketMarker, Type = String, Dynamic = False, Default = \"KAJU ", Scope = Protected
 	#tag EndConstant
