@@ -362,3 +362,8 @@ Add a translation for each, then submit a pull request as outlined above.
 1.3.3 (Jan. 22, 2015)
 
 - Fixed bug in conversion of release version to double.
+
+1.4
+
+- Added /g switch to Windows script.
+- When the app relaunches after an update or failed update, will get command-line switches telling it what happened. Added Kaju methods to report.
