@@ -258,6 +258,8 @@ There is only one class (`Kaju.UpdateChecker`) and one method in the Kaju module
 |Method|Description|
 |:---|:---|
 |CancelUpdate|Cancels any pending update; use in your windows' CancelClose event|
+|DidLastUpdateFail As Boolean|Returns `True` if this launch is a result of a failed update|
+|DidLastUpdateSucceed(ByRef fromVersion As String) As Boolean|Returns `True` and supplies the old version if this launch is the result of a successful update|
 
 There are other methods in the Kaju module that you might find useful but we are not documenting them.
 
@@ -365,5 +367,5 @@ Add a translation for each, then submit a pull request as outlined above.
 
 1.4
 
-- Added /g switch to Windows script.
+- Added /g switch to XCOPY in Windows script.
 - When the app relaunches after an update or failed update, will get command-line switches telling it what happened. Added Kaju methods to report.
