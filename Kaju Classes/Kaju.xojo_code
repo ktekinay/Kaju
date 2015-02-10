@@ -101,7 +101,7 @@ Protected Module Kaju
 		  dim pos as integer = args.IndexOf( kSwitchUpdateSucceeded )
 		  
 		  if pos <> -1 then
-		    vers = args( pos + 1 )
+		    fromVersion = args( pos + 1 )
 		    return true
 		  else
 		    return false
