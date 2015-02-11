@@ -138,14 +138,15 @@ Inherits HTTPSecureSocket
 		  //
 		  dim rx as new RegEx
 		  rx.SearchPattern = "^(?:https?://)([^:/\x20@]+):([^:/\x20@]*)@(.*)"
+		  
 		  dim match as RegExMatch = rx.Search( url )
-		  if match IsA RegExMatch then
+		  if match is nil then
+		    Username = ""
+		    Password = ""
+		  else
 		    Username = DecodeURLComponent( match.SubExpressionString( 1 ) )
 		    Password = DecodeURLComponent( match.SubExpressionString( 2 ) )
 		    url = match.SubExpressionString( 3 )
-		  else
-		    Username = ""
-		    Password = ""
 		  end if
 		  
 		End Sub
