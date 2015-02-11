@@ -123,6 +123,14 @@ Inherits HTTPSecureSocket
 		ForceSecure As Boolean
 	#tag EndProperty
 
+	#tag Property, Flags = &h21
+		Private Password As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Username As String
+	#tag EndProperty
+
 
 	#tag Constant, Name = kDefaultMaximumIterations, Type = Double, Dynamic = False, Default = \"5", Scope = Private
 	#tag EndConstant
