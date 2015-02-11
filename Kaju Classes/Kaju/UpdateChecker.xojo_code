@@ -535,6 +535,10 @@ Protected Class UpdateChecker
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		Socket As Kaju.HTTPSSocket
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		UpdateURL As String
 	#tag EndProperty
 
