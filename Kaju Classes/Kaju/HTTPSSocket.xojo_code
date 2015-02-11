@@ -1,6 +1,23 @@
 #tag Class
 Protected Class HTTPSSocket
 Inherits HTTPSecureSocket
+	#tag Event
+		Function AuthenticationRequired(Realm As String, Headers As InternetHeaders, ByRef Name As String, ByRef Password As String) As Boolean
+		  if RaiseEvent AuthenticationRequired( Realm, Headers, Name, Password ) then
+		    return true
+		  end if
+		  
+		  if Username <> "" then
+		    Name = Username
+		    Password = self.Password
+		    return true
+		  else
+		    return false
+		  end if
+		End Function
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h0
 		Sub Get(url As String)
 		  SetSecure( url )
