@@ -80,12 +80,7 @@ Protected Class UpdateChecker
 		  //
 		  dim url as string = self.UpdateURL
 		  if AllowRedirection then
-		    dim redirector as Kaju.HTTPSSocket
-		    if Socket is nil then
-		      redirector = new Kaju.HTTPSSocket
-		    else
-		      redirector = Socket
-		    end if
+		    dim redirector as new Kaju.HTTPSSocket
 		    url = redirector.GetRedirectAddress( url, 5 )
 		  end if
 		  
@@ -94,12 +89,7 @@ Protected Class UpdateChecker
 		  //
 		  do
 		    
-		    dim http as Kaju.HTTPSSocket
-		    if Socket is nil then
-		      http = new Kaju.HTTPSSocket
-		    else
-		      http = Socket
-		    end if
+		    dim http as new Kaju.HTTPSSocket
 		    
 		    dim raw as string = http.Get( url, 5 )
 		    if http.HTTPStatusCode = 404 then // Not found
@@ -542,10 +532,6 @@ Protected Class UpdateChecker
 
 	#tag Property, Flags = &h0
 		ServerPublicRSAKey As String
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		Socket As Kaju.HTTPSSocket
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
