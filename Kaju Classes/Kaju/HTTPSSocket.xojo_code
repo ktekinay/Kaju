@@ -119,6 +119,11 @@ Inherits HTTPSecureSocket
 	#tag EndMethod
 
 
+	#tag Hook, Flags = &h0
+		Event AuthenticationRequired(Realm As String, Headers As InternetHeaders, ByRef Name As String, ByRef Password As String) As Boolean
+	#tag EndHook
+
+
 	#tag Property, Flags = &h0
 		ForceSecure As Boolean
 	#tag EndProperty
