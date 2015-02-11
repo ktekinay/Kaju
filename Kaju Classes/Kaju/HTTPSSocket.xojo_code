@@ -107,7 +107,7 @@ Inherits HTTPSecureSocket
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub SetSecure(url As String)
+		Private Sub SetSecure(ByRef url As String)
 		  if ForceSecure or url.Trim.Left( 8 ) = "https://" then
 		    self.Secure = true
 		    self.Port = 443
@@ -115,6 +115,22 @@ Inherits HTTPSecureSocket
 		    self.Secure = false
 		    self.Port = 80
 		  end if
+		  
+		  //
+		  // See if the username and password has been specified
+		  //
+		  dim rx as new RegEx
+		  rx.SearchPattern = "^(?:https?://)([^:/\x20@]+):([^:/\x20@]*)@(.*)"
+		  dim match as RegExMatch = rx.Search( url )
+		  if match IsA RegExMatch then
+		    Username = DecodeURLComponent( match.SubExpressionString( 1 ) )
+		    Password = DecodeURLComponent( match.SubExpressionString( 2 ) )
+		    url = match.SubExpressionString( 3 )
+		  else
+		    Username = ""
+		    Password = ""
+		  end if
+		  
 		End Sub
 	#tag EndMethod
 
