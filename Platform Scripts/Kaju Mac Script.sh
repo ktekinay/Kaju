@@ -16,6 +16,7 @@ function log_cmd {
 
 APP_NAME=@@APP_NAME@@
 APP_PARENT=@@APP_PARENT@@
+APP_VERSION=@@APP_VERSION@@
 NEW_APP_NAME=@@NEW_APP_NAME@@
 NEW_APP_PARENT=@@NEW_APP_PARENT@@
 TEMP_FOLDER_PATH=@@TEMP_FOLDER@@
@@ -88,7 +89,7 @@ then
     log_cmd "Could not move in new application"
     log_cmd "Attempting to restore old application and launch it"
     mv "$RENAMED_APP_PATH" "$APP_PATH"
-    open "$APP_PATH"
+    open "$APP_PATH" --args --kaju-fail
     PROCEED=$false
   fi
 fi
@@ -101,7 +102,7 @@ then
   APP_PATH=$APP_PARENT/$NEW_APP_NAME
   log_cmd "Starting new application at $APP_PATH"
   
-  open "$APP_PATH"
+  open "$APP_PATH" --args --kaju-success "$APP_VERSION"
 fi
 
 if [ $PROCEED == $true ]
