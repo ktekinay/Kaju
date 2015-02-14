@@ -1,6 +1,23 @@
 #tag Class
 Protected Class HTTPSSocket
 Inherits HTTPSecureSocket
+	#tag Event
+		Function AuthenticationRequired(Realm As String, Headers As InternetHeaders, ByRef Name As String, ByRef Password As String) As Boolean
+		  if RaiseEvent AuthenticationRequired( Realm, Headers, Name, Password ) then
+		    return true
+		  end if
+		  
+		  if Username <> "" then
+		    Name = Username
+		    Password = self.Password
+		    return true
+		  else
+		    return false
+		  end if
+		End Function
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h0
 		Sub Get(url As String)
 		  SetSecure( url )
@@ -107,7 +124,7 @@ Inherits HTTPSecureSocket
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub SetSecure(url As String)
+		Private Sub SetSecure(ByRef url As String)
 		  if ForceSecure or url.Trim.Left( 8 ) = "https://" then
 		    self.Secure = true
 		    self.Port = 443
@@ -115,12 +132,42 @@ Inherits HTTPSecureSocket
 		    self.Secure = false
 		    self.Port = 80
 		  end if
+		  
+		  //
+		  // See if the username and password has been specified
+		  //
+		  dim rx as new RegEx
+		  rx.SearchPattern = "^(?:https?://)([^:/\x20@]+):([^:/\x20@]*)@(.*)"
+		  
+		  dim match as RegExMatch = rx.Search( url )
+		  if match is nil then
+		    Username = ""
+		    Password = ""
+		  else
+		    Username = DecodeURLComponent( match.SubExpressionString( 1 ) )
+		    Password = DecodeURLComponent( match.SubExpressionString( 2 ) )
+		    url = match.SubExpressionString( 3 )
+		  end if
+		  
 		End Sub
 	#tag EndMethod
 
 
+	#tag Hook, Flags = &h0
+		Event AuthenticationRequired(Realm As String, Headers As InternetHeaders, ByRef Name As String, ByRef Password As String) As Boolean
+	#tag EndHook
+
+
 	#tag Property, Flags = &h0
 		ForceSecure As Boolean
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Password As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Username As String
 	#tag EndProperty
 
 
