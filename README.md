@@ -225,7 +225,9 @@ We recommend that the latest version of any line use a static URL. For example, 
 
 ## The Classes
 
-There is only one class (`Kaju.UpdateChecker`) and one method in the Kaju module (`CancelUpdate`) that are of concern. The other classes and methods support these.
+There is only one class (`Kaju.UpdateChecker`) and one method in the Kaju module (`CancelUpdate`) that are of real concern. The other classes and methods support these.
+
+There is also a `Kaju.Version` constant (introduced in v.1.4) that will let you keep track of the Kaju version in your project.
 
 **Class:** `Kaju.UpdateChecker`
 
@@ -365,7 +367,7 @@ Add a translation for each, then submit a pull request as outlined above.
 
 - Fixed bug in conversion of release version to double.
 
-1.4
+1.4 (Feb. 14, 2015)
 
 - Added /g switch to XCOPY in Windows script.
 - When the app relaunches after an update or failed update, will get command-line switches telling it what happened. Added Kaju methods to report.
