@@ -284,6 +284,7 @@ Translations to other languages by:
 * Sascha Schneppmueller (German)
 * Valdemar De SOUSA (French)
 * Julen Ibarretxe Uriguen (Spanish)
+* Heikki Ohvo (Finnish)
 
 With special thanks to [Advanced Medical Pricing Solutions, Inc.](http://www.advancedpricing.com), for making this possible.
 
@@ -377,3 +378,4 @@ Add a translation for each, then submit a pull request as outlined above.
 1.4.1
 
 - Admin app: Lock "From URL" buttons to the right of the window.
+- Added Finnish translation.
