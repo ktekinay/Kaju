@@ -375,7 +375,7 @@ Add a translation for each, then submit a pull request as outlined above.
 - URL's for both the update information and the downloads can specify a username and password in the form "http://un:pw@theurl.com".
 - Added Kaju.Version constant.
 
-1.4.1
+1.4.1 (Feb. 18, 2015)
 
-- Admin app: Lock "From URL" buttons to the right of the window.
+- **Admin app**: Lock "From URL" buttons to the right of the window.
 - Added Finnish translation.
