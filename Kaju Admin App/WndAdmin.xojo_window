@@ -1683,8 +1683,8 @@ Begin Window WndAdmin
          Left            =   804
          LockBottom      =   False
          LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
+         LockLeft        =   False
+         LockRight       =   True
          LockTop         =   True
          Scope           =   2
          TabIndex        =   21
@@ -1714,8 +1714,8 @@ Begin Window WndAdmin
          Left            =   804
          LockBottom      =   False
          LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
+         LockLeft        =   False
+         LockRight       =   True
          LockTop         =   True
          Scope           =   2
          TabIndex        =   23
@@ -1745,8 +1745,8 @@ Begin Window WndAdmin
          Left            =   804
          LockBottom      =   False
          LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
+         LockLeft        =   False
+         LockRight       =   True
          LockTop         =   True
          Scope           =   2
          TabIndex        =   24
