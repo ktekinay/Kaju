@@ -1760,6 +1760,40 @@ Begin Window WndAdmin
          Visible         =   False
          Width           =   80
       End
+      Begin Label Label2
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   271
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   25
+         TabPanelIndex   =   2
+         Text            =   "Use ‘$VERSION$’ in the URL to insert the version on export"
+         TextAlign       =   1
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   588
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   613
+      End
    End
    Begin TextFieldChanger fldAppName
       AcceptTabs      =   False
