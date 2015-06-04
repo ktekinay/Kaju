@@ -1,5 +1,5 @@
 Type=Desktop
-RBProjectVersion=2015.01
+RBProjectVersion=2015.022
 MinIDEVersion=20070100
 Folder=Kaju Classes;../Kaju Classes;&h2570CF64;&h0;false
 Class=App;App.xojo_code;&h7955649;&h0;false
@@ -31,8 +31,8 @@ SubVersion=1
 NonRelease=0
 Release=3
 InfoVersion=Kaju Admin
-LongVersion=v.1.4.1
-ShortVersion=1.4.1
+LongVersion=v.1.5
+ShortVersion=1.5
 WinCompanyName=MacTechnologies Consulting
 WinInternalName=
 WinProductName=

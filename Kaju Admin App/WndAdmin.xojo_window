@@ -202,7 +202,6 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   12
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Version:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -337,7 +336,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   2
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   "Preview:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -447,7 +445,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -482,7 +479,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -517,7 +513,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   "Release Notes (HTML):"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -627,7 +622,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   8
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -662,7 +656,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   9
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -729,7 +722,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   13
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -764,7 +756,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   14
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -842,7 +833,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   1
          TabPanelIndex   =   3
-         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -974,7 +964,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   16
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Minimum Required Version:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1235,7 +1224,7 @@ Begin Window WndAdmin
          Mask            =   ""
          Password        =   False
          ReadOnly        =   True
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   1
          TabPanelIndex   =   2
          TabStop         =   True
@@ -1401,7 +1390,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   18
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Executable:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1479,7 +1467,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   20
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Executable:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1760,6 +1747,40 @@ Begin Window WndAdmin
          Visible         =   False
          Width           =   80
       End
+      Begin Label Label2
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   271
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   25
+         TabPanelIndex   =   2
+         Text            =   "Use ‘$VERSION$’ in the URL to insert the version on export"
+         TextAlign       =   1
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   588
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   613
+      End
    End
    Begin TextFieldChanger fldAppName
       AcceptTabs      =   False
@@ -1825,7 +1846,6 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   11
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "App Name:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -1871,8 +1891,7 @@ Begin Window WndAdmin
       Width           =   180
    End
    Begin Timer tmrUpdateReleaseNotesPreview
-      Enabled         =   True
-      Height          =   "32"
+      Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
@@ -1882,8 +1901,7 @@ Begin Window WndAdmin
       Scope           =   2
       TabPanelIndex   =   0
       Top             =   0
-      Visible         =   True
-      Width           =   "32"
+      Width           =   32
    End
    Begin HTMLViewer hvNewWindow
       AutoDeactivate  =   True
@@ -1938,8 +1956,7 @@ Begin Window WndAdmin
       Width           =   186
    End
    Begin Timer tmrUpdateImagePreview
-      Enabled         =   True
-      Height          =   "32"
+      Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   20
@@ -1949,8 +1966,7 @@ Begin Window WndAdmin
       Scope           =   2
       TabPanelIndex   =   0
       Top             =   20
-      Visible         =   True
-      Width           =   "32"
+      Width           =   32
    End
    Begin Label lblPlatform
       AutoDeactivate  =   True
@@ -1970,11 +1986,10 @@ Begin Window WndAdmin
       LockRight       =   False
       LockTop         =   True
       Multiline       =   False
-      Scope           =   0
+      Scope           =   2
       Selectable      =   False
       TabIndex        =   6
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "None"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -2009,7 +2024,6 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   13
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Platforms:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -2548,8 +2562,9 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub HashFromURL(url As String, hashField As TextField)
+		Private Sub HashFromURL(url As String, version As String, hashField As TextField)
 		  url = url.Trim
+		  url = InsertVersion( url, version )
 		  
 		  if url = "" then
 		    return
@@ -2582,6 +2597,12 @@ End
 		    end if
 		    
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function InsertVersion(originalURL As String, version As String) As String
+		  return originalURL.ReplaceAllB( "$VERSION$", version )
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
@@ -3157,21 +3178,21 @@ End
 #tag Events btnMacHashFromURL
 	#tag Event
 		Sub Action()
-		  HashFromURL( fldMacBinaryURL.Text, fldMacBinaryHash )
+		  HashFromURL( fldMacBinaryURL.Text, fldVersion.Text.Trim, fldMacBinaryHash )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events btnLinuxHashFromURL
 	#tag Event
 		Sub Action()
-		  HashFromURL( fldLinuxBinaryURL.Text, fldLinuxBinaryHash )
+		  HashFromURL( fldLinuxBinaryURL.Text, fldVersion.Text.Trim, fldLinuxBinaryHash )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events btnWindowsHashFromURL
 	#tag Event
 		Sub Action()
-		  HashFromURL( fldWindowsBinaryURL.Text, fldWindowsBinaryHash )
+		  HashFromURL( fldWindowsBinaryURL.Text, fldVersion.Text.Trim, fldWindowsBinaryHash )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -3237,6 +3258,27 @@ End
 		  dim data as JSONItem = KajuJSON
 		  data.Compact = false
 		  data.EscapeSlashes = false
+		  
+		  //
+		  // Perform $VERSION$ substitutions
+		  //
+		  dim keys() as string = Array( Kaju.UpdateInformation.kMacBinaryName, Kaju.UpdateInformation.kWindowsBinaryName, _
+		  Kaju.UpdateInformation.kLinuxBinaryName )
+		  
+		  dim lastVersionIndex as integer = data.Count - 1
+		  for versionIndex as integer = 0 to lastVersionIndex
+		    dim thisVersionData as JSONItem = data( versionIndex )
+		    dim thisVersion as string = thisVersionData.Value( fldVersion.DataField )
+		    for each binaryKey as string in keys
+		      if thisVersionData.HasName( binaryKey ) then
+		        dim binaryData as JSONItem = thisVersionData.Value( binaryKey )
+		        dim url as string = binaryData.Value( Kaju.BinaryInformation.kKeyURL )
+		        url = InsertVersion( url, thisVersion )
+		        binaryData.Value( Kaju.BinaryInformation.kKeyURL ) = url
+		      end if
+		    next
+		  next
+		  
 		  dim dataString as string = data.ToString
 		  
 		  dim sig as string = Crypto.RSASign( dataString, RSAPrivateKey )
