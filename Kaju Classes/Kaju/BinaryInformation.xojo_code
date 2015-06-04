@@ -49,10 +49,10 @@ Inherits Kaju.Information
 		Function ToJSON() As JSONItem
 		  dim j as new JSONItem
 		  
-		  j.Value( "Hash" ) = Hash
-		  j.Value( "URL" ) = URL
+		  j.Value( kKeyHash ) = Hash
+		  j.Value( kKeyURL ) = URL
 		  if ExecutableName <> "" then
-		    j.Value( "ExecutableName" ) = ExecutableName
+		    j.Value( kKeyExecutableName ) = ExecutableName
 		  end if
 		  
 		  return j
@@ -93,6 +93,16 @@ Inherits Kaju.Information
 	#tag Property, Flags = &h0
 		URL As String
 	#tag EndProperty
+
+
+	#tag Constant, Name = kKeyExecutableName, Type = String, Dynamic = False, Default = \"ExecutableName", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kKeyHash, Type = String, Dynamic = False, Default = \"Hash", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kKeyURL, Type = String, Dynamic = False, Default = \"URL", Scope = Public
+	#tag EndConstant
 
 
 	#tag ViewBehavior
