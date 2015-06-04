@@ -2562,8 +2562,9 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub HashFromURL(url As String, hashField As TextField)
+		Private Sub HashFromURL(url As String, version As String, hashField As TextField)
 		  url = url.Trim
+		  url = InsertVersion( url, version )
 		  
 		  if url = "" then
 		    return
@@ -3177,21 +3178,21 @@ End
 #tag Events btnMacHashFromURL
 	#tag Event
 		Sub Action()
-		  HashFromURL( fldMacBinaryURL.Text, fldMacBinaryHash )
+		  HashFromURL( fldMacBinaryURL.Text, fldVersion.Text.Trim, fldMacBinaryHash )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events btnLinuxHashFromURL
 	#tag Event
 		Sub Action()
-		  HashFromURL( fldLinuxBinaryURL.Text, fldLinuxBinaryHash )
+		  HashFromURL( fldLinuxBinaryURL.Text, fldVersion.Text.Trim, fldLinuxBinaryHash )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events btnWindowsHashFromURL
 	#tag Event
 		Sub Action()
-		  HashFromURL( fldWindowsBinaryURL.Text, fldWindowsBinaryHash )
+		  HashFromURL( fldWindowsBinaryURL.Text, fldVersion.Text.Trim, fldWindowsBinaryHash )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
