@@ -2599,6 +2599,12 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Function InsertVersion(originalURL As String, version As String) As String
+		  return originalURL.ReplaceAllB( "$VERSION$", version )
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Function IsDataValid() As Boolean
 		  StoreFieldsToVersionRow()
 		  
