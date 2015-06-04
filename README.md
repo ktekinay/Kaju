@@ -379,3 +379,7 @@ Add a translation for each, then submit a pull request as outlined above.
 
 - **Admin app**: Lock "From URL" buttons to the right of the window.
 - Added Finnish translation.
+
+1.5 (June 3, 2015)
+
+- **Admin app**: Enable substitution of `$VERSION$` in binary URL's.
