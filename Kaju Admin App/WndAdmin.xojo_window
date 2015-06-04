@@ -3258,6 +3258,27 @@ End
 		  dim data as JSONItem = KajuJSON
 		  data.Compact = false
 		  data.EscapeSlashes = false
+		  
+		  //
+		  // Perform $VERSION$ substitutions
+		  //
+		  dim keys() as string = Array( Kaju.UpdateInformation.kMacBinaryName, Kaju.UpdateInformation.kWindowsBinaryName, _
+		  Kaju.UpdateInformation.kLinuxBinaryName )
+		  
+		  dim lastVersionIndex as integer = data.Count - 1
+		  for versionIndex as integer = 0 to lastVersionIndex
+		    dim thisVersionData as JSONItem = data( versionIndex )
+		    dim thisVersion as string = thisVersionData.Value( fldVersion.DataField )
+		    for each binaryKey as string in keys
+		      if thisVersionData.HasName( binaryKey ) then
+		        dim binaryData as JSONItem = thisVersionData.Value( binaryKey )
+		        dim url as string = binaryData.Value( Kaju.BinaryInformation.kKeyURL )
+		        url = InsertVersion( url, thisVersion )
+		        binaryData.Value( Kaju.BinaryInformation.kKeyURL ) = url
+		      end if
+		    next
+		  next
+		  
 		  dim dataString as string = data.ToString
 		  
 		  dim sig as string = Crypto.RSASign( dataString, RSAPrivateKey )
