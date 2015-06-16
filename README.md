@@ -316,7 +316,7 @@ For the appropriate branch to your GitHub account. Use "develop" for general fix
 
 There are two places to look for strings that need translation:
 
-1. The constants in the KajuLocale module.
+1. The constants in the KajuLocale module. 
 1. The error messages in KajuException.
 
 Add a translation for each, then submit a pull request as outlined above.
@@ -382,4 +382,4 @@ Add a translation for each, then submit a pull request as outlined above.
 
 1.5 (June 3, 2015)
 
-- **Admin app**: Enable substitution of `$VERSION$` in binary URL's.
+- **Admin app**: Enable substitution of `$VERSION$` in binary URL's..
