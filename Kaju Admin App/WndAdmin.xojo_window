@@ -241,7 +241,7 @@ Begin Window WndAdmin
       TextUnit        =   0
       Top             =   86
       Underline       =   False
-      Value           =   2
+      Value           =   1
       Visible         =   True
       Width           =   653
       Begin TextAreaChanger fldReleaseNotes
@@ -409,7 +409,7 @@ Begin Window WndAdmin
          Password        =   False
          ReadOnly        =   False
          Scope           =   2
-         TabIndex        =   4
+         TabIndex        =   3
          TabPanelIndex   =   2
          TabStop         =   True
          Text            =   ""
@@ -443,7 +443,7 @@ Begin Window WndAdmin
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
-         TabIndex        =   15
+         TabIndex        =   12
          TabPanelIndex   =   2
          Text            =   "Hash:"
          TextAlign       =   0
@@ -477,7 +477,7 @@ Begin Window WndAdmin
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
-         TabIndex        =   16
+         TabIndex        =   13
          TabPanelIndex   =   2
          Text            =   "URL:"
          TextAlign       =   0
@@ -545,7 +545,7 @@ Begin Window WndAdmin
          LockTop         =   True
          Scope           =   2
          State           =   0
-         TabIndex        =   5
+         TabIndex        =   4
          TabPanelIndex   =   2
          TabStop         =   True
          TextFont        =   "System"
@@ -586,7 +586,7 @@ Begin Window WndAdmin
          Password        =   False
          ReadOnly        =   False
          Scope           =   2
-         TabIndex        =   9
+         TabIndex        =   7
          TabPanelIndex   =   2
          TabStop         =   True
          Text            =   ""
@@ -620,7 +620,7 @@ Begin Window WndAdmin
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
-         TabIndex        =   18
+         TabIndex        =   15
          TabPanelIndex   =   2
          Text            =   "Hash:"
          TextAlign       =   0
@@ -654,7 +654,7 @@ Begin Window WndAdmin
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
-         TabIndex        =   19
+         TabIndex        =   16
          TabPanelIndex   =   2
          Text            =   "URL:"
          TextAlign       =   0
@@ -688,7 +688,7 @@ Begin Window WndAdmin
          LockTop         =   True
          Scope           =   2
          State           =   0
-         TabIndex        =   10
+         TabIndex        =   8
          TabPanelIndex   =   2
          TabStop         =   True
          TextFont        =   "System"
@@ -720,7 +720,7 @@ Begin Window WndAdmin
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
-         TabIndex        =   21
+         TabIndex        =   18
          TabPanelIndex   =   2
          Text            =   "Hash:"
          TextAlign       =   0
@@ -754,7 +754,7 @@ Begin Window WndAdmin
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
-         TabIndex        =   22
+         TabIndex        =   19
          TabPanelIndex   =   2
          Text            =   "URL:"
          TextAlign       =   0
@@ -962,7 +962,7 @@ Begin Window WndAdmin
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
-         TabIndex        =   23
+         TabIndex        =   20
          TabPanelIndex   =   2
          Text            =   "Minimum Required Version:"
          TextAlign       =   0
@@ -1225,9 +1225,9 @@ Begin Window WndAdmin
          Password        =   False
          ReadOnly        =   True
          Scope           =   2
-         TabIndex        =   2
+         TabIndex        =   22
          TabPanelIndex   =   2
-         TabStop         =   True
+         TabStop         =   False
          Text            =   ""
          TextColor       =   &c00000000
          TextFont        =   "System"
@@ -1268,9 +1268,9 @@ Begin Window WndAdmin
          Password        =   False
          ReadOnly        =   True
          Scope           =   2
-         TabIndex        =   7
+         TabIndex        =   23
          TabPanelIndex   =   2
-         TabStop         =   True
+         TabStop         =   False
          Text            =   ""
          TextColor       =   &c00000000
          TextFont        =   "System"
@@ -1311,7 +1311,7 @@ Begin Window WndAdmin
          Password        =   False
          ReadOnly        =   False
          Scope           =   2
-         TabIndex        =   14
+         TabIndex        =   11
          TabPanelIndex   =   2
          TabStop         =   True
          Text            =   ""
@@ -1354,7 +1354,7 @@ Begin Window WndAdmin
          Password        =   False
          ReadOnly        =   False
          Scope           =   2
-         TabIndex        =   6
+         TabIndex        =   5
          TabPanelIndex   =   2
          TabStop         =   True
          Text            =   ""
@@ -1388,7 +1388,7 @@ Begin Window WndAdmin
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
-         TabIndex        =   17
+         TabIndex        =   14
          TabPanelIndex   =   2
          Text            =   "Executable:"
          TextAlign       =   0
@@ -1431,7 +1431,7 @@ Begin Window WndAdmin
          Password        =   False
          ReadOnly        =   False
          Scope           =   2
-         TabIndex        =   11
+         TabIndex        =   9
          TabPanelIndex   =   2
          TabStop         =   True
          Text            =   ""
@@ -1465,7 +1465,7 @@ Begin Window WndAdmin
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
-         TabIndex        =   20
+         TabIndex        =   17
          TabPanelIndex   =   2
          Text            =   "Executable:"
          TextAlign       =   0
@@ -1508,9 +1508,9 @@ Begin Window WndAdmin
          Password        =   False
          ReadOnly        =   True
          Scope           =   2
-         TabIndex        =   12
+         TabIndex        =   24
          TabPanelIndex   =   2
-         TabStop         =   True
+         TabStop         =   False
          Text            =   ""
          TextColor       =   &c00000000
          TextFont        =   "System"
@@ -1674,7 +1674,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          Scope           =   2
-         TabIndex        =   3
+         TabIndex        =   2
          TabPanelIndex   =   2
          TabStop         =   True
          TextFont        =   "SmallSystem"
@@ -1705,7 +1705,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          Scope           =   2
-         TabIndex        =   13
+         TabIndex        =   10
          TabPanelIndex   =   2
          TabStop         =   True
          TextFont        =   "SmallSystem"
@@ -1736,7 +1736,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          Scope           =   2
-         TabIndex        =   8
+         TabIndex        =   6
          TabPanelIndex   =   2
          TabStop         =   True
          TextFont        =   "SmallSystem"
@@ -1767,7 +1767,7 @@ Begin Window WndAdmin
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
-         TabIndex        =   24
+         TabIndex        =   21
          TabPanelIndex   =   2
          Text            =   "Use ‘$VERSION$’ in the URL to insert the version on export"
          TextAlign       =   1
