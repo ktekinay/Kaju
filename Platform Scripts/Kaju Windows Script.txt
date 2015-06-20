@@ -157,10 +157,12 @@ REM
 IF %PROCEED% == 1 (
 	ECHO "Launching new app" >> "%LOGGER%" 2>&1
 	START "" "%APP_PARENT%\%NEW_APP_NAME%" --kaju-success %APP_VERSION%
+	GOTO :remove_backup_folder
 ) ELSE (
 	ECHO "Launching old app" >> "%LOGGER%" 2>&1
 	START "" "%APP_PATH%" --kaju-fail
 )
 
+:remove_backup_folder
 ECHO "Removing temp folder" >> "%LOGGER%" 2>&1
 RMDIR /S /Q "%TEMP_FOLDER_PATH%" >> "%LOGGER%" 2>&1
