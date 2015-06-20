@@ -383,3 +383,10 @@ Add a translation for each, then submit a pull request as outlined above.
 1.5 (June 3, 2015)
 
 - **Admin app**: Enable substitution of `$VERSION$` in binary URL's.
+
+1.5.1 (June 19, 2015)
+
+- **Admin app**: Fixed tab order of controls.
+- **Admin app**: Retinized!
+- Added what should be an unneeded, but apparently necessary, GOTO to the Windows script.
+
