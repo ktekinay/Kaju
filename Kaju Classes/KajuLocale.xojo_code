@@ -140,6 +140,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Le nom de l\'application est manquant"
 		#Tag Instance, Platform = Any, Language = es, Definition  = \"El nombre de la aplicaci\xC3\xB3n no est\xC3\xA1 disponible "
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Nome dell\xE2\x80\x99applicazione non disponibile"
+		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Ohjelman nimi puuttuu"
 	#tag EndConstant
 
 	#tag Constant, Name = kMissingReason, Type = String, Dynamic = True, Default = \"Missing", Scope = Protected
