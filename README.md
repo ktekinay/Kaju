@@ -310,7 +310,7 @@ No. Thanks to John Hansen and code he provided on the [Xojo Forums](https://foru
 
 **How do I contribute?**
 
-For the appropriate branch to your GitHub account. Use "develop" for general fixes and additions and "translations" to add a language translation. Make your changes, then submit a pull request. We'll look it over and merge what's appropriate or provide feedback.
+Fork the project to your GitHub account. Use the "develop" branch for general fixes and additions and "translations" to add a language translation. Make your changes, then submit a pull request. We'll look it over and merge what's appropriate or provide feedback.
 
 **I want to submit a translation. What should be translated?**
 
