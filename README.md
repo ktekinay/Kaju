@@ -285,6 +285,7 @@ Translations to other languages by:
 * Valdemar De SOUSA (French)
 * Julen Ibarretxe Uriguen (Spanish)
 * Heikki Ohvo (Finnish)
+* Manuel Romei (Italian)
 
 With special thanks to [Advanced Medical Pricing Solutions, Inc.](http://www.advancedpricing.com), for making this possible.
 

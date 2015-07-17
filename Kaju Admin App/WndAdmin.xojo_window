@@ -202,6 +202,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   12
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Version:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -336,6 +337,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   11
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   "Preview:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -445,6 +447,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   12
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -479,6 +482,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   13
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -513,6 +517,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   10
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   "Release Notes (HTML):"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -622,6 +627,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   15
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -656,6 +662,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   16
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -722,6 +729,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   18
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -756,6 +764,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   19
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -833,6 +842,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   3
+         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -964,6 +974,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   20
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "Minimum Required Version:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1390,6 +1401,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   14
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "Executable:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1467,6 +1479,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   17
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "Executable:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1769,6 +1782,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   21
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "Use ‘$VERSION$’ in the URL to insert the version on export"
          TextAlign       =   1
          TextColor       =   &c00000000
@@ -1846,6 +1860,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   11
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "App Name:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -1891,7 +1906,8 @@ Begin Window WndAdmin
       Width           =   180
    End
    Begin Timer tmrUpdateReleaseNotesPreview
-      Height          =   32
+      Enabled         =   True
+      Height          =   "32"
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
@@ -1901,7 +1917,8 @@ Begin Window WndAdmin
       Scope           =   2
       TabPanelIndex   =   0
       Top             =   0
-      Width           =   32
+      Visible         =   True
+      Width           =   "32"
    End
    Begin HTMLViewer hvNewWindow
       AutoDeactivate  =   True
@@ -1956,7 +1973,8 @@ Begin Window WndAdmin
       Width           =   186
    End
    Begin Timer tmrUpdateImagePreview
-      Height          =   32
+      Enabled         =   True
+      Height          =   "32"
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   20
@@ -1966,7 +1984,8 @@ Begin Window WndAdmin
       Scope           =   2
       TabPanelIndex   =   0
       Top             =   20
-      Width           =   32
+      Visible         =   True
+      Width           =   "32"
    End
    Begin Label lblPlatform
       AutoDeactivate  =   True
@@ -1990,6 +2009,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   14
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "None"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -2024,6 +2044,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   13
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Platforms:"
       TextAlign       =   0
       TextColor       =   &c00000000
