@@ -285,6 +285,7 @@ Translations to other languages by:
 * Valdemar De SOUSA (French)
 * Julen Ibarretxe Uriguen (Spanish)
 * Heikki Ohvo (Finnish)
+* Manuel Romei (Italian)
 
 With special thanks to [Advanced Medical Pricing Solutions, Inc.](http://www.advancedpricing.com), for making this possible.
 
@@ -389,4 +390,7 @@ Add a translation for each, then submit a pull request as outlined above.
 - **Admin app**: Fixed tab order of controls.
 - **Admin app**: Retinized!
 - Added what should be an unneeded, but apparently necessary, GOTO to the Windows script.
+
+1.5.2 (July 17, 2015)
+- Added Italian translation.
 

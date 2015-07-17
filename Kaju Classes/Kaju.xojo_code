@@ -382,7 +382,7 @@ Protected Module Kaju
 	#tag Constant, Name = kUpdatePacketMarker, Type = String, Dynamic = False, Default = \"KAJU ", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = Version, Type = String, Dynamic = False, Default = \"1.5.1", Scope = Protected
+	#tag Constant, Name = Version, Type = String, Dynamic = False, Default = \"1.5.2", Scope = Protected
 	#tag EndConstant
 
 
