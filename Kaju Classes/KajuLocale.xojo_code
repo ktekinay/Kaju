@@ -25,18 +25,18 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Les informations binaires du fichier ne sont pas valides"
 		#Tag Instance, Platform = Any, Language = es, Definition  = \"La informaci\xC3\xB3n binaria no es correcta"
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Binaari-informaatio ei ole kelvollista"
-		#Tag Instance, Platform = Any, Language = it, Definition  = \"Le informazioni binarie non sono valide."
+		#Tag Instance, Platform = Any, Language = it, Definition  = \"Le informazioni binarie non sono valide"
 	#tag EndConstant
 
 	#tag Constant, Name = kCancelButton, Type = String, Dynamic = True, Default = \"&Cancel", Scope = Protected
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"&Abbrechen"
 		#Tag Instance, Platform = Any, Language = fr, Definition  = \"&Annuler"
 		#Tag Instance, Platform = Any, Language = es, Definition  = \"&Cancelar"
-		#Tag Instance, Platform = Mac OS, Language = fi, Definition  = \"Kumoa"
-		#Tag Instance, Platform = Windows, Language = fi, Definition  = \"Peruuta"
-		#Tag Instance, Platform = Linux, Language = fi, Definition  = \"Peruuta"
-		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Kumoa"
-		#Tag Instance, Platform = Any, Language = it, Definition  = \"Annulla"
+		#Tag Instance, Platform = Mac OS, Language = fi, Definition  = \"&Kumoa"
+		#Tag Instance, Platform = Windows, Language = fi, Definition  = \"&Peruuta"
+		#Tag Instance, Platform = Linux, Language = fi, Definition  = \"&Peruuta"
+		#Tag Instance, Platform = Any, Language = fi, Definition  = \"&Kumoa"
+		#Tag Instance, Platform = Any, Language = it, Definition  = \"&Annulla"
 	#tag EndConstant
 
 	#tag Constant, Name = kCannotSkipVersionsMessage, Type = String, Dynamic = True, Default = \"You cannot skip versions until you have updated to version <<Version>> or beyond.", Scope = Protected
@@ -92,7 +92,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fr, Definition  = \"Il n\'y a pas de mise \xC3\xA0 jour disponible."
 		#Tag Instance, Platform = Any, Language = es, Definition  = \"No hay actualizaciones disponibles."
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"P\xC3\xA4ivitysdataa ei ole saatavilla."
-		#Tag Instance, Platform = Any, Language = it, Definition  = \"Nessun dato dell\xE2\x80\x99aggiornamento disponibile"
+		#Tag Instance, Platform = Any, Language = it, Definition  = \"Nessun dato dell\xE2\x80\x99aggiornamento disponibile."
 	#tag EndConstant
 
 	#tag Constant, Name = kErrorOccurredMessage, Type = String, Dynamic = True, Default = \"An error has occurred. Would you like to try again now or later\?", Scope = Protected
@@ -293,7 +293,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fr, Definition  = \"La version doit \xC3\xAAtre dans une de ces formes"
 		#Tag Instance, Platform = Any, Language = es, Definition  = \"La versi\xC3\xB3n debe estar en una de las siguientes formas"
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Version t\xC3\xA4ytyy olla joku n\xC3\xA4ist\xC3\xA4"
-		#Tag Instance, Platform = Any, Language = it, Definition  = \"La versione deve essere in una di queste forme."
+		#Tag Instance, Platform = Any, Language = it, Definition  = \"La versione deve essere in una di queste forme"
 	#tag EndConstant
 
 	#tag Constant, Name = kVersionsLabel, Type = String, Dynamic = True, Default = \"Available Versions:", Scope = Protected
