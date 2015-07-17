@@ -391,3 +391,6 @@ Add a translation for each, then submit a pull request as outlined above.
 - **Admin app**: Retinized!
 - Added what should be an unneeded, but apparently necessary, GOTO to the Windows script.
 
+1.5.2 (July 17, 2015)
+- Added Italian translation.
+
