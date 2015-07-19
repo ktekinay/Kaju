@@ -2777,10 +2777,19 @@ End
 		  AdjustControls
 		  
 		  Exception err as RuntimeException
-		    MsgBox "Could not open document."
-		    
-		    self.Close
-		    return
+		    select case err
+		    case IsA EndException, IsA ThreadEndException
+		      //
+		      // Pass it on
+		      //
+		      raise err
+		      
+		    case else
+		      MsgBox "Could not open document."
+		      
+		      self.Close
+		      return
+		    end select
 		End Sub
 	#tag EndMethod
 
