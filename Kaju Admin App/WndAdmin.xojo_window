@@ -2750,6 +2750,7 @@ End
 		  tis.Encoding = Encodings.UTF8
 		  
 		  dim dataString as string = tis.ReadAll
+		  tis.Close
 		  tis = nil
 		  
 		  dataString = ReplaceLineEndings( dataString, EndOfLine )
