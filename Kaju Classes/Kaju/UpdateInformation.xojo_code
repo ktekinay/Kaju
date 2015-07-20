@@ -66,6 +66,20 @@ Inherits Kaju.Information
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function GetByName(propName As String) As Variant
+		  dim prop as Introspection.PropertyInfo = PropInfoDictionary.Value( propName )
+		  return prop.Value( self )
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetByName(propName As String, Assigns value As Variant)
+		  dim prop as Introspection.PropertyInfo = PropInfoDictionary.Value( propName )
+		  prop.Value( self ) = value
+		End Sub
+	#tag EndMethod
+
 
 	#tag Property, Flags = &h0
 		AppName As String
@@ -147,6 +161,26 @@ Inherits Kaju.Information
 			End Get
 		#tag EndGetter
 		PlatformBinary As Kaju.BinaryInformation
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h21
+		#tag Getter
+			Get
+			  static dict as Dictionary
+			  if dict is nil then
+			    dict = new Dictionary
+			    dim ti as Introspection.TypeInfo = GetTypeInfo( Kaju.UpdateInformation )
+			    dim props() as Introspection.PropertyInfo = ti.GetProperties
+			    for each prop as Introspection.PropertyInfo in props
+			      dict.Value( prop.Name ) = prop
+			    next
+			  end if
+			  
+			  return dict
+			  
+			End Get
+		#tag EndGetter
+		Private Shared PropInfoDictionary As Dictionary
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h0
