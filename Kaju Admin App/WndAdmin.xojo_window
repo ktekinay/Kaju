@@ -3182,9 +3182,8 @@ End
 		  
 		  dim dlg as new SaveAsDialog
 		  dlg.PromptText = "Export the file that will be served to your app through your web site:"
-		  dlg.Filter = FileTypes1.TextHtml
 		  dlg.ActionButtonCaption = "Export"
-		  dlg.SuggestedFileName = "UpdateInformation.html"
+		  dlg.SuggestedFileName = MyKajuFile.ExportFilename
 		  
 		  dim f as FolderItem = dlg.ShowModalWithin( self )
 		  if f is nil then
