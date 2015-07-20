@@ -147,7 +147,7 @@ Begin Window WndAdmin
       Bold            =   False
       Border          =   True
       CueText         =   ""
-      DataField       =   "Version"
+      DataField       =   "#KajuFile.kVersionName"
       DataSource      =   ""
       Enabled         =   False
       Format          =   ""
@@ -202,7 +202,6 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   12
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Version:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -337,7 +336,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   11
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   "Preview:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -447,7 +445,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   12
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -482,7 +479,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   13
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -517,7 +513,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   10
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   "Release Notes (HTML):"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -627,7 +622,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   15
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -662,7 +656,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   16
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -729,7 +722,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   18
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Hash:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -764,7 +756,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   19
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -842,7 +833,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   3
-         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -974,7 +964,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   20
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Minimum Required Version:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1401,7 +1390,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   14
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Executable:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1479,7 +1467,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   17
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Executable:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1782,7 +1769,6 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   21
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "Use ‘$VERSION$’ in the URL to insert the version on export"
          TextAlign       =   1
          TextColor       =   &c00000000
@@ -1860,7 +1846,6 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   11
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "App Name:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -1906,8 +1891,7 @@ Begin Window WndAdmin
       Width           =   180
    End
    Begin Timer tmrUpdateReleaseNotesPreview
-      Enabled         =   True
-      Height          =   "32"
+      Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
@@ -1917,8 +1901,7 @@ Begin Window WndAdmin
       Scope           =   2
       TabPanelIndex   =   0
       Top             =   0
-      Visible         =   True
-      Width           =   "32"
+      Width           =   32
    End
    Begin HTMLViewer hvNewWindow
       AutoDeactivate  =   True
@@ -1973,8 +1956,7 @@ Begin Window WndAdmin
       Width           =   186
    End
    Begin Timer tmrUpdateImagePreview
-      Enabled         =   True
-      Height          =   "32"
+      Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   20
@@ -1984,8 +1966,7 @@ Begin Window WndAdmin
       Scope           =   2
       TabPanelIndex   =   0
       Top             =   20
-      Visible         =   True
-      Width           =   "32"
+      Width           =   32
    End
    Begin Label lblPlatform
       AutoDeactivate  =   True
@@ -2009,7 +1990,6 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   14
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "None"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -2044,7 +2024,6 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   13
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Platforms:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -2445,29 +2424,17 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub CreateRSAKeys()
-		  if RSAPrivateKey = "" then
-		    if not Crypto.RSAGenerateKeyPair( 2048, RSAPrivateKey, RSAPublicKey ) then
-		      MsgBox "Could not create RSA key pairs."
-		      self.Close
-		    else
-		      self.ContentsChanged = true
-		    end if
-		  end if
-		  
-		  return
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
 		Private Sub DeleteVersion()
 		  dim curIndex as integer = lbVersions.ListIndex
 		  if curIndex = -1 then
 		    return
 		  end if
 		  
+		  dim version as Kaju.UpdateInformation = lbVersions.RowTag( curIndex )
 		  lbVersions.ListIndex = -1
 		  lbVersions.RemoveRow( curIndex )
+		  
+		  MyKajuFile.KajuData.Remove MyKajuFile.KajuData.IndexOf( version )
 		  
 		  if curIndex > 0 then
 		    curIndex = curIndex - 1
@@ -2481,48 +2448,27 @@ End
 
 	#tag Method, Flags = &h21
 		Private Function DoSave() As Boolean
+		  StoreFieldsToVersionRow()
+		  
 		  dim f as FolderItem = Document
 		  if f is nil then
 		    return DoSaveAs()
 		  end if
 		  
-		  dim r as boolean
 		  dim savedContentsChanged as boolean = self.ContentsChanged
 		  
-		  dim master as new JSONItem
-		  master.Compact = false
+		  dim r as boolean
+		  MyKajuFile.SaveTo( f )
+		  r = true
+		  ContentsChanged = false
 		  
-		  master.Value( kPrivateKeyName ) = RSAPrivateKey
-		  master.Value( kPublicKeyName ) = RSAPublicKey
-		  
-		  dim data as JSONItem = KajuJSON
-		  master.Value( kDataName ) = data
-		  
-		  dim toSave as string = master.ToString
-		  
-		  dim bs as BinaryStream = BinaryStream.Create( f, true )
-		  bs.Write( toSave )
-		  bs.Close
-		  
-		  dim tis as TextInputStream = TextInputStream.Open( f )
-		  dim compare as string = tis.ReadAll
-		  tis.Close
-		  
-		  r = StrComp( toSave, compare, 0 ) = 0
-		  self.ContentsChanged = not r
-		  
-		  if not r then
-		    MsgBox "Save failed!"
-		  end if
-		  
-		  return r
-		  
-		  Exception err as RuntimeException
+		  Exception err as IOException
 		    self.ContentsChanged = savedContentsChanged
-		    return false
+		    MsgBox "Save failed!"
 		    
 		  Finally
 		    UpdateWindowTitle
+		    return r
 		End Function
 	#tag EndMethod
 
@@ -2585,7 +2531,7 @@ End
 	#tag Method, Flags = &h21
 		Private Sub HashFromURL(url As String, version As String, hashField As TextField)
 		  url = url.Trim
-		  url = InsertVersion( url, version )
+		  url = KajuFile.InsertVersion( url, version )
 		  
 		  if url = "" then
 		    return
@@ -2621,12 +2567,6 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function InsertVersion(originalURL As String, version As String) As String
-		  return originalURL.ReplaceAllB( "$VERSION$", version )
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
 		Private Function IsDataValid() As Boolean
 		  StoreFieldsToVersionRow()
 		  
@@ -2639,8 +2579,7 @@ End
 		  dim msg as string
 		  dim lastRow as integer = lbVersions.ListCount - 1
 		  for row as integer = 0 to lastRow
-		    dim j as JSONItem = lbVersions.RowTag( row )
-		    dim u as new Kaju.UpdateInformation( j )
+		    dim u as Kaju.UpdateInformation = lbVersions.RowTag( row )
 		    if not u.IsValid then
 		      r = false
 		      msg = u.InvalidReason
@@ -2658,83 +2597,34 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub JSONToFields(data As JSONItem)
-		  //
-		  // Handle the named controls first
-		  //
-		  
-		  dim savedDirty as boolean = self.ContentsChanged
-		  
-		  ClearFields()
-		  
-		  self.Loading = true
-		  
-		  dim lastIndex as integer = ControlCount - 1
-		  for i as integer = 0 to lastIndex
-		    dim c as Control = self.Control( i )
-		    
-		    dim fieldName as string = ControlDataField( c )
-		    if fieldName <> "" then
-		      ControlValue( c ) = data.Lookup( fieldName, nil )
-		    end if
-		    
-		  next
-		  
-		  //
-		  // Binaries
-		  //
-		  
-		  if data.HasName( Kaju.UpdateInformation.kMacBinaryName ) then
-		    cbMacBinary.Value = true
-		    dim binary as new Kaju.BinaryInformation( false, data.Value( Kaju.UpdateInformation.kMacBinaryName ) )
-		    fldMacBinaryHash.Text = binary.Hash
-		    fldMacBinaryURL.Text = binary.URL
+		Private Function MyKajuFile() As KajuFile
+		  if mMyKajuFile is nil then
+		    mMyKajuFile = new KajuFile
 		  end if
 		  
-		  if data.HasName( Kaju.UpdateInformation.kWindowsBinaryName ) then
-		    cbWindowsBinary.Value = true
-		    dim binary as new Kaju.BinaryInformation( true, data.Value( Kaju.UpdateInformation.kWindowsBinaryName ) )
-		    fldWindowsExecutable.Text = binary.ExecutableName
-		    fldWindowsBinaryHash.Text = binary.Hash
-		    fldWindowsBinaryURL.Text = binary.URL
-		  end if
-		  
-		  if data.HasName( Kaju.UpdateInformation.kLinuxBinaryName ) then
-		    cbLinuxBinary.Value = true
-		    dim binary as new Kaju.BinaryInformation( true, data.Value( Kaju.UpdateInformation.kLinuxBinaryName ) )
-		    fldLinuxExecutable.Text = binary.ExecutableName
-		    fldLinuxBinaryHash.Text = binary.Hash
-		    fldLinuxBinaryURL.Text = binary.URL
-		  end if
-		  
-		  self.Loading = false
-		  
-		  AdjustControls()
-		  self.ContentsChanged = savedDirty
-		End Sub
+		  return mMyKajuFile
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
 		Private Sub NewVersion()
 		  StoreFieldsToVersionRow()
 		  
-		  CreateRSAKeys()
-		  
 		  lbVersions.AddRow "1.0.0d1"
-		  
-		  dim j as new JSONItem()
-		  j.Value( "Version" ) = lbVersions.Cell( lbVersions.LastIndex, 0 )
+		  dim version as new Kaju.UpdateInformation
+		  version.Version = lbVersions.Cell( lbVersions.LastIndex, 0 )
 		  
 		  dim prevIndex as integer = LastVersionRow
 		  if prevIndex <> -1 and prevIndex < lbVersions.ListCount then
-		    dim prevItem as JSONItem = lbVersions.RowTag( prevIndex )
+		    dim prevItem as Kaju.UpdateInformation = lbVersions.RowTag( prevIndex )
 		    if prevItem <> nil then
-		      dim fieldName as string = fldAppName.DataField
-		      j.Value( fieldName ) = prevItem.Lookup( fieldName, "" )
+		      version.AppName = prevItem.AppName
 		    end if
 		  end if
 		  
-		  lbVersions.RowTag( lbVersions.LastIndex ) = j
+		  MyKajuFile.KajuData.Append version
+		  
+		  lbVersions.RowTag( lbVersions.LastIndex ) = version
 		  lbVersions.ListIndex = lbVersions.LastIndex
 		  self.ContentsChanged = true
 		End Sub
@@ -2745,25 +2635,12 @@ End
 		  if f is nil or not f.Exists or f.Directory then
 		    raise new NilObjectException
 		  end if
+		  MyKajuFile.Load f
 		  
-		  dim tis as TextInputStream = TextInputStream.Open( f )
-		  tis.Encoding = Encodings.UTF8
-		  
-		  dim dataString as string = tis.ReadAll
-		  tis.Close
-		  tis = nil
-		  
-		  dataString = ReplaceLineEndings( dataString, EndOfLine )
-		  
-		  dim master as new JSONItem( dataString )
-		  RSAPrivateKey = master.Value( kPrivateKeyName )
-		  RSAPublicKey = master.Value( kPublicKeyName )
-		  
-		  dim data as JSONItem = master.Value( kDataName )
-		  dim lastIndex as integer = data.Count - 1
-		  for i as integer = 0 to lastIndex
-		    dim version as JSONItem = data( i )
-		    lbVersions.AddRow version.Value( "Version" ).StringValue
+		  dim versions() as Kaju.UpdateInformation = MyKajuFile.KajuData
+		  for i as integer = 0 to versions.Ubound
+		    dim version as Kaju.UpdateInformation = versions( i )
+		    lbVersions.AddRow version.Version
 		    lbVersions.RowTag( lbVersions.LastIndex ) = version
 		  next i
 		  
@@ -2799,7 +2676,7 @@ End
 		    return
 		  end if
 		  
-		  dim j as new JSONItem( "{}" )
+		  dim version as Kaju.UpdateInformation = lbVersions.RowTag( LastVersionRow )
 		  
 		  //
 		  // Gather the textfield data first
@@ -2812,7 +2689,7 @@ End
 		    dim fieldName as string = ControlDataField( c )
 		    if fieldName <> "" then
 		      dim value as Variant = ControlValue( c )
-		      j.Value( fieldName ) = value
+		      version.SetByName( fieldName ) = value
 		    end if
 		    
 		  next
@@ -2820,13 +2697,14 @@ End
 		  //
 		  // Binaries
 		  //
-		  
 		  if cbMacBinary.Value then
 		    dim binary as new Kaju.BinaryInformation( false )
 		    binary.Hash = fldMacBinaryHash.Text.Trim
 		    binary.URL = fldMacBinaryURL.Text.Trim
 		    
-		    j.Value( Kaju.UpdateInformation.kMacBinaryName ) = binary.ToJSON
+		    version.MacBinary = binary
+		  else
+		    version.MacBinary = nil
 		  end if
 		  
 		  if cbWindowsBinary.Value then
@@ -2835,7 +2713,9 @@ End
 		    binary.Hash = fldWindowsBinaryHash.Text.Trim
 		    binary.URL = fldWindowsBinaryURL.Text.Trim
 		    
-		    j.Value( Kaju.UpdateInformation.kWindowsBinaryName ) = binary.ToJSON
+		    version.WindowsBinary = binary
+		  else
+		    version.WindowsBinary = nil
 		  end if
 		  
 		  if cbLinuxBinary.Value then
@@ -2844,10 +2724,12 @@ End
 		    binary.Hash = fldLinuxBinaryHash.Text.Trim
 		    binary.URL = fldLinuxBinaryURL.Text.Trim
 		    
-		    j.Value( Kaju.UpdateInformation.kLinuxBinaryName ) = binary.ToJSON
+		    version.LinuxBinary = binary
+		  else
+		    version.LinuxBinary = nil
 		  end if
 		  
-		  lbVersions.RowTag( LastVersionRow ) = j
+		  
 		End Sub
 	#tag EndMethod
 
@@ -2870,6 +2752,67 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub VersionToFields(version As Kaju.UpdateInformation)
+		  //
+		  // Handle the named controls first
+		  //
+		  
+		  dim savedDirty as boolean = self.ContentsChanged
+		  
+		  ClearFields()
+		  
+		  self.Loading = true
+		  
+		  dim lastIndex as integer = ControlCount - 1
+		  for i as integer = 0 to lastIndex
+		    dim c as Control = self.Control( i )
+		    
+		    dim fieldName as string = ControlDataField( c )
+		    if fieldName <> "" then
+		      try
+		        ControlValue( c ) = version.GetByName( fieldName )
+		      catch err as KeyNotFoundException
+		        ControlValue( c ) = nil
+		      end try
+		    end if
+		    
+		  next
+		  
+		  //
+		  // Binaries
+		  //
+		  
+		  if version.MacBinary isa Kaju.BinaryInformation then
+		    cbMacBinary.Value = true
+		    dim binary as Kaju.BinaryInformation = version.MacBinary
+		    fldMacBinaryHash.Text = binary.Hash
+		    fldMacBinaryURL.Text = binary.URL
+		  end if
+		  
+		  if version.WindowsBinary isa Kaju.BinaryInformation then
+		    cbWindowsBinary.Value = true
+		    dim binary as Kaju.BinaryInformation = version.WindowsBinary
+		    fldWindowsExecutable.Text = binary.ExecutableName
+		    fldWindowsBinaryHash.Text = binary.Hash
+		    fldWindowsBinaryURL.Text = binary.URL
+		  end if
+		  
+		  if version.LinuxBinary isa Kaju.BinaryInformation then
+		    cbLinuxBinary.Value = true
+		    dim binary as Kaju.BinaryInformation = version.LinuxBinary
+		    fldLinuxExecutable.Text = binary.ExecutableName
+		    fldLinuxBinaryHash.Text = binary.Hash
+		    fldLinuxBinaryURL.Text = binary.URL
+		  end if
+		  
+		  self.Loading = false
+		  
+		  AdjustControls()
+		  self.ContentsChanged = savedDirty
+		End Sub
+	#tag EndMethod
+
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
@@ -2887,29 +2830,6 @@ End
 			End Set
 		#tag EndSetter
 		Document As FolderItem
-	#tag EndComputedProperty
-
-	#tag ComputedProperty, Flags = &h21
-		#tag Getter
-			Get
-			  StoreFieldsToVersionRow()
-			  
-			  dim combined as new JSONItem( "[]" )
-			  combined.Compact = false
-			  
-			  dim lastIndex as integer = lbVersions.ListCount - 1
-			  for row as integer = 0 to lastIndex
-			    dim j as JSONItem = lbVersions.RowTag( row )
-			    if j <> nil then
-			      combined.Append j
-			    end if
-			  next
-			  
-			  return combined
-			  
-			End Get
-		#tag EndGetter
-		Private KajuJSON As JSONItem
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h21
@@ -2947,15 +2867,11 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Private mMyKajuFile As KajuFile
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private Platforms() As String
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private RSAPrivateKey As String
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private RSAPublicKey As String
 	#tag EndProperty
 
 
@@ -2968,7 +2884,7 @@ End
 		  
 		  dim row as integer = me.ListIndex
 		  if row <> -1 and me.RowTag( row ) <> nil then
-		    JSONToFields( me.RowTag( row ) )
+		    VersionToFields( me.RowTag( row ) )
 		  else
 		    ClearFields
 		  end if
@@ -3239,10 +3155,9 @@ End
 #tag Events btnCopyPublicKey
 	#tag Event
 		Sub Action()
-		  CreateRSAKeys()
 		  
 		  dim c as new Clipboard
-		  c.Text = RSAPublicKey
+		  c.Text = MyKajuFile.PublicKey
 		  c.Close
 		End Sub
 	#tag EndEvent
@@ -3276,40 +3191,7 @@ End
 		    return
 		  end if
 		  
-		  dim data as JSONItem = KajuJSON
-		  data.Compact = false
-		  data.EscapeSlashes = false
-		  
-		  //
-		  // Perform $VERSION$ substitutions
-		  //
-		  dim keys() as string = Array( Kaju.UpdateInformation.kMacBinaryName, Kaju.UpdateInformation.kWindowsBinaryName, _
-		  Kaju.UpdateInformation.kLinuxBinaryName )
-		  
-		  dim lastVersionIndex as integer = data.Count - 1
-		  for versionIndex as integer = 0 to lastVersionIndex
-		    dim thisVersionData as JSONItem = data( versionIndex )
-		    dim thisVersion as string = thisVersionData.Value( fldVersion.DataField )
-		    for each binaryKey as string in keys
-		      if thisVersionData.HasName( binaryKey ) then
-		        dim binaryData as JSONItem = thisVersionData.Value( binaryKey )
-		        dim url as string = binaryData.Value( Kaju.BinaryInformation.kKeyURL )
-		        url = InsertVersion( url, thisVersion )
-		        binaryData.Value( Kaju.BinaryInformation.kKeyURL ) = url
-		      end if
-		    next
-		  next
-		  
-		  dim dataString as string = data.ToString
-		  
-		  dim sig as string = Crypto.RSASign( dataString, RSAPrivateKey )
-		  sig = EncodeHex( sig )
-		  
-		  dataString = Kaju.kUpdatePacketMarker + sig + EndOfLine.UNIX + dataString
-		  
-		  dim tos as TextOutputStream = TextOutputStream.Create( f )
-		  tos.Write dataString
-		  tos = nil
+		  MyKajuFile.ExportTo( f )
 		  
 		  Exception err As RuntimeException
 		    MsgBox "Could not export data."
@@ -3343,7 +3225,7 @@ End
 		  
 		  dim uc as new Kaju.UpdateChecker( App.PrefFolder )
 		  uc.AllowedStage = me.MenuValue
-		  dim s as string = KajuJSON.ToString
+		  dim s as string = MyKajuFile.DataToJSON.ToString
 		  uc.TestUpdate( s )
 		  
 		  me.MenuValue = -1
