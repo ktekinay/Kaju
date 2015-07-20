@@ -2959,16 +2959,6 @@ End
 	#tag EndProperty
 
 
-	#tag Constant, Name = kDataName, Type = String, Dynamic = False, Default = \"KajuData", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kPrivateKeyName, Type = String, Dynamic = False, Default = \"PrivateKey", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kPublicKeyName, Type = String, Dynamic = False, Default = \"PublicKey", Scope = Private
-	#tag EndConstant
-
-
 #tag EndWindowCode
 
 #tag Events lbVersions
