@@ -13,6 +13,12 @@ Protected Class KajuFile
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function ExportFilename() As String
+		  return mExportFilename
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub ExportTo(f As FolderItem)
 		  dim data as JSONItem = DataToJSON
 		  data.Compact = false
@@ -48,6 +54,9 @@ Protected Class KajuFile
 		  dim tos as TextOutputStream = TextOutputStream.Create( f )
 		  tos.Write dataString
 		  tos = nil
+		  
+		  mExportFilename = f.Name
+		  
 		End Sub
 	#tag EndMethod
 
@@ -69,6 +78,11 @@ Protected Class KajuFile
 		  
 		  mPrivateKey = root.Lookup( kPrivateKeyName, "" )
 		  mPublicKey = root.Lookup( kPublicKeyName, "" )
+		  
+		  //
+		  // Going to use the orinal default here in case this is an old file
+		  //
+		  mExportFilename = root.Lookup( kExportFilenameName, "UpdateInformation.html" )
 		  
 		  redim KajuData( -1 )
 		  
@@ -141,6 +155,10 @@ Protected Class KajuFile
 		KajuData() As Kaju.UpdateInformation
 	#tag EndProperty
 
+	#tag Property, Flags = &h0
+		mExportFilename As String = "UpdateInformation.json"
+	#tag EndProperty
+
 	#tag Property, Flags = &h21
 		Private mPrivateKey As String
 	#tag EndProperty
@@ -169,6 +187,9 @@ Protected Class KajuFile
 	#tag Constant, Name = kDataName, Type = String, Dynamic = False, Default = \"KajuData", Scope = Private
 	#tag EndConstant
 
+	#tag Constant, Name = kExportFilenameName, Type = String, Dynamic = False, Default = \"ExportFilename", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kPrivateKeyName, Type = String, Dynamic = False, Default = \"PrivateKey", Scope = Private
 	#tag EndConstant
 
@@ -192,11 +213,6 @@ Protected Class KajuFile
 			Visible=true
 			Group="Position"
 			InitialValue="0"
-			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="mPublicKey"
-			Group="Behavior"
 			Type="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
