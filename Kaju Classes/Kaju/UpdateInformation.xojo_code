@@ -188,6 +188,56 @@ Inherits Kaju.Information
 		StageCode As Integer
 	#tag EndComputedProperty
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  dim j as new JSONItem( "{}" )
+			  
+			  dim props() as Introspection.PropertyInfo = Introspection.GetType( self ).GetProperties
+			  for each prop as Introspection.PropertyInfo in props
+			    if prop.IsComputed or not prop.CanRead or not prop.CanWrite or not prop.IsPublic then
+			      continue for prop
+			    end if
+			    
+			    dim propType as Introspection.TypeInfo = prop.PropertyType
+			    dim propTypeName as string = propType.Name
+			    dim isGood as boolean
+			    select case propTypeName
+			    case "String", "Double", "Single", "Text", "Boolean"
+			      isGood = true
+			      
+			    end select
+			    
+			    if not isGood then
+			      //
+			      // See if it's an integer of some sort
+			      //
+			      if propTypeName.Left( 3 ) = "Int" or propTypeName.Left( 4 ) = "UInt" then
+			        isGood = true
+			      end if
+			    end if
+			    
+			    if isGood then
+			      j.Value( prop.Name ) = prop.Value( self )
+			    end if
+			  next
+			  
+			  if MacBinary Isa Kaju.BinaryInformation then
+			    j.Value( kMacBinaryName ) = MacBinary.ToJSON
+			  end if
+			  if WindowsBinary Isa Kaju.BinaryInformation then
+			    j.Value( kWindowsBinaryName ) = WindowsBinary.ToJSON
+			  end if
+			  if LinuxBinary Isa Kaju.BinaryInformation then
+			    j.Value( kLinuxBinaryName ) = LinuxBinary.ToJSON
+			  end if
+			  
+			  return j
+			End Get
+		#tag EndGetter
+		ToJSON As JSONItem
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h0
 		UseTransparency As Boolean = True
 	#tag EndProperty
