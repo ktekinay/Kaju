@@ -173,6 +173,7 @@ Protected Class KajuFile
 			  dim root as new JSONItem
 			  root.Value( kPrivateKeyName ) = PrivateKey
 			  root.Value( kPublicKeyName ) = PublicKey
+			  root.Value( kExportFilenameName ) = ExportFilename
 			  
 			  dim data as JSONItem = DataToJSON
 			  root.Value( kDataName ) = data
@@ -214,6 +215,12 @@ Protected Class KajuFile
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="mExportFilename"
+			Group="Behavior"
+			InitialValue="UpdateInformation.json"
+			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
