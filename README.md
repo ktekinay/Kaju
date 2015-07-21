@@ -395,7 +395,7 @@ Add a translation for each, then submit a pull request as outlined above.
 
 - Added Italian translation.
 
-1.5.3 (____, 2014)
+1.5.3 (July 20, 2015)
 
 - **Admin app**: Split the file settings from the Admin window so a file can be manipulated independently.
 - **Admin app**: Save the last export file name to suggest it for the next export.
