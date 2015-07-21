@@ -392,5 +392,11 @@ Add a translation for each, then submit a pull request as outlined above.
 - Added what should be an unneeded, but apparently necessary, GOTO to the Windows script.
 
 1.5.2 (July 17, 2015)
+
 - Added Italian translation.
+
+1.5.3 (July 20, 2015)
+
+- **Admin app**: Split the file settings from the Admin window so a file can be manipulated independently.
+- **Admin app**: Save the last export file name to suggest it for the next export.
 
