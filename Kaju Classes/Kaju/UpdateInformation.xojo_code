@@ -85,7 +85,7 @@ Inherits Kaju.Information
 		AppName As String
 	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
+	#tag ComputedProperty, Flags = &h0, CompatibilityFlags = (TargetHasGUI)
 		#tag Getter
 			Get
 			  if mImage <> nil then
@@ -191,7 +191,7 @@ Inherits Kaju.Information
 		RequiresPayment As Boolean
 	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
+	#tag ComputedProperty, Flags = &h0, CompatibilityFlags = (TargetHasGUI)
 		#tag Getter
 			Get
 			  static rx as RegEx
