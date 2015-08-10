@@ -108,6 +108,9 @@ Inherits ConsoleApplication
 	#tag Constant, Name = kAppGetKey, Type = String, Dynamic = False, Default = \"getkey", Scope = Private
 	#tag EndConstant
 
+	#tag Constant, Name = kErrorGeneralError, Type = Double, Dynamic = False, Default = \"1", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = kErrorNoError, Type = Double, Dynamic = False, Default = \"0", Scope = Public
 	#tag EndConstant
 
