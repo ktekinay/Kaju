@@ -1,6 +1,14 @@
 Things To Do
 (Ideas that may or may not be implemented)
 
-- Allow for the URL to use a placeholder like "$VERSION$" that will substitute the version on export.
 - A command line utility that will let you read or update the admin file and export the UpdateInformation.html file.
+-- Commands will be create, export, getkey, listversions, versioninfo, editversion, deleteversion.
+  kaju --file /path/to/file create
+  kaju --file /path/to/file getkey
+  kaju --file /path/to/file export /path/to/export
+  kaju --file /path/to/file listversions
+  kaju --file /path/to/file versioninfo versionNum
+  kaju --file /path/to/file addversion versionNum
+  kaju --file /path/to/file deleteversion versionNum
+  kaju --file /path/to/file editversion versionNum key1=value [key2=@/path/to/data ...]
 - Ability to use Markdown instead of HTML to create the release notes.
