@@ -1,7 +1,7 @@
 #tag Class
 Protected Class UpdateChecker
 	#tag Method, Flags = &h0
-		Sub Constructor(preferencesFolder As FolderItem, preferencesFilename as string = "Kaju_Preferences")
+		Sub Constructor(preferencesFolder As FolderItem, preferencesFilename As String = kDefaultPreferencesName)
 		  self.PrefFile = preferencesFolder.Child( preferencesFilename )
 		  
 		  LoadPrefs()
@@ -570,7 +570,7 @@ Protected Class UpdateChecker
 	#tag Constant, Name = kAllowUpdateWindow, Type = Double, Dynamic = False, Default = \"&b10000000", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kPreferencesName, Type = String, Dynamic = False, Default = \"Kaju_Preferences", Scope = Private
+	#tag Constant, Name = kDefaultPreferencesName, Type = String, Dynamic = False, Default = \"Kaju_Preferences", Scope = Public
 	#tag EndConstant
 
 
