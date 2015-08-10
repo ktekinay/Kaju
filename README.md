@@ -246,7 +246,7 @@ There is also a `Kaju.Version` constant (introduced in v.1.4) that will let you 
 
 |Method|Description|
 |:-----|:---------|
-|Constructor(preferencesFolder As FolderItem)|Create the new instance around the given preferences folder|
+|Constructor(preferencesFolder As FolderItem[, preferencesFilename As String])|Create the new instance around the given preferences folder using the given name for the file if provided, or "Kaju_Preferences" if not|
 |Execute|Start the update process|
 |ResetIgnored|Reset the list of ignored updates|
 |Result As ResultType|The result of the last Execute|
@@ -277,7 +277,7 @@ This project was designed and implemented by:
 * Luke Cowgar (lcowgar at advancedpricing.com)
 * Jeremy Cowgar (jeremy at cowgar.com)
 
-With thanks to John Hansen and Paul Lefebvre.
+With thanks to John Hansen, Paul Lefebvre, and Scott Boss.
 
 Translations to other languages by:
 
@@ -399,4 +399,7 @@ Add a translation for each, then submit a pull request as outlined above.
 
 - **Admin app**: Split the file settings from the Admin window so a file can be manipulated independently.
 - **Admin app**: Save the last export file name to suggest it for the next export.
+
+1.5.4 (____, 2015)
+- Can override the preference file name when creating the UpdateChecker object.
 
