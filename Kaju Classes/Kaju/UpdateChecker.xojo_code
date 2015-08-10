@@ -1,8 +1,8 @@
 #tag Class
 Protected Class UpdateChecker
 	#tag Method, Flags = &h0
-		Sub Constructor(preferencesFolder As FolderItem)
-		  self.PrefFile = preferencesFolder.Child( kPreferencesName )
+		Sub Constructor(preferencesFolder As FolderItem, preferencesFilename as string = "Kaju_Preferences")
+		  self.PrefFile = preferencesFolder.Child( preferencesFilename )
 		  
 		  LoadPrefs()
 		  
