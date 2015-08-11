@@ -22,7 +22,12 @@ Inherits SubApplication
 		  //
 		  // The version might be nil so the subclass must be ready for that
 		  //
-		  return RaiseEvent Run( version, file, options )
+		  dim err as integer = RaiseEvent Run( version, file, options )
+		  if err = App.kErrorNoError then
+		    file.SaveTo adminFile
+		  end if
+		  
+		  return err
 		End Function
 	#tag EndEvent
 
