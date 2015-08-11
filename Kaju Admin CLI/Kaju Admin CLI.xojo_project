@@ -29,6 +29,7 @@ Class=ListVersionsApp;Sub Applications/ListVersionsApp.xojo_code;&h8ED2FFF;&h58E
 Class=AddVersionApp;Sub Applications/AddVersionApp.xojo_code;&h7DC607FF;&h58EA2FFF;false
 Class=DeleteVersionApp;Sub Applications/DeleteVersionApp.xojo_code;&h518477FF;&h58EA2FFF;false
 Class=VersionInfoApp;Sub Applications/VersionInfoApp.xojo_code;&h788B8FFF;&h58EA2FFF;false
+Class=EditVersionApp;Sub Applications/EditVersionApp.xojo_code;&h39BFF7FF;&h58EA2FFF;false
 MajorVersion=1
 MinorVersion=0
 SubVersion=0
