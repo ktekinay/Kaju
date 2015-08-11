@@ -81,6 +81,7 @@ Inherits ConsoleApplication
 		  SubAppDictionary.Value( kAppGetKey ) = new GetKeyApp
 		  SubAppDictionary.Value( kAppExport ) = new ExportApp
 		  SubAppDictionary.Value( kAppListVersions ) = new ListVersionsApp
+		  SubAppDictionary.Value( kAppAddVersion ) = new AddVersionApp
 		End Sub
 	#tag EndMethod
 
@@ -89,6 +90,9 @@ Inherits ConsoleApplication
 		Private SubAppDictionary As Dictionary
 	#tag EndProperty
 
+
+	#tag Constant, Name = kAppAddVersion, Type = String, Dynamic = False, Default = \"addversion", Scope = Private
+	#tag EndConstant
 
 	#tag Constant, Name = kAppCreate, Type = String, Dynamic = False, Default = \"create", Scope = Private
 	#tag EndConstant
