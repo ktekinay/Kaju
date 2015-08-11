@@ -22,18 +22,15 @@ Inherits SubApplication
 
 	#tag Event
 		Function Run(adminFile As FolderItem, options As OptionParser) As Integer
-		  if options.Extra.Ubound <> 0 then
-		    print "Too many extras specified"
-		    return App.kErrorGeneralError
-		  end if
-		  
 		  dim file as new KajuFile
 		  file.Load adminFile
 		  
-		  dim outPath as string = options.Extra( 0 )
-		  dim out as new FolderItem( outPath, FolderItem.PathTypeShell )
+		  for each outPath as string in options.Extra
+		    dim out as new FolderItem( outPath, FolderItem.PathTypeShell )
+		    
+		    file.ExportTo out
+		  next
 		  
-		  file.ExportTo out
 		  return App.kErrorNoError
 		End Function
 	#tag EndEvent
