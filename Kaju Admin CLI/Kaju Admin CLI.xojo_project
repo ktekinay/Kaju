@@ -24,6 +24,7 @@ Folder=Sub Applications;Sub Applications;&h58EA2FFF;&h0;false
 Class=GetKeyApp;Sub Applications/GetKeyApp.xojo_code;&h475957FF;&h58EA2FFF;false
 Class=CreateApp;Sub Applications/CreateApp.xojo_code;&h629A87FF;&h58EA2FFF;false
 Class=ExportApp;Sub Applications/ExportApp.xojo_code;&h34271FFF;&h58EA2FFF;false
+Class=ListVersionsApp;Sub Applications/ListVersionsApp.xojo_code;&h8ED2FFF;&h58EA2FFF;false
 MajorVersion=1
 MinorVersion=0
 SubVersion=0
