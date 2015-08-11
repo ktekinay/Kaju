@@ -61,6 +61,21 @@ Protected Class KajuFile
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function GetVersion(version As String) As Kaju.UpdateInformation
+		  version = version.Trim
+		  
+		  for each u as Kaju.UpdateInformation in KajuData
+		    if u.Version.Trim = version then
+		      return u
+		    end if
+		  next
+		  
+		  return nil
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		 Shared Function InsertVersion(originalURL As String, version As String) As String
 		  return originalURL.ReplaceAllB( "$VERSION$", version )
 		End Function
@@ -221,6 +236,7 @@ Protected Class KajuFile
 			Group="Behavior"
 			InitialValue="UpdateInformation.json"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
