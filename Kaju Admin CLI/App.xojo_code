@@ -18,20 +18,11 @@ Inherits ConsoleApplication
 		  
 		  for i as integer = 1 to args.Ubound
 		    dim arg as string = args( i )
-		    select case arg
-		    case "--" + kOptionKeyFile
-		      appArgs.Append arg
-		      if i < args.Ubound then
-		        appArgs.Append args( i + 1 )
-		        i = i + 1
-		      end if
-		      
-		    case "--help", "-h", "-?"
-		      appArgs.Append arg
-		      
-		    case else
+		    if SubAppDictionary.HasKey( arg ) then
 		      exit for i
-		    end select
+		    else
+		      appArgs.Append arg
+		    end if
 		  next
 		  
 		  parser.Parse appArgs
