@@ -1,6 +1,45 @@
 #tag Class
 Protected Class VersionHandlerSubApplication
 Inherits SubApplication
+	#tag Event
+		Sub AddOptions(parser As OptionParser)
+		  dim o as new Option( "v", kOptionVersion, "Specify the version.", Option.OptionType.String )
+		  o.IsRequired = true
+		  parser.AddOption o
+		  
+		  RaiseEvent AddOptions( parser )
+		  
+		End Sub
+	#tag EndEvent
+
+	#tag Event
+		Function Run(adminFile As FolderItem, options As OptionParser) As Integer
+		  dim file as new KajuFile
+		  file.Load adminFile
+		  
+		  dim version as Kaju.UpdateInformation = file.GetVersion( options.StringValue( kOptionVersion ) )
+		  
+		  //
+		  // The version might be nil so the subclass must be ready for that
+		  //
+		  return RaiseEvent Run( version, file, options )
+		End Function
+	#tag EndEvent
+
+
+	#tag Hook, Flags = &h0
+		Event AddOptions(parser As OptionParser)
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
+		Event Run(version As Kaju.UpdateInformation, file As KajuFile, options As OptionParser) As Integer
+	#tag EndHook
+
+
+	#tag Constant, Name = kOptionVersion, Type = String, Dynamic = False, Default = \"version", Scope = Protected
+	#tag EndConstant
+
+
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="Description"
