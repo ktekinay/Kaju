@@ -9,7 +9,7 @@ Inherits ConsoleApplication
 		  
 		  dim parser as new OptionParser( "kaju", "Administer Kaju files" )
 		  
-		  dim o as new Option( "", kOptionKeyFile, "The admin file", Option.OptionType.File )
+		  dim o as new Option( "", kOptionFile, "The admin file", Option.OptionType.File )
 		  o.IsRequired = true
 		  parser.AddOption o
 		  
@@ -35,7 +35,7 @@ Inherits ConsoleApplication
 		  //
 		  // Get the admin file
 		  //
-		  dim adminFile as FolderItem = parser.FileValue( kOptionKeyFile )
+		  dim adminFile as FolderItem = parser.FileValue( kOptionFile )
 		  
 		  //
 		  // Adjust the args
@@ -120,7 +120,7 @@ Inherits ConsoleApplication
 	#tag Constant, Name = kErrorNoError, Type = Double, Dynamic = False, Default = \"0", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kOptionKeyFile, Type = String, Dynamic = False, Default = \"file", Scope = Public
+	#tag Constant, Name = kOptionFile, Type = String, Dynamic = False, Default = \"file", Scope = Public
 	#tag EndConstant
 
 
