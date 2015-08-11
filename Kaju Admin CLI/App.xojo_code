@@ -82,6 +82,7 @@ Inherits ConsoleApplication
 		  SubAppDictionary.Value( kAppExport ) = new ExportApp
 		  SubAppDictionary.Value( kAppListVersions ) = new ListVersionsApp
 		  SubAppDictionary.Value( kAppAddVersion ) = new AddVersionApp
+		  SubAppDictionary.Value( kAppDeleteVersion ) = new DeleteVersionApp
 		End Sub
 	#tag EndMethod
 
@@ -95,6 +96,9 @@ Inherits ConsoleApplication
 	#tag EndConstant
 
 	#tag Constant, Name = kAppCreate, Type = String, Dynamic = False, Default = \"create", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kAppDeleteVersion, Type = String, Dynamic = False, Default = \"deleteversion", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kAppExport, Type = String, Dynamic = False, Default = \"export", Scope = Private
