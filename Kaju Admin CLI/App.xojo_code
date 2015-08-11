@@ -120,7 +120,7 @@ Inherits ConsoleApplication
 	#tag Constant, Name = kErrorNoError, Type = Double, Dynamic = False, Default = \"0", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kOptionFile, Type = String, Dynamic = False, Default = \"file", Scope = Public
+	#tag Constant, Name = kOptionFile, Type = String, Dynamic = False, Default = \"file", Scope = Private
 	#tag EndConstant
 
 
