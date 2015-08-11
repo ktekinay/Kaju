@@ -62,16 +62,27 @@ Protected Class KajuFile
 
 	#tag Method, Flags = &h0
 		Function GetVersion(version As String) As Kaju.UpdateInformation
+		  dim i as integer = IndexOf( version )
+		  if i <> -1 then
+		    return KajuData( i )
+		  else
+		    return nil
+		  end if
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function IndexOf(version As String) As Integer
 		  version = version.Trim
 		  
-		  for each u as Kaju.UpdateInformation in KajuData
+		  for i as integer = 0 to KajuData.Ubound
+		    dim u as Kaju.UpdateInformation = KajuData( i )
 		    if u.Version.Trim = version then
-		      return u
+		      return i
 		    end if
 		  next
 		  
-		  return nil
-		  
+		  return -1
 		End Function
 	#tag EndMethod
 
