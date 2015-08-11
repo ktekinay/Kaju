@@ -9,7 +9,13 @@ Inherits VersionHandlerSubApplication
 
 	#tag Event
 		Function Run(version As Kaju.UpdateInformation, file As KajuFile, options As OptionParser) As Integer
+		  if version is nil then
+		    print "Version not found"
+		    return App.kErrorGeneralError
+		  end if
 		  
+		  file.KajuData.Remove file.KajuData.IndexOf( version )
+		  return App.kErrorNoError
 		End Function
 	#tag EndEvent
 
