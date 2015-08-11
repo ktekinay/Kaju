@@ -8,7 +8,9 @@ Inherits VersionHandlerSubApplication
 	#tag EndEvent
 
 	#tag Event
-		Function Run(version As Kaju.UpdateInformation, file As KajuFile, options As OptionParser) As Integer
+		Function Run(version As Kaju.UpdateInformation, file As KajuFile, options As OptionParser, ByRef saveFile As Boolean) As Integer
+		  #pragma unused saveFile
+		  
 		  if version is nil then
 		    print "Version not found"
 		    return App.kErrorGeneralError

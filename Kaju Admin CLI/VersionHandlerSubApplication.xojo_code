@@ -22,8 +22,9 @@ Inherits SubApplication
 		  //
 		  // The version might be nil so the subclass must be ready for that
 		  //
-		  dim err as integer = RaiseEvent Run( version, file, options )
-		  if err = App.kErrorNoError then
+		  dim saveFile as boolean = true
+		  dim err as integer = RaiseEvent Run( version, file, options, saveFile )
+		  if saveFile and err = App.kErrorNoError then
 		    file.SaveTo adminFile
 		  end if
 		  
@@ -37,7 +38,7 @@ Inherits SubApplication
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event Run(version As Kaju.UpdateInformation, file As KajuFile, options As OptionParser) As Integer
+		Event Run(version As Kaju.UpdateInformation, file As KajuFile, options As OptionParser, ByRef saveFile As Boolean) As Integer
 	#tag EndHook
 
 
