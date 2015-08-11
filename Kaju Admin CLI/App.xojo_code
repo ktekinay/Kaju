@@ -119,11 +119,6 @@ Inherits ConsoleApplication
 
 
 	#tag ViewBehavior
-		#tag ViewProperty
-			Name="AdminFile"
-			Group="Behavior"
-			Type="Integer"
-		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
 #tag EndClass
