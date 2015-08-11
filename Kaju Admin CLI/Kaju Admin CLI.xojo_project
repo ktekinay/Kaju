@@ -7,6 +7,7 @@ Folder=Kaju Classes;../Kaju Classes;&h2570CF64;&h0;false
 Class=KajuFile;../Admin Classes/KajuFile.xojo_code;&h1A7FF7FF;&h0;false
 Folder=Other Classes;../Other Classes;&hF6057FF;&h0;false
 Class=SubApplication;SubApplication.xojo_code;&h2E4257FF;&h0;false
+Class=VersionHandlerSubApplication;VersionHandlerSubApplication.xojo_code;&h2332B7FF;&h0;false
 Folder=OptionParser;../Other Classes/OptionParser;&h797A37FF;&hF6057FF;false
 Module=Kaju;../Kaju Classes/Kaju.xojo_code;&h11400316;&h2570CF64;false
 Class=KajuException;../Kaju Classes/Kaju/KajuException.xojo_code;&h3047231F;&h11400316;false
