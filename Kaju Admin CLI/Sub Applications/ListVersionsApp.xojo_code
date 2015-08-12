@@ -4,7 +4,7 @@ Inherits SubApplication
 	#tag Event
 		Sub AddOptions(parser As OptionParser)
 		  dim o as new Option( "", kOptionEOL, _
-		  "The EOL separator.", Option.OptionType.String )
+		  "The EOL separator", Option.OptionType.String )
 		  o.AddAllowedValue "cr", "lf", "crlf", "null"
 		  
 		  parser.AddOption o
@@ -12,16 +12,16 @@ Inherits SubApplication
 	#tag EndEvent
 
 	#tag Event
-		Function GetDescription() As String
-		  return kDescription
-		  
+		Function GetAdditionalHelp() As String
+		  return kAdditionalHelp
 		End Function
 	#tag EndEvent
 
 	#tag Event
-		Sub PrintHelp(options As OptionParser)
+		Function GetDescription() As String
+		  return kDescription
 		  
-		End Sub
+		End Function
 	#tag EndEvent
 
 	#tag Event
@@ -56,6 +56,9 @@ Inherits SubApplication
 	#tag EndEvent
 
 
+	#tag Constant, Name = kAdditionalHelp, Type = String, Dynamic = False, Default = \"Lists all the versions in the given admin file. The list will be separated by the given EOL or by the platform\'s default end-of-line character.", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"List the versions in the file", Scope = Private
 	#tag EndConstant
 
@@ -64,6 +67,12 @@ Inherits SubApplication
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="AdditionalHelp"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Description"
 			Group="Behavior"
@@ -102,6 +111,12 @@ Inherits SubApplication
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Usage"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

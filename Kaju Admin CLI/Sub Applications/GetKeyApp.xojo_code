@@ -2,19 +2,21 @@
 Protected Class GetKeyApp
 Inherits SubApplication
 	#tag Event
+		Function GetAdditionalHelp() As String
+		  return kAdditionalHelp
+		End Function
+	#tag EndEvent
+
+	#tag Event
 		Function GetDescription() As String
 		  return kDescription
 		End Function
 	#tag EndEvent
 
 	#tag Event
-		Sub PrintHelp(options As OptionParser)
-		  
-		End Sub
-	#tag EndEvent
-
-	#tag Event
 		Function Run(adminFile As FolderItem, options As OptionParser) As Integer
+		  #pragma unused options
+		  
 		  dim file as new KajuFile
 		  file.Load adminFile
 		  
@@ -24,7 +26,10 @@ Inherits SubApplication
 	#tag EndEvent
 
 
-	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"Get the public key", Scope = Private
+	#tag Constant, Name = kAdditionalHelp, Type = String, Dynamic = False, Default = \"Retuns the RSA public key in hex form from the admin file.", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"Get the RSA public key", Scope = Private
 	#tag EndConstant
 
 
