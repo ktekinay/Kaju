@@ -181,8 +181,8 @@ Protected Class KajuFile
 		KajuData() As Kaju.UpdateInformation
 	#tag EndProperty
 
-	#tag Property, Flags = &h0
-		mExportFilename As String = "UpdateInformation.json"
+	#tag Property, Flags = &h21
+		Private mExportFilename As String = "UpdateInformation.json"
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
