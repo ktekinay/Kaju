@@ -37,6 +37,15 @@ Inherits VersionHandlerSubApplication
 		  #pragma unused saveFile
 		  
 		  //
+		  // Make sure there are no extras
+		  // (probably means bad form)
+		  //
+		  if options.Extra.Ubound <> -1 then
+		    print "Unrecognized options: " + join( options.Extra, ", " ) + " (did you mean to `--set'?)"
+		    return App.kErrorGeneralError
+		  end if
+		  
+		  //
 		  // See if there is an encoding specified
 		  //
 		  dim enc as TextEncoding
