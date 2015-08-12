@@ -113,23 +113,24 @@ Inherits ConsoleApplication
 		  next
 		  subAppNames.SortWith subAppDescriptions
 		  
-		  Print LongVersion
-		  Print "Usage: " + kAppName + " [global-parameters] app-key [parameters]"
-		  Print ""
+		  print LongVersion
+		  print ""
+		  print "Usage: " + kAppName + " [global-parameters] app-key [parameters]"
+		  print ""
 		  
 		  if parser isa OptionParser then
 		    parser.ShowHelp( "Global parameters" )
-		    Print ""
+		    print ""
 		  end if
 		  
-		  Print "Where app-key is:"
+		  print "Where app-key is:"
 		  for i as integer = 0 to subAppNames.Ubound
-		    Print "  " + PadRight( subAppNames( i ), subAppNameMaxLen ) + " - " + subAppDescriptions( i )
+		    print "  " + PadRight( subAppNames( i ), subAppNameMaxLen ) + " - " + subAppDescriptions( i )
 		  next
-		  Print ""
-		  Print "For help on a given application, use:"
-		  Print "  " + kAppName + " app-key --help"
-		  Print ""
+		  print ""
+		  print "For help on a given application, use:"
+		  print "  " + kAppName + " app-key --help"
+		  print ""
 		End Sub
 	#tag EndMethod
 
@@ -146,17 +147,17 @@ Inherits ConsoleApplication
 		    end if
 		  end if
 		  
-		  Print LongVersion
-		  Print ""
-		  Print "Usage:"
-		  Print "  " + kAppName + " --file /path/to/admin/file " + _
+		  print LongVersion
+		  print ""
+		  print "Usage:"
+		  print "  " + kAppName + " --file /path/to/admin/file " + _
 		  subAppName + if( subAppUsage <> "", " " + subAppUsage, "" ) + " [parameters]"
 		  
 		  if options <> nil then
 		    options.AdditionalHelpNotes = subApp.AdditionalHelp
 		    
-		    Print ""
-		    Print "Help for:"
+		    print ""
+		    print "Help for:"
 		    options.ShowHelp()
 		  end if
 		End Sub
