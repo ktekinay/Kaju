@@ -61,6 +61,32 @@ Protected Class KajuFile
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function GetVersion(version As String) As Kaju.UpdateInformation
+		  dim i as integer = IndexOf( version )
+		  if i <> -1 then
+		    return KajuData( i )
+		  else
+		    return nil
+		  end if
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function IndexOf(version As String) As Integer
+		  version = version.Trim
+		  
+		  for i as integer = 0 to KajuData.Ubound
+		    dim u as Kaju.UpdateInformation = KajuData( i )
+		    if u.Version.Trim = version then
+		      return i
+		    end if
+		  next
+		  
+		  return -1
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		 Shared Function InsertVersion(originalURL As String, version As String) As String
 		  return originalURL.ReplaceAllB( "$VERSION$", version )
 		End Function
@@ -155,8 +181,8 @@ Protected Class KajuFile
 		KajuData() As Kaju.UpdateInformation
 	#tag EndProperty
 
-	#tag Property, Flags = &h0
-		mExportFilename As String = "UpdateInformation.json"
+	#tag Property, Flags = &h21
+		Private mExportFilename As String = "UpdateInformation.json"
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -221,6 +247,7 @@ Protected Class KajuFile
 			Group="Behavior"
 			InitialValue="UpdateInformation.json"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"

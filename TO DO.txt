@@ -7,8 +7,8 @@ Things To Do
   kaju --file /path/to/file getkey
   kaju --file /path/to/file export /path/to/export
   kaju --file /path/to/file listversions
-  kaju --file /path/to/file versioninfo versionNum
-  kaju --file /path/to/file addversion versionNum
-  kaju --file /path/to/file deleteversion versionNum
-  kaju --file /path/to/file editversion versionNum key1=value [key2=@/path/to/data ...]
+  kaju --file /path/to/file versioninfo --version versionNum [ --json=true ]
+  kaju --file /path/to/file addversion --version versionNum --appname name
+  kaju --file /path/to/file deleteversion --version versionNum
+  kaju --file /path/to/file editversion --version versionNum key1=value [key2=@/path/to/data ...]
 - Ability to use Markdown instead of HTML to create the release notes.
