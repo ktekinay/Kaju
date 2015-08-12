@@ -30,6 +30,10 @@ Inherits SubApplication
 		    file.ExportTo out
 		  next
 		  
+		  //
+		  // Save the lastest export name
+		  //
+		  file.SaveTo adminFile
 		  return App.kErrorNoError
 		End Function
 	#tag EndEvent
