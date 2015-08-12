@@ -28,7 +28,7 @@ Inherits ConsoleApplication
 		  parser.Parse appArgs
 		  
 		  if parser.HelpRequested then
-		    parser.ShowHelp
+		    PrintMainHelp parser
 		    return kErrorNoError
 		  end if
 		  
@@ -63,7 +63,7 @@ Inherits ConsoleApplication
 		  subappParser.Parse args
 		  
 		  if subappParser.HelpRequested then
-		    subapp.PrintHelp subappParser
+		    PrintSubAppHelp
 		    return kErrorNoError
 		  end if
 		  
@@ -72,6 +72,18 @@ Inherits ConsoleApplication
 		End Function
 	#tag EndEvent
 
+
+	#tag Method, Flags = &h21
+		Private Sub PrintMainHelp(options As OptionParser)
+		  #pragma warning "Finish this!"
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub PrintSubAppHelp()
+		  #pragma warning "Finish this!"
+		End Sub
+	#tag EndMethod
 
 	#tag Method, Flags = &h21
 		Private Sub RegisterSubApps()

@@ -8,12 +8,6 @@ Inherits SubApplication
 	#tag EndEvent
 
 	#tag Event
-		Sub PrintHelp(options As OptionParser)
-		  
-		End Sub
-	#tag EndEvent
-
-	#tag Event
 		Function Run(adminFile As FolderItem, options As OptionParser) As Integer
 		  #pragma unused options
 		  

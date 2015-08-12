@@ -13,12 +13,6 @@ Protected Class SubApplication
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Sub PrintHelp(options As OptionParser)
-		  RaiseEvent PrintHelp( options )
-		End Sub
-	#tag EndMethod
-
 
 	#tag Hook, Flags = &h0
 		Event AddOptions(parser As OptionParser)
@@ -26,10 +20,6 @@ Protected Class SubApplication
 
 	#tag Hook, Flags = &h0
 		Event GetDescription() As String
-	#tag EndHook
-
-	#tag Hook, Flags = &h0
-		Event PrintHelp(options As OptionParser)
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
