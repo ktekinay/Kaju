@@ -18,6 +18,7 @@ Inherits VersionHandlerSubApplication
 
 	#tag Event
 		Function Run(version As Kaju.UpdateInformation, file As KajuFile, options As OptionParser, ByRef saveFile As Boolean) As Integer
+		  #pragma unused version
 		  #pragma unused saveFile
 		  
 		  dim appName as string = options.StringValue( kOptionAppName )

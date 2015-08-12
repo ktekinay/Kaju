@@ -15,6 +15,8 @@ Inherits VersionHandlerSubApplication
 
 	#tag Event
 		Function Run(version As Kaju.UpdateInformation, file As KajuFile, options As OptionParser, ByRef saveFile As Boolean) As Integer
+		  #pragma unused file
+		  
 		  saveFile = false
 		  
 		  dim json as JSONItem = version.ToJSON

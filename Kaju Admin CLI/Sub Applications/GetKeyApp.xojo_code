@@ -15,6 +15,8 @@ Inherits SubApplication
 
 	#tag Event
 		Function Run(adminFile As FolderItem, options As OptionParser) As Integer
+		  #pragma unused options
+		  
 		  dim file as new KajuFile
 		  file.Load adminFile
 		  
