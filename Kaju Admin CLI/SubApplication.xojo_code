@@ -19,7 +19,15 @@ Protected Class SubApplication
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
+		Event GetAdditionalHelp() As String
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
 		Event GetDescription() As String
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
+		Event GetUsage() As String
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
@@ -30,14 +38,38 @@ Protected Class SubApplication
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
+			  return RaiseEvent GetAdditionalHelp
+			End Get
+		#tag EndGetter
+		AdditionalHelp As String
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
 			  return RaiseEvent GetDescription
 			End Get
 		#tag EndGetter
 		Description As String
 	#tag EndComputedProperty
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return RaiseEvent GetUsage
+			End Get
+		#tag EndGetter
+		Usage As String
+	#tag EndComputedProperty
+
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="Description"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true
