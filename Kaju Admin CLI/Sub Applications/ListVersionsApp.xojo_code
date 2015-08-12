@@ -12,6 +12,12 @@ Inherits SubApplication
 	#tag EndEvent
 
 	#tag Event
+		Function GetAdditionalHelp() As String
+		  return kAdditionalHelp
+		End Function
+	#tag EndEvent
+
+	#tag Event
 		Function GetDescription() As String
 		  return kDescription
 		  
@@ -50,6 +56,9 @@ Inherits SubApplication
 	#tag EndEvent
 
 
+	#tag Constant, Name = kAdditionalHelp, Type = String, Dynamic = False, Default = \"Lists all the versions in the given admin file. The list will be separated by the given EOL or by the platform\'s default end-of-line character.", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"List the versions in the file", Scope = Private
 	#tag EndConstant
 
@@ -58,6 +67,12 @@ Inherits SubApplication
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="AdditionalHelp"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Description"
 			Group="Behavior"
@@ -96,6 +111,12 @@ Inherits SubApplication
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Usage"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

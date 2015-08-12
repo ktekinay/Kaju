@@ -207,7 +207,7 @@ Inherits VersionHandlerSubApplication
 	#tag EndMethod
 
 
-	#tag Constant, Name = kAdditionalHelp, Type = String, Dynamic = False, Default = \"Set a version field to the given value. You can use the `@\' form to read the input from a file. Relative paths can be used.\n\nExamples:\n\nChange a version number:\n  editversion --version\x3D1.0 --set version\x3D1.2\n\nSet the release notes from a file:\n  editversion --version\x3D1.2 --set ReleaseNotes\x3D@/path/to/file\n\nMultiple changes:\n  editversion --version\x3D1.0 --set version\x3D1.1\n    --set ReleaseNotes\x3D@/path/to/file\n    --set MinimumRequiredVersion\x3D1.1\n    --set RequiresPayment\x3Dtrue\n\nSet the binary hashes:\n  editversion --version\x3D1.1\n    --macbinary\x3D/path/to/mac/file\n    --winbinary\x3D/path/to/windows/file\n\nSet a binary\'s data:\n  editversion --version\x3D1.5\n    --set MacBinary.url\x3Dhttp://www.something.com\n    --set WindowsBinary.ExecutableName\x3DMyApp\n\nYou can get a list of the top-level field names through the versioninfo tool. The binary fields are:\n\n  Hash (should not be set directly)\n  URL\n  ExecutableName (required for Windows and Linux)", Scope = Private
+	#tag Constant, Name = kAdditionalHelp, Type = String, Dynamic = False, Default = \"Set a version field to the given value. You can use the `@\' form to read the input from a file. Relative paths can be used.\n\nExamples:\n\nChange a version number:\n  editversion --version\x3D1.0 --set version\x3D1.2\n\nSet the release notes from a file:\n  editversion --version\x3D1.2 --set ReleaseNotes\x3D@/path/to/file\n\nMultiple changes:\n  editversion --version\x3D1.0 --set version\x3D1.1\n    --set ReleaseNotes\x3D@/path/to/file\n    --set MinimumRequiredVersion\x3D1.1\n    --set RequiresPayment\x3Dtrue\n\nSet the binary hashes:\n  editversion --version\x3D1.1\n    --macbinary\x3D/path/to/mac/file\n    --winbinary\x3D/path/to/windows/file\n\nSet a binary\'s data:\n  editversion --version\x3D1.5\n    --set MacBinary.url\x3Dhttp://www.something.com\n    --set WindowsBinary.ExecutableName\x3DMyApp\n\nYou can get a list of the top-level field names through the versioninfo tool. The binary fields are:\n\n  Hash (should not be set directly)\n  URL\n  ExecutableName (required for Windows and Linux)\n\nVersion placeholder:\n\nWhen setting binary URL\'s\x2C you can use `$VERSION$\' as a placeholder to substitute the version number when exporting the Update Information file.", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"Edit a version", Scope = Private
@@ -239,6 +239,12 @@ Inherits VersionHandlerSubApplication
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="AdditionalHelp"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Description"
 			Group="Behavior"
@@ -277,6 +283,12 @@ Inherits VersionHandlerSubApplication
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Usage"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

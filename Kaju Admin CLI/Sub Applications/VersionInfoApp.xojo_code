@@ -8,6 +8,12 @@ Inherits VersionHandlerSubApplication
 	#tag EndEvent
 
 	#tag Event
+		Function GetAdditionalHelp() As String
+		  return kAdditionalHelp
+		End Function
+	#tag EndEvent
+
+	#tag Event
 		Function GetDescription() As String
 		  return kDescription
 		End Function
@@ -60,6 +66,9 @@ Inherits VersionHandlerSubApplication
 	#tag EndMethod
 
 
+	#tag Constant, Name = kAdditionalHelp, Type = String, Dynamic = False, Default = \"Returns the fields and data for the given version. Optionally can be output as JSON.", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"Get information for a version", Scope = Private
 	#tag EndConstant
 
@@ -68,6 +77,12 @@ Inherits VersionHandlerSubApplication
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="AdditionalHelp"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Description"
 			Group="Behavior"
@@ -106,6 +121,12 @@ Inherits VersionHandlerSubApplication
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Usage"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
