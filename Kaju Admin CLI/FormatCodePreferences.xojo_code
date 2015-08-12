@@ -25,7 +25,7 @@ Protected Module FormatCodePreferences
 	#tag Constant, Name = DoDebug, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = KeywordsToLowerCase, Type = String, Dynamic = False, Default = \"if\x2C then\x2C end\x2C while\x2C wend\x2C select\x2C case\n", Scope = Protected
+	#tag Constant, Name = KeywordsToLowerCase, Type = String, Dynamic = False, Default = \"if\x2C then\x2C end\x2C while\x2C wend\x2C select\x2C case\x2C print\n", Scope = Protected
 	#tag EndConstant
 
 	#tag Constant, Name = KeywordsToTitleCase, Type = String, Dynamic = False, Default = \"Int8\x2C Int16\x2C Int32\x2C Int64\x2C UInt8\x2C UInt16\x2C UInt32\x2C UInt64\n\nDictionary\x2C Date\n\nTrue\x2C False\n\nClose\n\nRaiseEvent\n\nBackgroundTasks\nNilObjectChecking\nStackOverflowChecking\nBoundsChecking\nDebugBuild", Scope = Protected
