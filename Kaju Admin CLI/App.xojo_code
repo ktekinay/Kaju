@@ -10,7 +10,6 @@ Inherits ConsoleApplication
 		  dim parser as new OptionParser( "kaju", "Administer Kaju files" )
 		  
 		  dim o as new Option( "", kOptionFile, "The admin file", Option.OptionType.File )
-		  o.IsRequired = true
 		  parser.AddOption o
 		  
 		  dim appArgs() as string
@@ -27,15 +26,10 @@ Inherits ConsoleApplication
 		  
 		  parser.Parse appArgs
 		  
-		  if parser.HelpRequested then
+		  if args.Ubound = 0 or parser.HelpRequested then
 		    PrintMainHelp parser
 		    return kErrorNoError
 		  end if
-		  
-		  //
-		  // Get the admin file
-		  //
-		  dim adminFile as FolderItem = parser.FileValue( kOptionFile )
 		  
 		  //
 		  // Adjust the args
@@ -63,8 +57,17 @@ Inherits ConsoleApplication
 		  subappParser.Parse args
 		  
 		  if subappParser.HelpRequested then
-		    PrintSubAppHelp
+		    PrintSubAppHelp( subappKey, subapp, subappParser )
 		    return kErrorNoError
+		  end if
+		  
+		  //
+		  // Get the admin file
+		  //
+		  dim adminFile as FolderItem = parser.FileValue( kOptionFile )
+		  if adminFile is nil then
+		    print "No admin file specified"
+		    return kErrorGeneralError
 		  end if
 		  
 		  return subapp.Execute( adminFile, subappParser )
@@ -74,14 +77,87 @@ Inherits ConsoleApplication
 
 
 	#tag Method, Flags = &h21
-		Private Sub PrintMainHelp(options As OptionParser)
-		  #pragma warning "Finish this!"
+		Private Function PadRight(s As String, width As Integer) As String
+		  if s.Len >= width then
+		    return s
+		  end if
+		  
+		  static padder as string = " "
+		  while padder.Len < width
+		    padder = padder + padder
+		  wend
+		  
+		  s = s + padder.Left( width - s.Len )
+		  return s
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub PrintMainHelp(parser As OptionParser)
+		  // Have to get the names and descriptions of each of the registered subapps
+		  
+		  dim subAppNameMaxLen as integer = 0
+		  dim subAppNames() as string
+		  dim subAppDescriptions() as string
+		  for each k as variant in SubAppDictionary.Keys
+		    dim subApp as SubApplication = SubAppDictionary.Value( k )
+		    
+		    if k.StringValue.Len > subAppNameMaxLen then
+		      subAppNameMaxLen = k.StringValue.Len
+		    end if
+		    
+		    subAppNames.Append k.StringValue
+		    
+		    dim thisDescription as string = subApp.Description
+		    subAppDescriptions.Append thisDescription
+		  next
+		  subAppNames.SortWith subAppDescriptions
+		  
+		  Print LongVersion
+		  Print "Usage: " + kAppName + " [global-parameters] app-key [parameters]"
+		  Print ""
+		  
+		  if parser isa OptionParser then
+		    parser.ShowHelp( "Global parameters" )
+		    Print ""
+		  end if
+		  
+		  Print "Where app-key is:"
+		  for i as integer = 0 to subAppNames.Ubound
+		    Print "  " + PadRight( subAppNames( i ), subAppNameMaxLen ) + " - " + subAppDescriptions( i )
+		  next
+		  Print ""
+		  Print "For help on a given application, use:"
+		  Print "  " + kAppName + " app-key --help"
+		  Print ""
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub PrintSubAppHelp()
-		  #pragma warning "Finish this!"
+		Private Sub PrintSubAppHelp(subAppName As String, subApp As SubApplication, options As OptionParser)
+		  dim subAppUsage as string = subApp.Usage
+		  
+		  if subAppUsage = "" then
+		    if options.ExtrasRequired > 0 then
+		      for i as integer = 1 to options.ExtrasRequired
+		        subAppUsage = subAppUsage + " /path/to/file" + Str( i )
+		      next i
+		      subAppUsage = subAppUsage + " [/path/to/file ...]"
+		    end if
+		  end if
+		  
+		  Print LongVersion
+		  Print ""
+		  Print "Usage:"
+		  Print "  " + kAppName + " --file /path/to/admin/file " + subAppName + " [parameters] " + subAppUsage
+		  
+		  if options <> nil then
+		    options.AdditionalHelpNotes = subApp.AdditionalHelp
+		    
+		    Print ""
+		    Print "Help for:"
+		    options.ShowHelp()
+		  end if
 		End Sub
 	#tag EndMethod
 
