@@ -60,7 +60,7 @@ Inherits VersionHandlerSubApplication
 	#tag EndMethod
 
 
-	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"Get all version information", Scope = Private
+	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"Get information for a version", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kOptionJSON, Type = String, Dynamic = False, Default = \"json", Scope = Private

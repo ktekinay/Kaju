@@ -4,7 +4,7 @@ Inherits SubApplication
 	#tag Event
 		Sub AddOptions(parser As OptionParser)
 		  dim o as new Option( "", kOptionEOL, _
-		  "The EOL separator.", Option.OptionType.String )
+		  "The EOL separator", Option.OptionType.String )
 		  o.AddAllowedValue "cr", "lf", "crlf", "null"
 		  
 		  parser.AddOption o
