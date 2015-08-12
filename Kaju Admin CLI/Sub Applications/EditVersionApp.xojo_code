@@ -180,37 +180,8 @@ Inherits VersionHandlerSubApplication
 		  // Do some simple path parsing
 		  //
 		  
-		  #if TargetWin32 then
-		    
-		  #else 
-		    
-		    if path.Left( 2 ) = "~/" then
-		      path = SpecialFolder.UserHome.NativePath + path.Mid( 2 )
-		    end if
-		    
-		    if path.Left( 1 ) <> "/" then
-		      path = SpecialFolder.CurrentWorkingDirectory.NativePath + "/" + path
-		    end if
-		    
-		    dim pathParts() as string = path.Split( "/" )
-		    dim newParts() as string
-		    for i as integer = 0 to pathParts.Ubound
-		      dim part as string = pathParts( i )
-		      if part = ".." then
-		        newParts.Remove newParts.Ubound
-		      elseif part = "." then
-		        //
-		        // Do nothing
-		        //
-		      else
-		        newParts.Append part
-		      end if
-		    next
-		    
-		    path = join( newParts, "/" )
-		  #endif
+		  dim f as FolderItem = OptionParser.GetRelativeFolderItem( path )
 		  
-		  dim f as new FolderItem( path, FolderItem.PathTypeShell )
 		  dim bs as BinaryStream = BinaryStream.Open( f )
 		  dim r as string = bs.Read( bs.Length )
 		  bs.Close
