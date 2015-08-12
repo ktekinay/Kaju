@@ -115,6 +115,12 @@ Inherits ConsoleApplication
 	#tag Constant, Name = kAppListVersions, Type = String, Dynamic = False, Default = \"listversions", Scope = Private
 	#tag EndConstant
 
+	#tag Constant, Name = kAppName, Type = String, Dynamic = False, Default = \"", Scope = Public
+		#Tag Instance, Platform = Mac OS, Language = Default, Definition  = \"kaju"
+		#Tag Instance, Platform = Linux, Language = Default, Definition  = \"kaju"
+		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"kaju.exe"
+	#tag EndConstant
+
 	#tag Constant, Name = kAppVersionInfo, Type = String, Dynamic = False, Default = \"versioninfo", Scope = Private
 	#tag EndConstant
 
