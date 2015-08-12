@@ -149,7 +149,8 @@ Inherits ConsoleApplication
 		  Print LongVersion
 		  Print ""
 		  Print "Usage:"
-		  Print "  " + kAppName + " --file /path/to/admin/file " + subAppName + " [parameters] " + subAppUsage
+		  Print "  " + kAppName + " --file /path/to/admin/file " + _
+		  subAppName + if( subAppUsage <> "", " " + subAppUsage, "" ) + " [parameters]"
 		  
 		  if options <> nil then
 		    options.AdditionalHelpNotes = subApp.AdditionalHelp

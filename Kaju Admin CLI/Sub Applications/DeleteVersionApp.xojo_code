@@ -2,6 +2,12 @@
 Protected Class DeleteVersionApp
 Inherits VersionHandlerSubApplication
 	#tag Event
+		Function GetAdditionalHelp() As String
+		  return kAdditionalHelp
+		End Function
+	#tag EndEvent
+
+	#tag Event
 		Function GetDescription() As String
 		  return kDescription
 		End Function
@@ -22,6 +28,9 @@ Inherits VersionHandlerSubApplication
 		End Function
 	#tag EndEvent
 
+
+	#tag Constant, Name = kAdditionalHelp, Type = String, Dynamic = False, Default = \"Deletes a version from the given admin file.", Scope = Private
+	#tag EndConstant
 
 	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"Delete a version", Scope = Private
 	#tag EndConstant

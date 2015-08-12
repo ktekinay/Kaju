@@ -26,6 +26,12 @@ Inherits VersionHandlerSubApplication
 	#tag EndEvent
 
 	#tag Event
+		Function GetAdditionalHelp() As String
+		  return kAdditionalHelp
+		End Function
+	#tag EndEvent
+
+	#tag Event
 		Function GetDescription() As String
 		  return kDescription
 		End Function
@@ -200,6 +206,9 @@ Inherits VersionHandlerSubApplication
 		End Function
 	#tag EndMethod
 
+
+	#tag Constant, Name = kAdditionalHelp, Type = String, Dynamic = False, Default = \"Set a version field to the given value. You can use the `@\' form to read the input from a file. Relative paths can be used.\n\nExamples:\n\nChange a version number:\n  editversion --version\x3D1.0 --set version\x3D1.2\n\nSet the release notes from a file:\n  editversion --version\x3D1.2 --set ReleaseNotes\x3D@/path/to/file\n\nMultiple changes:\n  editversion --version\x3D1.0 --set version\x3D1.1\n    --set ReleaseNotes\x3D@/path/to/file\n    --set MinimumRequiredVersion\x3D1.1\n    --set RequiresPayment\x3Dtrue\n\nSet the binary hashes:\n  editversion --version\x3D1.1\n    --macbinary\x3D/path/to/mac/file\n    --winbinary\x3D/path/to/windows/file\n\nSet a binary\'s data:\n  editversion --version\x3D1.5\n    --set MacBinary.url\x3Dhttp://www.something.com\n    --set WindowsBinary.ExecutableName\x3DMyApp\n\nYou can get a list of the top-level field names through the versioninfo tool. The binary fields are:\n\n  Hash (should not be set directly)\n  URL\n  ExecutableName (required for Windows and Linux)", Scope = Private
+	#tag EndConstant
 
 	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"Edit a version", Scope = Private
 	#tag EndConstant

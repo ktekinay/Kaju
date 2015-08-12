@@ -3,7 +3,7 @@ Protected Class VersionHandlerSubApplication
 Inherits SubApplication
 	#tag Event
 		Sub AddOptions(parser As OptionParser)
-		  dim o as new Option( "v", kOptionVersion, "Specify the version.", Option.OptionType.String )
+		  dim o as new Option( "v", kOptionVersion, "The version number (required)", Option.OptionType.String )
 		  o.IsRequired = true
 		  parser.AddOption o
 		  
