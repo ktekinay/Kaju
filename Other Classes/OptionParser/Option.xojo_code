@@ -28,7 +28,7 @@ Protected Class Option
 		Sub Constructor(shortKey As String, longKey As String, description As String, type As OptionType = OptionType.String)
 		  //
 		  // Construct a new `Option` for use with `OptionParser`. Provides most
-		  // common attributes about an option as parameters.
+		  // common attributes about an option as parameters. 
 		  //
 		  // ### Parameters
 		  // * `shortKey` - Option's short key, can be blank
@@ -105,6 +105,13 @@ Protected Class Option
 		    
 		  #Else
 		    Const pathSep = "/"
+		    
+		    //
+		    // Resolve home
+		    //
+		    if path.Left(2) = "~/" then
+		      path = SpecialFolder.UserHome.NativePath + path.Mid(2)
+		    end if
 		    
 		    //
 		    // Maybe what is passed isn't actually a relative path
@@ -198,13 +205,17 @@ Protected Class Option
 		    End If
 		    
 		  Case OptionType.Directory
-		    newValue = GetRelativeFolderItem(value)
+		    if value <> "" then
+		      newValue = GetRelativeFolderItem(value)
+		    end if
 		    
 		  Case OptionType.Double
 		    newValue = Val(value)
 		    
 		  Case OptionType.File
-		    newValue = GetRelativeFolderItem(value)
+		    if value <> "" then
+		      newValue = GetRelativeFolderItem(value)
+		    end if
 		    
 		  Case OptionType.Integer
 		    newValue = Val(value)
@@ -390,7 +401,7 @@ Protected Class Option
 			date. If the validation fails a `OptionInvalidKeyValueException` exception will be raised.
 			
 			**NOTE:** This does not mean that the option is required. It simply means that if supplied, the
-			option needs to be a valid date. If you want to make sure that the option is both a readable
+			option needs to be a valid date. If you want to make sure that the option is both a readable 
 			date and required, one should also set `IsRequired=True`.
 		#tag EndNote
 		IsValidDateRequired As Boolean

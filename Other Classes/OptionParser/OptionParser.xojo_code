@@ -105,7 +105,7 @@ Protected Class OptionParser
 		  
 		  dim args() as string
 		  
-		  #if DebugBuild and not kDebugDeclares then
+		  #if DebugBuild and not kDebugDeclares then 
 		    //
 		    // Not perfect, but will emulate what you'll get in the built app
 		    //
@@ -462,7 +462,7 @@ Protected Class OptionParser
 		  // Parse the arguments
 		  //
 		  // ### Parameters
-		  //
+		  // 
 		  // * `args()` - Command line arguments already split into an array. Generally this will be used
 		  //   with a `ConsoleApplication` since it's `Run` event passes in command line parameters this way.
 		  //
@@ -527,7 +527,9 @@ Protected Class OptionParser
 		    End If
 		    
 		    Dim equalIdx As Integer = key.InStr(2, "=") // Start at the second character
+		    dim hasEquals as boolean
 		    If equalIdx <> 0 Then
+		      hasEquals = true
 		      value = key.Mid(equalIdx + 1)
 		      key = key.Left(equalIdx - 1)
 		    End If
@@ -553,7 +555,7 @@ Protected Class OptionParser
 		      End If
 		    End If
 		    
-		    If value <> "" Then
+		    If value <> "" or hasEquals Then
 		      // We already got the value, ignore everything else in this If
 		      
 		    ElseIf opt.Type = Option.OptionType.Boolean Then
@@ -676,7 +678,7 @@ Protected Class OptionParser
 		  //
 		  // ### Parameters
 		  //
-		  // * `value` - Command line arguments contained in a single line string. This is
+		  // * `value` - Command line arguments contained in a single line string. This is 
 		  //   used in a Desktop via a call to `System.CommandLine` as a Desktop
 		  //   has no direct access to the `args()` parameter that a `ConsoleApplication`
 		  //   does.
@@ -868,7 +870,7 @@ Protected Class OptionParser
 		      helpLines.Append key + desc
 		      
 		    Else
-		      helpLines.Append kIndentPrefix + PadRight(key, kAlignCol + 1) + desc
+		      helpLines.Append kIndentPrefix + PadRight(key, kAlignCol + 1) + desc 
 		      
 		    End If
 		  Next
@@ -1064,6 +1066,7 @@ Protected Class OptionParser
 			
 			This can be used to provide further usage notes and to expand on options
 			when a single line description is not sufficient.
+			
 		#tag EndNote
 		#tag Getter
 			Get
@@ -1082,6 +1085,7 @@ Protected Class OptionParser
 		#tag Note
 			Typically a single line description of the application that is displayed
 			before the application help.
+			
 		#tag EndNote
 		AppDescription As String
 	#tag EndProperty
@@ -1089,7 +1093,7 @@ Protected Class OptionParser
 	#tag Property, Flags = &h0
 		#tag Note
 			Name of the application. If empty, `OptionParser` will assign the `AppName`
-			variable to the name of the executable filename. This is displayed when
+			variable to the name of the executable filename. This is displayed when 
 			user help is shown.
 		#tag EndNote
 		AppName As String
