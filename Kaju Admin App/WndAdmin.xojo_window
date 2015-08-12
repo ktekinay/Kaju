@@ -2430,7 +2430,20 @@ End
 		    return
 		  end if
 		  
+		  StoreFieldsToVersionRow
+		  
 		  dim version as Kaju.UpdateInformation = lbVersions.RowTag( curIndex )
+		  
+		  dim dlg as new MessageDialog
+		  dlg.Message = "Really delete version " + version.Version + "?"
+		  dlg.Explanation = "This cannot be undone."
+		  dlg.ActionButton.Caption = "&Delete"
+		  dlg.CancelButton.Visible = true
+		  dim btn as MessageDialogButton = dlg.ShowModalWithin( self )
+		  if btn is dlg.CancelButton then
+		    return
+		  end if
+		  
 		  lbVersions.ListIndex = -1
 		  lbVersions.RemoveRow( curIndex )
 		  
@@ -2443,6 +2456,8 @@ End
 		  if curIndex < lbVersions.ListCount then
 		    lbVersions.ListIndex = curIndex
 		  end if
+		  
+		  ContentsChanged = true
 		End Sub
 	#tag EndMethod
 
