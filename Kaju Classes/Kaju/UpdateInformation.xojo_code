@@ -76,6 +76,14 @@ Inherits Kaju.Information
 	#tag Method, Flags = &h0
 		Sub SetByName(propName As String, Assigns value As Variant)
 		  dim prop as Introspection.PropertyInfo = PropInfoDictionary.Value( propName )
+		  
+		  //
+		  // Special case when the value is set to "yes"
+		  //
+		  if value.Type = Variant.TypeString and value.StringValue = "yes" and prop.PropertyType.Name = "Boolean" then
+		    value = true
+		  end if
+		  
 		  prop.Value( self ) = value
 		End Sub
 	#tag EndMethod
