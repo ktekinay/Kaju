@@ -84,85 +84,6 @@ Protected Class Option
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h21
-		Private Function GetRelativeFolderItem(path As String, relativeTo As FolderItem = Nil) As FolderItem
-		  Dim prefix As String = ""
-		  
-		  #If TargetWin32 Then
-		    Const pathSep = "\"
-		    
-		    //
-		    // Maybe what is passed isn't actually a relative path
-		    //
-		    
-		    If path.Mid(2, 1) = ":" Then
-		      Return GetFolderItem(path, FolderItem.PathTypeShell)
-		    End If
-		    
-		    If path.Left(1) = pathSep Then
-		      relativeTo = GetFolderItem(SpecialFolder.CurrentWorkingDirectory.NativePath.Left(3))
-		    End If
-		    
-		  #Else
-		    Const pathSep = "/"
-		    
-		    //
-		    // Resolve home
-		    //
-		    if path.Left(2) = "~/" then
-		      path = SpecialFolder.UserHome.NativePath + path.Mid(2)
-		    end if
-		    
-		    //
-		    // Maybe what is passed isn't actually a relative path
-		    //
-		    
-		    If path.Left(1) = pathSep Then
-		      Return GetFolderItem(path, FolderItem.PathTypeShell)
-		    End If
-		    
-		    prefix = pathSep
-		  #EndIf
-		  
-		  //
-		  // OK, seems to be a relative path
-		  //
-		  
-		  If relativeTo = Nil Then
-		    relativeTo = SpecialFolder.CurrentWorkingDirectory
-		  End If
-		  
-		  path = relativeTo.NativePath + pathSep + path
-		  Dim newParts() As String
-		  
-		  Dim pathParts() As String = path.Split(pathSep)
-		  For i As Integer = 0 to pathParts.Ubound
-		    Dim p As String = pathParts(i)
-		    If p = "" Then
-		      // Can happen on Windows since it appends a pathSep onto the end of NativePath
-		      // if relativeTo is a folder.
-		      
-		    ElseIf p = "." Then
-		      // Skip this path component
-		      
-		    ElseIf p = ".." Then
-		      // Remove the last path component from newParts
-		      If newParts.Ubound > -1 Then
-		        newParts.Remove newParts.Ubound
-		      End If
-		      
-		    Else
-		      // Nothing special about this path component
-		      newParts.Append p
-		    End If
-		  Next
-		  
-		  path = prefix + Join(newParts, pathSep)
-		  
-		  Return GetFolderItem(path, FolderItem.PathTypeShell)
-		End Function
-	#tag EndMethod
-
 	#tag Method, Flags = &h0
 		Sub HandleValue(value As String)
 		  //
@@ -206,7 +127,7 @@ Protected Class Option
 		    
 		  Case OptionType.Directory
 		    if value <> "" then
-		      newValue = GetRelativeFolderItem(value)
+		      newValue = OptionParser.GetRelativeFolderItem(value)
 		    end if
 		    
 		  Case OptionType.Double
@@ -214,7 +135,7 @@ Protected Class Option
 		    
 		  Case OptionType.File
 		    if value <> "" then
-		      newValue = GetRelativeFolderItem(value)
+		      newValue = OptionParser.GetRelativeFolderItem(value)
 		    end if
 		    
 		  Case OptionType.Integer
