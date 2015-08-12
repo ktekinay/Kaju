@@ -26,11 +26,14 @@ Inherits SubApplication
 		  file.Load adminFile
 		  
 		  for each outPath as string in options.Extra
-		    dim out as new FolderItem( outPath, FolderItem.PathTypeShell )
-		    
+		    dim out as FolderItem = OptionParser.GetRelativeFolderItem( outPath )
 		    file.ExportTo out
 		  next
 		  
+		  //
+		  // Save the lastest export name
+		  //
+		  file.SaveTo adminFile
 		  return App.kErrorNoError
 		End Function
 	#tag EndEvent
