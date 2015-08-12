@@ -1,14 +1,4 @@
 Things To Do
 (Ideas that may or may not be implemented)
 
-- A command line utility that will let you read or update the admin file and export the UpdateInformation.html file.
--- Commands will be create, export, getkey, listversions, versioninfo, editversion, deleteversion.
-  kaju --file /path/to/file create
-  kaju --file /path/to/file getkey
-  kaju --file /path/to/file export /path/to/export
-  kaju --file /path/to/file listversions
-  kaju --file /path/to/file versioninfo --version versionNum [ --json=true ]
-  kaju --file /path/to/file addversion --version versionNum --appname name
-  kaju --file /path/to/file deleteversion --version versionNum
-  kaju --file /path/to/file editversion --version versionNum key1=value [key2=@/path/to/data ...]
 - Ability to use Markdown instead of HTML to create the release notes.
