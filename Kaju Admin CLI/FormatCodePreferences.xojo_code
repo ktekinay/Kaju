@@ -28,7 +28,7 @@ Protected Module FormatCodePreferences
 	#tag Constant, Name = KeywordsToLowerCase, Type = String, Dynamic = False, Default = \"if\x2C then\x2C end\x2C while\x2C wend\x2C select\x2C case\n", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = KeywordsToTitleCase, Type = String, Dynamic = False, Default = \"Integer\x2C Byte\x2C Short\x2C Int8\x2C Int16\x2C Int32\x2C Int64\x2C UInt8\x2C UInt16\x2C UInt32\x2C UInt64\x2C Double\x2C Single\x2C String\x2C Text\x2C Variant\n\nDictionary\x2C Date\n\nTrue\x2C False\n\nClose\n\nRaiseEvent\n\nBackgroundTasks\nNilObjectChecking\nStackOverflowChecking\nBoundsChecking\nDebugBuild", Scope = Protected
+	#tag Constant, Name = KeywordsToTitleCase, Type = String, Dynamic = False, Default = \"Int8\x2C Int16\x2C Int32\x2C Int64\x2C UInt8\x2C UInt16\x2C UInt32\x2C UInt64\n\nDictionary\x2C Date\n\nTrue\x2C False\n\nClose\n\nRaiseEvent\n\nBackgroundTasks\nNilObjectChecking\nStackOverflowChecking\nBoundsChecking\nDebugBuild", Scope = Protected
 	#tag EndConstant
 
 	#tag Constant, Name = KeywordsToUpperCase, Type = String, Dynamic = False, Default = \"", Scope = Protected
