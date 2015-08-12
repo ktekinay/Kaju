@@ -9,6 +9,12 @@ Inherits SubApplication
 	#tag EndEvent
 
 	#tag Event
+		Function GetAdditionalHelp() As String
+		  return kAdditionalHelp
+		End Function
+	#tag EndEvent
+
+	#tag Event
 		Function GetDescription() As String
 		  return kDescription
 		End Function
@@ -32,6 +38,9 @@ Inherits SubApplication
 		End Function
 	#tag EndEvent
 
+
+	#tag Constant, Name = kAdditionalHelp, Type = String, Dynamic = False, Default = \"Export the Update Information file to the given path. If that path is a directory\x2C will use the last given export file name.", Scope = Private
+	#tag EndConstant
 
 	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"Export the update info file", Scope = Private
 	#tag EndConstant

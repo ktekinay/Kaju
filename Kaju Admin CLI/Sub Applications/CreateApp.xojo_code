@@ -2,6 +2,12 @@
 Protected Class CreateApp
 Inherits SubApplication
 	#tag Event
+		Function GetAdditionalHelp() As String
+		  return kAdditionalHelp
+		End Function
+	#tag EndEvent
+
+	#tag Event
 		Function GetDescription() As String
 		  return kDescription
 		End Function
@@ -18,6 +24,9 @@ Inherits SubApplication
 		End Function
 	#tag EndEvent
 
+
+	#tag Constant, Name = kAdditionalHelp, Type = String, Dynamic = False, Default = \"Creates a new admin file at the given file path.", Scope = Private
+	#tag EndConstant
 
 	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"Create a new admin file", Scope = Private
 	#tag EndConstant
