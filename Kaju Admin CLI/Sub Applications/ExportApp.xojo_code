@@ -26,8 +26,7 @@ Inherits SubApplication
 		  file.Load adminFile
 		  
 		  for each outPath as string in options.Extra
-		    dim out as new FolderItem( outPath, FolderItem.PathTypeShell )
-		    
+		    dim out as FolderItem = OptionParser.GetRelativeFolderItem( outPath )
 		    file.ExportTo out
 		  next
 		  
