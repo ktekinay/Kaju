@@ -19,7 +19,7 @@ Protected Class KajuFile
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ExportTo(f As FolderItem)
+		Sub ExportTo(fileOrFolder As FolderItem)
 		  dim data as JSONItem = DataToJSON
 		  data.Compact = false
 		  data.EscapeSlashes = false
@@ -51,8 +51,17 @@ Protected Class KajuFile
 		  
 		  dataString = Kaju.kUpdatePacketMarker + sig + EndOfLine.UNIX + dataString
 		  
+		  //
+		  // If it's a folder, get the child
+		  //
+		  dim f as FolderItem = fileOrFolder
+		  if f.Directory then
+		    f = f.Child( ExportFilename )
+		  end if
+		  
 		  dim tos as TextOutputStream = TextOutputStream.Create( f )
 		  tos.Write dataString
+		  tos.Close
 		  tos = nil
 		  
 		  mExportFilename = f.Name
@@ -241,13 +250,6 @@ Protected Class KajuFile
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="mExportFilename"
-			Group="Behavior"
-			InitialValue="UpdateInformation.json"
-			Type="String"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
