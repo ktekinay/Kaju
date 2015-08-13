@@ -536,7 +536,7 @@ Protected Class OptionParser
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Parse(args() As String)
+		Sub Parse(args() As String, firstArgIsExecutable As Boolean = True)
 		  //
 		  // Parse the arguments
 		  //
@@ -565,6 +565,14 @@ Protected Class OptionParser
 		  While optIdx < args.Ubound // args can be rewritten in the loop
 		    optIdx = optIdx + 1
 		    
+		    //
+		    // If the first argument is the executable,
+		    // we simply ignore it
+		    //
+		    if optIdx = 0 and firstArgIsExecutable then
+		      continue while
+		    end if
+		    
 		    If restAreExtras Then
 		      Extra.Append args(optIdx)
 		      
@@ -573,7 +581,7 @@ Protected Class OptionParser
 		    
 		    Dim arg As String = args(optIdx)
 		    
-		    If arg = "" Or arg = App.ExecutableFile.NativePath Then
+		    If arg = "" Then
 		      Continue
 		    End If
 		    

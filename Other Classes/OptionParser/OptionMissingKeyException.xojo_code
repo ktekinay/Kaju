@@ -9,12 +9,6 @@ Inherits OptionParserException
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="ErrorNumber"
-			Group="Behavior"
-			InitialValue="0"
-			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="Index"
 			Visible=true
 			Group="ID"
@@ -29,21 +23,10 @@ Inherits OptionParserException
 			Type="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="Message"
-			Group="Behavior"
-			Type="String"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
 			Type="String"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Reason"
-			Group="Behavior"
-			Type="Text"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
