@@ -1,6 +1,6 @@
 #tag Class
 Protected Class ListVersionsApp
-Inherits SubApplication
+Inherits FileHandlerSubApplication
 	#tag Event
 		Sub AddOptions(parser As OptionParser)
 		  dim o as new Option( "", kOptionEOL, _
@@ -25,16 +25,14 @@ Inherits SubApplication
 	#tag EndEvent
 
 	#tag Event
-		Function Run(adminFile As FolderItem, options As OptionParser) As Integer
-		  dim file as new KajuFile
-		  file.Load adminFile
+		Function Run(file As KajuFile, adminFile As FolderItem, options As OptionParser) As Integer
+		  #pragma unused adminFile
 		  
 		  dim versions() as string
 		  for i as integer = 0 to file.KajuData.Ubound
 		    dim data as Kaju.UpdateInformation = file.KajuData( i )
 		    versions.Append data.Version
 		  next
-		  
 		  
 		  dim eol as string = options.StringValue( kOptionEOL, "" )
 		  select case eol

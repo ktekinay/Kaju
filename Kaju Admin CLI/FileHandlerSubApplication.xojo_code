@@ -1,39 +1,27 @@
 #tag Class
-Protected Class DeleteVersionApp
-Inherits VersionHandlerSubApplication
+Protected Class FileHandlerSubApplication
+Inherits SubApplication
 	#tag Event
-		Function GetAdditionalHelp() As String
-		  return kAdditionalHelp
-		End Function
-	#tag EndEvent
-
-	#tag Event
-		Function GetDescription() As String
-		  return kDescription
-		End Function
-	#tag EndEvent
-
-	#tag Event
-		Function Run(version As Kaju.UpdateInformation, file As KajuFile, options As OptionParser, ByRef saveFile As Boolean) As Integer
-		  #pragma unused options
-		  #pragma unused saveFile
-		  
-		  if version is nil then
-		    print "Version not found"
+		Function Run(adminFile As FolderItem, options As OptionParser) As Integer
+		  try
+		    
+		    dim file as new KajuFile
+		    file.Load adminFile
+		    
+		    return RaiseEvent Run( file, adminFile, options )
+		    
+		  catch err as IOException
+		    print "Cannot open specified file"
 		    return App.kErrorGeneralError
-		  end if
-		  
-		  file.KajuData.Remove file.KajuData.IndexOf( version )
-		  return App.kErrorNoError
+		    
+		  end try
 		End Function
 	#tag EndEvent
 
 
-	#tag Constant, Name = kAdditionalHelp, Type = String, Dynamic = False, Default = \"Deletes a version from the given admin file.", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"Delete a version", Scope = Private
-	#tag EndConstant
+	#tag Hook, Flags = &h0
+		Event Run(file As KajuFile, adminFile As FolderItem, options As OptionParser) As Integer
+	#tag EndHook
 
 
 	#tag ViewBehavior

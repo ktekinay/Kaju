@@ -1,6 +1,6 @@
 #tag Class
 Protected Class GetKeyApp
-Inherits SubApplication
+Inherits FileHandlerSubApplication
 	#tag Event
 		Function GetAdditionalHelp() As String
 		  return kAdditionalHelp
@@ -14,11 +14,9 @@ Inherits SubApplication
 	#tag EndEvent
 
 	#tag Event
-		Function Run(adminFile As FolderItem, options As OptionParser) As Integer
+		Function Run(file As KajuFile, adminFile As FolderItem, options As OptionParser) As Integer
 		  #pragma unused options
-		  
-		  dim file as new KajuFile
-		  file.Load adminFile
+		  #pragma unused adminFile
 		  
 		  print file.PublicKey
 		  return App.kErrorNoError
@@ -34,6 +32,12 @@ Inherits SubApplication
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="AdditionalHelp"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Description"
 			Group="Behavior"
@@ -72,6 +76,12 @@ Inherits SubApplication
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Usage"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
