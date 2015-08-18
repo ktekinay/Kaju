@@ -1,6 +1,6 @@
 #tag Module
 Protected Module Kaju
-	#tag Method, Flags = &h1
+	#tag Method, Flags = &h1, CompatibilityFlags = (TargetHasGUI)
 		Protected Function AppVersionString() As String
 		  // Convenience method to return the app's version as a string
 		  
@@ -9,7 +9,7 @@ Protected Module Kaju
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
+	#tag Method, Flags = &h1, CompatibilityFlags = (TargetHasGUI)
 		Protected Sub CancelUpdate()
 		  if App.UpdateInitiater <> nil then
 		    App.UpdateInitiater.Cancel
@@ -207,7 +207,7 @@ Protected Module Kaju
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
+	#tag Method, Flags = &h1, CompatibilityFlags = (TargetHasGUI)
 		Protected Sub StartUpdate(initiater As Kaju.UpdateInitiater)
 		  App.UpdateInitiater = initiater
 		End Sub
@@ -232,13 +232,13 @@ Protected Module Kaju
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
+	#tag Method, Flags = &h1, CompatibilityFlags = (TargetHasGUI)
 		Protected Function VersionStringFor(majorVersion As Integer, minorVersion As Integer, bugVersion As Integer) As String
 		  return VersionStringFor( majorVersion, minorVersion, bugVersion, App.Final, 0 )
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
+	#tag Method, Flags = &h1, CompatibilityFlags = (TargetHasGUI)
 		Protected Function VersionStringFor(majorVersion As Integer, minorVersion As Integer, bugVersion As Integer, stageCode As Integer, nonReleaseVersion As Integer) As String
 		  dim parts() as string
 		  parts.Append str( majorVersion )
@@ -382,7 +382,7 @@ Protected Module Kaju
 	#tag Constant, Name = kUpdatePacketMarker, Type = String, Dynamic = False, Default = \"KAJU ", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = Version, Type = String, Dynamic = False, Default = \"1.5.3", Scope = Protected
+	#tag Constant, Name = Version, Type = String, Dynamic = False, Default = \"1.6", Scope = Protected
 	#tag EndConstant
 
 

@@ -19,7 +19,7 @@ Protected Class KajuFile
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ExportTo(f As FolderItem)
+		Sub ExportTo(fileOrFolder As FolderItem)
 		  dim data as JSONItem = DataToJSON
 		  data.Compact = false
 		  data.EscapeSlashes = false
@@ -51,13 +51,48 @@ Protected Class KajuFile
 		  
 		  dataString = Kaju.kUpdatePacketMarker + sig + EndOfLine.UNIX + dataString
 		  
+		  //
+		  // If it's a folder, get the child
+		  //
+		  dim f as FolderItem = fileOrFolder
+		  if f.Directory then
+		    f = f.Child( ExportFilename )
+		  end if
+		  
 		  dim tos as TextOutputStream = TextOutputStream.Create( f )
 		  tos.Write dataString
+		  tos.Close
 		  tos = nil
 		  
 		  mExportFilename = f.Name
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetVersion(version As String) As Kaju.UpdateInformation
+		  dim i as integer = IndexOf( version )
+		  if i <> -1 then
+		    return KajuData( i )
+		  else
+		    return nil
+		  end if
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function IndexOf(version As String) As Integer
+		  version = version.Trim
+		  
+		  for i as integer = 0 to KajuData.Ubound
+		    dim u as Kaju.UpdateInformation = KajuData( i )
+		    if u.Version.Trim = version then
+		      return i
+		    end if
+		  next
+		  
+		  return -1
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -155,8 +190,8 @@ Protected Class KajuFile
 		KajuData() As Kaju.UpdateInformation
 	#tag EndProperty
 
-	#tag Property, Flags = &h0
-		mExportFilename As String = "UpdateInformation.json"
+	#tag Property, Flags = &h21
+		Private mExportFilename As String = "UpdateInformation.json"
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -215,12 +250,6 @@ Protected Class KajuFile
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="mExportFilename"
-			Group="Behavior"
-			InitialValue="UpdateInformation.json"
-			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"

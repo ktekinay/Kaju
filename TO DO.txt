@@ -1,6 +1,4 @@
 Things To Do
 (Ideas that may or may not be implemented)
 
-- Allow for the URL to use a placeholder like "$VERSION$" that will substitute the version on export.
-- A command line utility that will let you read or update the admin file and export the UpdateInformation.html file.
 - Ability to use Markdown instead of HTML to create the release notes.
