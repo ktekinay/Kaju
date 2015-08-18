@@ -2,6 +2,13 @@
 Protected Class CreateApp
 Inherits SubApplication
 	#tag Event
+		Sub AddOptions(parser As OptionParser)
+		  parser.AddOption new Option( "", kOptionForce, "Force an existing file to be overwritten", Option.OptionType.Boolean)
+		  
+		End Sub
+	#tag EndEvent
+
+	#tag Event
 		Function GetAdditionalHelp() As String
 		  return kAdditionalHelp
 		End Function
@@ -17,10 +24,19 @@ Inherits SubApplication
 		Function Run(adminFile As FolderItem, options As OptionParser) As Integer
 		  #pragma unused options
 		  
-		  dim file as new KajuFile
-		  file.SaveTo adminFile
+		  if adminFile.Exists and not options.BooleanValue( kOptionForce, false ) then
+		    
+		    print "File already exists"
+		    return App.kErrorGeneralError
+		    
+		  else
+		    
+		    dim file as new KajuFile
+		    file.SaveTo adminFile
+		    
+		    return App.kErrorNoError
+		  end if
 		  
-		  return App.kErrorNoError
 		End Function
 	#tag EndEvent
 
@@ -31,8 +47,17 @@ Inherits SubApplication
 	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"Create a new admin file", Scope = Private
 	#tag EndConstant
 
+	#tag Constant, Name = kOptionForce, Type = String, Dynamic = False, Default = \"force", Scope = Private
+	#tag EndConstant
+
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="AdditionalHelp"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Description"
 			Group="Behavior"
@@ -71,6 +96,12 @@ Inherits SubApplication
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Usage"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
