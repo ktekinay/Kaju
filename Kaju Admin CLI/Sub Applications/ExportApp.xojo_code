@@ -1,6 +1,6 @@
 #tag Class
 Protected Class ExportApp
-Inherits SubApplication
+Inherits FileHandlerSubApplication
 	#tag Event
 		Sub AddOptions(parser As OptionParser)
 		  parser.ExtrasRequired = 1
@@ -21,10 +21,7 @@ Inherits SubApplication
 	#tag EndEvent
 
 	#tag Event
-		Function Run(adminFile As FolderItem, options As OptionParser) As Integer
-		  dim file as new KajuFile
-		  file.Load adminFile
-		  
+		Function Run(file As KajuFile, adminFile As FolderItem, options As OptionParser) As Integer
 		  for each outPath as string in options.Extra
 		    dim out as FolderItem = OptionParser.GetRelativeFolderItem( outPath )
 		    file.ExportTo out
@@ -47,6 +44,12 @@ Inherits SubApplication
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="AdditionalHelp"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Description"
 			Group="Behavior"
@@ -85,6 +88,12 @@ Inherits SubApplication
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Usage"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

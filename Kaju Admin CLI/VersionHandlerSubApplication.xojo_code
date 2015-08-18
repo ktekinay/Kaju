@@ -1,6 +1,6 @@
 #tag Class
 Protected Class VersionHandlerSubApplication
-Inherits SubApplication
+Inherits FileHandlerSubApplication
 	#tag Event
 		Sub AddOptions(parser As OptionParser)
 		  dim o as new Option( "v", kOptionVersion, "The version number (required)", Option.OptionType.String )
@@ -13,10 +13,7 @@ Inherits SubApplication
 	#tag EndEvent
 
 	#tag Event
-		Function Run(adminFile As FolderItem, options As OptionParser) As Integer
-		  dim file as new KajuFile
-		  file.Load adminFile
-		  
+		Function Run(file As KajuFile, adminFile As FolderItem, options As OptionParser) As Integer
 		  dim version as Kaju.UpdateInformation = file.GetVersion( options.StringValue( kOptionVersion ) )
 		  
 		  //
@@ -47,6 +44,12 @@ Inherits SubApplication
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="AdditionalHelp"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Description"
 			Group="Behavior"
@@ -85,6 +88,12 @@ Inherits SubApplication
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Usage"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

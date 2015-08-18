@@ -1,34 +1,27 @@
 #tag Class
-Protected Class GetKeyApp
-Inherits FileHandlerSubApplication
+Protected Class FileHandlerSubApplication
+Inherits SubApplication
 	#tag Event
-		Function GetAdditionalHelp() As String
-		  return kAdditionalHelp
-		End Function
-	#tag EndEvent
-
-	#tag Event
-		Function GetDescription() As String
-		  return kDescription
-		End Function
-	#tag EndEvent
-
-	#tag Event
-		Function Run(file As KajuFile, adminFile As FolderItem, options As OptionParser) As Integer
-		  #pragma unused options
-		  #pragma unused adminFile
-		  
-		  print file.PublicKey
-		  return App.kErrorNoError
+		Function Run(adminFile As FolderItem, options As OptionParser) As Integer
+		  try
+		    
+		    dim file as new KajuFile
+		    file.Load adminFile
+		    
+		    return RaiseEvent Run( file, adminFile, options )
+		    
+		  catch err as IOException
+		    print "Cannot open specified file"
+		    return App.kErrorGeneralError
+		    
+		  end try
 		End Function
 	#tag EndEvent
 
 
-	#tag Constant, Name = kAdditionalHelp, Type = String, Dynamic = False, Default = \"Retuns the RSA public key in hex form from the admin file.", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"Get the RSA public key", Scope = Private
-	#tag EndConstant
+	#tag Hook, Flags = &h0
+		Event Run(file As KajuFile, adminFile As FolderItem, options As OptionParser) As Integer
+	#tag EndHook
 
 
 	#tag ViewBehavior
