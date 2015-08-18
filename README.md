@@ -400,6 +400,7 @@ Add a translation for each, then submit a pull request as outlined above.
 - **Admin app**: Split the file settings from the Admin window so a file can be manipulated independently.
 - **Admin app**: Save the last export file name to suggest it for the next export.
 
-1.6 (____, 2015)
+1.6 (August 18, 2015)
+
 - Can override the preference file name when creating the UpdateChecker object.
 - Introduced command line project (CLI).
