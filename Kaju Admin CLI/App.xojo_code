@@ -82,8 +82,8 @@ Inherits ConsoleApplication
 		    r = kErrorGeneralError
 		  end try
 		  
-		  #if DebugBuild and TargetWin32 then
-		    print( "Press return to continue..." )
+		  #if DebugBuild and TargetRemoteDebugger then
+		    print "Press return to continue..."
 		    call input
 		  #endif
 		  
