@@ -70,7 +70,24 @@ Inherits ConsoleApplication
 		    return kErrorGeneralError
 		  end if
 		  
-		  return subapp.Execute( adminFile, subappParser )
+		  dim r as integer
+		  try
+		    r = subapp.Execute( adminFile, subappParser )
+		  catch err as RuntimeException
+		    if err isa EndException or err isa ThreadEndException then
+		      raise err
+		    end if
+		    
+		    print "Unexpected error: " + err.Message
+		    r = kErrorGeneralError
+		  end try
+		  
+		  #if DebugBuild and TargetWin32 then
+		    print( "Press return to continue..." )
+		    call input
+		  #endif
+		  
+		  return r
 		  
 		End Function
 	#tag EndEvent
