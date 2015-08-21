@@ -408,3 +408,5 @@ Add a translation for each, then submit a pull request as outlined above.
 1.6.1 (___, 2015)
 
 - **CLI**: Better handling of remote debugging.
+- **CLI**: listversions now has --include and --exclude switches that take regex patterns.
+
