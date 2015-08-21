@@ -27,8 +27,17 @@ Inherits VersionHandlerSubApplication
 		  #pragma unused version
 		  #pragma unused saveFile
 		  
-		  dim appName as string = options.StringValue( kOptionAppName )
-		  dim versionString as string = options.StringValue( kOptionVersion )
+		  dim appName as string = options.StringValue( kOptionAppName ).Trim
+		  if appName = "" then
+		    print "App name must be specified"
+		    return App.kErrorGeneralError
+		  end if
+		  
+		  dim versionString as string = options.StringValue( kOptionVersion ).Trim
+		  if file.IndexOf( versionString ) <> -1 then
+		    print "Version " + versionString + " already exists"
+		    return App.kErrorGeneralError
+		  end if
 		  
 		  dim u as new Kaju.UpdateInformation
 		  u.Version = versionString

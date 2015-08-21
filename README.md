@@ -409,4 +409,6 @@ Add a translation for each, then submit a pull request as outlined above.
 
 - **CLI**: Better handling of remote debugging.
 - **CLI**: listversions now has --include and --exclude switches that take regex patterns.
+- **Admin**: Prevent Save or Export if the file includes duplicate version numbers.
+- **CLI**: Disallow adding duplicate version number or changing an existing version number so it becomes a duplicate.
 
