@@ -20,6 +20,8 @@ Protected Class KajuFile
 
 	#tag Method, Flags = &h0
 		Sub ExportTo(fileOrFolder As FolderItem)
+		  Validate()
+		  
 		  dim data as JSONItem = DataToJSON
 		  data.Compact = false
 		  data.EscapeSlashes = false
@@ -148,6 +150,8 @@ Protected Class KajuFile
 
 	#tag Method, Flags = &h0
 		Sub SaveTo(f As FolderItem)
+		  Validate()
+		  
 		  dim master as JSONItem = ToJSON
 		  master.Compact = false
 		  
@@ -167,6 +171,21 @@ Protected Class KajuFile
 		  if not StrComp( toSave, jCompare.ToString, 0 ) = 0 then
 		    raise new IOException
 		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub Validate()
+		  //
+		  // Make sure there are no duplicate versions
+		  //
+		  for i as integer = 0 to KajuData.Ubound
+		    dim version as Kaju.UpdateInformation = KajuData( i )
+		    if IndexOf( version.Version ) <> i then
+		      raise new KajuException( "Duplicate version numbers", CurrentMethodName )
+		    end if
+		  next
 		  
 		End Sub
 	#tag EndMethod
