@@ -8,6 +8,14 @@ Inherits FileHandlerSubApplication
 		  o.AddAllowedValue "cr", "lf", "crlf", "null"
 		  
 		  parser.AddOption o
+		  
+		  o = new Option( "", kOptionInclude, "Include versions matching this regex pattern (can use more than one)", Option.OptionType.String )
+		  o.IsArray = true
+		  parser.AddOption o
+		  
+		  o = new Option( "", kOptionExclude, "Exclude versions matching this regex pattern (can use more than one)", Option.OptionType.String )
+		  o.IsArray = true
+		  parser.AddOption o
 		End Sub
 	#tag EndEvent
 
@@ -28,10 +36,50 @@ Inherits FileHandlerSubApplication
 		Function Run(file As KajuFile, adminFile As FolderItem, options As OptionParser) As Integer
 		  #pragma unused adminFile
 		  
+		  dim includeOption as Option = options.OptionValue( kOptionInclude )
+		  dim excludeOption as Option = options.OptionValue( kOptionExclude )
+		  
+		  dim emptyArray() as variant
+		  
+		  dim includers() as variant = if( includeOption.Value.IsNull, emptyArray, options.OptionValue( kOptionInclude ).Value )
+		  dim excluders() as variant = if( excludeOption.Value.IsNull, emptyArray, options.OptionValue( kOptionExclude ).Value )
+		  
+		  dim rxInclude as RegEx
+		  if includers.Ubound <> -1 then
+		    dim patterns() as string
+		    for each pattern as string in includers
+		      patterns.Append pattern
+		    next
+		    
+		    rxInclude = new RegEx
+		    rxInclude.SearchPattern = "(?:" + join( patterns, ") | (?:" ) + ")"
+		  end if
+		  
+		  dim rxExclude as RegEx
+		  if excluders.Ubound <> -1 then
+		    dim patterns() as string
+		    for each pattern as string in excluders
+		      patterns.Append pattern
+		    next
+		    
+		    rxExclude = new RegEx
+		    rxExclude.SearchPattern = "(?:" + join( patterns, ") | (?:" ) + ")"
+		  end if
+		  
 		  dim versions() as string
 		  for i as integer = 0 to file.KajuData.Ubound
 		    dim data as Kaju.UpdateInformation = file.KajuData( i )
-		    versions.Append data.Version
+		    dim version as string = data.Version
+		    
+		    select case true
+		    case rxInclude isa RegEx and rxInclude.Search( version ) is nil
+		      // Skip it
+		    case rxExclude isa RegEx and rxExclude.Search( version ) isa RegExMatch
+		      // Skip it
+		      
+		    case else
+		      versions.Append version
+		    end select
 		  next
 		  
 		  dim eol as string = options.StringValue( kOptionEOL, "" )
@@ -61,6 +109,12 @@ Inherits FileHandlerSubApplication
 	#tag EndConstant
 
 	#tag Constant, Name = kOptionEOL, Type = String, Dynamic = False, Default = \"eol", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kOptionExclude, Type = String, Dynamic = False, Default = \"exclude", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kOptionInclude, Type = String, Dynamic = False, Default = \"include", Scope = Private
 	#tag EndConstant
 
 
