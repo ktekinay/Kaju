@@ -405,7 +405,7 @@ Add a translation for each, then submit a pull request as outlined above.
 - Can override the preference file name when creating the UpdateChecker object.
 - Introduced command line project (CLI).
 
-1.6.1 (___, 2015)
+1.6.1 (August 27, 2015)
 
 - **CLI**: Better handling of remote debugging.
 - **CLI**: listversions now has --include and --exclude switches that take regex patterns.
