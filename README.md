@@ -404,3 +404,11 @@ Add a translation for each, then submit a pull request as outlined above.
 
 - Can override the preference file name when creating the UpdateChecker object.
 - Introduced command line project (CLI).
+
+1.6.1 (August 27, 2015)
+
+- **CLI**: Better handling of remote debugging.
+- **CLI**: listversions now has --include and --exclude switches that take regex patterns.
+- **Admin**: Prevent Save or Export if the file includes duplicate version numbers.
+- **CLI**: Disallow adding duplicate version number or changing an existing version number so it becomes a duplicate.
+- **Test App*: Created Build Script to automatically update the Kaju files after building.

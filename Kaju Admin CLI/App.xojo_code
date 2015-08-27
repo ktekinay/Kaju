@@ -3,6 +3,8 @@ Protected Class App
 Inherits ConsoleApplication
 	#tag Event
 		Function Run(args() as String) As Integer
+		  dim errCode as integer = kErrorNoError
+		  
 		  RegisterSubApps
 		  
 		  dim caller as string = args( 0 )
@@ -28,66 +30,69 @@ Inherits ConsoleApplication
 		  
 		  if args.Ubound = 0 or parser.HelpRequested then
 		    PrintMainHelp parser
-		    return kErrorNoError
-		  end if
-		  
-		  //
-		  // Adjust the args
-		  //
-		  for i as integer = 0 to appArgs.Ubound
-		    args.Remove 0
-		  next
-		  
-		  //
-		  // The first argument must be the subapp name
-		  //
-		  dim subappKey as string = args( 0 )
-		  dim subapp as SubApplication = SubAppDictionary.Value( subappKey )
-		  
-		  //
-		  // Substitute the caller for the subapp name
-		  //
-		  args( 0 ) = caller
-		  
-		  //
-		  // Get the options
-		  //
-		  dim subappParser as new OptionParser( subappKey, "" )
-		  subapp.AddOptions subappParser
-		  subappParser.Parse args
-		  
-		  if subappParser.HelpRequested then
-		    PrintSubAppHelp( subappKey, subapp, subappParser )
-		    return kErrorNoError
-		  end if
-		  
-		  //
-		  // Get the admin file
-		  //
-		  dim adminFile as FolderItem = parser.FileValue( kOptionFile )
-		  if adminFile is nil then
-		    print "No admin file specified"
-		    return kErrorGeneralError
-		  end if
-		  
-		  dim r as integer
-		  try
-		    r = subapp.Execute( adminFile, subappParser )
-		  catch err as RuntimeException
-		    if err isa EndException or err isa ThreadEndException then
-		      raise err
-		    end if
 		    
-		    print "Unexpected error: " + err.Message
-		    r = kErrorGeneralError
-		  end try
+		  else
+		    
+		    //
+		    // Adjust the args
+		    //
+		    for i as integer = 0 to appArgs.Ubound
+		      args.Remove 0
+		    next
+		    
+		    //
+		    // The first argument must be the subapp name
+		    //
+		    dim subappKey as string = args( 0 )
+		    dim subapp as SubApplication = SubAppDictionary.Value( subappKey )
+		    
+		    //
+		    // Substitute the caller for the subapp name
+		    //
+		    args( 0 ) = caller
+		    
+		    //
+		    // Get the options
+		    //
+		    dim subappParser as new OptionParser( subappKey, "" )
+		    subapp.AddOptions subappParser
+		    subappParser.Parse args
+		    
+		    if subappParser.HelpRequested then
+		      PrintSubAppHelp( subappKey, subapp, subappParser )
+		      
+		    else
+		      
+		      //
+		      // Get the admin file
+		      //
+		      dim adminFile as FolderItem = parser.FileValue( kOptionFile )
+		      if adminFile is nil then
+		        print "No admin file specified"
+		        errCode = kErrorGeneralError
+		        
+		      else
+		        try
+		          errCode = subapp.Execute( adminFile, subappParser )
+		        catch err as RuntimeException
+		          if err isa EndException or err isa ThreadEndException then
+		            raise err
+		          end if
+		          
+		          print "Unexpected error: " + err.Message
+		          errCode = kErrorGeneralError
+		        end try
+		      end if
+		      
+		    end if
+		  end if
 		  
 		  #if DebugBuild and TargetRemoteDebugger then
 		    print "Press return to continue..."
 		    call input
 		  #endif
 		  
-		  return r
+		  return errCode
 		  
 		End Function
 	#tag EndEvent

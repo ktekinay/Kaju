@@ -2477,6 +2477,10 @@ End
 		  r = true
 		  ContentsChanged = false
 		  
+		  Exception err as KajuException
+		    self.ContentsChanged= savedContentsChanged
+		    ShowValidationError "Save failed!", err
+		    
 		  Exception err as IOException
 		    self.ContentsChanged = savedContentsChanged
 		    MsgBox "Save failed!"
@@ -2682,6 +2686,18 @@ End
 		      self.Close
 		      return
 		    end select
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub ShowValidationError(msg As String, err As RuntimeException)
+		  dim mdlg as new MessageDialog
+		  mdlg.Message = msg
+		  mdlg.Explanation = err.Message
+		  mdlg.CancelButton.Visible = false
+		  
+		  call mdlg.ShowModalWithin self
+		  
 		End Sub
 	#tag EndMethod
 
@@ -3207,8 +3223,16 @@ End
 		  
 		  MyKajuFile.ExportTo( f )
 		  
+		  Exception err as KajuException
+		    ShowValidationError "Could not export data.", err
+		    
 		  Exception err As RuntimeException
+		    if err isa EndException or err isa ThreadEndException then
+		      raise err
+		    end if
+		    
 		    MsgBox "Could not export data."
+		    
 		    
 		End Sub
 	#tag EndEvent

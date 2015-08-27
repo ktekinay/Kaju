@@ -168,6 +168,15 @@ Inherits VersionHandlerSubApplication
 		        end if
 		        
 		      else // Just a key
+		        
+		        //
+		        // If the key is version, make sure it's not a duplicate
+		        //
+		        if key = "version" and value.Trim <> version.Version.Trim and file.IndexOf( value ) <> -1 then
+		          print "Can't set Version to " + value  + " since that version already exists"
+		          return App.kErrorGeneralError
+		        end if
+		        
 		        try
 		          version.SetByName( key ) = value
 		          keyFound = true
