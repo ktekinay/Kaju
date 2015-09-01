@@ -241,7 +241,7 @@ Begin Window WndAdmin
       TextUnit        =   0
       Top             =   86
       Underline       =   False
-      Value           =   1
+      Value           =   0
       Visible         =   True
       Width           =   653
       Begin TextAreaChanger fldReleaseNotes
@@ -3169,7 +3169,10 @@ End
 		Sub Action()
 		  self.Loading = true
 		  
-		  hvReleaseNotesPreview.LoadPage( ControlValue( fldReleaseNotes ).StringValue, new FolderItem )
+		  dim relativeTo as new FolderItem
+		  'System.DebugLog "RelativeTo Path: " + relativeTo.NativePath
+		  
+		  hvReleaseNotesPreview.LoadPage( ControlValue( fldReleaseNotes ).StringValue, relativeTo )
 		  
 		  self.Loading = false
 		End Sub
