@@ -2182,7 +2182,19 @@ End
 	#tag EndEvent
 
 	#tag Event
+		Sub Close()
+		  if RelativeToFolderItem isa FolderItem then
+		    if RelativeToFolderItem.Exists then
+		      RelativeToFolderItem.Delete
+		    end if
+		    RelativeToFolderItem = nil
+		  end if
+		End Sub
+	#tag EndEvent
+
+	#tag Event
 		Sub Open()
+		  RelativeToFolderItem = GetTemporaryFolderItem
 		  AdjustControls()
 		End Sub
 	#tag EndEvent
@@ -2905,6 +2917,10 @@ End
 		Private Platforms() As String
 	#tag EndProperty
 
+	#tag Property, Flags = &h21
+		Private RelativeToFolderItem As FolderItem
+	#tag EndProperty
+
 
 #tag EndWindowCode
 
@@ -3169,10 +3185,7 @@ End
 		Sub Action()
 		  self.Loading = true
 		  
-		  dim relativeTo as new FolderItem
-		  'System.DebugLog "RelativeTo Path: " + relativeTo.NativePath
-		  
-		  hvReleaseNotesPreview.LoadPage( ControlValue( fldReleaseNotes ).StringValue, relativeTo )
+		  hvReleaseNotesPreview.LoadPage( ControlValue( fldReleaseNotes ).StringValue, RelativeToFolderItem )
 		  
 		  self.Loading = false
 		End Sub

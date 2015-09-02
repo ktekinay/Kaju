@@ -426,3 +426,5 @@ Add a translation for each, then submit a pull request as outlined above.
 1.6.2 (___, 2015)
 
 - **CLI**: Made help prettier.
+- **Admin GUI**: Use a temp file for the LoadPage "relativeTo" parameter.
+- **KajuUpdateWindow**: Delete the temp file used for the LoadPage "relativeTo" parameter on close.

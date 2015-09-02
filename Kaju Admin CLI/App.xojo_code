@@ -173,7 +173,7 @@ Inherits ConsoleApplication
 		  print ""
 		  print "Usage:"
 		  print "  " + kAppName + " --file /path/to/admin/file " + _
-		  subAppName + " [parameters]" + if( subAppUsage <> "", " " + subAppUsage.Trim, "" ) 
+		  subAppName + " [parameters]" + if( subAppUsage <> "", " " + subAppUsage.Trim, "" )
 		  
 		  if options <> nil then
 		    options.AdditionalHelpNotes = subApp.AdditionalHelp
