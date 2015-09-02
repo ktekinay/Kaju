@@ -450,6 +450,9 @@ End
 
 	#tag Event
 		Sub Open()
+		  RelativeToFolderItem = GetTemporaryFolderItem
+		  DeleteOnClose.Append RelativeToFolderItem
+		  
 		  #if not TargetMacOS then
 		    //
 		    // Switch the buttons around for other platforms
@@ -656,14 +659,7 @@ End
 		    source = "<b>" + KajuLocale.kNoUpdateInfoMessage + "</b>"
 		  end if
 		  
-		  static tempFile as FolderItem = GetTemporaryFolderItem
-		  hvNotes.LoadPage( source, tempFile )
-		  
-		  #if DebugBuild then
-		    if not tempFile.Exists then
-		      break
-		    end if
-		  #endif
+		  hvNotes.LoadPage( source, RelativeToFolderItem )
 		  
 		  //
 		  // hvNotes.CancelLoad will set self.Loading back to false
@@ -791,6 +787,10 @@ End
 
 	#tag Property, Flags = &h21
 		Private mBackgroundImage As Picture
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private RelativeToFolderItem As FolderItem
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
