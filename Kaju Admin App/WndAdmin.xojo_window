@@ -3169,7 +3169,12 @@ End
 		Sub Action()
 		  self.Loading = true
 		  
-		  hvReleaseNotesPreview.LoadPage( ControlValue( fldReleaseNotes ).StringValue, new FolderItem )
+		  dim releaseNotes as string = ControlValue( fldReleaseNotes ).StringValue
+		  if releaseNotes.Left( 4 ) = "http" then
+		    hvReleaseNotesPreview.LoadURL( releaseNotes )
+		  else
+		    hvReleaseNotesPreview.LoadPage( releaseNotes, new FolderItem )
+		  end if
 		  
 		  self.Loading = false
 		End Sub

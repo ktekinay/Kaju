@@ -657,7 +657,11 @@ End
 		  end if
 		  
 		  static tempFile as FolderItem = GetTemporaryFolderItem
-		  hvNotes.LoadPage( source, tempFile )
+		  if source.Left( 4 ) = "http" then
+		    hvNotes.LoadURL( source )
+		  else
+		    hvNotes.LoadPage( source, tempFile )
+		  end if
 		  
 		  #if DebugBuild then
 		    if not tempFile.Exists then
