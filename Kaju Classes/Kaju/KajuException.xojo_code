@@ -13,16 +13,19 @@ Inherits RuntimeException
 	#tag Constant, Name = kErrorCantFindLibsFolder, Type = String, Dynamic = True, Default = \"Can\xE2\x80\x99t locate this applications Libs folder.", Scope = Public
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Kann den Applications Libs Ordner dieser Anwendung nicht finden."
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"T\xC3\xA4t\xC3\xA4 ohjelman kirjastotiedostokansiota ei l\xC3\xB6ydy."
+		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Kan dit programma\xE2\x80\x99s Libs folder niet vinden."
 	#tag EndConstant
 
 	#tag Constant, Name = kErrorImproperFunction, Type = String, Dynamic = True, Default = \"This function cannot be used on this platform.", Scope = Public
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Diese Funktion kann auf dieser Platform nicht benutzt werden."
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"T\xC3\xA4t\xC3\xA4 funktiota ei voi k\xC3\xA4ytt\xC3\xA4\xC3\xA4 t\xC3\xA4ll\xC3\xA4 alustalla."
+		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Deze functie kan niet worden gebruikt op dit platform."
 	#tag EndConstant
 
 	#tag Constant, Name = kErrorMissingUpdateURL, Type = String, Dynamic = True, Default = \"The update URL is missing.", Scope = Public
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Die Update URL fehlt."
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"P\xC3\xA4ivitys-URL on kateissa."
+		#Tag Instance, Platform = Any, Language = nl, Definition  = \"De update URL ontbreekt."
 	#tag EndConstant
 
 
