@@ -241,7 +241,7 @@ Begin Window WndAdmin
       TextUnit        =   0
       Top             =   86
       Underline       =   False
-      Value           =   1
+      Value           =   0
       Visible         =   True
       Width           =   653
       Begin TextAreaChanger fldReleaseNotes
@@ -2182,7 +2182,19 @@ End
 	#tag EndEvent
 
 	#tag Event
+		Sub Close()
+		  if RelativeToFolderItem isa FolderItem then
+		    if RelativeToFolderItem.Exists then
+		      RelativeToFolderItem.Delete
+		    end if
+		    RelativeToFolderItem = nil
+		  end if
+		End Sub
+	#tag EndEvent
+
+	#tag Event
 		Sub Open()
+		  RelativeToFolderItem = GetTemporaryFolderItem
 		  AdjustControls()
 		End Sub
 	#tag EndEvent
@@ -2905,6 +2917,10 @@ End
 		Private Platforms() As String
 	#tag EndProperty
 
+	#tag Property, Flags = &h21
+		Private RelativeToFolderItem As FolderItem
+	#tag EndProperty
+
 
 #tag EndWindowCode
 
@@ -3173,7 +3189,7 @@ End
 		  if releaseNotes.Left( 4 ) = "http" then
 		    hvReleaseNotesPreview.LoadURL( releaseNotes )
 		  else
-		    hvReleaseNotesPreview.LoadPage( releaseNotes, new FolderItem )
+		  hvReleaseNotesPreview.LoadPage( releaseNotes, RelativeToFolderItem )
 		  end if
 		  
 		  self.Loading = false

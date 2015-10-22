@@ -422,3 +422,9 @@ Add a translation for each, then submit a pull request as outlined above.
 - **Admin**: Prevent Save or Export if the file includes duplicate version numbers.
 - **CLI**: Disallow adding duplicate version number or changing an existing version number so it becomes a duplicate.
 - **Test App**: Created Build Script to automatically update the Kaju files after building.
+
+1.6.2 (___, 2015)
+
+- **CLI**: Made help prettier.
+- **Admin GUI**: Use a temp file for the LoadPage "relativeTo" parameter.
+- **KajuUpdateWindow**: Delete the temp file used for the LoadPage "relativeTo" parameter on close.
