@@ -117,6 +117,8 @@ Add an entry for each *current* version of your app. You do not need a history s
 
 The release notes are created in HTML and some simple tools are provided for making that a bit easier. You can see a preview of the release notes as a you type and use the Preview button to see how Kaju will present the update window under various circumstances. The HTML can be as simple or as complex as you'd like.
 
+Alternatively, you can set pull your release notes from a server by setting the first line to a URL. (Anything after the first line will be ignored so feel free to add notes.)
+
 **Note**: WebKit is used on all platforms to ensure consistency. This will increase the size of your project on Windows and Linux.
 
 ### Links In Release Notes
@@ -200,7 +202,7 @@ A sample JSON that will be returned by the server:
 	{
 		"AppName" : "My App" ,
 		"Version" : "6.1b4" ,
-		"ReleaseNotes" : "The beta release notes" ,
+		"ReleaseNotes" : "http://link/to/release/notes" ,
 		"MacBinary" : 
 			{
 				"URL" : "http://www.site.com/other_download_path" ,
@@ -287,7 +289,7 @@ This project was designed and implemented by:
 * Luke Cowgar (lcowgar at advancedpricing.com)
 * Jeremy Cowgar (jeremy at cowgar.com)
 
-With thanks to John Hansen, Paul Lefebvre, and Scott Boss.
+With thanks to John Hansen, Paul Lefebvre, Scott Boss, and Vidal van Bergen.
 
 Translations to other languages by:
 
@@ -296,6 +298,7 @@ Translations to other languages by:
 * Julen Ibarretxe Uriguen (Spanish)
 * Heikki Ohvo (Finnish)
 * Manuel Romei (Italian)
+* Vidal van Bergen (Dutch)
 
 With special thanks to [Advanced Medical Pricing Solutions, Inc.](http://www.advancedpricing.com) for making this possible.
 
@@ -428,3 +431,5 @@ Add a translation for each, then submit a pull request as outlined above.
 - **CLI**: Made help prettier.
 - **Admin GUI**: Use a temp file for the LoadPage "relativeTo" parameter.
 - **KajuUpdateWindow**: Delete the temp file used for the LoadPage "relativeTo" parameter on close.
+- Added Dutch translation.
+- Ability to load release notes through a URL.
