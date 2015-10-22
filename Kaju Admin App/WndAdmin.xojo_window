@@ -3187,9 +3187,12 @@ End
 		  
 		  dim releaseNotes as string = ControlValue( fldReleaseNotes ).StringValue
 		  if releaseNotes.Left( 4 ) = "http" then
-		    hvReleaseNotesPreview.LoadURL( releaseNotes )
+		    releaseNotes = ReplaceLineEndings( releaseNotes, EndOfLine.UNIX )
+		    dim url as string = releaseNotes.NthField( EndOfLine.UNIX, 1 )
+		    
+		    hvReleaseNotesPreview.LoadURL( url )
 		  else
-		  hvReleaseNotesPreview.LoadPage( releaseNotes, RelativeToFolderItem )
+		    hvReleaseNotesPreview.LoadPage( releaseNotes, RelativeToFolderItem )
 		  end if
 		  
 		  self.Loading = false

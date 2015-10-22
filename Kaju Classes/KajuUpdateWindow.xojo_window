@@ -677,9 +677,11 @@ End
 		  end if
 		  
 		  if source.Left( 4 ) = "http" then
-		    hvNotes.LoadURL( source )
+		    source = ReplaceLineEndings( source, EndOfLine.UNIX )
+		    dim url as string = source.NthField( EndOfLine.UNIX, 1 )
+		    hvNotes.LoadURL( url )
 		  else
- hvNotes.LoadPage( source, RelativeToFolderItem )
+		    hvNotes.LoadPage( source, RelativeToFolderItem )
 		  end if
 		  
 		  //
