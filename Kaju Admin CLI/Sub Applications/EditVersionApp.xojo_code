@@ -63,38 +63,36 @@ Inherits VersionHandlerSubApplication
 		  // Remove binaries
 		  //
 		  if options.BooleanValue( kOptionRemoveMacBinary, false ) then
-		    version.MacBinary = nil
+		    version.RemoveBinary version.kMacBinaryName
 		  end if
 		  if options.BooleanValue( kOptionRemoveWinBinary, false ) then
-		    version.WindowsBinary = nil
+		    version.RemoveBinary version.kWindowsBinaryName
 		  end if
 		  if options.BooleanValue( kOptionRemoveLinuxBinary, false ) then
-		    version.LinuxBinary = nil
+		    version.RemoveBinary version.kLinuxBinaryName
 		  end if
 		  
 		  //
 		  // Hashes
 		  //
-		  if options.OptionValue( kOptionMacBinary ).WasSet then
-		    if version.MacBinary is nil then
-		      version.MacBinary = new Kaju.BinaryInformation( false )
-		    end if
-		    dim binary as Kaju.BinaryInformation = version.MacBinary
-		    binary.Hash = Kaju.HashOfFile( options.FileValue( kOptionMacBinary ) )
+		  dim optionKey as string 
+		  
+		  optionKey = kOptionMacBinary
+		  if options.OptionValue( optionKey ).WasSet then
+		    dim binary as Kaju.BinaryInformation = version.FetchBinary( version.kMacBinaryName, false )
+		    binary.Hash = Kaju.HashOfFile( options.FileValue( optionKey ) )
 		  end if
-		  if options.OptionValue( kOptionWinBinary ).WasSet then
-		    if version.WindowsBinary is nil then
-		      version.WindowsBinary = new Kaju.BinaryInformation( true )
-		    end if
-		    dim binary as Kaju.BinaryInformation = version.WindowsBinary
-		    binary.Hash = Kaju.HashOfFile( options.FileValue( kOptionWinBinary ) )
+		  
+		  optionKey = kOptionWinBinary
+		  if options.OptionValue( optionKey ).WasSet then
+		    dim binary as Kaju.BinaryInformation = version.FetchBinary( version.kWindowsBinaryName, true )
+		    binary.Hash = Kaju.HashOfFile( options.FileValue( optionKey ) )
 		  end if
-		  if options.OptionValue( kOptionLinuxBinary ).WasSet then
-		    if version.LinuxBinary is nil then
-		      version.LinuxBinary = new Kaju.BinaryInformation( true )
-		    end if
-		    dim binary as Kaju.BinaryInformation = version.LinuxBinary
-		    binary.Hash = Kaju.HashOfFile( options.FileValue( kOptionLinuxBinary ) )
+		  
+		  optionKey = kOptionLinuxBinary
+		  if options.OptionValue( optionKey ).WasSet then
+		    dim binary as Kaju.BinaryInformation = version.FetchBinary( version.kLinuxBinaryName, true )
+		    binary.Hash = Kaju.HashOfFile( options.FileValue( optionKey ) )
 		  end if
 		  
 		  //
@@ -136,22 +134,13 @@ Inherits VersionHandlerSubApplication
 		        dim binary as Kaju.BinaryInformation
 		        select case leftKey
 		        case "MacBinary"
-		          if version.MacBinary is nil then
-		            version.MacBinary = new Kaju.BinaryInformation( false )
-		          end if
-		          binary = version.MacBinary
+		          binary = version.FetchBinary( version.kMacBinaryName, false )
 		          
 		        case "WindowsBinary", "WinBinary"
-		          if version.WindowsBinary is nil then
-		            version.WindowsBinary = new Kaju.BinaryInformation( true )
-		          end if
-		          binary = version.WindowsBinary
+		          binary = version.FetchBinary( version.kWindowsBinaryName, true )
 		          
 		        case "LinuxBinary", "LinBinary"
-		          if version.LinuxBinary is nil then
-		            version.LinuxBinary = new Kaju.BinaryInformation( true )
-		          end if
-		          binary = version.LinuxBinary
+		          binary = version.FetchBinary( version.kLinuxBinaryName, true )
 		          
 		        end select
 		        
