@@ -120,10 +120,31 @@ Inherits Kaju.Information
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function FetchBinary(binaryName As String, needsExecutableName As Boolean) As Kaju.BinaryInformation
+		  dim binary as Kaju.BinaryInformation = Binaries.Lookup( binaryName, nil )
+		  if binary is nil then
+		    binary = new Kaju.BinaryInformation( needsExecutableName )
+		    Binaries.Value( binaryName ) = binary
+		  end if
+		  
+		  return binary
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function GetByName(propName As String) As Variant
 		  dim prop as Introspection.PropertyInfo = PropInfoDictionary.Value( propName )
 		  return prop.Value( self )
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub RemoveBinary(binaryName As String)
+		  if Binaries.HasKey( binaryName ) then
+		    Binaries.Remove binaryName
+		  end if
+		  
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
