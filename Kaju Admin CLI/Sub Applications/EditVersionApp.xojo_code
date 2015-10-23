@@ -13,14 +13,18 @@ Inherits VersionHandlerSubApplication
 		  const kHashDescription = "Use the given file to set the binary's hash"
 		  
 		  parser.AddOption new Option( "", kOptionMacBinary, kHashDescription, Option.OptionType.File )
-		  parser.AddOption new Option( "", kOptionWinBinary, kHashDescription, Option.OptionType.File )
 		  parser.AddOption new Option( "", kOptionLinuxBinary, kHashDescription, Option.OptionType.File )
+		  parser.AddOption new Option( "", kOptionLinuxBinary64, kHashDescription, Option.OptionType.File )
+		  parser.AddOption new Option( "", kOptionWinBinary, kHashDescription, Option.OptionType.File )
+		  parser.AddOption new Option( "", kOptionWinBinary64, kHashDescription, Option.OptionType.File )
 		  
 		  const kRemoveDescription = "Remove the binary data"
 		  
 		  parser.AddOption new Option( "", kOptionRemoveMacBinary, kRemoveDescription, Option.OptionType.Boolean )
 		  parser.AddOption new Option( "", kOptionRemoveWinBinary, kRemoveDescription, Option.OptionType.Boolean )
+		  parser.AddOption new Option( "", kOptionRemoveWinBinary64, kRemoveDescription, Option.OptionType.Boolean )
 		  parser.AddOption new Option( "", kOptionRemoveLinuxBinary, kRemoveDescription, Option.OptionType.Boolean )
+		  parser.AddOption new Option( "", kOptionRemoveLinuxBinary64, kRemoveDescription, Option.OptionType.Boolean )
 		  
 		End Sub
 	#tag EndEvent
@@ -71,6 +75,12 @@ Inherits VersionHandlerSubApplication
 		  if options.BooleanValue( kOptionRemoveLinuxBinary, false ) then
 		    version.RemoveBinary version.kLinuxBinaryName
 		  end if
+		  if options.BooleanValue( kOptionRemoveWinBinary64, false ) then
+		    version.RemoveBinary version.kWindowsBinaryName
+		  end if
+		  if options.BooleanValue( kOptionRemoveLinuxBinary64, false ) then
+		    version.RemoveBinary version.kLinuxBinary64Name
+		  end if
 		  
 		  //
 		  // Hashes
@@ -92,6 +102,18 @@ Inherits VersionHandlerSubApplication
 		  optionKey = kOptionLinuxBinary
 		  if options.OptionValue( optionKey ).WasSet then
 		    dim binary as Kaju.BinaryInformation = version.FetchBinary( version.kLinuxBinaryName )
+		    binary.Hash = Kaju.HashOfFile( options.FileValue( optionKey ) )
+		  end if
+		  
+		  optionKey = kOptionWinBinary64
+		  if options.OptionValue( optionKey ).WasSet then
+		    dim binary as Kaju.BinaryInformation = version.FetchBinary( version.kWindowsBinary64Name )
+		    binary.Hash = Kaju.HashOfFile( options.FileValue( optionKey ) )
+		  end if
+		  
+		  optionKey = kOptionLinuxBinary64
+		  if options.OptionValue( optionKey ).WasSet then
+		    dim binary as Kaju.BinaryInformation = version.FetchBinary( version.kLinuxBinary64Name )
 		    binary.Hash = Kaju.HashOfFile( options.FileValue( optionKey ) )
 		  end if
 		  
@@ -141,6 +163,12 @@ Inherits VersionHandlerSubApplication
 		          
 		        case "LinuxBinary", "LinBinary"
 		          binary = version.FetchBinary( version.kLinuxBinaryName )
+		          
+		        case "WindowsBinary64", "WinBinary64"
+		          binary = version.FetchBinary( version.kWindowsBinary64Name )
+		          
+		        case "LinuxBinary64", "LinBinary64"
+		          binary = version.FetchBinary( version.kLinuxBinary64Name )
 		          
 		        end select
 		        
@@ -205,7 +233,7 @@ Inherits VersionHandlerSubApplication
 	#tag EndMethod
 
 
-	#tag Constant, Name = kAdditionalHelp, Type = String, Dynamic = False, Default = \"Set a version field to the given value. You can use the `@\' form to read the input from a file. Relative paths can be used.\n\nExamples:\n\nChange a version number:\n  editversion --version\x3D1.0 --set version\x3D1.2\n\nSet the release notes from a file:\n  editversion --version\x3D1.2 --set ReleaseNotes\x3D@/path/to/file\n\nMultiple changes:\n  editversion --version\x3D1.0 --set version\x3D1.1\n    --set ReleaseNotes\x3D@/path/to/file\n    --set MinimumRequiredVersion\x3D1.1\n    --set RequiresPayment\x3Dtrue\n\nSet the binary hashes:\n  editversion --version\x3D1.1\n    --macbinary\x3D/path/to/mac/file\n    --winbinary\x3D/path/to/windows/file\n\nSet a binary\'s data:\n  editversion --version\x3D1.5\n    --set MacBinary.url\x3Dhttp://www.something.com\n    --set WindowsBinary.ExecutableName\x3DMyApp\n\nYou can get a list of the top-level field names through the versioninfo tool. The binary fields are:\n\n  Hash (should not be set directly)\n  URL\n  ExecutableName (required for Windows and Linux)\n\nVersion placeholder:\n\nWhen setting binary URL\'s\x2C you can use `$VERSION$\' as a placeholder to substitute the version number when exporting the Update Information file.", Scope = Private
+	#tag Constant, Name = kAdditionalHelp, Type = String, Dynamic = False, Default = \"Set a version field to the given value. You can use the `@\' form to read the input from a file. Relative paths can be used.\n\nExamples:\n\nChange a version number:\n  editversion --version\x3D1.0 --set version\x3D1.2\n\nSet the release notes from a file:\n  editversion --version\x3D1.2 --set ReleaseNotes\x3D@/path/to/file\n\nMultiple changes:\n  editversion --version\x3D1.0 --set version\x3D1.1\n    --set ReleaseNotes\x3D@/path/to/file\n    --set MinimumRequiredVersion\x3D1.1\n    --set RequiresPayment\x3Dtrue\n\nSet the binary hashes:\n  editversion --version\x3D1.1\n    --macbinary\x3D/path/to/mac/file\n    --winbinary\x3D/path/to/windows/file\n    --winbinary64\x3D/path/to/win64/file\n    --linuxbinary\x3D/path/to/linux/file\n    --linuxbinary64\x3D/path/to/linux64/file\n\nSet a binary\'s data (can be abbreviated as illustrated):\n  editversion --version\x3D1.5\n    --set MacBinary.url\x3Dhttp://www.something.com\n    --set WindowsBinary.ExecutableName\x3DMyApp.exe\n    --set winbinary64.url\x3D\'http://www.somethingelse.com\'\n    --set LinuxBinary.URL\x3D\'http://www.linupdater.com\'\n    --set linbinary64.ExecutableName\x3D\'MyApp\'\n\nRemove a binary:\n  editversion --version\x3D1.2\n    --remove-macbinary\n    --remove-winbinary\n    --remove-winbinary64\n    --remove-linuxbinary\n    --remove-linuxbinary64\n\nYou can get a list of the top-level field names through the versioninfo tool. The binary fields are:\n\n  Hash (should not be set directly)\n  URL\n  ExecutableName (required for Windows and Linux)\n\nVersion placeholder:\n\nWhen setting binary URL\'s\x2C you can use `$VERSION$\' as a placeholder to substitute the version number when exporting the Update Information file.", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kDescription, Type = String, Dynamic = False, Default = \"Edit a version", Scope = Private
@@ -217,10 +245,16 @@ Inherits VersionHandlerSubApplication
 	#tag Constant, Name = kOptionLinuxBinary, Type = String, Dynamic = False, Default = \"linuxbinary", Scope = Private
 	#tag EndConstant
 
+	#tag Constant, Name = kOptionLinuxBinary64, Type = String, Dynamic = False, Default = \"linuxbinary64", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kOptionMacBinary, Type = String, Dynamic = False, Default = \"macbinary", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kOptionRemoveLinuxBinary, Type = String, Dynamic = False, Default = \"remove-linuxbinary", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kOptionRemoveLinuxBinary64, Type = String, Dynamic = False, Default = \"remove-linuxbinary64", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kOptionRemoveMacBinary, Type = String, Dynamic = False, Default = \"remove-macbinary", Scope = Private
@@ -229,10 +263,16 @@ Inherits VersionHandlerSubApplication
 	#tag Constant, Name = kOptionRemoveWinBinary, Type = String, Dynamic = False, Default = \"remove-winbinary", Scope = Private
 	#tag EndConstant
 
+	#tag Constant, Name = kOptionRemoveWinBinary64, Type = String, Dynamic = False, Default = \"remove-winbinary64", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kOptionSet, Type = String, Dynamic = False, Default = \"set", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kOptionWinBinary, Type = String, Dynamic = False, Default = \"winbinary", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kOptionWinBinary64, Type = String, Dynamic = False, Default = \"winbinary64", Scope = Private
 	#tag EndConstant
 
 
