@@ -59,7 +59,7 @@ Begin ContainerControl BinaryInformationControl
    Begin CheckBoxChanger cbUseBinary
       AutoDeactivate  =   True
       Bold            =   False
-      Caption         =   "Mac"
+      Caption         =   "Use"
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   False
