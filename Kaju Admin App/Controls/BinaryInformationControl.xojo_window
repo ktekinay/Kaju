@@ -352,8 +352,8 @@ End
 	#tag EndEvent
 
 
-	#tag Method, Flags = &h21
-		Private Sub AdjustControls()
+	#tag Method, Flags = &h0
+		Sub AdjustControls()
 		  if BinaryName <> "" then
 		    cbUseBinary.Caption = BinaryName.NthField( "Binary", 1 )
 		  end if
@@ -366,9 +366,7 @@ End
 		    dim c as Control = self.Control( i )
 		    select case c
 		    case isa CheckBox
-		      //
-		      // Ignore it
-		      //
+		      CheckBox( c ).Enabled = self.Enabled
 		      
 		    case isa RectControl
 		      if c is fldExecutable and not NeedsExecutableName then
@@ -380,6 +378,9 @@ End
 		    end select
 		  next
 		  
+		  if btnHashFromURL.Visible then
+		    btnHashFromURL.Enabled = self.Enabled and fldURL.Text.Trim <> "" and Version <> ""
+		  end if
 		End Sub
 	#tag EndMethod
 
@@ -448,7 +449,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub Load(binary As Kaju.BinaryInformation, version As String)
-		  self.Version = version
+		  self.Version = version.Trim
 		  
 		  cbUseBinary.Value = binary isa Kaju.BinaryInformation
 		  
@@ -469,6 +470,10 @@ End
 
 
 	#tag Hook, Flags = &h0
+		Event CheckedChanged()
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
 		Event Open()
 	#tag EndHook
 
@@ -476,6 +481,16 @@ End
 	#tag Property, Flags = &h0
 		BinaryName As String
 	#tag EndProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return cbUseBinary.Value
+			  
+			End Get
+		#tag EndGetter
+		IsChecked As Boolean
+	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h21
 		#tag Getter
@@ -505,6 +520,8 @@ End
 	#tag Event
 		Sub Action()
 		  AdjustControls()
+		  RaiseEvent CheckedChanged
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -601,13 +618,6 @@ End
 		Type="Boolean"
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="HashCueText"
-		Visible=true
-		Group="Behavior"
-		Type="String"
-		EditorType="MultiLineEditor"
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="Height"
 		Visible=true
 		Group="Size"
@@ -624,6 +634,11 @@ End
 		Name="InitialParent"
 		Group="Position"
 		Type="String"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="IsChecked"
+		Group="Behavior"
+		Type="Boolean"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Left"
