@@ -357,7 +357,7 @@ Inherits Kaju.Information
 	#tag EndComputedProperty
 
 
-	#tag Constant, Name = kLinuxBinary64Name, Type = String, Dynamic = False, Default = \"LinuxBinary64", Scope = Public
+	#tag Constant, Name = kLinuxBinary64Name, Type = String, Dynamic = False, Default = \"LinuxBinary64bit", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kLinuxBinaryName, Type = String, Dynamic = False, Default = \"LinuxBinary", Scope = Public
@@ -366,7 +366,7 @@ Inherits Kaju.Information
 	#tag Constant, Name = kMacBinaryName, Type = String, Dynamic = False, Default = \"MacBinary", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kWindowsBinary64Name, Type = String, Dynamic = False, Default = \"WindowsBinary64", Scope = Public
+	#tag Constant, Name = kWindowsBinary64Name, Type = String, Dynamic = False, Default = \"WindowsBinary64bit", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kWindowsBinaryName, Type = String, Dynamic = False, Default = \"WindowsBinary", Scope = Public
