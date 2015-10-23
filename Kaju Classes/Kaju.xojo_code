@@ -234,6 +234,34 @@ Protected Module Kaju
 		    if http.HTTPStatusCode = 404 or raw.Trim = "" then
 		      r = alternateNotes
 		    else
+		      //
+		      // Adjust the encoding
+		      //
+		      
+		      dim enc as TextEncoding
+		      
+		      //
+		      // See if the html contains a charset
+		      //
+		      static rx as RegEx
+		      if rx is nil then
+		        rx = new RegEx
+		        rx.SearchPattern = "<meta charset *= *[""']([^""']+)"
+		      end if
+		      
+		      dim match as RegExMatch = rx.Search( raw )
+		      if match isa RegExMatch then
+		        dim encString as string = match.SubExpressionString( 1 ).Trim
+		        try
+		          enc = GetInternetTextEncoding( encString )
+		        end try
+		      end if
+		      
+		      if enc is nil then
+		        enc = Encodings.UTF8
+		      end if
+		      raw = raw.DefineEncoding( enc )
+		      
 		      r = raw
 		    end if
 		    
