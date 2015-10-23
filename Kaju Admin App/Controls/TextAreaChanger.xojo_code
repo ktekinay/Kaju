@@ -3,7 +3,7 @@ Protected Class TextAreaChanger
 Inherits TextArea
 	#tag Event
 		Sub TextChange()
-		  self.Window.ContentsChanged = true
+		  self.TrueWindow.ContentsChanged = true
 		  RaiseEvent TextChange()
 		End Sub
 	#tag EndEvent

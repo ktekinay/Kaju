@@ -3,7 +3,7 @@ Protected Class CheckBoxChanger
 Inherits CheckBox
 	#tag Event
 		Sub Action()
-		  self.Window.ContentsChanged = true
+		  self.TrueWindow.ContentsChanged = true
 		  RaiseEvent Action()
 		End Sub
 	#tag EndEvent
