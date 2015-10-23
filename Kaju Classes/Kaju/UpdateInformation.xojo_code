@@ -120,9 +120,11 @@ Inherits Kaju.Information
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function FetchBinary(binaryName As String, needsExecutableName As Boolean) As Kaju.BinaryInformation
+		Function FetchBinary(binaryName As String) As Kaju.BinaryInformation
 		  dim binary as Kaju.BinaryInformation = Binaries.Lookup( binaryName, nil )
 		  if binary is nil then
+		    dim needsExecutableName as boolean = binaryName.Left( 3 ) <> "Mac"
+		    
 		    binary = new Kaju.BinaryInformation( needsExecutableName )
 		    Binaries.Value( binaryName ) = binary
 		  end if
