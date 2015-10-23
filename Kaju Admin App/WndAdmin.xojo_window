@@ -2745,49 +2745,36 @@ End
 		  //
 		  // Binaries
 		  //
-		  dim binaryDict as Dictionary = version.Binaries
 		  
 		  dim thisKey as string
 		  
 		  thisKey = version.kMacBinaryName
 		  if cbMacBinary.Value then
-		    dim binary as new Kaju.BinaryInformation( false )
+		    dim binary as Kaju.BinaryInformation = version.FetchBinary( thisKey )
 		    binary.Hash = fldMacBinaryHash.Text.Trim
 		    binary.URL = fldMacBinaryURL.Text.Trim
-		    
-		    binaryDict.Value( thisKey ) = binary
 		  else
-		    if binaryDict.HasKey( thisKey ) then
-		      binaryDict.Remove thisKey 
-		    end if
+		    version.RemoveBinary thisKey
 		  end if
 		  
 		  thisKey = version.kWindowsBinaryName
 		  if cbWindowsBinary.Value then
-		    dim binary as new Kaju.BinaryInformation( true )
+		    dim binary as Kaju.BinaryInformation = version.FetchBinary( thisKey )
 		    binary.ExecutableName = fldWindowsExecutable.Text.Trim
 		    binary.Hash = fldWindowsBinaryHash.Text.Trim
 		    binary.URL = fldWindowsBinaryURL.Text.Trim
-		    
-		    binaryDict.Value( thisKey ) = binary
 		  else
-		    if binaryDict.HasKey( thisKey ) then
-		      binaryDict.Remove thisKey
-		    end if
+		    version.RemoveBinary thisKey
 		  end if
 		  
 		  thisKey = version.kLinuxBinaryName
 		  if cbLinuxBinary.Value then
-		    dim binary as new Kaju.BinaryInformation( true )
+		    dim binary as Kaju.BinaryInformation = version.FetchBinary( thisKey )
 		    binary.ExecutableName = fldLinuxExecutable.Text.Trim
 		    binary.Hash = fldLinuxBinaryHash.Text.Trim
 		    binary.URL = fldLinuxBinaryURL.Text.Trim
-		    
-		    binaryDict.Value( thisKey ) = binary
 		  else
-		    if binaryDict.HasKey( thisKey ) then
-		      binaryDict.Remove thisKey
-		    end if
+		    version.RemoveBinary thisKey
 		  end if
 		  
 		  
