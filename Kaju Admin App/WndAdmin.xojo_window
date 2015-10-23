@@ -2552,6 +2552,7 @@ End
 		  
 		  dim tag as Variant = lbVersions.RowTag( curIndex )
 		  dim infoCopy as new Kaju.UpdateInformation( Kaju.UpdateInformation( tag ) )
+		  MyKajuFile.KajuData.Append infoCopy
 		  
 		  dim listing as string = lbVersions.Cell( curIndex, 0 )
 		  dim newIndex as integer = curIndex + 1
@@ -2559,7 +2560,6 @@ End
 		  lbVersions.RowTag( newIndex ) = infoCopy
 		  lbVersions.ListIndex = newIndex
 		  
-		  MyKajuFile.KajuData.Append infoCopy
 		  
 		End Sub
 	#tag EndMethod
@@ -2745,36 +2745,49 @@ End
 		  //
 		  // Binaries
 		  //
+		  dim binaryDict as Dictionary = version.Binaries
+		  
+		  dim thisKey as string
+		  
+		  thisKey = version.kMacBinaryName
 		  if cbMacBinary.Value then
 		    dim binary as new Kaju.BinaryInformation( false )
 		    binary.Hash = fldMacBinaryHash.Text.Trim
 		    binary.URL = fldMacBinaryURL.Text.Trim
 		    
-		    version.MacBinary = binary
+		    binaryDict.Value( thisKey ) = binary
 		  else
-		    version.MacBinary = nil
+		    if binaryDict.HasKey( thisKey ) then
+		      binaryDict.Remove thisKey 
+		    end if
 		  end if
 		  
+		  thisKey = version.kWindowsBinaryName
 		  if cbWindowsBinary.Value then
 		    dim binary as new Kaju.BinaryInformation( true )
 		    binary.ExecutableName = fldWindowsExecutable.Text.Trim
 		    binary.Hash = fldWindowsBinaryHash.Text.Trim
 		    binary.URL = fldWindowsBinaryURL.Text.Trim
 		    
-		    version.WindowsBinary = binary
+		    binaryDict.Value( thisKey ) = binary
 		  else
-		    version.WindowsBinary = nil
+		    if binaryDict.HasKey( thisKey ) then
+		      binaryDict.Remove thisKey
+		    end if
 		  end if
 		  
+		  thisKey = version.kLinuxBinaryName
 		  if cbLinuxBinary.Value then
 		    dim binary as new Kaju.BinaryInformation( true )
 		    binary.ExecutableName = fldLinuxExecutable.Text.Trim
 		    binary.Hash = fldLinuxBinaryHash.Text.Trim
 		    binary.URL = fldLinuxBinaryURL.Text.Trim
 		    
-		    version.LinuxBinary = binary
+		    binaryDict.Value( thisKey ) = binary
 		  else
-		    version.LinuxBinary = nil
+		    if binaryDict.HasKey( thisKey ) then
+		      binaryDict.Remove thisKey
+		    end if
 		  end if
 		  
 		  
@@ -2831,24 +2844,26 @@ End
 		  // Binaries
 		  //
 		  
-		  if version.MacBinary isa Kaju.BinaryInformation then
+		  dim binary as Kaju.BinaryInformation
+		  
+		  binary = version.Binaries.Lookup( version.kMacBinaryName, nil )
+		  if binary isa Kaju.BinaryInformation then
 		    cbMacBinary.Value = true
-		    dim binary as Kaju.BinaryInformation = version.MacBinary
 		    fldMacBinaryHash.Text = binary.Hash
 		    fldMacBinaryURL.Text = binary.URL
 		  end if
 		  
-		  if version.WindowsBinary isa Kaju.BinaryInformation then
+		  binary = version.Binaries.Lookup( version.kWindowsBinaryName, nil )
+		  if binary isa Kaju.BinaryInformation then
 		    cbWindowsBinary.Value = true
-		    dim binary as Kaju.BinaryInformation = version.WindowsBinary
 		    fldWindowsExecutable.Text = binary.ExecutableName
 		    fldWindowsBinaryHash.Text = binary.Hash
 		    fldWindowsBinaryURL.Text = binary.URL
 		  end if
 		  
-		  if version.LinuxBinary isa Kaju.BinaryInformation then
+		  binary = version.Binaries.Lookup( version.kLinuxBinaryName, nil )
+		  if binary isa Kaju.BinaryInformation then
 		    cbLinuxBinary.Value = true
-		    dim binary as Kaju.BinaryInformation = version.LinuxBinary
 		    fldLinuxExecutable.Text = binary.ExecutableName
 		    fldLinuxBinaryHash.Text = binary.Hash
 		    fldLinuxBinaryURL.Text = binary.URL
