@@ -655,17 +655,8 @@ End
 		  // Show the release notes
 		  //
 		  dim source as string = update.ReleaseNotes
-		  if source = "" then
-		    source = "<b>" + KajuLocale.kNoUpdateInfoMessage + "</b>"
-		  end if
-		  
-		  if source.Left( 4 ) = "http" then
-		    source = ReplaceLineEndings( source, EndOfLine.UNIX )
-		    dim url as string = source.NthField( EndOfLine.UNIX, 1 )
-		    hvNotes.LoadURL( url )
-		  else
-		    hvNotes.LoadPage( source, RelativeToFolderItem )
-		  end if
+		  source = Kaju.ProcessReleaseNotes( source )
+		  hvNotes.LoadPage( source, RelativeToFolderItem )
 		  
 		  //
 		  // hvNotes.CancelLoad will set self.Loading back to false
