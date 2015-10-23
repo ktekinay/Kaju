@@ -2551,11 +2551,16 @@ End
 		  StoreFieldsToVersionRow()
 		  
 		  dim tag as Variant = lbVersions.RowTag( curIndex )
+		  dim infoCopy as new Kaju.UpdateInformation( Kaju.UpdateInformation( tag ) )
+		  
 		  dim listing as string = lbVersions.Cell( curIndex, 0 )
 		  dim newIndex as integer = curIndex + 1
 		  lbVersions.InsertRow( newIndex, listing )
-		  lbVersions.RowTag( newIndex ) = tag
+		  lbVersions.RowTag( newIndex ) = infoCopy
 		  lbVersions.ListIndex = newIndex
+		  
+		  MyKajuFile.KajuData.Append infoCopy
+		  
 		End Sub
 	#tag EndMethod
 

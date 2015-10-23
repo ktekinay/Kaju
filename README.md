@@ -433,3 +433,4 @@ Add a translation for each, then submit a pull request as outlined above.
 - **KajuUpdateWindow**: Delete the temp file used for the LoadPage "relativeTo" parameter on close.
 - Added Dutch translation.
 - Ability to load release notes through a URL.
+- **Admin GUI**: Fixed Dupe button.
