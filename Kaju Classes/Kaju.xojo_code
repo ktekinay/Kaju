@@ -207,7 +207,7 @@ Protected Module Kaju
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
+	#tag Method, Flags = &h1, CompatibilityFlags = (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit)) or  (TargetIOS and (Target32Bit or Target64Bit))
 		Protected Function ProcessReleaseNotes(notes As String) As String
 		  //
 		  // The release notes might be straight HTML or them might be a URL.
