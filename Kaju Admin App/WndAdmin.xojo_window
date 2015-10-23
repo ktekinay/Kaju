@@ -2195,6 +2195,37 @@ End
 	#tag Event
 		Sub Open()
 		  RelativeToFolderItem = GetTemporaryFolderItem
+		  
+		  //
+		  // Create binary controls
+		  //
+		  
+		  dim binaryNames() as string = Kaju.UpdateInformation.BinaryNames
+		  dim useTop as integer = 100
+		  dim useTop64 as integer = useTop
+		  dim gap as integer = 50
+		  
+		  dim tpIndex as integer = 1
+		  dim tpIndex64 as integer = 2
+		  
+		  for i as integer = 0 to binaryNames.Ubound
+		    dim binaryName as string = binaryNames( i )
+		    
+		    dim cc as new BinaryInformationControl
+		    cc.BinaryName = binaryName
+		    
+		    if binaryName.InStr( "64" ) <> 0 then
+		      cc.EmbedWithinPanel TabPanel1, tpIndex64, 10, useTop64
+		      useTop64 = cc.Top + cc.Height + gap
+		    else
+		      cc.EmbedWithinPanel TabPanel1, tpIndex, 10, useTop
+		      useTop = cc.Top + cc.Height + gap
+		    end if
+		    
+		    useTop = cc.Top + cc.Height + gap
+		    BinaryControls.Append cc
+		  next
+		  
 		  AdjustControls()
 		End Sub
 	#tag EndEvent
@@ -2825,6 +2856,10 @@ End
 		End Sub
 	#tag EndMethod
 
+
+	#tag Property, Flags = &h21
+		Private BinaryControls() As BinaryInformationControl
+	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
