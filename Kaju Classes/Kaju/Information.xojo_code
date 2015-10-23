@@ -114,7 +114,7 @@ Protected Class Information
 		      try
 		        value = CloneValue( value )
 		      catch err as KajuException
-		        err.Message = err.Message + " (" + propName + ")"
+		        err.Message = err.Message + " (" + prop.Name + ")"
 		        raise err
 		      end try
 		      prop.Value( self ) = value
