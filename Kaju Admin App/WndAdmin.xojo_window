@@ -232,7 +232,7 @@ Begin Window WndAdmin
       Panels          =   ""
       Scope           =   2
       SmallTabs       =   False
-      TabDefinition   =   "Release Notes\rBinaries\rImage"
+      TabDefinition   =   "Release Notes\rBinaries\r64-bit Binaries\rImage"
       TabIndex        =   4
       TabPanelIndex   =   0
       TabStop         =   True
@@ -798,7 +798,7 @@ Begin Window WndAdmin
          ReadOnly        =   False
          Scope           =   2
          TabIndex        =   1
-         TabPanelIndex   =   3
+         TabPanelIndex   =   4
          TabStop         =   True
          Text            =   ""
          TextColor       =   &c00000000
@@ -832,7 +832,7 @@ Begin Window WndAdmin
          Scope           =   2
          Selectable      =   False
          TabIndex        =   3
-         TabPanelIndex   =   3
+         TabPanelIndex   =   4
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -866,7 +866,7 @@ Begin Window WndAdmin
          Scope           =   2
          State           =   0
          TabIndex        =   0
-         TabPanelIndex   =   3
+         TabPanelIndex   =   4
          TabStop         =   True
          TextFont        =   "System"
          TextSize        =   0.0
@@ -893,7 +893,7 @@ Begin Window WndAdmin
          Renderer        =   0
          Scope           =   2
          TabIndex        =   2
-         TabPanelIndex   =   3
+         TabPanelIndex   =   4
          TabStop         =   True
          Top             =   224
          Visible         =   True
