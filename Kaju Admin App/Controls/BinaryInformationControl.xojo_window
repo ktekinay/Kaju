@@ -14,9 +14,9 @@ Begin ContainerControl BinaryInformationControl
    InitialParent   =   ""
    Left            =   0
    LockBottom      =   False
-   LockLeft        =   False
-   LockRight       =   False
-   LockTop         =   False
+   LockLeft        =   True
+   LockRight       =   True
+   LockTop         =   True
    TabIndex        =   0
    TabPanelIndex   =   0
    TabStop         =   True
