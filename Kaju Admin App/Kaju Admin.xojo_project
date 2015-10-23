@@ -27,6 +27,7 @@ Class=FolderItemAlias;Other Classes/FolderItemAlias.xojo_code;&h53EF1AE5;&h6AF5D
 Class=HTTPSSocket;../Kaju Classes/Kaju/HTTPSSocket.xojo_code;&h5ACDFAEB;&h11400316;false
 Plist=Info;Custom Plist/Info.plist;&h7393D7FF;&h74C1A7FF;false
 Class=KajuFile;../Admin Classes/KajuFile.xojo_code;&h1A7FF7FF;&h0;false
+Window=BinaryInformationControl;Controls/BinaryInformationControl.xojo_window;&h5D6E5FFF;&hE8B14E5;false
 AppMenuBar=MainMenuBar
 MajorVersion=1
 MinorVersion=6
