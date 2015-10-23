@@ -3131,21 +3131,21 @@ End
 #tag Events btnMacHashFromURL
 	#tag Event
 		Sub Action()
-		  HashFromURL( fldMacBinaryURL.Text, fldVersion.Text.Trim, fldMacBinaryHash )
+		  'HashFromURL( fldMacBinaryURL.Text, fldVersion.Text.Trim, fldMacBinaryHash )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events btnLinuxHashFromURL
 	#tag Event
 		Sub Action()
-		  HashFromURL( fldLinuxBinaryURL.Text, fldVersion.Text.Trim, fldLinuxBinaryHash )
+		  'HashFromURL( fldLinuxBinaryURL.Text, fldVersion.Text.Trim, fldLinuxBinaryHash )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events btnWindowsHashFromURL
 	#tag Event
 		Sub Action()
-		  HashFromURL( fldWindowsBinaryURL.Text, fldVersion.Text.Trim, fldWindowsBinaryHash )
+		  'HashFromURL( fldWindowsBinaryURL.Text, fldVersion.Text.Trim, fldWindowsBinaryHash )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
