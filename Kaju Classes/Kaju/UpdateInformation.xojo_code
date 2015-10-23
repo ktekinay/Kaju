@@ -237,12 +237,13 @@ Inherits Kaju.Information
 			  
 			  dim props() as Introspection.PropertyInfo = Introspection.GetType( self ).GetProperties
 			  for each prop as Introspection.PropertyInfo in props
-			    if prop.IsComputed or not prop.CanRead or not prop.CanWrite or not prop.IsPublic then
+			    if prop.IsShared or prop.IsComputed or not prop.CanRead or not prop.CanWrite or not prop.IsPublic then
 			      continue for prop
 			    end if
 			    
 			    dim propType as Introspection.TypeInfo = prop.PropertyType
 			    dim propTypeName as string = propType.Name
+			    
 			    dim isGood as boolean
 			    select case propTypeName
 			    case "String", "Double", "Single", "Text", "Boolean"
