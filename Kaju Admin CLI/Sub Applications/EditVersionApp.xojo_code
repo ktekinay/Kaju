@@ -79,19 +79,19 @@ Inherits VersionHandlerSubApplication
 		  
 		  optionKey = kOptionMacBinary
 		  if options.OptionValue( optionKey ).WasSet then
-		    dim binary as Kaju.BinaryInformation = version.FetchBinary( version.kMacBinaryName, false )
+		    dim binary as Kaju.BinaryInformation = version.FetchBinary( version.kMacBinaryName )
 		    binary.Hash = Kaju.HashOfFile( options.FileValue( optionKey ) )
 		  end if
 		  
 		  optionKey = kOptionWinBinary
 		  if options.OptionValue( optionKey ).WasSet then
-		    dim binary as Kaju.BinaryInformation = version.FetchBinary( version.kWindowsBinaryName, true )
+		    dim binary as Kaju.BinaryInformation = version.FetchBinary( version.kWindowsBinaryName )
 		    binary.Hash = Kaju.HashOfFile( options.FileValue( optionKey ) )
 		  end if
 		  
 		  optionKey = kOptionLinuxBinary
 		  if options.OptionValue( optionKey ).WasSet then
-		    dim binary as Kaju.BinaryInformation = version.FetchBinary( version.kLinuxBinaryName, true )
+		    dim binary as Kaju.BinaryInformation = version.FetchBinary( version.kLinuxBinaryName )
 		    binary.Hash = Kaju.HashOfFile( options.FileValue( optionKey ) )
 		  end if
 		  
@@ -134,13 +134,13 @@ Inherits VersionHandlerSubApplication
 		        dim binary as Kaju.BinaryInformation
 		        select case leftKey
 		        case "MacBinary"
-		          binary = version.FetchBinary( version.kMacBinaryName, false )
+		          binary = version.FetchBinary( version.kMacBinaryName )
 		          
 		        case "WindowsBinary", "WinBinary"
-		          binary = version.FetchBinary( version.kWindowsBinaryName, true )
+		          binary = version.FetchBinary( version.kWindowsBinaryName )
 		          
 		        case "LinuxBinary", "LinBinary"
-		          binary = version.FetchBinary( version.kLinuxBinaryName, true )
+		          binary = version.FetchBinary( version.kLinuxBinaryName )
 		          
 		        end select
 		        
