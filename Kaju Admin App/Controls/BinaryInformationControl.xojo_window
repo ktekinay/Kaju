@@ -96,7 +96,7 @@ Begin ContainerControl BinaryInformationControl
       BackColor       =   &cFFFFFF00
       Bold            =   False
       Border          =   True
-      CueText         =   "Drop the Mac Zip file here to calculate the hash"
+      CueText         =   "Drop the Zip file here to calculate the hash"
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
