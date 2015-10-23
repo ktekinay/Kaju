@@ -380,8 +380,6 @@ End
 		    end select
 		  next
 		  
-		  fldHash.CueText = HashCueText
-		  
 		End Sub
 	#tag EndMethod
 
@@ -477,10 +475,6 @@ End
 
 	#tag Property, Flags = &h0
 		BinaryName As String
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		HashCueText As String
 	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h21
