@@ -80,6 +80,13 @@ Inherits Kaju.Information
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		 Shared Function BinaryNeedsExecutableName(binaryName As String) As Boolean
+		  return binaryName.Left( 3 ) <> "Mac"
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1000
 		Sub Constructor()
 		  
