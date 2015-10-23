@@ -3191,14 +3191,8 @@ End
 		  self.Loading = true
 		  
 		  dim releaseNotes as string = ControlValue( fldReleaseNotes ).StringValue
-		  if releaseNotes.Left( 4 ) = "http" then
-		    releaseNotes = ReplaceLineEndings( releaseNotes, EndOfLine.UNIX )
-		    dim url as string = releaseNotes.NthField( EndOfLine.UNIX, 1 )
-		    
-		    hvReleaseNotesPreview.LoadURL( url )
-		  else
-		    hvReleaseNotesPreview.LoadPage( releaseNotes, RelativeToFolderItem )
-		  end if
+		  releaseNotes = Kaju.ProcessReleaseNotes( releaseNotes )
+		  hvReleaseNotesPreview.LoadPage( releaseNotes, RelativeToFolderItem )
 		  
 		  self.Loading = false
 		End Sub
@@ -3287,6 +3281,10 @@ End
 	#tag Event
 		Sub Action()
 		  if me.MenuValue = -1 then
+		    return
+		  end if
+		  
+		  if not IsDataValid then
 		    return
 		  end if
 		  

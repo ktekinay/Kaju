@@ -62,7 +62,7 @@
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip"
       },
       "MinimumRequiredVersion":"",
-      "ReleaseNotes":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Test_Release_Notes_1.2.1a4.html\n\nThis will load the release notes from a URL. Everything below the url is ignored.",
+      "ReleaseNotes":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Test_Release_Notes_1.2.1a4.html\n\n<p>These are alternate release notes. If the URL above can’t be accessed or returns an empty string, this will be displayed instead.<\/p>\n\n<p>Try fiddling with the URL to see the results.<\/p>",
       "RequiresPayment":false,
       "UseTransparency":false,
       "Version":"1.2.1a4",
