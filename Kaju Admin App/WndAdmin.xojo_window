@@ -3284,6 +3284,10 @@ End
 		    return
 		  end if
 		  
+		  if not IsDataValid then
+		    return
+		  end if
+		  
 		  dim uc as new Kaju.UpdateChecker( App.PrefFolder )
 		  uc.AllowedStage = me.MenuValue
 		  dim s as string = MyKajuFile.DataToJSON.ToString
