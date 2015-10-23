@@ -207,6 +207,46 @@ Protected Module Kaju
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h1
+		Protected Function ProcessReleaseNotes(notes As String) As String
+		  //
+		  // The release notes might be straight HTML or them might be a URL.
+		  // If the latter, the remainder will be alternate notes.
+		  // This method will determine which it is and, if the latter, will
+		  // attempt to fetch the notes. If it can't, it will return the alternate
+		  // notes if any, or a message.
+		  //
+		  
+		  static noInfoHTML as string = "<b>" + KajuLocale.kNoUpdateInfoMessage + "</b>"
+		  
+		  dim r as string = notes
+		  
+		  if notes.Left( 4 ) = "http" then
+		    dim notesCopy as string = ReplaceLineEndings( notes, EndOfLine.UNIX )
+		    dim url as string = notesCopy.NthField( EndOfLine.UNIX, 1 )
+		    dim alternateNotes as string = notes.Mid( url.Len + 1 ).Trim
+		    
+		    dim redirector as new Kaju.HTTPSSocket
+		    url = redirector.GetRedirectAddress( url, 5 )
+		    
+		    dim http as new Kaju.HTTPSSocket
+		    dim raw as string = http.Get( url, 5 )
+		    if http.HTTPStatusCode = 404 or raw.Trim = "" then
+		      r = alternateNotes
+		    else
+		      r = raw
+		    end if
+		    
+		  end if
+		  
+		  if r.Trim = "" then
+		    r = noInfoHTML
+		  end if
+		  
+		  return r
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1, CompatibilityFlags = (TargetHasGUI)
 		Protected Sub StartUpdate(initiater As Kaju.UpdateInitiater)
 		  App.UpdateInitiater = initiater
