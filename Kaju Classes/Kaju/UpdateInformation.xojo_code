@@ -21,25 +21,64 @@ Inherits Kaju.Information
 		    r = true
 		  end if
 		  
-		  if not r and MacBinary <> nil and not MacBinary.IsValid then
-		    reason = "Mac " + KajuLocale.kBinaryInfoInvalidReason + ": " + MacBinary.InvalidReason
-		    r = true
-		  end if
-		  
-		  if not r and WindowsBinary <> nil and not WindowsBinary.IsValid then
-		    reason = "Windows " + KajuLocale.kBinaryInfoInvalidReason + ": " + WindowsBinary.InvalidReason
-		    r = true
-		  end if
-		  
-		  if not r and LinuxBinary <> nil and not LinuxBinary.IsValid then
-		    reason = "Linux " + KajuLocale.kBinaryInfoInvalidReason + ": " + LinuxBinary.InvalidReason
-		    r = true
+		  if not r then
+		    dim pairs() as Pair 
+		    for each binaryName as string in BinaryNames
+		      dim platform as string
+		      select case binaryName.Left( 3 )
+		      case "Mac"
+		        platform = "Mac"
+		      case "Win"
+		        platform = "Windows"
+		      case "Lin"
+		        platform = "Linux"
+		      case else
+		        raise new KajuException( "Unknown platform", CurrentMethodName )
+		      end select
+		      
+		      dim p as new Pair( binaryName, platform )
+		      pairs.Append p
+		    next
+		    
+		    for each p as Pair in pairs
+		      dim key as string = p.Left
+		      dim platform as string = p.Right
+		      
+		      dim binary as Kaju.BinaryInformation = Binaries.Lookup( key, nil )
+		      if binary isa Kaju.BinaryInformation and not binary.IsValid then
+		        reason = platform + " " + KajuLocale.kBinaryInfoInvalidReason + ": " + binary.InvalidReason
+		        r = true
+		        exit for p
+		      end if
+		    next
 		  end if
 		  
 		  return r
 		End Function
 	#tag EndEvent
 
+
+	#tag Method, Flags = &h0
+		Function Binaries() As Dictionary
+		  if mBinaries is nil then
+		    mBinaries = new Dictionary
+		  end if
+		  
+		  return mBinaries
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		 Shared Function BinaryNames() As String()
+		  return array( _
+		  kMacBinaryName, _
+		  kWindowsBinaryName, _
+		  kLinuxBinaryName, _
+		  kWindowsBinary64Name, _
+		  kLinuxBinary64Name _
+		  )
+		End Function
+	#tag EndMethod
 
 	#tag Method, Flags = &h1000
 		Sub Constructor()
@@ -49,21 +88,35 @@ Inherits Kaju.Information
 
 	#tag Method, Flags = &h0
 		Sub Constructor(data As JSONItem)
+		  self.Constructor()
+		  
 		  Kaju.JSONToProperties( data, self )
 		  
-		  if data.HasName( kMacBinaryName ) then
-		    MacBinary = new Kaju.BinaryInformation( false, data.Value( kMacBinaryName ) )
-		  end if
-		  
-		  if data.HasName( kWindowsBinaryName ) then
-		    WindowsBinary = new Kaju.BinaryInformation( true, data.Value( kWindowsBinaryName ) )
-		  end if
-		  
-		  if data.HasName( kLinuxBinaryName ) then
-		    LinuxBinary = new Kaju.BinaryInformation( true, data.Value( kLinuxBinaryName ) )
-		  end if
+		  for each binaryName as string in BinaryNames
+		    if data.HasName( binaryName ) then
+		      dim executableNameRequired as boolean = binaryName.Left( 3 ) <> "Mac"
+		      
+		      dim binary as new Kaju.BinaryInformation( executableNameRequired, data.Value( binaryName ) )
+		      Binaries.Value( binaryName ) = binary
+		    end if
+		  next
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function ConvertToJSON() As JSONItem
+		  dim j as JSONItem = super.ConvertToJSON
+		  
+		  for each binaryName as string in BinaryNames
+		    dim b as Kaju.BinaryInformation = Binaries.Lookup( binaryName, nil )
+		    if b isa Kaju.BinaryInformation then
+		      j.Value( binaryName ) = b.ToJSON
+		    end if
+		  next
+		  
+		  return j
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -136,12 +189,8 @@ Inherits Kaju.Information
 		ImageURL As String
 	#tag EndProperty
 
-	#tag Property, Flags = &h0
-		LinuxBinary As Kaju.BinaryInformation
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		MacBinary As Kaju.BinaryInformation
+	#tag Property, Flags = &h21
+		Private mBinaries As Dictionary
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -155,15 +204,36 @@ Inherits Kaju.Information
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  dim binaryInfo as Kaju.BinaryInformation
+			  dim b32 as Kaju.BinaryInformation
+			  dim b64 as Kaju.BinaryInformation
 			  
 			  #if TargetMacOS then
-			    binaryInfo = MacBinary
+			    b64 = Binaries.Lookup( kMacBinaryName, nil )
 			  #elseif TargetWin32 then
-			    binaryInfo = WindowsBinary
+			    b32 = Binaries.Lookup( kWindowsBinaryName, nil )
+			    b64 = Binaries.Lookup( kWindowsBinary64Name, nil )
 			  #else // Linux
-			    binaryInfo = LinuxBinary
+			    b32 = Binaries.Lookup( kLinuxBinaryName, nil )
+			    b64 = Binaries.Lookup( kLinuxBinary64Name, nil )
 			  #endif
+			  
+			  dim binaryInfo as Kaju.BinaryInformation
+			  if b32 is nil and b64 is nil then
+			    binaryInfo = nil
+			  elseif b32 isa Kaju.BinaryInformation and b64 is nil then
+			    binaryInfo = b32
+			  elseif b64 isa Kaju.BinaryInformation and b32 is nil then
+			    binaryInfo = b64
+			  else
+			    //
+			    // Neither are nil so pick according to the current version
+			    //
+			    #if Target32Bit
+			      binaryInfo = b32
+			    #else
+			      binaryInfo = b64
+			    #endif
+			  end if
 			  
 			  return binaryInfo
 			End Get
@@ -233,49 +303,7 @@ Inherits Kaju.Information
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  dim j as new JSONItem( "{}" )
-			  
-			  dim props() as Introspection.PropertyInfo = Introspection.GetType( self ).GetProperties
-			  for each prop as Introspection.PropertyInfo in props
-			    if prop.IsShared or prop.IsComputed or not prop.CanRead or not prop.CanWrite or not prop.IsPublic then
-			      continue for prop
-			    end if
-			    
-			    dim propType as Introspection.TypeInfo = prop.PropertyType
-			    dim propTypeName as string = propType.Name
-			    
-			    dim isGood as boolean
-			    select case propTypeName
-			    case "String", "Double", "Single", "Text", "Boolean"
-			      isGood = true
-			      
-			    end select
-			    
-			    if not isGood then
-			      //
-			      // See if it's an integer of some sort
-			      //
-			      if propTypeName.Left( 3 ) = "Int" or propTypeName.Left( 4 ) = "UInt" then
-			        isGood = true
-			      end if
-			    end if
-			    
-			    if isGood then
-			      j.Value( prop.Name ) = prop.Value( self )
-			    end if
-			  next
-			  
-			  if MacBinary Isa Kaju.BinaryInformation then
-			    j.Value( kMacBinaryName ) = MacBinary.ToJSON
-			  end if
-			  if WindowsBinary Isa Kaju.BinaryInformation then
-			    j.Value( kWindowsBinaryName ) = WindowsBinary.ToJSON
-			  end if
-			  if LinuxBinary Isa Kaju.BinaryInformation then
-			    j.Value( kLinuxBinaryName ) = LinuxBinary.ToJSON
-			  end if
-			  
-			  return j
+			  return ConvertToJSON
 			End Get
 		#tag EndGetter
 		ToJSON As JSONItem
@@ -298,9 +326,6 @@ Inherits Kaju.Information
 		VersionAsDouble As Double
 	#tag EndComputedProperty
 
-	#tag Property, Flags = &h0
-		WindowsBinary As Kaju.BinaryInformation
-	#tag EndProperty
 
 	#tag Constant, Name = kLinuxBinary64Name, Type = String, Dynamic = False, Default = \"LinuxBinary64", Scope = Public
 	#tag EndConstant
