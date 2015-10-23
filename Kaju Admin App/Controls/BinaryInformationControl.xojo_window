@@ -354,6 +354,10 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub AdjustControls()
+		  if BinaryName <> "" then
+		    cbUseBinary.Caption = BinaryName.NthField( "Binary", 1 )
+		  end if
+		  
 		  dim isChecked as boolean = cbUseBinary.Value
 		  dim isVisible as boolean = isChecked
 		  
