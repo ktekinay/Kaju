@@ -117,7 +117,7 @@ Add an entry for each *current* version of your app. You do not need a history s
 
 The release notes are created in HTML and some simple tools are provided for making that a bit easier. You can see a preview of the release notes as a you type and use the Preview button to see how Kaju will present the update window under various circumstances. The HTML can be as simple or as complex as you'd like.
 
-Alternatively, you can set pull your release notes from a server by setting the first line to a URL. Anything after the first line will be used as an alternate if the URL can't be reached or has no content.
+Alternatively, you can set pull your release notes from a server by setting the first line to a URL. Anything after the first line will be used as an alternate if the URL can't be reached or has no content. (But note: Older apps with Kaju 1.x will see the text of the release notes including the URL at the top.)
 
 **Note**: WebKit is used on all platforms to ensure consistency. This will increase the size of your project on Windows and Linux.
 
@@ -167,6 +167,14 @@ The JSON will contain these fields for each version.
 		ExecutableName
 		URL                        (string)
 		Hash                       (string)
+	WindowsBinary64bit             (dictionary)
+		ExecutableName
+		URL                        (string)
+		Hash                       (string)
+	LinuxBinary64bit               (dictionary)
+		ExecutableName
+		URL                        (string)
+		Hash                       (string)
 	ImageURL                       (string)
 	UseTransparency                (bool, default = true)
 
@@ -195,6 +203,18 @@ A sample JSON that will be returned by the server:
 				"ExecutableName" : "My App" ,
 				"URL" : "http://www.site.com/download_path_Linux" ,
 				"Hash" : "ABC123"
+			} ,
+		"WindowsBinaryb4bit" :
+			{
+				"ExecutableName" : "My App.exe" ,
+				"URL" : "http://www.site.com/download_path_Win_64" ,
+				"Hash" : "ABC12B3"
+			} ,
+		"LinuxBinary64bit" :
+			{
+				"ExecutableName" : "My App" ,
+				"URL" : "http://www.site.com/download_path_Linux_64" ,
+				"Hash" : "ABC12C"
 			} ,
 		"ImageURL" : "http://www.site.com/image.png" ,
 		"UseTransparency" : true
