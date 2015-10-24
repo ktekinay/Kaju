@@ -487,6 +487,10 @@ Protected Class UpdateChecker
 
 
 	#tag Property, Flags = &h0
+		Allow32bitTo64bitUpdates As Boolean = True
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		AllowedInteraction As UInt32 = kAllowAll
 	#tag EndProperty
 
@@ -588,6 +592,12 @@ Protected Class UpdateChecker
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="AllowedInteraction"
+			Group="Behavior"
+			InitialValue="kAllowAll"
+			Type="UInt32"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AllowedStage"
 			Group="Behavior"
