@@ -73,7 +73,7 @@
       "AppName":"Kaju Update Test",
       "ImageURL":"",
       "MinimumRequiredVersion":"",
-      "ReleaseNotes":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Test_Release_Notes_1.2.1a4.html\n\n<p>These are alternate release notes. If the URL above can’t be accessed or returns an empty string, this will be displayed instead.<\/p>\n\n<p>Try fiddling with the URL to see the results.<\/p>",
+      "ReleaseNotes":"<!-- http:\/\/www.mactechnologies.com\/Kaju_Test\/Test_Release_Notes_1.2.1a4.html -->\n\n<!--\nWe could have also put the URL on a line by itself, but this form maintains better compatibility with previous versions of Kaju that will only show these release notes as-is\n-->\n\n<p>These are alternate release notes. If the URL above can’t be accessed or returns an empty string, this will be displayed instead.<\/p>\n\n<p>Try fiddling with the URL to see the results.<\/p>",
       "RequiresPayment":false,
       "UseTransparency":false,
       "Version":"1.2.1a4",
