@@ -426,7 +426,7 @@ Add a translation for each, then submit a pull request as outlined above.
 - **CLI**: Disallow adding duplicate version number or changing an existing version number so it becomes a duplicate.
 - **Test App**: Created Build Script to automatically update the Kaju files after building.
 
-1.6.2 (___, 2015)
+2.0 (___, 2015)
 
 - **CLI**: Made help prettier.
 - **Admin GUI**: Use a temp file for the LoadPage "relativeTo" parameter.
@@ -434,3 +434,4 @@ Add a translation for each, then submit a pull request as outlined above.
 - Added Dutch translation.
 - Ability to load release notes through a URL.
 - **Admin GUI**: Fixed Dupe button.
+- Added support for 64-bit binaries.

@@ -53,7 +53,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   20
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -155,7 +155,7 @@ Begin Window WndAdmin
       HelpTag         =   ""
       Index           =   -2147483648
       Italic          =   False
-      Left            =   363
+      Left            =   380
       LimitText       =   0
       LockBottom      =   False
       LockedInPosition=   False
@@ -212,34 +212,34 @@ Begin Window WndAdmin
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   100
+      Width           =   117
    End
    Begin TabPanel TabPanel1
       AutoDeactivate  =   True
       Bold            =   False
       Enabled         =   True
-      Height          =   542
+      Height          =   509
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
       Left            =   251
       LockBottom      =   True
-      LockedInPosition=   True
+      LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   True
       LockTop         =   True
       Panels          =   ""
       Scope           =   2
       SmallTabs       =   False
-      TabDefinition   =   "Release Notes\rBinaries\rImage"
+      TabDefinition   =   "Release Notes\rBinaries\r64-bit Binaries\rImage"
       TabIndex        =   4
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   86
+      Top             =   119
       Underline       =   False
       Value           =   0
       Visible         =   True
@@ -256,7 +256,7 @@ Begin Window WndAdmin
          DataSource      =   ""
          Enabled         =   False
          Format          =   ""
-         Height          =   210
+         Height          =   177
          HelpTag         =   ""
          HideSelection   =   True
          Index           =   -2147483648
@@ -286,7 +286,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   160
+         Top             =   193
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   True
@@ -348,149 +348,6 @@ Begin Window WndAdmin
          Visible         =   True
          Width           =   100
       End
-      Begin CheckBoxChanger cbMacBinary
-         AutoDeactivate  =   True
-         Bold            =   False
-         Caption         =   "Mac"
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   False
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   271
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Scope           =   2
-         State           =   0
-         TabIndex        =   1
-         TabPanelIndex   =   2
-         TabStop         =   True
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   191
-         Underline       =   False
-         Value           =   False
-         Visible         =   True
-         Width           =   100
-      End
-      Begin TextFieldChanger fldMacBinaryURL
-         AcceptTabs      =   False
-         Alignment       =   0
-         AutoDeactivate  =   True
-         AutomaticallyCheckSpelling=   False
-         BackColor       =   &cFFFFFF00
-         Bold            =   False
-         Border          =   True
-         CueText         =   ""
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Format          =   ""
-         Height          =   22
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   414
-         LimitText       =   0
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         Mask            =   ""
-         Password        =   False
-         ReadOnly        =   False
-         Scope           =   2
-         TabIndex        =   3
-         TabPanelIndex   =   2
-         TabStop         =   True
-         Text            =   ""
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   257
-         Underline       =   False
-         UseFocusRing    =   True
-         Visible         =   False
-         Width           =   470
-      End
-      Begin Label lblMacBinaryHash
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   305
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Multiline       =   False
-         Scope           =   2
-         Selectable      =   False
-         TabIndex        =   12
-         TabPanelIndex   =   2
-         Text            =   "Hash:"
-         TextAlign       =   0
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   224
-         Transparent     =   False
-         Underline       =   False
-         Visible         =   False
-         Width           =   67
-      End
-      Begin Label lblMacBinaryURL
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   305
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Multiline       =   False
-         Scope           =   2
-         Selectable      =   False
-         TabIndex        =   13
-         TabPanelIndex   =   2
-         Text            =   "URL:"
-         TextAlign       =   0
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   258
-         Transparent     =   False
-         Underline       =   False
-         Visible         =   False
-         Width           =   67
-      End
       Begin Label Label1
          AutoDeactivate  =   True
          Bold            =   False
@@ -519,254 +376,11 @@ Begin Window WndAdmin
          TextFont        =   "SmallSystem"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   138
+         Top             =   171
          Transparent     =   False
          Underline       =   False
          Visible         =   True
          Width           =   142
-      End
-      Begin CheckBoxChanger cbWindowsBinary
-         AutoDeactivate  =   True
-         Bold            =   False
-         Caption         =   "Windows"
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   False
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   271
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Scope           =   2
-         State           =   0
-         TabIndex        =   4
-         TabPanelIndex   =   2
-         TabStop         =   True
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   290
-         Underline       =   False
-         Value           =   False
-         Visible         =   True
-         Width           =   100
-      End
-      Begin TextFieldChanger fldWindowsBinaryURL
-         AcceptTabs      =   False
-         Alignment       =   0
-         AutoDeactivate  =   True
-         AutomaticallyCheckSpelling=   False
-         BackColor       =   &cFFFFFF00
-         Bold            =   False
-         Border          =   True
-         CueText         =   ""
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Format          =   ""
-         Height          =   22
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   414
-         LimitText       =   0
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         Mask            =   ""
-         Password        =   False
-         ReadOnly        =   False
-         Scope           =   2
-         TabIndex        =   7
-         TabPanelIndex   =   2
-         TabStop         =   True
-         Text            =   ""
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   390
-         Underline       =   False
-         UseFocusRing    =   True
-         Visible         =   False
-         Width           =   470
-      End
-      Begin Label lblWindowsBinaryHash
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   305
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Multiline       =   False
-         Scope           =   2
-         Selectable      =   False
-         TabIndex        =   15
-         TabPanelIndex   =   2
-         Text            =   "Hash:"
-         TextAlign       =   0
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   357
-         Transparent     =   False
-         Underline       =   False
-         Visible         =   False
-         Width           =   67
-      End
-      Begin Label lblWindowsBinaryURL
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   305
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Multiline       =   False
-         Scope           =   2
-         Selectable      =   False
-         TabIndex        =   16
-         TabPanelIndex   =   2
-         Text            =   "URL:"
-         TextAlign       =   0
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   391
-         Transparent     =   False
-         Underline       =   False
-         Visible         =   False
-         Width           =   67
-      End
-      Begin CheckBoxChanger cbLinuxBinary
-         AutoDeactivate  =   True
-         Bold            =   False
-         Caption         =   "Linux"
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   False
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   271
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Scope           =   2
-         State           =   0
-         TabIndex        =   8
-         TabPanelIndex   =   2
-         TabStop         =   True
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   438
-         Underline       =   False
-         Value           =   False
-         Visible         =   True
-         Width           =   100
-      End
-      Begin Label lblLinuxBinaryHash
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   305
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Multiline       =   False
-         Scope           =   2
-         Selectable      =   False
-         TabIndex        =   18
-         TabPanelIndex   =   2
-         Text            =   "Hash:"
-         TextAlign       =   0
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   504
-         Transparent     =   False
-         Underline       =   False
-         Visible         =   False
-         Width           =   67
-      End
-      Begin Label lblLinuxBinaryURL
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   305
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Multiline       =   False
-         Scope           =   2
-         Selectable      =   False
-         TabIndex        =   19
-         TabPanelIndex   =   2
-         Text            =   "URL:"
-         TextAlign       =   0
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   538
-         Transparent     =   False
-         Underline       =   False
-         Visible         =   False
-         Width           =   67
       End
       Begin TextFieldChanger fldImageURL
          AcceptTabs      =   False
@@ -791,25 +405,25 @@ Begin Window WndAdmin
          LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   True
-         LockRight       =   False
+         LockRight       =   True
          LockTop         =   True
          Mask            =   ""
          Password        =   False
          ReadOnly        =   False
          Scope           =   2
          TabIndex        =   1
-         TabPanelIndex   =   3
+         TabPanelIndex   =   4
          TabStop         =   True
          Text            =   ""
          TextColor       =   &c00000000
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   161
+         Top             =   194
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   True
-         Width           =   470
+         Width           =   534
       End
       Begin Label Label1
          AutoDeactivate  =   True
@@ -832,14 +446,14 @@ Begin Window WndAdmin
          Scope           =   2
          Selectable      =   False
          TabIndex        =   3
-         TabPanelIndex   =   3
+         TabPanelIndex   =   4
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   161
+         Top             =   194
          Transparent     =   False
          Underline       =   False
          Visible         =   True
@@ -866,12 +480,12 @@ Begin Window WndAdmin
          Scope           =   2
          State           =   0
          TabIndex        =   0
-         TabPanelIndex   =   3
+         TabPanelIndex   =   4
          TabStop         =   True
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   129
+         Top             =   162
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -880,7 +494,7 @@ Begin Window WndAdmin
       Begin HTMLViewer hvImagePreview
          AutoDeactivate  =   True
          Enabled         =   True
-         Height          =   384
+         Height          =   351
          HelpTag         =   ""
          Index           =   -2147483648
          InitialParent   =   "TabPanel1"
@@ -893,88 +507,11 @@ Begin Window WndAdmin
          Renderer        =   0
          Scope           =   2
          TabIndex        =   2
-         TabPanelIndex   =   3
+         TabPanelIndex   =   4
          TabStop         =   True
-         Top             =   224
+         Top             =   257
          Visible         =   True
          Width           =   613
-      End
-      Begin TextFieldChanger fldMinRequiredVersion
-         AcceptTabs      =   False
-         Alignment       =   0
-         AutoDeactivate  =   True
-         AutomaticallyCheckSpelling=   False
-         BackColor       =   &cFFFFFF00
-         Bold            =   False
-         Border          =   True
-         CueText         =   ""
-         DataField       =   "MinimumRequiredVersion"
-         DataSource      =   ""
-         Enabled         =   False
-         Format          =   ""
-         Height          =   22
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   483
-         LimitText       =   0
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Mask            =   ""
-         Password        =   False
-         ReadOnly        =   False
-         Scope           =   2
-         TabIndex        =   0
-         TabPanelIndex   =   2
-         TabStop         =   True
-         Text            =   ""
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   147
-         Underline       =   False
-         UseFocusRing    =   True
-         Visible         =   True
-         Width           =   80
-      End
-      Begin Label Label1
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   2
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   271
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Multiline       =   False
-         Scope           =   2
-         Selectable      =   False
-         TabIndex        =   20
-         TabPanelIndex   =   2
-         Text            =   "Minimum Required Version:"
-         TextAlign       =   0
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   148
-         Transparent     =   False
-         Underline       =   False
-         Visible         =   True
-         Width           =   200
       End
       Begin BevelButton btnStyle
          AcceptFocus     =   True
@@ -1014,7 +551,7 @@ Begin Window WndAdmin
          TextFont        =   "SmallSystem"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   136
+         Top             =   169
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -1058,7 +595,7 @@ Begin Window WndAdmin
          TextFont        =   "SmallSystem"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   136
+         Top             =   169
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -1102,7 +639,7 @@ Begin Window WndAdmin
          TextFont        =   "SmallSystem"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   136
+         Top             =   169
          Underline       =   True
          Value           =   False
          Visible         =   True
@@ -1146,7 +683,7 @@ Begin Window WndAdmin
          TextFont        =   "SmallSystem"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   136
+         Top             =   169
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -1190,337 +727,11 @@ Begin Window WndAdmin
          TextFont        =   "SmallSystem"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   136
+         Top             =   169
          Underline       =   False
          Value           =   False
          Visible         =   True
          Width           =   26
-      End
-      Begin TextFieldChanger fldMacBinaryHash
-         AcceptTabs      =   False
-         Alignment       =   0
-         AutoDeactivate  =   True
-         AutomaticallyCheckSpelling=   False
-         BackColor       =   &cFFFFFF00
-         Bold            =   False
-         Border          =   True
-         CueText         =   "Drop the Mac Zip file here to calculate the hash"
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Format          =   ""
-         Height          =   22
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   414
-         LimitText       =   0
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         Mask            =   ""
-         Password        =   False
-         ReadOnly        =   True
-         Scope           =   2
-         TabIndex        =   22
-         TabPanelIndex   =   2
-         TabStop         =   False
-         Text            =   ""
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   223
-         Underline       =   False
-         UseFocusRing    =   True
-         Visible         =   False
-         Width           =   350
-      End
-      Begin TextFieldChanger fldWindowsBinaryHash
-         AcceptTabs      =   False
-         Alignment       =   0
-         AutoDeactivate  =   True
-         AutomaticallyCheckSpelling=   False
-         BackColor       =   &cFFFFFF00
-         Bold            =   False
-         Border          =   True
-         CueText         =   "Drop the Windows Zip file here to calculate the hash"
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Format          =   ""
-         Height          =   22
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   414
-         LimitText       =   0
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         Mask            =   ""
-         Password        =   False
-         ReadOnly        =   True
-         Scope           =   2
-         TabIndex        =   23
-         TabPanelIndex   =   2
-         TabStop         =   False
-         Text            =   ""
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   356
-         Underline       =   False
-         UseFocusRing    =   True
-         Visible         =   False
-         Width           =   350
-      End
-      Begin TextFieldChanger fldLinuxBinaryURL
-         AcceptTabs      =   False
-         Alignment       =   0
-         AutoDeactivate  =   True
-         AutomaticallyCheckSpelling=   False
-         BackColor       =   &cFFFFFF00
-         Bold            =   False
-         Border          =   True
-         CueText         =   ""
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Format          =   ""
-         Height          =   22
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   414
-         LimitText       =   0
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         Mask            =   ""
-         Password        =   False
-         ReadOnly        =   False
-         Scope           =   2
-         TabIndex        =   11
-         TabPanelIndex   =   2
-         TabStop         =   True
-         Text            =   ""
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   537
-         Underline       =   False
-         UseFocusRing    =   True
-         Visible         =   False
-         Width           =   470
-      End
-      Begin TextFieldChanger fldWindowsExecutable
-         AcceptTabs      =   False
-         Alignment       =   0
-         AutoDeactivate  =   True
-         AutomaticallyCheckSpelling=   False
-         BackColor       =   &cFFFFFF00
-         Bold            =   False
-         Border          =   True
-         CueText         =   ""
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Format          =   ""
-         Height          =   22
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   414
-         LimitText       =   0
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         Mask            =   ""
-         Password        =   False
-         ReadOnly        =   False
-         Scope           =   2
-         TabIndex        =   5
-         TabPanelIndex   =   2
-         TabStop         =   True
-         Text            =   ""
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   322
-         Underline       =   False
-         UseFocusRing    =   True
-         Visible         =   False
-         Width           =   470
-      End
-      Begin Label lblWindowsExecutable
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   305
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Multiline       =   False
-         Scope           =   2
-         Selectable      =   False
-         TabIndex        =   14
-         TabPanelIndex   =   2
-         Text            =   "Executable:"
-         TextAlign       =   0
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   323
-         Transparent     =   False
-         Underline       =   False
-         Visible         =   False
-         Width           =   67
-      End
-      Begin TextFieldChanger fldLinuxExecutable
-         AcceptTabs      =   False
-         Alignment       =   0
-         AutoDeactivate  =   True
-         AutomaticallyCheckSpelling=   False
-         BackColor       =   &cFFFFFF00
-         Bold            =   False
-         Border          =   True
-         CueText         =   ""
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Format          =   ""
-         Height          =   22
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   414
-         LimitText       =   0
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         Mask            =   ""
-         Password        =   False
-         ReadOnly        =   False
-         Scope           =   2
-         TabIndex        =   9
-         TabPanelIndex   =   2
-         TabStop         =   True
-         Text            =   ""
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   470
-         Underline       =   False
-         UseFocusRing    =   True
-         Visible         =   False
-         Width           =   470
-      End
-      Begin Label lblLinuxExecutable
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   305
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Multiline       =   False
-         Scope           =   2
-         Selectable      =   False
-         TabIndex        =   17
-         TabPanelIndex   =   2
-         Text            =   "Executable:"
-         TextAlign       =   0
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   471
-         Transparent     =   False
-         Underline       =   False
-         Visible         =   False
-         Width           =   67
-      End
-      Begin TextFieldChanger fldLinuxBinaryHash
-         AcceptTabs      =   False
-         Alignment       =   0
-         AutoDeactivate  =   True
-         AutomaticallyCheckSpelling=   False
-         BackColor       =   &cFFFFFF00
-         Bold            =   False
-         Border          =   True
-         CueText         =   "Drop the Linux Zip file here to calculate the hash"
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Format          =   ""
-         Height          =   22
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   414
-         LimitText       =   0
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         Mask            =   ""
-         Password        =   False
-         ReadOnly        =   True
-         Scope           =   2
-         TabIndex        =   24
-         TabPanelIndex   =   2
-         TabStop         =   False
-         Text            =   ""
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   503
-         Underline       =   False
-         UseFocusRing    =   True
-         Visible         =   False
-         Width           =   350
       End
       Begin BevelButton btnList
          AcceptFocus     =   True
@@ -1560,7 +771,7 @@ Begin Window WndAdmin
          TextFont        =   "SmallSystem"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   136
+         Top             =   169
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -1604,7 +815,7 @@ Begin Window WndAdmin
          TextFont        =   "SmallSystem"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   136
+         Top             =   169
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -1648,104 +859,11 @@ Begin Window WndAdmin
          TextFont        =   "SmallSystem"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   136
+         Top             =   169
          Underline       =   False
          Value           =   False
          Visible         =   True
          Width           =   26
-      End
-      Begin PushButton btnMacHashFromURL
-         AutoDeactivate  =   True
-         Bold            =   False
-         ButtonStyle     =   "0"
-         Cancel          =   False
-         Caption         =   "From URL"
-         Default         =   False
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   804
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   False
-         LockRight       =   True
-         LockTop         =   True
-         Scope           =   2
-         TabIndex        =   2
-         TabPanelIndex   =   2
-         TabStop         =   True
-         TextFont        =   "SmallSystem"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   223
-         Underline       =   False
-         Visible         =   False
-         Width           =   80
-      End
-      Begin PushButton btnLinuxHashFromURL
-         AutoDeactivate  =   True
-         Bold            =   False
-         ButtonStyle     =   "0"
-         Cancel          =   False
-         Caption         =   "From URL"
-         Default         =   False
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   804
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   False
-         LockRight       =   True
-         LockTop         =   True
-         Scope           =   2
-         TabIndex        =   10
-         TabPanelIndex   =   2
-         TabStop         =   True
-         TextFont        =   "SmallSystem"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   503
-         Underline       =   False
-         Visible         =   False
-         Width           =   80
-      End
-      Begin PushButton btnWindowsHashFromURL
-         AutoDeactivate  =   True
-         Bold            =   False
-         ButtonStyle     =   "0"
-         Cancel          =   False
-         Caption         =   "From URL"
-         Default         =   False
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   804
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   False
-         LockRight       =   True
-         LockTop         =   True
-         Scope           =   2
-         TabIndex        =   6
-         TabPanelIndex   =   2
-         TabStop         =   True
-         TextFont        =   "SmallSystem"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   358
-         Underline       =   False
-         Visible         =   False
-         Width           =   80
       End
       Begin Label Label2
          AutoDeactivate  =   True
@@ -1767,7 +885,7 @@ Begin Window WndAdmin
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
-         TabIndex        =   21
+         TabIndex        =   0
          TabPanelIndex   =   2
          Text            =   "Use ‘$VERSION$’ in the URL to insert the version on export"
          TextAlign       =   1
@@ -1775,7 +893,41 @@ Begin Window WndAdmin
          TextFont        =   "SmallSystem"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   588
+         Top             =   589
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   613
+      End
+      Begin Label Label3
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   271
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   0
+         TabPanelIndex   =   3
+         Text            =   "Use ‘$VERSION$’ in the URL to insert the version on export"
+         TextAlign       =   1
+         TextColor       =   &c00000000
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   589
          Transparent     =   False
          Underline       =   False
          Visible         =   True
@@ -1799,7 +951,7 @@ Begin Window WndAdmin
       HelpTag         =   ""
       Index           =   -2147483648
       Italic          =   False
-      Left            =   363
+      Left            =   380
       LimitText       =   0
       LockBottom      =   False
       LockedInPosition=   False
@@ -1856,7 +1008,7 @@ Begin Window WndAdmin
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   100
+      Width           =   117
    End
    Begin CheckBoxChanger cbRequiresPayment
       AutoDeactivate  =   True
@@ -1974,7 +1126,7 @@ Begin Window WndAdmin
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
-      Height          =   20
+      Height          =   58
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
@@ -1985,7 +1137,7 @@ Begin Window WndAdmin
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
-      Multiline       =   False
+      Multiline       =   True
       Scope           =   2
       Selectable      =   False
       TabIndex        =   14
@@ -1996,7 +1148,7 @@ Begin Window WndAdmin
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   53
+      Top             =   55
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -2142,6 +1294,83 @@ Begin Window WndAdmin
       Visible         =   True
       Width           =   113
    End
+   Begin TextFieldChanger fldMinRequiredVersion
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   "MinimumRequiredVersion"
+      DataSource      =   ""
+      Enabled         =   False
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   380
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   2
+      TabIndex        =   16
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   85
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   80
+   End
+   Begin Label Label1
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   2
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   251
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   2
+      Selectable      =   False
+      TabIndex        =   17
+      TabPanelIndex   =   0
+      Text            =   "Min. Req. Version:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   86
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   117
+   End
 End
 #tag EndWindow
 
@@ -2189,12 +1418,60 @@ End
 		    end if
 		    RelativeToFolderItem = nil
 		  end if
+		  
+		  //
+		  // Tear down the BinaryInformationControls
+		  //
+		  
+		  for each bc as BinaryInformationControl in BinaryControls
+		    RemoveHandler bc.CheckedChanged, AddressOf HandleBinaryInformationControlCheckedChanged
+		  next
+		  
+		  redim BinaryControls( -1 )
+		  
 		End Sub
 	#tag EndEvent
 
 	#tag Event
 		Sub Open()
 		  RelativeToFolderItem = GetTemporaryFolderItem
+		  
+		  //
+		  // Create binary controls
+		  //
+		  
+		  dim binaryNames() as string = Kaju.UpdateInformation.BinaryNames
+		  dim gap as integer = 10
+		  dim useTop as integer = 50
+		  dim useTop64 as integer = useTop
+		  dim useLeft as integer = 15
+		  
+		  dim tpIndex as integer = 1
+		  dim tpIndex64 as integer = 2
+		  
+		  for i as integer = 0 to binaryNames.Ubound
+		    dim binaryName as string = binaryNames( i )
+		    
+		    dim cc as new BinaryInformationControl
+		    cc.BinaryName = binaryName
+		    cc.LockLeft = true
+		    cc.LockRight = true
+		    cc.LockTop = true
+		    cc.LockBottom = false
+		    
+		    if binaryName.InStr( "64" ) <> 0 then
+		      cc.EmbedWithinPanel TabPanel1, tpIndex64, useLeft, useTop64
+		      useTop64 = useTop64 + cc.Height + gap
+		    else
+		      cc.EmbedWithinPanel TabPanel1, tpIndex, useLeft, useTop
+		      useTop = useTop + cc.Height + gap
+		    end if
+		    
+		    AddHandler cc.CheckedChanged, AddressOf HandleBinaryInformationControlCheckedChanged
+		    
+		    BinaryControls.Append cc
+		  next
+		  
 		  AdjustControls()
 		End Sub
 	#tag EndEvent
@@ -2255,9 +1532,15 @@ End
 		  // Adjust the outliers that aren't directly set
 		  //
 		  
-		  cbMacBinary.Enabled = trueValue
-		  cbWindowsBinary.Enabled = trueValue
-		  cbLinuxBinary.Enabled = trueValue
+		  redim Platforms( -1 )
+		  for each bc as BinaryInformationControl in BinaryControls
+		    bc.Enabled = trueValue
+		    bc.AdjustControls
+		    
+		    if bc.Enabled and bc.IsChecked then
+		      Platforms.Append bc.BinaryName
+		    end if
+		  next
 		  
 		  btnDelete.Enabled = trueValue
 		  btnDuplicate.Enabled = trueValue
@@ -2265,58 +1548,21 @@ End
 		  btnBreak.Enabled = trueValue
 		  
 		  //
-		  // HashFromURL buttons
-		  //
-		  if cbMacBinary.Enabled and cbMacBinary.Value and fldMacBinaryURL.Text.Trim <> "" then
-		    btnMacHashFromURL.Enabled = trueValue
-		  else
-		    btnMacHashFromURL.Enabled = false
-		  end if
-		  
-		  if cbWindowsBinary.Enabled and cbWindowsBinary.Value and fldWindowsBinaryURL.Text.Trim <> "" then
-		    btnWindowsHashFromURL.Enabled = trueValue
-		  else
-		    btnWindowsHashFromURL.Enabled = false
-		  end if
-		  
-		  if cbLinuxBinary.Enabled and cbLinuxBinary.Value and fldLinuxBinaryURL.Text.Trim <> "" then
-		    btnLinuxHashFromURL.Enabled = trueValue
-		  else
-		    btnLinuxHashFromURL.Enabled = false
-		  end if
-		  
-		  //
 		  // Set the platform summary
 		  //
 		  
 		  if not trueValue then
-		    
 		    lblPlatform.Text = ""
-		    
-		  else
-		    
-		    Redim Platforms( -1 )
-		    if cbMacBinary.Enabled and cbMacBinary.Value then
-		      Platforms.Append "Mac"
-		    end if
-		    
-		    if cbWindowsBinary.Enabled and cbWindowsBinary.Value then
-		      Platforms.Append "Windows"
-		    end if
-		    
-		    if cbLinuxBinary.Enabled and cbLinuxBinary.Value then
-		      Platforms.Append "Linux"
-		    end if
-		    
-		    if Platforms.Ubound = -1 then
-		      lblPlatform.Italic = true
-		      lblPlatform.Text = "No platforms selected"
-		    else
-		      lblPlatform.Italic = false
-		      lblPlatform.Text = join( Platforms, ", " )
-		    end if
-		    
 		  end if
+		  
+		  if Platforms.Ubound = -1 then
+		    lblPlatform.Italic = true
+		    lblPlatform.Text = "No platforms selected"
+		  else
+		    lblPlatform.Italic = false
+		    lblPlatform.Text = join( Platforms, ", " )
+		  end if
+		  
 		  
 		  UpdateWindowTitle
 		  
@@ -2363,6 +1609,10 @@ End
 		    
 		    ControlValue( c ) = nil
 		  next i
+		  
+		  for each bc as BinaryInformationControl in BinaryControls
+		    bc.Clear
+		  next
 		  
 		  hvReleaseNotesPreview.LoadPage( "", nil )
 		  hvImagePreview.LoadPage( "", nil )
@@ -2552,6 +1802,7 @@ End
 		  
 		  dim tag as Variant = lbVersions.RowTag( curIndex )
 		  dim infoCopy as new Kaju.UpdateInformation( Kaju.UpdateInformation( tag ) )
+		  MyKajuFile.KajuData.Append infoCopy
 		  
 		  dim listing as string = lbVersions.Cell( curIndex, 0 )
 		  dim newIndex as integer = curIndex + 1
@@ -2559,46 +1810,16 @@ End
 		  lbVersions.RowTag( newIndex ) = infoCopy
 		  lbVersions.ListIndex = newIndex
 		  
-		  MyKajuFile.KajuData.Append infoCopy
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub HashFromURL(url As String, version As String, hashField As TextField)
-		  url = url.Trim
-		  url = KajuFile.InsertVersion( url, version )
+		Private Sub HandleBinaryInformationControlCheckedChanged(sender As BinaryInformationControl)
+		  #pragma unused sender
 		  
-		  if url = "" then
-		    return
-		  end if
+		  AdjustControls()
 		  
-		  hashField.Text = ""
-		  
-		  dim http as new Kaju.HTTPSSocket
-		  url = http.GetRedirectAddress( url, 5 )
-		  
-		  dim file as FolderItem = GetTemporaryFolderItem
-		  dim r as boolean = http.Get( url, file, 30 )
-		  if not r or http.LastErrorCode <> 0 then
-		    
-		    MsgBox "Could not get the executable from that url: " + str( http.LastErrorCode )
-		    
-		  else
-		    
-		    dim hash as string = Kaju.HashOfFile( file )
-		    hashField.Text = hash
-		    
-		  end if
-		  
-		  Exception err As RuntimeException
-		    MsgBox err.Message
-		    
-		  Finally
-		    if file <> nil and file.Exists then
-		      file.Delete
-		    end if
-		    
 		End Sub
 	#tag EndMethod
 
@@ -2745,39 +1966,19 @@ End
 		  //
 		  // Binaries
 		  //
-		  if cbMacBinary.Value then
-		    dim binary as new Kaju.BinaryInformation( false )
-		    binary.Hash = fldMacBinaryHash.Text.Trim
-		    binary.URL = fldMacBinaryURL.Text.Trim
+		  
+		  for each bc as BinaryInformationControl in BinaryControls
 		    
-		    version.MacBinary = binary
-		  else
-		    version.MacBinary = nil
-		  end if
-		  
-		  if cbWindowsBinary.Value then
-		    dim binary as new Kaju.BinaryInformation( true )
-		    binary.ExecutableName = fldWindowsExecutable.Text.Trim
-		    binary.Hash = fldWindowsBinaryHash.Text.Trim
-		    binary.URL = fldWindowsBinaryURL.Text.Trim
+		    dim thisKey as string = bc.BinaryName
 		    
-		    version.WindowsBinary = binary
-		  else
-		    version.WindowsBinary = nil
-		  end if
-		  
-		  if cbLinuxBinary.Value then
-		    dim binary as new Kaju.BinaryInformation( true )
-		    binary.ExecutableName = fldLinuxExecutable.Text.Trim
-		    binary.Hash = fldLinuxBinaryHash.Text.Trim
-		    binary.URL = fldLinuxBinaryURL.Text.Trim
+		    if bc.IsChecked then
+		      dim binary as Kaju.BinaryInformation = bc.GetBinaryInformation
+		      version.Binaries.Value( thisKey ) = binary
+		    else
+		      version.RemoveBinary thisKey
+		    end if
 		    
-		    version.LinuxBinary = binary
-		  else
-		    version.LinuxBinary = nil
-		  end if
-		  
-		  
+		  next
 		End Sub
 	#tag EndMethod
 
@@ -2831,28 +2032,11 @@ End
 		  // Binaries
 		  //
 		  
-		  if version.MacBinary isa Kaju.BinaryInformation then
-		    cbMacBinary.Value = true
-		    dim binary as Kaju.BinaryInformation = version.MacBinary
-		    fldMacBinaryHash.Text = binary.Hash
-		    fldMacBinaryURL.Text = binary.URL
-		  end if
-		  
-		  if version.WindowsBinary isa Kaju.BinaryInformation then
-		    cbWindowsBinary.Value = true
-		    dim binary as Kaju.BinaryInformation = version.WindowsBinary
-		    fldWindowsExecutable.Text = binary.ExecutableName
-		    fldWindowsBinaryHash.Text = binary.Hash
-		    fldWindowsBinaryURL.Text = binary.URL
-		  end if
-		  
-		  if version.LinuxBinary isa Kaju.BinaryInformation then
-		    cbLinuxBinary.Value = true
-		    dim binary as Kaju.BinaryInformation = version.LinuxBinary
-		    fldLinuxExecutable.Text = binary.ExecutableName
-		    fldLinuxBinaryHash.Text = binary.Hash
-		    fldLinuxBinaryURL.Text = binary.URL
-		  end if
+		  for each bc as BinaryInformationControl in BinaryControls
+		    dim thisKey as string = bc.BinaryName
+		    dim binary as Kaju.BinaryInformation = version.Binaries.Lookup( thisKey, nil )
+		    bc.Load binary, version.Version
+		  next
 		  
 		  self.Loading = false
 		  
@@ -2861,6 +2045,10 @@ End
 		End Sub
 	#tag EndMethod
 
+
+	#tag Property, Flags = &h21
+		Private BinaryControls() As BinaryInformationControl
+	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
@@ -3000,63 +2188,6 @@ End
 		End Function
 	#tag EndEvent
 #tag EndEvents
-#tag Events cbMacBinary
-	#tag Event
-		Sub Action()
-		  fldMacBinaryHash.Visible = me.Value
-		  fldMacBinaryURL.Visible = me.Value
-		  lblMacBinaryHash.Visible = me.Value
-		  lblMacBinaryURL.Visible = me.Value
-		  btnMacHashFromURL.Visible = me.Value
-		  
-		  AdjustControls()
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events fldMacBinaryURL
-	#tag Event
-		Sub TextChange()
-		  AdjustControls()
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events cbWindowsBinary
-	#tag Event
-		Sub Action()
-		  fldWindowsExecutable.Visible = me.Value
-		  fldWindowsBinaryHash.Visible = me.Value
-		  fldWindowsBinaryURL.Visible = me.Value
-		  lblWindowsExecutable.Visible = me.Value
-		  lblWindowsBinaryHash.Visible = me.Value
-		  lblWindowsBinaryURL.Visible = me.Value
-		  btnWindowsHashFromURL.Visible = me.Value
-		  
-		  AdjustControls()
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events fldWindowsBinaryURL
-	#tag Event
-		Sub TextChange()
-		  AdjustControls()
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events cbLinuxBinary
-	#tag Event
-		Sub Action()
-		  fldLinuxExecutable.Visible = me.Value
-		  fldLinuxBinaryHash.Visible = me.Value
-		  fldLinuxBinaryURL.Visible = me.Value
-		  lblLinuxExecutable.Visible = me.Value
-		  lblLinuxBinaryHash.Visible = me.Value
-		  lblLinuxBinaryURL.Visible = me.Value
-		  btnLinuxHashFromURL.Visible = me.Value
-		  
-		  AdjustControls()
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events fldImageURL
 	#tag Event
 		Sub TextChange()
@@ -3096,64 +2227,6 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events fldMacBinaryHash
-	#tag Event
-		Sub DropObject(obj As DragItem, action As Integer)
-		  if obj.FolderItemAvailable then
-		    dim f as FolderItem = obj.FolderItem
-		    me.Text = Kaju.HashOfFile( f )
-		  end if
-		  
-		  #pragma unused action
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub Open()
-		  me.AcceptFileDrop( FileTypes1.ApplicationZip )
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events fldWindowsBinaryHash
-	#tag Event
-		Sub Open()
-		  me.AcceptFileDrop( FileTypes1.ApplicationZip )
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub DropObject(obj As DragItem, action As Integer)
-		  if obj.FolderItemAvailable then
-		    dim f as FolderItem = obj.FolderItem
-		    me.Text = Kaju.HashOfFile( f )
-		  end if
-		  
-		  #pragma unused action
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events fldLinuxBinaryURL
-	#tag Event
-		Sub TextChange()
-		  AdjustControls()
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events fldLinuxBinaryHash
-	#tag Event
-		Sub Open()
-		  me.AcceptFileDrop( FileTypes1.ApplicationZip )
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub DropObject(obj As DragItem, action As Integer)
-		  if obj.FolderItemAvailable then
-		    dim f as FolderItem = obj.FolderItem
-		    me.Text = Kaju.HashOfFile( f )
-		  end if
-		  
-		  #pragma unused action
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events btnList
 	#tag Event
 		Sub Action(index as Integer)
@@ -3161,27 +2234,6 @@ End
 		  ApplyStyle( tag, true )
 		  
 		  #pragma unused index
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events btnMacHashFromURL
-	#tag Event
-		Sub Action()
-		  HashFromURL( fldMacBinaryURL.Text, fldVersion.Text.Trim, fldMacBinaryHash )
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events btnLinuxHashFromURL
-	#tag Event
-		Sub Action()
-		  HashFromURL( fldLinuxBinaryURL.Text, fldVersion.Text.Trim, fldLinuxBinaryHash )
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events btnWindowsHashFromURL
-	#tag Event
-		Sub Action()
-		  HashFromURL( fldWindowsBinaryURL.Text, fldVersion.Text.Trim, fldWindowsBinaryHash )
 		End Sub
 	#tag EndEvent
 #tag EndEvents
