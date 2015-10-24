@@ -307,7 +307,14 @@ Protected Class UpdateChecker
 		    //
 		    // See if the binary information is present
 		    //
-		    if thisInfo.PlatformBinary is nil then
+		    dim binary as Kaju.BinaryInformation
+		    if Target32Bit and Allow32bitTo64bitUpdates then
+		      binary = thisInfo.PlatformBinaryAny
+		    else
+		      binary = thisInfo.PlatformBinarySameBitness
+		    end if
+		    
+		    if binary is nil then
 		      continue for i
 		    end if
 		    
