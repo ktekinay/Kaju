@@ -278,7 +278,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   197
+      Top             =   230
       Underline       =   False
       Visible         =   True
       Width           =   171
@@ -311,7 +311,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   207
+      Top             =   240
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -351,6 +351,38 @@ Begin Window Window1
       Visible         =   True
       Width           =   206
    End
+   Begin CheckBox cbAllow32bitTo64bitUpdates
+      AutoDeactivate  =   True
+      Bold            =   False
+      Caption         =   "Allow 32-bit To 64-bit Updates"
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      State           =   1
+      TabIndex        =   10
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   207
+      Underline       =   False
+      Value           =   True
+      Visible         =   True
+      Width           =   238
+   End
 End
 #tag EndWindow
 
@@ -381,6 +413,7 @@ End
 	#tag Event
 		Sub Action()
 		  Checker.HonorIgnored = cbHonorIgnored.Value
+		  Checker.Allow32bitTo64bitUpdates = cbAllow32bitTo64bitUpdates.Value
 		  
 		  dim allowWindow as integer = if( cbAllowWindow.Value, Kaju.UpdateChecker.kAllowUpdateWindow, 0 )
 		  dim allowErrorDialog as integer = if( cbAllowErrorDialog.Value, Kaju.UpdateChecker.kAllowErrorDialog, 0 )
