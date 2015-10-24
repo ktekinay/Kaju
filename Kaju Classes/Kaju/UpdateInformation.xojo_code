@@ -234,41 +234,91 @@ Inherits Kaju.Information
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  dim b32 as Kaju.BinaryInformation
-			  dim b64 as Kaju.BinaryInformation
+			  dim binary as Kaju.BinaryInformation
 			  
-			  #if TargetMacOS then
-			    b64 = Binaries.Lookup( kMacBinaryName, nil )
-			  #elseif TargetWin32 then
-			    b32 = Binaries.Lookup( kWindowsBinaryName, nil )
-			    b64 = Binaries.Lookup( kWindowsBinary64Name, nil )
-			  #else // Linux
-			    b32 = Binaries.Lookup( kLinuxBinaryName, nil )
-			    b64 = Binaries.Lookup( kLinuxBinary64Name, nil )
+			  #if TargetMacOS
+			    binary = Binaries.Lookup( kMacBinaryName, nil )
+			    
+			  #elseif TargetWin32
+			    binary = Binaries.Lookup( kWindowsBinaryName, nil )
+			    
+			  #elseif TargetLinux
+			    binary = Binaries.Lookup( kLinuxBinaryName, nil )
+			    
 			  #endif
 			  
-			  dim binaryInfo as Kaju.BinaryInformation
+			  return binary
+			  
+			End Get
+		#tag EndGetter
+		PlatformBinary32bit As Kaju.BinaryInformation
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  dim binary as Kaju.BinaryInformation
+			  
+			  #if TargetMacOS
+			    binary = Binaries.Lookup( kMacBinaryName, nil )
+			    
+			  #elseif TargetWin32 
+			    binary = Binaries.Lookup( kWindowsBinary64Name, nil )
+			    
+			  #elseif TargetLinux
+			    binary = Binaries.Lookup( kLinuxBinary64Name, nil )
+			    
+			  #endif
+			  
+			  return binary
+			  
+			End Get
+		#tag EndGetter
+		PlatformBinary64bit As Kaju.BinaryInformation
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  dim b32 as Kaju.BinaryInformation = PlatformBinary32bit
+			  dim b64 as Kaju.BinaryInformation = PlatformBinary64bit
+			  
+			  dim binary as Kaju.BinaryInformation
 			  if b32 is nil and b64 is nil then
-			    binaryInfo = nil
+			    binary = nil
 			  elseif b32 isa Kaju.BinaryInformation and b64 is nil then
-			    binaryInfo = b32
+			    binary = b32
 			  elseif b64 isa Kaju.BinaryInformation and b32 is nil then
-			    binaryInfo = b64
+			    binary = b64
 			  else
 			    //
 			    // Neither are nil so pick according to the current version
 			    //
 			    #if Target32Bit
-			      binaryInfo = b32
+			      binary = b32
 			    #else
-			      binaryInfo = b64
+			      binary = b64
 			    #endif
 			  end if
 			  
-			  return binaryInfo
+			  return binary
 			End Get
 		#tag EndGetter
-		PlatformBinary As Kaju.BinaryInformation
+		PlatformBinaryAny As Kaju.BinaryInformation
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  #if Target32Bit 
+			    return PlatformBinary32bit
+			  #elseif Target64Bit
+			    return PlatformBinary64bit
+			  #endif
+			  
+			End Get
+		#tag EndGetter
+		PlatformBinarySameBitness As Kaju.BinaryInformation
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h21
