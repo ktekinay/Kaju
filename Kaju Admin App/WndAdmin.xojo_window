@@ -933,6 +933,38 @@ Begin Window WndAdmin
          Visible         =   True
          Width           =   613
       End
+      Begin CheckBox cbPre2Preview
+         AutoDeactivate  =   True
+         Bold            =   False
+         Caption         =   "Show Pre-2.0 Preview"
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   727
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         Scope           =   0
+         State           =   0
+         TabIndex        =   12
+         TabPanelIndex   =   1
+         TabStop         =   True
+         TextFont        =   "SmallSystem"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   382
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   157
+      End
    End
    Begin TextFieldChanger fldAppName
       AcceptTabs      =   False
@@ -2237,13 +2269,23 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events cbPre2Preview
+	#tag Event
+		Sub Action()
+		  tmrUpdateReleaseNotesPreview.Mode = Timer.ModeSingle
+		  tmrUpdateReleaseNotesPreview.Reset
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events tmrUpdateReleaseNotesPreview
 	#tag Event
 		Sub Action()
 		  self.Loading = true
 		  
 		  dim releaseNotes as string = ControlValue( fldReleaseNotes ).StringValue
-		  releaseNotes = Kaju.ProcessReleaseNotes( releaseNotes )
+		  if not cbPre2Preview.Value then
+		    releaseNotes = Kaju.ProcessReleaseNotes( releaseNotes )
+		  end if
 		  hvReleaseNotesPreview.LoadPage( releaseNotes, RelativeToFolderItem )
 		  
 		  self.Loading = false
