@@ -1,6 +1,9 @@
 const kTargetMac = 7
+const kTargetMac64 = 16
 const kTargetWin = 3
+const kTargetWin64 = 19
 const kTargetLinux = 4
+const kTargetLinux64 = 17
 
 Function ConfirmTool( toolPath as String ) As Boolean
 toolPath = DoShellCommand( "echo " + toolPath ).Trim
@@ -42,10 +45,12 @@ end if
 //
 dim topLevelPath as string = CurrentBuildLocation
 select case CurrentBuildTarget
-case kTargetWin, kTargetLinux 
+case kTargetWin, kTargetLinux, kTargetWin64, kTargetLinux64
 topLevelPath = topLevelPath + "/../../../.."
-case else
+case kTargetMac, kTargetMac64
 topLevelPath = topLevelPath + "/../../.."
+case else
+print str( CurrentBuildTarget )
 end select
 
 dim kaju as string = topLevelPath + "/Kaju\ Admin\ CLI/Builds\ \-\ Kaju\ Admin\ CLI.xojo_project/Mac\ OS\ X\ \(Intel\)/kaju/kaju"
@@ -68,7 +73,7 @@ dim sequesterRsrc as string
 dim binaryType as string
 
 select case CurrentBuildTarget
-case kTargetMac
+case kTargetMac, kTargetMac64
 zipName = "Kaju_Update_Test_Mac.zip"
 sourcePath = CurrentBuildLocation + "/'" + CurrentBuildAppName + ".app'"
 sequesterRsrc = "--sequesterRsrc "
@@ -77,10 +82,18 @@ case kTargetWin
 zipName = "Kaju_Update_Test_Win.zip"
 sourcePath = CurrentBuildLocation
 binaryType = "--WinBinary"
+case kTargetWin64
+zipName = "Kaju_Update_Test_Win_64.zip"
+sourcePath = CurrentBuildLocation
+binaryType = "--WinBinary64"
 case kTargetLinux
 zipName = "Kaju_Update_Test_Linux.zip"
 sourcePath = CurrentBuildLocation
 binaryType = "--LinuxBinary"
+case kTargetLinux64
+zipName = "Kaju_Update_Test_Linux_64.zip"
+sourcePath = CurrentBuildLocation
+binaryType = "--LinuxBinary64"
 case else
 print "CurrentBuildTarget = " + str( CurrentBuildTarget )
 return
