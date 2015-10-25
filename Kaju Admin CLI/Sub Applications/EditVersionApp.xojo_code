@@ -76,7 +76,7 @@ Inherits VersionHandlerSubApplication
 		    version.RemoveBinary version.kLinuxBinaryName
 		  end if
 		  if options.BooleanValue( kOptionRemoveWinBinary64, false ) then
-		    version.RemoveBinary version.kWindowsBinaryName
+		    version.RemoveBinary version.kWindowsBinary64Name
 		  end if
 		  if options.BooleanValue( kOptionRemoveLinuxBinary64, false ) then
 		    version.RemoveBinary version.kLinuxBinary64Name
