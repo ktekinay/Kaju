@@ -856,7 +856,7 @@ End
 		    else
 		      msg = KajuLocale.kChooseBetweenBitsMessage
 		    end if
-		    msg = = KajuLocale.kCurrenlyUsing32bitMessage + " " + msg
+		    msg = KajuLocale.kCurrenlyUsing32bitMessage + " " + msg
 		    
 		    dim dlg as new MessageDialog
 		    dlg.Message = msg
