@@ -726,10 +726,10 @@ End
 		      dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
 		      DeleteOnCancel.Append tempFolder
 		      
-		      DownloadFile = tempFolder.Child( SelectedUpdate.PlatformBinary.FileName )
+		      DownloadFile = tempFolder.Child( SelectedBinary.FileName )
 		      DeleteOnClose.Append DownloadFile
 		      
-		      dim url as string = SelectedUpdate.PlatformBinary.URL
+		      dim url as string = SelectedBinary.URL
 		      
 		      //
 		      // Check for redirection
@@ -1043,7 +1043,7 @@ End
 		    
 		    ShowError()
 		    
-		  elseif Kaju.HashOfFile( file ) <> SelectedUpdate.PlatformBinary.Hash then
+		  elseif Kaju.HashOfFile( file ) <> SelectedBinary.Hash then
 		    
 		    ShowError( KajuLocale.kBadDownloadMessage )
 		    
@@ -1137,7 +1137,7 @@ End
 		      
 		      Initiater = new Kaju.UpdateInitiater
 		      Initiater.ReplacementAppFolder = item
-		      Initiater.ReplacementExecutableName = SelectedUpdate.PlatformBinary.ExecutableName
+		      Initiater.ReplacementExecutableName = SelectedBinary.ExecutableName
 		      
 		      btnOK.Enabled = true
 		      btnOK.Caption = KajuLocale.kQuitButton
