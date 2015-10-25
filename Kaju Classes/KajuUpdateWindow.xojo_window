@@ -849,6 +849,18 @@ End
 		    // Let the user choose
 		    //
 		    
+		    dim b32 as Kaju.BinaryInformation = update.PlatformBinary32bit
+		    dim b64 as Kaju.BinaryInformation = update.PlatformBinary64bit
+		    
+		    dim msg as string
+		    if b32 is nil then
+		      msg =
+		    else
+		      msg = 
+		    end if
+		    
+		    dim dlg as new MessageDialog
+		    
 		    #pragma error "Finish this"
 		    
 		  end if
