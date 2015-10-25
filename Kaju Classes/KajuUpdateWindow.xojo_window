@@ -905,6 +905,10 @@ End
 		Private RelativeToFolderItem As FolderItem
 	#tag EndProperty
 
+	#tag Property, Flags = &h21
+		Private SelectedBinary As Kaju.BinaryInformation
+	#tag EndProperty
+
 	#tag Property, Flags = &h0
 		SelectedUpdate As Kaju.UpdateInformation
 	#tag EndProperty
