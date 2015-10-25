@@ -837,32 +837,51 @@ End
 		  // Make sure we pick the right binary from the update
 		  //
 		  
-		  if Target64Bit then
-		    return update.PlatformBinary64bit
-		  elseif not Checker.Allow32bitTo64bitUpdates then
-		    return update.PlatformBinary32bit
+		  if TargetMacOS or Target64Bit or not Checker.Allow32bitTo64bitUpdates then
+		    return update.PlatformBinarySameBitness
 		  elseif update.PlatformBinary64bit is nil then
 		    return update.PlatformBinary32bit
 		  else
 		    //
-		    // Either both binaries exist or only the 64-bit exists
+		    // The current is 32-bit and either both binaries exist or only the 64-bit exists
 		    // Let the user choose
 		    //
 		    
 		    dim b32 as Kaju.BinaryInformation = update.PlatformBinary32bit
 		    dim b64 as Kaju.BinaryInformation = update.PlatformBinary64bit
 		    
-		    dim msg as string
+		    dim msg as string 
 		    if b32 is nil then
-		      msg =
+		      msg = KajuLocale.kChoose64bitMessage
 		    else
-		      msg = 
+		      msg = KajuLocale.kChooseBetweenBitsMessage
 		    end if
+		    msg = = KajuLocale.kCurrenlyUsing32bitMessage + " " + msg
 		    
 		    dim dlg as new MessageDialog
+		    dlg.Message = msg
+		    dlg.Explanation = KajuLocale.kExplain64bitMessage
+		    if b32 is nil then
+		      dlg.ActionButton.Caption = KajuLocale.kProceedButton
+		      dlg.ActionButton.Visible = true
+		      dlg.AlternateActionButton.Visible = false
+		    else
+		      dlg.ActionButton.Caption = KajuLocale.kUse32bitLabel
+		      dlg.ActionButton.Visible = true
+		      dlg.AlternateActionButton.Caption = KajuLocale.kUse64bitLabel
+		      dlg.AlternateActionButton.Visible = true
+		    end if
+		    dlg.CancelButton.Caption = KajuLocale.kCancelButton
+		    dlg.CancelButton.Visible = true
 		    
-		    #pragma error "Finish this"
-		    
+		    dim btn as MessageDialogButton = dlg.ShowModalWithin( self )
+		    if btn is nil or btn is dlg.CancelButton then
+		      return nil
+		    elseif b32 is nil or btn is dlg.AlternateActionButton then
+		      return b64
+		    else
+		      return b32
+		    end if
 		  end if
 		End Function
 	#tag EndMethod
