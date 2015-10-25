@@ -686,21 +686,22 @@ End
 		    // The update has been chosen
 		    //
 		    
+		    SelectedUpdate = nil
+		    SelectedBinary = nil
+		    
 		    if true then // Scope
 		      dim chosen as Kaju.UpdateInformation = pumUpdates.RowTag( pumUpdates.ListIndex )
-		      if chosen.RequiresPayment then
-		        dim dlg as new MessageDialog
-		        dlg.ActionButton.Visible = true
-		        dlg.ActionButton.Caption = KajuLocale.kProceedButton
-		        dlg.CancelButton.Visible = true
-		        dlg.Message = KajuLocale.kPaymentRequiredMessage
-		        dim btn as MessageDialogButton = dlg.ShowModalWithin( self )
-		        
-		        if btn is dlg.CancelButton then
-		          return
-		        end if
+		      dim binary as Kaju.BinaryInformation = UserSelectsBinary( chosen )
+		      if binary is nil then
+		        return
 		      end if
+		      
+		      if not UserConfirmsRequiredPayment( chosen ) then
+		        return
+		      end if
+		      
 		      SelectedUpdate = chosen
+		      SelectedBinary = binary
 		    end if
 		    
 		    btnOK.Enabled = false
@@ -822,6 +823,49 @@ End
 		  
 		  #pragma unused parentWindow
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function UserConfirmsRequiredPayment(update As Kaju.UpdateInformation) As Boolean
+		  if update.RequiresPayment then
+		    dim dlg as new MessageDialog
+		    dlg.ActionButton.Visible = true
+		    dlg.ActionButton.Caption = KajuLocale.kProceedButton
+		    dlg.CancelButton.Visible = true
+		    dlg.Message = KajuLocale.kPaymentRequiredMessage
+		    dim btn as MessageDialogButton = dlg.ShowModalWithin( self )
+		    
+		    if btn is dlg.CancelButton then
+		      return false
+		    end if
+		  end if
+		  
+		  return true
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function UserSelectsBinary(update As Kaju.UpdateInformation) As Kaju.BinaryInformation
+		  //
+		  // Make sure we pick the right binary from the update
+		  //
+		  
+		  if Target64Bit then
+		    return update.PlatformBinary64bit
+		  elseif not Checker.Allow32bitTo64bitUpdates then
+		    return update.PlatformBinary32bit
+		  elseif update.PlatformBinary64bit is nil then
+		    return update.PlatformBinary32bit
+		  else
+		    //
+		    // Either both binaries exist or only the 64-bit exists
+		    // Let the user choose
+		    //
+		    
+		    #pragma error "Finish this"
+		    
+		  end if
+		End Function
 	#tag EndMethod
 
 
