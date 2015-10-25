@@ -50,5 +50,3 @@ DebuggerCommandLine=
 UseGDIPlus=True
 UseBuildsFolder=True
 IsWebProject=False
-LinuxBuildArchitecture=1
-WindowsBuildArchitecture=1
