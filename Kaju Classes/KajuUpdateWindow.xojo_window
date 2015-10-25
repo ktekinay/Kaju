@@ -679,6 +679,108 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub HandleOKButton()
+		  select case CurrentStage
+		  case Stage.ChoosingUpdate
+		    //
+		    // The update has been chosen
+		    //
+		    
+		    if true then // Scope
+		      dim chosen as Kaju.UpdateInformation = pumUpdates.RowTag( pumUpdates.ListIndex )
+		      if chosen.RequiresPayment then
+		        dim dlg as new MessageDialog
+		        dlg.ActionButton.Visible = true
+		        dlg.ActionButton.Caption = KajuLocale.kProceedButton
+		        dlg.CancelButton.Visible = true
+		        dlg.Message = KajuLocale.kPaymentRequiredMessage
+		        dim btn as MessageDialogButton = dlg.ShowModalWithin( self )
+		        
+		        if btn is dlg.CancelButton then
+		          return
+		        end if
+		      end if
+		      SelectedUpdate = chosen
+		    end if
+		    
+		    btnOK.Enabled = false
+		    
+		    btnCancel.Caption = KajuLocale.kStopButton
+		    
+		    btnSkipVersion.Visible = false
+		    pbProgress.Visible = true
+		    lblInstallMessage.Visible = true
+		    
+		    pumUpdates.Enabled = false
+		    
+		    CurrentStage = Stage.InstallingUpdate
+		    
+		    if Checker.DryRun then
+		      
+		      lblInstallMessage.Text = KajuLocale.kDryRunMessage
+		      
+		    else
+		      
+		      lblInstallMessage.Text = KajuLocale.kDownloadingMessage
+		      
+		      dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
+		      DeleteOnCancel.Append tempFolder
+		      
+		      DownloadFile = tempFolder.Child( SelectedUpdate.PlatformBinary.FileName )
+		      DeleteOnClose.Append DownloadFile
+		      
+		      dim url as string = SelectedUpdate.PlatformBinary.URL
+		      
+		      //
+		      // Check for redirection
+		      //
+		      url = hsSocket.GetRedirectAddress( url, 5 )
+		      
+		      //
+		      // Start the download
+		      //
+		      hsSocket.Get( url, DownloadFile )
+		      
+		      //
+		      // Start the timeout timer
+		      //
+		      tmrTimeout.Reset
+		      tmrTimeout.Mode = Timer.ModeSingle
+		      
+		    end if
+		    
+		  case Stage.WaitingToQuit
+		    //
+		    // The user chose Quit & Install
+		    //
+		    
+		    Kaju.StartUpdate( self.Initiater )
+		    
+		    //
+		    // Move this window to the back
+		    //
+		    dim lastWindowIndex as integer = WindowCount - 1
+		    if not( Window( lastWindowIndex ) Is self ) then
+		      dim showIndex as integer = lastWindowIndex
+		      for windowIndex as integer = lastWindowIndex downto 0
+		        dim w as Window = Window( showIndex )
+		        if w Is self then
+		          showIndex = showIndex - 1
+		        else
+		          w.Show
+		        end if
+		      next
+		    end if
+		    
+		    Quit
+		    
+		  end
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub Show()
 		  // Override super's show
 		  
@@ -846,103 +948,7 @@ End
 #tag Events btnOK
 	#tag Event
 		Sub Action()
-		  select case CurrentStage
-		  case Stage.ChoosingUpdate
-		    //
-		    // The update has been chosen
-		    //
-		    
-		    if true then // Scope
-		      dim chosen as Kaju.UpdateInformation = pumUpdates.RowTag( pumUpdates.ListIndex )
-		      if chosen.RequiresPayment then
-		        dim dlg as new MessageDialog
-		        dlg.ActionButton.Visible = true
-		        dlg.ActionButton.Caption = KajuLocale.kProceedButton
-		        dlg.CancelButton.Visible = true
-		        dlg.Message = KajuLocale.kPaymentRequiredMessage
-		        dim btn as MessageDialogButton = dlg.ShowModalWithin( self )
-		        
-		        if btn is dlg.CancelButton then
-		          return
-		        end if
-		      end if
-		      SelectedUpdate = chosen
-		    end if
-		    
-		    btnOK.Enabled = false
-		    
-		    btnCancel.Caption = KajuLocale.kStopButton
-		    
-		    btnSkipVersion.Visible = false
-		    pbProgress.Visible = true
-		    lblInstallMessage.Visible = true
-		    
-		    pumUpdates.Enabled = false
-		    
-		    CurrentStage = Stage.InstallingUpdate
-		    
-		    if Checker.DryRun then
-		      
-		      lblInstallMessage.Text = KajuLocale.kDryRunMessage
-		      
-		    else
-		      
-		      lblInstallMessage.Text = KajuLocale.kDownloadingMessage
-		      
-		      dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
-		      DeleteOnCancel.Append tempFolder
-		      
-		      DownloadFile = tempFolder.Child( SelectedUpdate.PlatformBinary.FileName )
-		      DeleteOnClose.Append DownloadFile
-		      
-		      dim url as string = SelectedUpdate.PlatformBinary.URL
-		      
-		      //
-		      // Check for redirection
-		      //
-		      url = hsSocket.GetRedirectAddress( url, 5 )
-		      
-		      //
-		      // Start the download
-		      //
-		      hsSocket.Get( url, DownloadFile )
-		      
-		      //
-		      // Start the timeout timer
-		      //
-		      tmrTimeout.Reset
-		      tmrTimeout.Mode = Timer.ModeSingle
-		      
-		    end if
-		    
-		  case Stage.WaitingToQuit
-		    //
-		    // The user chose Quit & Install
-		    //
-		    
-		    Kaju.StartUpdate( self.Initiater )
-		    
-		    //
-		    // Move this window to the back
-		    //
-		    dim lastWindowIndex as integer = WindowCount - 1
-		    if not( Window( lastWindowIndex ) Is self ) then
-		      dim showIndex as integer = lastWindowIndex
-		      for windowIndex as integer = lastWindowIndex downto 0
-		        dim w as Window = Window( showIndex )
-		        if w Is self then
-		          showIndex = showIndex - 1
-		        else
-		          w.Show
-		        end if
-		      next
-		    end if
-		    
-		    Quit
-		    
-		  end
-		  
-		  
+		  HandleOKButton
 		End Sub
 	#tag EndEvent
 #tag EndEvents
