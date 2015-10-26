@@ -48,7 +48,6 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "This will check a predefined web site for an update. It will always show an update for 1.1 and offer to download it, but the download is, in fact, v.1.0. In other words, the app will replace itself (sometimes with an older version) just so the process can be repeated."
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -118,7 +117,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   111
+      Top             =   85
       Underline       =   False
       Value           =   True
       Visible         =   True
@@ -146,7 +145,6 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   3
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Press check to get a result"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -185,7 +183,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   111
+      Top             =   85
       Underline       =   False
       Visible         =   True
       Width           =   139
@@ -216,7 +214,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   143
+      Top             =   117
       Underline       =   False
       Value           =   True
       Visible         =   True
@@ -248,7 +246,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   175
+      Top             =   149
       Underline       =   False
       Value           =   True
       Visible         =   True
@@ -280,7 +278,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   230
+      Top             =   181
       Underline       =   False
       Visible         =   True
       Width           =   171
@@ -307,14 +305,13 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Min. Stage Allowed:"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   240
+      Top             =   191
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -342,7 +339,6 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   9
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Version"
       TextAlign       =   2
       TextColor       =   &c00000000
@@ -367,7 +363,7 @@ Begin Window Window1
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   20
+      Left            =   329
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -381,11 +377,76 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   207
+      Top             =   149
       Underline       =   False
       Value           =   True
       Visible         =   True
       Width           =   238
+   End
+   Begin PopupMenu pumChooseUpdateURL
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      InitialValue    =   ""
+      Italic          =   False
+      Left            =   191
+      ListIndex       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   11
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   222
+      Underline       =   False
+      Visible         =   True
+      Width           =   171
+   End
+   Begin Label Label1
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   2
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   12
+      TabPanelIndex   =   0
+      Text            =   "Update File URL:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   223
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   152
    End
 End
 #tag EndWindow
@@ -396,7 +457,6 @@ End
 		  dim u as new Kaju.UpdateChecker( App.PrefFolder )
 		  u.ServerPublicRSAKey = _
 		  "30820120300D06092A864886F70D01010105000382010D00308201080282010100D1DE526C8D98CCBFFDB4BD71487AC16205CF851696FB2910ABBC564BFEC1261A53A90794102BCC80EFB3CED3F8E73D90FF4C426D2315DE5E31A1A6C7563A21EADBD91B1DD637FAE0BED539C186BCB81DD865CC2A2F9427F717AA5E837C53AB90691569FC45EE17AF0ACD80E0C24C864EE86D4DBB7A6010E09B4E0BC556004E02980388C654A1C676A31E3AF788754E0CF7DEEC8236D55EDD5BB7490011B27CDEE5E254099FDE98C17D5F85014622D64C3BFB6A77200050FB2C8DF9A1ACEE50CF5A8353CE68304F91EC4F463E76BCF90A15152D03308B229FFE91E4906990D0E5F2E5C3ACC106E58DB1A37095DCBD5E233D7ED4A41AA263A73C54D4F12A113881020111"
-		  u.UpdateURL = "http://www.mactechnologies.com/Kaju_Test/UpdateInformation.html"
 		  
 		  u.DefaultImage = Some_Image
 		  u.DefaultUseTransparency = true
@@ -406,9 +466,31 @@ End
 	#tag EndEvent
 
 
+	#tag Method, Flags = &h0
+		Sub AddRowAndTag(pum As PopUpMenu, s As String, tag As Variant)
+		  pum.AddRow s
+		  pum.RowTag( pum.ListCount - 1 ) = tag
+		  
+		End Sub
+	#tag EndMethod
+
+
 	#tag Property, Flags = &h0
 		Checker As Kaju.UpdateChecker
 	#tag EndProperty
+
+
+	#tag Constant, Name = kBaseURL, Type = String, Dynamic = False, Default = \"http://www.mactechnologies.com/Kaju_Test/", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kUpdateFile32bit, Type = String, Dynamic = False, Default = \"UpdateInformation32bit.html", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kUpdateFile64bit, Type = String, Dynamic = False, Default = \"UpdateInformation64bit.html", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kUpdateFileAll, Type = String, Dynamic = False, Default = \"UpdateInformation.html", Scope = Public
+	#tag EndConstant
 
 
 #tag EndWindowCode
@@ -418,6 +500,7 @@ End
 		Sub Action()
 		  Checker.HonorIgnored = cbHonorIgnored.Value
 		  Checker.Allow32bitTo64bitUpdates = cbAllow32bitTo64bitUpdates.Value
+		  Checker.UpdateURL = pumChooseUpdateURL.RowTag( pumChooseUpdateURL.ListIndex )
 		  
 		  dim allowWindow as integer = if( cbAllowWindow.Value, Kaju.UpdateChecker.kAllowUpdateWindow, 0 )
 		  dim allowErrorDialog as integer = if( cbAllowErrorDialog.Value, Kaju.UpdateChecker.kAllowErrorDialog, 0 )
@@ -490,6 +573,18 @@ End
 	#tag Event
 		Sub Open()
 		  me.Text = "Kaju Version " + Kaju.Version
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events pumChooseUpdateURL
+	#tag Event
+		Sub Open()
+		  AddRowAndTag me, "All Updates", kBaseURL + kUpdateFileAll
+		  AddRowAndTag me, "32-bit Only", kBaseURL + kUpdateFile32bit
+		  AddRowAndTag me, "64-bit Only", kBaseURL + kUpdateFile64bit
+		  
+		  me.ListIndex = 0
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
