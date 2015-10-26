@@ -135,6 +135,10 @@ For each version in your admin file, check each platform to which it applies, pr
 
 For Windows and Linux, you must also provide the exact name of the executable. If your app is called "My Great App", the Linux executable name will be "My Great App" and the Windows name will be "My Great App.exe".
 
+### About 64-bit
+
+Kaju will allow you to specify 64-bit versions for Windows and Linux. If available, and if the `UpdateChecker.Allow32bitTo64bitUpdates` is `True`, the users of your 32-bit version will be given the option to upgrade to the next version as 64-bit.
+
 ## The CLI Admin App
 
 Included in the project is a command-line version of the admin app so you can automate the maintenance of your update file. It will let you do anything that the GUI version will, including creating the Kaju admin file, adding and editing versions, and exporting the update information.
@@ -265,6 +269,7 @@ There is also a `Kaju.Version` constant (introduced in v.1.4) that will let you 
 
 |Property|Type|Description|Required|
 |:---|:---:|:---|---:|
+|Allow32bitTo64bitUpdates|Boolean|If `True`, will offer the user of a 32-bit app the option to upgrade to the 64-bit version, if available.|n|
 |AllowedInteraction|UInt32|Determines what windows Kaju is allowed to display; Use the available constants|n|
 |AllowedStage|Integer|What stage of updates the user may see (App.Final, App.Beta, App.Alpha, or App.Development)|n|
 |AllowRedirection|Boolean|If `True`, the `UpdateURL` may redirect to another URL (default: `False`)|n|

@@ -51,6 +51,15 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"U kunt geen versies overslaan totdat u minstens <<Version>> of hoger heeft ge\xC3\xAFnstalleerd."
 	#tag EndConstant
 
+	#tag Constant, Name = kChoose64bitMessage, Type = String, Dynamic = True, Default = \"The update is only available as 64-bit. Proceed\?", Scope = Protected
+	#tag EndConstant
+
+	#tag Constant, Name = kChooseBetweenBitsMessage, Type = String, Dynamic = True, Default = \"This update is also available as 64-bit. Which would you prefer\?", Scope = Protected
+	#tag EndConstant
+
+	#tag Constant, Name = kCurrenlyUsing32bitMessage, Type = String, Dynamic = True, Default = \"You are currently using the 32-bit version.", Scope = Protected
+	#tag EndConstant
+
 	#tag Constant, Name = kDownloadingMessage, Type = String, Dynamic = True, Default = \"Downloading...", Scope = Protected
 		#Tag Instance, Platform = Any, Language = de, Definition  = \"Herunterladen..."
 		#Tag Instance, Platform = Any, Language = fr, Definition  = \"T\xC3\xA9l\xC3\xA9chargement..."
@@ -112,6 +121,9 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Tapahtui virhe. Haluatko yritt\xC3\xA4\xC3\xA4 uudelleen nyt vai my\xC3\xB6hemmin\?"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Si \xC3\xA8 verificato un errore. Vuoi riprovare ora o pi\xC3\xB9 tardi\?"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Er is een fout opgetreden. Wilt u het nu of later nog eens proberen\?"
+	#tag EndConstant
+
+	#tag Constant, Name = kExplain64bitMessage, Type = String, Dynamic = True, Default = \"Your system may not be able to run the 64-bit version. If you\xE2\x80\x99re not sure\x2C do not select it.", Scope = Protected
 	#tag EndConstant
 
 	#tag Constant, Name = kGenericErrorMessage, Type = String, Dynamic = True, Default = \"An error has occurred.", Scope = Protected
@@ -316,6 +328,12 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Yrit\xC3\xA4 my\xC3\xB6hemmin"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Prova pi\xC3\xB9 tardi"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Probeer het later opnieuw"
+	#tag EndConstant
+
+	#tag Constant, Name = kUse32bitLabel, Type = String, Dynamic = True, Default = \"Stay With 32-bit", Scope = Protected
+	#tag EndConstant
+
+	#tag Constant, Name = kUse64bitLabel, Type = String, Dynamic = True, Default = \"Switch To 64-bit", Scope = Protected
 	#tag EndConstant
 
 	#tag Constant, Name = kVersionMarker, Type = String, Dynamic = False, Default = \"<<Version>>", Scope = Protected

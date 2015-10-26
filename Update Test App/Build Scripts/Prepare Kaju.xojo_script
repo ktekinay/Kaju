@@ -135,7 +135,100 @@ next
 dim exportName as string = "UpdateInformation.html"
 dim exportPath as string = destPath + "/" + exportName
 
-cmd = kaju + " --file=" + kajuFile + " export " + destPath
+cmd = kaju + " --file=" + kajuFile + " export " + exportPath
+err = DoShellCommand( cmd )
+if err <> "" then
+print err + &uA + &uA + cmd
+return
+end if
+
+//
+// Create a copy of the file to export 32-bit only updates and 
+// 64-bit only updates
+//
+
+//
+// 32-bit
+//
+dim kajuFileCopy as string = topLevelPath + "/Kaju\ Update\ Test\ 32bit\ v1.kaju"
+cmd = "cp " + kajuFile + " " + kajuFileCopy
+err = DoShellCommand( cmd )
+if err <> "" then
+print err + &uA + &uA + cmd
+return
+end if
+
+for each version as string in versions
+cmd = kaju + " --file=" + kajuFileCopy + " editversion --version=" + Quoted( version ) + _
+" --remove-winbinary64 --remove-linuxbinary64"
+dim r as string = DoShellCommand( cmd )
+if r <> "" then
+print "Version: " + version + &uA + &uA + r
+return
+end if
+next
+
+//
+// Export the file
+//
+exportName = "UpdateInformation32bit.html"
+exportPath = destPath + "/" + exportName
+
+cmd = kaju + " --file=" + kajuFileCopy + " export " + exportPath
+err = DoShellCommand( cmd )
+if err <> "" then
+print err + &uA + &uA + cmd
+return
+end if
+
+//
+// Remove the copy
+//
+cmd = "rm " + kajuFileCopy
+err = DoShellCommand( cmd )
+if err <> "" then
+print err + &uA + &uA + cmd
+return
+end if
+
+//
+// 64-bit
+//
+kajuFileCopy = topLevelPath + "/Kaju\ Update\ Test\ 64bit\ v1.kaju"
+cmd = "cp " + kajuFile + " " + kajuFileCopy
+err = DoShellCommand( cmd )
+if err <> "" then
+print err + &uA + &uA + cmd
+return
+end if
+
+for each version as string in versions
+cmd = kaju + " --file=" + kajuFileCopy + " editversion --version=" + Quoted( version ) + _
+" --remove-winbinary --remove-linuxbinary"
+dim r as string = DoShellCommand( cmd )
+if r <> "" then
+print "Version: " + version + &uA + &uA + r
+return
+end if
+next
+
+//
+// Export the file
+//
+exportName = "UpdateInformation64bit.html"
+exportPath = destPath + "/" + exportName
+
+cmd = kaju + " --file=" + kajuFileCopy + " export " + exportPath
+err = DoShellCommand( cmd )
+if err <> "" then
+print err + &uA + &uA + cmd
+return
+end if
+
+//
+// Remove the copy
+//
+cmd = "rm " + kajuFileCopy
 err = DoShellCommand( cmd )
 if err <> "" then
 print err + &uA + &uA + cmd

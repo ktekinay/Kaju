@@ -307,7 +307,14 @@ Protected Class UpdateChecker
 		    //
 		    // See if the binary information is present
 		    //
-		    if thisInfo.PlatformBinary is nil then
+		    dim binary as Kaju.BinaryInformation
+		    if Target32Bit and Allow32bitTo64bitUpdates then
+		      binary = thisInfo.PlatformBinaryAny
+		    else
+		      binary = thisInfo.PlatformBinarySameBitness
+		    end if
+		    
+		    if binary is nil then
 		      continue for i
 		    end if
 		    
@@ -362,6 +369,11 @@ Protected Class UpdateChecker
 		  return true
 		  
 		  Exception err as RuntimeException
+		    if err isa EndException or err isa ThreadEndException then
+		      raise err
+		    end if
+		    
+		    System.DebugLog err.Message
 		    return not HandleError( KajuLocale.kErrorBadUpdateData )
 		    
 		End Function
@@ -487,6 +499,10 @@ Protected Class UpdateChecker
 
 
 	#tag Property, Flags = &h0
+		Allow32bitTo64bitUpdates As Boolean = True
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		AllowedInteraction As UInt32 = kAllowAll
 	#tag EndProperty
 
@@ -588,6 +604,18 @@ Protected Class UpdateChecker
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="Allow32bitTo64bitUpdates"
+			Group="Behavior"
+			InitialValue="True"
+			Type="Boolean"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AllowedInteraction"
+			Group="Behavior"
+			InitialValue="kAllowAll"
+			Type="UInt32"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AllowedStage"
 			Group="Behavior"
