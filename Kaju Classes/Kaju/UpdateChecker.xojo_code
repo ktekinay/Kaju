@@ -369,6 +369,11 @@ Protected Class UpdateChecker
 		  return true
 		  
 		  Exception err as RuntimeException
+		    if err isa EndException or err isa ThreadEndException then
+		      raise err
+		    end if
+		    
+		    System.DebugLog err.Message
 		    return not HandleError( KajuLocale.kErrorBadUpdateData )
 		    
 		End Function
@@ -599,6 +604,12 @@ Protected Class UpdateChecker
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="Allow32bitTo64bitUpdates"
+			Group="Behavior"
+			InitialValue="True"
+			Type="Boolean"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AllowedInteraction"
 			Group="Behavior"
