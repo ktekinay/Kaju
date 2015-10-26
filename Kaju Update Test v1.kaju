@@ -12,26 +12,26 @@
       "UseTransparency":false,
       "Version":"1.1 (10)",
       "MacBinary":{
-        "Hash":"21C50D24514EB970033E1193C82D0409",
+        "Hash":"D9415D7F8757D833236B3F7C9681EEB1",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip"
       },
       "WindowsBinary":{
-        "Hash":"0CA8DEF5CC16A357C793CC8DBBF8D57A",
+        "Hash":"ACC1C473EE44A733749F1E96ADD3699F",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win.zip",
         "ExecutableName":"Kaju Update Test.exe"
       },
       "LinuxBinary":{
-        "Hash":"85C130262F06617F294919C797958545",
+        "Hash":"87570885CF7625CEC59149553E5A8CD6",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux.zip",
         "ExecutableName":"Kaju Update Test"
       },
       "WindowsBinary64bit":{
-        "Hash":"C0C53E2C931C661B45AF2041CC9A0412",
+        "Hash":"1AFFB38947848BAB59C706B0765E36C7",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win_64.zip",
         "ExecutableName":"Kaju Update Test.exe"
       },
       "LinuxBinary64bit":{
-        "Hash":"D816DE67803CA77E97B7A8D002D7B125",
+        "Hash":"13058275240FC0A8A63CDC94FF939574",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux_64.zip",
         "ExecutableName":"Kaju Update Test"
       }
@@ -45,26 +45,26 @@
       "UseTransparency":false,
       "Version":"1.2.2d5",
       "MacBinary":{
-        "Hash":"21C50D24514EB970033E1193C82D0409",
+        "Hash":"D9415D7F8757D833236B3F7C9681EEB1",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip"
       },
       "WindowsBinary":{
-        "Hash":"0CA8DEF5CC16A357C793CC8DBBF8D57A",
+        "Hash":"ACC1C473EE44A733749F1E96ADD3699F",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win.zip",
         "ExecutableName":"Kaju Update Test.exe"
       },
       "LinuxBinary":{
-        "Hash":"85C130262F06617F294919C797958545",
+        "Hash":"87570885CF7625CEC59149553E5A8CD6",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux.zip",
         "ExecutableName":"Kaju Update Test"
       },
       "WindowsBinary64bit":{
-        "Hash":"C0C53E2C931C661B45AF2041CC9A0412",
+        "Hash":"1AFFB38947848BAB59C706B0765E36C7",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win_64.zip",
         "ExecutableName":"Kaju Update Test.exe"
       },
       "LinuxBinary64bit":{
-        "Hash":"D816DE67803CA77E97B7A8D002D7B125",
+        "Hash":"13058275240FC0A8A63CDC94FF939574",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux_64.zip",
         "ExecutableName":"Kaju Update Test"
       }
@@ -78,26 +78,26 @@
       "UseTransparency":false,
       "Version":"1.2.1a4",
       "MacBinary":{
-        "Hash":"21C50D24514EB970033E1193C82D0409",
+        "Hash":"D9415D7F8757D833236B3F7C9681EEB1",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip"
       },
       "WindowsBinary":{
-        "Hash":"0CA8DEF5CC16A357C793CC8DBBF8D57A",
+        "Hash":"ACC1C473EE44A733749F1E96ADD3699F",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win.zip",
         "ExecutableName":"Kaju Update Test.exe"
       },
       "LinuxBinary":{
-        "Hash":"85C130262F06617F294919C797958545",
+        "Hash":"87570885CF7625CEC59149553E5A8CD6",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux.zip",
         "ExecutableName":"Kaju Update Test"
       },
       "WindowsBinary64bit":{
-        "Hash":"C0C53E2C931C661B45AF2041CC9A0412",
+        "Hash":"1AFFB38947848BAB59C706B0765E36C7",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win_64.zip",
         "ExecutableName":"Kaju Update Test.exe"
       },
       "LinuxBinary64bit":{
-        "Hash":"D816DE67803CA77E97B7A8D002D7B125",
+        "Hash":"13058275240FC0A8A63CDC94FF939574",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux_64.zip",
         "ExecutableName":"Kaju Update Test"
       }
@@ -111,26 +111,26 @@
       "UseTransparency":true,
       "Version":"1.2b2",
       "MacBinary":{
-        "Hash":"21C50D24514EB970033E1193C82D0409",
+        "Hash":"D9415D7F8757D833236B3F7C9681EEB1",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux.zip"
       },
       "WindowsBinary":{
-        "Hash":"0CA8DEF5CC16A357C793CC8DBBF8D57A",
+        "Hash":"ACC1C473EE44A733749F1E96ADD3699F",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip",
         "ExecutableName":"Kaju Update Test.exe"
       },
       "LinuxBinary":{
-        "Hash":"85C130262F06617F294919C797958545",
+        "Hash":"87570885CF7625CEC59149553E5A8CD6",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win.zip",
         "ExecutableName":"Kaju Update Test"
       },
       "WindowsBinary64bit":{
-        "Hash":"C0C53E2C931C661B45AF2041CC9A0412",
+        "Hash":"1AFFB38947848BAB59C706B0765E36C7",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux_64.zip",
         "ExecutableName":"Kaju Update Test.exe"
       },
       "LinuxBinary64bit":{
-        "Hash":"D816DE67803CA77E97B7A8D002D7B125",
+        "Hash":"13058275240FC0A8A63CDC94FF939574",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win_64.zip",
         "ExecutableName":"Kaju Update Test"
       }
@@ -144,26 +144,26 @@
       "UseTransparency":false,
       "Version":"0.9",
       "MacBinary":{
-        "Hash":"21C50D24514EB970033E1193C82D0409",
+        "Hash":"D9415D7F8757D833236B3F7C9681EEB1",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip"
       },
       "WindowsBinary":{
-        "Hash":"0CA8DEF5CC16A357C793CC8DBBF8D57A",
+        "Hash":"ACC1C473EE44A733749F1E96ADD3699F",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win.zip",
         "ExecutableName":"Kaju Update Test.exe"
       },
       "LinuxBinary":{
-        "Hash":"85C130262F06617F294919C797958545",
+        "Hash":"87570885CF7625CEC59149553E5A8CD6",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux.zip",
         "ExecutableName":"Kaju Update Test"
       },
       "WindowsBinary64bit":{
-        "Hash":"C0C53E2C931C661B45AF2041CC9A0412",
+        "Hash":"1AFFB38947848BAB59C706B0765E36C7",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Win_64.zip",
         "ExecutableName":"Kaju Update Test.exe"
       },
       "LinuxBinary64bit":{
-        "Hash":"D816DE67803CA77E97B7A8D002D7B125",
+        "Hash":"13058275240FC0A8A63CDC94FF939574",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux_64.zip",
         "ExecutableName":"Kaju Update Test"
       }
