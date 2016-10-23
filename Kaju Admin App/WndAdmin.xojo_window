@@ -1075,17 +1075,13 @@ Begin Window WndAdmin
       Width           =   180
    End
    Begin Timer tmrUpdateReleaseNotesPreview
-      Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
-      Left            =   0
       LockedInPosition=   False
       Mode            =   0
       Period          =   750
       Scope           =   2
       TabPanelIndex   =   0
-      Top             =   0
-      Width           =   32
    End
    Begin HTMLViewer hvNewWindow
       AutoDeactivate  =   True
@@ -1140,17 +1136,13 @@ Begin Window WndAdmin
       Width           =   186
    End
    Begin Timer tmrUpdateImagePreview
-      Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
-      Left            =   20
       LockedInPosition=   False
       Mode            =   0
       Period          =   750
       Scope           =   2
       TabPanelIndex   =   0
-      Top             =   20
-      Width           =   32
    End
    Begin Label lblPlatform
       AutoDeactivate  =   True
@@ -2439,7 +2431,6 @@ End
 			"7 - Global Floating Window"
 			"8 - Sheet Window"
 			"9 - Metal Window"
-			"10 - Drawer Window"
 			"11 - Modeless Dialog"
 		#tag EndEnumValues
 	#tag EndViewProperty

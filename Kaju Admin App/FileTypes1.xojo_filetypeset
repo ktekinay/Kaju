@@ -35,6 +35,7 @@
 		MacCreator=????
 		MacType=????
 		Name=special/any
+		UTI=
 		UTIConformsTo=
 		Description=
 		MimeType=
@@ -48,6 +49,7 @@
 		MacCreator=SITx
 		MacType=ZIP 
 		Name=application/zip
+		UTI=
 		UTIConformsTo=
 		Description=
 		MimeType=
