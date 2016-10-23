@@ -19,6 +19,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Ladattu tiedosto vaikuttaa vioittuneelta."
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Il file scaricato sembra essere corrotto."
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Het gedownloade bestand lijkt te zijn beschadigd."
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"The downloaded file appears to be corrupted."
 	#tag EndConstant
 
 	#tag Constant, Name = kBinaryInfoInvalidReason, Type = String, Dynamic = True, Default = \"Binary information is not valid", Scope = Protected
@@ -28,6 +29,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Binaari-informaatio ei ole kelvollista"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Le informazioni binarie non sono valide"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Binaire gegevens zijn ongeldig"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Binary information is not valid"
 	#tag EndConstant
 
 	#tag Constant, Name = kCancelButton, Type = String, Dynamic = True, Default = \"&Cancel", Scope = Protected
@@ -40,6 +42,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"&Kumoa"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"&Annulla"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"&Annuleer"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"&Cancel"
 	#tag EndConstant
 
 	#tag Constant, Name = kCannotSkipVersionsMessage, Type = String, Dynamic = True, Default = \"You cannot skip versions until you have updated to version <<Version>> or beyond.", Scope = Protected
@@ -49,18 +52,22 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Et voi ohittaa yht\xC3\xA4\xC3\xA4n versioita ennen kuin olet p\xC3\xA4ivitt\xC3\xA4nyt versioon <<Version>> tai sit\xC3\xA4 uudempaan."
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Non puoi saltare le versioni fintanto che non hai aggiornato alla versione <<Version>> o superiori."
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"U kunt geen versies overslaan totdat u minstens <<Version>> of hoger heeft ge\xC3\xAFnstalleerd."
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"You cannot skip versions until you have updated to version <<Version>> or beyond."
 	#tag EndConstant
 
 	#tag Constant, Name = kChoose64bitMessage, Type = String, Dynamic = True, Default = \"The update is only available as 64-bit. Proceed\?", Scope = Protected
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"P\xC3\xA4ivitys on saatavana vain 64-bittisen\xC3\xA4. Jatketaanko\?"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"The update is only available as 64-bit. Proceed\?"
 	#tag EndConstant
 
 	#tag Constant, Name = kChooseBetweenBitsMessage, Type = String, Dynamic = True, Default = \"This update is also available as 64-bit. Which would you prefer\?", Scope = Protected
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"T\xC3\xA4m\xC3\xA4 p\xC3\xA4ivitys on saatavana my\xC3\xB6s 64-bittisen\xC3\xA4. Kumman haluat\?"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"This update is also available as 64-bit. Which would you prefer\?"
 	#tag EndConstant
 
 	#tag Constant, Name = kCurrenlyUsing32bitMessage, Type = String, Dynamic = True, Default = \"You are currently using the 32-bit version.", Scope = Protected
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"K\xC3\xA4yt\xC3\xA4t t\xC3\xA4ll\xC3\xA4 hetkell\xC3\xA4 32-bittist\xC3\xA4 versiota."
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"You are currently using the 32-bit version."
 	#tag EndConstant
 
 	#tag Constant, Name = kDownloadingMessage, Type = String, Dynamic = True, Default = \"Downloading...", Scope = Protected
@@ -70,6 +77,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Ladataan\xE2\x80\xA6"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Scaricando\xE2\x80\xA6"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Downloaden\xE2\x80\xA6"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Downloading..."
 	#tag EndConstant
 
 	#tag Constant, Name = kDryRunMessage, Type = String, Dynamic = True, Default = \"(Dry run\x2C not really installing)", Scope = Protected
@@ -79,6 +87,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"(Testiajo\x2C ei installoida)"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"(Prova\x2C non sto installando veramente)"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"(Test run\x2C geen installatie)"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"(Dry run\x2C not really installing)"
 	#tag EndConstant
 
 	#tag Constant, Name = kErrorBadUpdateData, Type = String, Dynamic = True, Default = \"The update data cannot be read.", Scope = Protected
@@ -88,6 +97,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"P\xC3\xA4ivitystietoja ei voi lukea."
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"I dati dell\xE2\x80\x99aggiornamento non possono essere letti."
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Update informatie kon niet worden gelezen."
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"The update data cannot be read."
 	#tag EndConstant
 
 	#tag Constant, Name = kErrorIncorrectPacketMarker, Type = String, Dynamic = True, Default = \"The update packet signature marker was incorrect.", Scope = Protected
@@ -97,6 +107,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"P\xC3\xA4ivityspaketin allekirjoitusmerkint\xC3\xA4 ei ollut oikein."
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"La firma del pacchetto di aggiornamento non \xC3\xA8 corretta."
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"De update handtekening was incorrect."
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"The update packet signature marker was incorrect."
 	#tag EndConstant
 
 	#tag Constant, Name = kErrorIncorrectPacketSignature, Type = String, Dynamic = True, Default = \"The RSA signature of the update packet cannot be verified.", Scope = Protected
@@ -106,6 +117,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"P\xC3\xA4ivityspaketin RSA-allekirjoitusta ei voida varmentaa."
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"La firma RSA del pacchetto di aggiornamento non pu\xC3\xB2 essere verificata."
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"De RSA handtekening van het update pakket kan niet worden geverifieerd."
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"The RSA signature of the update packet cannot be verified."
 	#tag EndConstant
 
 	#tag Constant, Name = kErrorNoUpdateData, Type = String, Dynamic = True, Default = \"No update data was available.", Scope = Protected
@@ -115,6 +127,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"P\xC3\xA4ivitysdataa ei ole saatavilla."
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Nessun dato dell\xE2\x80\x99aggiornamento disponibile."
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Er was geen update informatie beschikbaar."
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"No update data was available."
 	#tag EndConstant
 
 	#tag Constant, Name = kErrorOccurredMessage, Type = String, Dynamic = True, Default = \"An error has occurred. Would you like to try again now or later\?", Scope = Protected
@@ -124,10 +137,12 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Tapahtui virhe. Haluatko yritt\xC3\xA4\xC3\xA4 uudelleen nyt vai my\xC3\xB6hemmin\?"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Si \xC3\xA8 verificato un errore. Vuoi riprovare ora o pi\xC3\xB9 tardi\?"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Er is een fout opgetreden. Wilt u het nu of later nog eens proberen\?"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"An error has occurred. Would you like to try again now or later\?"
 	#tag EndConstant
 
 	#tag Constant, Name = kExplain64bitMessage, Type = String, Dynamic = True, Default = \"Your system may not be able to run the 64-bit version. If you\xE2\x80\x99re not sure\x2C do not select it.", Scope = Protected
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"J\xC3\xA4rjestelm\xC3\xA4si ei ehk\xC3\xA4 pysty k\xC3\xA4ytt\xC3\xA4m\xC3\xA4\xC3\xA4n 64-bittist\xC3\xA4 versiota. Jos et ole varma\x2C \xC3\xA4l\xC3\xA4 valitse sit\xC3\xA4."
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Your system may not be able to run the 64-bit version. If you\xE2\x80\x99re not sure\x2C do not select it."
 	#tag EndConstant
 
 	#tag Constant, Name = kGenericErrorMessage, Type = String, Dynamic = True, Default = \"An error has occurred.", Scope = Protected
@@ -137,6 +152,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"On tapahtunut virhe."
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Si \xC3\xA8 verificato un errore."
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Er is een fout opgetreden."
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"An error has occurred."
 	#tag EndConstant
 
 	#tag Constant, Name = kInstallButton, Type = String, Dynamic = True, Default = \"Install Update", Scope = Protected
@@ -146,6 +162,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Asenna"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Installa"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Installeren"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Install Update"
 	#tag EndConstant
 
 	#tag Constant, Name = kLaterButton, Type = String, Dynamic = True, Default = \"Later", Scope = Protected
@@ -155,6 +172,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"My\xC3\xB6hemmin"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Pi\xC3\xB9 tardi"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Later"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Later"
 	#tag EndConstant
 
 	#tag Constant, Name = kMainNotice, Type = String, Dynamic = True, Default = \"A new version of <<AppName>> is available!", Scope = Protected
@@ -164,6 +182,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Uusi versio ohjelmasta <<AppName>> on saatavilla!"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Una nuova versione di <<AppName>> \xC3\xA8 disponibile!"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Een nieuwe versie van <<AppName>> is beschikbaar!"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"A new version of <<AppName>> is available!"
 	#tag EndConstant
 
 	#tag Constant, Name = kMissingAppNameReason, Type = String, Dynamic = True, Default = \"Missing app name", Scope = Protected
@@ -173,6 +192,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Nome dell\xE2\x80\x99applicazione non disponibile"
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Ohjelman nimi puuttuu"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"App naam ontbreekt"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Missing app name"
 	#tag EndConstant
 
 	#tag Constant, Name = kMissingReason, Type = String, Dynamic = True, Default = \"Missing", Scope = Protected
@@ -182,6 +202,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Puuttuu"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Non disponibile"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Niet beschikbaar"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Missing"
 	#tag EndConstant
 
 	#tag Constant, Name = kNewVersionMarker, Type = String, Dynamic = False, Default = \"<<NewVersion>>", Scope = Protected
@@ -194,6 +215,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"EI P\xC3\x84IVITYSINFORMAATIOTA"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"NESSUN INFORMAZIONE SULL\xE2\x80\x99AGGIORNAMENTO"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"GEEN UPDATE INFORMATIE"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"NO UPDATE INFORMATION"
 	#tag EndConstant
 
 	#tag Constant, Name = kPaymentRequiredMessage, Type = String, Dynamic = True, Default = \"This update is not free and will require payment. Proceed anyway\?", Scope = Protected
@@ -203,6 +225,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"T\xC3\xA4m\xC3\xA4 on maksullinen p\xC3\xA4ivitys. Jatketaanko kuitenkin\?"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Questo aggiornamento non \xC3\xA8 gratuito e richieder\xC3\xA0 un pagamento. Vuoi proseguire comunque\?"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Deze update is niet gratis en zal betaling vragen\x2C wilt u doorgaan\?"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"This update is not free and will require payment. Proceed anyway\?"
 	#tag EndConstant
 
 	#tag Constant, Name = kProceedButton, Type = String, Dynamic = True, Default = \"Proceed", Scope = Protected
@@ -212,6 +235,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Jatketaan"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Continua"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Doorgaan"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Proceed"
 	#tag EndConstant
 
 	#tag Constant, Name = kProcessingFileMessage, Type = String, Dynamic = True, Default = \"Processing file...", Scope = Protected
@@ -221,6 +245,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"K\xC3\xA4sitell\xC3\xA4\xC3\xA4n tiedostoa\xE2\x80\xA6"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Processando il file..."
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Bestand verwerken\xE2\x80\xA6"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Processing file..."
 	#tag EndConstant
 
 	#tag Constant, Name = kQuitButton, Type = String, Dynamic = True, Default = \"Quit && Install", Scope = Protected
@@ -230,6 +255,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Sulje ja asenna"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Chiudi && Installa"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Afsluiten && Installeren"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Quit && Install"
 	#tag EndConstant
 
 	#tag Constant, Name = kReadyMessage, Type = String, Dynamic = True, Default = \"Ready to install", Scope = Protected
@@ -239,6 +265,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Valmiina asentamaan"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Pronto per installare"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Klaar om te installeren"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Ready to install"
 	#tag EndConstant
 
 	#tag Constant, Name = kReleaseNotesLabel, Type = String, Dynamic = True, Default = \"Release Notes:", Scope = Protected
@@ -248,6 +275,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Julkaisutiedot:"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Note di rilascio:"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Update informatie:"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Release Notes:"
 	#tag EndConstant
 
 	#tag Constant, Name = kRemindMeLaterButton, Type = String, Dynamic = True, Default = \"Remind Me Later", Scope = Protected
@@ -257,6 +285,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Muistuta my\xC3\xB6hemmin"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Ricordamelo pi\xC3\xB9 tardi"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Herinner mij later"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Remind Me Later"
 	#tag EndConstant
 
 	#tag Constant, Name = kSecondaryNoticeMultiple, Type = String, Dynamic = True, Default = \"You have version <<ThisVersion>> and there are multiple updates available. Install one\?", Scope = Protected
@@ -266,6 +295,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Sinulla on versio <<ThisVersion>> ja saatavilla on useita p\xC3\xA4ivityksi\xC3\xA4. Asennetaanko joku\?"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"La versione attuale \xC3\xA8 <<ThisVersion>> e ci sono diversi aggiornamenti disponibile. Vuoi installarne uno\?"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"U heeft versie <<ThisVersion>> en er zijn meerdere updates beschikbaar. Wilt u er een installeren\?"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"You have version <<ThisVersion>> and there are multiple updates available. Install one\?"
 	#tag EndConstant
 
 	#tag Constant, Name = kSecondaryNoticeOne, Type = String, Dynamic = True, Default = \"You have version <<ThisVersion>>. Would you like to install version <<NewVersion>>\?", Scope = Protected
@@ -275,6 +305,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Sinulla on versio <<ThisVersion>>. Haluatko asentaa version <<NewVersion>>\?"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Hai la versione <<ThisVersion>>. Vuoi installare la versione <<NewVersion>>\?"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"U heeft versie <<ThisVersion>>. Wilt u versie <<NewVersion>> installeren\?"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"You have version <<ThisVersion>>. Would you like to install version <<NewVersion>>\?"
 	#tag EndConstant
 
 	#tag Constant, Name = kSkipVersionButton, Type = String, Dynamic = True, Default = \"Skip Version", Scope = Protected
@@ -284,6 +315,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Ohita versio"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Salta questa versione"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Versie overslaan"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Skip Version"
 	#tag EndConstant
 
 	#tag Constant, Name = kStopButton, Type = String, Dynamic = True, Default = \"Stop", Scope = Protected
@@ -293,6 +325,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Seis"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Stop"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Stop"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Stop"
 	#tag EndConstant
 
 	#tag Constant, Name = kThisApplication, Type = String, Dynamic = True, Default = \"this application", Scope = Protected
@@ -302,6 +335,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"t\xC3\xA4m\xC3\xA4 ohjelma"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"quest\xE2\x80\x99applicazione"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Dit programma"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"this application"
 	#tag EndConstant
 
 	#tag Constant, Name = kThisVersionMarker, Type = String, Dynamic = False, Default = \"<<ThisVersion>>", Scope = Protected
@@ -314,6 +348,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Toiminto on aikakatkaistu."
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Il tempo massimo per l\xE2\x80\x99operazione richiesta \xC3\xA8 scaduto."
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"De voortgang is geannuleerd vanwege een time-out."
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"The operation has timed out."
 	#tag EndConstant
 
 	#tag Constant, Name = kTryAgainButton, Type = String, Dynamic = True, Default = \"Try Again", Scope = Protected
@@ -323,6 +358,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Yrit\xC3\xA4 uudelleen"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Prova ancora"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Probeer opnieuw"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Try Again"
 	#tag EndConstant
 
 	#tag Constant, Name = kTryLaterButton, Type = String, Dynamic = True, Default = \"Try Later", Scope = Protected
@@ -332,14 +368,17 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Yrit\xC3\xA4 my\xC3\xB6hemmin"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Prova pi\xC3\xB9 tardi"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Probeer het later opnieuw"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Try Later"
 	#tag EndConstant
 
 	#tag Constant, Name = kUse32bitLabel, Type = String, Dynamic = True, Default = \"Stay With 32-bit", Scope = Protected
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Pysy 32-bittisess\xC3\xA4"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Stay With 32-bit"
 	#tag EndConstant
 
 	#tag Constant, Name = kUse64bitLabel, Type = String, Dynamic = True, Default = \"Switch To 64-bit", Scope = Protected
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Vaihda 64-bittiseen"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Switch To 64-bit"
 	#tag EndConstant
 
 	#tag Constant, Name = kVersionMarker, Type = String, Dynamic = False, Default = \"<<Version>>", Scope = Protected
@@ -352,6 +391,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Version t\xC3\xA4ytyy olla joku n\xC3\xA4ist\xC3\xA4"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"La versione deve essere in una di queste forme"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Versie moet in een van de volgende formaten worden ingevoerd"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Version must be in one of these forms"
 	#tag EndConstant
 
 	#tag Constant, Name = kVersionsLabel, Type = String, Dynamic = True, Default = \"Available Versions:", Scope = Protected
@@ -361,6 +401,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"Saatavana versiot:"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Versioni disponibili:"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Beschikbare versies:"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Available Versions:"
 	#tag EndConstant
 
 	#tag Constant, Name = kWindowTitle, Type = String, Dynamic = True, Default = \"Update Available", Scope = Protected
@@ -370,6 +411,7 @@ Protected Module KajuLocale
 		#Tag Instance, Platform = Any, Language = fi, Definition  = \"P\xC3\xA4ivitys saatavilla"
 		#Tag Instance, Platform = Any, Language = it, Definition  = \"Aggiornamento disponibile"
 		#Tag Instance, Platform = Any, Language = nl, Definition  = \"Update beschikbaar"
+		#Tag Instance, Platform = Any, Language = en, Definition  = \"Update Available"
 	#tag EndConstant
 
 
