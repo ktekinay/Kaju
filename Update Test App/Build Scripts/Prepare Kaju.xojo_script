@@ -26,7 +26,7 @@ End Function
 // Confirm that it's a Mac
 //
 if not ConfirmTool( "/usr/bin/sw_vers" ) then
-print "This build script can only be run in a Mac."
+print "This build script can only be run on a Mac."
 return
 end if
 
@@ -71,6 +71,8 @@ dim zipName as string
 dim sourcePath as string
 dim sequesterRsrc as string
 dim binaryType as string
+
+sequesterRsrc = "--norsrc "
 
 select case CurrentBuildTarget
 case kTargetMac, kTargetMac64
