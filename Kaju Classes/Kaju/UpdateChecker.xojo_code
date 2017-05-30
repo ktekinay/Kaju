@@ -252,7 +252,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		 Shared Function OSIsSupported() As Boolean
+		Shared Function OSIsSupported() As Boolean
 		  // Ensures that the right tools are available on the current OS
 		  
 		  dim r as boolean = true // Assume it's fine
@@ -374,7 +374,8 @@ Protected Class UpdateChecker
 		    end if
 		    
 		    System.DebugLog err.Message
-		    return not HandleError( KajuLocale.kErrorBadUpdateData )
+		    return not HandleError( KajuLocale.kErrorBadUpdateData + _
+		    if( err.Message <> "", " - " + err.Message, "" ) )
 		    
 		End Function
 	#tag EndMethod
