@@ -1,5 +1,5 @@
 Type=Console
-RBProjectVersion=2015.03
+RBProjectVersion=2017.011
 MinIDEVersion=20070100
 Class=App;App.xojo_code;&h31FD87FF;&h0;false
 Module=FormatCodePreferences;FormatCodePreferences.xojo_code;&h2977F6F1;&h0;false
@@ -61,4 +61,6 @@ OSXBundleID=com.mactechnologiesconsulting.kajucli
 DebuggerCommandLine=
 UseGDIPlus=False
 UseBuildsFolder=True
+CopyRedistNextToWindowsEXE=False
 IsWebProject=False
+OptimizationLevel=0
