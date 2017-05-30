@@ -73,7 +73,7 @@ Begin Window Window1
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   20
+      Left            =   13
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -86,7 +86,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   272
+      Top             =   288
       Underline       =   False
       Visible         =   True
       Width           =   129
@@ -151,7 +151,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   284
+      Top             =   300
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -389,7 +389,7 @@ Begin Window Window1
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
-      Height          =   20
+      Height          =   30
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
@@ -442,7 +442,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   223
+      Top             =   232
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -635,7 +635,6 @@ End
 			"7 - Global Floating Window"
 			"8 - Sheet Window"
 			"9 - Metal Window"
-			"10 - Drawer Window"
 			"11 - Modeless Dialog"
 		#tag EndEnumValues
 	#tag EndViewProperty
