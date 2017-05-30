@@ -46,6 +46,19 @@ Protected Class UpdateInitiater
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Function GetAppVersionForScript() As String
+		  dim thisVersion as string = Kaju.AppVersionString
+		  if Target32Bit then
+		    thisVersion = thisVersion + Kaju.kBitMarker32Bit
+		  elseif Target64Bit then
+		    thisVersion = thisVersion + Kaju.kBitMarker64Bit
+		  end if
+		  
+		  return thisVersion
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Function GetManifest(sourceFolder As FolderItem, excludeName As String) As String()
 		  // Retrieves the names of the files and folders contained in the sourceFolder
 		  // except for the excluded name and .DS_Store
@@ -127,9 +140,14 @@ Protected Class UpdateInitiater
 		  //
 		  dim executable as FolderItem = App.ExecutableFile
 		  
+		  //
+		  // We are going to tack the bitness onto the version
+		  //
+		  dim thisVersion as string = GetAppVersionForScript
+		  
 		  script = script.ReplaceAll( kMarkerAppName, ShellQuote( executable.Name ) )
 		  script = script.ReplaceAll( kMarkerAppParent, ShellPathQuote( executable.Parent ) )
-		  script = script.ReplaceAll( kMarkerAppVersion, ShellQuote( Kaju.AppVersionString ) )
+		  script = script.ReplaceAll( kMarkerAppVersion, ShellQuote( thisVersion ) )
 		  script = script.ReplaceAll( kMarkerNewAppName, ShellQuote( ReplacementExecutableName ) )
 		  script = script.ReplaceAll( kMarkerNewAppParent, ShellPathQuote( ReplacementAppFolder ) )
 		  script = script.ReplaceAll( kMarkerTempFolder, ShellPathQuote( TempFolder ) )
@@ -208,9 +226,14 @@ Protected Class UpdateInitiater
 		    ReplacementAppFolder.Name = appFolderItem.Name
 		  end if
 		  
+		  //
+		  // We are going to tack the bitness onto the version
+		  //
+		  dim thisVersion as string = GetAppVersionForScript
+		  
 		  script = script.ReplaceAll( kMarkerAppName, ShellQuote( appFolderItem.Name ) )
 		  script = script.ReplaceAll( kMarkerAppParent, ShellPathQuote( appFolderItem.Parent ) )
-		  script = script.ReplaceAll( kMarkerAppVersion, ShellQuote( Kaju.AppVersionString ) )
+		  script = script.ReplaceAll( kMarkerAppVersion, ShellQuote( thisVersion ) )
 		  script = script.ReplaceAll( kMarkerNewAppName, ShellQuote( ReplacementAppFolder.Name ) )
 		  script = script.ReplaceAll( kMarkerNewAppParent, ShellPathQuote( ReplacementAppFolder.Parent ) )
 		  script = script.ReplaceAll( kMarkerTempFolder, ShellPathQuote( TempFolder ) )
@@ -267,9 +290,14 @@ Protected Class UpdateInitiater
 		  //
 		  dim executable as FolderItem = App.ExecutableFile
 		  
+		  //
+		  // We are going to tack the bitness onto the version
+		  //
+		  dim thisVersion as string = GetAppVersionForScript
+		  
 		  script = script.ReplaceAll( kMarkerAppName, executable.Name )
 		  script = script.ReplaceAll( kMarkerAppParent, ShellPathQuote( executable.Parent ) )
-		  script = script.ReplaceAll( kMarkerAppVersion, Kaju.AppVersionString )
+		  script = script.ReplaceAll( kMarkerAppVersion, thisVersion )
 		  script = script.ReplaceAll( kMarkerNewAppName, ReplacementExecutableName )
 		  script = script.ReplaceAll( kMarkerNewAppParent, ShellPathQuote( ReplacementAppFolder ) )
 		  script = script.ReplaceAll( kMarkerTempFolder, ShellPathQuote( TempFolder ) )

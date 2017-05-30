@@ -96,14 +96,32 @@ Protected Module Kaju
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
-		Protected Function DidLastUpdateSucceed(ByRef fromVersion As String) As Boolean
-		  dim marker as string = kSwitchUpdateSucceeded
+		Protected Function DidLastUpdateSucceed(ByRef fromVersion As String, ByRef fromBits As Kaju.BitTypes) As Boolean
+		  dim switchMarker as string = kSwitchUpdateSucceeded
 		  dim args as string = System.CommandLine
-		  dim pos as integer = args.InStrB( marker )
+		  
+		  dim pos as integer = args.InStrB( switchMarker )
 		  
 		  if pos <> 0 then
-		    fromVersion = args.MidB( pos + marker.LenB + 1 )
+		    fromVersion = args.MidB( pos + switchMarker.LenB + 1 )
 		    fromVersion = fromVersion.Trim
+		    
+		    //
+		    // Get the bits
+		    //
+		    dim bitMarkers() as string = array( kBitMarker32Bit, kBitMarker64Bit )
+		    dim bitTypes() as Kaju.BitTypes = array( Kaju.BitTypes.Bits32, Kaju.BitTypes.Bits64 )
+		    
+		    fromBits = Kaju.BitTypes.Unknown // Assume this
+		    for i as integer = 0 to bitMarkers.Ubound
+		      dim bitMarker as string = bitMarkers( i )
+		      if fromVersion.RightB( bitMarker.LenB ) = bitMarker then
+		        fromBits = bitTypes( i )
+		        fromVersion = fromVersion.LeftB( fromVersion.LenB - bitMarker.LenB )
+		        exit for i
+		      end if
+		    next
+		    
 		    return true
 		  else
 		    return false
@@ -462,6 +480,12 @@ Protected Module Kaju
 	#tag EndNote
 
 
+	#tag Constant, Name = kBitMarker32Bit, Type = String, Dynamic = False, Default = \"_32-bit", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kBitMarker64Bit, Type = String, Dynamic = False, Default = \"_64-bit", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = kSwitchUpdateFailed, Type = String, Dynamic = False, Default = \"--kaju-fail", Scope = Private
 	#tag EndConstant
 
@@ -473,6 +497,13 @@ Protected Module Kaju
 
 	#tag Constant, Name = Version, Type = String, Dynamic = False, Default = \"2.0", Scope = Protected
 	#tag EndConstant
+
+
+	#tag Enum, Name = BitTypes, Type = Integer, Flags = &h1
+		Unknown=0
+		  Bits32
+		Bits64
+	#tag EndEnum
 
 
 	#tag ViewBehavior
