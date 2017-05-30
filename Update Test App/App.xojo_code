@@ -2,6 +2,15 @@
 Protected Class App
 Inherits Application
 	#tag Event
+		Sub Close()
+		  // The App.UpdateInitiater's Destructor should fire automatically on quit,
+		  // but sometimes it doesn't, so we force the issue here.
+		  
+		  App.UpdateInitiater = nil
+		End Sub
+	#tag EndEvent
+
+	#tag Event
 		Sub Open()
 		  mPrefFolder = SpecialFolder.ApplicationData.Child( "Kaju Update Test" )
 		  if not mPrefFolder.Exists then
