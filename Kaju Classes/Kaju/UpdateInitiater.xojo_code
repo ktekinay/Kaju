@@ -82,7 +82,7 @@ Protected Class UpdateInitiater
 		      Kaju.DeleteRecursive( tempFolder )
 		    end if
 		    tempFolder.CreateAsFolder
-		  #elseif TargetWin32 then
+		  #elseif TargetWindows then
 		    dim parent as FolderItem = App.ExecutableFile.Parent
 		    dim folderName as string = App.ExecutableFile.Name + "-tempfolder"
 		    tempFolder = parent.Child( folderName )
@@ -351,7 +351,7 @@ Protected Class UpdateInitiater
 
 	#tag Method, Flags = &h21
 		Private Function ShellPathQuote(f As FolderItem) As String
-		  #if TargetWin32 then
+		  #if TargetWindows then
 		    const kSlash = "\"
 		  #else
 		    const kSlash = "/"
@@ -365,7 +365,7 @@ Protected Class UpdateInitiater
 		  wend
 		  s = s.Left( properLen )
 		  
-		  #if not TargetWin32 then
+		  #if not TargetWindows then
 		    s = ShellQuote( s )
 		  #endif
 		  
@@ -376,7 +376,7 @@ Protected Class UpdateInitiater
 
 	#tag Method, Flags = &h21
 		Private Function ShellQuote(s As String) As String
-		  #if TargetWin32 then
+		  #if TargetWindows then
 		    
 		    s = """" + s + """"
 		    

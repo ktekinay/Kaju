@@ -239,7 +239,7 @@ Inherits Kaju.Information
 			  #if TargetMacOS
 			    binary = Binaries.Lookup( kMacBinaryName, nil )
 			    
-			  #elseif TargetWin32
+			  #elseif TargetWindows
 			    binary = Binaries.Lookup( kWindowsBinaryName, nil )
 			    
 			  #elseif TargetLinux
@@ -262,7 +262,7 @@ Inherits Kaju.Information
 			  #if TargetMacOS
 			    binary = Binaries.Lookup( kMacBinaryName, nil )
 			    
-			  #elseif TargetWin32 
+			  #elseif TargetWindows
 			    binary = Binaries.Lookup( kWindowsBinary64Name, nil )
 			    
 			  #elseif TargetLinux

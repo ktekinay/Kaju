@@ -261,7 +261,7 @@ Protected Class UpdateChecker
 		    
 		    r = true // If this app can run, it has the right tools
 		    
-		  #elseif TargetWin32 then
+		  #elseif TargetWindows then
 		    
 		    dim sh as new Shell
 		    sh.Execute "XCOPY /?"

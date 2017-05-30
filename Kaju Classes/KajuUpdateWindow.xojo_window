@@ -624,23 +624,23 @@ End
 		    faded.Transparent = Picture.TransparentWhite
 		    
 		    const kTransparencyPercent = 50.0
-		    #if TargetWin32 then
+		    #if TargetWindows then
 		      if App.UseGDIPlus then
 		    #endif
 		    faded.Graphics.Transparency = kTransparencyPercent
-		    #if TargetWin32 then
+		    #if TargetWindows then
 		  end if
 		  #endif
 		  
 		  faded.Graphics.DrawPicture( p, 0, 0 )
 		  
-		  #if TargetWin32 then
+		  #if TargetWindows then
 		    if App.UseGDIPlus then
 		  #endif
 		  dim mask as new Picture( p.Width, p.Height )
 		  mask.Graphics.DrawPicture( p.Mask, 0, 0 )
 		  faded.Mask = mask
-		  #if TargetWin32 then
+		  #if TargetWindows then
 		    end if
 		  #endif
 		  
@@ -1115,7 +1115,7 @@ End
 		    lblInstallMessage.Text = KajuLocale.kProcessingFileMessage
 		    
 		    dim targetFolder as FolderItem
-		    #if TargetWin32 then
+		    #if TargetWindows then
 		      dim targetFolderName as string = SelectedUpdate.AppName + "- decompressed"
 		      targetFolder = App.ExecutableFile.Parent
 		      targetFolder = targetFolder.Child( targetFolderName )
