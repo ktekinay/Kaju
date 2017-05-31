@@ -29,11 +29,13 @@ Inherits Kaju.Information
 	#tag Method, Flags = &h1021
 		Private Sub Constructor()
 		  // Must use one of the other contructors
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h1000
 		Sub Constructor(executableNameRequired As Boolean)
+		  self.Constructor
 		  IsExecutableNameRequired = executableNameRequired
 		End Sub
 	#tag EndMethod

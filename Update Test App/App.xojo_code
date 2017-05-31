@@ -2,6 +2,15 @@
 Protected Class App
 Inherits Application
 	#tag Event
+		Sub Close()
+		  // The App.UpdateInitiater's Destructor should fire automatically on quit,
+		  // but sometimes it doesn't, so we force the issue here.
+		  
+		  App.UpdateInitiater = nil
+		End Sub
+	#tag EndEvent
+
+	#tag Event
 		Sub Open()
 		  mPrefFolder = SpecialFolder.ApplicationData.Child( "Kaju Update Test" )
 		  if not mPrefFolder.Exists then
@@ -12,8 +21,42 @@ Inherits Application
 		  // See if this was a launch after an attempted update
 		  //
 		  dim fromVersion as string
-		  if Kaju.DidLastUpdateSucceed( fromVersion ) then
-		    MsgBox "You have successfully updated from version " + fromVersion + "."
+		  dim fromBits as Kaju.BitTypes
+		  
+		  if Kaju.DidLastUpdateSucceed( fromVersion, fromBits ) then
+		    dim mustQuit as boolean
+		    
+		    dim msg as string = "You have successfully updated from version " + fromVersion // Add the "." below
+		    
+		    //
+		    // See if the bits have changed
+		    //
+		    dim explanation as string
+		    if ( fromBits = Kaju.BitTypes.Bits32 and Target64Bit ) or _
+		      ( fromBits = Kaju.BitTypes.Bits64 and Target32Bit ) then
+		      msg = msg + " " + if( Target32Bit, " (64-bit)", " (32-bit)" )
+		      
+		      #if not TargetMacOS then
+		        mustQuit = true
+		        explanation = "Due to the nature of this update, you must relaunch the app manually. " + _
+		        "This only happens when you switch from a 32-bit to 64-bit version, or vice-versa."
+		      #endif
+		    end if
+		    
+		    msg = msg + "."
+		    
+		    dim dlg as new MessageDialog
+		    dlg.Message = msg
+		    dlg.Explanation = explanation
+		    dlg.ActionButton.Caption = if( mustQuit, "Quit", "Cool!" )
+		    dlg.CancelButton.Visible = false
+		    dlg.AlternateActionButton.Visible = false
+		    
+		    call dlg.ShowModal
+		    if mustQuit then
+		      quit
+		    end if
+		    
 		  elseif Kaju.DidLastUpdateFail then
 		    MsgBox "The last update failed. Please try again."
 		  end if

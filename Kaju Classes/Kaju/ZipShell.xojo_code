@@ -82,7 +82,7 @@ Inherits Shell
 		    mCurrentOperation = Operation.Decompressing
 		  end if
 		  
-		  #if TargetWin32 then
+		  #if TargetWindows then
 		    
 		    WindowsUnzip( file, toFolder )
 		    
@@ -136,7 +136,7 @@ Inherits Shell
 
 	#tag Method, Flags = &h21
 		Private Sub WindowsUnzip(zipFile As FolderItem, extractTo As FolderItem)
-		  #if TargetWin32 then
+		  #if TargetWindows then
 		    
 		    dim zipFilePath as string = zipFile.NativePath
 		    dim extractToPath as string = extractTo.NativePath

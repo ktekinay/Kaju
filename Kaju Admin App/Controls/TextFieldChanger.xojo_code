@@ -3,7 +3,7 @@ Protected Class TextFieldChanger
 Inherits TextField
 	#tag Event
 		Sub TextChange()
-		  self.Window.ContentsChanged = true
+		  self.TrueWindow.ContentsChanged = true
 		  RaiseEvent TextChange()
 		End Sub
 	#tag EndEvent
@@ -122,6 +122,7 @@ Inherits TextField
 			Visible=true
 			Group="ID"
 			Type="Integer"
+			EditorType="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Italic"
@@ -177,6 +178,7 @@ Inherits TextField
 			Visible=true
 			Group="ID"
 			Type="String"
+			EditorType="String"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Password"
@@ -195,6 +197,7 @@ Inherits TextField
 			Visible=true
 			Group="ID"
 			Type="String"
+			EditorType="String"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TabIndex"

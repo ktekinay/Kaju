@@ -1,6 +1,6 @@
 # README
 
-A Xojo module and Admin app to enable self-updating Xojo apps.
+A Xojo module and Admin apps to enable self-updating Xojo apps.
 
 ## General Information
 
@@ -16,7 +16,9 @@ Open the included Admin App or Test App, copy the Kaju Classes folder, then past
 
 You need to add one property to your App class, `UpdateInitiater As Kaju.UpdateInitiater`. Kaju expects to find that and will handle it for you.
 
-The only special code you'll need is in the `CancelClose` event of any window where the close is actually being cancelled, i.e., where you have the event return `True`. In those cases, you must call `Kaju.CancelUpdate`. (It doesn't matter if there is an update scheduled at the time.) This will prevent an update from happening if the user quits later without choosing Quit & Install again. That code should look something like this:
+**Important**: Kaju does its magic by launching a command-line script when the `UpdateInitiater` gets set to `Nil`, which should happen when the app quits. Unfortunately, that's not always true so you should force the issue by inserting `App.UpdateInitiater = Nil` into your `App.Close` event.
+
+The only other special code you'll need is in the `CancelClose` event of any window where the close is actually being cancelled, i.e., where you have the event return `True`. In those cases, you must call `Kaju.CancelUpdate`. (It doesn't matter if there is an update scheduled at the time.) This will prevent an update from happening if the user quits later without choosing Quit & Install again. That code should look something like this:
 
 ```Xojo
 Event CancelClose(appQuitting As Boolean) As Boolean
@@ -28,6 +30,10 @@ Event CancelClose(appQuitting As Boolean) As Boolean
 	return true
 End Event
 ```
+
+If you plan to allow 32-bit to 64-bit updates on Windows and Linux, you must include code that will force the user to manually relaunch the app after such an update.
+
+<a name='warning64bit'></a>**Important**: Due to limitations in the Windows and Linux OS's, a 64-bit app that is launched after an update from the 32-bit version will not work properly. The user must manually start the new app, so your code should warn them and force the app to quit. There is example code in the Kaju Update Test project.
 
 ### Implementation
 
@@ -44,6 +50,8 @@ To discover what `UpdateChecker` found, you can check the `Result` method after 
 Kaju will work the same way on Mac, Windows, and Linux. All recent versions of MacOS and Linux should be supported. Windows Vista and later are supported.
 
 If Kaju cannot find the tools it needs, the `Result` will be set to `UnsupportedOS` after you call `Execute`.
+
+**Important**: Recent Linus distros do not have the libraries needed to show the `HTMLViewer` in 32-bit apps. Kaju will report an error in those cases and will not show the release notes, but the update will still work.
 
 ## What Else?
 
@@ -90,7 +98,7 @@ On Windows and Linux, since executable folders can be combined, only the files t
 ## Step By Step
 
 * Copy the Kaju Classes folder into your project.
-* Add to your App instance the property `UpdateInitiater As Kaju.UpdateInitiater`. You do not need to do anything more with this property.
+* Add to your App instance the property `UpdateInitiater As Kaju.UpdateInitiater`. In the `App.Close` event, insert `App.UpdateInitiater = Nil`. You do not need to do anything more with this property.
 * Run the Kaju Admin app through the included project and save a new document with an appropriate name, something like "MyApp v.1.kaju". You don't have to add any updates at this time.
 * Copy the RSA public key with the appropriate button. A key pair is generated every time a new document is created and it is this key that will ensure that your app is getting legitimate, uncorrupted update information. **Do not lose this file after releasing your app!** If you do, users of older versions will no longer be able to update.
 * In an appropriate place within your project, add code that looks something like this:
@@ -102,6 +110,8 @@ updater.UpdateURL = "http://www...." // Where the update info will be posted
 
 updater.Execute
 ```
+
+* If you expect to allow 32-bit to 64-bit updates on Windows or Linux, insert code into `App.Open` that will force the user to manually restart the app if such an update is detected. See the Kaju Update Test app project code for an example.
 
 At a bare minimum, that's it.
 
@@ -117,6 +127,8 @@ Add an entry for each *current* version of your app. You do not need a history s
 
 The release notes are created in HTML and some simple tools are provided for making that a bit easier. You can see a preview of the release notes as a you type and use the Preview button to see how Kaju will present the update window under various circumstances. The HTML can be as simple or as complex as you'd like.
 
+Alternatively, you can pull your release notes from a server by setting the first line to a URL. Anything after the first line will be used as an alternate if the URL can't be reached or has no content. (But note: Older apps with Kaju 1.x will see the text of the release notes including the URL at the top.)
+
 **Note**: WebKit is used on all platforms to ensure consistency. This will increase the size of your project on Windows and Linux.
 
 ### Links In Release Notes
@@ -127,11 +139,15 @@ Links in the release notes will be ignored *unless* you include `target="_blank"
 
 Your compiled apps for each platform must be zipped and named appropriately. For the Mac, zip the application. For the other platforms, zip the folder that contains the executable and supporting folders.
 
-For each version in your admin file, check each platform to which it applies, provide the URL where that binary will be found, then drop each binary onto the appropriate field to calculate its hash. You can also post the binary to your web site, enter the URL, then use the button to calculate the hash from the URL. (It will download the binary, calculate the hash, then delete it.)
+For each version in your admin file, check the checkbox for each platform to which it applies, provide the URL where that binary will be found, then drop each binary onto the appropriate field to calculate its hash. You can also post the binary to your web site, enter the URL, then use the button to calculate the hash from the URL. (It will download the binary, calculate the hash, then delete it.)
 
 **Note**: If the URL to a binary starts with "https:", a secure connection will be used automatically.
 
 For Windows and Linux, you must also provide the exact name of the executable. If your app is called "My Great App", the Linux executable name will be "My Great App" and the Windows name will be "My Great App.exe".
+
+### About 64-bit
+
+Kaju will allow you to specify 64-bit versions for Windows and Linux. If available, and if the `UpdateChecker.Allow32bitTo64bitUpdates` is `True`, the users of your 32-bit version will be given the option to upgrade to the next version as 64-bit. *But* see <a href='#warning64bit'>the warning above</a> in that case.
 
 ## The CLI Admin App
 
@@ -141,7 +157,11 @@ To use it, open the Kaju Admin CLI project, compile it, then, from the command l
 
 	kaju --help
 
-(I'm assuming you already know how to use command-line utilities.) The online help should give you all the information you need.
+(I'm assuming you already know how to use command-line utilities.) There are subapps that will let you perform various actions and the top-level help will list those. To get help on a subapp, type
+
+	kaju <subapp> --help
+
+The online help should give you all the information you need.
 
 ## JSON Specs
 
@@ -162,6 +182,14 @@ The JSON will contain these fields for each version.
 		URL                        (string)
 		Hash                       (string)
 	LinuxBinary                    (dictionary)
+		ExecutableName
+		URL                        (string)
+		Hash                       (string)
+	WindowsBinary64bit             (dictionary)
+		ExecutableName
+		URL                        (string)
+		Hash                       (string)
+	LinuxBinary64bit               (dictionary)
 		ExecutableName
 		URL                        (string)
 		Hash                       (string)
@@ -194,13 +222,25 @@ A sample JSON that will be returned by the server:
 				"URL" : "http://www.site.com/download_path_Linux" ,
 				"Hash" : "ABC123"
 			} ,
+		"WindowsBinaryb4bit" :
+			{
+				"ExecutableName" : "My App.exe" ,
+				"URL" : "http://www.site.com/download_path_Win_64" ,
+				"Hash" : "ABC12B3"
+			} ,
+		"LinuxBinary64bit" :
+			{
+				"ExecutableName" : "My App" ,
+				"URL" : "http://www.site.com/download_path_Linux_64" ,
+				"Hash" : "ABC12C"
+			} ,
 		"ImageURL" : "http://www.site.com/image.png" ,
 		"UseTransparency" : true
 	} ,
 	{
 		"AppName" : "My App" ,
 		"Version" : "6.1b4" ,
-		"ReleaseNotes" : "The beta release notes" ,
+		"ReleaseNotes" : "http://link/to/release/notes" ,
 		"MacBinary" : 
 			{
 				"URL" : "http://www.site.com/other_download_path" ,
@@ -231,7 +271,7 @@ The "RequiresPayment" flag can be used to warn users of paid updates. For exampl
 
 ## General Recommendations
 
-We recommend that the latest version of any line use a static URL. For example, even if your app is at version 5.5, name the zipped file something like "My_App_5_Mac.zip" and place it in the My_App/v5/ folder on your web server. When you release version 6, name it "My_App_6_Mac.zip" and put it in the My_App/v6/ folder on the server. That way, no matter when the user chooses to update, the same URL will always lead them to the latest version.
+We recommend that the latest version of any line use a static URL. For example, even if your app is at version 5.5, name the zipped file something like "My\_App\_5\_Mac.zip" and place it in the My\_App/v5/ folder on your web server. When you release version 6, name it "My\_App\_6\_Mac.zip" and put it in the My_App/v6/ folder on the server. That way, no matter when the user chooses to update, the same URL will always lead them to the latest version.
 
 ## The Classes
 
@@ -243,6 +283,7 @@ There is also a `Kaju.Version` constant (introduced in v.1.4) that will let you 
 
 |Property|Type|Description|Required|
 |:---|:---:|:---|---:|
+|Allow32bitTo64bitUpdates|Boolean|If `True`, will offer the user of a 32-bit app the option to upgrade to the 64-bit version, if available.|n|
 |AllowedInteraction|UInt32|Determines what windows Kaju is allowed to display; Use the available constants|n|
 |AllowedStage|Integer|What stage of updates the user may see (App.Final, App.Beta, App.Alpha, or App.Development)|n|
 |AllowRedirection|Boolean|If `True`, the `UpdateURL` may redirect to another URL (default: `False`)|n|
@@ -271,7 +312,7 @@ There is also a `Kaju.Version` constant (introduced in v.1.4) that will let you 
 |:---|:---|
 |CancelUpdate|Cancels any pending update; use in your windows' CancelClose event|
 |DidLastUpdateFail As Boolean|Returns `True` if this launch is a result of a failed update|
-|DidLastUpdateSucceed(ByRef fromVersion As String) As Boolean|Returns `True` and supplies the old version if this launch is the result of a successful update|
+|DidLastUpdateSucceed(ByRef fromVersion As String, ByRef fromBits As Kaju.BitTypes) As Boolean|Returns `True` and supplies the old version and bits if this launch is the result of a successful update|
 
 There are other methods in the Kaju module that you might find useful but we are not documenting them.
 
@@ -287,7 +328,7 @@ This project was designed and implemented by:
 * Luke Cowgar (lcowgar at advancedpricing.com)
 * Jeremy Cowgar (jeremy at cowgar.com)
 
-With thanks to John Hansen, Paul Lefebvre, and Scott Boss.
+With thanks to John Hansen, Paul Lefebvre, Scott Boss, and Vidal van Bergen.
 
 Translations to other languages by:
 
@@ -296,6 +337,7 @@ Translations to other languages by:
 * Julen Ibarretxe Uriguen (Spanish)
 * Heikki Ohvo (Finnish)
 * Manuel Romei (Italian)
+* Vidal van Bergen (Dutch)
 
 With special thanks to [Advanced Medical Pricing Solutions, Inc.](http://www.advancedpricing.com) for making this possible.
 
@@ -334,91 +376,105 @@ Add a translation for each, then submit a pull request as outlined above.
 
 ## Release Notes
 
-1.0 (Jan. 5, 2015)
+2.0 (___, 2017)
 
-- Initial release.
-
-1.0.1 (Jan. 5, 2015)
-
-- Fixed redirect bug.
-- The URL will set Secure and the Port (can override in the URL itself).
-
-1.1 (Jan. 11, 2015)
-
-- Moved user-presented strings to KajuLocale module for easier translation.
-- Fixed bug where the app name was not being presented in the Update window.
-- Changed behavior of how the "A never version of..." message is presented in the Update window.
-- Added German translation.
-
-1.2 (Jan. 12, 2015)
-
-- Added timeout timer for downloads.
-- Fixed transparency issue on Windows.
-- Fixed some German translations.
-- Added French translation.
-
-1.2.1 (Jan. 13, 2015)
-
-- Added Spanish translation.
-
-1.3 (Jan. 13, 2015)
-
-- Final versions can use the non-release number as a build number.
-- Fixed translations that were marked as "default".
-
-1.3.1 (Jan. 13, 2015)
-
-- Fixed bug that prevented MinimumRequiredVersion from working.
-
-1.3.2 (Jan. 15, 2015)
-
-- Fixed Admin app bugs.
-- Download progress bar will now update properly on all platforms.
-
-1.3.3 (Jan. 22, 2015)
-
-- Fixed bug in conversion of release version to double.
-
-1.4 (Feb. 14, 2015)
-
-- Added /g switch to XCOPY in Windows script.
-- When the app relaunches after an update or failed update, will get command-line switches telling it what happened. Added Kaju methods to report.
-- URL's for both the update information and the downloads can specify a username and password in the form "http://un:pw@theurl.com".
-- Added Kaju.Version constant.
-
-1.4.1 (Feb. 18, 2015)
-
-- **Admin app**: Lock "From URL" buttons to the right of the window.
-- Added Finnish translation.
-
-1.5 (June 3, 2015)
-
-- **Admin app**: Enable substitution of `$VERSION$` in binary URL's.
-
-1.5.1 (June 19, 2015)
-
-- **Admin app**: Fixed tab order of controls.
-- **Admin app**: Retinized!
-- Added what should be an unneeded, but apparently necessary, GOTO to the Windows script.
-
-1.5.2 (July 17, 2015)
-
-- Added Italian translation.
-
-1.5.3 (July 20, 2015)
-
-- **Admin app**: Split the file settings from the Admin window so a file can be manipulated independently.
-- **Admin app**: Save the last export file name to suggest it for the next export.
-
-1.6 (August 18, 2015)
-
-- Can override the preference file name when creating the UpdateChecker object.
-- Introduced command line project (CLI).
+* **CLI**: Made help prettier.
+* **Admin GUI**: Use a temp file for the LoadPage "relativeTo" parameter.
+* **KajuUpdateWindow**: Delete the temp file used for the LoadPage "relativeTo" parameter on close.
+* Added Dutch translation.
+* **KajuUpdateWindow**: If an exception is raised while displaying the release notes, any exception message will be added to the dialog text.
+* Ability to load release notes through a URL.
+* **Admin GUI**: Fixed Dupe button.
+* Added support for 64-bit binaries.
+* **Kaju**: Changed parameters of `DidLastUpdateSucceed` to report the "bit-ness" of the version that initiated the update. 
+* **Test App**: Use better technique for compressing Windows and Linux executables.
 
 1.6.1 (August 27, 2015)
 
-- **CLI**: Better handling of remote debugging.
-- **CLI**: listversions now has --include and --exclude switches that take regex patterns.
-- **Admin**: Prevent Save or Export if the file includes duplicate version numbers.
-- **CLI**: Disallow adding duplicate version number or changing an existing version number so it becomes a duplicate.
-- **Test App**: Created Build Script to automatically update the Kaju files after building.
+* **CLI**: Better handling of remote debugging.
+* **CLI**: listversions now has --include and --exclude switches that take regex patterns.
+* **Admin**: Prevent Save or Export if the file includes duplicate version numbers.
+* **CLI**: Disallow adding duplicate version number or changing an existing version number so it becomes a duplicate.
+* **Test App**: Created Build Script to automatically update the Kaju files after building.
+
+1.6 (August 18, 2015)
+
+* Can override the preference file name when creating the UpdateChecker object.
+* Introduced command line project (CLI).
+
+1.5.3 (July 20, 2015)
+
+* **Admin app**: Split the file settings from the Admin window so a file can be manipulated independently.
+* **Admin app**: Save the last export file name to suggest it for the next export.
+
+1.5.2 (July 17, 2015)
+
+* Added Italian translation.
+
+1.5.1 (June 19, 2015)
+
+* **Admin app**: Fixed tab order of controls.
+* **Admin app**: Retinized!
+* Added what should be an unneeded, but apparently necessary, GOTO to the Windows script.
+
+1.5 (June 3, 2015)
+
+* **Admin app**: Enable substitution of `$VERSION$` in binary URL's.
+
+1.4.1 (Feb. 18, 2015)
+
+* **Admin app**: Lock "From URL" buttons to the right of the window.
+* Added Finnish translation.
+
+1.4 (Feb. 14, 2015)
+
+* Added /g switch to XCOPY in Windows script.
+* When the app relaunches after an update or failed update, will get command-line switches telling it what happened. Added Kaju methods to report.
+* URL's for both the update information and the downloads can specify a username and password in the form "http://un:pw@theurl.com".
+* Added Kaju.Version constant.
+
+1.3.3 (Jan. 22, 2015)
+
+* Fixed bug in conversion of release version to double.
+
+1.3.2 (Jan. 15, 2015)
+
+* Fixed Admin app bugs.
+* Download progress bar will now update properly on all platforms.
+
+1.3.1 (Jan. 13, 2015)
+
+* Fixed bug that prevented MinimumRequiredVersion from working.
+
+1.3 (Jan. 13, 2015)
+
+* Final versions can use the non-release number as a build number.
+* Fixed translations that were marked as "default".
+
+1.2.1 (Jan. 13, 2015)
+
+* Added Spanish translation.
+
+1.2 (Jan. 12, 2015)
+
+* Added timeout timer for downloads.
+* Fixed transparency issue on Windows.
+* Fixed some German translations.
+* Added French translation.
+
+1.1 (Jan. 11, 2015)
+
+* Moved user-presented strings to KajuLocale module for easier translation.
+* Fixed bug where the app name was not being presented in the Update window.
+* Changed behavior of how the "A never version of..." message is presented in the Update window.
+* Added German translation.
+
+1.0.1 (Jan. 5, 2015)
+
+* Fixed redirect bug.
+* The URL will set Secure and the Port (can override in the URL itself).
+
+1.0 (Jan. 5, 2015)
+
+* Initial release.
+

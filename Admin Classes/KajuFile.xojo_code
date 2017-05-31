@@ -29,8 +29,7 @@ Protected Class KajuFile
 		  //
 		  // Perform $VERSION$ substitutions
 		  //
-		  dim keys() as string = Array( Kaju.UpdateInformation.kMacBinaryName, Kaju.UpdateInformation.kWindowsBinaryName, _
-		  Kaju.UpdateInformation.kLinuxBinaryName )
+		  dim keys() as string = Kaju.UpdateInformation.BinaryNames
 		  
 		  dim lastVersionIndex as integer = data.Count - 1
 		  for versionIndex as integer = 0 to lastVersionIndex

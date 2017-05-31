@@ -252,7 +252,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		 Shared Function OSIsSupported() As Boolean
+		Shared Function OSIsSupported() As Boolean
 		  // Ensures that the right tools are available on the current OS
 		  
 		  dim r as boolean = true // Assume it's fine
@@ -261,7 +261,7 @@ Protected Class UpdateChecker
 		    
 		    r = true // If this app can run, it has the right tools
 		    
-		  #elseif TargetWin32 then
+		  #elseif TargetWindows then
 		    
 		    dim sh as new Shell
 		    sh.Execute "XCOPY /?"
@@ -307,7 +307,14 @@ Protected Class UpdateChecker
 		    //
 		    // See if the binary information is present
 		    //
-		    if thisInfo.PlatformBinary is nil then
+		    dim binary as Kaju.BinaryInformation
+		    if Target32Bit and Allow32bitTo64bitUpdates then
+		      binary = thisInfo.PlatformBinaryAny
+		    else
+		      binary = thisInfo.PlatformBinarySameBitness
+		    end if
+		    
+		    if binary is nil then
 		      continue for i
 		    end if
 		    
@@ -362,7 +369,13 @@ Protected Class UpdateChecker
 		  return true
 		  
 		  Exception err as RuntimeException
-		    return not HandleError( KajuLocale.kErrorBadUpdateData )
+		    if err isa EndException or err isa ThreadEndException then
+		      raise err
+		    end if
+		    
+		    System.DebugLog err.Message
+		    return not HandleError( KajuLocale.kErrorBadUpdateData + _
+		    if( err.Message <> "", " - " + err.Message, "" ) )
 		    
 		End Function
 	#tag EndMethod
@@ -487,6 +500,10 @@ Protected Class UpdateChecker
 
 
 	#tag Property, Flags = &h0
+		Allow32bitTo64bitUpdates As Boolean = True
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		AllowedInteraction As UInt32 = kAllowAll
 	#tag EndProperty
 
@@ -588,6 +605,18 @@ Protected Class UpdateChecker
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="Allow32bitTo64bitUpdates"
+			Group="Behavior"
+			InitialValue="True"
+			Type="Boolean"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AllowedInteraction"
+			Group="Behavior"
+			InitialValue="kAllowAll"
+			Type="UInt32"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AllowedStage"
 			Group="Behavior"

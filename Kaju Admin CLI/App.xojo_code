@@ -165,7 +165,7 @@ Inherits ConsoleApplication
 		      for i as integer = 1 to options.ExtrasRequired
 		        subAppUsage = subAppUsage + " /path/to/file" + Str( i )
 		      next i
-		      subAppUsage = subAppUsage + " [/path/to/file ...]"
+		      subAppUsage = subAppUsage + EndOfLine + "    [/path/to/file ...]"
 		    end if
 		  end if
 		  
@@ -173,7 +173,7 @@ Inherits ConsoleApplication
 		  print ""
 		  print "Usage:"
 		  print "  " + kAppName + " --file /path/to/admin/file " + _
-		  subAppName + if( subAppUsage <> "", " " + subAppUsage, "" ) + " [parameters]"
+		  subAppName + " [parameters]" + if( subAppUsage <> "", " " + subAppUsage.Trim, "" )
 		  
 		  if options <> nil then
 		    options.AdditionalHelpNotes = subApp.AdditionalHelp

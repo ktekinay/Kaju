@@ -162,6 +162,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   5
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Untitled"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -196,6 +197,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   6
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Untitled"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -230,6 +232,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   7
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "#KajuLocale.kReleaseNotesLabel"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -264,6 +267,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "#KajuLocale.kDownloadingMessage"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -291,7 +295,9 @@ Begin Window KajuUpdateWindow
       LockTop         =   True
       Maximum         =   0
       Scope           =   2
+      TabIndex        =   8
       TabPanelIndex   =   0
+      TabStop         =   True
       Top             =   555
       Value           =   0
       Visible         =   False
@@ -302,33 +308,27 @@ Begin Window KajuUpdateWindow
       CertificatePassword=   ""
       CertificateRejectionFile=   
       ConnectionType  =   2
+      Enabled         =   True
       ForceSecure     =   False
-      Height          =   32
       Index           =   -2147483648
       InitialParent   =   ""
-      Left            =   0
       LockedInPosition=   False
       Scope           =   2
       Secure          =   False
       TabPanelIndex   =   0
-      Top             =   0
-      Width           =   32
    End
    Begin Kaju.ZipShell shZipper
       Arguments       =   ""
       Backend         =   ""
       Canonical       =   False
-      Height          =   32
+      Enabled         =   True
       Index           =   -2147483648
       InitialParent   =   ""
-      Left            =   0
       LockedInPosition=   False
       Mode            =   1
       Scope           =   2
       TabPanelIndex   =   0
       TimeOut         =   0
-      Top             =   0
-      Width           =   32
    End
    Begin HTMLViewer hvNewWindow
       AutoDeactivate  =   True
@@ -373,6 +373,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   10
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "#KajuLocale.kVersionsLabel"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -417,17 +418,14 @@ Begin Window KajuUpdateWindow
       Width           =   101
    End
    Begin Timer tmrTimeout
-      Height          =   32
+      Enabled         =   True
       Index           =   -2147483648
       InitialParent   =   ""
-      Left            =   0
       LockedInPosition=   False
       Mode            =   0
       Period          =   5000
       Scope           =   0
       TabPanelIndex   =   0
-      Top             =   0
-      Width           =   32
    End
 End
 #tag EndWindow
@@ -450,6 +448,9 @@ End
 
 	#tag Event
 		Sub Open()
+		  RelativeToFolderItem = GetTemporaryFolderItem
+		  DeleteOnClose.Append RelativeToFolderItem
+		  
 		  #if not TargetMacOS then
 		    //
 		    // Switch the buttons around for other platforms
@@ -623,23 +624,23 @@ End
 		    faded.Transparent = Picture.TransparentWhite
 		    
 		    const kTransparencyPercent = 50.0
-		    #if TargetWin32 then
+		    #if TargetWindows then
 		      if App.UseGDIPlus then
 		    #endif
 		    faded.Graphics.Transparency = kTransparencyPercent
-		    #if TargetWin32 then
+		    #if TargetWindows then
 		  end if
 		  #endif
 		  
 		  faded.Graphics.DrawPicture( p, 0, 0 )
 		  
-		  #if TargetWin32 then
+		  #if TargetWindows then
 		    if App.UseGDIPlus then
 		  #endif
 		  dim mask as new Picture( p.Width, p.Height )
 		  mask.Graphics.DrawPicture( p.Mask, 0, 0 )
 		  faded.Mask = mask
-		  #if TargetWin32 then
+		  #if TargetWindows then
 		    end if
 		  #endif
 		  
@@ -652,22 +653,115 @@ End
 		  // Show the release notes
 		  //
 		  dim source as string = update.ReleaseNotes
-		  if source = "" then
-		    source = "<b>" + KajuLocale.kNoUpdateInfoMessage + "</b>"
-		  end if
-		  
-		  static tempFile as FolderItem = GetTemporaryFolderItem
-		  hvNotes.LoadPage( source, tempFile )
-		  
-		  #if DebugBuild then
-		    if not tempFile.Exists then
-		      break
-		    end if
-		  #endif
+		  source = Kaju.ProcessReleaseNotes( source )
+		  hvNotes.LoadPage( source, RelativeToFolderItem )
 		  
 		  //
 		  // hvNotes.CancelLoad will set self.Loading back to false
 		  //
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub HandleOKButton()
+		  select case CurrentStage
+		  case Stage.ChoosingUpdate
+		    //
+		    // The update has been chosen
+		    //
+		    
+		    SelectedUpdate = nil
+		    SelectedBinary = nil
+		    
+		    if true then // Scope
+		      dim chosen as Kaju.UpdateInformation = pumUpdates.RowTag( pumUpdates.ListIndex )
+		      dim binary as Kaju.BinaryInformation = UserSelectsBinary( chosen )
+		      if binary is nil then
+		        return
+		      end if
+		      
+		      if not UserConfirmsRequiredPayment( chosen ) then
+		        return
+		      end if
+		      
+		      SelectedUpdate = chosen
+		      SelectedBinary = binary
+		    end if
+		    
+		    btnOK.Enabled = false
+		    
+		    btnCancel.Caption = KajuLocale.kStopButton
+		    
+		    btnSkipVersion.Visible = false
+		    pbProgress.Visible = true
+		    lblInstallMessage.Visible = true
+		    
+		    pumUpdates.Enabled = false
+		    
+		    CurrentStage = Stage.InstallingUpdate
+		    
+		    if Checker.DryRun then
+		      
+		      lblInstallMessage.Text = KajuLocale.kDryRunMessage
+		      
+		    else
+		      
+		      lblInstallMessage.Text = KajuLocale.kDownloadingMessage
+		      
+		      dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
+		      DeleteOnCancel.Append tempFolder
+		      
+		      DownloadFile = tempFolder.Child( SelectedBinary.FileName )
+		      DeleteOnClose.Append DownloadFile
+		      
+		      dim url as string = SelectedBinary.URL
+		      
+		      //
+		      // Check for redirection
+		      //
+		      url = hsSocket.GetRedirectAddress( url, 5 )
+		      
+		      //
+		      // Start the download
+		      //
+		      hsSocket.Get( url, DownloadFile )
+		      
+		      //
+		      // Start the timeout timer
+		      //
+		      tmrTimeout.Reset
+		      tmrTimeout.Mode = Timer.ModeSingle
+		      
+		    end if
+		    
+		  case Stage.WaitingToQuit
+		    //
+		    // The user chose Quit & Install
+		    //
+		    
+		    Kaju.StartUpdate( self.Initiater )
+		    
+		    //
+		    // Move this window to the back
+		    //
+		    dim lastWindowIndex as integer = WindowCount - 1
+		    if not( Window( lastWindowIndex ) Is self ) then
+		      dim showIndex as integer = lastWindowIndex
+		      for windowIndex as integer = lastWindowIndex downto 0
+		        dim w as Window = Window( showIndex )
+		        if w Is self then
+		          showIndex = showIndex - 1
+		        else
+		          w.Show
+		        end if
+		      next
+		    end if
+		    
+		    Quit
+		    
+		  end
+		  
 		  
 		End Sub
 	#tag EndMethod
@@ -714,6 +808,80 @@ End
 		  
 		  #pragma unused parentWindow
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function UserConfirmsRequiredPayment(update As Kaju.UpdateInformation) As Boolean
+		  if update.RequiresPayment then
+		    dim dlg as new MessageDialog
+		    dlg.ActionButton.Visible = true
+		    dlg.ActionButton.Caption = KajuLocale.kProceedButton
+		    dlg.CancelButton.Visible = true
+		    dlg.Message = KajuLocale.kPaymentRequiredMessage
+		    dim btn as MessageDialogButton = dlg.ShowModalWithin( self )
+		    
+		    if btn is dlg.CancelButton then
+		      return false
+		    end if
+		  end if
+		  
+		  return true
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function UserSelectsBinary(update As Kaju.UpdateInformation) As Kaju.BinaryInformation
+		  //
+		  // Make sure we pick the right binary from the update
+		  //
+		  
+		  if TargetMacOS or Target64Bit or not Checker.Allow32bitTo64bitUpdates then
+		    return update.PlatformBinarySameBitness
+		  elseif update.PlatformBinary64bit is nil then
+		    return update.PlatformBinary32bit
+		  else
+		    //
+		    // The current is 32-bit and either both binaries exist or only the 64-bit exists
+		    // Let the user choose
+		    //
+		    
+		    dim b32 as Kaju.BinaryInformation = update.PlatformBinary32bit
+		    dim b64 as Kaju.BinaryInformation = update.PlatformBinary64bit
+		    
+		    dim msg as string 
+		    if b32 is nil then
+		      msg = KajuLocale.kChoose64bitMessage
+		    else
+		      msg = KajuLocale.kChooseBetweenBitsMessage
+		    end if
+		    msg = KajuLocale.kCurrenlyUsing32bitMessage + " " + msg
+		    
+		    dim dlg as new MessageDialog
+		    dlg.Message = msg
+		    dlg.Explanation = KajuLocale.kExplain64bitMessage
+		    if b32 is nil then
+		      dlg.ActionButton.Caption = KajuLocale.kProceedButton
+		      dlg.ActionButton.Visible = true
+		      dlg.AlternateActionButton.Visible = false
+		    else
+		      dlg.ActionButton.Caption = KajuLocale.kUse32bitLabel
+		      dlg.ActionButton.Visible = true
+		      dlg.AlternateActionButton.Caption = KajuLocale.kUse64bitLabel
+		      dlg.AlternateActionButton.Visible = true
+		    end if
+		    dlg.CancelButton.Caption = KajuLocale.kCancelButton
+		    dlg.CancelButton.Visible = true
+		    
+		    dim btn as MessageDialogButton = dlg.ShowModalWithin( self )
+		    if btn is nil or btn is dlg.CancelButton then
+		      return nil
+		    elseif b32 is nil or btn is dlg.AlternateActionButton then
+		      return b64
+		    else
+		      return b32
+		    end if
+		  end if
+		End Function
 	#tag EndMethod
 
 
@@ -793,6 +961,14 @@ End
 		Private mBackgroundImage As Picture
 	#tag EndProperty
 
+	#tag Property, Flags = &h21
+		Private RelativeToFolderItem As FolderItem
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private SelectedBinary As Kaju.BinaryInformation
+	#tag EndProperty
+
 	#tag Property, Flags = &h0
 		SelectedUpdate As Kaju.UpdateInformation
 	#tag EndProperty
@@ -836,103 +1012,7 @@ End
 #tag Events btnOK
 	#tag Event
 		Sub Action()
-		  select case CurrentStage
-		  case Stage.ChoosingUpdate
-		    //
-		    // The update has been chosen
-		    //
-		    
-		    if true then // Scope
-		      dim chosen as Kaju.UpdateInformation = pumUpdates.RowTag( pumUpdates.ListIndex )
-		      if chosen.RequiresPayment then
-		        dim dlg as new MessageDialog
-		        dlg.ActionButton.Visible = true
-		        dlg.ActionButton.Caption = KajuLocale.kProceedButton
-		        dlg.CancelButton.Visible = true
-		        dlg.Message = KajuLocale.kPaymentRequiredMessage
-		        dim btn as MessageDialogButton = dlg.ShowModalWithin( self )
-		        
-		        if btn is dlg.CancelButton then
-		          return
-		        end if
-		      end if
-		      SelectedUpdate = chosen
-		    end if
-		    
-		    btnOK.Enabled = false
-		    
-		    btnCancel.Caption = KajuLocale.kStopButton
-		    
-		    btnSkipVersion.Visible = false
-		    pbProgress.Visible = true
-		    lblInstallMessage.Visible = true
-		    
-		    pumUpdates.Enabled = false
-		    
-		    CurrentStage = Stage.InstallingUpdate
-		    
-		    if Checker.DryRun then
-		      
-		      lblInstallMessage.Text = KajuLocale.kDryRunMessage
-		      
-		    else
-		      
-		      lblInstallMessage.Text = KajuLocale.kDownloadingMessage
-		      
-		      dim tempFolder as FolderItem = Kaju.GetTemporaryFolder
-		      DeleteOnCancel.Append tempFolder
-		      
-		      DownloadFile = tempFolder.Child( SelectedUpdate.PlatformBinary.FileName )
-		      DeleteOnClose.Append DownloadFile
-		      
-		      dim url as string = SelectedUpdate.PlatformBinary.URL
-		      
-		      //
-		      // Check for redirection
-		      //
-		      url = hsSocket.GetRedirectAddress( url, 5 )
-		      
-		      //
-		      // Start the download
-		      //
-		      hsSocket.Get( url, DownloadFile )
-		      
-		      //
-		      // Start the timeout timer
-		      //
-		      tmrTimeout.Reset
-		      tmrTimeout.Mode = Timer.ModeSingle
-		      
-		    end if
-		    
-		  case Stage.WaitingToQuit
-		    //
-		    // The user chose Quit & Install
-		    //
-		    
-		    Kaju.StartUpdate( self.Initiater )
-		    
-		    //
-		    // Move this window to the back
-		    //
-		    dim lastWindowIndex as integer = WindowCount - 1
-		    if not( Window( lastWindowIndex ) Is self ) then
-		      dim showIndex as integer = lastWindowIndex
-		      for windowIndex as integer = lastWindowIndex downto 0
-		        dim w as Window = Window( showIndex )
-		        if w Is self then
-		          showIndex = showIndex - 1
-		        else
-		          w.Show
-		        end if
-		      next
-		    end if
-		    
-		    Quit
-		    
-		  end
-		  
-		  
+		  HandleOKButton
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1023,7 +1103,7 @@ End
 		    
 		    ShowError()
 		    
-		  elseif Kaju.HashOfFile( file ) <> SelectedUpdate.PlatformBinary.Hash then
+		  elseif Kaju.HashOfFile( file ) <> SelectedBinary.Hash then
 		    
 		    ShowError( KajuLocale.kBadDownloadMessage )
 		    
@@ -1035,7 +1115,7 @@ End
 		    lblInstallMessage.Text = KajuLocale.kProcessingFileMessage
 		    
 		    dim targetFolder as FolderItem
-		    #if TargetWin32 then
+		    #if TargetWindows then
 		      dim targetFolderName as string = SelectedUpdate.AppName + "- decompressed"
 		      targetFolder = App.ExecutableFile.Parent
 		      targetFolder = targetFolder.Child( targetFolderName )
@@ -1117,7 +1197,7 @@ End
 		      
 		      Initiater = new Kaju.UpdateInitiater
 		      Initiater.ReplacementAppFolder = item
-		      Initiater.ReplacementExecutableName = SelectedUpdate.PlatformBinary.ExecutableName
+		      Initiater.ReplacementExecutableName = SelectedBinary.ExecutableName
 		      
 		      btnOK.Enabled = true
 		      btnOK.Caption = KajuLocale.kQuitButton
@@ -1245,7 +1325,6 @@ End
 			"7 - Global Floating Window"
 			"8 - Sheet Window"
 			"9 - Metal Window"
-			"10 - Drawer Window"
 			"11 - Modeless Dialog"
 		#tag EndEnumValues
 	#tag EndViewProperty
