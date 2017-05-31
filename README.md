@@ -376,7 +376,7 @@ Add a translation for each, then submit a pull request as outlined above.
 
 ## Release Notes
 
-2.0 (___, 2017)
+2.0 (May 31, 2017)
 
 * **CLI**: Made help prettier.
 * **Admin GUI**: Use a temp file for the LoadPage "relativeTo" parameter.
