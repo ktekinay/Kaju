@@ -69,7 +69,7 @@ Inherits Kaju.Information
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		 Shared Function BinaryNames() As String()
+		Shared Function BinaryNames() As String()
 		  return array( _
 		  kMacBinaryName, _
 		  kWindowsBinaryName, _
@@ -81,7 +81,7 @@ Inherits Kaju.Information
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		 Shared Function BinaryNeedsExecutableName(binaryName As String) As Boolean
+		Shared Function BinaryNeedsExecutableName(binaryName As String) As Boolean
 		  return binaryName.Left( 3 ) <> "Mac"
 		  
 		End Function
@@ -310,7 +310,7 @@ Inherits Kaju.Information
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  #if Target32Bit 
+			  #if Target32Bit
 			    return PlatformBinary32bit
 			  #elseif Target64Bit
 			    return PlatformBinary64bit
