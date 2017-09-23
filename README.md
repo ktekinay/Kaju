@@ -376,6 +376,10 @@ Add a translation for each, then submit a pull request as outlined above.
 
 ## Release Notes
 
+2.0.1 (__)
+
+* Changed `KajuUpdateWindow.hsSocket.ConnectionType` to SSLv23.
+
 2.0 (May 31, 2017)
 
 * **CLI**: Made help prettier.
