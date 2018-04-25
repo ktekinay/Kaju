@@ -92,7 +92,9 @@ Protected Class UpdateChecker
 		    dim http as new Kaju.HTTPSSocket
 		    
 		    dim raw as string = http.Get( url, 5 )
-		    if http.HTTPStatusCode = 404 then // Not found
+		    dim statusCode as integer = http.HTTPStatusCode
+		    
+		    if statusCode = 404 then // Not found
 		      mResult = ResultType.NoUpdateAvailable
 		      exit do
 		      
