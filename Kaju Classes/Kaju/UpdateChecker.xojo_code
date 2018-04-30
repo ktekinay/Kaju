@@ -1,5 +1,47 @@
 #tag Class
 Protected Class UpdateChecker
+	#tag Method, Flags = &h21
+		Private Sub AsyncHTTP_Error(sender As HTTPSocketAsync, err As RuntimeException)
+		  #pragma unused sender
+		  
+		  dim index as integer = AsyncCheckers.IndexOf( self )
+		  if index <> -1 then
+		    AsyncCheckers.Remove index
+		  end if
+		  
+		  raise err
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub AsyncHTTP_PageReceived(sender As HTTPSocketAsync, url As String, httpStatus As Integer, content As String)
+		  #pragma unused sender
+		  #pragma unused url
+		  
+		  dim index as integer = AsyncCheckers.IndexOf( self )
+		  if index <> -1 then
+		    AsyncCheckers.Remove index
+		  end if
+		  
+		  dim statusCode as integer = httpStatus
+		  dim raw as string = content
+		  
+		  if statusCode = 404 then // Not found
+		    mResult = ResultType.NoUpdateAvailable
+		    RaiseEvent ExecuteAsyncComplete
+		    
+		  elseif ProcessRaw( raw ) then
+		    FetchAsync()
+		    
+		  else
+		    RaiseEvent ExecuteAsyncComplete
+		    
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub Constructor(preferencesFolder As FolderItem, preferencesFilename As String = kDefaultPreferencesName)
 		  self.PrefFile = preferencesFolder.Child( preferencesFilename )
@@ -12,6 +54,13 @@ Protected Class UpdateChecker
 	#tag Method, Flags = &h21
 		Private Sub Destructor()
 		  SavePrefs()
+		  
+		  if AsyncHTTP isa object then
+		    RemoveHandler AsyncHTTP.PageReceived, WeakAddressOf AsyncHTTP_PageReceived
+		    RemoveHandler AsyncHTTP.Error, WeakAddressOf AsyncHTTP_Error
+		    AsyncHTTP = nil
+		  end if
+		  
 		End Sub
 	#tag EndMethod
 
@@ -27,54 +76,36 @@ Protected Class UpdateChecker
 		  // Returns true if the app should quit in preparation of the update.
 		  //
 		  // The caller should be prepared to handle an exception in case of error.
+		  //
 		  
-		  //
-		  // If there is already an update in progress, do nothing
-		  //
-		  if UpdateWindowIsOpen then
-		    mResult = ResultType.UpdateAlreadyInProgress
+		  if not PreCheck then
 		    return
 		  end if
 		  
+		  FetchAndProcess
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ExecuteAsync()
 		  //
-		  // Make sure the OS is supported
+		  // Uses the new socket to check asynchronously
+		  // (required for newer certificates)
 		  //
-		  if not OSIsSupported() then
-		    mResult = ResultType.UnsupportedOS
+		  // The caller should be prepared to handle an exception in case of error.
+		  //
+		  
+		  if not PreCheck then
 		    return
 		  end if
 		  
-		  //
-		  // Check for write permission
-		  //
-		  if true then // Scope
-		    
-		    dim executable as FolderItem = Kaju.TrueExecutableFile
-		    
-		    #if TargetMacOS then
-		      if not executable.Parent.IsWriteable or not Kaju.IsWriteableRecursive( executable ) then
-		        mResult = ResultType.NoWritePermission
-		        return
-		      end if
-		    #else
-		      if not Kaju.IsWriteableRecursive( executable.Parent ) then
-		        mResult = ResultType.NoWritePermission
-		        return
-		      end if
-		    #endif
-		    
-		  end if
+		  FetchAsync
 		  
-		  mDryRun = false
-		  
-		  //
-		  // Make sure we have some URL
-		  //
-		  
-		  if UpdateURL.Trim = "" then
-		    raise new KajuException( KajuException.kErrorMissingUpdateURL, CurrentMethodName )
-		  end if
-		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub FetchAndProcess()
 		  //
 		  // Look for redirection
 		  //
@@ -97,47 +128,63 @@ Protected Class UpdateChecker
 		    if statusCode = 404 then // Not found
 		      mResult = ResultType.NoUpdateAvailable
 		      exit do
-		      
-		    elseif raw = "" then
-		      if HandleError( KajuLocale.kErrorNoUpdateData ) then
-		        continue do
-		      else
-		        exit do
-		      end if
 		    end if
 		    
-		    raw = raw.DefineEncoding( Encodings.UTF8 )
-		    
-		    dim firstLine as string
-		    dim remainder as string
-		    SeparatePacket( raw, firstLine, remainder )
-		    raw = remainder
-		    
-		    dim sig as string = firstLine.Left( kUpdatePacketMarker.Len )
-		    if StrComp( sig, kUpdatePacketMarker, 0 ) <> 0 then
-		      if HandleError( KajuLocale.kErrorIncorrectPacketMarker ) then
-		        continue do
-		      else
-		        exit do
-		      end if
-		    end if
-		    
-		    sig = firstLine.Mid( sig.Len + 1 )
-		    sig = DecodeHex( sig )
-		    if not Crypto.RSAVerifySignature( raw, sig, ServerPublicRSAKey ) then
-		      if HandleError( KajuLocale.kErrorIncorrectPacketSignature ) then
-		        continue do
-		      else
-		        exit do
-		      end if
-		    end if
-		    
-		    if ProcessUpdateData( raw ) then
+		    if not ProcessRaw( raw ) then
 		      exit do
 		    end if
 		  loop
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub FetchAsync()
+		  //
+		  // The new socket will always redirect so
+		  // AllowRedirection must be set to true.
+		  // If it isn't, we will let the consumer know through
+		  // an exception.
+		  //
+		  
+		  if not AllowRedirection then
+		    const kErrorString = _
+		    "AllowRedirection must be set to True when using asynchrous operations"
+		    raise new Kaju.KajuException( kErrorString, CurrentMethodName )
+		  end if
+		  
+		  dim url as string = UpdateURL
+		  dim http as Kaju.HTTPSocketAsync = GetAsyncHTTPSocket
+		  http.Get url
+		  
+		  mResult = ResultType.FetchingUpdateInfo
+		  
+		  //
+		  // Processing will resume in the events
+		  //
+		  
+		  //
+		  // But we have to hold a reference to this object in case the consumer decided to use
+		  // a temporary variable
+		  //
+		  
+		  if AsyncCheckers.IndexOf( self ) = -1 then
+		    AsyncCheckers.Append self
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function GetAsyncHTTPSocket() As Kaju.HTTPSocketAsync
+		  if AsyncHTTP is nil then
+		    AsyncHTTP = new HTTPSocketAsync
+		    AddHandler AsyncHTTP.PageReceived, WeakAddressOf AsyncHTTP_PageReceived
+		    AddHandler AsyncHTTP.Error, WeakAddressOf AsyncHTTP_Error
+		  end if
+		  
+		  return AsyncHTTP
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
@@ -285,6 +332,95 @@ Protected Class UpdateChecker
 		  #endif
 		  
 		  return r
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function Precheck() As Boolean
+		  
+		  //
+		  // If there is already an update in progress, do nothing
+		  //
+		  if UpdateWindowIsOpen then
+		    mResult = ResultType.UpdateAlreadyInProgress
+		    return false
+		  end if
+		  
+		  //
+		  // Make sure the OS is supported
+		  //
+		  if not OSIsSupported() then
+		    mResult = ResultType.UnsupportedOS
+		    return false
+		  end if
+		  
+		  //
+		  // Check for write permission
+		  //
+		  if true then // Scope
+		    
+		    dim executable as FolderItem = Kaju.TrueExecutableFile
+		    
+		    #if TargetMacOS then
+		      if not executable.Parent.IsWriteable or not Kaju.IsWriteableRecursive( executable ) then
+		        mResult = ResultType.NoWritePermission
+		        return false
+		      end if
+		    #else
+		      if not Kaju.IsWriteableRecursive( executable.Parent ) then
+		        mResult = ResultType.NoWritePermission
+		        return false
+		      end if
+		    #endif
+		    
+		  end if
+		  
+		  mDryRun = false
+		  
+		  //
+		  // Make sure we have some URL
+		  //
+		  
+		  if UpdateURL.Trim = "" then
+		    raise new KajuException( KajuException.kErrorMissingUpdateURL, CurrentMethodName )
+		  end if
+		  
+		  return true
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function ProcessRaw(raw As String) As Boolean
+		  //
+		  // Processes the raw packet
+		  // 
+		  // Returns True if the process should contine, False if it's done
+		  // or was cancelled
+		  //
+		  
+		  if raw = "" then
+		    return HandleError( KajuLocale.kErrorNoUpdateData ) 
+		  end if
+		  
+		  raw = raw.DefineEncoding( Encodings.UTF8 )
+		  
+		  dim firstLine as string
+		  dim remainder as string
+		  SeparatePacket( raw, firstLine, remainder )
+		  raw = remainder
+		  
+		  dim sig as string = firstLine.Left( kUpdatePacketMarker.Len )
+		  if StrComp( sig, kUpdatePacketMarker, 0 ) <> 0 then
+		    return HandleError( KajuLocale.kErrorIncorrectPacketMarker )
+		  end if
+		  
+		  sig = firstLine.Mid( sig.Len + 1 )
+		  sig = DecodeHex( sig )
+		  if not Crypto.RSAVerifySignature( raw, sig, ServerPublicRSAKey ) then
+		    return HandleError( KajuLocale.kErrorIncorrectPacketSignature )
+		  end if
+		  
+		  return not ProcessUpdateData( raw )
 		End Function
 	#tag EndMethod
 
@@ -493,6 +629,10 @@ Protected Class UpdateChecker
 
 
 	#tag Hook, Flags = &h0
+		Event ExecuteAsyncComplete()
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
 		Event ReadyToInstall()
 	#tag EndHook
 
@@ -515,6 +655,14 @@ Protected Class UpdateChecker
 
 	#tag Property, Flags = &h0
 		AllowRedirection As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Shared AsyncCheckers() As Kaju.UpdateChecker
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private AsyncHTTP As Kaju.HTTPSocketAsync
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -602,7 +750,8 @@ Protected Class UpdateChecker
 		  NoUpdateAvailable = 0
 		  IgnoredUpdateAvailable
 		  UpdateAvailable
-		RequiredUpdateAvailable
+		  RequiredUpdateAvailable
+		FetchingUpdateInfo
 	#tag EndEnum
 
 

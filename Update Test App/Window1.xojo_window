@@ -48,6 +48,7 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "This will check a predefined web site for an update. It will always show an update for 1.1 and offer to download it, but the download is, in fact, v.1.0. In other words, the app will replace itself (sometimes with an older version) just so the process can be repeated."
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -73,7 +74,7 @@ Begin Window Window1
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   13
+      Left            =   12
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -87,6 +88,7 @@ Begin Window Window1
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   288
+      Transparent     =   True
       Underline       =   False
       Visible         =   True
       Width           =   129
@@ -118,6 +120,7 @@ Begin Window Window1
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   85
+      Transparent     =   True
       Underline       =   False
       Value           =   True
       Visible         =   True
@@ -145,13 +148,14 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   3
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Press check to get a result"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   300
+      Top             =   296
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -184,6 +188,7 @@ Begin Window Window1
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   85
+      Transparent     =   True
       Underline       =   False
       Visible         =   True
       Width           =   139
@@ -215,6 +220,7 @@ Begin Window Window1
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   117
+      Transparent     =   True
       Underline       =   False
       Value           =   True
       Visible         =   True
@@ -247,6 +253,7 @@ Begin Window Window1
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   149
+      Transparent     =   True
       Underline       =   False
       Value           =   True
       Visible         =   True
@@ -279,6 +286,7 @@ Begin Window Window1
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   181
+      Transparent     =   True
       Underline       =   False
       Visible         =   True
       Width           =   171
@@ -305,6 +313,7 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Min. Stage Allowed:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -339,6 +348,7 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   9
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Version"
       TextAlign       =   2
       TextColor       =   &c00000000
@@ -378,6 +388,7 @@ Begin Window Window1
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   149
+      Transparent     =   True
       Underline       =   False
       Value           =   True
       Visible         =   True
@@ -410,6 +421,7 @@ Begin Window Window1
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   222
+      Transparent     =   True
       Underline       =   False
       Visible         =   True
       Width           =   171
@@ -436,6 +448,7 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   12
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Update File URL:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -447,6 +460,39 @@ Begin Window Window1
       Underline       =   False
       Visible         =   True
       Width           =   152
+   End
+   Begin CheckBox cbAsynchrous
+      AutoDeactivate  =   True
+      Bold            =   False
+      Caption         =   "Asynchronous"
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   27
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   2
+      State           =   0
+      TabIndex        =   13
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   339
+      Transparent     =   False
+      Underline       =   False
+      Value           =   False
+      Visible         =   True
+      Width           =   159
    End
 End
 #tag EndWindow
@@ -462,6 +508,8 @@ End
 		  u.DefaultUseTransparency = true
 		  
 		  Checker = u
+		  AddHandler Checker.ExecuteAsyncComplete, WeakAddressOf Checker_ExecuteAsyncComplete
+		  
 		End Sub
 	#tag EndEvent
 
@@ -470,6 +518,48 @@ End
 		Sub AddRowAndTag(pum As PopUpMenu, s As String, tag As Variant)
 		  pum.AddRow s
 		  pum.RowTag( pum.ListCount - 1 ) = tag
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub Checker_ExecuteAsyncComplete(sender As Kaju.UpdateChecker)
+		  #pragma unused sender
+		  HandlePostCheck
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub HandlePostCheck()
+		  select case Checker.Result
+		  case Kaju.UpdateChecker.ResultType.UpdateAlreadyInProgress
+		    lblResult.Text = "Update already in progress"
+		    
+		  case Kaju.UpdateChecker.ResultType.UnsupportedOS
+		    lblResult.Text = "This OS is not supported (missing required tools)"
+		    
+		  case Kaju.UpdateChecker.ResultType.NoWritePermission
+		    lblResult.Text = "Aborted (no write permission)"
+		    
+		  case Kaju.UpdateChecker.ResultType.Error
+		    lblResult.Text = "Error, user chose to try later"
+		    
+		  case Kaju.UpdateChecker.ResultType.IgnoredUpdateAvailable
+		    lblResult.Text = "Updates available, but ignored"
+		    
+		  case Kaju.UpdateChecker.ResultType.NoUpdateAvailable
+		    lblResult.Text = "No updates available"
+		    
+		  case Kaju.UpdateChecker.ResultType.UpdateAvailable
+		    lblResult.Text = "Updates available"
+		    
+		  case Kaju.UpdateChecker.ResultType.RequiredUpdateAvailable
+		    lblResult.Text = "Required update available"
+		    
+		  else
+		    lblResult.Text = "UNKNOWN RESULT"
+		    
+		  end select
 		  
 		End Sub
 	#tag EndMethod
@@ -500,7 +590,9 @@ End
 		Sub Action()
 		  Checker.HonorIgnored = cbHonorIgnored.Value
 		  Checker.Allow32bitTo64bitUpdates = cbAllow32bitTo64bitUpdates.Value
-		  Checker.UpdateURL = pumChooseUpdateURL.RowTag( pumChooseUpdateURL.ListIndex )
+		  'Checker.UpdateURL = pumChooseUpdateURL.RowTag( pumChooseUpdateURL.ListIndex )
+		  Checker.UpdateURL = "https://bkeeney.com/kaju/UpdateInformation.html"
+		  Checker.AllowRedirection = true
 		  
 		  dim allowWindow as integer = if( cbAllowWindow.Value, Kaju.UpdateChecker.kAllowUpdateWindow, 0 )
 		  dim allowErrorDialog as integer = if( cbAllowErrorDialog.Value, Kaju.UpdateChecker.kAllowErrorDialog, 0 )
@@ -508,36 +600,12 @@ End
 		  
 		  Checker.AllowedStage = pumStageAllowed.RowTag( pumStageAllowed.ListIndex )
 		  
-		  Checker.Execute()
-		  
-		  select case Checker.Result
-		  case Kaju.UpdateChecker.ResultType.UpdateAlreadyInProgress
-		    lblResult.Text = "Update already in progress"
-		    
-		  case Kaju.UpdateChecker.ResultType.UnsupportedOS
-		    lblResult.Text = "This OS is not supported (missing required tools)"
-		    
-		  case Kaju.UpdateChecker.ResultType.NoWritePermission
-		    lblResult.Text = "Aborted (no write permission)"
-		    
-		  case Kaju.UpdateChecker.ResultType.Error
-		    lblResult.Text = "Error, user chose to try later"
-		    
-		  case Kaju.UpdateChecker.ResultType.IgnoredUpdateAvailable
-		    lblResult.Text = "Updates available, but ignored"
-		    
-		  case Kaju.UpdateChecker.ResultType.NoUpdateAvailable
-		    lblResult.Text = "No updates available"
-		    
-		  case Kaju.UpdateChecker.ResultType.UpdateAvailable
-		    lblResult.Text = "Updates available"
-		    
-		  case Kaju.UpdateChecker.ResultType.RequiredUpdateAvailable
-		    lblResult.Text = "Required update available"
-		    
+		  if cbAsynchrous.Value then
+		    Checker.ExecuteAsync()
 		  else
-		    lblResult.Text = "UNKNOWN RESULT"
-		  end
+		    Checker.Execute()
+		    HandlePostCheck
+		  end if
 		  
 		  return
 		End Sub
