@@ -28,7 +28,7 @@ Protected Class UpdateChecker
 		  dim raw as string = content
 		  
 		  if statusCode = 404 then // Not found
-		    mResult = ResultType.NoUpdateAvailable
+		    mResult = ResultType.PageNotFound
 		    RaiseEvent ExecuteAsyncComplete
 		    
 		  elseif ProcessRaw( raw ) then
@@ -126,7 +126,7 @@ Protected Class UpdateChecker
 		    dim statusCode as integer = http.HTTPStatusCode
 		    
 		    if statusCode = 404 then // Not found
-		      mResult = ResultType.NoUpdateAvailable
+		      mResult = ResultType.PageNotFound
 		      exit do
 		    end if
 		    
@@ -751,7 +751,8 @@ Protected Class UpdateChecker
 		  IgnoredUpdateAvailable
 		  UpdateAvailable
 		  RequiredUpdateAvailable
-		FetchingUpdateInfo
+		  FetchingUpdateInfo
+		PageNotFound = 404
 	#tag EndEnum
 
 

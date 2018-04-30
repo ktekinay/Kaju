@@ -556,6 +556,12 @@ End
 		  case Kaju.UpdateChecker.ResultType.RequiredUpdateAvailable
 		    lblResult.Text = "Required update available"
 		    
+		  case Kaju.UpdateChecker.ResultType.FetchingUpdateInfo
+		    lblResult.Text = "Fetching update information"
+		    
+		  case Kaju.UpdateChecker.ResultType.PageNotFound
+		    lblResult.Text = "The URL resulted in a 404 error"
+		    
 		  else
 		    lblResult.Text = "UNKNOWN RESULT"
 		    
@@ -604,8 +610,9 @@ End
 		    Checker.ExecuteAsync()
 		  else
 		    Checker.Execute()
-		    HandlePostCheck
 		  end if
+		  
+		  HandlePostCheck
 		  
 		  return
 		End Sub
