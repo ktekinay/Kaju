@@ -119,7 +119,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   166
+      Top             =   132
       Transparent     =   True
       Underline       =   False
       Value           =   True
@@ -152,7 +152,7 @@ Begin Window Window1
       Text            =   "Press check to get a result"
       TextAlign       =   0
       TextColor       =   &c00000000
-      TextFont        =   "System"
+      TextFont        =   "SmallSystem"
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   377
@@ -187,7 +187,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   166
+      Top             =   132
       Transparent     =   True
       Underline       =   False
       Visible         =   True
@@ -219,7 +219,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   198
+      Top             =   164
       Transparent     =   True
       Underline       =   False
       Value           =   True
@@ -252,7 +252,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   230
+      Top             =   196
       Transparent     =   True
       Underline       =   False
       Value           =   True
@@ -320,7 +320,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   272
+      Top             =   271
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -387,7 +387,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   230
+      Top             =   196
       Transparent     =   True
       Underline       =   False
       Value           =   True
@@ -479,7 +479,7 @@ Begin Window Window1
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
-      Scope           =   2
+      Scope           =   0
       State           =   0
       TabIndex        =   13
       TabPanelIndex   =   0
@@ -493,6 +493,117 @@ Begin Window Window1
       Value           =   False
       Visible         =   True
       Width           =   159
+   End
+   Begin CheckBox cbUseAuthenticated
+      AutoDeactivate  =   True
+      Bold            =   False
+      Caption         =   "Authenticated"
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      State           =   1
+      TabIndex        =   14
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   228
+      Transparent     =   True
+      Underline       =   False
+      Value           =   True
+      Visible         =   True
+      Width           =   183
+   End
+   Begin TextField fldURL
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   "Fully formed url starting with http and including un:pw if required"
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   131
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   15
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   96
+      Transparent     =   False
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   436
+   End
+   Begin Label Label1
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   3
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   16
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "Override URL:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   97
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   112
    End
 End
 #tag EndWindow
@@ -574,6 +685,10 @@ End
 		    
 		  end select
 		  
+		  if Checker isa object and Checker.UpdateURL <> "" then
+		    lblResult.Text = lblResult.Text + EndOfLine + EndOfLine + Checker.UpdateURL
+		  end if
+		  
 		End Sub
 	#tag EndMethod
 
@@ -583,7 +698,10 @@ End
 	#tag EndProperty
 
 
-	#tag Constant, Name = kBaseURL, Type = String, Dynamic = False, Default = \"http://Kaju:password@www.mactechnologies.com/Kaju_Test_Authenticated/", Scope = Public
+	#tag Constant, Name = kBaseURL, Type = String, Dynamic = False, Default = \"http://www.mactechnologies.com/Kaju_Test/", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kBaseURLAuthenticated, Type = String, Dynamic = False, Default = \"http://Kaju:password@www.mactechnologies.com/Kaju_Test_Authenticated/", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kServerPublicKey, Type = String, Dynamic = False, Default = \"30820120300D06092A864886F70D01010105000382010D00308201080282010100D1DE526C8D98CCBFFDB4BD71487AC16205CF851696FB2910ABBC564BFEC1261A53A90794102BCC80EFB3CED3F8E73D90FF4C426D2315DE5E31A1A6C7563A21EADBD91B1DD637FAE0BED539C186BCB81DD865CC2A2F9427F717AA5E837C53AB90691569FC45EE17AF0ACD80E0C24C864EE86D4DBB7A6010E09B4E0BC556004E02980388C654A1C676A31E3AF788754E0CF7DEEC8236D55EDD5BB7490011B27CDEE5E254099FDE98C17D5F85014622D64C3BFB6A77200050FB2C8DF9A1ACEE50CF5A8353CE68304F91EC4F463E76BCF90A15152D03308B229FFE91E4906990D0E5F2E5C3ACC106E58DB1A37095DCBD5E233D7ED4A41AA263A73C54D4F12A113881020111", Scope = Private
@@ -604,10 +722,16 @@ End
 #tag Events btnExecute
 	#tag Event
 		Sub Action()
+		  dim baseURL as string = _
+		  if( cbUseAuthenticated.Value, kBaseURLAuthenticated, kBaseURL )
+		  
 		  Checker.HonorIgnored = cbHonorIgnored.Value
 		  Checker.Allow32bitTo64bitUpdates = cbAllow32bitTo64bitUpdates.Value
-		  Checker.UpdateURL = pumChooseUpdateURL.RowTag( pumChooseUpdateURL.ListIndex )
-		  'Checker.UpdateURL = "https://bkeeney.com/kaju/UpdateInformation.html"
+		  dim url as string = fldURL.Text.Trim
+		  if url = "" then
+		    url = baseURL + pumChooseUpdateURL.RowTag( pumChooseUpdateURL.ListIndex ).StringValue
+		  end if
+		  Checker.UpdateURL = url
 		  Checker.AllowRedirection = true
 		  
 		  dim allowWindow as integer = if( cbAllowWindow.Value, Kaju.UpdateChecker.kAllowUpdateWindow, 0 )
@@ -667,12 +791,23 @@ End
 #tag Events pumChooseUpdateURL
 	#tag Event
 		Sub Open()
-		  AddRowAndTag me, "All Updates", kBaseURL + kUpdateFileAll
-		  AddRowAndTag me, "32-bit Only", kBaseURL + kUpdateFile32bit
-		  AddRowAndTag me, "64-bit Only", kBaseURL + kUpdateFile64bit
+		  AddRowAndTag me, "All Updates", kUpdateFileAll
+		  AddRowAndTag me, "32-bit Only", kUpdateFile32bit
+		  AddRowAndTag me, "64-bit Only", kUpdateFile64bit
 		  
 		  me.ListIndex = 0
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events fldURL
+	#tag Event
+		Sub TextChange()
+		  if me.Text.Trim = "" then
+		    cbUseAuthenticated.Enabled = true
+		  else
+		    cbUseAuthenticated.Enabled = false
+		  end if
 		End Sub
 	#tag EndEvent
 #tag EndEvents
