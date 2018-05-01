@@ -9,8 +9,18 @@ Protected Class UpdateChecker
 		    AsyncCheckers.Remove index
 		  end if
 		  
-		  raise err
+		  dim errMsg as string = err.Message
+		  if errMsg = "" then
+		    err.Message = "An exception of type " + Introspection.GetType( err ).Name + " has occurred"
+		  end if
 		  
+		  LastError = err
+		  
+		  if HandleError( errMsg ) then
+		    FetchAsync
+		  else
+		    RaiseEvent ExecuteAsyncComplete
+		  end if
 		End Sub
 	#tag EndMethod
 
@@ -337,7 +347,6 @@ Protected Class UpdateChecker
 
 	#tag Method, Flags = &h21
 		Private Function Precheck() As Boolean
-		  
 		  //
 		  // If there is already an update in progress, do nothing
 		  //
@@ -345,6 +354,11 @@ Protected Class UpdateChecker
 		    mResult = ResultType.UpdateAlreadyInProgress
 		    return false
 		  end if
+		  
+		  //
+		  // Clear the last error
+		  //
+		  LastError = nil
 		  
 		  //
 		  // Make sure the OS is supported
@@ -679,6 +693,10 @@ Protected Class UpdateChecker
 
 	#tag Property, Flags = &h21
 		Private IgnoreVersionsPref() As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		LastError As RuntimeException
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
