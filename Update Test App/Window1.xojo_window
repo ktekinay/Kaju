@@ -583,7 +583,7 @@ End
 	#tag EndProperty
 
 
-	#tag Constant, Name = kBaseURL, Type = String, Dynamic = False, Default = \"http://www.mactechnologies.com/Kaju_Test/", Scope = Public
+	#tag Constant, Name = kBaseURL, Type = String, Dynamic = False, Default = \"http://Kaju:password@www.mactechnologies.com/Kaju_Test_Authenticated/", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kServerPublicKey, Type = String, Dynamic = False, Default = \"30820120300D06092A864886F70D01010105000382010D00308201080282010100D1DE526C8D98CCBFFDB4BD71487AC16205CF851696FB2910ABBC564BFEC1261A53A90794102BCC80EFB3CED3F8E73D90FF4C426D2315DE5E31A1A6C7563A21EADBD91B1DD637FAE0BED539C186BCB81DD865CC2A2F9427F717AA5E837C53AB90691569FC45EE17AF0ACD80E0C24C864EE86D4DBB7A6010E09B4E0BC556004E02980388C654A1C676A31E3AF788754E0CF7DEEC8236D55EDD5BB7490011B27CDEE5E254099FDE98C17D5F85014622D64C3BFB6A77200050FB2C8DF9A1ACEE50CF5A8353CE68304F91EC4F463E76BCF90A15152D03308B229FFE91E4906990D0E5F2E5C3ACC106E58DB1A37095DCBD5E233D7ED4A41AA263A73C54D4F12A113881020111", Scope = Private
@@ -606,8 +606,8 @@ End
 		Sub Action()
 		  Checker.HonorIgnored = cbHonorIgnored.Value
 		  Checker.Allow32bitTo64bitUpdates = cbAllow32bitTo64bitUpdates.Value
-		  'Checker.UpdateURL = pumChooseUpdateURL.RowTag( pumChooseUpdateURL.ListIndex )
-		  Checker.UpdateURL = "https://bkeeney.com/kaju/UpdateInformation.html"
+		  Checker.UpdateURL = pumChooseUpdateURL.RowTag( pumChooseUpdateURL.ListIndex )
+		  'Checker.UpdateURL = "https://bkeeney.com/kaju/UpdateInformation.html"
 		  Checker.AllowRedirection = true
 		  
 		  dim allowWindow as integer = if( cbAllowWindow.Value, Kaju.UpdateChecker.kAllowUpdateWindow, 0 )
