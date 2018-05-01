@@ -71,12 +71,13 @@ Inherits Xojo.Net.HTTPSocket
 	#tag Method, Flags = &h21
 		Private Sub SetSecure(ByRef url As String)
 		  ValidateCertificates = true
+		  Username = ""
+		  Password = ""
+		  ClearRequestHeaders
 		  
 		  url = url.ConvertEncoding( Encodings.UTF8 )
 		  
 		  #if not TargetMacOS then
-		    
-		    ClearRequestHeaders
 		    
 		    //
 		    // See if the username and password has been specified
@@ -85,10 +86,7 @@ Inherits Xojo.Net.HTTPSocket
 		    rx.SearchPattern = "^(https?://)([^:/\x20@]+):([^:/\x20@]*)@(.*)"
 		    
 		    dim match as RegExMatch = rx.Search( url )
-		    if match is nil then
-		      Username = ""
-		      Password = ""
-		    else
+		    if match isa RegExMatch then
 		      Username = DecodeURLComponent( match.SubExpressionString( 2 ) ).DefineEncoding( Encodings.UTF8 )
 		      Password = DecodeURLComponent( match.SubExpressionString( 3 ) ).DefineEncoding( Encodings.UTF8 )
 		      url = match.SubExpressionString( 1 ) + match.SubExpressionString( 4 )
