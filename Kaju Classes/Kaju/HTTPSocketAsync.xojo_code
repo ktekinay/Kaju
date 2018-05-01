@@ -45,7 +45,8 @@ Inherits Xojo.Net.HTTPSocket
 		Sub Get(url As String, file As FolderItem)
 		  SetSecure url
 		  
-		  dim f as new Xojo.IO.FolderItem( file.NativePath.ToText )
+		  dim path as string = file.NativePath.DefineEncoding( Encodings.UTF8 )
+		  dim f as new Xojo.IO.FolderItem( path.ToText )
 		  super.Send "GET", url.ToText, f
 		  
 		End Sub
