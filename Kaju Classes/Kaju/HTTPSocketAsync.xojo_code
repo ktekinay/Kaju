@@ -36,6 +36,8 @@ Inherits Xojo.Net.HTTPSocket
 
 	#tag Method, Flags = &h0
 		Sub Get(url As String)
+		  Disconnect
+		  
 		  SetSecure url
 		  super.Send "GET", url.ToText
 		End Sub
@@ -43,6 +45,8 @@ Inherits Xojo.Net.HTTPSocket
 
 	#tag Method, Flags = &h0
 		Sub Get(url As String, file As FolderItem)
+		  Disconnect
+		  
 		  SetSecure url
 		  
 		  dim path as string = file.NativePath.DefineEncoding( Encodings.UTF8 )
@@ -72,20 +76,29 @@ Inherits Xojo.Net.HTTPSocket
 		  
 		  #if not TargetMacOS then
 		    
+		    ClearRequestHeaders
+		    
 		    //
 		    // See if the username and password has been specified
 		    //
 		    dim rx as new RegEx
-		    rx.SearchPattern = "^(?:https?://)([^:/\x20@]+):([^:/\x20@]*)@(.*)"
+		    rx.SearchPattern = "^(https?://)([^:/\x20@]+):([^:/\x20@]*)@(.*)"
 		    
 		    dim match as RegExMatch = rx.Search( url )
 		    if match is nil then
 		      Username = ""
 		      Password = ""
 		    else
-		      Username = DecodeURLComponent( match.SubExpressionString( 1 ) ).DefineEncoding( Encodings.UTF8 )
-		      Password = DecodeURLComponent( match.SubExpressionString( 2 ) ).DefineEncoding( Encodings.UTF8 )
-		      url = match.SubExpressionString( 3 ).DefineEncoding( Encodings.UTF8 )
+		      Username = DecodeURLComponent( match.SubExpressionString( 2 ) ).DefineEncoding( Encodings.UTF8 )
+		      Password = DecodeURLComponent( match.SubExpressionString( 3 ) ).DefineEncoding( Encodings.UTF8 )
+		      url = match.SubExpressionString( 1 ) + match.SubExpressionString( 4 )
+		      url = url.DefineEncoding( Encodings.UTF8 )
+		      
+		      //
+		      // Set the request header manually
+		      //
+		      dim encoded as string = EncodeBase64( Username + ":" + Password ).DefineEncoding( Encodings.UTF8 )
+		      RequestHeader( "Authorization" ) = "Basic " + encoded.ToText
 		    end if
 		    
 		  #endif
