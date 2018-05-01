@@ -44,6 +44,7 @@ Begin Window KajuUpdateWindow
       TabPanelIndex   =   0
       TabStop         =   True
       Top             =   84
+      Transparent     =   True
       Visible         =   True
       Width           =   631
    End
@@ -300,6 +301,7 @@ Begin Window KajuUpdateWindow
       Scope           =   2
       TabIndex        =   8
       TabPanelIndex   =   0
+      TabStop         =   True
       Top             =   555
       Transparent     =   False
       Value           =   0
@@ -310,6 +312,7 @@ Begin Window KajuUpdateWindow
       Arguments       =   ""
       Backend         =   ""
       Canonical       =   False
+      Enabled         =   True
       ErrorCode       =   0
       Index           =   -2147483648
       InitialParent   =   ""
@@ -340,6 +343,7 @@ Begin Window KajuUpdateWindow
       TabPanelIndex   =   0
       TabStop         =   True
       Top             =   119
+      Transparent     =   True
       Visible         =   False
       Width           =   300
    End
@@ -411,6 +415,7 @@ Begin Window KajuUpdateWindow
       Width           =   101
    End
    Begin Timer tmrTimeout
+      Enabled         =   True
       Index           =   -2147483648
       InitialParent   =   ""
       LockedInPosition=   False
@@ -420,10 +425,14 @@ Begin Window KajuUpdateWindow
       TabPanelIndex   =   0
    End
    Begin Kaju.HTTPSocketAsync hsSocket
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Scope           =   2
+      TabIndex        =   "14"
       TabPanelIndex   =   0
+      TabStop         =   True
+      Visible         =   True
    End
 End
 #tag EndWindow
