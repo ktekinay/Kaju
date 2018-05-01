@@ -9,16 +9,16 @@ Begin Window Window1
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
-   Height          =   400
+   Height          =   500
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
-   MaxHeight       =   400
+   MaxHeight       =   500
    MaximizeButton  =   True
    MaxWidth        =   600
    MenuBar         =   1729944148
    MenuBarVisible  =   True
-   MinHeight       =   400
+   MinHeight       =   500
    MinimizeButton  =   True
    MinWidth        =   600
    Placement       =   0
@@ -87,7 +87,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   288
+      Top             =   369
       Transparent     =   True
       Underline       =   False
       Visible         =   True
@@ -119,7 +119,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   85
+      Top             =   166
       Transparent     =   True
       Underline       =   False
       Value           =   True
@@ -155,7 +155,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   296
+      Top             =   377
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -187,7 +187,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   85
+      Top             =   166
       Transparent     =   True
       Underline       =   False
       Visible         =   True
@@ -219,7 +219,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   117
+      Top             =   198
       Transparent     =   True
       Underline       =   False
       Value           =   True
@@ -252,7 +252,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   149
+      Top             =   230
       Transparent     =   True
       Underline       =   False
       Value           =   True
@@ -285,7 +285,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   181
+      Top             =   262
       Transparent     =   True
       Underline       =   False
       Visible         =   True
@@ -320,7 +320,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   191
+      Top             =   272
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -355,7 +355,7 @@ Begin Window Window1
       TextFont        =   "SmallSystem"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   359
+      Top             =   459
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -387,7 +387,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   149
+      Top             =   230
       Transparent     =   True
       Underline       =   False
       Value           =   True
@@ -420,7 +420,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   222
+      Top             =   303
       Transparent     =   True
       Underline       =   False
       Visible         =   True
@@ -455,7 +455,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   232
+      Top             =   313
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -487,7 +487,7 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   339
+      Top             =   420
       Transparent     =   False
       Underline       =   False
       Value           =   False
