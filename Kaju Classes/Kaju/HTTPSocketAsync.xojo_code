@@ -18,6 +18,13 @@ Inherits Xojo.Net.HTTPSocket
 	#tag EndEvent
 
 	#tag Event
+		Sub FileReceived(URL as Text, HTTPStatus as Integer, File as xojo.IO.FolderItem)
+		  dim f as new FolderItem( file.Path, FolderItem.PathTypeNative )
+		  RaiseEvent FileReceived( url, httpStatus, f )
+		End Sub
+	#tag EndEvent
+
+	#tag Event
 		Sub PageReceived(URL as Text, HTTPStatus as Integer, Content as xojo.Core.MemoryBlock)
 		  dim mb as MemoryBlock = content.Data
 		  dim contentString as string = mb.StringValue( 0, content.Size )
@@ -84,6 +91,10 @@ Inherits Xojo.Net.HTTPSocket
 
 	#tag Hook, Flags = &h0
 		Event AuthenticationRequired(Realm as Text, ByRef Name as Text, ByRef Password as Text) As Boolean
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
+		Event FileReceived(url As String, httpStatus As Integer, file As FolderItem)
 	#tag EndHook
 
 	#tag Hook, Flags = &h0

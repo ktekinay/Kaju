@@ -74,6 +74,7 @@ Begin Window KajuUpdateWindow
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   555
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   150
@@ -105,6 +106,7 @@ Begin Window KajuUpdateWindow
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   555
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   150
@@ -136,6 +138,7 @@ Begin Window KajuUpdateWindow
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   555
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   150
@@ -162,6 +165,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   5
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Untitled"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -196,6 +200,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   6
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Untitled"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -230,6 +235,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   7
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "#KajuLocale.kReleaseNotesLabel"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -264,6 +270,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "#KajuLocale.kDownloadingMessage"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -294,31 +301,23 @@ Begin Window KajuUpdateWindow
       TabIndex        =   8
       TabPanelIndex   =   0
       Top             =   555
+      Transparent     =   False
       Value           =   0
       Visible         =   False
       Width           =   117
-   End
-   Begin Kaju.HTTPSSocket hsSocket
-      CertificateFile =   
-      CertificatePassword=   ""
-      CertificateRejectionFile=   
-      ConnectionType  =   1
-      ForceSecure     =   False
-      Index           =   -2147483648
-      InitialParent   =   ""
-      LockedInPosition=   False
-      Scope           =   2
-      Secure          =   False
-      TabPanelIndex   =   0
    End
    Begin Kaju.ZipShell shZipper
       Arguments       =   ""
       Backend         =   ""
       Canonical       =   False
+      ErrorCode       =   0
       Index           =   -2147483648
       InitialParent   =   ""
+      IsRunning       =   False
       LockedInPosition=   False
       Mode            =   1
+      PID             =   0
+      Result          =   ""
       Scope           =   2
       TabPanelIndex   =   0
       TimeOut         =   0
@@ -366,6 +365,7 @@ Begin Window KajuUpdateWindow
       Selectable      =   False
       TabIndex        =   10
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "#KajuLocale.kVersionsLabel"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -405,6 +405,7 @@ Begin Window KajuUpdateWindow
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   87
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   101
@@ -416,6 +417,12 @@ Begin Window KajuUpdateWindow
       Mode            =   0
       Period          =   5000
       Scope           =   0
+      TabPanelIndex   =   0
+   End
+   Begin Kaju.HTTPSocketAsync hsSocket
+      Index           =   -2147483648
+      LockedInPosition=   False
+      Scope           =   2
       TabPanelIndex   =   0
    End
 End
@@ -509,9 +516,7 @@ End
 		  end if
 		  Kaju.CancelUpdate
 		  
-		  if hsSocket.IsConnected then
-		    hsSocket.Disconnect
-		  end if
+		  hsSocket.Disconnect
 		  
 		  if shZipper.IsRunning then
 		    shZipper.Close
@@ -707,11 +712,6 @@ End
 		      DeleteOnClose.Append DownloadFile
 		      
 		      dim url as string = SelectedBinary.URL
-		      
-		      //
-		      // Check for redirection
-		      //
-		      url = hsSocket.GetRedirectAddress( url, 5 )
 		      
 		      //
 		      // Start the download
@@ -1046,96 +1046,6 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events hsSocket
-	#tag Event
-		Sub ReceiveProgress(bytesReceived as integer, totalBytes as integer, newData as string)
-		  if CurrentStage = Stage.Cancelled then
-		    //
-		    // Do nothing
-		    //
-		    return
-		  end if
-		  
-		  //
-		  // Have to get the value below 65536
-		  //
-		  
-		  const kMaxAllowed = 1000
-		  
-		  if totalBytes > kMaxAllowed then
-		    dim mult as integer = totalBytes \ kMaxAllowed
-		    totalBytes = totalBytes \ mult
-		    bytesReceived = bytesReceived \ mult
-		  end if
-		  
-		  pbProgress.Maximum = totalBytes
-		  pbProgress.Value = bytesReceived
-		  
-		  tmrTimeout.Reset
-		  
-		  #pragma unused newData
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub DownloadComplete(url as string, httpStatus as integer, headers as internetHeaders, file as folderItem)
-		  if CurrentStage = Stage.Cancelled then
-		    //
-		    // Do nothing
-		    //
-		    return
-		  end if
-		  
-		  pbProgress.Maximum = -1
-		  pbProgress.Value = 0
-		  
-		  tmrTimeout.Mode = Timer.ModeOff
-		  
-		  if httpStatus <> 200 then
-		    
-		    ShowError()
-		    
-		  elseif Kaju.HashOfFile( file ) <> SelectedBinary.Hash then
-		    
-		    ShowError( KajuLocale.kBadDownloadMessage )
-		    
-		  else
-		    //
-		    // We have the file and it appears to be good
-		    //
-		    
-		    lblInstallMessage.Text = KajuLocale.kProcessingFileMessage
-		    
-		    dim targetFolder as FolderItem
-		    #if TargetWindows then
-		      dim targetFolderName as string = SelectedUpdate.AppName + "- decompressed"
-		      targetFolder = App.ExecutableFile.Parent
-		      targetFolder = targetFolder.Child( targetFolderName )
-		      Kaju.DeleteRecursive( targetFolder )
-		    #else
-		      targetFolder = file.Parent.Child( "decompressed" )
-		    #endif
-		    DeleteOnCancel.Append targetFolder
-		    shZipper.Decompress( file, targetFolder )
-		  end if
-		  
-		  
-		  #pragma unused url
-		  #pragma unused headers
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub Error(code as integer)
-		  if me.IsConnected then
-		    me.Disconnect
-		  end if
-		  
-		  tmrTimeout.Mode = Timer.ModeOff
-		  
-		  ShowError( KajuLocale.kGenericErrorMessage + "  (" + str( code ) + ")" )
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events shZipper
 	#tag Event
 		Sub DecompressCompleted(zipFile As FolderItem, containingFolder As FolderItem)
@@ -1253,11 +1163,100 @@ End
 #tag Events tmrTimeout
 	#tag Event
 		Sub Action()
-		  if hsSocket.IsConnected then
-		    hsSocket.Disconnect
+		  hsSocket.Disconnect
+		  ShowError( KajuLocale.kTimedOutMessage )
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events hsSocket
+	#tag Event
+		Sub ReceiveProgress(BytesReceived as Int64, TotalBytes as Int64, NewData as xojo.Core.MemoryBlock)
+		  #pragma unused newData
+		  
+		  if CurrentStage = Stage.Cancelled then
+		    //
+		    // Do nothing
+		    //
+		    return
 		  end if
 		  
-		  ShowError( KajuLocale.kTimedOutMessage )
+		  //
+		  // Have to get the value below 65536
+		  //
+		  
+		  const kMaxAllowed = 1000
+		  
+		  if totalBytes > kMaxAllowed then
+		    dim mult as integer = totalBytes \ kMaxAllowed
+		    totalBytes = totalBytes \ mult
+		    bytesReceived = bytesReceived \ mult
+		  end if
+		  
+		  pbProgress.Maximum = totalBytes
+		  pbProgress.Value = bytesReceived
+		  
+		  tmrTimeout.Reset
+		  
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Error(err as RuntimeException)
+		  tmrTimeout.Mode = Timer.ModeOff
+		  
+		  dim errMsg as string = err.Message
+		  if errMsg = "" then
+		    errMsg = KajuLocale.kGenericErrorMessage
+		  end if
+		  
+		  ShowError( errMsg + "  (" + str( err.ErrorNumber ) + ")" )
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub FileReceived(url As String, httpStatus As Integer, file As FolderItem)
+		  #pragma unused url
+		  
+		  if CurrentStage = Stage.Cancelled then
+		    //
+		    // Do nothing
+		    //
+		    return
+		  end if
+		  
+		  pbProgress.Maximum = -1
+		  pbProgress.Value = 0
+		  
+		  tmrTimeout.Mode = Timer.ModeOff
+		  
+		  if httpStatus <> 200 then
+		    
+		    ShowError()
+		    
+		  elseif Kaju.HashOfFile( file ) <> SelectedBinary.Hash then
+		    
+		    ShowError( KajuLocale.kBadDownloadMessage )
+		    
+		  else
+		    //
+		    // We have the file and it appears to be good
+		    //
+		    
+		    lblInstallMessage.Text = KajuLocale.kProcessingFileMessage
+		    
+		    dim targetFolder as FolderItem
+		    #if TargetWindows then
+		      dim targetFolderName as string = SelectedUpdate.AppName + "- decompressed"
+		      targetFolder = App.ExecutableFile.Parent
+		      targetFolder = targetFolder.Child( targetFolderName )
+		      Kaju.DeleteRecursive( targetFolder )
+		    #else
+		      targetFolder = file.Parent.Child( "decompressed" )
+		    #endif
+		    DeleteOnCancel.Append targetFolder
+		    shZipper.Decompress( file, targetFolder )
+		  end if
 		  
 		End Sub
 	#tag EndEvent
