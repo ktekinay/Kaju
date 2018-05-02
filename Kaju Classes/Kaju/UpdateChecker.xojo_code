@@ -874,6 +874,11 @@ Protected Class UpdateChecker
 			Group="Behavior"
 			Type="Boolean"
 		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Result"
+			Group="Behavior"
+			Type="ResultType"
+		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
 #tag EndClass

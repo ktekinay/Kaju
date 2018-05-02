@@ -442,6 +442,8 @@ End
 		    Kaju.DeleteRecursive( f )
 		  next
 		  
+		  CurrentUpdate = nil
+		  
 		End Sub
 	#tag EndEvent
 
@@ -533,6 +535,30 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub ChangeBackgroudImage(update As Kaju.UpdateInformation)
+		  dim useTransparency as boolean = update.UseTransparency
+		  dim p as Picture = update.Image
+		  if p is nil then
+		    p = Checker.DefaultImage
+		    useTransparency = Checker.DefaultUseTransparency
+		  end if
+		  
+		  if p <> nil and useTransparency then
+		    dim faded as new Picture( p.Width, p.Height )
+		    
+		    const kTransparencyPercent = 50.0
+		    faded.Graphics.Transparency = kTransparencyPercent
+		    
+		    faded.Graphics.DrawPicture( p, 0, 0 )
+		    
+		    p = faded
+		  end if
+		  
+		  self.BackgroundImage = p
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub ChooseUpdate(checker As Kaju.UpdateChecker, updates() As Kaju.UpdateInformation)
 		  self.Checker = checker
@@ -584,6 +610,24 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub CurrentUpdate_ImageReceived(sender As Kaju.UpdateInformation)
+		  if sender is CurrentUpdate then
+		    ChangeBackgroudImage( CurrentUpdate )
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub CurrentUpdate_ReleaseNotesReceived(sender As Kaju.UpdateInformation)
+		  if sender is CurrentUpdate then
+		    DisplayVersionInfo( CurrentUpdate )
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub DisplayVersionInfo(update As Kaju.UpdateInformation)
 		  //
 		  // Fill in the viewer
@@ -609,31 +653,12 @@ End
 		  //
 		  // Get the background picture, if any
 		  //
-		  dim useTransparency as boolean = update.UseTransparency
-		  dim p as Picture = update.Image
-		  if p is nil then
-		    p = Checker.DefaultImage
-		    useTransparency = Checker.DefaultUseTransparency
-		  end if
-		  
-		  if p <> nil and useTransparency then
-		    dim faded as new Picture( p.Width, p.Height )
-		    
-		    const kTransparencyPercent = 50.0
-		    faded.Graphics.Transparency = kTransparencyPercent
-		    
-		    faded.Graphics.DrawPicture( p, 0, 0 )
-		    
-		    p = faded
-		  end if
-		  
-		  self.BackgroundImage = p
+		  ChangeBackgroudImage update
 		  
 		  //
 		  // Show the release notes
 		  //
 		  dim source as string = update.ReleaseNotes
-		  source = Kaju.ProcessReleaseNotes( source )
 		  hvNotes.LoadPage( source, RelativeToFolderItem )
 		  
 		  //
@@ -902,6 +927,31 @@ End
 		Private CurrentStage As Stage
 	#tag EndProperty
 
+	#tag ComputedProperty, Flags = &h21
+		#tag Getter
+			Get
+			  return mCurrentUpdate
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  dim current as Kaju.UpdateInformation = mCurrentUpdate
+			  if current isa object then
+			    RemoveHandler current.ImageReceived, WeakAddressOf CurrentUpdate_ImageReceived
+			    RemoveHandler current.ReleaseNotesReceived, WeakAddressOf CurrentUpdate_ReleaseNotesReceived
+			  end if
+			  
+			  mCurrentUpdate = value
+			  if value isa object then
+			    AddHandler value.ImageReceived, WeakAddressOf CurrentUpdate_ImageReceived
+			    AddHandler value.ReleaseNotesReceived, WeakAddressOf CurrentUpdate_ReleaseNotesReceived
+			  end if
+			  
+			End Set
+		#tag EndSetter
+		Private CurrentUpdate As Kaju.UpdateInformation
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h21
 		#tag Note
 			Files/folders that shoudl be deleted if the user cancelled
@@ -937,6 +987,10 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Attributes( hidden ) Private mCurrentUpdate As Kaju.UpdateInformation
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private RelativeToFolderItem As FolderItem
 	#tag EndProperty
 
@@ -968,19 +1022,29 @@ End
 	#tag EndEvent
 	#tag Event
 		Function CancelLoad(URL as String) As Boolean
+		  #pragma unused URL
+		  
 		  dim r as boolean = not Loading
 		  Loading = false
 		  return r
 		  
-		  #pragma unused URL
 		End Function
 	#tag EndEvent
 	#tag Event
 		Sub Error(errorNumber as Integer, errorMessage as String)
-		  break
-		  
-		  #pragma unused errorNumber
 		  #pragma unused errorMessage
+		  
+		  #if TargetMacOS then
+		    const kCancelledCode as integer = -999
+		  #else
+		    const kCancelledCode as integer = -9999999999
+		  #endif
+		  
+		  if errorNumber <> kCancelledCode then
+		    break
+		  end if
+		  
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1131,6 +1195,8 @@ End
 		  // Fill in the viewer
 		  //
 		  
+		  CurrentUpdate = nil
+		  
 		  if me.ListIndex = -1 then
 		    if me.ListCount <> 0 then
 		      me.ListIndex = 0
@@ -1140,6 +1206,7 @@ End
 		  
 		  dim update as Kaju.UpdateInformation = me.RowTag( me.ListIndex )
 		  DisplayVersionInfo( update )
+		  CurrentUpdate = update
 		  
 		End Sub
 	#tag EndEvent

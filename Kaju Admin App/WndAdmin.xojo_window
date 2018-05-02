@@ -62,6 +62,7 @@ Begin Window WndAdmin
       ScrollbarHorizontal=   False
       ScrollBarVertical=   True
       SelectionType   =   0
+      ShowDropIndicator=   False
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
@@ -69,6 +70,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   14
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -103,6 +105,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   640
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   20
@@ -134,6 +137,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   640
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   20
@@ -175,6 +179,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   52
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -202,6 +207,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   12
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Version:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -240,6 +246,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   119
+      Transparent     =   False
       Underline       =   False
       Value           =   0
       Visible         =   True
@@ -286,7 +293,8 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   193
+         Top             =   194
+         Transparent     =   False
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   True
@@ -336,6 +344,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   11
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   "Preview:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -370,6 +379,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   10
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   "Release Notes (HTML):"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -420,6 +430,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   194
+         Transparent     =   False
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   True
@@ -447,6 +458,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   4
+         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -486,6 +498,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   162
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -552,6 +565,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -596,6 +610,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -640,6 +655,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   True
          Value           =   False
          Visible         =   True
@@ -684,6 +700,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -728,6 +745,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -772,6 +790,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -816,6 +835,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -860,6 +880,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -887,6 +908,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   0
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "Use ‘$VERSION$’ in the URL to insert the version on export"
          TextAlign       =   1
          TextColor       =   &c00000000
@@ -921,6 +943,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   0
          TabPanelIndex   =   3
+         TabStop         =   True
          Text            =   "Use ‘$VERSION$’ in the URL to insert the version on export"
          TextAlign       =   1
          TextColor       =   &c00000000
@@ -960,6 +983,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   382
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -1003,6 +1027,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   18
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -1030,6 +1055,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   11
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "App Name:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -1069,6 +1095,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   19
+      Transparent     =   False
       Underline       =   False
       Value           =   False
       Visible         =   True
@@ -1131,6 +1158,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   640
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   186
@@ -1166,6 +1194,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   14
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "None"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -1200,6 +1229,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   13
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Platforms:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -1239,6 +1269,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   639
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   85
@@ -1270,6 +1301,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   641
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   65
@@ -1313,6 +1345,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   639
+      Transparent     =   False
       Underline       =   False
       Value           =   False
       Visible         =   True
@@ -1356,6 +1389,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   85
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -1383,6 +1417,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   17
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Min. Req. Version:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -1394,6 +1429,15 @@ Begin Window WndAdmin
       Underline       =   False
       Visible         =   True
       Width           =   117
+   End
+   Begin Kaju.UpdateInformation objReleaseNotesProcessor
+      Image           =   0
+      Index           =   -2147483648
+      LockedInPosition=   False
+      Scope           =   2
+      StageCode       =   0
+      TabPanelIndex   =   0
+      UseTransparency =   True
    End
 End
 #tag EndWindow
@@ -2193,6 +2237,7 @@ End
 #tag Events fldReleaseNotes
 	#tag Event
 		Sub TextChange()
+		  objReleaseNotesProcessor.ReleaseNotes = me.Text
 		  tmrUpdateReleaseNotesPreview.Mode = Timer.ModeSingle
 		  tmrUpdateReleaseNotesPreview.Reset
 		End Sub
@@ -2274,9 +2319,11 @@ End
 		Sub Action()
 		  self.Loading = true
 		  
-		  dim releaseNotes as string = ControlValue( fldReleaseNotes ).StringValue
-		  if not cbPre2Preview.Value then
-		    releaseNotes = Kaju.ProcessReleaseNotes( releaseNotes )
+		  dim releaseNotes as string
+		  if cbPre2Preview.Value then
+		    releaseNotes = ControlValue( fldReleaseNotes ).StringValue
+		  else
+		    releaseNotes = objReleaseNotesProcessor.ReleaseNotes
 		  end if
 		  hvReleaseNotesPreview.LoadPage( releaseNotes, RelativeToFolderItem )
 		  
@@ -2380,6 +2427,14 @@ End
 		  uc.TestUpdate( s )
 		  
 		  me.MenuValue = -1
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events objReleaseNotesProcessor
+	#tag Event
+		Sub ReleaseNotesReceived()
+		  tmrUpdateReleaseNotesPreview.Mode = Timer.ModeSingle
+		  tmrUpdateReleaseNotesPreview.Reset
 		End Sub
 	#tag EndEvent
 #tag EndEvents
