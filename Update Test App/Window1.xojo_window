@@ -480,7 +480,7 @@ Begin Window Window1
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      State           =   0
+      State           =   1
       TabIndex        =   13
       TabPanelIndex   =   0
       TabStop         =   True
@@ -490,7 +490,7 @@ Begin Window Window1
       Top             =   420
       Transparent     =   False
       Underline       =   False
-      Value           =   False
+      Value           =   True
       Visible         =   True
       Width           =   159
    End
