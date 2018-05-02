@@ -272,6 +272,20 @@ Inherits Kaju.Information
 		AppName As String
 	#tag EndProperty
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  if mReleaseNotesFromURL <> "" then
+			    return mReleaseNotesFromURL
+			  else
+			    return mReleaseNotes
+			  end if
+			  
+			End Get
+		#tag EndGetter
+		DisplayReleaseNotes As String
+	#tag EndComputedProperty
+
 	#tag ComputedProperty, Flags = &h0, CompatibilityFlags = (TargetHasGUI)
 		#tag Getter
 			Get
@@ -723,6 +737,7 @@ Inherits Kaju.Information
 			Name="ReleaseNotesFromURL"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

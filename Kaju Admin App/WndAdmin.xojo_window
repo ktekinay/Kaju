@@ -248,7 +248,7 @@ Begin Window WndAdmin
       Top             =   119
       Transparent     =   False
       Underline       =   False
-      Value           =   0
+      Value           =   3
       Visible         =   True
       Width           =   653
       Begin TextAreaChanger fldReleaseNotes
@@ -2425,10 +2425,7 @@ End
 		  if cbPre2Preview.Value then
 		    releaseNotes = ControlValue( fldReleaseNotes ).StringValue
 		  else
-		    releaseNotes = objReleaseNotesProcessor.ReleaseNotesFromURL
-		    if releaseNotes = "" then
-		      releaseNotes = objReleaseNotesProcessor.ReleaseNotes
-		    end if
+		    releaseNotes = objReleaseNotesProcessor.DisplayReleaseNotes
 		  end if
 		  hvReleaseNotesPreview.LoadPage( releaseNotes, RelativeToFolderItem )
 		  
