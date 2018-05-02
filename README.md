@@ -39,17 +39,17 @@ If you plan to allow 32-bit to 64-bit updates on Windows and Linux, you must inc
 
 Create a new `Kaju.UpdateChecker` instance and fill in its properties. In the `Constructor`, you have to provide a FolderItem for a folder where Kaju can save its preferences, one that is unique to your app. At the least, you must also set the `ServerPublicRSAKey` (more on this later) and the `UpdateURL` where it will get its update information. If that URL (or any URL) starts with "https:", it will be accessed securely. (Conversely, a URL that does not start with "https:" will be accessed normally.)
 
-Call the `Execute` method of the `Kaju.UpdateChecker`. That's it. Kaju will handle everything else by going to the `UpdateURL` to see if there are any updates available for that version of the app, then ask the user about them. If the user chooses to update, the class will download and verify the binary, then offer the user the opportunity to Quit & Install or Cancel. If they choose to install, Quit will be called.
+Call the `ExecuteAsync` (preferred) or `Execute` method of the `Kaju.UpdateChecker`. That's it. Kaju will handle everything else by going to the `UpdateURL` to see if there are any updates available for that version of the app, then ask the user about them. If the user chooses to update, the class will download and verify the binary, then offer the user the opportunity to Quit & Install or Cancel. If they choose to install, Quit will be called.
 
 Since none of this is modal, the user can continue to use your app with the update window waiting in the background. If they do choose to install, the update window will be sent to the back so it will be closed last.
 
-To discover what `UpdateChecker` found, you can check the `Result` method after calling `Execute`. It returns a value from the `Kaju.UpdateChecker.ResultType` enum. 
+To discover what `UpdateChecker` found, you can check the `Result` property in the `ExecuteAsyncComplete` event after using `ExecuteAsync` (preferred) or directly after calling `Execute`. It returns a value from the `Kaju.UpdateChecker.ResultType` enum. If there was a connection error with `ExecuteAsync` check the `LastError` property too.
 
 ### Minimum OS
 
 Kaju will work the same way on Mac, Windows, and Linux. All recent versions of MacOS and Linux should be supported. Windows Vista and later are supported.
 
-If Kaju cannot find the tools it needs, the `Result` will be set to `UnsupportedOS` after you call `Execute`.
+If Kaju cannot find the tools it needs, the `Result` will be set to `UnsupportedOS` after you call `ExecuteAsync` or `Execute`.
 
 **Important**: Recent Linus distros do not have the libraries needed to show the `HTMLViewer` in 32-bit apps. Kaju will report an error in those cases and will not show the release notes, but the update will still work.
 
@@ -376,9 +376,17 @@ Add a translation for each, then submit a pull request as outlined above.
 
 ## Release Notes
 
-2.0.1 (__)
+2.1 (__)
 
-* Changed `KajuUpdateWindow.hsSocket.ConnectionType` to SSLv23.
+* **KajuUpdateWindow**: Changed `hsSocket` to a `Xojo.Net.HTTPSocket` object.
+* **UpdateChecker**: Added `ExecuteAsync` that will check for updates asynchronously using `Xojo.Net.HTTPSocket` and `LastError` for HTTP errors that occur when using that method.
+* **UpdateChecker**: Added results for "PageNotFound" and "FetchingUpdateInfo".
+* **UpdateChecker**: Better handling of a URL in the form "http://un:pw@path".
+* **UpdateChecker**: Changed `Result` to a computed property and made the `mResult` shadow property hidden.
+* **UpdateInformation**: Will fetch images and release notes asynchronously.
+* **Test App**: The window will let you specify Asynchronous and your own URL. It will also allow testing of simple HTTP authenticated directories.
+* **Test App**: Asynchronous is now the default.
+* **General**: Code changes for easier debugging.
 
 2.0 (May 31, 2017)
 
