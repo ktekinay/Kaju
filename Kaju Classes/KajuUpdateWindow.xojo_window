@@ -625,31 +625,14 @@ End
 		  end if
 		  
 		  if p <> nil and useTransparency then
-		    dim faded as new Picture( p.Width, p.Height, 32 )
-		    faded.Transparent = Picture.TransparentWhite
+		    dim faded as new Picture( p.Width, p.Height )
 		    
 		    const kTransparencyPercent = 50.0
-		    #if TargetWindows then
-		      if App.UseGDIPlus then
-		    #endif
 		    faded.Graphics.Transparency = kTransparencyPercent
-		    #if TargetWindows then
-		  end if
-		  #endif
-		  
-		  faded.Graphics.DrawPicture( p, 0, 0 )
-		  
-		  #if TargetWindows then
-		    if App.UseGDIPlus then
-		  #endif
-		  dim mask as new Picture( p.Width, p.Height )
-		  mask.Graphics.DrawPicture( p.Mask, 0, 0 )
-		  faded.Mask = mask
-		  #if TargetWindows then
-		    end if
-		  #endif
-		  
-		  p = faded
+		    
+		    faded.Graphics.DrawPicture( p, 0, 0 )
+		    
+		    p = faded
 		  end if
 		  
 		  self.BackgroundImage = p
