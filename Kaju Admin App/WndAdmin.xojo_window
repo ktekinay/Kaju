@@ -429,7 +429,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   194
+         Top             =   195
          Transparent     =   False
          Underline       =   False
          UseFocusRing    =   True
@@ -465,7 +465,7 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   194
+         Top             =   195
          Transparent     =   False
          Underline       =   False
          Visible         =   True
@@ -556,7 +556,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   7
          TabPanelIndex   =   1
          TabStop         =   True
@@ -601,7 +601,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   8
          TabPanelIndex   =   1
          TabStop         =   True
@@ -646,7 +646,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   9
          TabPanelIndex   =   1
          TabStop         =   True
@@ -691,7 +691,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   2
          TabPanelIndex   =   1
          TabStop         =   True
@@ -736,7 +736,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   3
          TabPanelIndex   =   1
          TabStop         =   True
@@ -781,7 +781,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   4
          TabPanelIndex   =   1
          TabStop         =   True
@@ -826,7 +826,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   5
          TabPanelIndex   =   1
          TabStop         =   True
@@ -871,7 +871,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   6
          TabPanelIndex   =   1
          TabStop         =   True
@@ -974,7 +974,7 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   False
-         Scope           =   0
+         Scope           =   2
          State           =   0
          TabIndex        =   12
          TabPanelIndex   =   1
@@ -988,6 +988,73 @@ Begin Window WndAdmin
          Value           =   False
          Visible         =   True
          Width           =   157
+      End
+      Begin PopupMenuChanger pumImageScale
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   "ImageScale"
+         DataSource      =   ""
+         Enabled         =   False
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         InitialValue    =   "1\n2\n3"
+         Italic          =   False
+         Left            =   804
+         ListIndex       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   4
+         TabPanelIndex   =   4
+         TabStop         =   True
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   161
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   80
+      End
+      Begin Label Label1
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   10
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   725
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   5
+         TabPanelIndex   =   4
+         TabStop         =   True
+         Text            =   "Scale:"
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   162
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   67
       End
    End
    Begin TextFieldChanger fldAppName
@@ -1336,7 +1403,7 @@ Begin Window WndAdmin
       LockRight       =   True
       LockTop         =   False
       MenuValue       =   -1
-      Scope           =   0
+      Scope           =   2
       TabIndex        =   9
       TabPanelIndex   =   0
       TabStop         =   True
@@ -1431,13 +1498,23 @@ Begin Window WndAdmin
       Width           =   117
    End
    Begin Kaju.UpdateInformation objReleaseNotesProcessor
+      AppName         =   ""
       Image           =   0
+      ImageScale      =   1
+      ImageURL        =   ""
       Index           =   -2147483648
+      IsValid         =   False
       LockedInPosition=   False
+      MinimumRequiredVersion=   ""
+      ReleaseNotes    =   ""
+      ReleaseNotesFromURL=   ""
+      RequiresPayment =   False
       Scope           =   2
       StageCode       =   0
       TabPanelIndex   =   0
       UseTransparency =   True
+      Version         =   ""
+      VersionAsDouble =   0.0
    End
 End
 #tag EndWindow
@@ -1671,6 +1748,7 @@ End
 		    select case c
 		    case IsA TextEdit
 		    case IsA CheckBox
+		    case IsA PopupMenu
 		    else
 		      continue for i
 		    end
@@ -1707,6 +1785,10 @@ End
 		    dim cb as CheckBox = CheckBox( c )
 		    value = cb.DataField
 		    
+		  case IsA PopUpMenu
+		    dim pum as PopupMenu = PopupMenu( c )
+		    value = pum.DataField
+		    
 		  end select
 		  
 		  return value
@@ -1727,6 +1809,12 @@ End
 		    dim cb as CheckBox = CheckBox( c )
 		    r = cb.Value
 		    
+		  case IsA PopupMenu
+		    dim pum as PopupMenu = PopupMenu( c )
+		    if pum.ListIndex <> -1 then
+		      r = pum.List( pum.ListIndex )
+		    end if
+		    
 		  end select
 		  
 		  return r
@@ -1745,6 +1833,20 @@ End
 		  case IsA CheckBox
 		    dim cb as CheckBox = CheckBox( c )
 		    cb.Value = value.BooleanValue
+		    
+		  case IsA PopupMenu
+		    dim pum as PopupMenu = PopupMenu( c )
+		    if value.IsNull then
+		      pum.ListIndex = 0
+		    else
+		      for i as integer = pum.ListCount - 1 downto 0
+		        if pum.List( i ) = value.StringValue then
+		          pum.ListIndex = i
+		          exit
+		        end if
+		      next
+		      
+		    end if
 		    
 		  else
 		    raise new KeyNotFoundException
@@ -2323,7 +2425,10 @@ End
 		  if cbPre2Preview.Value then
 		    releaseNotes = ControlValue( fldReleaseNotes ).StringValue
 		  else
-		    releaseNotes = objReleaseNotesProcessor.ReleaseNotes
+		    releaseNotes = objReleaseNotesProcessor.ReleaseNotesFromURL
+		    if releaseNotes = "" then
+		      releaseNotes = objReleaseNotesProcessor.ReleaseNotes
+		    end if
 		  end if
 		  hvReleaseNotesPreview.LoadPage( releaseNotes, RelativeToFolderItem )
 		  

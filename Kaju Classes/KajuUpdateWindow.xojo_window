@@ -658,7 +658,11 @@ End
 		  //
 		  // Show the release notes
 		  //
-		  dim source as string = update.ReleaseNotes
+		  dim source as string = update.ReleaseNotesFromURL
+		  if source = "" then
+		    source = update.ReleaseNotes
+		  end if
+		  
 		  hvNotes.LoadPage( source, RelativeToFolderItem )
 		  
 		  //

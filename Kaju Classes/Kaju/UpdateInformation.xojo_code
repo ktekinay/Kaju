@@ -170,8 +170,14 @@ Inherits Kaju.Information
 		  #pragma unused sender
 		  #pragma unused url
 		  
-		  if httpStatus = 200 then
-		    mImage = Picture.FromData( content )
+		  if httpStatus <> 404 and content <> "" then
+		    dim p as Picture = Picture.FromData( content )
+		    
+		    if ImageScale > 1 then
+		      p = new Picture( p.Width \ ImageScale, p.Height \ ImageScale, array( p ) )
+		    end if
+		    
+		    mImage = p
 		    RaiseEvent ImageReceived
 		  end if
 		  
@@ -220,8 +226,8 @@ Inherits Kaju.Information
 		    raw = raw.DefineEncoding( enc )
 		    
 		    if raw.Trim <> "" then
-		      mReleaseNotes = raw
-		      RaiseEvent ReleaseNotesReceived
+		      mReleaseNotesFromURL = raw
+		      RaiseEvent ReleaseNotesReceived()
 		    end if
 		  end if
 		  
@@ -303,6 +309,10 @@ Inherits Kaju.Information
 		Image As Picture
 	#tag EndComputedProperty
 
+	#tag Property, Flags = &h0
+		ImageScale As Integer = 1
+	#tag EndProperty
+
 	#tag Property, Flags = &h21, CompatibilityFlags = (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit)) or  (TargetIOS and (Target32Bit or Target64Bit))
 		Private ImageSocket As Kaju.HTTPSocketAsync
 	#tag EndProperty
@@ -325,6 +335,10 @@ Inherits Kaju.Information
 
 	#tag Property, Flags = &h21
 		Private mReleaseNotes As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mReleaseNotesFromURL As String
 	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -440,7 +454,8 @@ Inherits Kaju.Information
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  Return mReleaseNotes
+			  return mReleaseNotes
+			  
 			End Get
 		#tag EndGetter
 		#tag Setter
@@ -468,6 +483,8 @@ Inherits Kaju.Information
 			  //  http://something.com/UpdateInformation.json
 			  //  -->
 			  //
+			  
+			  mReleaseNotesFromURL = ""
 			  
 			  static noInfoHTML as string = "<b>" + KajuLocale.kNoUpdateInfoMessage + "</b>"
 			  
@@ -508,6 +525,15 @@ Inherits Kaju.Information
 			End Set
 		#tag EndSetter
 		ReleaseNotes As String
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  Return mReleaseNotesFromURL
+			End Get
+		#tag EndGetter
+		ReleaseNotesFromURL As String
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h21, CompatibilityFlags = (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit)) or  (TargetIOS and (Target32Bit or Target64Bit))
@@ -683,6 +709,18 @@ Inherits Kaju.Information
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ReleaseNotes"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ImageScale"
+			Group="Behavior"
+			InitialValue="1"
+			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ReleaseNotesFromURL"
 			Group="Behavior"
 			Type="String"
 		#tag EndViewProperty
