@@ -538,13 +538,6 @@ Protected Class UpdateChecker
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Function Result() As ResultType
-		  return mResult
-		  
-		End Function
-	#tag EndMethod
-
 	#tag Method, Flags = &h21
 		Private Sub SavePrefs()
 		  dim j as new JSONItem
@@ -704,7 +697,7 @@ Protected Class UpdateChecker
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private mResult As ResultType = ResultType.NotYetChecked
+		Attributes( hidden ) Private mResult As ResultType = ResultType.NotYetChecked
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -714,6 +707,15 @@ Protected Class UpdateChecker
 	#tag Property, Flags = &h0
 		QuitOnCancelIfRequired As Boolean = True
 	#tag EndProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mResult
+			End Get
+		#tag EndGetter
+		Result As ResultType
+	#tag EndComputedProperty
 
 	#tag Property, Flags = &h0
 		ServerPublicRSAKey As String
