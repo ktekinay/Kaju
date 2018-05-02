@@ -313,7 +313,7 @@ Begin Window WndAdmin
          LockLeft        =   True
          LockRight       =   True
          LockTop         =   False
-         Renderer        =   0
+         Renderer        =   1
          Scope           =   2
          TabIndex        =   1
          TabPanelIndex   =   1
@@ -498,7 +498,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   162
-         Transparent     =   False
+         Transparent     =   True
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -517,7 +517,7 @@ Begin Window WndAdmin
          LockLeft        =   True
          LockRight       =   True
          LockTop         =   True
-         Renderer        =   0
+         Renderer        =   1
          Scope           =   2
          TabIndex        =   2
          TabPanelIndex   =   4
@@ -700,7 +700,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
-         Transparent     =   False
+         Transparent     =   True
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -1499,6 +1499,7 @@ Begin Window WndAdmin
    End
    Begin Kaju.UpdateInformation objReleaseNotesProcessor
       AppName         =   ""
+      DisplayReleaseNotes=   ""
       Image           =   0
       ImageScale      =   1
       ImageURL        =   ""
@@ -1603,6 +1604,7 @@ End
 		    cc.LockRight = true
 		    cc.LockTop = true
 		    cc.LockBottom = false
+		    cc.Transparent = true
 		    
 		    if binaryName.InStr( "64" ) <> 0 then
 		      cc.EmbedWithinPanel TabPanel1, tpIndex64, useLeft, useTop64
@@ -1760,8 +1762,8 @@ End
 		    bc.Clear
 		  next
 		  
-		  hvReleaseNotesPreview.LoadPage( "", nil )
-		  hvImagePreview.LoadPage( "", nil )
+		  hvReleaseNotesPreview.LoadPage( kNoDataHTML, RelativeToFolderItem )
+		  hvImagePreview.LoadPage( kNoDataHTML, RelativeToFolderItem )
 		  
 		  self.Loading = false
 		  
@@ -2285,6 +2287,10 @@ End
 	#tag EndProperty
 
 
+	#tag Constant, Name = kNoDataHTML, Type = String, Dynamic = False, Default = \"<!-- No data --><BR />", Scope = Private
+	#tag EndConstant
+
+
 #tag EndWindowCode
 
 #tag Events lbVersions
@@ -2342,6 +2348,14 @@ End
 		  objReleaseNotesProcessor.ReleaseNotes = me.Text
 		  tmrUpdateReleaseNotesPreview.Mode = Timer.ModeSingle
 		  tmrUpdateReleaseNotesPreview.Reset
+		  
+		  #if TargetWindows then
+		    hvReleaseNotesPreview.LoadPage( kNoDataHTML, RelativeToFolderItem )
+		    
+		    dim releaseNotes as string = ControlValue( fldReleaseNotes ).StringValue
+		    hvReleaseNotesPreview.LoadPage releaseNotes, RelativeToFolderItem
+		  #endif
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2358,12 +2372,31 @@ End
 		  #pragma unused URL
 		End Function
 	#tag EndEvent
+	#tag Event
+		Sub DocumentComplete(URL as String)
+		  #pragma unused URL
+		  
+		  self.Loading = false
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Error(errorNumber as Integer, errorMessage as String)
+		  #pragma unused errorNumber
+		  #pragma unused errorMessage
+		  
+		  break
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events fldImageURL
 	#tag Event
 		Sub TextChange()
 		  tmrUpdateImagePreview.Mode = Timer.ModeSingle
 		  tmrUpdateImagePreview.Reset
+		  
+		  #if TargetWindows then
+		    hvImagePreview.LoadPage kNoDataHTML, RelativeToFolderItem
+		  #endif
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2379,6 +2412,21 @@ End
 		  
 		  #pragma unused URL
 		End Function
+	#tag EndEvent
+	#tag Event
+		Sub DocumentComplete(URL as String)
+		  #pragma unused URL
+		  
+		  self.Loading = false
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Error(errorNumber as Integer, errorMessage as String)
+		  #pragma unused errorNumber
+		  #pragma unused errorMessage
+		  
+		  break
+		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events btnStyle
@@ -2429,7 +2477,10 @@ End
 		  end if
 		  hvReleaseNotesPreview.LoadPage( releaseNotes, RelativeToFolderItem )
 		  
-		  self.Loading = false
+		  //
+		  // The htmlViewer will set Loading to false
+		  //
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2458,7 +2509,10 @@ End
 		  
 		  hvImagePreview.LoadURL( fldImageURL.Text )
 		  
-		  self.Loading = false
+		  //
+		  // The htmlViewer will set Loading to false
+		  //
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
