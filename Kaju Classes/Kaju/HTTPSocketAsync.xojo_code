@@ -29,6 +29,10 @@ Inherits Xojo.Net.HTTPSocket
 		  dim mb as MemoryBlock = content.Data
 		  dim contentString as string = mb.StringValue( 0, content.Size )
 		  
+		  if Encodings.UTF8.IsValidData( contentString ) then
+		    contentString = contentString.DefineEncoding( Encodings.UTF8 )
+		  end if
+		  
 		  RaiseEvent PageReceived( url, httpStatus, contentString )
 		End Sub
 	#tag EndEvent
