@@ -1,0 +1,46 @@
+#tag MultiImage
+Image Some_Image
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAJgAAAAAAJgAAIAAAVBdGxhcwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8fcGx1c2gtYmVhcnMtdmVjdG9yI0ZGRkZGRkZGLnBuZwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAP////8AAAogY3UAAAAAAAAAAAAAAAAAD0V4dGVybmFsIEltYWdlcwAAAgCLLzpVc2VyczprdGVraW5heTpEb2N1bWVudHM6UkIgUHJvamVjdHM6S2FqdSBTZWxmLVVwZGF0ZXI6S2FqdSBHaXQ6RXh0ZXJuYWwgSW1hZ2VzOnBsdXNoLWJlYXJzLXZlY3Rvci1jbGlwYXJ0LWZyb20tZ29vZGZyZWVwaG90b3MtY29tQDF4LnBuZwAADgB0ADkAcABsAHUAcwBoAC0AYgBlAGEAcgBzAC0AdgBlAGMAdABvAHIALQBjAGwAaQBwAGEAcgB0AC0AZgByAG8AbQAtAGcAbwBvAGQAZgByAGUAZQBwAGgAbwB0AG8AcwAtAGMAbwBtAEAAMQB4AC4AcABuAGcADwAMAAUAQQB0AGwAYQBzABIAiVVzZXJzL2t0ZWtpbmF5L0RvY3VtZW50cy9SQiBQcm9qZWN0cy9LYWp1IFNlbGYtVXBkYXRlci9LYWp1IEdpdC9FeHRlcm5hbCBJbWFnZXMvcGx1c2gtYmVhcnMtdmVjdG9yLWNsaXBhcnQtZnJvbS1nb29kZnJlZXBob3Rvcy1jb21AMXgucG5nAAATAAEvAAAVAAIAD///AAAAAAAAAAA=
+		FullPath = /Users/ktekinay/Documents/RB Projects/Kaju Self-Updater/Kaju Git/External Images/plush-bears-vector-clipart-from-goodfreephotos-com@1x.png
+		PartialPath = ..\External Images\plush-bears-vector-clipart-from-goodfreephotos-com@1x.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 800.00
+			Orientation = Any
+			Platform = 15
+			PPI = 72
+			VSize = 494.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAJgAAAAAAJgAAIAAAVBdGxhcwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8fcGx1c2gtYmVhcnMtdmVjdG9yI0ZGRkZGRkZGLnBuZwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAABQTkdmR0tPTv////8AAAogY3UAAAAAAAAAAAAAAAAAD0V4dGVybmFsIEltYWdlcwAAAgCLLzpVc2VyczprdGVraW5heTpEb2N1bWVudHM6UkIgUHJvamVjdHM6S2FqdSBTZWxmLVVwZGF0ZXI6S2FqdSBHaXQ6RXh0ZXJuYWwgSW1hZ2VzOnBsdXNoLWJlYXJzLXZlY3Rvci1jbGlwYXJ0LWZyb20tZ29vZGZyZWVwaG90b3MtY29tQDJ4LnBuZwAADgB0ADkAcABsAHUAcwBoAC0AYgBlAGEAcgBzAC0AdgBlAGMAdABvAHIALQBjAGwAaQBwAGEAcgB0AC0AZgByAG8AbQAtAGcAbwBvAGQAZgByAGUAZQBwAGgAbwB0AG8AcwAtAGMAbwBtAEAAMgB4AC4AcABuAGcADwAMAAUAQQB0AGwAYQBzABIAiVVzZXJzL2t0ZWtpbmF5L0RvY3VtZW50cy9SQiBQcm9qZWN0cy9LYWp1IFNlbGYtVXBkYXRlci9LYWp1IEdpdC9FeHRlcm5hbCBJbWFnZXMvcGx1c2gtYmVhcnMtdmVjdG9yLWNsaXBhcnQtZnJvbS1nb29kZnJlZXBob3Rvcy1jb21AMngucG5nAAATAAEvAAAVAAIAD///AAAAAAAAAAA=
+		FullPath = /Users/ktekinay/Documents/RB Projects/Kaju Self-Updater/Kaju Git/External Images/plush-bears-vector-clipart-from-goodfreephotos-com@2x.png
+		PartialPath = ..\External Images\plush-bears-vector-clipart-from-goodfreephotos-com@2x.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 800.00
+			Orientation = Any
+			Platform = 15
+			PPI = 144
+			VSize = 494.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAJgAAAAAAJgAAIAAAVBdGxhcwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8fcGx1c2gtYmVhcnMtdmVjdG9yI0ZGRkZGRkZGLnBuZwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAP////8AAAogY3UAAAAAAAAAAAAAAAAAD0V4dGVybmFsIEltYWdlcwAAAgCLLzpVc2VyczprdGVraW5heTpEb2N1bWVudHM6UkIgUHJvamVjdHM6S2FqdSBTZWxmLVVwZGF0ZXI6S2FqdSBHaXQ6RXh0ZXJuYWwgSW1hZ2VzOnBsdXNoLWJlYXJzLXZlY3Rvci1jbGlwYXJ0LWZyb20tZ29vZGZyZWVwaG90b3MtY29tQDN4LnBuZwAADgB0ADkAcABsAHUAcwBoAC0AYgBlAGEAcgBzAC0AdgBlAGMAdABvAHIALQBjAGwAaQBwAGEAcgB0AC0AZgByAG8AbQAtAGcAbwBvAGQAZgByAGUAZQBwAGgAbwB0AG8AcwAtAGMAbwBtAEAAMwB4AC4AcABuAGcADwAMAAUAQQB0AGwAYQBzABIAiVVzZXJzL2t0ZWtpbmF5L0RvY3VtZW50cy9SQiBQcm9qZWN0cy9LYWp1IFNlbGYtVXBkYXRlci9LYWp1IEdpdC9FeHRlcm5hbCBJbWFnZXMvcGx1c2gtYmVhcnMtdmVjdG9yLWNsaXBhcnQtZnJvbS1nb29kZnJlZXBob3Rvcy1jb21AM3gucG5nAAATAAEvAAAVAAIAD///AAAAAAAAAAA=
+		FullPath = /Users/ktekinay/Documents/RB Projects/Kaju Self-Updater/Kaju Git/External Images/plush-bears-vector-clipart-from-goodfreephotos-com@3x.png
+		PartialPath = ..\External Images\plush-bears-vector-clipart-from-goodfreephotos-com@3x.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 800.00
+			Orientation = Any
+			Platform = 15
+			PPI = 216
+			VSize = 494.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+End Image
+#tag EndMultiImage
