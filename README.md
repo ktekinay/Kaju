@@ -59,7 +59,7 @@ If Kaju cannot find the tools it needs, the `Result` will be set to `Unsupported
 
 If you set up a minimim required version in your update information, Kaju may find that a particular update is "required". For example, if the user is using v.1.0 and you've discovered a bug that necessitates an update to at least v.1.1, you would set that as the minimum required version. In the future, even as you release v.1.2, 1.3, etc, you would leave the minimum required as v.1.1 so Kaju knows to force the users of 1.0 to update.
 
-After calling `Kaju.UpdateChecker.Execute`, the `Result` method will tell you if a required update was found. In that case, it's up to you to take special actions to make sure that your app cannot be used until it is updated. To help, there is the `Kaju.UpdateChecker.QuitOnCancelIfRequired` property that is `True` by default. If the user tries to cancel a required update, the app will quit.
+After calling  `Kaju.UpdateChecker.ExecuteAsync` or `Kaju.UpdateChecker.Execute`, the `Result` method will tell you if a required update was found. In that case, it's up to you to take special actions to make sure that your app cannot be used until it is updated. To help, there is the `Kaju.UpdateChecker.QuitOnCancelIfRequired` property that is `True` by default. If the user tries to cancel a required update, the app will quit.
 
 ### Other Features
 
@@ -75,7 +75,7 @@ You may choose to specify an update URL that redirects to another location. By d
 
 ### One At A Time
 
-You can create several instances of `Kaju.UpdateChecker` if you'd like, but only one update can run at any time. If an update is already in progress, `Execute` won't do anything and will let you know through the `Result`.
+You can create several instances of `Kaju.UpdateChecker` if you'd like, but only one update can run at any time. If an update is already in progress, `ExecuteAsync` and `Execute` won't do anything and will let you know through the `Result`.
 
 ### Images
 
@@ -84,6 +84,8 @@ You can set a background image for the window in two places. Within the app, you
 You can also set `Kaju.UpdateChecker.DefaultUseTransparency` or set "Use Transparency" for an image provided through the Admin app. Transparency is set to 50% when `True`.
 
 An image will cover the entire window without cropping or scaling starting at the upper, left corner. Accordingly, you can provide an entire background image or just an icon.
+
+Within your app, use an Image Set to properly handle HiRes vs. LoRes screens. When providing a URL, set the "Scale" property for the image. For example, the URL points to an image designed for HiRes displays, set the Scale to 2 or 3, as appropriate, and Kaju will scale for LoRes if needed.
 
 ### Limitations
 
@@ -194,6 +196,7 @@ The JSON will contain these fields for each version.
 		URL                        (string)
 		Hash                       (string)
 	ImageURL                       (string)
+	ImageScale                     (integer)
 	UseTransparency                (bool, default = true)
 
 A sample JSON that will be returned by the server:
@@ -235,6 +238,7 @@ A sample JSON that will be returned by the server:
 				"Hash" : "ABC12C"
 			} ,
 		"ImageURL" : "http://www.site.com/image.png" ,
+		"ImageScale" : 2 ,
 		"UseTransparency" : true
 	} ,
 	{
@@ -382,7 +386,7 @@ Add a translation for each, then submit a pull request as outlined above.
 * **UpdateChecker**: Added `ExecuteAsync` that will check for updates asynchronously using `Xojo.Net.HTTPSocket` and `LastError` for HTTP errors that occur when using that method.
 * **UpdateChecker**: Added results for "PageNotFound" and "FetchingUpdateInfo".
 * **UpdateChecker**: Better handling of a URL in the form "http://un:pw@path".
-* **UpdateChecker**: Changed `Result` to a computed property and made the `mResult` shadow property hidden.
+* **UpdateChecker**: Changed `Result` to a read-only computed property and made the `mResult` shadow property hidden.
 * **UpdateInformation**: Will fetch images and release notes asynchronously.
 * **Test App**: The window will let you specify Asynchronous and your own URL. It will also allow testing of simple HTTP authenticated directories.
 * **Test App**: Asynchronous is now the default.
