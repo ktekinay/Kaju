@@ -639,14 +639,6 @@ Protected Class UpdateChecker
 		Event ExecuteAsyncComplete()
 	#tag EndHook
 
-	#tag Hook, Flags = &h0
-		Event ReadyToInstall()
-	#tag EndHook
-
-	#tag Hook, Flags = &h0
-		Event RequiredUpdateDeclined()
-	#tag EndHook
-
 
 	#tag Property, Flags = &h0
 		Allow32bitTo64bitUpdates As Boolean = True
@@ -878,6 +870,20 @@ Protected Class UpdateChecker
 			Name="Result"
 			Group="Behavior"
 			Type="ResultType"
+			EditorType="Enum"
+			#tag EnumValues
+				"-9999 - NotYetChecked"
+				"-100 - UpdateAlreadyInProgress"
+				"-70 - UnsupportedOS"
+				"-50 - NoWritePermission"
+				"-1 - Error"
+				"0 - NoUpdateAvailable"
+				"1 - IgnoredUpdateAvailable"
+				"2 - UpdateAvailable"
+				"3 - RequiredUpdateAvailable"
+				"4 - FetchingUpdateInfo"
+				"404 - PageNotFound"
+			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
