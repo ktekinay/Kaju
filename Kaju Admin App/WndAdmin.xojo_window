@@ -498,7 +498,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   162
-         Transparent     =   True
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -700,7 +700,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
-         Transparent     =   True
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -1307,7 +1307,7 @@ Begin Window WndAdmin
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   100
+      Width           =   80
    End
    Begin PushButton btnExport
       AutoDeactivate  =   True
@@ -1604,7 +1604,7 @@ End
 		    cc.LockRight = true
 		    cc.LockTop = true
 		    cc.LockBottom = false
-		    cc.Transparent = true
+		    cc.Transparent = false
 		    
 		    if binaryName.InStr( "64" ) <> 0 then
 		      cc.EmbedWithinPanel TabPanel1, tpIndex64, useLeft, useTop64

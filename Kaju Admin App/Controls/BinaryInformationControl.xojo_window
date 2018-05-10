@@ -22,7 +22,7 @@ Begin ContainerControl BinaryInformationControl
    TabPanelIndex   =   0
    TabStop         =   True
    Top             =   0
-   Transparent     =   True
+   Transparent     =   False
    UseFocusRing    =   False
    Visible         =   True
    Width           =   630
@@ -53,7 +53,7 @@ Begin ContainerControl BinaryInformationControl
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   66
-      Transparent     =   True
+      Transparent     =   False
       Underline       =   False
       Visible         =   False
       Width           =   80
@@ -207,7 +207,7 @@ Begin ContainerControl BinaryInformationControl
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   67
-      Transparent     =   True
+      Transparent     =   False
       Underline       =   False
       Visible         =   False
       Width           =   67
@@ -242,7 +242,7 @@ Begin ContainerControl BinaryInformationControl
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   101
-      Transparent     =   True
+      Transparent     =   False
       Underline       =   False
       Visible         =   False
       Width           =   67
