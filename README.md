@@ -10,7 +10,7 @@ Kaju is a pull system where the client application gets information from a known
 
 ### Installation
 
-Open the included Admin App or Test App, copy the Kaju Classes folder, then paste it into your project.
+Open the included Admin App or Test App, copy the Kaju Classes folder, then paste it into your project. **Important**: Do not drag the folders directly from the directory.
 
 ### Special Actions
 
@@ -39,17 +39,25 @@ If you plan to allow 32-bit to 64-bit updates on Windows and Linux, you must inc
 
 Create a new `Kaju.UpdateChecker` instance and fill in its properties. In the `Constructor`, you have to provide a FolderItem for a folder where Kaju can save its preferences, one that is unique to your app. At the least, you must also set the `ServerPublicRSAKey` (more on this later) and the `UpdateURL` where it will get its update information. If that URL (or any URL) starts with "https:", it will be accessed securely. (Conversely, a URL that does not start with "https:" will be accessed normally.)
 
-Call the `Execute` method of the `Kaju.UpdateChecker`. That's it. Kaju will handle everything else by going to the `UpdateURL` to see if there are any updates available for that version of the app, then ask the user about them. If the user chooses to update, the class will download and verify the binary, then offer the user the opportunity to Quit & Install or Cancel. If they choose to install, Quit will be called.
+Call the `ExecuteAsync` (preferred) or `Execute` method of the `Kaju.UpdateChecker`. That's it. Kaju will handle everything else by going to the `UpdateURL` to see if there are any updates available for that version of the app, then ask the user about them. If the user chooses to update, the class will download and verify the binary, then offer the user the opportunity to Quit & Install or Cancel. If they choose to install, Quit will be called.
 
 Since none of this is modal, the user can continue to use your app with the update window waiting in the background. If they do choose to install, the update window will be sent to the back so it will be closed last.
 
-To discover what `UpdateChecker` found, you can check the `Result` method after calling `Execute`. It returns a value from the `Kaju.UpdateChecker.ResultType` enum. 
+To discover what `UpdateChecker` found, you can check the `Result` property in the `ExecuteAsyncComplete` event after using `ExecuteAsync` (preferred) or directly after calling `Execute`. It returns a value from the `Kaju.UpdateChecker.ResultType` enum. If there was a connection error with `ExecuteAsync` check the `LastError` property too.
+
+### ExecuteAsync vs. Execute
+
+Xojo offers two types of HTTPSocket, the "classic" and the "namespaced" (`Xojo.Net.HTTPSocket`) versions. The namespaced version includes features that works with newer types of security but does not offer a synchronous mode. With that in mind, Kaju has two ways to start the update process, `Kaju.UpdateChecker.ExecuteAsync` and `Kaju.UpdateChecker.Execute`. The former uses the namespaced version and will report its result in the `ExecuteAsyncComplete` event. The latter uses the classic version and will report its results immediately.
+
+If yoru uddate information is not on a secure website, it shouldn't matter which you use, but we still recommend `ExecuteAsync` moving forward.
+
+**Note**: `ExecuteAsync` will always allow redirects so `UpdateChecker.AllowRedirection` must be set to `True` or an exception will be raised.
 
 ### Minimum OS
 
 Kaju will work the same way on Mac, Windows, and Linux. All recent versions of MacOS and Linux should be supported. Windows Vista and later are supported.
 
-If Kaju cannot find the tools it needs, the `Result` will be set to `UnsupportedOS` after you call `Execute`.
+If Kaju cannot find the tools it needs, the `Result` will be set to `UnsupportedOS` after you call `ExecuteAsync` or `Execute`.
 
 **Important**: Recent Linus distros do not have the libraries needed to show the `HTMLViewer` in 32-bit apps. Kaju will report an error in those cases and will not show the release notes, but the update will still work.
 
@@ -59,7 +67,7 @@ If Kaju cannot find the tools it needs, the `Result` will be set to `Unsupported
 
 If you set up a minimim required version in your update information, Kaju may find that a particular update is "required". For example, if the user is using v.1.0 and you've discovered a bug that necessitates an update to at least v.1.1, you would set that as the minimum required version. In the future, even as you release v.1.2, 1.3, etc, you would leave the minimum required as v.1.1 so Kaju knows to force the users of 1.0 to update.
 
-After calling `Kaju.UpdateChecker.Execute`, the `Result` method will tell you if a required update was found. In that case, it's up to you to take special actions to make sure that your app cannot be used until it is updated. To help, there is the `Kaju.UpdateChecker.QuitOnCancelIfRequired` property that is `True` by default. If the user tries to cancel a required update, the app will quit.
+After calling  `Kaju.UpdateChecker.ExecuteAsync` or `Kaju.UpdateChecker.Execute`, the `Result` method will tell you if a required update was found. In that case, it's up to you to take special actions to make sure that your app cannot be used until it is updated. To help, there is the `Kaju.UpdateChecker.QuitOnCancelIfRequired` property that is `True` by default. If the user tries to cancel a required update, the app will quit.
 
 ### Other Features
 
@@ -75,7 +83,7 @@ You may choose to specify an update URL that redirects to another location. By d
 
 ### One At A Time
 
-You can create several instances of `Kaju.UpdateChecker` if you'd like, but only one update can run at any time. If an update is already in progress, `Execute` won't do anything and will let you know through the `Result`.
+You can create several instances of `Kaju.UpdateChecker` if you'd like, but only one update can run at any time. If an update is already in progress, `ExecuteAsync` and `Execute` won't do anything and will let you know through the `Result`.
 
 ### Images
 
@@ -84,6 +92,8 @@ You can set a background image for the window in two places. Within the app, you
 You can also set `Kaju.UpdateChecker.DefaultUseTransparency` or set "Use Transparency" for an image provided through the Admin app. Transparency is set to 50% when `True`.
 
 An image will cover the entire window without cropping or scaling starting at the upper, left corner. Accordingly, you can provide an entire background image or just an icon.
+
+Within your app, use an Image Set to properly handle HiRes vs. LoRes screens. When providing a URL, set the "Scale" property for the image. For example, the URL points to an image designed for HiRes displays, set the Scale to 2 or 3, as appropriate, and Kaju will scale for LoRes if needed.
 
 ### Limitations
 
@@ -108,7 +118,7 @@ dim updater as new Kaju.UpdateChecker( myAppPrefFolder )
 updater.ServerPublicRSAKey = "12345..." // The key you copied from the Admin app
 updater.UpdateURL = "http://www...." // Where the update info will be posted
 
-updater.Execute
+updater.ExecuteAsync
 ```
 
 * If you expect to allow 32-bit to 64-bit updates on Windows or Linux, insert code into `App.Open` that will force the user to manually restart the app if such an update is detected. See the Kaju Update Test app project code for an example.
@@ -127,7 +137,26 @@ Add an entry for each *current* version of your app. You do not need a history s
 
 The release notes are created in HTML and some simple tools are provided for making that a bit easier. You can see a preview of the release notes as a you type and use the Preview button to see how Kaju will present the update window under various circumstances. The HTML can be as simple or as complex as you'd like.
 
-Alternatively, you can pull your release notes from a server by setting the first line to a URL. Anything after the first line will be used as an alternate if the URL can't be reached or has no content. (But note: Older apps with Kaju 1.x will see the text of the release notes including the URL at the top.)
+Alternatively, you can pull your release notes from a server by setting the first line to a URL. Anything after the first line will be used as an alternate if the URL can't be reached or has no content. (But note: Older apps with Kaju 1.x will see the text of the release notes including the URL at the top _unless_ that URL is in a comment.)
+
+The two ways to include a URL from which release notes will be pulled:
+
+```
+http://wwww.something.com/my_release_notes
+
+These are the alternate release notes and 
+the url above will be visible.
+```
+
+or
+
+```
+<!-- http://www.something.com/my_release_notes -->
+
+These are the alternate release notes but 
+the url above will not be visible because they are 
+commented (preferred).
+```
 
 **Note**: WebKit is used on all platforms to ensure consistency. This will increase the size of your project on Windows and Linux.
 
@@ -194,6 +223,7 @@ The JSON will contain these fields for each version.
 		URL                        (string)
 		Hash                       (string)
 	ImageURL                       (string)
+	ImageScale                     (integer)
 	UseTransparency                (bool, default = true)
 
 A sample JSON that will be returned by the server:
@@ -235,6 +265,7 @@ A sample JSON that will be returned by the server:
 				"Hash" : "ABC12C"
 			} ,
 		"ImageURL" : "http://www.site.com/image.png" ,
+		"ImageScale" : 2 ,
 		"UseTransparency" : true
 	} ,
 	{
@@ -286,10 +317,11 @@ There is also a `Kaju.Version` constant (introduced in v.1.4) that will let you 
 |Allow32bitTo64bitUpdates|Boolean|If `True`, will offer the user of a 32-bit app the option to upgrade to the 64-bit version, if available.|n|
 |AllowedInteraction|UInt32|Determines what windows Kaju is allowed to display; Use the available constants|n|
 |AllowedStage|Integer|What stage of updates the user may see (App.Final, App.Beta, App.Alpha, or App.Development)|n|
-|AllowRedirection|Boolean|If `True`, the `UpdateURL` may redirect to another URL (default: `False`)|n|
+|AllowRedirection|Boolean|If `True`, the `UpdateURL` may redirect to another URL (default: `False`) (must be `True` when using `ExecuteAsync`)|n|
 |DefaultImage|Picture|The background image that will be displayed in the window when an image is not provided by the update|n|
 |DefaultUseTransparency|Boolean|If `True`, transparency will be set to 50%|n|
 |HonorIgnored|Boolean|If `False`, the user will be presented with updates they previously set to "ignore" (default: `True`)|n|
+|LastError|RuntimeException|Stores an error returned by `ExecuteAsync`|n/a|
 |QuitOnCancelIfRequired|Boolean|When `True` (default), canceling a required update will call Quit|n|
 |ServerPublicRSAKey|String|The public key as found in the Admin app file|**yes**|
 |UpdateURL|String|The URL where the update info will be found|**yes**|
@@ -298,13 +330,19 @@ There is also a `Kaju.Version` constant (introduced in v.1.4) that will let you 
 |Method|Description|
 |:-----|:---------|
 |Constructor(preferencesFolder As FolderItem[, preferencesFilename As String])|Create the new instance around the given preferences folder using the given name for the file if provided, or "Kaju_Preferences" if not|
-|Execute|Start the update process|
+|ExecuteAsync|Start the update process asynchronously (preferred)|
+|Execute|Start the update process synchronously|
 |ResetIgnored|Reset the list of ignored updates|
 |Result As ResultType|The result of the last Execute|
 
 |Shared Method|Description|
 |:---|:---|
 |OSIsSupported As Boolean|Reports if the OS has the right tools installed|
+
+|Event|Description|
+|:----|:----------|
+|ExecuteAsyncComplete|`ExecuteAsync` has checked the update information packet from the `UpdateURL` and is reporting some result or status. Check `Result` and, if necessary, `LastError`.|
+
 
 **Module:** `Kaju`
 
@@ -376,9 +414,18 @@ Add a translation for each, then submit a pull request as outlined above.
 
 ## Release Notes
 
-2.0.1 (__)
+2.1 (__)
 
-* Changed `KajuUpdateWindow.hsSocket.ConnectionType` to SSLv23.
+* **KajuUpdateWindow**: Changed `hsSocket` to a `Xojo.Net.HTTPSocket` object.
+* **UpdateChecker**: Added `ExecuteAsync` that will check for updates asynchronously using `Xojo.Net.HTTPSocket` and `LastError` for HTTP errors that occur when using that method.
+* **UpdateChecker**: Added results for "PageNotFound" and "FetchingUpdateInfo".
+* **UpdateChecker**: Better handling of a URL in the form "http://un:pw@path".
+* **UpdateChecker**: Changed `Result` to a read-only computed property and made the `mResult` shadow property hidden.
+* **UpdateChecker**: Removed events that were not being raised anyway.
+* **UpdateInformation**: Will fetch images and release notes asynchronously.
+* **Test App**: The window will let you specify Asynchronous and your own URL. It will also allow testing of simple HTTP authenticated directories.
+* **Test App**: Asynchronous is now the default.
+* **General**: Code changes for easier debugging.
 
 2.0 (May 31, 2017)
 

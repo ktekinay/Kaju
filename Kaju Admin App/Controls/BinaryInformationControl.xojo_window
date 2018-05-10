@@ -6,6 +6,7 @@ Begin ContainerControl BinaryInformationControl
    BackColor       =   &cFFFFFF00
    Backdrop        =   0
    Compatibility   =   ""
+   DoubleBuffer    =   False
    Enabled         =   True
    EraseBackground =   True
    HasBackColor    =   False
@@ -21,7 +22,7 @@ Begin ContainerControl BinaryInformationControl
    TabPanelIndex   =   0
    TabStop         =   True
    Top             =   0
-   Transparent     =   True
+   Transparent     =   False
    UseFocusRing    =   False
    Visible         =   True
    Width           =   630
@@ -52,6 +53,7 @@ Begin ContainerControl BinaryInformationControl
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   66
+      Transparent     =   False
       Underline       =   False
       Visible         =   False
       Width           =   80
@@ -83,6 +85,7 @@ Begin ContainerControl BinaryInformationControl
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   0
+      Transparent     =   False
       Underline       =   False
       Value           =   False
       Visible         =   True
@@ -125,6 +128,7 @@ Begin ContainerControl BinaryInformationControl
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   66
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   False
@@ -167,6 +171,7 @@ Begin ContainerControl BinaryInformationControl
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   100
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   False
@@ -194,6 +199,7 @@ Begin ContainerControl BinaryInformationControl
       Selectable      =   False
       TabIndex        =   4
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Hash:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -228,6 +234,7 @@ Begin ContainerControl BinaryInformationControl
       Selectable      =   False
       TabIndex        =   5
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "URL:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -277,6 +284,7 @@ Begin ContainerControl BinaryInformationControl
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   32
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   False
@@ -304,6 +312,7 @@ Begin ContainerControl BinaryInformationControl
       Selectable      =   False
       TabIndex        =   7
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Executable:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -311,7 +320,7 @@ Begin ContainerControl BinaryInformationControl
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   33
-      Transparent     =   False
+      Transparent     =   True
       Underline       =   False
       Visible         =   False
       Width           =   67
@@ -550,6 +559,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="DoubleBuffer"
+		Visible=true
+		Group="Windows Behavior"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType="Boolean"
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="AcceptFocus"
 		Visible=true

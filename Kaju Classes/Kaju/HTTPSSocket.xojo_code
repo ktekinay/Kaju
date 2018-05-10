@@ -137,16 +137,16 @@ Inherits HTTPSecureSocket
 		  // See if the username and password has been specified
 		  //
 		  dim rx as new RegEx
-		  rx.SearchPattern = "^(?:https?://)([^:/\x20@]+):([^:/\x20@]*)@(.*)"
+		  rx.SearchPattern = "^(https?://)([^:/\x20@]+):([^:/\x20@]*)@(.*)"
 		  
 		  dim match as RegExMatch = rx.Search( url )
 		  if match is nil then
 		    Username = ""
 		    Password = ""
 		  else
-		    Username = DecodeURLComponent( match.SubExpressionString( 1 ) )
-		    Password = DecodeURLComponent( match.SubExpressionString( 2 ) )
-		    url = match.SubExpressionString( 3 )
+		    Username = DecodeURLComponent( match.SubExpressionString( 2 ) )
+		    Password = DecodeURLComponent( match.SubExpressionString( 3 ) )
+		    url = match.SubExpressionString( 1 ) + match.SubExpressionString( 4 )
 		  end if
 		  
 		End Sub
@@ -202,6 +202,13 @@ Inherits HTTPSecureSocket
 			Group="Behavior"
 			InitialValue="3"
 			Type="Integer"
+			EditorType="Enum"
+			#tag EnumValues
+				"1 - SSLv23"
+				"3 - TLSv1"
+				"4 - TLSv11"
+				"5 - TLSv12"
+			#tag EndEnumValues
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ForceSecure"
@@ -214,12 +221,6 @@ Inherits HTTPSecureSocket
 			Group="ID"
 			Type="Integer"
 			EditorType="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Left"
-			Visible=true
-			Group="Position"
-			Type="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
@@ -240,12 +241,6 @@ Inherits HTTPSecureSocket
 			Group="ID"
 			Type="String"
 			EditorType="String"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Top"
-			Visible=true
-			Group="Position"
-			Type="Integer"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

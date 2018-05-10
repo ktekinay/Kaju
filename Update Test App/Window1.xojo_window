@@ -9,16 +9,16 @@ Begin Window Window1
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
-   Height          =   400
+   Height          =   500
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
-   MaxHeight       =   400
+   MaxHeight       =   500
    MaximizeButton  =   True
    MaxWidth        =   600
    MenuBar         =   1729944148
    MenuBarVisible  =   True
-   MinHeight       =   400
+   MinHeight       =   500
    MinimizeButton  =   True
    MinWidth        =   600
    Placement       =   0
@@ -48,7 +48,8 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
-      Text            =   "This will check a predefined web site for an update. It will always show an update for 1.1 and offer to download it, but the download is, in fact, v.1.0. In other words, the app will replace itself (sometimes with an older version) just so the process can be repeated."
+      TabStop         =   True
+      Text            =   "This will check a predefined web site for an update. It will always show an update for X.1 and offer to download it, but the download is, in fact, the same version. In other words, the app will replace itself (sometimes with an older version) just so the process can be repeated."
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
@@ -73,7 +74,7 @@ Begin Window Window1
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   13
+      Left            =   12
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -86,7 +87,8 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   288
+      Top             =   369
+      Transparent     =   True
       Underline       =   False
       Visible         =   True
       Width           =   129
@@ -117,7 +119,8 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   85
+      Top             =   132
+      Transparent     =   True
       Underline       =   False
       Value           =   True
       Visible         =   True
@@ -145,13 +148,14 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   3
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Press check to get a result"
       TextAlign       =   0
       TextColor       =   &c00000000
-      TextFont        =   "System"
+      TextFont        =   "SmallSystem"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   300
+      Top             =   377
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -183,7 +187,8 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   85
+      Top             =   132
+      Transparent     =   True
       Underline       =   False
       Visible         =   True
       Width           =   139
@@ -214,7 +219,8 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   117
+      Top             =   164
+      Transparent     =   True
       Underline       =   False
       Value           =   True
       Visible         =   True
@@ -246,7 +252,8 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   149
+      Top             =   196
+      Transparent     =   True
       Underline       =   False
       Value           =   True
       Visible         =   True
@@ -278,7 +285,8 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   181
+      Top             =   262
+      Transparent     =   True
       Underline       =   False
       Visible         =   True
       Width           =   171
@@ -305,13 +313,14 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Min. Stage Allowed:"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   191
+      Top             =   271
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -339,13 +348,14 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   9
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Version"
       TextAlign       =   2
       TextColor       =   &c00000000
       TextFont        =   "SmallSystem"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   359
+      Top             =   459
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -377,7 +387,8 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   149
+      Top             =   196
+      Transparent     =   True
       Underline       =   False
       Value           =   True
       Visible         =   True
@@ -409,7 +420,8 @@ Begin Window Window1
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   222
+      Top             =   303
+      Transparent     =   True
       Underline       =   False
       Visible         =   True
       Width           =   171
@@ -436,17 +448,162 @@ Begin Window Window1
       Selectable      =   False
       TabIndex        =   12
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Update File URL:"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   232
+      Top             =   313
       Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   152
+   End
+   Begin CheckBox cbAsynchrous
+      AutoDeactivate  =   True
+      Bold            =   False
+      Caption         =   "Asynchronous"
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   27
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      State           =   1
+      TabIndex        =   13
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   420
+      Transparent     =   False
+      Underline       =   False
+      Value           =   True
+      Visible         =   True
+      Width           =   159
+   End
+   Begin CheckBox cbUseAuthenticated
+      AutoDeactivate  =   True
+      Bold            =   False
+      Caption         =   "Authenticated"
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      State           =   1
+      TabIndex        =   14
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   228
+      Transparent     =   True
+      Underline       =   False
+      Value           =   True
+      Visible         =   True
+      Width           =   183
+   End
+   Begin TextField fldURL
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   "Fully formed url starting with http and including un:pw if required"
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   131
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   15
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   96
+      Transparent     =   False
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   436
+   End
+   Begin Label Label1
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   3
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   16
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "Override URL:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   97
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   112
    End
 End
 #tag EndWindow
@@ -455,13 +612,22 @@ End
 	#tag Event
 		Sub Open()
 		  dim u as new Kaju.UpdateChecker( App.PrefFolder )
-		  u.ServerPublicRSAKey = _
-		  "30820120300D06092A864886F70D01010105000382010D00308201080282010100D1DE526C8D98CCBFFDB4BD71487AC16205CF851696FB2910ABBC564BFEC1261A53A90794102BCC80EFB3CED3F8E73D90FF4C426D2315DE5E31A1A6C7563A21EADBD91B1DD637FAE0BED539C186BCB81DD865CC2A2F9427F717AA5E837C53AB90691569FC45EE17AF0ACD80E0C24C864EE86D4DBB7A6010E09B4E0BC556004E02980388C654A1C676A31E3AF788754E0CF7DEEC8236D55EDD5BB7490011B27CDEE5E254099FDE98C17D5F85014622D64C3BFB6A77200050FB2C8DF9A1ACEE50CF5A8353CE68304F91EC4F463E76BCF90A15152D03308B229FFE91E4906990D0E5F2E5C3ACC106E58DB1A37095DCBD5E233D7ED4A41AA263A73C54D4F12A113881020111"
+		  u.ServerPublicRSAKey = kServerPublicKey
 		  
 		  u.DefaultImage = Some_Image
 		  u.DefaultUseTransparency = true
 		  
 		  Checker = u
+		  AddHandler Checker.ExecuteAsyncComplete, WeakAddressOf Checker_ExecuteAsyncComplete
+		  
+		  //
+		  // Normally, this object will not be placed on a window, instead
+		  // called directly in the App or similar. With that in mind,
+		  // I opted for AddHandler here to simulate that rather than taking
+		  // the easier course of placing the UpdateChecker into the window
+		  // as a control. 
+		  //
+		  
 		End Sub
 	#tag EndEvent
 
@@ -474,42 +640,15 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub Checker_ExecuteAsyncComplete(sender As Kaju.UpdateChecker)
+		  #pragma unused sender
+		  HandlePostCheck
+		End Sub
+	#tag EndMethod
 
-	#tag Property, Flags = &h0
-		Checker As Kaju.UpdateChecker
-	#tag EndProperty
-
-
-	#tag Constant, Name = kBaseURL, Type = String, Dynamic = False, Default = \"http://www.mactechnologies.com/Kaju_Test/", Scope = Public
-	#tag EndConstant
-
-	#tag Constant, Name = kUpdateFile32bit, Type = String, Dynamic = False, Default = \"UpdateInformation32bit.html", Scope = Public
-	#tag EndConstant
-
-	#tag Constant, Name = kUpdateFile64bit, Type = String, Dynamic = False, Default = \"UpdateInformation64bit.html", Scope = Public
-	#tag EndConstant
-
-	#tag Constant, Name = kUpdateFileAll, Type = String, Dynamic = False, Default = \"UpdateInformation.html", Scope = Public
-	#tag EndConstant
-
-
-#tag EndWindowCode
-
-#tag Events btnExecute
-	#tag Event
-		Sub Action()
-		  Checker.HonorIgnored = cbHonorIgnored.Value
-		  Checker.Allow32bitTo64bitUpdates = cbAllow32bitTo64bitUpdates.Value
-		  Checker.UpdateURL = pumChooseUpdateURL.RowTag( pumChooseUpdateURL.ListIndex )
-		  
-		  dim allowWindow as integer = if( cbAllowWindow.Value, Kaju.UpdateChecker.kAllowUpdateWindow, 0 )
-		  dim allowErrorDialog as integer = if( cbAllowErrorDialog.Value, Kaju.UpdateChecker.kAllowErrorDialog, 0 )
-		  Checker.AllowedInteraction = allowWindow + allowErrorDialog
-		  
-		  Checker.AllowedStage = pumStageAllowed.RowTag( pumStageAllowed.ListIndex )
-		  
-		  Checker.Execute()
-		  
+	#tag Method, Flags = &h21
+		Private Sub HandlePostCheck()
 		  select case Checker.Result
 		  case Kaju.UpdateChecker.ResultType.UpdateAlreadyInProgress
 		    lblResult.Text = "Update already in progress"
@@ -535,9 +674,82 @@ End
 		  case Kaju.UpdateChecker.ResultType.RequiredUpdateAvailable
 		    lblResult.Text = "Required update available"
 		    
+		  case Kaju.UpdateChecker.ResultType.FetchingUpdateInfo
+		    lblResult.Text = "Fetching update information"
+		    
+		  case Kaju.UpdateChecker.ResultType.PageNotFound
+		    lblResult.Text = "The URL resulted in a 404 error"
+		    
 		  else
 		    lblResult.Text = "UNKNOWN RESULT"
-		  end
+		    
+		  end select
+		  
+		  if Checker isa object and Checker.UpdateURL <> "" then
+		    lblResult.Text = lblResult.Text + EndOfLine + EndOfLine + Checker.UpdateURL
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+
+	#tag Property, Flags = &h0
+		Checker As Kaju.UpdateChecker
+	#tag EndProperty
+
+
+	#tag Constant, Name = kBaseURL, Type = String, Dynamic = False, Default = \"http://www.mactechnologies.com/Kaju_Test/", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kBaseURLAuthenticated, Type = String, Dynamic = False, Default = \"http://Kaju:password@www.mactechnologies.com/Kaju_Test_Authenticated/", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kServerPublicKey, Type = String, Dynamic = False, Default = \"30820120300D06092A864886F70D01010105000382010D00308201080282010100D1DE526C8D98CCBFFDB4BD71487AC16205CF851696FB2910ABBC564BFEC1261A53A90794102BCC80EFB3CED3F8E73D90FF4C426D2315DE5E31A1A6C7563A21EADBD91B1DD637FAE0BED539C186BCB81DD865CC2A2F9427F717AA5E837C53AB90691569FC45EE17AF0ACD80E0C24C864EE86D4DBB7A6010E09B4E0BC556004E02980388C654A1C676A31E3AF788754E0CF7DEEC8236D55EDD5BB7490011B27CDEE5E254099FDE98C17D5F85014622D64C3BFB6A77200050FB2C8DF9A1ACEE50CF5A8353CE68304F91EC4F463E76BCF90A15152D03308B229FFE91E4906990D0E5F2E5C3ACC106E58DB1A37095DCBD5E233D7ED4A41AA263A73C54D4F12A113881020111", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kUpdateFile32bit, Type = String, Dynamic = False, Default = \"UpdateInformation32bit.html", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kUpdateFile64bit, Type = String, Dynamic = False, Default = \"UpdateInformation64bit.html", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kUpdateFileAll, Type = String, Dynamic = False, Default = \"UpdateInformation.html", Scope = Public
+	#tag EndConstant
+
+
+#tag EndWindowCode
+
+#tag Events btnExecute
+	#tag Event
+		Sub Action()
+		  dim baseURL as string = _
+		  if( cbUseAuthenticated.Value, kBaseURLAuthenticated, kBaseURL )
+		  
+		  Checker.HonorIgnored = cbHonorIgnored.Value
+		  Checker.Allow32bitTo64bitUpdates = cbAllow32bitTo64bitUpdates.Value
+		  dim url as string = fldURL.Text.Trim
+		  if url = "" then
+		    url = baseURL + pumChooseUpdateURL.RowTag( pumChooseUpdateURL.ListIndex ).StringValue
+		  end if
+		  Checker.UpdateURL = url
+		  Checker.AllowRedirection = true
+		  
+		  dim allowWindow as integer = if( cbAllowWindow.Value, Kaju.UpdateChecker.kAllowUpdateWindow, 0 )
+		  dim allowErrorDialog as integer = if( cbAllowErrorDialog.Value, Kaju.UpdateChecker.kAllowErrorDialog, 0 )
+		  Checker.AllowedInteraction = allowWindow + allowErrorDialog
+		  
+		  Checker.AllowedStage = pumStageAllowed.RowTag( pumStageAllowed.ListIndex )
+		  
+		  if cbAsynchrous.Value then
+		    Checker.ExecuteAsync()
+		    //
+		    // See AddHandler notes in the Open event
+		    //
+		  else
+		    Checker.Execute()
+		  end if
+		  
+		  HandlePostCheck
 		  
 		  return
 		End Sub
@@ -579,12 +791,23 @@ End
 #tag Events pumChooseUpdateURL
 	#tag Event
 		Sub Open()
-		  AddRowAndTag me, "All Updates", kBaseURL + kUpdateFileAll
-		  AddRowAndTag me, "32-bit Only", kBaseURL + kUpdateFile32bit
-		  AddRowAndTag me, "64-bit Only", kBaseURL + kUpdateFile64bit
+		  AddRowAndTag me, "All Updates", kUpdateFileAll
+		  AddRowAndTag me, "32-bit Only", kUpdateFile32bit
+		  AddRowAndTag me, "64-bit Only", kUpdateFile64bit
 		  
 		  me.ListIndex = 0
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events fldURL
+	#tag Event
+		Sub TextChange()
+		  if me.Text.Trim = "" then
+		    cbUseAuthenticated.Enabled = true
+		  else
+		    cbUseAuthenticated.Enabled = false
+		  end if
 		End Sub
 	#tag EndEvent
 #tag EndEvents

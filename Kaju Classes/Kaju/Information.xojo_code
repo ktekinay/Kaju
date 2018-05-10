@@ -132,7 +132,7 @@ Protected Class Information
 		  dim props() as Introspection.PropertyInfo = ti.GetProperties
 		  
 		  for each prop as Introspection.PropertyInfo in props
-		    if prop.IsShared or prop.IsComputed or not prop.CanRead or not prop.CanWrite or not prop.IsPublic then
+		    if prop.IsShared or not prop.CanRead or not prop.CanWrite or not prop.IsPublic then
 		      continue for prop
 		    end if
 		    

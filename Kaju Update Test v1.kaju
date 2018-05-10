@@ -5,6 +5,7 @@
   "KajuData":[
     {
       "AppName":"Kaju Update Test",
+      "ImageScale":1,
       "ImageURL":"",
       "MinimumRequiredVersion":"",
       "ReleaseNotes":"<p>This is a fake update for v.1.1 (10). It will really point to a binary of 1.0. (This demonstrates the use of the optional build number for final versions.)<\/p>\n\r<p>In other words, the app will replace itself.<\/p>\n\n<p><b>NOTE<\/b>: The update will warn you that the update will require a payment. <u>THIS IS A LIE!!<\/u> It’s only set that way to test the “Requires Payment” option.<\/p>\n\n<h3>Changes<\/h3>\n<ul>\n<li>There really aren’t any.<\/li>\n<li>This is just here as a placeholder.<\/li>\n<\/ul>",
@@ -38,6 +39,7 @@
     },
     {
       "AppName":"New Kaju Update Test",
+      "ImageScale":1,
       "ImageURL":"",
       "MinimumRequiredVersion":"",
       "ReleaseNotes":"<p>A phony development version pointing to the same binary. Meant as a placeholder to demonstrate multiple versions.<\/p>\n\n<p>Note that this version has a name change.<\/p>",
@@ -71,6 +73,7 @@
     },
     {
       "AppName":"Kaju Update Test",
+      "ImageScale":1,
       "ImageURL":"",
       "MinimumRequiredVersion":"",
       "ReleaseNotes":"<!-- http:\/\/www.mactechnologies.com\/Kaju_Test\/Test_Release_Notes_1.2.1a4.html -->\n\n<!--\nWe could have also put the URL on a line by itself, but this form maintains better compatibility with previous versions of Kaju that will only show these release notes as-is\n-->\n\n<p>These are alternate release notes. If the URL above can’t be accessed or returns an empty string, this will be displayed instead.<\/p>\n\n<p>Try fiddling with the URL to see the results.<\/p>",
@@ -104,7 +107,8 @@
     },
     {
       "AppName":"Kaju Update Test",
-      "ImageURL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Some_Image_beta.png",
+      "ImageScale":2,
+      "ImageURL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/plush-bears-beta@2x.png",
       "MinimumRequiredVersion":"",
       "ReleaseNotes":"<p>A phony beta pointing to the same binary. Meant as a placeholder to demonstrate multiple versions.<\/p>\n\n<p><b>IMPORTANT<\/b>: The URL’s for the binaries have been intentionally switched to test the hash function. Attempting to update to this version should result in an error.<\/b>",
       "RequiresPayment":false,
@@ -137,6 +141,7 @@
     },
     {
       "AppName":"Kaju Update Test",
+      "ImageScale":1,
       "ImageURL":"",
       "MinimumRequiredVersion":"",
       "ReleaseNotes":"<p>A fake release that should never appear. (Except in Preview.)<\/p>",
