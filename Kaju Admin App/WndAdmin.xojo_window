@@ -1604,7 +1604,7 @@ End
 		    cc.LockRight = true
 		    cc.LockTop = true
 		    cc.LockBottom = false
-		    cc.Transparent = false
+		    'cc.Transparent = false
 		    
 		    if binaryName.InStr( "64" ) <> 0 then
 		      cc.EmbedWithinPanel TabPanel1, tpIndex64, useLeft, useTop64

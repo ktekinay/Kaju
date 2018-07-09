@@ -22,7 +22,7 @@ Begin ContainerControl BinaryInformationControl
    TabPanelIndex   =   0
    TabStop         =   True
    Top             =   0
-   Transparent     =   False
+   Transparent     =   True
    UseFocusRing    =   False
    Visible         =   True
    Width           =   630
@@ -210,7 +210,7 @@ Begin ContainerControl BinaryInformationControl
       Transparent     =   False
       Underline       =   False
       Visible         =   False
-      Width           =   67
+      Width           =   97
    End
    Begin Label lblURL
       AutoDeactivate  =   True
@@ -245,7 +245,7 @@ Begin ContainerControl BinaryInformationControl
       Transparent     =   False
       Underline       =   False
       Visible         =   False
-      Width           =   67
+      Width           =   97
    End
    Begin TextFieldChanger fldExecutable
       AcceptTabs      =   False
@@ -323,7 +323,7 @@ Begin ContainerControl BinaryInformationControl
       Transparent     =   True
       Underline       =   False
       Visible         =   False
-      Width           =   67
+      Width           =   97
    End
 End
 #tag EndWindow
