@@ -79,6 +79,9 @@ Inherits Xojo.Net.HTTPSocket
 		  Password = ""
 		  ClearRequestHeaders
 		  
+		  RequestHeader( "Cache-Control" ) = "private, no-cache, max-age=0"
+		  RequestHeader( "Pragma" ) = "no-cache"
+		  
 		  url = url.ConvertEncoding( Encodings.UTF8 )
 		  
 		  #if not TargetMacOS then
