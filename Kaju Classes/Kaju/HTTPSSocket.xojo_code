@@ -133,6 +133,9 @@ Inherits HTTPSecureSocket
 		    self.Port = 80
 		  end if
 		  
+		  SetRequestHeader "Cache-Control", "private, no-cache, max-age=0"
+		  SetRequestHeader "Pragma", "no-cache"
+		  
 		  //
 		  // See if the username and password has been specified
 		  //
