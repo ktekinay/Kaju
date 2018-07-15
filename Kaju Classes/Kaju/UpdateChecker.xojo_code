@@ -428,9 +428,29 @@ Protected Class UpdateChecker
 		    return HandleError( KajuLocale.kErrorIncorrectPacketMarker )
 		  end if
 		  
-		  sig = firstLine.Mid( sig.Len + 1 )
+		  sig = firstLine.Mid( sig.Len + 1 ).Trim
 		  sig = DecodeHex( sig )
-		  if not Crypto.RSAVerifySignature( raw, sig, ServerPublicRSAKey ) then
+		  
+		  //
+		  // It's possible the EOL in the JSON got changed so we will try all
+		  // possibilities before giving up
+		  //
+		  dim isValid as boolean
+		  
+		  dim eolChars() as string = array( "", &u0A, &u0D, &u0D + &u0A )
+		  for each eol as string in eolChars
+		    dim tester as string = raw
+		    if eol <> "" then
+		      tester = ReplaceLineEndings( tester, eol )
+		    end if
+		    
+		    isValid = Crypto.RSAVerifySignature( tester, sig, ServerPublicRSAKey )
+		    if isValid then
+		      exit for eol
+		    end if
+		  next
+		  
+		  if not isValid then
 		    return HandleError( KajuLocale.kErrorIncorrectPacketSignature )
 		  end if
 		  
