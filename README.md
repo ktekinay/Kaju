@@ -423,9 +423,10 @@ Add a translation for each, then submit a pull request as outlined above.
 * **UpdateChecker**: Changed `Result` to a read-only computed property and made the `mResult` shadow property hidden.
 * **UpdateChecker**: Removed events that were not being raised anyway.
 * **UpdateInformation**: Will fetch images and release notes asynchronously.
-* **Test App**: The window will let you specify Asynchronous and your own URL. It will also allow testing of simple HTTP authenticated directories.
+* **Test App**: The window will let you specify Asynchronous and your own URL and/or public key. It will also allow testing of simple HTTP authenticated directories.
 * **Test App**: Asynchronous is now the default.
 * **General**: Code changes for easier debugging.
+* **General**: All HTTP requests now include headers to disable caching.
 
 2.0 (May 31, 2017)
 
