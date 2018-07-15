@@ -397,6 +397,9 @@ Protected Module Kaju
 	#tag Constant, Name = kBitMarker64Bit, Type = String, Dynamic = False, Default = \"_64-bit", Scope = Private
 	#tag EndConstant
 
+	#tag Constant, Name = kNameSecurityToken, Type = String, Dynamic = False, Default = \"Security Token", Scope = Protected
+	#tag EndConstant
+
 	#tag Constant, Name = kSwitchUpdateFailed, Type = String, Dynamic = False, Default = \"--kaju-fail", Scope = Private
 	#tag EndConstant
 

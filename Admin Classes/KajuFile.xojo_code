@@ -27,7 +27,7 @@ Protected Class KajuFile
 		  data.EscapeSlashes = false
 		  
 		  //
-		  // Perform $VERSION$ substitutions
+		  // Perform $VERSION$ substitutions and add security token
 		  //
 		  dim keys() as string = Kaju.UpdateInformation.BinaryNames
 		  
@@ -43,6 +43,13 @@ Protected Class KajuFile
 		        binaryData.Value( Kaju.BinaryInformation.kKeyURL ) = url
 		      end if
 		    next
+		    
+		    //
+		    // Add a security token
+		    //
+		    dim rawKey as string = Crypto.GenerateRandomBytes( 8 )
+		    dim encodedKey as string = EncodeBase64( rawKey, 0 )
+		    thisVersionData.Value( Kaju.kNameSecurityToken ) = encodedKey
 		  next
 		  
 		  dim dataString as string = data.ToString
@@ -97,7 +104,7 @@ Protected Class KajuFile
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		 Shared Function InsertVersion(originalURL As String, version As String) As String
+		Shared Function InsertVersion(originalURL As String, version As String) As String
 		  return originalURL.ReplaceAllB( "$VERSION$", version )
 		End Function
 	#tag EndMethod

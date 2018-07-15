@@ -474,7 +474,15 @@ Protected Class UpdateChecker
 		  dim info() as Kaju.UpdateInformation
 		  dim updateIsRequired as boolean
 		  for i as integer = 0 to ub
-		    dim thisInfo as new Kaju.UpdateInformation( j( i ) )
+		    //
+		    // Make sure it has a Security Token
+		    //
+		    dim thisElement as JSONItem = j( i )
+		    if thisElement.Lookup( kNameSecurityToken, "" ) = "" then
+		      raise new KajuException( KajuLocale.kMissingReason + " security token", CurrentMethodName )
+		    end if
+		    
+		    dim thisInfo as new Kaju.UpdateInformation( thisElement )
 		    
 		    //
 		    // See if the binary information is present

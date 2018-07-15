@@ -739,6 +739,12 @@ Inherits Kaju.Information
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
+		#tag ViewProperty
+			Name="DisplayReleaseNotes"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
 #tag EndClass
