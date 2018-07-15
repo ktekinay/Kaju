@@ -422,11 +422,14 @@ Add a translation for each, then submit a pull request as outlined above.
 * **UpdateChecker**: Better handling of a URL in the form "http://un:pw@path".
 * **UpdateChecker**: Changed `Result` to a read-only computed property and made the `mResult` shadow property hidden.
 * **UpdateChecker**: Removed events that were not being raised anyway.
+* **UpdateChecker**: Make sure each version has a security token (see below).
+* **UpdateChecker**: Validate the downloaded packet against every form of EOL in case that got changed along the way.
 * **UpdateInformation**: Will fetch images and release notes asynchronously.
 * **Test App**: The window will let you specify Asynchronous and your own URL and/or public key. It will also allow testing of simple HTTP authenticated directories.
 * **Test App**: Asynchronous is now the default.
 * **General**: Code changes for easier debugging.
 * **General**: All HTTP requests now include headers to disable caching.
+* **General**: Exported information file contains a security token to make sure that each export has a different RSA signature.
 
 2.0 (May 31, 2017)
 
