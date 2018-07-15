@@ -53,7 +53,7 @@ case else
 print str( CurrentBuildTarget )
 end select
 
-dim kaju as string = topLevelPath + "/Kaju\ Admin\ CLI/Builds\ \-\ Kaju\ Admin\ CLI.xojo_project/Mac\ OS\ X\ \(Intel\)/kaju/kaju"
+dim kaju as string = topLevelPath + "/Kaju\ Admin\ CLI/Builds\ \-\ Kaju\ Admin\ CLI.xojo_project/OS\ X\ 64\ bit/kaju/kaju"
 
 dim result as string
 result = DoShellCommand( kaju )
