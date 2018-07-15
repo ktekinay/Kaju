@@ -9,16 +9,16 @@ Begin Window WndTest
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
-   Height          =   500
+   Height          =   584
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
-   MaxHeight       =   500
-   MaximizeButton  =   True
+   MaxHeight       =   584
+   MaximizeButton  =   False
    MaxWidth        =   600
    MenuBar         =   1729944148
    MenuBarVisible  =   True
-   MinHeight       =   500
+   MinHeight       =   584
    MinimizeButton  =   True
    MinWidth        =   600
    Placement       =   0
@@ -81,13 +81,13 @@ Begin Window WndTest
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   1
+      TabIndex        =   15
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   369
+      Top             =   453
       Transparent     =   True
       Underline       =   False
       Visible         =   True
@@ -113,13 +113,13 @@ Begin Window WndTest
       LockTop         =   True
       Scope           =   0
       State           =   1
-      TabIndex        =   2
+      TabIndex        =   5
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   132
+      Top             =   216
       Transparent     =   True
       Underline       =   False
       Value           =   True
@@ -146,7 +146,7 @@ Begin Window WndTest
       Multiline       =   True
       Scope           =   0
       Selectable      =   False
-      TabIndex        =   3
+      TabIndex        =   16
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Press check to get a result"
@@ -155,7 +155,7 @@ Begin Window WndTest
       TextFont        =   "SmallSystem"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   377
+      Top             =   461
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -181,13 +181,13 @@ Begin Window WndTest
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   4
+      TabIndex        =   6
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   132
+      Top             =   216
       Transparent     =   True
       Underline       =   False
       Visible         =   True
@@ -213,13 +213,13 @@ Begin Window WndTest
       LockTop         =   True
       Scope           =   0
       State           =   1
-      TabIndex        =   5
+      TabIndex        =   7
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   164
+      Top             =   248
       Transparent     =   True
       Underline       =   False
       Value           =   True
@@ -246,13 +246,13 @@ Begin Window WndTest
       LockTop         =   True
       Scope           =   0
       State           =   1
-      TabIndex        =   6
+      TabIndex        =   8
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   196
+      Top             =   280
       Transparent     =   True
       Underline       =   False
       Value           =   True
@@ -279,13 +279,13 @@ Begin Window WndTest
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   7
+      TabIndex        =   11
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   262
+      Top             =   346
       Transparent     =   True
       Underline       =   False
       Visible         =   True
@@ -311,7 +311,7 @@ Begin Window WndTest
       Multiline       =   False
       Scope           =   0
       Selectable      =   False
-      TabIndex        =   8
+      TabIndex        =   12
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Min. Stage Allowed:"
@@ -320,7 +320,7 @@ Begin Window WndTest
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   271
+      Top             =   355
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -346,7 +346,7 @@ Begin Window WndTest
       Multiline       =   False
       Scope           =   0
       Selectable      =   False
-      TabIndex        =   9
+      TabIndex        =   18
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Version"
@@ -355,7 +355,7 @@ Begin Window WndTest
       TextFont        =   "SmallSystem"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   459
+      Top             =   543
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -381,13 +381,13 @@ Begin Window WndTest
       LockTop         =   True
       Scope           =   0
       State           =   1
-      TabIndex        =   10
+      TabIndex        =   9
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   196
+      Top             =   280
       Transparent     =   True
       Underline       =   False
       Value           =   True
@@ -414,13 +414,13 @@ Begin Window WndTest
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   11
+      TabIndex        =   13
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   303
+      Top             =   387
       Transparent     =   True
       Underline       =   False
       Visible         =   True
@@ -446,7 +446,7 @@ Begin Window WndTest
       Multiline       =   False
       Scope           =   0
       Selectable      =   False
-      TabIndex        =   12
+      TabIndex        =   14
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Update File URL:"
@@ -455,7 +455,7 @@ Begin Window WndTest
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   313
+      Top             =   397
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -481,13 +481,13 @@ Begin Window WndTest
       LockTop         =   True
       Scope           =   0
       State           =   1
-      TabIndex        =   13
+      TabIndex        =   17
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   420
+      Top             =   504
       Transparent     =   False
       Underline       =   False
       Value           =   True
@@ -514,13 +514,13 @@ Begin Window WndTest
       LockTop         =   True
       Scope           =   0
       State           =   1
-      TabIndex        =   14
+      TabIndex        =   10
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   228
+      Top             =   312
       Transparent     =   True
       Underline       =   False
       Value           =   True
@@ -555,7 +555,7 @@ Begin Window WndTest
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      TabIndex        =   15
+      TabIndex        =   2
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   ""
@@ -590,7 +590,7 @@ Begin Window WndTest
       Multiline       =   False
       Scope           =   0
       Selectable      =   False
-      TabIndex        =   16
+      TabIndex        =   1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Override URL:"
@@ -605,6 +605,89 @@ Begin Window WndTest
       Visible         =   True
       Width           =   112
    End
+   Begin Label Label1
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   74
+      HelpTag         =   ""
+      Index           =   4
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   True
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   3
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "Override Pub. Key:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   130
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   112
+   End
+   Begin TextArea fldPublicKey
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   True
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   74
+      HelpTag         =   "The public key that matches the file you are testing"
+      HideSelection   =   True
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   131
+      LimitText       =   0
+      LineHeight      =   0.0
+      LineSpacing     =   1.0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Multiline       =   True
+      ReadOnly        =   False
+      Scope           =   0
+      ScrollbarHorizontal=   False
+      ScrollbarVertical=   True
+      Styled          =   False
+      TabIndex        =   4
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "SmallSystem"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   130
+      Transparent     =   False
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   436
+   End
 End
 #tag EndWindow
 
@@ -612,7 +695,6 @@ End
 	#tag Event
 		Sub Open()
 		  dim u as new Kaju.UpdateChecker( App.PrefFolder )
-		  u.ServerPublicRSAKey = kServerPublicKey
 		  
 		  u.DefaultImage = Some_Image
 		  u.DefaultUseTransparency = true
@@ -734,6 +816,12 @@ End
 		  Checker.UpdateURL = url
 		  Checker.AllowRedirection = true
 		  
+		  dim pubKey as string = fldPublicKey.Text.Trim
+		  if pubKey = "" then
+		    pubKey = kServerPublicKey
+		  end if
+		  Checker.ServerPublicRSAKey = pubKey
+		  
 		  dim allowWindow as integer = if( cbAllowWindow.Value, Kaju.UpdateChecker.kAllowUpdateWindow, 0 )
 		  dim allowErrorDialog as integer = if( cbAllowErrorDialog.Value, Kaju.UpdateChecker.kAllowErrorDialog, 0 )
 		  Checker.AllowedInteraction = allowWindow + allowErrorDialog
@@ -808,6 +896,17 @@ End
 		  else
 		    cbUseAuthenticated.Enabled = false
 		  end if
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events fldPublicKey
+	#tag Event
+		Sub TextChange()
+		  dim newText as string = ReplaceLineEndings( me.Text, "" )
+		  if newText <> me.Text then
+		    me.Text = newText
+		  end if
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
