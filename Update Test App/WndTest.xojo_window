@@ -628,7 +628,7 @@ Begin Window WndTest
       TabIndex        =   3
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   "Override Pub. Key:"
+      Text            =   "Override Public Key:"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
