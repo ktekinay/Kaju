@@ -424,6 +424,7 @@ Add a translation for each, then submit a pull request as outlined above.
 * **UpdateChecker**: Removed events that were not being raised anyway.
 * **UpdateChecker**: Make sure each version has a security token (see below).
 * **UpdateChecker**: Validate the downloaded packet against every form of EOL in case that got changed along the way.
+* **UpdateChecker**: `OSIsSupported` will try twice to find the tools it needs and log any errors.
 * **UpdateInformation**: Will fetch images and release notes asynchronously.
 * **Test App**: The window will let you specify Asynchronous and your own URL and/or public key. It will also allow testing of simple HTTP authenticated directories.
 * **Test App**: Asynchronous is now the default.
