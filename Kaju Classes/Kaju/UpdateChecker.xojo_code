@@ -314,34 +314,57 @@ Protected Class UpdateChecker
 		Shared Function OSIsSupported() As Boolean
 		  // Ensures that the right tools are available on the current OS
 		  
-		  dim r as boolean = true // Assume it's fine
+		  dim errorCode as integer = 0 // Assume it's fine
+		  dim errorMessage as string
 		  
-		  #if TargetMacOS then
+		  //
+		  // Try more than once, just in case
+		  //
+		  for repeatIndex as integer = 1 to 2
 		    
-		    r = true // If this app can run, it has the right tools
-		    
-		  #elseif TargetWindows then
-		    
-		    dim sh as new Shell
-		    sh.Execute "XCOPY /?"
-		    r = sh.ErrorCode = 0
-		    
-		  #else // Linux
-		    
-		    dim cmds() as string = array( "rsync --version", "/usr/bin/logger --version" )
-		    
-		    dim sh as new shell
-		    for each cmd as string in cmds
-		      sh.Execute cmd
-		      if sh.ErrorCode <> 0 then
-		        r = false
-		        exit
+		    #if TargetMacOS then
+		      
+		      errorCode = 0 // If this app can run, it has the right tools
+		      errorMessage = ""
+		      
+		    #elseif TargetWindows then
+		      
+		      dim sh as new Shell
+		      sh.TimeOut = 3000
+		      sh.Execute "XCOPY /?"
+		      errorCode = sh.ErrorCode
+		      if errorCode <> 0 then
+		        errorMessage = sh.Result.Trim
 		      end if
-		    next
+		      
+		    #else // Linux
+		      
+		      dim cmds() as string = array( "rsync --version", "/usr/bin/logger --version" )
+		      
+		      dim sh as new shell
+		      for each cmd as string in cmds
+		        sh.Execute cmd
+		        errorCode = sh.ErrorCode
+		        
+		        if errorCode <> 0 then
+		          errorMessage = "(" + cmd + ") " + sh.Result.Trim
+		          exit for cmd
+		        end if
+		      next
+		      
+		    #endif
 		    
-		  #endif
+		    if errorCode = 0 then
+		      exit for repeatIndex
+		    else
+		      errorMessage = errorMessage.Trim
+		      System.Log System.LogLevelCritical, _
+		      CurrentMethodName + ": Tool not available, code " + str( errorCode ) + _
+		      if( errorMessage <> "", ": " + errorMessage, "" )
+		    end if
+		  next
 		  
-		  return r
+		  return errorCode = 0
 		End Function
 	#tag EndMethod
 
