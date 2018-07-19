@@ -533,4 +533,3 @@ Add a translation for each, then submit a pull request as outlined above.
 1.0 (Jan. 5, 2015)
 
 * Initial release.
-
