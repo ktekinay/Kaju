@@ -300,6 +300,7 @@ Begin Window KajuUpdateWindow
       Scope           =   2
       TabIndex        =   8
       TabPanelIndex   =   0
+      TabStop         =   True
       Top             =   555
       Transparent     =   False
       Value           =   0
@@ -310,6 +311,7 @@ Begin Window KajuUpdateWindow
       Arguments       =   ""
       Backend         =   ""
       Canonical       =   False
+      Enabled         =   True
       ErrorCode       =   0
       Index           =   -2147483648
       InitialParent   =   ""
@@ -411,6 +413,7 @@ Begin Window KajuUpdateWindow
       Width           =   101
    End
    Begin Timer tmrTimeout
+      Enabled         =   True
       Index           =   -2147483648
       InitialParent   =   ""
       LockedInPosition=   False
@@ -420,6 +423,7 @@ Begin Window KajuUpdateWindow
       TabPanelIndex   =   0
    End
    Begin Kaju.HTTPSocketAsync hsSocket
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Scope           =   2
@@ -1128,11 +1132,11 @@ End
 		    // Find the executable
 		    //
 		    dim item as FolderItem
-		    for i as integer = 1 to containingFolder.Count
+		    For i As Integer = 1 To containingFolder.Count
 		      dim f as FolderItem = containingFolder.Item( i )
 		      dim name as string = f.Name
 		      dim leftChars as string = name.Left( 1 )
-		      if leftChars <> "." and leftChars <> "_" then
+		      If leftChars <> "." And leftChars <> "_" And Not f.Directory Then
 		        item = f
 		        exit
 		      end if
