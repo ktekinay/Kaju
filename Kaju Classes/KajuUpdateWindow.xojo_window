@@ -3,7 +3,6 @@ Begin Window KajuUpdateWindow
    BackColor       =   &cFFFFFF00
    Backdrop        =   0
    CloseButton     =   False
-   Compatibility   =   ""
    Composite       =   True
    Frame           =   0
    FullScreen      =   False
@@ -11,7 +10,7 @@ Begin Window KajuUpdateWindow
    HasBackColor    =   False
    Height          =   600
    ImplicitInstance=   True
-   LiveResize      =   False
+   LiveResize      =   "False"
    MacProcID       =   0
    MaxHeight       =   32000
    MaximizeButton  =   False
@@ -50,7 +49,7 @@ Begin Window KajuUpdateWindow
    Begin PushButton btnOK
       AutoDeactivate  =   True
       Bold            =   False
-      ButtonStyle     =   "0"
+      ButtonStyle     =   0
       Cancel          =   False
       Caption         =   "#KajuLocale.kInstallButton"
       Default         =   True
@@ -82,7 +81,7 @@ Begin Window KajuUpdateWindow
    Begin PushButton btnCancel
       AutoDeactivate  =   True
       Bold            =   False
-      ButtonStyle     =   "0"
+      ButtonStyle     =   0
       Cancel          =   True
       Caption         =   "#KajuLocale.kRemindMeLaterButton"
       Default         =   False
@@ -114,7 +113,7 @@ Begin Window KajuUpdateWindow
    Begin PushButton btnSkipVersion
       AutoDeactivate  =   True
       Bold            =   False
-      ButtonStyle     =   "0"
+      ButtonStyle     =   0
       Cancel          =   False
       Caption         =   "#KajuLocale.kSkipVersionButton"
       Default         =   False
@@ -288,6 +287,7 @@ Begin Window KajuUpdateWindow
       Enabled         =   True
       Height          =   20
       HelpTag         =   ""
+      Indeterminate   =   False
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   20
@@ -300,9 +300,10 @@ Begin Window KajuUpdateWindow
       Scope           =   2
       TabIndex        =   8
       TabPanelIndex   =   0
+      TabStop         =   True
       Top             =   555
       Transparent     =   False
-      Value           =   0
+      Value           =   0.0
       Visible         =   False
       Width           =   117
    End
@@ -310,6 +311,7 @@ Begin Window KajuUpdateWindow
       Arguments       =   ""
       Backend         =   ""
       Canonical       =   False
+      Enabled         =   True
       ErrorCode       =   0
       Index           =   -2147483648
       InitialParent   =   ""
@@ -411,6 +413,7 @@ Begin Window KajuUpdateWindow
       Width           =   101
    End
    Begin Timer tmrTimeout
+      Enabled         =   True
       Index           =   -2147483648
       InitialParent   =   ""
       LockedInPosition=   False
@@ -420,6 +423,7 @@ Begin Window KajuUpdateWindow
       TabPanelIndex   =   0
    End
    Begin Kaju.HTTPSocketAsync hsSocket
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Scope           =   2
@@ -669,6 +673,24 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub GetReadyToQuit()
+		  //MyKajuChanges 7
+		  'This code moved from shZipper.DecompressCompleted
+		  btnOK.Enabled = true
+		  btnOK.Caption = KajuLocale.kQuitButton
+		  btnCancel.Visible = true
+		  btnCancel.Caption = KajuLocale.kCancelButton
+		  
+		  pbProgress.Visible = false
+		  
+		  lblInstallMessage.Visible = true
+		  lblInstallMessage.Value = KajuLocale.kReadyMessage
+		  
+		  CurrentStage = Stage.WaitingToQuit
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub HandleOKButton()
 		  select case CurrentStage
 		  case Stage.ChoosingUpdate
@@ -711,6 +733,43 @@ End
 		      lblInstallMessage.Text = KajuLocale.kDryRunMessage
 		      
 		    else
+		      //MyKajuChanges 2
+		      ' User wants to update. Do precheck now to ensure necessary tools (xcopy) available and have write permission
+		      
+		      'Make sure Shell command xcopy works
+		      If Not XcopySupported Then
+		        'User notified of error in xcopysupported
+		        self.Cancel
+		        Return
+		      End If
+		      
+		      //MyKajuChanges 4
+		      ' Adapted from PreCheck
+		      'Make sure have write permission to Applications folder
+		      Var executable as FolderItem = Kaju.TrueExecutableFile
+		      
+		      #if TargetMacOS then
+		        if not executable.Parent.IsWriteable or not Kaju.IsWriteableRecursive( executable ) then
+		          Var msg As String
+		          msg = "Error. No write permission. To update, please open the app "
+		          msg = msg + "with an account with Administrator rights and recheck for updates." 
+		          MessageBox(msg)
+		          self.Cancel
+		          Return
+		        end if
+		      #elseif TargetWindows
+		        ' We don't need write permissions because InnoSetup will run as administrator
+		      #else
+		        if not Kaju.IsWriteableRecursive( executable.Parent ) then
+		          Var msg As String
+		          msg = "Error. No write permission. To update, please open the app "
+		          msg = msg + "with an account with Administrator rights and recheck for updates." 
+		          MessageBox(msg)
+		          self.Cancel
+		          Return
+		        end if
+		      #endif
+		      //EndofChanges
 		      
 		      lblInstallMessage.Text = KajuLocale.kDownloadingMessage
 		      
@@ -740,26 +799,32 @@ End
 		    // The user chose Quit & Install
 		    //
 		    
-		    Kaju.StartUpdate( self.Initiater )
-		    
-		    //
-		    // Move this window to the back
-		    //
-		    dim lastWindowIndex as integer = WindowCount - 1
-		    if not( Window( lastWindowIndex ) Is self ) then
-		      dim showIndex as integer = lastWindowIndex
-		      for windowIndex as integer = lastWindowIndex downto 0
-		        dim w as Window = Window( showIndex )
-		        if w Is self then
-		          showIndex = showIndex - 1
-		        else
-		          w.Show
-		        end if
-		      next
-		    end if
+		    //MyKajuChanges 8
+		    'On Windows, run the downloaded InnoSetup installer
+		    #If TargetWindows
+		      DownloadFile.Open("/kajuupdate=true")
+		    #else
+		      Kaju.StartUpdate( self.Initiater )
+		      
+		      //
+		      // Move this window to the back
+		      //
+		      dim lastWindowIndex as integer = WindowCount - 1
+		      if not( Window( lastWindowIndex ) Is self ) then
+		        dim showIndex as integer = lastWindowIndex
+		        for windowIndex as integer = lastWindowIndex downto 0
+		          dim w as Window = Window( showIndex )
+		          if w Is self then
+		            showIndex = showIndex - 1
+		          else
+		            w.Show
+		          end if
+		        next
+		      end if
+		    #endif
 		    
 		    Quit
-		    
+		    //EndOfChanges
 		  end
 		  
 		  
@@ -1016,7 +1081,7 @@ End
 
 #tag Events hvNotes
 	#tag Event
-		Function NewWindow() As HTMLViewer
+		Function NewWindow() As Object
 		  return hvNewWindow
 		End Function
 	#tag EndEvent
@@ -1143,23 +1208,25 @@ End
 		      ShowError()
 		      
 		    else
-		      
-		      Initiater = new Kaju.UpdateInitiater
-		      Initiater.ReplacementAppFolder = item
-		      Initiater.ReplacementExecutableName = SelectedBinary.ExecutableName
-		      
-		      btnOK.Enabled = true
-		      btnOK.Caption = KajuLocale.kQuitButton
-		      btnCancel.Visible = true
-		      btnCancel.Caption = KajuLocale.kCancelButton
-		      
-		      pbProgress.Visible = false
-		      
-		      lblInstallMessage.Visible = true
-		      lblInstallMessage.Text = KajuLocale.kReadyMessage
-		      
-		      CurrentStage = Stage.WaitingToQuit
-		      
+		      //MyKajuChanges 6
+		      ' Moved following code to new method GetReadyToQuit so don't duplicate code
+		      'Initiater = new Kaju.UpdateInitiater
+		      'Initiater.ReplacementAppFolder = item
+		      'Initiater.ReplacementExecutableName = SelectedBinary.ExecutableName
+		      '
+		      'btnOK.Enabled = true
+		      'btnOK.Caption = KajuLocale.kQuitButton
+		      'btnCancel.Visible = true
+		      'btnCancel.Caption = KajuLocale.kCancelButton
+		      '
+		      'pbProgress.Visible = false
+		      '
+		      'lblInstallMessage.Visible = true
+		      'lblInstallMessage.Text = KajuLocale.kReadyMessage
+		      '
+		      'CurrentStage = Stage.WaitingToQuit
+		      GetReadyToQuit
+		      //EndOfChanges
 		    end if
 		    
 		  end if
@@ -1298,15 +1365,23 @@ End
 		    
 		    dim targetFolder as FolderItem
 		    #if TargetWindows then
-		      dim targetFolderName as string = SelectedUpdate.AppName + "- decompressed"
-		      targetFolder = App.ExecutableFile.Parent
-		      targetFolder = targetFolder.Child( targetFolderName )
-		      Kaju.DeleteRecursive( targetFolder )
+		      //MyKajuChanges 5
+		      ' file is InnoSetup installer in temporary folder
+		      ' bypass the unzipping and get ready to quit
+		      GetReadyToQuit
+		      
+		      'dim targetFolderName as string = SelectedUpdate.AppName + "- decompressed"
+		      'targetFolder = App.ExecutableFile.Parent
+		      'targetFolder = targetFolder.Child( targetFolderName )
+		      'Kaju.DeleteRecursive( targetFolder )
 		    #else
 		      targetFolder = file.Parent.Child( "decompressed" )
+		      DeleteOnCancel.AddRow targetFolder
+		      shZipper.Decompress( file, targetFolder )
 		    #endif
-		    DeleteOnCancel.Append targetFolder
-		    shZipper.Decompress( file, targetFolder )
+		    'DeleteOnCancel.Append targetFolder
+		    'shZipper.Decompress( file, targetFolder )
+		    //EndOfChanges
 		  end if
 		  
 		End Sub
@@ -1314,46 +1389,43 @@ End
 #tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="AppName"
-		Group="Behavior"
-		Type="String"
-		EditorType="MultiLineEditor"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="BackColor"
+		Name="MinimumWidth"
 		Visible=true
-		Group="Appearance"
-		InitialValue="&hFFFFFF"
-		Type="Color"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Backdrop"
-		Visible=true
-		Group="Appearance"
-		Type="Picture"
-		EditorType="Picture"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="CloseButton"
-		Visible=true
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Composite"
-		Visible=true
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Frame"
-		Visible=true
-		Group="Appearance"
-		InitialValue="0"
+		Group="Size"
+		InitialValue="64"
 		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MinimumHeight"
+		Visible=true
+		Group="Size"
+		InitialValue="64"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MaximumWidth"
+		Visible=true
+		Group="Size"
+		InitialValue="32000"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MaximumHeight"
+		Visible=true
+		Group="Size"
+		InitialValue="32000"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Type"
+		Visible=true
+		Group="Frame"
+		InitialValue="0"
+		Type="Types"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Document"
@@ -1370,135 +1442,43 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="FullScreen"
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="FullScreenButton"
+		Name="HasCloseButton"
 		Visible=true
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="HasBackColor"
-		Visible=true
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Height"
-		Visible=true
-		Group="Position"
-		InitialValue="400"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="ImplicitInstance"
-		Visible=true
-		Group="Appearance"
+		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Interfaces"
+		Name="HasMaximizeButton"
 		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="LiveResize"
-		Visible=true
-		Group="Appearance"
+		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MacProcID"
+		Name="HasMinimizeButton"
 		Visible=true
-		Group="Appearance"
+		Group="Frame"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasFullScreenButton"
+		Visible=true
+		Group="Frame"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="DefaultLocation"
+		Visible=true
+		Group="Behavior"
 		InitialValue="0"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaxHeight"
-		Visible=true
-		Group="Position"
-		InitialValue="32000"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaximizeButton"
-		Visible=true
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaxWidth"
-		Visible=true
-		Group="Position"
-		InitialValue="32000"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MenuBar"
-		Visible=true
-		Group="Appearance"
-		Type="MenuBar"
-		EditorType="MenuBar"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MenuBarVisible"
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinHeight"
-		Visible=true
-		Group="Position"
-		InitialValue="64"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinimizeButton"
-		Visible=true
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinWidth"
-		Visible=true
-		Group="Position"
-		InitialValue="64"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Name"
-		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Placement"
-		Visible=true
-		Group="Position"
-		InitialValue="0"
-		Type="Integer"
+		Type="Locations"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Default"
@@ -1509,19 +1489,124 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="HasBackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="&hFFFFFF"
+		Type="Color"
+		EditorType="Color"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="AppName"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Backdrop"
+		Visible=true
+		Group="Appearance"
+		InitialValue=""
+		Type="Picture"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Composite"
+		Visible=true
+		Group="Appearance"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="FullScreen"
+		Visible=false
+		Group="Appearance"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Height"
+		Visible=true
+		Group="Position"
+		InitialValue="400"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ImplicitInstance"
+		Visible=true
+		Group="Appearance"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Interfaces"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MacProcID"
+		Visible=true
+		Group="Appearance"
+		InitialValue="0"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MenuBar"
+		Visible=true
+		Group="Appearance"
+		InitialValue=""
+		Type="MenuBar"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MenuBarVisible"
+		Visible=false
+		Group="Appearance"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Name"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="Resizeable"
 		Visible=true
 		Group="Appearance"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
-		EditorType="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Title"
@@ -1529,6 +1614,7 @@ End
 		Group="Appearance"
 		InitialValue="Untitled"
 		Type="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Visible"
@@ -1536,7 +1622,7 @@ End
 		Group="Appearance"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Width"
@@ -1544,5 +1630,6 @@ End
 		Group="Position"
 		InitialValue="600"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

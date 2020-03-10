@@ -363,6 +363,79 @@ Protected Module Kaju
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function XcopySupported() As Boolean
+		  //MyKajuChanges 3
+		  ' This is basically OSIsSupported but moved over from Kaju.UpdateChecker
+		  
+		  // Ensures that the right tools are available on the current OS
+		  
+		  Var errorCode as integer = 0 // Assume it's fine
+		  Var errorMessage as string
+		  
+		  //
+		  // Try more than once, just in case
+		  //
+		  for repeatIndex as integer = 1 to 2
+		    
+		    #if TargetMacOS then
+		      
+		      errorCode = 0 // If this app can run, it has the right tools
+		      errorMessage = ""
+		      
+		    #elseif TargetWindows then
+		      //MyKajuChanges 3a
+		      'Windows does not need xcopy anymore as we are going to run an InnoSetup installer instead
+		      errorCode = 0 // If this app can run, it has the right tools
+		      errorMessage = ""
+		      
+		      'Var sh as new Shell
+		      'sh.TimeOut = 3000
+		      'sh.Execute "XCOPY /?"
+		      'errorCode = sh.ErrorCode
+		      'if errorCode <> 0 then
+		      'errorMessage = sh.Result.Trim
+		      'end if
+		      //EndOfChanges
+		      
+		    #else // Linux
+		      
+		      Var cmds() as string = array( "rsync --version", "/usr/bin/logger --version" )
+		      
+		      Var sh as new shell
+		      for each cmd as string in cmds
+		        sh.Execute cmd
+		        errorCode = sh.ErrorCode
+		        
+		        if errorCode <> 0 then
+		          errorMessage = "(" + cmd + ") " + sh.Result.Trim
+		          exit for cmd
+		        end if
+		      next
+		      
+		    #endif
+		    
+		    if errorCode = 0 then
+		      exit for repeatIndex
+		    else
+		      errorMessage = errorMessage.Trim
+		      System.Log System.LogLevelCritical, _
+		      CurrentMethodName + ": Tool not available, code " + str( errorCode ) + _
+		      if( errorMessage <> "", ": " + errorMessage, "" )
+		      
+		      'Added notification to user if there is a problem
+		      Var msg As String
+		      msg = "Error. Unable to download and install the update, the necessary tools are not available. "
+		      msg = msg + "Error code: " + Str(errorCode) + ". Error message: " + errorMessage + ". "
+		      msg = msg + " Please see the website FAQ for troubleshooting."
+		      MessageBox(msg)
+		    end if
+		  next
+		  
+		  return errorCode = 0
+		End Function
+	#tag EndMethod
+
 
 	#tag Note, Name = License
 		
@@ -427,6 +500,7 @@ Protected Module Kaju
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -434,18 +508,23 @@ Protected Module Kaju
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -453,6 +532,7 @@ Protected Module Kaju
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Module

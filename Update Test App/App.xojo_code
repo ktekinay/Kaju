@@ -72,6 +72,30 @@ Inherits Application
 	#tag EndMethod
 
 
+	#tag Note, Name = Alterations
+		//MyKajuChanges 0
+		
+		I have made the following alterations to the workflow of Kaju:
+		1. PreCheck is done after the KajuUpdateWindow is shown, rather than before, when it can fail silently and Kaju never check for updates
+		2. For Windows builds only, an InnoSetup installer is registered in the Kau Admin app rather than a zip file
+		3. After the setup.exe is downloaded into a temp folder, when the user presses Quit & Install, it launches the setup.exe
+		
+		I made these changes because:
+		1. I had issues with the PreCheck failing silently (due to xcopy not being available - a problem with my %PATH% system environment variable)
+		2. PreCheck failing because I did not have write permissions to the Application Files folder (must run as administrator)
+		3. The final steps of the normal Kaju workflow were failing when copying files from the decompressed folder
+		"File creation error - The requested operation cannot be performed on a file with a user-mapped section open." ?scanning by Windows Security
+		
+		I think the benefits of these changes are:
+		1. Stops PreCheck from failing silently
+		2. Allows the update to proceed, even if the app has not been run as administrator
+		3. The InnoSetup installer workflow is familiar to most users and can be streamlined to minimise the installation steps
+		4. The same InnoSetup installer can be used for new installations and updates
+		5. The Registry entry for the app in 
+		HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{YourAppID}_is1 is updated with the new version number
+	#tag EndNote
+
+
 	#tag Property, Flags = &h21
 		Private mPrefFolder As FolderItem
 	#tag EndProperty
