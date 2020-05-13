@@ -1160,7 +1160,6 @@ Begin Window WndAdmin
       Width           =   180
    End
    Begin Timer tmrUpdateReleaseNotesPreview
-      Enabled         =   True
       Index           =   -2147483648
       InitialParent   =   ""
       LockedInPosition=   False
@@ -1223,7 +1222,6 @@ Begin Window WndAdmin
       Width           =   186
    End
    Begin Timer tmrUpdateImagePreview
-      Enabled         =   True
       Index           =   -2147483648
       InitialParent   =   ""
       LockedInPosition=   False
@@ -1492,7 +1490,6 @@ Begin Window WndAdmin
    Begin Kaju.UpdateInformation objReleaseNotesProcessor
       AppName         =   ""
       DisplayReleaseNotes=   ""
-      Enabled         =   True
       Image           =   0
       ImageScale      =   1
       ImageURL        =   ""
@@ -1511,7 +1508,6 @@ Begin Window WndAdmin
       VersionAsDouble =   0.0
    End
    Begin Timer tmrAdjustControls
-      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Mode            =   0
