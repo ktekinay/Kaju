@@ -92,7 +92,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   20
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   False
@@ -124,7 +124,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   39
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   False
@@ -1204,7 +1204,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   251
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   False
@@ -1315,7 +1315,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   819
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   False
       LockRight       =   True
       LockTop         =   False
@@ -1347,7 +1347,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   158
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   False
@@ -1389,7 +1389,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   684
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   False
       LockRight       =   True
       LockTop         =   False
