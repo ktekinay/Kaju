@@ -2352,7 +2352,7 @@ End
 #tag EndEvents
 #tag Events hvReleaseNotesPreview
 	#tag Event
-		Function NewWindow() As HTMLViewer
+		Function NewWindow() As Object
 		  return hvNewWindow
 		End Function
 	#tag EndEvent
@@ -2393,7 +2393,7 @@ End
 #tag EndEvents
 #tag Events hvImagePreview
 	#tag Event
-		Function NewWindow() As HTMLViewer
+		Function NewWindow() As Object
 		  return hvNewWindow
 		End Function
 	#tag EndEvent

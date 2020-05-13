@@ -1010,8 +1010,9 @@ End
 
 #tag Events hvNotes
 	#tag Event
-		Function NewWindow() As HTMLViewer
+		Function NewWindow() As Object
 		  return hvNewWindow
+		  
 		End Function
 	#tag EndEvent
 	#tag Event
