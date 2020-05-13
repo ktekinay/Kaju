@@ -79,7 +79,7 @@ If an update was found, the update window will have opened. You can check throug
 
 The user can choose to ignore certain versions as long as they are not marked as required. You can set `HonorIgnored` to `False` to bypass that temporarily and present even ignored versions to your user, or you can clear the database of ignored versions entirely with the `ResetIgnored` method.
 
-You may choose to specify an update URL that redirects to another location. By default, Kaju will not allow that, but if you really need to do it, set the `Kaju.UpdateChecker.AllowRedirection` property to `True`. 
+You may choose to specify an update URL that redirects to another location. By default, Kaju will not allow that, but if you really need to do it, set the `Kaju.UpdateChecker.AllowRedirection` property to `True`.
 
 ### One At A Time
 
@@ -127,7 +127,7 @@ At a bare minimum, that's it.
 
 ## The Admin App
 
-The included Admin app makes it easy to set up your update file. Start it up and use the "+" at the bottom, left to add a version. Fill in the information for the release. 
+The included Admin app makes it easy to set up your update file. Start it up and use the "+" at the bottom, left to add a version. Fill in the information for the release.
 
 When you're done, save the file, then export the HTML data. It is this exported file that you will post to your web site and the final URL should match the URL you included within your app.
 
@@ -144,7 +144,7 @@ The two ways to include a URL from which release notes will be pulled:
 ```
 http://wwww.something.com/my_release_notes
 
-These are the alternate release notes and 
+These are the alternate release notes and
 the url above will be visible.
 ```
 
@@ -153,8 +153,8 @@ or
 ```
 <!-- http://www.something.com/my_release_notes -->
 
-These are the alternate release notes but 
-the url above will not be visible because they are 
+These are the alternate release notes but
+the url above will not be visible because they are
 commented (preferred).
 ```
 
@@ -272,13 +272,13 @@ A sample JSON that will be returned by the server:
 		"AppName" : "My App" ,
 		"Version" : "6.1b4" ,
 		"ReleaseNotes" : "http://link/to/release/notes" ,
-		"MacBinary" : 
+		"MacBinary" :
 			{
 				"URL" : "http://www.site.com/other_download_path" ,
 				"Hash" :"0123456"
-			} 
+			}
 	}
-] 
+]
 ```
 
 **NOTE**: The ExecutableName will be used by the updater script while the AppName is what will display in the updater window. These may be the same or different. Since the ExecutableName of the Mac app can be discovered, it is not needed for the Mac binary.
@@ -407,7 +407,7 @@ Fork the project to your GitHub account. Use the "develop" branch for general fi
 
 There are two places to look for strings that need translation:
 
-1. The constants in the KajuLocale module. 
+1. The constants in the KajuLocale module.
 1. The error messages in KajuException.
 
 Add a translation for each, then submit a pull request as outlined above.
@@ -416,8 +416,8 @@ Add a translation for each, then submit a pull request as outlined above.
 
 2.1 (__)
 
-* **KajuUpdateWindow**: Changed `hsSocket` to a `Xojo.Net.HTTPSocket` object.
-* **UpdateChecker**: Added `ExecuteAsync` that will check for updates asynchronously using `Xojo.Net.HTTPSocket` and `LastError` for HTTP errors that occur when using that method.
+* **KajuUpdateWindow**: Changed `hsSocket` to a `URLConnection` object.
+* **UpdateChecker**: Added `ExecuteAsync` that will check for updates asynchronously using `URLConnection` and `LastError` for HTTP errors that occur when using that method.
 * **UpdateChecker**: Added results for "PageNotFound" and "FetchingUpdateInfo".
 * **UpdateChecker**: Better handling of a URL in the form "http://un:pw@path".
 * **UpdateChecker**: Changed `Result` to a read-only computed property and made the `mResult` shadow property hidden.
@@ -442,7 +442,7 @@ Add a translation for each, then submit a pull request as outlined above.
 * Ability to load release notes through a URL.
 * **Admin GUI**: Fixed Dupe button.
 * Added support for 64-bit binaries.
-* **Kaju**: Changed parameters of `DidLastUpdateSucceed` to report the "bit-ness" of the version that initiated the update. 
+* **Kaju**: Changed parameters of `DidLastUpdateSucceed` to report the "bit-ness" of the version that initiated the update.
 * **Test App**: Use better technique for compressing Windows and Linux executables.
 
 1.6.1 (August 27, 2015)
