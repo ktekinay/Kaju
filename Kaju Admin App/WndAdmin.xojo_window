@@ -1160,6 +1160,7 @@ Begin Window WndAdmin
       Width           =   180
    End
    Begin Timer tmrUpdateReleaseNotesPreview
+      Enabled         =   True
       Index           =   -2147483648
       InitialParent   =   ""
       LockedInPosition=   False
@@ -1222,6 +1223,7 @@ Begin Window WndAdmin
       Width           =   186
    End
    Begin Timer tmrUpdateImagePreview
+      Enabled         =   True
       Index           =   -2147483648
       InitialParent   =   ""
       LockedInPosition=   False
@@ -1490,6 +1492,7 @@ Begin Window WndAdmin
    Begin Kaju.UpdateInformation objReleaseNotesProcessor
       AppName         =   ""
       DisplayReleaseNotes=   ""
+      Enabled         =   True
       Image           =   0
       ImageScale      =   1
       ImageURL        =   ""
@@ -1506,6 +1509,15 @@ Begin Window WndAdmin
       UseTransparency =   True
       Version         =   ""
       VersionAsDouble =   0.0
+   End
+   Begin Timer tmrAdjustControls
+      Enabled         =   True
+      Index           =   -2147483648
+      LockedInPosition=   False
+      Mode            =   0
+      Period          =   20
+      Scope           =   2
+      TabPanelIndex   =   0
    End
 End
 #tag EndWindow
@@ -1631,8 +1643,9 @@ End
 
 
 	#tag Method, Flags = &h21
-		Private Sub AdjustControls()
-		  if self.Loading then
+		Private Sub AdjustControls(immediate As Boolean = False)
+		  if not immediate or self.Loading then
+		    tmrAdjustControls.Mode = Timer.ModeSingle
 		    return
 		  end if
 		  
@@ -2571,6 +2584,14 @@ End
 		Sub ReleaseNotesReceived()
 		  tmrUpdateReleaseNotesPreview.Mode = Timer.ModeSingle
 		  tmrUpdateReleaseNotesPreview.Reset
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events tmrAdjustControls
+	#tag Event
+		Sub Action()
+		  AdjustControls true
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
