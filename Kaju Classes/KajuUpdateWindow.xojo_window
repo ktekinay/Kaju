@@ -420,11 +420,12 @@ Begin Window KajuUpdateWindow
       TabPanelIndex   =   0
    End
    Begin Kaju.HTTPSocketAsync hsSocket
+      AllowCertificateValidation=   False
+      HTTPStatusCode  =   0
       Index           =   -2147483648
       LockedInPosition=   False
       Scope           =   2
       TabPanelIndex   =   0
-      ValidateCertificates=   False
    End
 End
 #tag EndWindow
@@ -725,7 +726,7 @@ End
 		      //
 		      // Start the download
 		      //
-		      hsSocket.Get( url, DownloadFile )
+		      hsSocket.Get( url, DownloadFile, true )
 		      
 		      //
 		      // Start the timeout timer
@@ -1222,51 +1223,20 @@ End
 #tag EndEvents
 #tag Events hsSocket
 	#tag Event
-		Sub ReceiveProgress(BytesReceived as Int64, TotalBytes as Int64, NewData as xojo.Core.MemoryBlock)
-		  #pragma unused newData
-		  
-		  if CurrentStage = Stage.Cancelled then
-		    //
-		    // Do nothing
-		    //
-		    return
-		  end if
-		  
-		  //
-		  // Have to get the value below 65536
-		  //
-		  
-		  const kMaxAllowed = 1000
-		  
-		  if totalBytes > kMaxAllowed then
-		    dim mult as integer = totalBytes \ kMaxAllowed
-		    totalBytes = totalBytes \ mult
-		    bytesReceived = bytesReceived \ mult
-		  end if
-		  
-		  pbProgress.Maximum = totalBytes
-		  pbProgress.Value = bytesReceived
-		  
-		  tmrTimeout.Reset
-		  
-		  
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub Error(err as RuntimeException)
+		Sub Error(e As RuntimeException)
 		  tmrTimeout.Mode = Timer.ModeOff
 		  
-		  dim errMsg as string = err.Message
+		  dim errMsg as string = e.Message
 		  if errMsg = "" then
 		    errMsg = KajuLocale.kGenericErrorMessage
 		  end if
 		  
-		  ShowError( errMsg + "  (" + str( err.ErrorNumber ) + ")" )
+		  ShowError( errMsg + "  (" + str( e.ErrorNumber ) + ")" )
 		  
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub FileReceived(url As String, httpStatus As Integer, file As FolderItem)
+		Sub FileReceived(URL As String, HTTPStatus As Integer, file As FolderItem)
 		  #pragma unused url
 		  
 		  if CurrentStage = Stage.Cancelled then
@@ -1308,6 +1278,37 @@ End
 		    DeleteOnCancel.Append targetFolder
 		    shZipper.Decompress( file, targetFolder )
 		  end if
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub ReceivingProgressed(bytesReceived As Int64, totalBytes As Int64, newData As String)
+		  #pragma unused newData
+		  
+		  if CurrentStage = Stage.Cancelled then
+		    //
+		    // Do nothing
+		    //
+		    return
+		  end if
+		  
+		  //
+		  // Have to get the value below 65536
+		  //
+		  
+		  const kMaxAllowed = 1000
+		  
+		  if totalBytes > kMaxAllowed then
+		    dim mult as integer = totalBytes \ kMaxAllowed
+		    totalBytes = totalBytes \ mult
+		    bytesReceived = bytesReceived \ mult
+		  end if
+		  
+		  pbProgress.Maximum = totalBytes
+		  pbProgress.Value = bytesReceived
+		  
+		  tmrTimeout.Reset
+		  
 		  
 		End Sub
 	#tag EndEvent

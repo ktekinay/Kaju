@@ -2363,7 +2363,7 @@ End
 		End Function
 	#tag EndEvent
 	#tag Event
-		Sub DocumentComplete(URL as String)
+		Sub DocumentComplete(url as String)
 		  #pragma unused URL
 		  
 		  self.Loading = false
@@ -2404,7 +2404,7 @@ End
 		End Function
 	#tag EndEvent
 	#tag Event
-		Sub DocumentComplete(URL as String)
+		Sub DocumentComplete(url as String)
 		  #pragma unused URL
 		  
 		  self.Loading = false

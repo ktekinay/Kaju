@@ -1,6 +1,7 @@
 Type=Desktop
-RBProjectVersion=2018.011
+RBProjectVersion=2019.031
 MinIDEVersion=20150400
+OrigIDEVersion=00000000
 Class=App;App.xojo_code;&h00000000503AC7A0;&h0000000000000000;false
 Folder=Custom Plist;Custom Plist;&h0000000031A617FF;&h0000000000000000;false
 Window=WndTest;WndTest.xojo_window;&h000000004308442C;&h0000000000000000;false

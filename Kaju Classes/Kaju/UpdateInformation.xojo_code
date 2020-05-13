@@ -138,13 +138,13 @@ Inherits Kaju.Information
 		  #if not TargetConsole then
 		    if ImageSocket isa object then
 		      ImageSocket.Disconnect
-		      RemoveHandler ImageSocket.PageReceived, WeakAddressOf ImageSocket_PageReceived
+		      RemoveHandler ImageSocket.ContentReceived, WeakAddressOf ImageSocket_ContentReceived
 		      ImageSocket = nil
 		    end if
 		    
 		    if ReleaseNotesSocket isa object then
 		      ReleaseNotesSocket.Disconnect
-		      RemoveHandler ReleaseNotesSocket.PageReceived, WeakAddressOf ReleaseNotesSocket_PageReceived
+		      RemoveHandler ReleaseNotesSocket.ContentReceived, WeakAddressOf ReleaseNotesSocket_ContentReceived
 		      ReleaseNotesSocket = nil
 		    end if
 		  #endif
@@ -173,7 +173,7 @@ Inherits Kaju.Information
 	#tag EndMethod
 
 	#tag Method, Flags = &h21, CompatibilityFlags = (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit)) or  (TargetIOS and (Target32Bit or Target64Bit))
-		Private Sub ImageSocket_PageReceived(sender As Kaju.HTTPSocketAsync, url As String, httpStatus As Integer, content As String)
+		Private Sub ImageSocket_ContentReceived(sender As Kaju.HTTPSocketAsync, url As String, httpStatus As Integer, content As String)
 		  #pragma unused sender
 		  #pragma unused url
 		  
@@ -192,7 +192,7 @@ Inherits Kaju.Information
 	#tag EndMethod
 
 	#tag Method, Flags = &h21, CompatibilityFlags = (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit)) or  (TargetIOS and (Target32Bit or Target64Bit))
-		Private Sub ReleaseNotesSocket_PageReceived(sender As Kaju.HTTPSocketAsync, url As String, httpStatus As Integer, content As String)
+		Private Sub ReleaseNotesSocket_ContentReceived(sender As Kaju.HTTPSocketAsync, url As String, httpStatus As Integer, content As String)
 		  #pragma unused sender
 		  #pragma unused url
 		  
@@ -312,12 +312,12 @@ Inherits Kaju.Information
 			  
 			  if ImageSocket is nil then
 			    ImageSocket = new Kaju.HTTPSocketAsync
-			    AddHandler ImageSocket.PageReceived, WeakAddressOf ImageSocket_PageReceived
+			    AddHandler ImageSocket.ContentReceived, WeakAddressOf ImageSocket_ContentReceived
 			  end if
 			  
 			  dim http as Kaju.HTTPSocketAsync = ImageSocket
 			  
-			  http.Get( url )
+			  http.Get( url, true )
 			  
 			  Exception err as RuntimeException
 			    mImage = nil
@@ -527,11 +527,11 @@ Inherits Kaju.Information
 			      
 			      if ReleaseNotesSocket is nil then
 			        ReleaseNotesSocket = new Kaju.HTTPSocketAsync
-			        AddHandler ReleaseNotesSocket.PageReceived, WeakAddressOf ReleaseNotesSocket_PageReceived
+			        AddHandler ReleaseNotesSocket.ContentReceived, WeakAddressOf ReleaseNotesSocket_ContentReceived
 			      end if
 			      
 			      dim http as Kaju.HTTPSocketAsync = ReleaseNotesSocket
-			      http.Get url
+			      http.Get url, true
 			      mReleaseNotes = alternateNotes
 			    end if
 			    

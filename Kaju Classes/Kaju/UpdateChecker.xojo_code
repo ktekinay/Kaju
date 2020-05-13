@@ -1,31 +1,7 @@
 #tag Class
 Protected Class UpdateChecker
 	#tag Method, Flags = &h21
-		Private Sub AsyncHTTP_Error(sender As HTTPSocketAsync, err As RuntimeException)
-		  #pragma unused sender
-		  
-		  dim index as integer = AsyncCheckers.IndexOf( self )
-		  if index <> -1 then
-		    AsyncCheckers.Remove index
-		  end if
-		  
-		  dim errMsg as string = err.Message
-		  if errMsg = "" then
-		    err.Message = "An exception of type " + Introspection.GetType( err ).Name + " has occurred"
-		  end if
-		  
-		  LastError = err
-		  
-		  if HandleError( errMsg ) then
-		    FetchAsync
-		  else
-		    RaiseEvent ExecuteAsyncComplete
-		  end if
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Sub AsyncHTTP_PageReceived(sender As HTTPSocketAsync, url As String, httpStatus As Integer, content As String)
+		Private Sub AsyncHTTP_ContentReceived(sender As HTTPSocketAsync, url As String, httpStatus As Integer, content As String)
 		  #pragma unused sender
 		  #pragma unused url
 		  
@@ -52,6 +28,30 @@ Protected Class UpdateChecker
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub AsyncHTTP_Error(sender As HTTPSocketAsync, err As RuntimeException)
+		  #pragma unused sender
+		  
+		  dim index as integer = AsyncCheckers.IndexOf( self )
+		  if index <> -1 then
+		    AsyncCheckers.Remove index
+		  end if
+		  
+		  dim errMsg as string = err.Message
+		  if errMsg = "" then
+		    err.Message = "An exception of type " + Introspection.GetType( err ).Name + " has occurred"
+		  end if
+		  
+		  LastError = err
+		  
+		  if HandleError( errMsg ) then
+		    FetchAsync
+		  else
+		    RaiseEvent ExecuteAsyncComplete
+		  end if
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub Constructor(preferencesFolder As FolderItem, preferencesFilename As String = kDefaultPreferencesName)
 		  self.PrefFile = preferencesFolder.Child( preferencesFilename )
@@ -66,7 +66,7 @@ Protected Class UpdateChecker
 		  SavePrefs()
 		  
 		  if AsyncHTTP isa object then
-		    RemoveHandler AsyncHTTP.PageReceived, WeakAddressOf AsyncHTTP_PageReceived
+		    RemoveHandler AsyncHTTP.ContentReceived, WeakAddressOf AsyncHTTP_ContentReceived
 		    RemoveHandler AsyncHTTP.Error, WeakAddressOf AsyncHTTP_Error
 		    AsyncHTTP = nil
 		  end if
@@ -150,22 +150,9 @@ Protected Class UpdateChecker
 
 	#tag Method, Flags = &h21
 		Private Sub FetchAsync()
-		  //
-		  // The new socket will always redirect so
-		  // AllowRedirection must be set to true.
-		  // If it isn't, we will let the consumer know through
-		  // an exception.
-		  //
-		  
-		  if not AllowRedirection then
-		    const kErrorString = _
-		    "AllowRedirection must be set to True when using asynchrous operations"
-		    raise new Kaju.KajuException( kErrorString, CurrentMethodName )
-		  end if
-		  
 		  dim url as string = UpdateURL
 		  dim http as Kaju.HTTPSocketAsync = GetAsyncHTTPSocket
-		  http.Get url
+		  http.Get url, AllowRedirection
 		  
 		  mResult = ResultType.FetchingUpdateInfo
 		  
@@ -189,7 +176,7 @@ Protected Class UpdateChecker
 		Private Function GetAsyncHTTPSocket() As Kaju.HTTPSocketAsync
 		  if AsyncHTTP is nil then
 		    AsyncHTTP = new HTTPSocketAsync
-		    AddHandler AsyncHTTP.PageReceived, WeakAddressOf AsyncHTTP_PageReceived
+		    AddHandler AsyncHTTP.ContentReceived, WeakAddressOf AsyncHTTP_ContentReceived
 		    AddHandler AsyncHTTP.Error, WeakAddressOf AsyncHTTP_Error
 		  end if
 		  
@@ -431,7 +418,7 @@ Protected Class UpdateChecker
 		  //
 		  // Processes the raw packet
 		  // 
-		  // Returns True if the process should contine, False if it's done
+		  // Returns True if the process should continue, False if it's done
 		  // or was cancelled
 		  //
 		  

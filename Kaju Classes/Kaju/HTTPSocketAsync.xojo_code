@@ -1,15 +1,15 @@
 #tag Class
 Protected Class HTTPSocketAsync
-Inherits Xojo.Net.HTTPSocket
+Inherits URLConnection
 	#tag Event
-		Function AuthenticationRequired(Realm as Text, ByRef Name as Text, ByRef Password as Text) As Boolean
-		  if RaiseEvent AuthenticationRequired( Realm, Name, Password ) then
+		Function AuthenticationRequested(realm As String, ByRef name As String, ByRef password As String) As Boolean
+		  if RaiseEvent AuthenticationRequested( realm, name, password ) then
 		    return true
 		  end if
 		  
 		  if Username <> "" then
-		    Name = Username.ToText
-		    Password = self.Password.ToText
+		    name = Username.ToText
+		    password = self.Password.ToText
 		    return true
 		  else
 		    return false
@@ -18,28 +18,26 @@ Inherits Xojo.Net.HTTPSocket
 	#tag EndEvent
 
 	#tag Event
-		Sub FileReceived(URL as Text, HTTPStatus as Integer, File as xojo.IO.FolderItem)
-		  dim f as new FolderItem( file.Path, FolderItem.PathTypeNative )
-		  RaiseEvent FileReceived( url, httpStatus, f )
-		End Sub
-	#tag EndEvent
-
-	#tag Event
-		Sub PageReceived(URL as Text, HTTPStatus as Integer, Content as xojo.Core.MemoryBlock)
-		  dim mb as MemoryBlock = content.Data
-		  dim contentString as string = mb.StringValue( 0, content.Size )
-		  
-		  if Encodings.UTF8.IsValidData( contentString ) then
-		    contentString = contentString.DefineEncoding( Encodings.UTF8 )
+		Sub ContentReceived(URL As String, HTTPStatus As Integer, content As String)
+		  if not AllowRedirection and url <> RequestedURL then
+		    httpStatus = 404
+		    content = ""
+		    
+		  elseif content.Encoding is nil and Encodings.UTF8.IsValidData( content ) then
+		    content = content.DefineEncoding( Encodings.UTF8 )
+		    
 		  end if
 		  
-		  RaiseEvent PageReceived( url, httpStatus, contentString )
+		  RaiseEvent ContentReceived( url, httpStatus, content )
 		End Sub
 	#tag EndEvent
 
 
 	#tag Method, Flags = &h0
-		Sub Get(url As String)
+		Sub Get(url As String, allowRedirect As Boolean)
+		  self.AllowRedirection = allowRedirect
+		  RequestedURL = url
+		  
 		  Disconnect
 		  
 		  SetSecure url
@@ -48,15 +46,21 @@ Inherits Xojo.Net.HTTPSocket
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Get(url As String, file As FolderItem)
+		Sub Get(url As String, file As FolderItem, allowRedirect As Boolean)
+		  self.AllowRedirection = allowRedirect
+		  RequestedURL = url
+		  
 		  Disconnect
 		  
 		  SetSecure url
+		  super.Send "GET", url, file
 		  
-		  dim path as string = file.NativePath.DefineEncoding( Encodings.UTF8 )
-		  dim f as new Xojo.IO.FolderItem( path.ToText )
-		  super.Send "GET", url.ToText, f
-		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub Send(method As String, url As String, File As FolderItem)
+		  super.Send Method, URL, File
 		End Sub
 	#tag EndMethod
 
@@ -67,14 +71,8 @@ Inherits Xojo.Net.HTTPSocket
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub Send(Method as Text, URL as Text, File as xojo.IO.FolderItem)
-		  super.Send Method, URL, File
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
 		Private Sub SetSecure(ByRef url As String)
-		  ValidateCertificates = true
+		  AllowCertificateValidation = true
 		  Username = ""
 		  Password = ""
 		  ClearRequestHeaders
@@ -112,20 +110,24 @@ Inherits Xojo.Net.HTTPSocket
 
 
 	#tag Hook, Flags = &h0
-		Event AuthenticationRequired(Realm as Text, ByRef Name as Text, ByRef Password as Text) As Boolean
+		Event AuthenticationRequested(realm As String, ByRef name As String, ByRef password As String) As Boolean
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event FileReceived(url As String, httpStatus As Integer, file As FolderItem)
-	#tag EndHook
-
-	#tag Hook, Flags = &h0
-		Event PageReceived(url As String, httpStatus As Integer, content As String)
+		Event ContentReceived(url As String, httpStatus As Integer, content As String)
 	#tag EndHook
 
 
 	#tag Property, Flags = &h21
+		Private AllowRedirection As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private Password As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private RequestedURL As String
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -135,11 +137,28 @@ Inherits Xojo.Net.HTTPSocket
 
 	#tag ViewBehavior
 		#tag ViewProperty
+			Name="AllowCertificateValidation"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="HTTPStatusCode"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Index"
 			Visible=true
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -147,18 +166,23 @@ Inherits Xojo.Net.HTTPSocket
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -166,11 +190,7 @@ Inherits Xojo.Net.HTTPSocket
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ValidateCertificates"
-			Group="Behavior"
-			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
