@@ -33,7 +33,7 @@ Begin Window KajuUpdateWindow
       Index           =   -2147483648
       Left            =   149
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -61,7 +61,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   630
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -93,7 +93,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   468
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -125,7 +125,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   149
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -155,7 +155,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   149
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -190,7 +190,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   149
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -225,7 +225,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   149
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -260,7 +260,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   149
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -292,7 +292,7 @@ Begin Window KajuUpdateWindow
       InitialParent   =   ""
       Left            =   20
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -330,11 +330,11 @@ Begin Window KajuUpdateWindow
       Index           =   -2147483648
       Left            =   -345
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
-      Renderer        =   0
+      Renderer        =   1
       Scope           =   2
       TabIndex        =   9
       TabPanelIndex   =   0
@@ -356,7 +356,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   20
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -393,7 +393,7 @@ Begin Window KajuUpdateWindow
       Left            =   36
       ListIndex       =   0
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
