@@ -1,6 +1,7 @@
 Type=Desktop
-RBProjectVersion=2018.011
+RBProjectVersion=2019.031
 MinIDEVersion=20070100
+OrigIDEVersion=00000000
 Folder=Kaju Classes;../Kaju Classes;&h000000002570CF64;&h0000000000000000;false
 Class=App;App.xojo_code;&h0000000007955649;&h0000000000000000;false
 MenuBar=MainMenuBar;MainMenuBar.xojo_menu;&h000000004AB8FF74;&h0000000000000000;false
