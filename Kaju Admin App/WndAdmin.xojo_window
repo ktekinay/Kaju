@@ -1548,13 +1548,6 @@ End
 
 	#tag Event
 		Sub Close()
-		  if RelativeToFolderItem isa FolderItem then
-		    if RelativeToFolderItem.Exists then
-		      RelativeToFolderItem.Delete
-		    end if
-		    RelativeToFolderItem = nil
-		  end if
-		  
 		  //
 		  // Tear down the BinaryInformationControls
 		  //
@@ -1570,8 +1563,6 @@ End
 
 	#tag Event
 		Sub Open()
-		  RelativeToFolderItem = GetTemporaryFolderItem
-		  
 		  //
 		  // Create binary controls
 		  //
@@ -1752,8 +1743,8 @@ End
 		    bc.Clear
 		  next
 		  
-		  hvReleaseNotesPreview.LoadPage( kNoDataHTML, RelativeToFolderItem )
-		  hvImagePreview.LoadPage( kNoDataHTML, RelativeToFolderItem )
+		  hvReleaseNotesPreview.LoadPage( kNoDataHTML, nil )
+		  hvImagePreview.LoadPage( kNoDataHTML, nil )
 		  
 		  self.Loading = false
 		  
@@ -2272,10 +2263,6 @@ End
 		Private Platforms() As String
 	#tag EndProperty
 
-	#tag Property, Flags = &h21
-		Private RelativeToFolderItem As FolderItem
-	#tag EndProperty
-
 
 	#tag Constant, Name = kNoDataHTML, Type = String, Dynamic = False, Default = \"<!-- No data --><BR />", Scope = Private
 	#tag EndConstant
@@ -2340,10 +2327,11 @@ End
 		  tmrUpdateReleaseNotesPreview.Reset
 		  
 		  #if TargetWindows then
-		    hvReleaseNotesPreview.LoadPage( kNoDataHTML, RelativeToFolderItem )
+		    hvReleaseNotesPreview.LoadPage( kNoDataHTML, nil )
 		    
 		    dim releaseNotes as string = ControlValue( fldReleaseNotes ).StringValue
-		    hvReleaseNotesPreview.LoadPage releaseNotes, RelativeToFolderItem
+		    hvReleaseNotesPreview.LoadPage releaseNotes, nil
+		    me.SetFocus
 		  #endif
 		  
 		End Sub
@@ -2385,7 +2373,7 @@ End
 		  tmrUpdateImagePreview.Reset
 		  
 		  #if TargetWindows then
-		    hvImagePreview.LoadPage kNoDataHTML, RelativeToFolderItem
+		    hvImagePreview.LoadPage kNoDataHTML, nil
 		  #endif
 		End Sub
 	#tag EndEvent
@@ -2465,8 +2453,10 @@ End
 		  else
 		    releaseNotes = objReleaseNotesProcessor.DisplayReleaseNotes
 		  end if
-		  hvReleaseNotesPreview.LoadPage( releaseNotes, RelativeToFolderItem )
 		  
+		  dim saveControl as RectControl = self.Focus
+		  hvReleaseNotesPreview.LoadPage( releaseNotes, nil )
+		  self.Focus = saveControl
 		  //
 		  // The htmlViewer will set Loading to false
 		  //

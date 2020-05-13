@@ -450,9 +450,6 @@ End
 
 	#tag Event
 		Sub Open()
-		  RelativeToFolderItem = GetTemporaryFolderItem
-		  DeleteOnClose.Append RelativeToFolderItem
-		  
 		  #if not TargetMacOS then
 		    //
 		    // Switch the buttons around for other platforms
@@ -660,7 +657,7 @@ End
 		  // Show the release notes
 		  //
 		  dim source as string = update.DisplayReleaseNotes
-		  hvNotes.LoadPage( source, RelativeToFolderItem )
+		  hvNotes.LoadPage( source, nil )
 		  
 		  //
 		  // hvNotes.CancelLoad will set self.Loading back to false
@@ -989,10 +986,6 @@ End
 
 	#tag Property, Flags = &h21
 		Attributes( hidden ) Private mCurrentUpdate As Kaju.UpdateInformation
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private RelativeToFolderItem As FolderItem
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
