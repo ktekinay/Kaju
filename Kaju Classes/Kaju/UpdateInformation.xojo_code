@@ -115,6 +115,13 @@ Inherits Kaju.Information
 		Function ConvertToJSON() As JSONItem
 		  dim j as JSONItem = super.ConvertToJSON
 		  
+		  //
+		  // Add a security token
+		  //
+		  dim rawKey as string = Crypto.GenerateRandomBytes( 8 )
+		  dim encodedKey as string = EncodeBase64( rawKey, 0 )
+		  j.Value( Kaju.kNameSecurityToken ) = encodedKey
+		  
 		  for each binaryName as string in BinaryNames
 		    dim b as Kaju.BinaryInformation = Binaries.Lookup( binaryName, nil )
 		    if b isa Kaju.BinaryInformation then

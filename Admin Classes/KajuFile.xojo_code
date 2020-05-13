@@ -43,13 +43,6 @@ Protected Class KajuFile
 		        binaryData.Value( Kaju.BinaryInformation.kKeyURL ) = url
 		      end if
 		    next
-		    
-		    //
-		    // Add a security token
-		    //
-		    dim rawKey as string = Crypto.GenerateRandomBytes( 8 )
-		    dim encodedKey as string = EncodeBase64( rawKey, 0 )
-		    thisVersionData.Value( Kaju.kNameSecurityToken ) = encodedKey
 		  next
 		  
 		  dim dataString as string = data.ToString
