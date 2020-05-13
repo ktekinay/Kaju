@@ -12,6 +12,7 @@
       "RequiresPayment":true,
       "UseTransparency":false,
       "Version":"1.1 (10)",
+      "Security Token":"XBz\/iAUrlYM=",
       "MacBinary":{
         "Hash":"07A49D4D1A1865E695DC0DC881C06AAE",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip"
@@ -42,10 +43,11 @@
       "ImageScale":1,
       "ImageURL":"",
       "MinimumRequiredVersion":"",
-      "ReleaseNotes":"<p>A phony development version pointing to the same binary. Meant as a placeholder to demonstrate multiple versions.<\/p>\n\n<p>Note that this version has a name change.<\/p>",
+      "ReleaseNotes":"<p>A phony development version pointing to the same binary. Meant as a placeholder to demonstrate multiple versions.<\/p>\n<p>Visit my <a href='http:\/\/www.mactechnologies.com' target='_blank'>web site<\/a>!<\/p>\n<p>Note that this version has a name change.<\/p>",
       "RequiresPayment":false,
       "UseTransparency":false,
       "Version":"1.2.2d5",
+      "Security Token":"zVrJfHERmnU=",
       "MacBinary":{
         "Hash":"07A49D4D1A1865E695DC0DC881C06AAE",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip"
@@ -80,6 +82,7 @@
       "RequiresPayment":false,
       "UseTransparency":false,
       "Version":"1.2.1a4",
+      "Security Token":"\/zAtqmcBDhI=",
       "MacBinary":{
         "Hash":"07A49D4D1A1865E695DC0DC881C06AAE",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip"
@@ -114,6 +117,7 @@
       "RequiresPayment":false,
       "UseTransparency":true,
       "Version":"1.2b2",
+      "Security Token":"e0ugxvYzlKI=",
       "MacBinary":{
         "Hash":"07A49D4D1A1865E695DC0DC881C06AAE",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Linux.zip"
@@ -148,6 +152,7 @@
       "RequiresPayment":false,
       "UseTransparency":false,
       "Version":"0.9",
+      "Security Token":"Vx\/hhx3yPDY=",
       "MacBinary":{
         "Hash":"07A49D4D1A1865E695DC0DC881C06AAE",
         "URL":"http:\/\/www.mactechnologies.com\/Kaju_Test\/Kaju_Update_Test_Mac.zip"
