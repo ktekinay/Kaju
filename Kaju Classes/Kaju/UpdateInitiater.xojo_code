@@ -366,14 +366,22 @@ Protected Class UpdateInitiater
 		  dim scriptFile as FolderItem = tempFolder.Child( scriptName )
 		  dim bs as BinaryStream = BinaryStream.Create( scriptFile, true )
 		  bs.Write( script )
-		  if bs.LastErrorCode <> 0 then
-		    MsgBox "Error writing script file: " + str( bs.LastErrorCode )
-		    scriptFile = nil
-		  end if
+		  #if XojoVersion < 2019.02 
+		    if bs.LastErrorCode <> 0 then
+		      dim ex as new IOException
+		      ex.ErrorNumber = bs.LastErrorCode
+		      raise ex
+		    end if
+		  #endif
 		  bs.Close
 		  bs = nil
 		  
 		  return scriptFile
+		  
+		  exception err as IOException
+		    MsgBox "Error writing script file: " + str( err.ErrorNumber )
+		    return nil
+		    
 		End Function
 	#tag EndMethod
 
