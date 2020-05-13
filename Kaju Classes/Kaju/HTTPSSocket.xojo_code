@@ -180,31 +180,11 @@ Inherits HTTPSecureSocket
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="CertificateFile"
-			Visible=true
-			Group="Behavior"
-			Type="FolderItem"
-			EditorType="File"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="CertificatePassword"
-			Visible=true
-			Group="Behavior"
-			Type="String"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="CertificateRejectionFile"
-			Visible=true
-			Group="Behavior"
-			Type="FolderItem"
-			EditorType="File"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ConnectionType"
+			Name="SSLConnectionType"
 			Visible=true
 			Group="Behavior"
 			InitialValue="3"
-			Type="Integer"
+			Type="SSLConnectionTypes"
 			EditorType="Enum"
 			#tag EnumValues
 				"1 - SSLv23"
@@ -214,36 +194,68 @@ Inherits HTTPSecureSocket
 			#tag EndEnumValues
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="ForceSecure"
+			Name="CertificateFile"
+			Visible=true
 			Group="Behavior"
+			InitialValue=""
+			Type="FolderItem"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="CertificatePassword"
+			Visible=true
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="CertificateRejectionFile"
+			Visible=true
+			Group="Behavior"
+			InitialValue=""
+			Type="FolderItem"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ForceSecure"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="Integer"
-			EditorType="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
-			EditorType="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Secure"
 			Visible=true
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
-			EditorType="String"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
