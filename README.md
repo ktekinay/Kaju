@@ -418,19 +418,24 @@ Add a translation for each, then submit a pull request as outlined above.
 
 * **KajuUpdateWindow**: Changed `hsSocket` to a `URLConnection` object.
 * **UpdateChecker**: Added `ExecuteAsync` that will check for updates asynchronously using `URLConnection` and `LastError` for HTTP errors that occur when using that method.
-* **UpdateChecker**: Added results for "PageNotFound" and "FetchingUpdateInfo".
+* **UpdateChecker**: Deprecated `Execute`.
+* **UpdateChecker**: If redirection is allowed, uses `URLConnection`.
+* **UpdateChecker**: Added results for "PageNotFound", "PageRedirected", and "FetchingUpdateInfo".
 * **UpdateChecker**: Better handling of a URL in the form "http://un:pw@path".
 * **UpdateChecker**: Changed `Result` to a read-only computed property and made the `mResult` shadow property hidden.
 * **UpdateChecker**: Removed events that were not being raised anyway.
 * **UpdateChecker**: Make sure each version has a security token (see below).
-* **UpdateChecker**: Validate the downloaded packet against every form of EOL in case that got changed along the way.
+* **UpdateChecker**: Validate the downloaded packet against every form of EOL with and without Trim in case that got changed along the way.
 * **UpdateChecker**: `OSIsSupported` will try twice to find the tools it needs and log any errors.
 * **UpdateInformation**: Will fetch images and release notes asynchronously.
 * **Test App**: The window will let you specify Asynchronous and your own URL and/or public key. It will also allow testing of simple HTTP authenticated directories.
 * **Test App**: Asynchronous is now the default.
+* **Admin App**: Fixed issues with saving and alias tracking. (Alias tracking does not work on Windows.)
+* **Admin App**: Better UI handling on Windows.
 * **General**: Code changes for easier debugging.
 * **General**: All HTTP requests now include headers to disable caching.
 * **General**: Exported information file contains a security token to make sure that each export has a different RSA signature.
+* **General**: Handle IOException.
 
 2.0 (May 31, 2017)
 
