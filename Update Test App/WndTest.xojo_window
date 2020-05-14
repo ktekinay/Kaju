@@ -706,7 +706,7 @@ Begin Window WndTest
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      State           =   "0"
+      State           =   0
       TabIndex        =   19
       TabPanelIndex   =   0
       TabStop         =   True
@@ -790,6 +790,9 @@ End
 		    
 		  case Kaju.UpdateChecker.ResultType.FetchingUpdateInfo
 		    lblResult.Text = "Fetching update information"
+		    
+		  case Kaju.UpdateChecker.ResultType.PageRedirected
+		    lblResult.Text = "The URL was redirected to another page"
 		    
 		  case Kaju.UpdateChecker.ResultType.PageNotFound
 		    lblResult.Text = "The URL resulted in a 404 error"
