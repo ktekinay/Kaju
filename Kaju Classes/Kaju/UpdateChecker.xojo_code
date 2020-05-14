@@ -470,6 +470,10 @@ Protected Class UpdateChecker
 		    if isValid then
 		      exit for eol
 		    end if
+		    isValid = Crypto.RSAVerifySignature( tester.Trim, sig, ServerPublicRSAKey )
+		    if isValid then
+		      exit for eol
+		    end if
 		  next
 		  
 		  if not isValid then
@@ -807,6 +811,7 @@ Protected Class UpdateChecker
 		  UpdateAvailable
 		  RequiredUpdateAvailable
 		  FetchingUpdateInfo
+		  PageRedirected = 302
 		PageNotFound = 404
 	#tag EndEnum
 
