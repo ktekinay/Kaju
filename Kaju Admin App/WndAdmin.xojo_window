@@ -1886,10 +1886,13 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function DoSave() As Boolean
+		Private Function DoSave(f As FolderItem = Nil) As Boolean
 		  StoreFieldsToVersionRow()
 		  
-		  dim f as FolderItem = Document
+		  if f is nil then
+		    f = Document
+		  end if
+		  
 		  if f is nil then
 		    return DoSaveAs()
 		  end if
@@ -1899,6 +1902,7 @@ End
 		  dim r as boolean
 		  MyKajuFile.SaveTo( f )
 		  r = true
+		  Document = f
 		  ContentsChanged = false
 		  
 		  Exception err as KajuException
@@ -1944,8 +1948,7 @@ End
 		      end if
 		    end if
 		    
-		    Document = f
-		    r = DoSave()
+		    r = DoSave( f )
 		  end if
 		  
 		  UpdateWindowTitle
