@@ -13,8 +13,12 @@ Protected Class UpdateChecker
 		  dim statusCode as integer = httpStatus
 		  dim raw as string = content
 		  
-		  if statusCode = 404 then // Not found
+		  if statusCode >= 400 and statusCode <= 499 then // Not found
 		    mResult = ResultType.PageNotFound
+		    RaiseEvent ExecuteAsyncComplete
+		    
+		  elseif statusCode >= 300 and statusCode <= 399 then
+		    mResult = ResultType.PageRedirected
 		    RaiseEvent ExecuteAsyncComplete
 		    
 		  elseif ProcessRaw( raw ) then
@@ -149,6 +153,10 @@ Protected Class UpdateChecker
 		    
 		    if statusCode = 404 then // Not found
 		      mResult = ResultType.PageNotFound
+		      exit do
+		      
+		    elseif statusCode >= 300 and statusCode <= 399 then
+		      mResult = ResultType.PageRedirected
 		      exit do
 		    end if
 		    
