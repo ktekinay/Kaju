@@ -20,8 +20,8 @@ Inherits URLConnection
 	#tag Event
 		Sub ContentReceived(URL As String, HTTPStatus As Integer, content As String)
 		  if not AllowRedirection and url <> RequestedURL then
-		    httpStatus = 404
 		    content = ""
+		    httpStatus = 302
 		    
 		  elseif content.Encoding is nil and Encodings.UTF8.IsValidData( content ) then
 		    content = content.DefineEncoding( Encodings.UTF8 )
@@ -36,19 +36,17 @@ Inherits URLConnection
 	#tag Method, Flags = &h0
 		Sub Get(url As String, allowRedirect As Boolean)
 		  self.AllowRedirection = allowRedirect
-		  RequestedURL = url
 		  
 		  Disconnect
 		  
 		  SetSecure url
-		  super.Send "GET", url.ToText
+		  super.Send "GET", url
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Get(url As String, file As FolderItem, allowRedirect As Boolean)
 		  self.AllowRedirection = allowRedirect
-		  RequestedURL = url
 		  
 		  Disconnect
 		  
@@ -56,6 +54,29 @@ Inherits URLConnection
 		  super.Send "GET", url, file
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub GetSync(url As String, file As FolderItem, timeout As Integer = 0)
+		  self.AllowRedirection = true
+		  
+		  Disconnect
+		  
+		  SetSecure url
+		  super.SendSync "GET", url, file, timeout
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetSync(url As String, timeout As Integer = 0) As String
+		  self.AllowRedirection = true
+		  
+		  Disconnect
+		  
+		  SetSecure url
+		  return super.SendSync( "GET", url, timeout )
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
@@ -71,6 +92,20 @@ Inherits URLConnection
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub SendSync(method As String, URL As String, file As FolderItem, timeout As Integer = 0)
+		  super.SendSync method, URL, file, timeout
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function SendSync(method As String, URL As String, timeout As Integer = 0) As String
+		  return super.SendSync( method, URL, timeout )
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub SetSecure(ByRef url As String)
 		  AllowCertificateValidation = true
 		  Username = ""
@@ -81,6 +116,7 @@ Inherits URLConnection
 		  RequestHeader( "Pragma" ) = "no-cache"
 		  
 		  url = url.ConvertEncoding( Encodings.UTF8 )
+		  RequestedURL = url
 		  
 		  #if not TargetMacOS then
 		    

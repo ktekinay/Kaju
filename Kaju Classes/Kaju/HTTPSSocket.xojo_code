@@ -62,40 +62,6 @@ Inherits HTTPSecureSocket
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function GetRedirectAddress(url As String, timeout As Integer, maximumIterations As Integer = kDefaultMaximumIterations) As String
-		  // Gets the redirect address for a url
-		  // Will give up after maximumIterations interations.
-		  // Put a 0 (or less) in there for infinite
-		  
-		  if url = "" then
-		    return url
-		  end if
-		  
-		  dim isFinite as boolean = true
-		  if maximumIterations < 1 then
-		    isFinite = false
-		  end if
-		  
-		  do
-		    dim headers as InternetHeaders = GetHeaders( url, timeout )
-		    if headers is nil then
-		      exit
-		    elseif headers.Value( "Location" ) <> "" then
-		      url = headers.Value( "Location" )
-		    else
-		      exit
-		    end if
-		    if isFinite then
-		      maximumIterations = maximumIterations - 1
-		    end if
-		  loop until isFinite and maximumIterations = 0 // Will never end if maxiumIterations < 0 to start
-		  
-		  return url.Trim
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub SendRequest(method As String, url As String)
 		  SetSecure( url )
 		  super.SendRequest( method, url )

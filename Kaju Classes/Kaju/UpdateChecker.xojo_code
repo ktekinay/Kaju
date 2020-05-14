@@ -120,20 +120,32 @@ Protected Class UpdateChecker
 		  // Look for redirection
 		  //
 		  dim url as string = self.UpdateURL
-		  if AllowRedirection then
-		    dim redirector as new Kaju.HTTPSSocket
-		    url = redirector.GetRedirectAddress( url, 5 )
-		  end if
 		  
 		  //
 		  // Repeat the check until we get data or the user gives up
 		  //
 		  do
+		    const kTimeout as integer = 5
 		    
-		    dim http as new Kaju.HTTPSSocket
+		    dim raw as string
+		    dim statusCode as integer
 		    
-		    dim raw as string = http.Get( url, 5 )
-		    dim statusCode as integer = http.HTTPStatusCode
+		    //
+		    // Note:
+		    //
+		    // If Xojo ever disallows redirection in URLConnection
+		    // we can delete HTTPSSocket and simplify this
+		    // code.
+		    //
+		    if AllowRedirection then
+		      dim http as new Kaju.HTTPSocketAsync // Follows redirects anyway
+		      raw = http.GetSync( url, kTimeout )
+		      statusCode = http.HTTPStatusCode
+		    else
+		      dim http as new Kaju.HTTPSSocket
+		      raw = http.Get( url, kTimeout ) // Does not follow redirects
+		      statusCode = http.HTTPStatusCode
+		    end if
 		    
 		    if statusCode = 404 then // Not found
 		      mResult = ResultType.PageNotFound
