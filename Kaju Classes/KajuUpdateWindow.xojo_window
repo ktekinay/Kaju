@@ -1127,7 +1127,7 @@ End
 		      dim f as FolderItem = containingFolder.Item( i )
 		      dim name as string = f.Name
 		      dim leftChars as string = name.Left( 1 )
-		      if leftChars <> "." and leftChars <> "_" and f.Directory = false then
+		      if leftChars <> "." and leftChars <> "_" and f.Directory then
 		        item = f
 		        exit
 		      end if
