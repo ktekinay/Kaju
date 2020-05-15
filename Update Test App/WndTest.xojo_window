@@ -716,7 +716,7 @@ Begin Window WndTest
       Top             =   344
       Transparent     =   True
       Underline       =   False
-      Value           =   True
+      Value           =   False
       Visible         =   True
       Width           =   183
    End
