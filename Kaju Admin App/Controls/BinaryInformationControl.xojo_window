@@ -428,14 +428,13 @@ End
 		  
 		  hashField.Text = ""
 		  
-		  dim http as new Kaju.HTTPSSocket
-		  url = http.GetRedirectAddress( url, 5 )
+		  dim http as new Kaju.HTTPSocketAsync
 		  
 		  dim file as FolderItem = GetTemporaryFolderItem
-		  dim r as boolean = http.Get( url, file, 30 )
-		  if not r or http.LastErrorCode <> 0 then
+		  http.GetSync( url, file, 30 )
+		  if http.HTTPStatusCode <> 200 then
 		    
-		    MsgBox "Could not get the executable from that url: " + str( http.LastErrorCode )
+		    MsgBox "Could not get the executable from that url: " + str( http.HTTPStatusCode )
 		    
 		  else
 		    
