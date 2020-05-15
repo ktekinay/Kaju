@@ -19,6 +19,8 @@ Inherits URLConnection
 
 	#tag Event
 		Sub ContentReceived(URL As String, HTTPStatus As Integer, content As String)
+		  url = Kaju.StripURLCredentials( url )
+		  
 		  if not AllowRedirection and url <> RequestedURL then
 		    content = ""
 		    httpStatus = 302
@@ -116,7 +118,7 @@ Inherits URLConnection
 		  RequestHeader( "Pragma" ) = "no-cache"
 		  
 		  url = url.ConvertEncoding( Encodings.UTF8 )
-		  RequestedURL = url
+		  RequestedURL = Kaju.StripURLCredentials( url )
 		  
 		  #if not TargetMacOS then
 		    
