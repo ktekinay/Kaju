@@ -5,10 +5,7 @@ Protected Class UpdateChecker
 		  #pragma unused sender
 		  #pragma unused url
 		  
-		  dim index as integer = AsyncCheckers.IndexOf( self )
-		  if index <> -1 then
-		    AsyncCheckers.Remove index
-		  end if
+		  RemoveInstance self
 		  
 		  dim statusCode as integer = httpStatus
 		  dim raw as string = content
@@ -22,7 +19,7 @@ Protected Class UpdateChecker
 		    RaiseEvent ExecuteAsyncComplete
 		    
 		  elseif ProcessRaw( raw ) then
-		    FetchAsync()
+		    FetchAsync true // Immediate because the socket is already set up
 		    
 		  else
 		    RaiseEvent ExecuteAsyncComplete
@@ -36,10 +33,7 @@ Protected Class UpdateChecker
 		Private Sub AsyncHTTP_Error(sender As HTTPSocketAsync, err As RuntimeException)
 		  #pragma unused sender
 		  
-		  dim index as integer = AsyncCheckers.IndexOf( self )
-		  if index <> -1 then
-		    AsyncCheckers.Remove index
-		  end if
+		  RemoveInstance self
 		  
 		  dim errMsg as string = err.Message
 		  if errMsg = "" then
@@ -49,7 +43,7 @@ Protected Class UpdateChecker
 		  LastError = err
 		  
 		  if HandleError( errMsg ) then
-		    FetchAsync
+		    FetchAsync true // Immediate because the socket is already set up
 		  else
 		    RaiseEvent ExecuteAsyncComplete
 		  end if
@@ -73,6 +67,12 @@ Protected Class UpdateChecker
 		    RemoveHandler AsyncHTTP.ContentReceived, WeakAddressOf AsyncHTTP_ContentReceived
 		    RemoveHandler AsyncHTTP.Error, WeakAddressOf AsyncHTTP_Error
 		    AsyncHTTP = nil
+		  end if
+		  
+		  if FetchAsyncTimer isa object then
+		    FetchAsyncTimer.Mode = Timer.ModeOff
+		    RemoveHandler FetchAsyncTimer.Action, WeakAddressOf FetchAsyncTimer_Action
+		    FetchAsyncTimer = nil
 		  end if
 		  
 		End Sub
@@ -113,8 +113,7 @@ Protected Class UpdateChecker
 		    return
 		  end if
 		  
-		  FetchAsync
-		  
+		  FetchAsync false
 		End Sub
 	#tag EndMethod
 
@@ -169,25 +168,51 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub FetchAsync()
-		  dim url as string = UpdateURL
-		  dim http as Kaju.HTTPSocketAsync = GetAsyncHTTPSocket
-		  http.Get url, AllowRedirection
+		Private Sub FetchAsync(immediate As Boolean)
+		  dim http as Kaju.HTTPSocketAsync = GetAsyncHTTPSocket // Set up the socket
 		  
 		  mResult = ResultType.FetchingUpdateInfo
 		  
 		  //
-		  // Processing will resume in the events
-		  //
-		  
-		  //
-		  // But we have to hold a reference to this object in case the consumer decided to use
+		  // We have to hold a reference to this object in case the consumer decided to use
 		  // a temporary variable
 		  //
+		  StoreInstance self
 		  
-		  if AsyncCheckers.IndexOf( self ) = -1 then
-		    AsyncCheckers.Append self
+		  //
+		  // If not immediate, start a timer to do this
+		  //
+		  // This is to counter a potential timing issue reported by a user
+		  // so we set up the socket first, then call it later
+		  //
+		  if immediate then
+		    
+		    dim url as string = UpdateURL
+		    http.Get url, AllowRedirection
+		    
+		    //
+		    // Processing will resume in the events
+		    //
+		    
+		  else
+		    
+		    if FetchAsyncTimer is nil then
+		      FetchAsyncTimer = new Timer
+		      FetchAsyncTimer.Period = 10
+		      AddHandler FetchAsyncTimer.Action, WeakAddressOf FetchAsyncTimer_Action
+		    end if
+		    
+		    FetchAsyncTimer.Mode = Timer.ModeSingle
+		    
 		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub FetchAsyncTimer_Action(sender As Timer)
+		  #pragma unused sender
+		  FetchAsync true
 		  
 		End Sub
 	#tag EndMethod
@@ -587,6 +612,16 @@ Protected Class UpdateChecker
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Shared Sub RemoveInstance(o As UpdateChecker)
+		  dim i as integer = AsyncCheckers.IndexOf( o )
+		  if i <> -1 then
+		    AsyncCheckers.Remove i
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub ResetIgnored()
 		  redim IgnoreVersionsPref( -1 )
@@ -649,6 +684,15 @@ Protected Class UpdateChecker
 		    firstLine = match.SubExpressionString( 1 )
 		    remainder = match.SubExpressionString( 2 )
 		    
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Shared Sub StoreInstance(o As UpdateChecker)
+		  if AsyncCheckers.IndexOf( o ) = -1 then
+		    AsyncCheckers.Append o
 		  end if
 		  
 		End Sub
@@ -725,6 +769,10 @@ Protected Class UpdateChecker
 
 	#tag Property, Flags = &h0
 		DefaultUseTransparency As Boolean = True
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private FetchAsyncTimer As Timer
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -971,6 +1019,7 @@ Protected Class UpdateChecker
 				"2 - UpdateAvailable"
 				"3 - RequiredUpdateAvailable"
 				"4 - FetchingUpdateInfo"
+				"302 - PageRedirected"
 				"404 - PageNotFound"
 			#tag EndEnumValues
 		#tag EndViewProperty
