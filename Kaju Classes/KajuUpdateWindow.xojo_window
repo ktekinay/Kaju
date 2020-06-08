@@ -1143,6 +1143,15 @@ End
 		      Initiater.ReplacementAppFolder = item
 		      Initiater.ReplacementExecutableName = SelectedBinary.ExecutableName
 		      
+		      #if not TargetMacOS then
+		        if Initiater.ReplacementExecutableName = "" then
+		          //
+		          // We will assume it's the same name
+		          //
+		          Initiater.ReplacementExecutableName = App.ExecutableFile.Name
+		        end if
+		      #endif
+		      
 		      btnOK.Enabled = true
 		      btnOK.Caption = KajuLocale.kQuitButton
 		      btnCancel.Visible = true
