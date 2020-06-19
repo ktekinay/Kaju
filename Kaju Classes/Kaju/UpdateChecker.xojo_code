@@ -63,11 +63,7 @@ Protected Class UpdateChecker
 		Private Sub Destructor()
 		  SavePrefs()
 		  
-		  if AsyncHTTP isa object then
-		    RemoveHandler AsyncHTTP.ContentReceived, WeakAddressOf AsyncHTTP_ContentReceived
-		    RemoveHandler AsyncHTTP.Error, WeakAddressOf AsyncHTTP_Error
-		    AsyncHTTP = nil
-		  end if
+		  TeardownAsyncHTTP
 		  
 		  if FetchAsyncTimer isa object then
 		    FetchAsyncTimer.Mode = Timer.ModeOff
@@ -169,7 +165,7 @@ Protected Class UpdateChecker
 
 	#tag Method, Flags = &h21
 		Private Sub FetchAsync(immediate As Boolean)
-		  dim http as Kaju.HTTPSocketAsync = GetAsyncHTTPSocket // Set up the socket
+		  dim http as Kaju.HTTPSocketAsync = GetNewAsyncHTTPSocket // Set up the socket
 		  
 		  mResult = ResultType.FetchingUpdateInfo
 		  
@@ -218,12 +214,12 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function GetAsyncHTTPSocket() As Kaju.HTTPSocketAsync
-		  if AsyncHTTP is nil then
-		    AsyncHTTP = new HTTPSocketAsync
-		    AddHandler AsyncHTTP.ContentReceived, WeakAddressOf AsyncHTTP_ContentReceived
-		    AddHandler AsyncHTTP.Error, WeakAddressOf AsyncHTTP_Error
-		  end if
+		Private Function GetNewAsyncHTTPSocket() As Kaju.HTTPSocketAsync
+		  TeardownAsyncHTTP
+		  
+		  AsyncHTTP = new HTTPSocketAsync
+		  AddHandler AsyncHTTP.ContentReceived, WeakAddressOf AsyncHTTP_ContentReceived
+		  AddHandler AsyncHTTP.Error, WeakAddressOf AsyncHTTP_Error
 		  
 		  return AsyncHTTP
 		End Function
@@ -707,6 +703,17 @@ Protected Class UpdateChecker
 		  
 		  return j
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub TeardownAsyncHTTP()
+		  if AsyncHTTP isa object then
+		    RemoveHandler AsyncHTTP.ContentReceived, WeakAddressOf AsyncHTTP_ContentReceived
+		    RemoveHandler AsyncHTTP.Error, WeakAddressOf AsyncHTTP_Error
+		    AsyncHTTP = nil
+		  end if
+		  
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
