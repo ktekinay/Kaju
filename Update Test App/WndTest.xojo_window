@@ -706,7 +706,7 @@ Begin Window WndTest
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      State           =   0
+      State           =   1
       TabIndex        =   19
       TabPanelIndex   =   0
       TabStop         =   True
