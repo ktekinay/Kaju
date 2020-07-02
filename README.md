@@ -49,11 +49,13 @@ To discover what `UpdateChecker` found, you can check the `Result` property in t
 
 ### ExecuteAsync vs. Execute
 
-Xojo offers two types of HTTPSocket, the "classic" and the "namespaced" (`Xojo.Net.HTTPSocket`) versions. The namespaced version includes features that works with newer types of security but does not offer a synchronous mode. With that in mind, Kaju has two ways to start the update process, `Kaju.UpdateChecker.ExecuteAsync` and `Kaju.UpdateChecker.Execute`. The former uses the namespaced version and will report its result in the `ExecuteAsyncComplete` event. The latter uses the classic version and will report its results immediately.
+Kaju has two ways to start the update process, `Kaju.UpdateChecker.ExecuteAsync` and `Kaju.UpdateChecker.Execute`.
+
+Xojo has introduced the `URLConnection` class, an update to the classic `HTTPSocket` and `HTTPSecureSocket` classes. The more modern implementation is preferred and used when you choose `ExecuteAsync`. The older class is used when you choose the synchronous `Execute` _and_ set `AllowRedirection` to `False` (Unfortunately, the `URLConnection` class has no way to disallow redirects and we can only fake it in asynchronous mode.)
+
+`ExecuteAsync` will report its result in the `ExecuteAsyncComplete` event while `Execute` will report its results immediately.
 
 If your update information is not on a secure website, it shouldn't matter which you use, but we still recommend `ExecuteAsync` moving forward.
-
-**Note**: `ExecuteAsync` will always allow redirects so `UpdateChecker.AllowRedirection` must be set to `True` or an exception will be raised.
 
 ### Minimum OS
 
@@ -69,7 +71,7 @@ If Kaju cannot find the tools it needs, the `Result` will be set to `Unsupported
 
 If you set up a minimum required version in your update information, Kaju may find that a particular update is "required". For example, if the user is using v.1.0 and you've discovered a bug that necessitates an update to at least v.1.1, you would set that as the minimum required version. In the future, even as you release v.1.2, 1.3, etc, you would leave the minimum required as v.1.1 so Kaju knows to force the users of 1.0 to update.
 
-After calling  `Kaju.UpdateChecker.ExecuteAsync` or `Kaju.UpdateChecker.Execute`, the `Result` method will tell you if a required update was found. In that case, it's up to you to take special actions to make sure that your app cannot be used until it is updated. To help, there is the `Kaju.UpdateChecker.QuitOnCancelIfRequired` property that is `True` by default. If the user tries to cancel a required update, the app will quit.
+After calling  `Kaju.UpdateChecker.ExecuteAsync` or `Kaju.UpdateChecker.Execute`, the `Result` property will tell you if a required update was found. In that case, it's up to you to take special actions to make sure that your app cannot be used until it is updated. To help, there is the `Kaju.UpdateChecker.QuitOnCancelIfRequired` property that is `True` by default. If the user tries to cancel a required update, the app will quit.
 
 ### Other Features
 
@@ -175,6 +177,8 @@ For each version in your admin file, check the checkbox for each platform to whi
 **Note**: If the URL to a binary starts with "https:", a secure connection will be used automatically.
 
 For Windows and Linux, you must also provide the exact name of the executable. If your app is called "My Great App", the Linux executable name will be "My Great App" and the Windows name will be "My Great App.exe".
+
+__Note__: If you omit this, Kaju will assume the name of the executable that is running the update.
 
 ### About 64-bit
 
@@ -421,7 +425,7 @@ Add a translation for each, then submit a pull request as outlined above.
 * **KajuUpdateWindow**: Changed `hsSocket` to a `URLConnection` object.
 * **UpdateChecker**: Added `ExecuteAsync` that will check for updates asynchronously using `URLConnection` and `LastError` for HTTP errors that occur when using that method.
 * **UpdateChecker**: Deprecated `Execute`.
-* **UpdateChecker**: If redirection is allowed, uses `URLConnection`.
+* **UpdateChecker**: Use `URLConnection` unless `Execute` is used where `AllowRedirection` isß `False`.
 * **UpdateChecker**: Added results for "PageNotFound", "PageRedirected", and "FetchingUpdateInfo".
 * **UpdateChecker**: Better handling of a URL in the form "http://un:pw@path".
 * **UpdateChecker**: Changed `Result` to a read-only computed property and made the `mResult` shadow property hidden.
