@@ -420,7 +420,7 @@ Add a translation for each, then submit a pull request as outlined above.
 
 ## Release Notes
 
-2.1 (__)
+2.1 (July 3, 2020)
 
 * **KajuUpdateWindow**: Changed `hsSocket` to a `URLConnection` object.
 * **UpdateChecker**: Added `ExecuteAsync` that will check for updates asynchronously using `URLConnection` and `LastError` for HTTP errors that occur when using that method.
