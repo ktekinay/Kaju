@@ -53,10 +53,17 @@ case else
 print str( CurrentBuildTarget )
 end select
 
-dim kaju as string = topLevelPath + "/Kaju\ Admin\ CLI/Builds\ \-\ Kaju\ Admin\ CLI.xojo_project/Mac\ OS\ X\ \(Intel\)/kaju/kaju"
+dim kaju as string
+kaju = topLevelPath + "/Kaju\ Admin\ CLI/Builds\ \-\ Kaju\ Admin\ CLI/OS\ X\ 64\ bit/kaju/kaju"
 
 dim result as string
 result = DoShellCommand( kaju )
+
+if result.InStr( "addversion" ) = 0 then
+kaju = topLevelPath + "/Kaju\ Admin\ CLI/Builds\ \-\ Kaju\ Admin\ CLI.xojo_project/OS\ X\ 64\ bit/kaju/kaju"
+result = DoShellCommand( kaju )
+end if
+
 if result.InStr( "addversion" ) = 0 then
 print "The kaju CLI is not available. Build it first."
 return

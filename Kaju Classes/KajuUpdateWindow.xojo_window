@@ -3,7 +3,6 @@ Begin Window KajuUpdateWindow
    BackColor       =   &cFFFFFF00
    Backdrop        =   0
    CloseButton     =   False
-   Compatibility   =   ""
    Composite       =   True
    Frame           =   0
    FullScreen      =   False
@@ -11,7 +10,7 @@ Begin Window KajuUpdateWindow
    HasBackColor    =   False
    Height          =   600
    ImplicitInstance=   True
-   LiveResize      =   False
+   LiveResize      =   "False"
    MacProcID       =   0
    MaxHeight       =   32000
    MaximizeButton  =   False
@@ -26,31 +25,10 @@ Begin Window KajuUpdateWindow
    Title           =   "#KajuLocale.kWindowTitle"
    Visible         =   True
    Width           =   800
-   Begin HTMLViewer hvNotes
-      AutoDeactivate  =   True
-      Enabled         =   True
-      Height          =   445
-      HelpTag         =   ""
-      Index           =   -2147483648
-      Left            =   149
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      Renderer        =   1
-      Scope           =   2
-      TabIndex        =   1
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Top             =   84
-      Visible         =   True
-      Width           =   631
-   End
    Begin PushButton btnOK
       AutoDeactivate  =   True
       Bold            =   False
-      ButtonStyle     =   "0"
+      ButtonStyle     =   0
       Cancel          =   False
       Caption         =   "#KajuLocale.kInstallButton"
       Default         =   True
@@ -62,7 +40,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   630
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -74,6 +52,7 @@ Begin Window KajuUpdateWindow
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   555
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   150
@@ -81,7 +60,7 @@ Begin Window KajuUpdateWindow
    Begin PushButton btnCancel
       AutoDeactivate  =   True
       Bold            =   False
-      ButtonStyle     =   "0"
+      ButtonStyle     =   0
       Cancel          =   True
       Caption         =   "#KajuLocale.kRemindMeLaterButton"
       Default         =   False
@@ -93,7 +72,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   468
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -105,6 +84,7 @@ Begin Window KajuUpdateWindow
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   555
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   150
@@ -112,7 +92,7 @@ Begin Window KajuUpdateWindow
    Begin PushButton btnSkipVersion
       AutoDeactivate  =   True
       Bold            =   False
-      ButtonStyle     =   "0"
+      ButtonStyle     =   0
       Cancel          =   False
       Caption         =   "#KajuLocale.kSkipVersionButton"
       Default         =   False
@@ -124,7 +104,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   149
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -136,6 +116,7 @@ Begin Window KajuUpdateWindow
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   555
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   150
@@ -153,7 +134,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   149
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -188,7 +169,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   149
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -223,7 +204,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   149
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -258,7 +239,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   149
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -285,47 +266,37 @@ Begin Window KajuUpdateWindow
       Enabled         =   True
       Height          =   20
       HelpTag         =   ""
+      Indeterminate   =   False
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   20
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
-      Maximum         =   0
+      Maximum         =   100
       Scope           =   2
       TabIndex        =   8
       TabPanelIndex   =   0
-      TabStop         =   True
       Top             =   555
-      Value           =   0
+      Transparent     =   False
+      Value           =   0.0
       Visible         =   False
       Width           =   117
-   End
-   Begin Kaju.HTTPSSocket hsSocket
-      CertificateFile =   
-      CertificatePassword=   ""
-      CertificateRejectionFile=   
-      ConnectionType  =   2
-      Enabled         =   True
-      ForceSecure     =   False
-      Index           =   -2147483648
-      InitialParent   =   ""
-      LockedInPosition=   False
-      Scope           =   2
-      Secure          =   False
-      TabPanelIndex   =   0
    End
    Begin Kaju.ZipShell shZipper
       Arguments       =   ""
       Backend         =   ""
       Canonical       =   False
-      Enabled         =   True
+      ErrorCode       =   0
       Index           =   -2147483648
       InitialParent   =   ""
+      IsRunning       =   False
       LockedInPosition=   False
       Mode            =   1
+      PID             =   0
+      Result          =   ""
       Scope           =   2
       TabPanelIndex   =   0
       TimeOut         =   0
@@ -338,11 +309,11 @@ Begin Window KajuUpdateWindow
       Index           =   -2147483648
       Left            =   -345
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
-      Renderer        =   0
+      Renderer        =   1
       Scope           =   2
       TabIndex        =   9
       TabPanelIndex   =   0
@@ -364,7 +335,7 @@ Begin Window KajuUpdateWindow
       Italic          =   False
       Left            =   20
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -396,16 +367,16 @@ Begin Window KajuUpdateWindow
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
-      InitialValue    =   ""
+      InitialValue    =   "updates"
       Italic          =   False
       Left            =   36
       ListIndex       =   0
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
-      Scope           =   0
+      Scope           =   2
       TabIndex        =   11
       TabPanelIndex   =   0
       TabStop         =   True
@@ -413,19 +384,48 @@ Begin Window KajuUpdateWindow
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   87
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   101
    End
    Begin Timer tmrTimeout
-      Enabled         =   True
       Index           =   -2147483648
       InitialParent   =   ""
       LockedInPosition=   False
       Mode            =   0
       Period          =   5000
-      Scope           =   0
+      Scope           =   2
       TabPanelIndex   =   0
+   End
+   Begin Kaju.HTTPSocketAsync hsSocket
+      AllowCertificateValidation=   False
+      HTTPStatusCode  =   0
+      Index           =   -2147483648
+      LockedInPosition=   False
+      Scope           =   2
+      TabPanelIndex   =   0
+   End
+   Begin HTMLViewer hvNotes
+      AutoDeactivate  =   True
+      Enabled         =   True
+      Height          =   445
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Left            =   149
+      LockBottom      =   False
+      LockedInPosition=   True
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Renderer        =   1
+      Scope           =   2
+      TabIndex        =   1
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Top             =   84
+      Visible         =   True
+      Width           =   631
    End
 End
 #tag EndWindow
@@ -443,14 +443,13 @@ End
 		    Kaju.DeleteRecursive( f )
 		  next
 		  
+		  CurrentUpdate = nil
+		  
 		End Sub
 	#tag EndEvent
 
 	#tag Event
 		Sub Open()
-		  RelativeToFolderItem = GetTemporaryFolderItem
-		  DeleteOnClose.Append RelativeToFolderItem
-		  
 		  #if not TargetMacOS then
 		    //
 		    // Switch the buttons around for other platforms
@@ -518,9 +517,7 @@ End
 		  end if
 		  Kaju.CancelUpdate
 		  
-		  if hsSocket.IsConnected then
-		    hsSocket.Disconnect
-		  end if
+		  hsSocket.Disconnect
 		  
 		  if shZipper.IsRunning then
 		    shZipper.Close
@@ -533,6 +530,30 @@ End
 		  else
 		    self.Close
 		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub ChangeBackgroudImage(update As Kaju.UpdateInformation)
+		  dim useTransparency as boolean = update.UseTransparency
+		  dim p as Picture = update.Image
+		  if p is nil then
+		    p = Checker.DefaultImage
+		    useTransparency = Checker.DefaultUseTransparency
+		  end if
+		  
+		  if p <> nil and useTransparency then
+		    dim faded as new Picture( p.Width, p.Height )
+		    
+		    const kTransparencyPercent = 50.0
+		    faded.Graphics.Transparency = kTransparencyPercent
+		    
+		    faded.Graphics.DrawPicture( p, 0, 0 )
+		    
+		    p = faded
+		  end if
+		  
+		  self.BackgroundImage = p
 		End Sub
 	#tag EndMethod
 
@@ -565,6 +586,11 @@ End
 		  // Set up the menu with the available updates.
 		  // It will set up the rest of the controls.
 		  //
+		  // NOTE: Linux requires there to be an initial value in 
+		  // the pop-up menu or the Window won't draw
+		  // correctly.
+		  //
+		  pumUpdates.DeleteAllRows
 		  
 		  for i as integer = 0 to Updates.Ubound
 		    dim update as Kaju.UpdateInformation = updates( i )
@@ -582,6 +608,24 @@ End
 		    pumUpdates.Visible = false
 		  end if
 		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub CurrentUpdate_ImageReceived(sender As Kaju.UpdateInformation)
+		  if sender is CurrentUpdate then
+		    ChangeBackgroudImage( CurrentUpdate )
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub CurrentUpdate_ReleaseNotesReceived(sender As Kaju.UpdateInformation)
+		  if sender is CurrentUpdate then
+		    DisplayVersionInfo( CurrentUpdate )
+		  end if
 		  
 		End Sub
 	#tag EndMethod
@@ -612,49 +656,13 @@ End
 		  //
 		  // Get the background picture, if any
 		  //
-		  dim useTransparency as boolean = update.UseTransparency
-		  dim p as Picture = update.Image
-		  if p is nil then
-		    p = Checker.DefaultImage
-		    useTransparency = Checker.DefaultUseTransparency
-		  end if
-		  
-		  if p <> nil and useTransparency then
-		    dim faded as new Picture( p.Width, p.Height, 32 )
-		    faded.Transparent = Picture.TransparentWhite
-		    
-		    const kTransparencyPercent = 50.0
-		    #if TargetWindows then
-		      if App.UseGDIPlus then
-		    #endif
-		    faded.Graphics.Transparency = kTransparencyPercent
-		    #if TargetWindows then
-		  end if
-		  #endif
-		  
-		  faded.Graphics.DrawPicture( p, 0, 0 )
-		  
-		  #if TargetWindows then
-		    if App.UseGDIPlus then
-		  #endif
-		  dim mask as new Picture( p.Width, p.Height )
-		  mask.Graphics.DrawPicture( p.Mask, 0, 0 )
-		  faded.Mask = mask
-		  #if TargetWindows then
-		    end if
-		  #endif
-		  
-		  p = faded
-		  end if
-		  
-		  self.BackgroundImage = p
+		  ChangeBackgroudImage update
 		  
 		  //
 		  // Show the release notes
 		  //
-		  dim source as string = update.ReleaseNotes
-		  source = Kaju.ProcessReleaseNotes( source )
-		  hvNotes.LoadPage( source, RelativeToFolderItem )
+		  dim source as string = update.DisplayReleaseNotes
+		  hvNotes.LoadPage( source, nil )
 		  
 		  //
 		  // hvNotes.CancelLoad will set self.Loading back to false
@@ -718,14 +726,9 @@ End
 		      dim url as string = SelectedBinary.URL
 		      
 		      //
-		      // Check for redirection
-		      //
-		      url = hsSocket.GetRedirectAddress( url, 5 )
-		      
-		      //
 		      // Start the download
 		      //
-		      hsSocket.Get( url, DownloadFile )
+		      hsSocket.Get( url, DownloadFile, true )
 		      
 		      //
 		      // Start the timeout timer
@@ -927,6 +930,31 @@ End
 		Private CurrentStage As Stage
 	#tag EndProperty
 
+	#tag ComputedProperty, Flags = &h21
+		#tag Getter
+			Get
+			  return mCurrentUpdate
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  dim current as Kaju.UpdateInformation = mCurrentUpdate
+			  if current isa object then
+			    RemoveHandler current.ImageReceived, WeakAddressOf CurrentUpdate_ImageReceived
+			    RemoveHandler current.ReleaseNotesReceived, WeakAddressOf CurrentUpdate_ReleaseNotesReceived
+			  end if
+			  
+			  mCurrentUpdate = value
+			  if value isa object then
+			    AddHandler value.ImageReceived, WeakAddressOf CurrentUpdate_ImageReceived
+			    AddHandler value.ReleaseNotesReceived, WeakAddressOf CurrentUpdate_ReleaseNotesReceived
+			  end if
+			  
+			End Set
+		#tag EndSetter
+		Private CurrentUpdate As Kaju.UpdateInformation
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h21
 		#tag Note
 			Files/folders that shoudl be deleted if the user cancelled
@@ -962,7 +990,7 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private RelativeToFolderItem As FolderItem
+		Attributes( hidden ) Private mCurrentUpdate As Kaju.UpdateInformation
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -985,30 +1013,6 @@ End
 
 #tag EndWindowCode
 
-#tag Events hvNotes
-	#tag Event
-		Function NewWindow() As HTMLViewer
-		  return hvNewWindow
-		End Function
-	#tag EndEvent
-	#tag Event
-		Function CancelLoad(URL as String) As Boolean
-		  dim r as boolean = not Loading
-		  Loading = false
-		  return r
-		  
-		  #pragma unused URL
-		End Function
-	#tag EndEvent
-	#tag Event
-		Sub Error(errorNumber as Integer, errorMessage as String)
-		  break
-		  
-		  #pragma unused errorNumber
-		  #pragma unused errorMessage
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events btnOK
 	#tag Event
 		Sub Action()
@@ -1055,96 +1059,6 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events hsSocket
-	#tag Event
-		Sub ReceiveProgress(bytesReceived as integer, totalBytes as integer, newData as string)
-		  if CurrentStage = Stage.Cancelled then
-		    //
-		    // Do nothing
-		    //
-		    return
-		  end if
-		  
-		  //
-		  // Have to get the value below 65536
-		  //
-		  
-		  const kMaxAllowed = 1000
-		  
-		  if totalBytes > kMaxAllowed then
-		    dim mult as integer = totalBytes \ kMaxAllowed
-		    totalBytes = totalBytes \ mult
-		    bytesReceived = bytesReceived \ mult
-		  end if
-		  
-		  pbProgress.Maximum = totalBytes
-		  pbProgress.Value = bytesReceived
-		  
-		  tmrTimeout.Reset
-		  
-		  #pragma unused newData
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub DownloadComplete(url as string, httpStatus as integer, headers as internetHeaders, file as folderItem)
-		  if CurrentStage = Stage.Cancelled then
-		    //
-		    // Do nothing
-		    //
-		    return
-		  end if
-		  
-		  pbProgress.Maximum = -1
-		  pbProgress.Value = 0
-		  
-		  tmrTimeout.Mode = Timer.ModeOff
-		  
-		  if httpStatus <> 200 then
-		    
-		    ShowError()
-		    
-		  elseif Kaju.HashOfFile( file ) <> SelectedBinary.Hash then
-		    
-		    ShowError( KajuLocale.kBadDownloadMessage )
-		    
-		  else
-		    //
-		    // We have the file and it appears to be good
-		    //
-		    
-		    lblInstallMessage.Text = KajuLocale.kProcessingFileMessage
-		    
-		    dim targetFolder as FolderItem
-		    #if TargetWindows then
-		      dim targetFolderName as string = SelectedUpdate.AppName + "- decompressed"
-		      targetFolder = App.ExecutableFile.Parent
-		      targetFolder = targetFolder.Child( targetFolderName )
-		      Kaju.DeleteRecursive( targetFolder )
-		    #else
-		      targetFolder = file.Parent.Child( "decompressed" )
-		    #endif
-		    DeleteOnCancel.Append targetFolder
-		    shZipper.Decompress( file, targetFolder )
-		  end if
-		  
-		  
-		  #pragma unused url
-		  #pragma unused headers
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub Error(code as integer)
-		  if me.IsConnected then
-		    me.Disconnect
-		  end if
-		  
-		  tmrTimeout.Mode = Timer.ModeOff
-		  
-		  ShowError( KajuLocale.kGenericErrorMessage + "  (" + str( code ) + ")" )
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events shZipper
 	#tag Event
 		Sub DecompressCompleted(zipFile As FolderItem, containingFolder As FolderItem)
@@ -1183,7 +1097,7 @@ End
 		      dim f as FolderItem = containingFolder.Item( i )
 		      dim name as string = f.Name
 		      dim leftChars as string = name.Left( 1 )
-		      if leftChars <> "." and leftChars <> "_" then
+		      if leftChars <> "." and leftChars <> "_" and f.Directory then
 		        item = f
 		        exit
 		      end if
@@ -1198,6 +1112,15 @@ End
 		      Initiater = new Kaju.UpdateInitiater
 		      Initiater.ReplacementAppFolder = item
 		      Initiater.ReplacementExecutableName = SelectedBinary.ExecutableName
+		      
+		      #if not TargetMacOS then
+		        if Initiater.ReplacementExecutableName = "" then
+		          //
+		          // We will assume it's the same name
+		          //
+		          Initiater.ReplacementExecutableName = App.ExecutableFile.Name
+		        end if
+		      #endif
 		      
 		      btnOK.Enabled = true
 		      btnOK.Caption = KajuLocale.kQuitButton
@@ -1246,6 +1169,8 @@ End
 		  // Fill in the viewer
 		  //
 		  
+		  CurrentUpdate = nil
+		  
 		  if me.ListIndex = -1 then
 		    if me.ListCount <> 0 then
 		      me.ListIndex = 0
@@ -1255,6 +1180,7 @@ End
 		  
 		  dim update as Kaju.UpdateInformation = me.RowTag( me.ListIndex )
 		  DisplayVersionInfo( update )
+		  CurrentUpdate = update
 		  
 		End Sub
 	#tag EndEvent
@@ -1262,57 +1188,178 @@ End
 #tag Events tmrTimeout
 	#tag Event
 		Sub Action()
-		  if hsSocket.IsConnected then
-		    hsSocket.Disconnect
+		  hsSocket.Disconnect
+		  ShowError( KajuLocale.kTimedOutMessage )
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events hsSocket
+	#tag Event
+		Sub Error(e As RuntimeException)
+		  tmrTimeout.Mode = Timer.ModeOff
+		  
+		  dim errMsg as string = e.Message
+		  if errMsg = "" then
+		    errMsg = KajuLocale.kGenericErrorMessage
 		  end if
 		  
-		  ShowError( KajuLocale.kTimedOutMessage )
+		  ShowError( errMsg + "  (" + str( e.ErrorNumber ) + ")" )
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub FileReceived(URL As String, HTTPStatus As Integer, file As FolderItem)
+		  #pragma unused url
+		  
+		  if CurrentStage = Stage.Cancelled then
+		    //
+		    // Do nothing
+		    //
+		    return
+		  end if
+		  
+		  pbProgress.Maximum = -1
+		  pbProgress.Value = 0
+		  
+		  tmrTimeout.Mode = Timer.ModeOff
+		  
+		  if httpStatus <> 200 then
+		    
+		    ShowError()
+		    
+		  elseif Kaju.HashOfFile( file ) <> SelectedBinary.Hash then
+		    
+		    ShowError( KajuLocale.kBadDownloadMessage )
+		    
+		  else
+		    //
+		    // We have the file and it appears to be good
+		    //
+		    
+		    lblInstallMessage.Text = KajuLocale.kProcessingFileMessage
+		    
+		    dim targetFolder as FolderItem
+		    #if TargetWindows then
+		      dim targetFolderName as string = SelectedUpdate.AppName + "- decompressed"
+		      targetFolder = App.ExecutableFile.Parent
+		      targetFolder = targetFolder.Child( targetFolderName )
+		      Kaju.DeleteRecursive( targetFolder )
+		    #else
+		      targetFolder = file.Parent.Child( "decompressed" )
+		    #endif
+		    DeleteOnCancel.Append targetFolder
+		    shZipper.Decompress( file, targetFolder )
+		  end if
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub ReceivingProgressed(bytesReceived As Int64, totalBytes As Int64, newData As String)
+		  #pragma unused newData
+		  
+		  if CurrentStage = Stage.Cancelled then
+		    //
+		    // Do nothing
+		    //
+		    return
+		  end if
+		  
+		  //
+		  // Have to get the value below 65536
+		  //
+		  
+		  const kMaxAllowed = 1000
+		  
+		  if totalBytes > kMaxAllowed then
+		    dim mult as integer = totalBytes \ kMaxAllowed
+		    totalBytes = totalBytes \ mult
+		    bytesReceived = bytesReceived \ mult
+		  end if
+		  
+		  pbProgress.Maximum = totalBytes
+		  pbProgress.Value = bytesReceived
+		  
+		  tmrTimeout.Reset
+		  
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events hvNotes
+	#tag Event
+		Function NewWindow() As Object
+		  return hvNewWindow
+		  
+		End Function
+	#tag EndEvent
+	#tag Event
+		Function CancelLoad(URL as String) As Boolean
+		  #pragma unused URL
+		  
+		  dim r as boolean = not Loading
+		  Loading = false
+		  return r
+		  
+		End Function
+	#tag EndEvent
+	#tag Event
+		Sub Error(errorNumber as Integer, errorMessage as String)
+		  #pragma unused errorMessage
+		  
+		  #if TargetMacOS then
+		    const kCancelledCode as integer = -999
+		  #else
+		    const kCancelledCode as integer = -9999999999
+		  #endif
+		  
+		  if errorNumber <> kCancelledCode then
+		    break
+		  end if
+		  
 		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="AppName"
-		Group="Behavior"
-		Type="String"
-		EditorType="MultiLineEditor"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="BackColor"
+		Name="MinimumWidth"
 		Visible=true
-		Group="Appearance"
-		InitialValue="&hFFFFFF"
-		Type="Color"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Backdrop"
-		Visible=true
-		Group="Appearance"
-		Type="Picture"
-		EditorType="Picture"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="CloseButton"
-		Visible=true
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Composite"
-		Visible=true
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Frame"
-		Visible=true
-		Group="Appearance"
-		InitialValue="0"
+		Group="Size"
+		InitialValue="64"
 		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MinimumHeight"
+		Visible=true
+		Group="Size"
+		InitialValue="64"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MaximumWidth"
+		Visible=true
+		Group="Size"
+		InitialValue="32000"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MaximumHeight"
+		Visible=true
+		Group="Size"
+		InitialValue="32000"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Type"
+		Visible=true
+		Group="Frame"
+		InitialValue="0"
+		Type="Types"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Document"
@@ -1329,135 +1376,43 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="FullScreen"
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="FullScreenButton"
+		Name="HasCloseButton"
 		Visible=true
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="HasBackColor"
-		Visible=true
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Height"
-		Visible=true
-		Group="Position"
-		InitialValue="400"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="ImplicitInstance"
-		Visible=true
-		Group="Appearance"
+		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Interfaces"
+		Name="HasMaximizeButton"
 		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="LiveResize"
-		Visible=true
-		Group="Appearance"
+		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MacProcID"
+		Name="HasMinimizeButton"
 		Visible=true
-		Group="Appearance"
+		Group="Frame"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasFullScreenButton"
+		Visible=true
+		Group="Frame"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="DefaultLocation"
+		Visible=true
+		Group="Behavior"
 		InitialValue="0"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaxHeight"
-		Visible=true
-		Group="Position"
-		InitialValue="32000"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaximizeButton"
-		Visible=true
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaxWidth"
-		Visible=true
-		Group="Position"
-		InitialValue="32000"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MenuBar"
-		Visible=true
-		Group="Appearance"
-		Type="MenuBar"
-		EditorType="MenuBar"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MenuBarVisible"
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinHeight"
-		Visible=true
-		Group="Position"
-		InitialValue="64"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinimizeButton"
-		Visible=true
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinWidth"
-		Visible=true
-		Group="Position"
-		InitialValue="64"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Name"
-		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Placement"
-		Visible=true
-		Group="Position"
-		InitialValue="0"
-		Type="Integer"
+		Type="Locations"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Default"
@@ -1468,19 +1423,124 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="HasBackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="&hFFFFFF"
+		Type="Color"
+		EditorType="Color"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="AppName"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Backdrop"
+		Visible=true
+		Group="Appearance"
+		InitialValue=""
+		Type="Picture"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Composite"
+		Visible=true
+		Group="Appearance"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="FullScreen"
+		Visible=false
+		Group="Appearance"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Height"
+		Visible=true
+		Group="Position"
+		InitialValue="400"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ImplicitInstance"
+		Visible=true
+		Group="Appearance"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Interfaces"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MacProcID"
+		Visible=true
+		Group="Appearance"
+		InitialValue="0"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MenuBar"
+		Visible=true
+		Group="Appearance"
+		InitialValue=""
+		Type="MenuBar"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MenuBarVisible"
+		Visible=false
+		Group="Appearance"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Name"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="Resizeable"
 		Visible=true
 		Group="Appearance"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
-		EditorType="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Title"
@@ -1488,6 +1548,7 @@ End
 		Group="Appearance"
 		InitialValue="Untitled"
 		Type="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Visible"
@@ -1495,7 +1556,7 @@ End
 		Group="Appearance"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Width"
@@ -1503,5 +1564,6 @@ End
 		Group="Position"
 		InitialValue="600"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

@@ -3,7 +3,6 @@ Begin Window WndAdmin
    BackColor       =   &cFFFFFF00
    Backdrop        =   0
    CloseButton     =   True
-   Compatibility   =   ""
    Composite       =   True
    Frame           =   0
    FullScreen      =   False
@@ -11,7 +10,7 @@ Begin Window WndAdmin
    HasBackColor    =   False
    Height          =   680
    ImplicitInstance=   True
-   LiveResize      =   True
+   LiveResize      =   "True"
    MacProcID       =   0
    MaxHeight       =   32000
    MaximizeButton  =   True
@@ -62,6 +61,7 @@ Begin Window WndAdmin
       ScrollbarHorizontal=   False
       ScrollBarVertical=   True
       SelectionType   =   0
+      ShowDropIndicator=   False
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
@@ -69,6 +69,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   14
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -79,7 +80,7 @@ Begin Window WndAdmin
    Begin PushButton btnNew
       AutoDeactivate  =   True
       Bold            =   True
-      ButtonStyle     =   "6"
+      ButtonStyle     =   6
       Cancel          =   False
       Caption         =   "+"
       Default         =   False
@@ -91,7 +92,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   20
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   False
@@ -103,6 +104,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   640
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   20
@@ -110,7 +112,7 @@ Begin Window WndAdmin
    Begin PushButton btnDelete
       AutoDeactivate  =   True
       Bold            =   True
-      ButtonStyle     =   "6"
+      ButtonStyle     =   6
       Cancel          =   False
       Caption         =   "-"
       Default         =   False
@@ -122,7 +124,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   39
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   False
@@ -134,6 +136,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   640
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   20
@@ -175,6 +178,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   52
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -202,6 +206,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   12
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Version:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -240,8 +245,9 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   119
+      Transparent     =   False
       Underline       =   False
-      Value           =   0
+      Value           =   3
       Visible         =   True
       Width           =   653
       Begin TextAreaChanger fldReleaseNotes
@@ -286,7 +292,8 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   193
+         Top             =   194
+         Transparent     =   False
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   True
@@ -305,7 +312,7 @@ Begin Window WndAdmin
          LockLeft        =   True
          LockRight       =   True
          LockTop         =   False
-         Renderer        =   0
+         Renderer        =   1
          Scope           =   2
          TabIndex        =   1
          TabPanelIndex   =   1
@@ -336,6 +343,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   11
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   "Preview:"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -370,6 +378,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   10
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   "Release Notes (HTML):"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -419,7 +428,8 @@ Begin Window WndAdmin
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   194
+         Top             =   195
+         Transparent     =   False
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   True
@@ -447,13 +457,14 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   4
+         TabStop         =   True
          Text            =   "URL:"
          TextAlign       =   0
          TextColor       =   &c00000000
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   194
+         Top             =   195
          Transparent     =   False
          Underline       =   False
          Visible         =   True
@@ -486,6 +497,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   162
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -504,7 +516,7 @@ Begin Window WndAdmin
          LockLeft        =   True
          LockRight       =   True
          LockTop         =   True
-         Renderer        =   0
+         Renderer        =   1
          Scope           =   2
          TabIndex        =   2
          TabPanelIndex   =   4
@@ -542,8 +554,7 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   7
          TabPanelIndex   =   1
          TabStop         =   True
@@ -552,6 +563,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -586,8 +598,7 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   8
          TabPanelIndex   =   1
          TabStop         =   True
@@ -596,6 +607,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -630,8 +642,7 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   9
          TabPanelIndex   =   1
          TabStop         =   True
@@ -640,6 +651,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   True
          Value           =   False
          Visible         =   True
@@ -674,8 +686,7 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   2
          TabPanelIndex   =   1
          TabStop         =   True
@@ -684,6 +695,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -718,8 +730,7 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   3
          TabPanelIndex   =   1
          TabStop         =   True
@@ -728,6 +739,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -762,8 +774,7 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   4
          TabPanelIndex   =   1
          TabStop         =   True
@@ -772,6 +783,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -806,8 +818,7 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   5
          TabPanelIndex   =   1
          TabStop         =   True
@@ -816,6 +827,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -850,8 +862,7 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
-         Scope           =   0
+         Scope           =   2
          TabIndex        =   6
          TabPanelIndex   =   1
          TabStop         =   True
@@ -860,6 +871,7 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   169
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -887,6 +899,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   0
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "Use ‘$VERSION$’ in the URL to insert the version on export"
          TextAlign       =   1
          TextColor       =   &c00000000
@@ -921,6 +934,7 @@ Begin Window WndAdmin
          Selectable      =   False
          TabIndex        =   0
          TabPanelIndex   =   3
+         TabStop         =   True
          Text            =   "Use ‘$VERSION$’ in the URL to insert the version on export"
          TextAlign       =   1
          TextColor       =   &c00000000
@@ -951,7 +965,7 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   False
-         Scope           =   0
+         Scope           =   2
          State           =   0
          TabIndex        =   12
          TabPanelIndex   =   1
@@ -960,10 +974,78 @@ Begin Window WndAdmin
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   382
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
          Width           =   157
+      End
+      Begin PopupMenuChanger pumImageScale
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   "ImageScale"
+         DataSource      =   ""
+         Enabled         =   False
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         InitialValue    =   "1\n2\n3"
+         Italic          =   False
+         Left            =   804
+         ListIndex       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   4
+         TabPanelIndex   =   4
+         TabStop         =   True
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   161
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   80
+      End
+      Begin Label Label1
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   10
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   725
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   2
+         Selectable      =   False
+         TabIndex        =   5
+         TabPanelIndex   =   4
+         TabStop         =   True
+         Text            =   "Scale:"
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   162
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   67
       End
    End
    Begin TextFieldChanger fldAppName
@@ -1003,6 +1085,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   18
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -1030,6 +1113,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   11
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "App Name:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -1069,6 +1153,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   19
+      Transparent     =   False
       Underline       =   False
       Value           =   False
       Visible         =   True
@@ -1107,7 +1192,7 @@ Begin Window WndAdmin
    Begin PushButton btnCopyPublicKey
       AutoDeactivate  =   True
       Bold            =   False
-      ButtonStyle     =   "0"
+      ButtonStyle     =   0
       Cancel          =   False
       Caption         =   "Copy RSA Public Key"
       Default         =   False
@@ -1119,7 +1204,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   251
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   False
@@ -1131,6 +1216,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   640
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   186
@@ -1166,6 +1252,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   14
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "None"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -1200,6 +1287,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   13
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Platforms:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -1210,12 +1298,12 @@ Begin Window WndAdmin
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   100
+      Width           =   80
    End
    Begin PushButton btnExport
       AutoDeactivate  =   True
       Bold            =   False
-      ButtonStyle     =   "0"
+      ButtonStyle     =   0
       Cancel          =   False
       Caption         =   "Export..."
       Default         =   False
@@ -1227,7 +1315,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   819
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   False
       LockRight       =   True
       LockTop         =   False
@@ -1239,6 +1327,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   639
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   85
@@ -1246,7 +1335,7 @@ Begin Window WndAdmin
    Begin PushButton btnDuplicate
       AutoDeactivate  =   True
       Bold            =   False
-      ButtonStyle     =   "0"
+      ButtonStyle     =   0
       Cancel          =   False
       Caption         =   "Dupe"
       Default         =   False
@@ -1258,7 +1347,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   158
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   False
@@ -1270,6 +1359,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   641
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   65
@@ -1299,12 +1389,11 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   684
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   False
       LockRight       =   True
       LockTop         =   False
-      MenuValue       =   -1
-      Scope           =   0
+      Scope           =   2
       TabIndex        =   9
       TabPanelIndex   =   0
       TabStop         =   True
@@ -1313,6 +1402,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   639
+      Transparent     =   False
       Underline       =   False
       Value           =   False
       Visible         =   True
@@ -1356,6 +1446,7 @@ Begin Window WndAdmin
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   85
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -1383,6 +1474,7 @@ Begin Window WndAdmin
       Selectable      =   False
       TabIndex        =   17
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Min. Req. Version:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -1394,6 +1486,34 @@ Begin Window WndAdmin
       Underline       =   False
       Visible         =   True
       Width           =   117
+   End
+   Begin Kaju.UpdateInformation objReleaseNotesProcessor
+      AppName         =   ""
+      DisplayReleaseNotes=   ""
+      Image           =   0
+      ImageScale      =   1
+      ImageURL        =   ""
+      Index           =   -2147483648
+      IsValid         =   False
+      LockedInPosition=   False
+      MinimumRequiredVersion=   ""
+      ReleaseNotes    =   ""
+      ReleaseNotesFromURL=   ""
+      RequiresPayment =   False
+      Scope           =   2
+      StageCode       =   0
+      TabPanelIndex   =   0
+      UseTransparency =   True
+      Version         =   ""
+      VersionAsDouble =   0.0
+   End
+   Begin Timer tmrAdjustControls
+      Index           =   -2147483648
+      LockedInPosition=   False
+      Mode            =   0
+      Period          =   20
+      Scope           =   2
+      TabPanelIndex   =   0
    End
 End
 #tag EndWindow
@@ -1436,13 +1556,6 @@ End
 
 	#tag Event
 		Sub Close()
-		  if RelativeToFolderItem isa FolderItem then
-		    if RelativeToFolderItem.Exists then
-		      RelativeToFolderItem.Delete
-		    end if
-		    RelativeToFolderItem = nil
-		  end if
-		  
 		  //
 		  // Tear down the BinaryInformationControls
 		  //
@@ -1458,8 +1571,6 @@ End
 
 	#tag Event
 		Sub Open()
-		  RelativeToFolderItem = GetTemporaryFolderItem
-		  
 		  //
 		  // Create binary controls
 		  //
@@ -1482,6 +1593,7 @@ End
 		    cc.LockRight = true
 		    cc.LockTop = true
 		    cc.LockBottom = false
+		    'cc.Transparent = false
 		    
 		    if binaryName.InStr( "64" ) <> 0 then
 		      cc.EmbedWithinPanel TabPanel1, tpIndex64, useLeft, useTop64
@@ -1527,8 +1639,9 @@ End
 
 
 	#tag Method, Flags = &h21
-		Private Sub AdjustControls()
-		  if self.Loading then
+		Private Sub AdjustControls(immediate As Boolean = False)
+		  if not immediate or self.Loading then
+		    tmrAdjustControls.Mode = Timer.ModeSingle
 		    return
 		  end if
 		  
@@ -1627,6 +1740,7 @@ End
 		    select case c
 		    case IsA TextEdit
 		    case IsA CheckBox
+		    case IsA PopupMenu
 		    else
 		      continue for i
 		    end
@@ -1638,8 +1752,8 @@ End
 		    bc.Clear
 		  next
 		  
-		  hvReleaseNotesPreview.LoadPage( "", nil )
-		  hvImagePreview.LoadPage( "", nil )
+		  hvReleaseNotesPreview.LoadPage( kNoDataHTML, nil )
+		  hvImagePreview.LoadPage( kNoDataHTML, nil )
 		  
 		  self.Loading = false
 		  
@@ -1663,6 +1777,10 @@ End
 		    dim cb as CheckBox = CheckBox( c )
 		    value = cb.DataField
 		    
+		  case IsA PopUpMenu
+		    dim pum as PopupMenu = PopupMenu( c )
+		    value = pum.DataField
+		    
 		  end select
 		  
 		  return value
@@ -1683,6 +1801,12 @@ End
 		    dim cb as CheckBox = CheckBox( c )
 		    r = cb.Value
 		    
+		  case IsA PopupMenu
+		    dim pum as PopupMenu = PopupMenu( c )
+		    if pum.ListIndex <> -1 then
+		      r = pum.List( pum.ListIndex )
+		    end if
+		    
 		  end select
 		  
 		  return r
@@ -1701,6 +1825,20 @@ End
 		  case IsA CheckBox
 		    dim cb as CheckBox = CheckBox( c )
 		    cb.Value = value.BooleanValue
+		    
+		  case IsA PopupMenu
+		    dim pum as PopupMenu = PopupMenu( c )
+		    if value.IsNull then
+		      pum.ListIndex = 0
+		    else
+		      for i as integer = pum.ListCount - 1 downto 0
+		        if pum.List( i ) = value.StringValue then
+		          pum.ListIndex = i
+		          exit
+		        end if
+		      next
+		      
+		    end if
 		    
 		  else
 		    raise new KeyNotFoundException
@@ -1748,10 +1886,13 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function DoSave() As Boolean
+		Private Function DoSave(f As FolderItem = Nil) As Boolean
 		  StoreFieldsToVersionRow()
 		  
-		  dim f as FolderItem = Document
+		  if f is nil then
+		    f = Document
+		  end if
+		  
 		  if f is nil then
 		    return DoSaveAs()
 		  end if
@@ -1761,6 +1902,7 @@ End
 		  dim r as boolean
 		  MyKajuFile.SaveTo( f )
 		  r = true
+		  Document = f
 		  ContentsChanged = false
 		  
 		  Exception err as KajuException
@@ -1806,8 +1948,7 @@ End
 		      end if
 		    end if
 		    
-		    Document = f
-		    r = DoSave()
+		    r = DoSave( f )
 		  end if
 		  
 		  UpdateWindowTitle
@@ -2134,9 +2275,9 @@ End
 		Private Platforms() As String
 	#tag EndProperty
 
-	#tag Property, Flags = &h21
-		Private RelativeToFolderItem As FolderItem
-	#tag EndProperty
+
+	#tag Constant, Name = kNoDataHTML, Type = String, Dynamic = False, Default = \"<!-- No data --><BR />", Scope = Private
+	#tag EndConstant
 
 
 #tag EndWindowCode
@@ -2193,14 +2334,24 @@ End
 #tag Events fldReleaseNotes
 	#tag Event
 		Sub TextChange()
+		  objReleaseNotesProcessor.ReleaseNotes = me.Text
 		  tmrUpdateReleaseNotesPreview.Mode = Timer.ModeSingle
 		  tmrUpdateReleaseNotesPreview.Reset
+		  
+		  #if TargetWindows then
+		    hvReleaseNotesPreview.LoadPage( kNoDataHTML, nil )
+		    
+		    dim releaseNotes as string = ControlValue( fldReleaseNotes ).StringValue
+		    hvReleaseNotesPreview.LoadPage releaseNotes, nil
+		    me.SetFocus
+		  #endif
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events hvReleaseNotesPreview
 	#tag Event
-		Function NewWindow() As HTMLViewer
+		Function NewWindow() As Object
 		  return hvNewWindow
 		End Function
 	#tag EndEvent
@@ -2210,6 +2361,21 @@ End
 		  
 		  #pragma unused URL
 		End Function
+	#tag EndEvent
+	#tag Event
+		Sub DocumentComplete(url as String)
+		  #pragma unused URL
+		  
+		  self.Loading = false
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Error(errorNumber as Integer, errorMessage as String)
+		  #pragma unused errorNumber
+		  #pragma unused errorMessage
+		  
+		  break
+		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events fldImageURL
@@ -2217,12 +2383,16 @@ End
 		Sub TextChange()
 		  tmrUpdateImagePreview.Mode = Timer.ModeSingle
 		  tmrUpdateImagePreview.Reset
+		  
+		  #if TargetWindows then
+		    hvImagePreview.LoadPage kNoDataHTML, nil
+		  #endif
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events hvImagePreview
 	#tag Event
-		Function NewWindow() As HTMLViewer
+		Function NewWindow() As Object
 		  return hvNewWindow
 		End Function
 	#tag EndEvent
@@ -2232,6 +2402,21 @@ End
 		  
 		  #pragma unused URL
 		End Function
+	#tag EndEvent
+	#tag Event
+		Sub DocumentComplete(url as String)
+		  #pragma unused URL
+		  
+		  self.Loading = false
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Error(errorNumber as Integer, errorMessage as String)
+		  #pragma unused errorNumber
+		  #pragma unused errorMessage
+		  
+		  break
+		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events btnStyle
@@ -2274,13 +2459,20 @@ End
 		Sub Action()
 		  self.Loading = true
 		  
-		  dim releaseNotes as string = ControlValue( fldReleaseNotes ).StringValue
-		  if not cbPre2Preview.Value then
-		    releaseNotes = Kaju.ProcessReleaseNotes( releaseNotes )
+		  dim releaseNotes as string
+		  if cbPre2Preview.Value then
+		    releaseNotes = ControlValue( fldReleaseNotes ).StringValue
+		  else
+		    releaseNotes = objReleaseNotesProcessor.DisplayReleaseNotes
 		  end if
-		  hvReleaseNotesPreview.LoadPage( releaseNotes, RelativeToFolderItem )
 		  
-		  self.Loading = false
+		  dim saveControl as RectControl = self.Focus
+		  hvReleaseNotesPreview.LoadPage( releaseNotes, nil )
+		  self.Focus = saveControl
+		  //
+		  // The htmlViewer will set Loading to false
+		  //
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2309,7 +2501,10 @@ End
 		  
 		  hvImagePreview.LoadURL( fldImageURL.Text )
 		  
-		  self.Loading = false
+		  //
+		  // The htmlViewer will set Loading to false
+		  //
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2383,42 +2578,61 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events objReleaseNotesProcessor
+	#tag Event
+		Sub ReleaseNotesReceived()
+		  tmrUpdateReleaseNotesPreview.Mode = Timer.ModeSingle
+		  tmrUpdateReleaseNotesPreview.Reset
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events tmrAdjustControls
+	#tag Event
+		Sub Action()
+		  AdjustControls true
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="BackColor"
+		Name="MinimumWidth"
 		Visible=true
-		Group="Appearance"
-		InitialValue="&hFFFFFF"
-		Type="Color"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Backdrop"
-		Visible=true
-		Group="Appearance"
-		Type="Picture"
-		EditorType="Picture"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="CloseButton"
-		Visible=true
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Composite"
-		Visible=true
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Frame"
-		Visible=true
-		Group="Appearance"
-		InitialValue="0"
+		Group="Size"
+		InitialValue="64"
 		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MinimumHeight"
+		Visible=true
+		Group="Size"
+		InitialValue="64"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MaximumWidth"
+		Visible=true
+		Group="Size"
+		InitialValue="32000"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MaximumHeight"
+		Visible=true
+		Group="Size"
+		InitialValue="32000"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Type"
+		Visible=true
+		Group="Frame"
+		InitialValue="0"
+		Type="Types"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Document"
@@ -2435,140 +2649,43 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="FullScreen"
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="FullScreenButton"
+		Name="HasCloseButton"
 		Visible=true
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="HasBackColor"
-		Visible=true
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Height"
-		Visible=true
-		Group="Position"
-		InitialValue="400"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="ImplicitInstance"
-		Visible=true
-		Group="Appearance"
+		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Interfaces"
+		Name="HasMaximizeButton"
 		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="LiveResize"
-		Visible=true
-		Group="Appearance"
+		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Loading"
+		Name="HasMinimizeButton"
+		Visible=true
+		Group="Frame"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasFullScreenButton"
+		Visible=true
+		Group="Frame"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="DefaultLocation"
+		Visible=true
 		Group="Behavior"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MacProcID"
-		Visible=true
-		Group="Appearance"
 		InitialValue="0"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaxHeight"
-		Visible=true
-		Group="Position"
-		InitialValue="32000"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaximizeButton"
-		Visible=true
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaxWidth"
-		Visible=true
-		Group="Position"
-		InitialValue="32000"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MenuBar"
-		Visible=true
-		Group="Appearance"
-		Type="MenuBar"
-		EditorType="MenuBar"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MenuBarVisible"
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinHeight"
-		Visible=true
-		Group="Position"
-		InitialValue="64"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinimizeButton"
-		Visible=true
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinWidth"
-		Visible=true
-		Group="Position"
-		InitialValue="64"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Name"
-		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Placement"
-		Visible=true
-		Group="Position"
-		InitialValue="0"
-		Type="Integer"
+		Type="Locations"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Default"
@@ -2579,19 +2696,124 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="HasBackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="&hFFFFFF"
+		Type="Color"
+		EditorType="Color"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Backdrop"
+		Visible=true
+		Group="Appearance"
+		InitialValue=""
+		Type="Picture"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Composite"
+		Visible=true
+		Group="Appearance"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="FullScreen"
+		Visible=false
+		Group="Appearance"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Height"
+		Visible=true
+		Group="Position"
+		InitialValue="400"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ImplicitInstance"
+		Visible=true
+		Group="Appearance"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Interfaces"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Loading"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MacProcID"
+		Visible=true
+		Group="Appearance"
+		InitialValue="0"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MenuBar"
+		Visible=true
+		Group="Appearance"
+		InitialValue=""
+		Type="MenuBar"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MenuBarVisible"
+		Visible=false
+		Group="Appearance"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Name"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="Resizeable"
 		Visible=true
 		Group="Appearance"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
-		EditorType="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Title"
@@ -2599,6 +2821,7 @@ End
 		Group="Appearance"
 		InitialValue="Untitled"
 		Type="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Visible"
@@ -2606,7 +2829,7 @@ End
 		Group="Appearance"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Width"
@@ -2614,5 +2837,6 @@ End
 		Group="Position"
 		InitialValue="600"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

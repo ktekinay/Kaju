@@ -225,99 +225,27 @@ Protected Module Kaju
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h1, CompatibilityFlags = (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit)) or  (TargetIOS and (Target32Bit or Target64Bit))
-		Protected Function ProcessReleaseNotes(notes As String) As String
-		  //
-		  // The release notes might be straight HTML or them might be a URL.
-		  // If the latter, the remainder will be alternate notes.
-		  // This method will determine which it is and, if the latter, will
-		  // attempt to fetch the notes. If it can't, it will return the alternate
-		  // notes if any, or a message.
-		  //
-		  // The URL may start the first line followed by an EOL or may be in an
-		  // HTML comment that starts the first line. The latter form will maintain
-		  // better compatibility with previous versions of Kaju.
-		  //
-		  // Examples:
-		  //
-		  //  http://something.com/UpdateInformation.json
-		  //
-		  //  <!-- http://something.com/UpdateInformation.json -->
-		  //
-		  //  <!--
-		  //  http://something.com/UpdateInformation.json
-		  //  -->
-		  //
-		  
-		  static noInfoHTML as string = "<b>" + KajuLocale.kNoUpdateInfoMessage + "</b>"
-		  
-		  static rxURLSplitter as RegEx
-		  if rxURLSplitter is nil then
-		    rxURLSplitter = new RegEx
-		    rxURLSplitter.SearchPattern = _
-		    "(?mi-Us)\A\x20*(?|(?:(http[^\s]+)\x20*\R)|(?:<!--\s*(http[^\s]*)\s*-->))([\s\S]*)"
-		  end if
-		  
-		  dim r as string = notes
-		  
-		  dim matchURL as RegExMatch = rxURLSplitter.Search( notes)
-		  if matchURL isa RegExMatch then
-		    dim url as string = matchURL.SubExpressionString( 1 ).Trim
-		    dim alternateNotes as string = matchURL.SubExpressionString( 2 ).Trim
-		    
-		    dim redirector as new Kaju.HTTPSSocket
-		    url = redirector.GetRedirectAddress( url, 5 )
-		    
-		    dim http as new Kaju.HTTPSSocket
-		    dim raw as string = http.Get( url, 5 )
-		    if http.HTTPStatusCode = 404 or raw.Trim = "" then
-		      r = alternateNotes
-		    else
-		      //
-		      // Adjust the encoding
-		      //
-		      
-		      dim enc as TextEncoding
-		      
-		      //
-		      // See if the html contains a charset
-		      //
-		      static rxCharSetFinder as RegEx
-		      if rxCharSetFinder is nil then
-		        rxCharSetFinder = new RegEx
-		        rxCharSetFinder.SearchPattern = "<meta charset *= *[""']([^""']+)"
-		      end if
-		      
-		      dim matchCharSet as RegExMatch = rxCharSetFinder.Search( raw )
-		      if matchCharSet isa RegExMatch then
-		        dim encString as string = matchCharSet.SubExpressionString( 1 ).Trim
-		        try
-		          enc = GetInternetTextEncoding( encString )
-		        end try
-		      end if
-		      
-		      if enc is nil then
-		        enc = Encodings.UTF8
-		      end if
-		      raw = raw.DefineEncoding( enc )
-		      
-		      r = raw
-		    end if
-		    
-		  end if
-		  
-		  if r.Trim = "" then
-		    r = noInfoHTML
-		  end if
-		  
-		  return r
-		End Function
-	#tag EndMethod
-
 	#tag Method, Flags = &h1, CompatibilityFlags = (TargetHasGUI)
 		Protected Sub StartUpdate(initiater As Kaju.UpdateInitiater)
 		  App.UpdateInitiater = initiater
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function StripURLCredentials(url As String) As String
+		  //
+		  // Strips credentials from the given url
+		  //
+		  
+		  dim rx as new RegEx
+		  rx.SearchPattern = "(://|^)(\w+:\w*)@"
+		  rx.ReplacementPattern = "$1"
+		  
+		  url = rx.Replace( url )
+		  
+		  return url
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
@@ -486,6 +414,9 @@ Protected Module Kaju
 	#tag Constant, Name = kBitMarker64Bit, Type = String, Dynamic = False, Default = \"_64-bit", Scope = Private
 	#tag EndConstant
 
+	#tag Constant, Name = kNameSecurityToken, Type = String, Dynamic = False, Default = \"Security Token", Scope = Protected
+	#tag EndConstant
+
 	#tag Constant, Name = kSwitchUpdateFailed, Type = String, Dynamic = False, Default = \"--kaju-fail", Scope = Private
 	#tag EndConstant
 
@@ -495,7 +426,7 @@ Protected Module Kaju
 	#tag Constant, Name = kUpdatePacketMarker, Type = String, Dynamic = False, Default = \"KAJU ", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = Version, Type = String, Dynamic = False, Default = \"2.0", Scope = Protected
+	#tag Constant, Name = Version, Type = String, Dynamic = False, Default = \"2.1", Scope = Protected
 	#tag EndConstant
 
 
@@ -513,6 +444,7 @@ Protected Module Kaju
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -520,18 +452,23 @@ Protected Module Kaju
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -539,6 +476,7 @@ Protected Module Kaju
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Module

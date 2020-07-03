@@ -115,6 +115,13 @@ Inherits Kaju.Information
 		Function ConvertToJSON() As JSONItem
 		  dim j as JSONItem = super.ConvertToJSON
 		  
+		  //
+		  // Add a security token
+		  //
+		  dim rawKey as string = Crypto.GenerateRandomBytes( 8 )
+		  dim encodedKey as string = EncodeBase64( rawKey, 0 )
+		  j.Value( Kaju.kNameSecurityToken ) = encodedKey
+		  
 		  for each binaryName as string in BinaryNames
 		    dim b as Kaju.BinaryInformation = Binaries.Lookup( binaryName, nil )
 		    if b isa Kaju.BinaryInformation then
@@ -124,6 +131,24 @@ Inherits Kaju.Information
 		  
 		  return j
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub Destructor()
+		  #if not TargetConsole then
+		    if ImageSocket isa object then
+		      ImageSocket.Disconnect
+		      RemoveHandler ImageSocket.ContentReceived, WeakAddressOf ImageSocket_ContentReceived
+		      ImageSocket = nil
+		    end if
+		    
+		    if ReleaseNotesSocket isa object then
+		      ReleaseNotesSocket.Disconnect
+		      RemoveHandler ReleaseNotesSocket.ContentReceived, WeakAddressOf ReleaseNotesSocket_ContentReceived
+		      ReleaseNotesSocket = nil
+		    end if
+		  #endif
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -145,6 +170,75 @@ Inherits Kaju.Information
 		  dim prop as Introspection.PropertyInfo = PropInfoDictionary.Value( propName )
 		  return prop.Value( self )
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21, CompatibilityFlags = (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit)) or  (TargetIOS and (Target32Bit or Target64Bit))
+		Private Sub ImageSocket_ContentReceived(sender As Kaju.HTTPSocketAsync, url As String, httpStatus As Integer, content As String)
+		  #pragma unused sender
+		  #pragma unused url
+		  
+		  if httpStatus <> 404 and content <> "" then
+		    dim p as Picture = Picture.FromData( content )
+		    
+		    if ImageScale > 1 then
+		      p = new Picture( p.Width \ ImageScale, p.Height \ ImageScale, array( p ) )
+		    end if
+		    
+		    mImage = p
+		    RaiseEvent ImageReceived
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21, CompatibilityFlags = (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit)) or  (TargetIOS and (Target32Bit or Target64Bit))
+		Private Sub ReleaseNotesSocket_ContentReceived(sender As Kaju.HTTPSocketAsync, url As String, httpStatus As Integer, content As String)
+		  #pragma unused sender
+		  #pragma unused url
+		  
+		  dim raw as string = content
+		  
+		  if httpStatus = 404 or raw.Trim = "" then
+		    //
+		    // Do nothing
+		    //
+		    
+		  else
+		    //
+		    // Adjust the encoding
+		    //
+		    
+		    dim enc as TextEncoding
+		    
+		    //
+		    // See if the html contains a charset
+		    //
+		    static rxCharSetFinder as RegEx
+		    if rxCharSetFinder is nil then
+		      rxCharSetFinder = new RegEx
+		      rxCharSetFinder.SearchPattern = "<meta charset *= *[""']([^""']+)"
+		    end if
+		    
+		    dim matchCharSet as RegExMatch = rxCharSetFinder.Search( raw )
+		    if matchCharSet isa RegExMatch then
+		      dim encString as string = matchCharSet.SubExpressionString( 1 ).Trim
+		      try
+		        enc = GetInternetTextEncoding( encString )
+		      end try
+		    end if
+		    
+		    if enc is nil then
+		      enc = Encodings.UTF8
+		    end if
+		    raw = raw.DefineEncoding( enc )
+		    
+		    if raw.Trim <> "" then
+		      mReleaseNotesFromURL = raw
+		      RaiseEvent ReleaseNotesReceived()
+		    end if
+		  end if
+		  
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -172,9 +266,32 @@ Inherits Kaju.Information
 	#tag EndMethod
 
 
+	#tag Hook, Flags = &h0
+		Event ImageReceived()
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
+		Event ReleaseNotesReceived()
+	#tag EndHook
+
+
 	#tag Property, Flags = &h0
 		AppName As String
 	#tag EndProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  if mReleaseNotesFromURL <> "" then
+			    return mReleaseNotesFromURL
+			  else
+			    return mReleaseNotes
+			  end if
+			  
+			End Get
+		#tag EndGetter
+		DisplayReleaseNotes As String
+	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0, CompatibilityFlags = (TargetHasGUI)
 		#tag Getter
@@ -193,16 +310,14 @@ Inherits Kaju.Information
 			  // Get the image
 			  //
 			  
-			  dim http as new Kaju.HTTPSSocket
-			  url = http.GetRedirectAddress( url, 5 )
-			  
-			  dim data as string = http.Get( url, 5 )
-			  
-			  if data = "" then
-			    return nil
+			  if ImageSocket is nil then
+			    ImageSocket = new Kaju.HTTPSocketAsync
+			    AddHandler ImageSocket.ContentReceived, WeakAddressOf ImageSocket_ContentReceived
 			  end if
 			  
-			  mImage = Picture.FromData( data )
+			  dim http as Kaju.HTTPSocketAsync = ImageSocket
+			  
+			  http.Get( url, true )
 			  
 			  Exception err as RuntimeException
 			    mImage = nil
@@ -214,6 +329,14 @@ Inherits Kaju.Information
 		#tag EndGetter
 		Image As Picture
 	#tag EndComputedProperty
+
+	#tag Property, Flags = &h0
+		ImageScale As Integer = 1
+	#tag EndProperty
+
+	#tag Property, Flags = &h21, CompatibilityFlags = (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit)) or  (TargetIOS and (Target32Bit or Target64Bit))
+		Private ImageSocket As Kaju.HTTPSocketAsync
+	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		ImageURL As String
@@ -229,6 +352,14 @@ Inherits Kaju.Information
 
 	#tag Property, Flags = &h0
 		MinimumRequiredVersion As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mReleaseNotes As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mReleaseNotesFromURL As String
 	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -341,8 +472,93 @@ Inherits Kaju.Information
 		Private Shared PropInfoDictionary As Dictionary
 	#tag EndComputedProperty
 
-	#tag Property, Flags = &h0
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mReleaseNotes
+			  
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mReleaseNotes = value
+			  
+			  //
+			  // The release notes might be straight HTML or them might be a URL.
+			  // If the latter, the remainder will be alternate notes.
+			  // This method will determine which it is and, if the latter, will
+			  // attempt to fetch the notes. If it can't, it will return the alternate
+			  // notes if any, or a message.
+			  //
+			  // The URL may start the first line followed by an EOL or may be in an
+			  // HTML comment that starts the first line. The latter form will maintain
+			  // better compatibility with previous versions of Kaju.
+			  //
+			  // Examples:
+			  //
+			  //  http://something.com/UpdateInformation.json
+			  //
+			  //  <!-- http://something.com/UpdateInformation.json -->
+			  //
+			  //  <!--
+			  //  http://something.com/UpdateInformation.json
+			  //  -->
+			  //
+			  
+			  mReleaseNotesFromURL = ""
+			  
+			  static noInfoHTML as string = "<b>" + KajuLocale.kNoUpdateInfoMessage + "</b>"
+			  
+			  static rxURLSplitter as RegEx
+			  if rxURLSplitter is nil then
+			    rxURLSplitter = new RegEx
+			    rxURLSplitter.SearchPattern = _
+			    "(?mi-Us)\A\x20*(?|(?:(http[^\s]+)\x20*\R)|(?:<!--\s*(http[^\s]*)\s*-->))([\s\S]*)"
+			  end if
+			  
+			  dim r as string = value
+			  
+			  #if not TargetConsole then
+			    
+			    dim matchURL as RegExMatch = rxURLSplitter.Search( value)
+			    if matchURL isa RegExMatch then
+			      dim url as string = matchURL.SubExpressionString( 1 ).Trim
+			      dim alternateNotes as string = matchURL.SubExpressionString( 2 ).Trim
+			      
+			      if ReleaseNotesSocket is nil then
+			        ReleaseNotesSocket = new Kaju.HTTPSocketAsync
+			        AddHandler ReleaseNotesSocket.ContentReceived, WeakAddressOf ReleaseNotesSocket_ContentReceived
+			      end if
+			      
+			      dim http as Kaju.HTTPSocketAsync = ReleaseNotesSocket
+			      http.Get url, true
+			      mReleaseNotes = alternateNotes
+			    end if
+			    
+			  #endif
+			  
+			  if r.Trim = "" then
+			    r = noInfoHTML
+			  end if
+			  
+			  mReleaseNotes = r
+			  
+			End Set
+		#tag EndSetter
 		ReleaseNotes As String
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  Return mReleaseNotesFromURL
+			End Get
+		#tag EndGetter
+		ReleaseNotesFromURL As String
+	#tag EndComputedProperty
+
+	#tag Property, Flags = &h21, CompatibilityFlags = (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit)) or  (TargetIOS and (Target32Bit or Target64Bit))
+		Private ReleaseNotesSocket As Kaju.HTTPSocketAsync
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -426,18 +642,25 @@ Inherits Kaju.Information
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="AppName"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Image"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Picture"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ImageURL"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
@@ -447,11 +670,15 @@ Inherits Kaju.Information
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="IsValid"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -459,10 +686,13 @@ Inherits Kaju.Information
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="MinimumRequiredVersion"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
@@ -470,29 +700,33 @@ Inherits Kaju.Information
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ReleaseNotes"
-			Group="Behavior"
-			Type="String"
-			EditorType="MultiLineEditor"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="RequiresPayment"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="StageCode"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -500,23 +734,63 @@ Inherits Kaju.Information
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="UseTransparency"
+			Visible=false
 			Group="Behavior"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Version"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="VersionAsDouble"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ReleaseNotes"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ImageScale"
+			Visible=false
+			Group="Behavior"
+			InitialValue="1"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ReleaseNotesFromURL"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="DisplayReleaseNotes"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
