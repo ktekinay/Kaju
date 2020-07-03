@@ -115,6 +115,13 @@ Inherits Kaju.Information
 		Function ConvertToJSON() As JSONItem
 		  dim j as JSONItem = super.ConvertToJSON
 		  
+		  //
+		  // Add a security token
+		  //
+		  dim rawKey as string = Crypto.GenerateRandomBytes( 8 )
+		  dim encodedKey as string = EncodeBase64( rawKey, 0 )
+		  j.Value( Kaju.kNameSecurityToken ) = encodedKey
+		  
 		  for each binaryName as string in BinaryNames
 		    dim b as Kaju.BinaryInformation = Binaries.Lookup( binaryName, nil )
 		    if b isa Kaju.BinaryInformation then
@@ -131,13 +138,13 @@ Inherits Kaju.Information
 		  #if not TargetConsole then
 		    if ImageSocket isa object then
 		      ImageSocket.Disconnect
-		      RemoveHandler ImageSocket.PageReceived, WeakAddressOf ImageSocket_PageReceived
+		      RemoveHandler ImageSocket.ContentReceived, WeakAddressOf ImageSocket_ContentReceived
 		      ImageSocket = nil
 		    end if
 		    
 		    if ReleaseNotesSocket isa object then
 		      ReleaseNotesSocket.Disconnect
-		      RemoveHandler ReleaseNotesSocket.PageReceived, WeakAddressOf ReleaseNotesSocket_PageReceived
+		      RemoveHandler ReleaseNotesSocket.ContentReceived, WeakAddressOf ReleaseNotesSocket_ContentReceived
 		      ReleaseNotesSocket = nil
 		    end if
 		  #endif
@@ -166,7 +173,7 @@ Inherits Kaju.Information
 	#tag EndMethod
 
 	#tag Method, Flags = &h21, CompatibilityFlags = (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit)) or  (TargetIOS and (Target32Bit or Target64Bit))
-		Private Sub ImageSocket_PageReceived(sender As Kaju.HTTPSocketAsync, url As String, httpStatus As Integer, content As String)
+		Private Sub ImageSocket_ContentReceived(sender As Kaju.HTTPSocketAsync, url As String, httpStatus As Integer, content As String)
 		  #pragma unused sender
 		  #pragma unused url
 		  
@@ -185,7 +192,7 @@ Inherits Kaju.Information
 	#tag EndMethod
 
 	#tag Method, Flags = &h21, CompatibilityFlags = (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit)) or  (TargetIOS and (Target32Bit or Target64Bit))
-		Private Sub ReleaseNotesSocket_PageReceived(sender As Kaju.HTTPSocketAsync, url As String, httpStatus As Integer, content As String)
+		Private Sub ReleaseNotesSocket_ContentReceived(sender As Kaju.HTTPSocketAsync, url As String, httpStatus As Integer, content As String)
 		  #pragma unused sender
 		  #pragma unused url
 		  
@@ -305,12 +312,12 @@ Inherits Kaju.Information
 			  
 			  if ImageSocket is nil then
 			    ImageSocket = new Kaju.HTTPSocketAsync
-			    AddHandler ImageSocket.PageReceived, WeakAddressOf ImageSocket_PageReceived
+			    AddHandler ImageSocket.ContentReceived, WeakAddressOf ImageSocket_ContentReceived
 			  end if
 			  
 			  dim http as Kaju.HTTPSocketAsync = ImageSocket
 			  
-			  http.Get( url )
+			  http.Get( url, true )
 			  
 			  Exception err as RuntimeException
 			    mImage = nil
@@ -520,11 +527,11 @@ Inherits Kaju.Information
 			      
 			      if ReleaseNotesSocket is nil then
 			        ReleaseNotesSocket = new Kaju.HTTPSocketAsync
-			        AddHandler ReleaseNotesSocket.PageReceived, WeakAddressOf ReleaseNotesSocket_PageReceived
+			        AddHandler ReleaseNotesSocket.ContentReceived, WeakAddressOf ReleaseNotesSocket_ContentReceived
 			      end if
 			      
 			      dim http as Kaju.HTTPSocketAsync = ReleaseNotesSocket
-			      http.Get url
+			      http.Get url, true
 			      mReleaseNotes = alternateNotes
 			    end if
 			    
@@ -635,18 +642,25 @@ Inherits Kaju.Information
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="AppName"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Image"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Picture"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ImageURL"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
@@ -656,11 +670,15 @@ Inherits Kaju.Information
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="IsValid"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -668,10 +686,13 @@ Inherits Kaju.Information
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="MinimumRequiredVersion"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
@@ -679,23 +700,33 @@ Inherits Kaju.Information
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="RequiresPayment"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="StageCode"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -703,45 +734,61 @@ Inherits Kaju.Information
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="UseTransparency"
+			Visible=false
 			Group="Behavior"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Version"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="VersionAsDouble"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ReleaseNotes"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ImageScale"
+			Visible=false
 			Group="Behavior"
 			InitialValue="1"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ReleaseNotesFromURL"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DisplayReleaseNotes"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty

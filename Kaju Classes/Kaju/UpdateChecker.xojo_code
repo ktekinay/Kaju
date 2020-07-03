@@ -1,13 +1,39 @@
 #tag Class
 Protected Class UpdateChecker
 	#tag Method, Flags = &h21
+		Private Sub AsyncHTTP_ContentReceived(sender As HTTPSocketAsync, url As String, httpStatus As Integer, content As String)
+		  #pragma unused sender
+		  #pragma unused url
+		  
+		  RemoveInstance self
+		  
+		  dim statusCode as integer = httpStatus
+		  dim raw as string = content
+		  
+		  if statusCode >= 400 and statusCode <= 499 then // Not found
+		    mResult = ResultType.PageNotFound
+		    RaiseEvent ExecuteAsyncComplete
+		    
+		  elseif statusCode >= 300 and statusCode <= 399 then
+		    mResult = ResultType.PageRedirected
+		    RaiseEvent ExecuteAsyncComplete
+		    
+		  elseif ProcessRaw( raw ) then
+		    FetchAsync true // Immediate because the socket is already set up
+		    
+		  else
+		    RaiseEvent ExecuteAsyncComplete
+		    
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub AsyncHTTP_Error(sender As HTTPSocketAsync, err As RuntimeException)
 		  #pragma unused sender
 		  
-		  dim index as integer = AsyncCheckers.IndexOf( self )
-		  if index <> -1 then
-		    AsyncCheckers.Remove index
-		  end if
+		  RemoveInstance self
 		  
 		  dim errMsg as string = err.Message
 		  if errMsg = "" then
@@ -17,38 +43,10 @@ Protected Class UpdateChecker
 		  LastError = err
 		  
 		  if HandleError( errMsg ) then
-		    FetchAsync
+		    FetchAsync true // Immediate because the socket is already set up
 		  else
 		    RaiseEvent ExecuteAsyncComplete
 		  end if
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Sub AsyncHTTP_PageReceived(sender As HTTPSocketAsync, url As String, httpStatus As Integer, content As String)
-		  #pragma unused sender
-		  #pragma unused url
-		  
-		  dim index as integer = AsyncCheckers.IndexOf( self )
-		  if index <> -1 then
-		    AsyncCheckers.Remove index
-		  end if
-		  
-		  dim statusCode as integer = httpStatus
-		  dim raw as string = content
-		  
-		  if statusCode = 404 then // Not found
-		    mResult = ResultType.PageNotFound
-		    RaiseEvent ExecuteAsyncComplete
-		    
-		  elseif ProcessRaw( raw ) then
-		    FetchAsync()
-		    
-		  else
-		    RaiseEvent ExecuteAsyncComplete
-		    
-		  end if
-		  
 		End Sub
 	#tag EndMethod
 
@@ -65,10 +63,12 @@ Protected Class UpdateChecker
 		Private Sub Destructor()
 		  SavePrefs()
 		  
-		  if AsyncHTTP isa object then
-		    RemoveHandler AsyncHTTP.PageReceived, WeakAddressOf AsyncHTTP_PageReceived
-		    RemoveHandler AsyncHTTP.Error, WeakAddressOf AsyncHTTP_Error
-		    AsyncHTTP = nil
+		  TeardownAsyncHTTP
+		  
+		  if FetchAsyncTimer isa object then
+		    FetchAsyncTimer.Mode = Timer.ModeOff
+		    RemoveHandler FetchAsyncTimer.Action, WeakAddressOf FetchAsyncTimer_Action
+		    FetchAsyncTimer = nil
 		  end if
 		  
 		End Sub
@@ -81,7 +81,7 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Execute()
+		Attributes( Deprecated = "ExecuteAsync" )  Sub Execute()
 		  // Pull the data from the URL, check it, and preset the window if needed
 		  // Returns true if the app should quit in preparation of the update.
 		  //
@@ -109,8 +109,7 @@ Protected Class UpdateChecker
 		    return
 		  end if
 		  
-		  FetchAsync
-		  
+		  FetchAsync false
 		End Sub
 	#tag EndMethod
 
@@ -120,23 +119,39 @@ Protected Class UpdateChecker
 		  // Look for redirection
 		  //
 		  dim url as string = self.UpdateURL
-		  if AllowRedirection then
-		    dim redirector as new Kaju.HTTPSSocket
-		    url = redirector.GetRedirectAddress( url, 5 )
-		  end if
 		  
 		  //
 		  // Repeat the check until we get data or the user gives up
 		  //
 		  do
+		    const kTimeout as integer = 5
 		    
-		    dim http as new Kaju.HTTPSSocket
+		    dim raw as string
+		    dim statusCode as integer
 		    
-		    dim raw as string = http.Get( url, 5 )
-		    dim statusCode as integer = http.HTTPStatusCode
+		    //
+		    // Note:
+		    //
+		    // If Xojo ever disallows redirection in URLConnection
+		    // we can delete HTTPSSocket and simplify this
+		    // code.
+		    //
+		    if AllowRedirection then
+		      dim http as new Kaju.HTTPSocketAsync // Follows redirects anyway
+		      raw = http.GetSync( url, kTimeout )
+		      statusCode = http.HTTPStatusCode
+		    else
+		      dim http as new Kaju.HTTPSSocket
+		      raw = http.Get( url, kTimeout ) // Does not follow redirects
+		      statusCode = http.HTTPStatusCode
+		    end if
 		    
 		    if statusCode = 404 then // Not found
 		      mResult = ResultType.PageNotFound
+		      exit do
+		      
+		    elseif statusCode >= 300 and statusCode <= 399 then
+		      mResult = ResultType.PageRedirected
 		      exit do
 		    end if
 		    
@@ -149,49 +164,62 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub FetchAsync()
-		  //
-		  // The new socket will always redirect so
-		  // AllowRedirection must be set to true.
-		  // If it isn't, we will let the consumer know through
-		  // an exception.
-		  //
-		  
-		  if not AllowRedirection then
-		    const kErrorString = _
-		    "AllowRedirection must be set to True when using asynchrous operations"
-		    raise new Kaju.KajuException( kErrorString, CurrentMethodName )
-		  end if
-		  
-		  dim url as string = UpdateURL
-		  dim http as Kaju.HTTPSocketAsync = GetAsyncHTTPSocket
-		  http.Get url
+		Private Sub FetchAsync(immediate As Boolean)
+		  dim http as Kaju.HTTPSocketAsync = GetNewAsyncHTTPSocket // Set up the socket
 		  
 		  mResult = ResultType.FetchingUpdateInfo
 		  
 		  //
-		  // Processing will resume in the events
-		  //
-		  
-		  //
-		  // But we have to hold a reference to this object in case the consumer decided to use
+		  // We have to hold a reference to this object in case the consumer decided to use
 		  // a temporary variable
 		  //
+		  StoreInstance self
 		  
-		  if AsyncCheckers.IndexOf( self ) = -1 then
-		    AsyncCheckers.Append self
+		  //
+		  // If not immediate, start a timer to do this
+		  //
+		  // This is to counter a potential timing issue reported by a user
+		  // so we set up the socket first, then call it later
+		  //
+		  if immediate then
+		    
+		    dim url as string = UpdateURL
+		    http.Get url, AllowRedirection
+		    
+		    //
+		    // Processing will resume in the events
+		    //
+		    
+		  else
+		    
+		    if FetchAsyncTimer is nil then
+		      FetchAsyncTimer = new Timer
+		      FetchAsyncTimer.Period = 10
+		      AddHandler FetchAsyncTimer.Action, WeakAddressOf FetchAsyncTimer_Action
+		    end if
+		    
+		    FetchAsyncTimer.Mode = Timer.ModeSingle
+		    
 		  end if
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function GetAsyncHTTPSocket() As Kaju.HTTPSocketAsync
-		  if AsyncHTTP is nil then
-		    AsyncHTTP = new HTTPSocketAsync
-		    AddHandler AsyncHTTP.PageReceived, WeakAddressOf AsyncHTTP_PageReceived
-		    AddHandler AsyncHTTP.Error, WeakAddressOf AsyncHTTP_Error
-		  end if
+		Private Sub FetchAsyncTimer_Action(sender As Timer)
+		  #pragma unused sender
+		  FetchAsync true
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function GetNewAsyncHTTPSocket() As Kaju.HTTPSocketAsync
+		  TeardownAsyncHTTP
+		  
+		  AsyncHTTP = new HTTPSocketAsync
+		  AddHandler AsyncHTTP.ContentReceived, WeakAddressOf AsyncHTTP_ContentReceived
+		  AddHandler AsyncHTTP.Error, WeakAddressOf AsyncHTTP_Error
 		  
 		  return AsyncHTTP
 		End Function
@@ -431,7 +459,7 @@ Protected Class UpdateChecker
 		  //
 		  // Processes the raw packet
 		  // 
-		  // Returns True if the process should contine, False if it's done
+		  // Returns True if the process should continue, False if it's done
 		  // or was cancelled
 		  //
 		  
@@ -471,6 +499,10 @@ Protected Class UpdateChecker
 		    if isValid then
 		      exit for eol
 		    end if
+		    isValid = Crypto.RSAVerifySignature( tester.Trim, sig, ServerPublicRSAKey )
+		    if isValid then
+		      exit for eol
+		    end if
 		  next
 		  
 		  if not isValid then
@@ -497,14 +529,7 @@ Protected Class UpdateChecker
 		  dim info() as Kaju.UpdateInformation
 		  dim updateIsRequired as boolean
 		  for i as integer = 0 to ub
-		    //
-		    // Make sure it has a Security Token
-		    //
 		    dim thisElement as JSONItem = j( i )
-		    if thisElement.Lookup( kNameSecurityToken, "" ) = "" then
-		      raise new KajuException( KajuLocale.kMissingReason + " security token", CurrentMethodName )
-		    end if
-		    
 		    dim thisInfo as new Kaju.UpdateInformation( thisElement )
 		    
 		    //
@@ -583,6 +608,16 @@ Protected Class UpdateChecker
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Shared Sub RemoveInstance(o As UpdateChecker)
+		  dim i as integer = AsyncCheckers.IndexOf( o )
+		  if i <> -1 then
+		    AsyncCheckers.Remove i
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub ResetIgnored()
 		  redim IgnoreVersionsPref( -1 )
@@ -651,6 +686,15 @@ Protected Class UpdateChecker
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Shared Sub StoreInstance(o As UpdateChecker)
+		  if AsyncCheckers.IndexOf( o ) = -1 then
+		    AsyncCheckers.Append o
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Function StringArrayToJSON(arr() As String) As JSONItem
 		  dim j as new JSONItem( "[]" )
 		  for i as integer = 0 to arr.Ubound
@@ -659,6 +703,17 @@ Protected Class UpdateChecker
 		  
 		  return j
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub TeardownAsyncHTTP()
+		  if AsyncHTTP isa object then
+		    RemoveHandler AsyncHTTP.ContentReceived, WeakAddressOf AsyncHTTP_ContentReceived
+		    RemoveHandler AsyncHTTP.Error, WeakAddressOf AsyncHTTP_Error
+		    AsyncHTTP = nil
+		  end if
+		  
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -721,6 +776,10 @@ Protected Class UpdateChecker
 
 	#tag Property, Flags = &h0
 		DefaultUseTransparency As Boolean = True
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private FetchAsyncTimer As Timer
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -815,6 +874,7 @@ Protected Class UpdateChecker
 		  UpdateAvailable
 		  RequiredUpdateAvailable
 		  FetchingUpdateInfo
+		  PageRedirected = 302
 		PageNotFound = 404
 	#tag EndEnum
 
@@ -822,44 +882,59 @@ Protected Class UpdateChecker
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="Allow32bitTo64bitUpdates"
+			Visible=false
 			Group="Behavior"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AllowedInteraction"
+			Visible=false
 			Group="Behavior"
 			InitialValue="kAllowAll"
 			Type="UInt32"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AllowedStage"
+			Visible=false
 			Group="Behavior"
 			InitialValue="App.Development"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AllowRedirection"
+			Visible=false
 			Group="Behavior"
 			InitialValue="False"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DefaultImage"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Picture"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DefaultUseTransparency"
+			Visible=false
 			Group="Behavior"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="HonorIgnored"
+			Visible=false
 			Group="Behavior"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -867,6 +942,7 @@ Protected Class UpdateChecker
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -874,22 +950,29 @@ Protected Class UpdateChecker
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="QuitOnCancelIfRequired"
+			Visible=false
 			Group="Behavior"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ServerPublicRSAKey"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
@@ -897,7 +980,9 @@ Protected Class UpdateChecker
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -905,21 +990,29 @@ Protected Class UpdateChecker
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="UpdateURL"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="UpdateWindowIsOpen"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Result"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="ResultType"
 			EditorType="Enum"
 			#tag EnumValues
@@ -933,6 +1026,7 @@ Protected Class UpdateChecker
 				"2 - UpdateAvailable"
 				"3 - RequiredUpdateAvailable"
 				"4 - FetchingUpdateInfo"
+				"302 - PageRedirected"
 				"404 - PageNotFound"
 			#tag EndEnumValues
 		#tag EndViewProperty

@@ -39,6 +39,8 @@ If you plan to allow 32-bit to 64-bit updates on Windows and Linux, you must inc
 
 Create a new `Kaju.UpdateChecker` instance and fill in its properties. In the `Constructor`, you have to provide a FolderItem for a folder where Kaju can save its preferences, one that is unique to your app. At the least, you must also set the `ServerPublicRSAKey` (more on this later) and the `UpdateURL` where it will get its update information. If that URL (or any URL) starts with "https:", it will be accessed securely. (Conversely, a URL that does not start with "https:" will be accessed normally.)
 
+**Note**: Due to changes in the MacOS, accessing an insecure URL will require entries in your app's plist file. For more information, look [here](https://docs.xojo.com/UserGuide:App_Transport_Security).
+
 Call the `ExecuteAsync` (preferred) or `Execute` method of the `Kaju.UpdateChecker`. That's it. Kaju will handle everything else by going to the `UpdateURL` to see if there are any updates available for that version of the app, then ask the user about them. If the user chooses to update, the class will download and verify the binary, then offer the user the opportunity to Quit & Install or Cancel. If they choose to install, Quit will be called.
 
 Since none of this is modal, the user can continue to use your app with the update window waiting in the background. If they do choose to install, the update window will be sent to the back so it will be closed last.
@@ -47,11 +49,13 @@ To discover what `UpdateChecker` found, you can check the `Result` property in t
 
 ### ExecuteAsync vs. Execute
 
-Xojo offers two types of HTTPSocket, the "classic" and the "namespaced" (`Xojo.Net.HTTPSocket`) versions. The namespaced version includes features that works with newer types of security but does not offer a synchronous mode. With that in mind, Kaju has two ways to start the update process, `Kaju.UpdateChecker.ExecuteAsync` and `Kaju.UpdateChecker.Execute`. The former uses the namespaced version and will report its result in the `ExecuteAsyncComplete` event. The latter uses the classic version and will report its results immediately.
+Kaju has two ways to start the update process, `Kaju.UpdateChecker.ExecuteAsync` and `Kaju.UpdateChecker.Execute`.
 
-If yoru uddate information is not on a secure website, it shouldn't matter which you use, but we still recommend `ExecuteAsync` moving forward.
+Xojo has introduced the `URLConnection` class, an update to the classic `HTTPSocket` and `HTTPSecureSocket` classes. The more modern implementation is preferred and used when you choose `ExecuteAsync`. The older class is used when you choose the synchronous `Execute` _and_ set `AllowRedirection` to `False` (Unfortunately, the `URLConnection` class has no way to disallow redirects and we can only fake it in asynchronous mode.)
 
-**Note**: `ExecuteAsync` will always allow redirects so `UpdateChecker.AllowRedirection` must be set to `True` or an exception will be raised.
+`ExecuteAsync` will report its result in the `ExecuteAsyncComplete` event while `Execute` will report its results immediately.
+
+If your update information is not on a secure website, it shouldn't matter which you use, but we still recommend `ExecuteAsync` moving forward.
 
 ### Minimum OS
 
@@ -65,9 +69,9 @@ If Kaju cannot find the tools it needs, the `Result` will be set to `Unsupported
 
 ### Required Updates
 
-If you set up a minimim required version in your update information, Kaju may find that a particular update is "required". For example, if the user is using v.1.0 and you've discovered a bug that necessitates an update to at least v.1.1, you would set that as the minimum required version. In the future, even as you release v.1.2, 1.3, etc, you would leave the minimum required as v.1.1 so Kaju knows to force the users of 1.0 to update.
+If you set up a minimum required version in your update information, Kaju may find that a particular update is "required". For example, if the user is using v.1.0 and you've discovered a bug that necessitates an update to at least v.1.1, you would set that as the minimum required version. In the future, even as you release v.1.2, 1.3, etc, you would leave the minimum required as v.1.1 so Kaju knows to force the users of 1.0 to update.
 
-After calling  `Kaju.UpdateChecker.ExecuteAsync` or `Kaju.UpdateChecker.Execute`, the `Result` method will tell you if a required update was found. In that case, it's up to you to take special actions to make sure that your app cannot be used until it is updated. To help, there is the `Kaju.UpdateChecker.QuitOnCancelIfRequired` property that is `True` by default. If the user tries to cancel a required update, the app will quit.
+After calling  `Kaju.UpdateChecker.ExecuteAsync` or `Kaju.UpdateChecker.Execute`, the `Result` property will tell you if a required update was found. In that case, it's up to you to take special actions to make sure that your app cannot be used until it is updated. To help, there is the `Kaju.UpdateChecker.QuitOnCancelIfRequired` property that is `True` by default. If the user tries to cancel a required update, the app will quit.
 
 ### Other Features
 
@@ -79,7 +83,7 @@ If an update was found, the update window will have opened. You can check throug
 
 The user can choose to ignore certain versions as long as they are not marked as required. You can set `HonorIgnored` to `False` to bypass that temporarily and present even ignored versions to your user, or you can clear the database of ignored versions entirely with the `ResetIgnored` method.
 
-You may choose to specify an update URL that redirects to another location. By default, Kaju will not allow that, but if you really need to do it, set the `Kaju.UpdateChecker.AllowRedirection` property to `True`. 
+You may choose to specify an update URL that redirects to another location. By default, Kaju will not allow that, but if you really need to do it, set the `Kaju.UpdateChecker.AllowRedirection` property to `True`.
 
 ### One At A Time
 
@@ -101,7 +105,7 @@ Kaju does not elevate permissions. If the user does not have write permission fo
 
 ### Platform Differences
 
-Kaju will act the same way across plaforms except for one point: Since the Mac executable is always one package, it will be replaced entirely. Anything stored within the package that was put there after initial installation will be deleted.
+Kaju will act the same way across platforms except for one point: Since the Mac executable is always one package, it will be replaced entirely. Anything stored within the package that was put there after initial installation will be deleted.
 
 On Windows and Linux, since executable folders can be combined, only the files that are found in the update will be replaced. Any additional files or even older, no-longer-used files, will remain untouched. If you want to make sure some older file is removed by the update, put an empty placeholder into the update package.
 
@@ -127,7 +131,7 @@ At a bare minimum, that's it.
 
 ## The Admin App
 
-The included Admin app makes it easy to set up your update file. Start it up and use the "+" at the bottom, left to add a version. Fill in the information for the release. 
+The included Admin app makes it easy to set up your update file. Start it up and use the "+" at the bottom, left to add a version. Fill in the information for the release.
 
 When you're done, save the file, then export the HTML data. It is this exported file that you will post to your web site and the final URL should match the URL you included within your app.
 
@@ -144,7 +148,7 @@ The two ways to include a URL from which release notes will be pulled:
 ```
 http://wwww.something.com/my_release_notes
 
-These are the alternate release notes and 
+These are the alternate release notes and
 the url above will be visible.
 ```
 
@@ -153,8 +157,8 @@ or
 ```
 <!-- http://www.something.com/my_release_notes -->
 
-These are the alternate release notes but 
-the url above will not be visible because they are 
+These are the alternate release notes but
+the url above will not be visible because they are
 commented (preferred).
 ```
 
@@ -173,6 +177,8 @@ For each version in your admin file, check the checkbox for each platform to whi
 **Note**: If the URL to a binary starts with "https:", a secure connection will be used automatically.
 
 For Windows and Linux, you must also provide the exact name of the executable. If your app is called "My Great App", the Linux executable name will be "My Great App" and the Windows name will be "My Great App.exe".
+
+__Note__: If you omit this, Kaju will assume the name of the executable that is running the update.
 
 ### About 64-bit
 
@@ -252,7 +258,7 @@ A sample JSON that will be returned by the server:
 				"URL" : "http://www.site.com/download_path_Linux" ,
 				"Hash" : "ABC123"
 			} ,
-		"WindowsBinaryb4bit" :
+		"WindowsBinary64bit" :
 			{
 				"ExecutableName" : "My App.exe" ,
 				"URL" : "http://www.site.com/download_path_Win_64" ,
@@ -272,13 +278,13 @@ A sample JSON that will be returned by the server:
 		"AppName" : "My App" ,
 		"Version" : "6.1b4" ,
 		"ReleaseNotes" : "http://link/to/release/notes" ,
-		"MacBinary" : 
+		"MacBinary" :
 			{
 				"URL" : "http://www.site.com/other_download_path" ,
 				"Hash" :"0123456"
-			} 
+			}
 	}
-] 
+]
 ```
 
 **NOTE**: The ExecutableName will be used by the updater script while the AppName is what will display in the updater window. These may be the same or different. Since the ExecutableName of the Mac app can be discovered, it is not needed for the Mac binary.
@@ -317,7 +323,7 @@ There is also a `Kaju.Version` constant (introduced in v.1.4) that will let you 
 |Allow32bitTo64bitUpdates|Boolean|If `True`, will offer the user of a 32-bit app the option to upgrade to the 64-bit version, if available.|n|
 |AllowedInteraction|UInt32|Determines what windows Kaju is allowed to display; Use the available constants|n|
 |AllowedStage|Integer|What stage of updates the user may see (App.Final, App.Beta, App.Alpha, or App.Development)|n|
-|AllowRedirection|Boolean|If `True`, the `UpdateURL` may redirect to another URL (default: `False`) (must be `True` when using `ExecuteAsync`)|n|
+|AllowRedirection|Boolean|If `True`, the `UpdateURL` may redirect to another URL (default: `False`)|n|
 |DefaultImage|Picture|The background image that will be displayed in the window when an image is not provided by the update|n|
 |DefaultUseTransparency|Boolean|If `True`, transparency will be set to 50%|n|
 |HonorIgnored|Boolean|If `False`, the user will be presented with updates they previously set to "ignore" (default: `True`)|n|
@@ -373,7 +379,7 @@ Translations to other languages by:
 * Sascha Schneppmueller (German)
 * Valdemar De SOUSA (French)
 * Julen Ibarretxe Uriguen (Spanish)
-* Heikki Ohvo (Finnish)
+* Heikki Hoo (Finnish)
 * Manuel Romei (Italian)
 * Vidal van Bergen (Dutch)
 
@@ -407,7 +413,7 @@ Fork the project to your GitHub account. Use the "develop" branch for general fi
 
 There are two places to look for strings that need translation:
 
-1. The constants in the KajuLocale module. 
+1. The constants in the KajuLocale module.
 1. The error messages in KajuException.
 
 Add a translation for each, then submit a pull request as outlined above.
@@ -416,21 +422,28 @@ Add a translation for each, then submit a pull request as outlined above.
 
 2.1 (__)
 
-* **KajuUpdateWindow**: Changed `hsSocket` to a `Xojo.Net.HTTPSocket` object.
-* **UpdateChecker**: Added `ExecuteAsync` that will check for updates asynchronously using `Xojo.Net.HTTPSocket` and `LastError` for HTTP errors that occur when using that method.
-* **UpdateChecker**: Added results for "PageNotFound" and "FetchingUpdateInfo".
+* **KajuUpdateWindow**: Changed `hsSocket` to a `URLConnection` object.
+* **UpdateChecker**: Added `ExecuteAsync` that will check for updates asynchronously using `URLConnection` and `LastError` for HTTP errors that occur when using that method.
+* **UpdateChecker**: Deprecated `Execute`.
+* **UpdateChecker**: Use `URLConnection` unless `Execute` is used where `AllowRedirection` isß `False`.
+* **UpdateChecker**: Added results for "PageNotFound", "PageRedirected", and "FetchingUpdateInfo".
 * **UpdateChecker**: Better handling of a URL in the form "http://un:pw@path".
 * **UpdateChecker**: Changed `Result` to a read-only computed property and made the `mResult` shadow property hidden.
 * **UpdateChecker**: Removed events that were not being raised anyway.
 * **UpdateChecker**: Make sure each version has a security token (see below).
-* **UpdateChecker**: Validate the downloaded packet against every form of EOL in case that got changed along the way.
+* **UpdateChecker**: Validate the downloaded packet against every form of EOL with and without Trim in case that got changed along the way.
 * **UpdateChecker**: `OSIsSupported` will try twice to find the tools it needs and log any errors.
 * **UpdateInformation**: Will fetch images and release notes asynchronously.
+* **UpdateInitiater**: Fixed Windows script issue that could have prevented re-launch of the application.
 * **Test App**: The window will let you specify Asynchronous and your own URL and/or public key. It will also allow testing of simple HTTP authenticated directories.
 * **Test App**: Asynchronous is now the default.
+* **Admin App**: Fixed issues with saving and alias tracking. (Alias tracking does not work on Windows.)
+* **Admin App**: Better UI handling on Windows.
 * **General**: Code changes for easier debugging.
 * **General**: All HTTP requests now include headers to disable caching.
 * **General**: Exported information file contains a security token to make sure that each export has a different RSA signature.
+* **General**: Handle IOException.
+* **General**: Updated build script to look for kaju cli in "Builds" folder as named in the newer Xojo versions.
 
 2.0 (May 31, 2017)
 
@@ -442,7 +455,7 @@ Add a translation for each, then submit a pull request as outlined above.
 * Ability to load release notes through a URL.
 * **Admin GUI**: Fixed Dupe button.
 * Added support for 64-bit binaries.
-* **Kaju**: Changed parameters of `DidLastUpdateSucceed` to report the "bit-ness" of the version that initiated the update. 
+* **Kaju**: Changed parameters of `DidLastUpdateSucceed` to report the "bit-ness" of the version that initiated the update.
 * **Test App**: Use better technique for compressing Windows and Linux executables.
 
 1.6.1 (August 27, 2015)

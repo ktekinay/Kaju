@@ -62,40 +62,6 @@ Inherits HTTPSecureSocket
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function GetRedirectAddress(url As String, timeout As Integer, maximumIterations As Integer = kDefaultMaximumIterations) As String
-		  // Gets the redirect address for a url
-		  // Will give up after maximumIterations interations.
-		  // Put a 0 (or less) in there for infinite
-		  
-		  if url = "" then
-		    return url
-		  end if
-		  
-		  dim isFinite as boolean = true
-		  if maximumIterations < 1 then
-		    isFinite = false
-		  end if
-		  
-		  do
-		    dim headers as InternetHeaders = GetHeaders( url, timeout )
-		    if headers is nil then
-		      exit
-		    elseif headers.Value( "Location" ) <> "" then
-		      url = headers.Value( "Location" )
-		    else
-		      exit
-		    end if
-		    if isFinite then
-		      maximumIterations = maximumIterations - 1
-		    end if
-		  loop until isFinite and maximumIterations = 0 // Will never end if maxiumIterations < 0 to start
-		  
-		  return url.Trim
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub SendRequest(method As String, url As String)
 		  SetSecure( url )
 		  super.SendRequest( method, url )
@@ -180,31 +146,11 @@ Inherits HTTPSecureSocket
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="CertificateFile"
-			Visible=true
-			Group="Behavior"
-			Type="FolderItem"
-			EditorType="File"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="CertificatePassword"
-			Visible=true
-			Group="Behavior"
-			Type="String"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="CertificateRejectionFile"
-			Visible=true
-			Group="Behavior"
-			Type="FolderItem"
-			EditorType="File"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ConnectionType"
+			Name="SSLConnectionType"
 			Visible=true
 			Group="Behavior"
 			InitialValue="3"
-			Type="Integer"
+			Type="SSLConnectionTypes"
 			EditorType="Enum"
 			#tag EnumValues
 				"1 - SSLv23"
@@ -214,36 +160,68 @@ Inherits HTTPSecureSocket
 			#tag EndEnumValues
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="ForceSecure"
+			Name="CertificateFile"
+			Visible=true
 			Group="Behavior"
+			InitialValue=""
+			Type="FolderItem"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="CertificatePassword"
+			Visible=true
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="CertificateRejectionFile"
+			Visible=true
+			Group="Behavior"
+			InitialValue=""
+			Type="FolderItem"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ForceSecure"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="Integer"
-			EditorType="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
-			EditorType="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Secure"
 			Visible=true
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
-			EditorType="String"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

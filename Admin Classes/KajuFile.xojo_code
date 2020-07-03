@@ -43,13 +43,6 @@ Protected Class KajuFile
 		        binaryData.Value( Kaju.BinaryInformation.kKeyURL ) = url
 		      end if
 		    next
-		    
-		    //
-		    // Add a security token
-		    //
-		    dim rawKey as string = Crypto.GenerateRandomBytes( 8 )
-		    dim encodedKey as string = EncodeBase64( rawKey, 0 )
-		    thisVersionData.Value( Kaju.kNameSecurityToken ) = encodedKey
 		  next
 		  
 		  dim dataString as string = data.ToString
@@ -268,6 +261,7 @@ Protected Class KajuFile
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -275,18 +269,23 @@ Protected Class KajuFile
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -294,6 +293,7 @@ Protected Class KajuFile
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

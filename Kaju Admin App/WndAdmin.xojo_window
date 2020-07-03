@@ -3,7 +3,6 @@ Begin Window WndAdmin
    BackColor       =   &cFFFFFF00
    Backdrop        =   0
    CloseButton     =   True
-   Compatibility   =   ""
    Composite       =   True
    Frame           =   0
    FullScreen      =   False
@@ -11,7 +10,7 @@ Begin Window WndAdmin
    HasBackColor    =   False
    Height          =   680
    ImplicitInstance=   True
-   LiveResize      =   True
+   LiveResize      =   "True"
    MacProcID       =   0
    MaxHeight       =   32000
    MaximizeButton  =   True
@@ -81,7 +80,7 @@ Begin Window WndAdmin
    Begin PushButton btnNew
       AutoDeactivate  =   True
       Bold            =   True
-      ButtonStyle     =   "6"
+      ButtonStyle     =   6
       Cancel          =   False
       Caption         =   "+"
       Default         =   False
@@ -93,7 +92,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   20
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   False
@@ -113,7 +112,7 @@ Begin Window WndAdmin
    Begin PushButton btnDelete
       AutoDeactivate  =   True
       Bold            =   True
-      ButtonStyle     =   "6"
+      ButtonStyle     =   6
       Cancel          =   False
       Caption         =   "-"
       Default         =   False
@@ -125,7 +124,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   39
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   False
@@ -555,7 +554,6 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
          Scope           =   2
          TabIndex        =   7
          TabPanelIndex   =   1
@@ -600,7 +598,6 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
          Scope           =   2
          TabIndex        =   8
          TabPanelIndex   =   1
@@ -645,7 +642,6 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
          Scope           =   2
          TabIndex        =   9
          TabPanelIndex   =   1
@@ -690,7 +686,6 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
          Scope           =   2
          TabIndex        =   2
          TabPanelIndex   =   1
@@ -735,7 +730,6 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
          Scope           =   2
          TabIndex        =   3
          TabPanelIndex   =   1
@@ -780,7 +774,6 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
          Scope           =   2
          TabIndex        =   4
          TabPanelIndex   =   1
@@ -825,7 +818,6 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
          Scope           =   2
          TabIndex        =   5
          TabPanelIndex   =   1
@@ -870,7 +862,6 @@ Begin Window WndAdmin
          LockLeft        =   False
          LockRight       =   True
          LockTop         =   True
-         MenuValue       =   0
          Scope           =   2
          TabIndex        =   6
          TabPanelIndex   =   1
@@ -1201,7 +1192,7 @@ Begin Window WndAdmin
    Begin PushButton btnCopyPublicKey
       AutoDeactivate  =   True
       Bold            =   False
-      ButtonStyle     =   "0"
+      ButtonStyle     =   0
       Cancel          =   False
       Caption         =   "Copy RSA Public Key"
       Default         =   False
@@ -1213,7 +1204,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   251
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   False
@@ -1312,7 +1303,7 @@ Begin Window WndAdmin
    Begin PushButton btnExport
       AutoDeactivate  =   True
       Bold            =   False
-      ButtonStyle     =   "0"
+      ButtonStyle     =   0
       Cancel          =   False
       Caption         =   "Export..."
       Default         =   False
@@ -1324,7 +1315,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   819
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   False
       LockRight       =   True
       LockTop         =   False
@@ -1344,7 +1335,7 @@ Begin Window WndAdmin
    Begin PushButton btnDuplicate
       AutoDeactivate  =   True
       Bold            =   False
-      ButtonStyle     =   "0"
+      ButtonStyle     =   0
       Cancel          =   False
       Caption         =   "Dupe"
       Default         =   False
@@ -1356,7 +1347,7 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   158
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   False
@@ -1398,11 +1389,10 @@ Begin Window WndAdmin
       Italic          =   False
       Left            =   684
       LockBottom      =   True
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   False
       LockRight       =   True
       LockTop         =   False
-      MenuValue       =   -1
       Scope           =   2
       TabIndex        =   9
       TabPanelIndex   =   0
@@ -1517,6 +1507,14 @@ Begin Window WndAdmin
       Version         =   ""
       VersionAsDouble =   0.0
    End
+   Begin Timer tmrAdjustControls
+      Index           =   -2147483648
+      LockedInPosition=   False
+      Mode            =   0
+      Period          =   20
+      Scope           =   2
+      TabPanelIndex   =   0
+   End
 End
 #tag EndWindow
 
@@ -1558,13 +1556,6 @@ End
 
 	#tag Event
 		Sub Close()
-		  if RelativeToFolderItem isa FolderItem then
-		    if RelativeToFolderItem.Exists then
-		      RelativeToFolderItem.Delete
-		    end if
-		    RelativeToFolderItem = nil
-		  end if
-		  
 		  //
 		  // Tear down the BinaryInformationControls
 		  //
@@ -1580,8 +1571,6 @@ End
 
 	#tag Event
 		Sub Open()
-		  RelativeToFolderItem = GetTemporaryFolderItem
-		  
 		  //
 		  // Create binary controls
 		  //
@@ -1650,8 +1639,9 @@ End
 
 
 	#tag Method, Flags = &h21
-		Private Sub AdjustControls()
-		  if self.Loading then
+		Private Sub AdjustControls(immediate As Boolean = False)
+		  if not immediate or self.Loading then
+		    tmrAdjustControls.Mode = Timer.ModeSingle
 		    return
 		  end if
 		  
@@ -1762,8 +1752,8 @@ End
 		    bc.Clear
 		  next
 		  
-		  hvReleaseNotesPreview.LoadPage( kNoDataHTML, RelativeToFolderItem )
-		  hvImagePreview.LoadPage( kNoDataHTML, RelativeToFolderItem )
+		  hvReleaseNotesPreview.LoadPage( kNoDataHTML, nil )
+		  hvImagePreview.LoadPage( kNoDataHTML, nil )
 		  
 		  self.Loading = false
 		  
@@ -1896,10 +1886,13 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function DoSave() As Boolean
+		Private Function DoSave(f As FolderItem = Nil) As Boolean
 		  StoreFieldsToVersionRow()
 		  
-		  dim f as FolderItem = Document
+		  if f is nil then
+		    f = Document
+		  end if
+		  
 		  if f is nil then
 		    return DoSaveAs()
 		  end if
@@ -1909,6 +1902,7 @@ End
 		  dim r as boolean
 		  MyKajuFile.SaveTo( f )
 		  r = true
+		  Document = f
 		  ContentsChanged = false
 		  
 		  Exception err as KajuException
@@ -1954,8 +1948,7 @@ End
 		      end if
 		    end if
 		    
-		    Document = f
-		    r = DoSave()
+		    r = DoSave( f )
 		  end if
 		  
 		  UpdateWindowTitle
@@ -2282,10 +2275,6 @@ End
 		Private Platforms() As String
 	#tag EndProperty
 
-	#tag Property, Flags = &h21
-		Private RelativeToFolderItem As FolderItem
-	#tag EndProperty
-
 
 	#tag Constant, Name = kNoDataHTML, Type = String, Dynamic = False, Default = \"<!-- No data --><BR />", Scope = Private
 	#tag EndConstant
@@ -2350,10 +2339,11 @@ End
 		  tmrUpdateReleaseNotesPreview.Reset
 		  
 		  #if TargetWindows then
-		    hvReleaseNotesPreview.LoadPage( kNoDataHTML, RelativeToFolderItem )
+		    hvReleaseNotesPreview.LoadPage( kNoDataHTML, nil )
 		    
 		    dim releaseNotes as string = ControlValue( fldReleaseNotes ).StringValue
-		    hvReleaseNotesPreview.LoadPage releaseNotes, RelativeToFolderItem
+		    hvReleaseNotesPreview.LoadPage releaseNotes, nil
+		    me.SetFocus
 		  #endif
 		  
 		End Sub
@@ -2361,7 +2351,7 @@ End
 #tag EndEvents
 #tag Events hvReleaseNotesPreview
 	#tag Event
-		Function NewWindow() As HTMLViewer
+		Function NewWindow() As Object
 		  return hvNewWindow
 		End Function
 	#tag EndEvent
@@ -2373,7 +2363,7 @@ End
 		End Function
 	#tag EndEvent
 	#tag Event
-		Sub DocumentComplete(URL as String)
+		Sub DocumentComplete(url as String)
 		  #pragma unused URL
 		  
 		  self.Loading = false
@@ -2395,14 +2385,14 @@ End
 		  tmrUpdateImagePreview.Reset
 		  
 		  #if TargetWindows then
-		    hvImagePreview.LoadPage kNoDataHTML, RelativeToFolderItem
+		    hvImagePreview.LoadPage kNoDataHTML, nil
 		  #endif
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events hvImagePreview
 	#tag Event
-		Function NewWindow() As HTMLViewer
+		Function NewWindow() As Object
 		  return hvNewWindow
 		End Function
 	#tag EndEvent
@@ -2414,7 +2404,7 @@ End
 		End Function
 	#tag EndEvent
 	#tag Event
-		Sub DocumentComplete(URL as String)
+		Sub DocumentComplete(url as String)
 		  #pragma unused URL
 		  
 		  self.Loading = false
@@ -2475,8 +2465,10 @@ End
 		  else
 		    releaseNotes = objReleaseNotesProcessor.DisplayReleaseNotes
 		  end if
-		  hvReleaseNotesPreview.LoadPage( releaseNotes, RelativeToFolderItem )
 		  
+		  dim saveControl as RectControl = self.Focus
+		  hvReleaseNotesPreview.LoadPage( releaseNotes, nil )
+		  self.Focus = saveControl
 		  //
 		  // The htmlViewer will set Loading to false
 		  //
@@ -2594,42 +2586,53 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events tmrAdjustControls
+	#tag Event
+		Sub Action()
+		  AdjustControls true
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="BackColor"
+		Name="MinimumWidth"
 		Visible=true
-		Group="Appearance"
-		InitialValue="&hFFFFFF"
-		Type="Color"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Backdrop"
-		Visible=true
-		Group="Appearance"
-		Type="Picture"
-		EditorType="Picture"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="CloseButton"
-		Visible=true
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Composite"
-		Visible=true
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Frame"
-		Visible=true
-		Group="Appearance"
-		InitialValue="0"
+		Group="Size"
+		InitialValue="64"
 		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MinimumHeight"
+		Visible=true
+		Group="Size"
+		InitialValue="64"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MaximumWidth"
+		Visible=true
+		Group="Size"
+		InitialValue="32000"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MaximumHeight"
+		Visible=true
+		Group="Size"
+		InitialValue="32000"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Type"
+		Visible=true
+		Group="Frame"
+		InitialValue="0"
+		Type="Types"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Document"
@@ -2646,140 +2649,43 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="FullScreen"
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="FullScreenButton"
+		Name="HasCloseButton"
 		Visible=true
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="HasBackColor"
-		Visible=true
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Height"
-		Visible=true
-		Group="Position"
-		InitialValue="400"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="ImplicitInstance"
-		Visible=true
-		Group="Appearance"
+		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Interfaces"
+		Name="HasMaximizeButton"
 		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="LiveResize"
-		Visible=true
-		Group="Appearance"
+		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Loading"
+		Name="HasMinimizeButton"
+		Visible=true
+		Group="Frame"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasFullScreenButton"
+		Visible=true
+		Group="Frame"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="DefaultLocation"
+		Visible=true
 		Group="Behavior"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MacProcID"
-		Visible=true
-		Group="Appearance"
 		InitialValue="0"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaxHeight"
-		Visible=true
-		Group="Position"
-		InitialValue="32000"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaximizeButton"
-		Visible=true
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaxWidth"
-		Visible=true
-		Group="Position"
-		InitialValue="32000"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MenuBar"
-		Visible=true
-		Group="Appearance"
-		Type="MenuBar"
-		EditorType="MenuBar"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MenuBarVisible"
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinHeight"
-		Visible=true
-		Group="Position"
-		InitialValue="64"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinimizeButton"
-		Visible=true
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinWidth"
-		Visible=true
-		Group="Position"
-		InitialValue="64"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Name"
-		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Placement"
-		Visible=true
-		Group="Position"
-		InitialValue="0"
-		Type="Integer"
+		Type="Locations"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Default"
@@ -2790,19 +2696,124 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="HasBackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="&hFFFFFF"
+		Type="Color"
+		EditorType="Color"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Backdrop"
+		Visible=true
+		Group="Appearance"
+		InitialValue=""
+		Type="Picture"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Composite"
+		Visible=true
+		Group="Appearance"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="FullScreen"
+		Visible=false
+		Group="Appearance"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Height"
+		Visible=true
+		Group="Position"
+		InitialValue="400"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ImplicitInstance"
+		Visible=true
+		Group="Appearance"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Interfaces"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Loading"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MacProcID"
+		Visible=true
+		Group="Appearance"
+		InitialValue="0"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MenuBar"
+		Visible=true
+		Group="Appearance"
+		InitialValue=""
+		Type="MenuBar"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MenuBarVisible"
+		Visible=false
+		Group="Appearance"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Name"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="Resizeable"
 		Visible=true
 		Group="Appearance"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
-		EditorType="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Title"
@@ -2810,6 +2821,7 @@ End
 		Group="Appearance"
 		InitialValue="Untitled"
 		Type="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Visible"
@@ -2817,7 +2829,7 @@ End
 		Group="Appearance"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Width"
@@ -2825,5 +2837,6 @@ End
 		Group="Position"
 		InitialValue="600"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior
