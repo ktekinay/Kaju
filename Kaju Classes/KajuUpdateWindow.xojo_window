@@ -25,27 +25,6 @@ Begin Window KajuUpdateWindow
    Title           =   "#KajuLocale.kWindowTitle"
    Visible         =   True
    Width           =   800
-   Begin HTMLViewer hvNotes
-      AutoDeactivate  =   True
-      Enabled         =   True
-      Height          =   445
-      HelpTag         =   ""
-      Index           =   -2147483648
-      Left            =   149
-      LockBottom      =   False
-      LockedInPosition=   True
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      Renderer        =   1
-      Scope           =   2
-      TabIndex        =   1
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Top             =   84
-      Visible         =   True
-      Width           =   631
-   End
    Begin PushButton btnOK
       AutoDeactivate  =   True
       Bold            =   False
@@ -300,7 +279,6 @@ Begin Window KajuUpdateWindow
       Scope           =   2
       TabIndex        =   8
       TabPanelIndex   =   0
-      TabStop         =   True
       Top             =   555
       Transparent     =   False
       Value           =   0.0
@@ -311,7 +289,6 @@ Begin Window KajuUpdateWindow
       Arguments       =   ""
       Backend         =   ""
       Canonical       =   False
-      Enabled         =   True
       ErrorCode       =   0
       Index           =   -2147483648
       InitialParent   =   ""
@@ -390,7 +367,7 @@ Begin Window KajuUpdateWindow
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
-      InitialValue    =   ""
+      InitialValue    =   "updates"
       Italic          =   False
       Left            =   36
       ListIndex       =   0
@@ -413,7 +390,6 @@ Begin Window KajuUpdateWindow
       Width           =   101
    End
    Begin Timer tmrTimeout
-      Enabled         =   True
       Index           =   -2147483648
       InitialParent   =   ""
       LockedInPosition=   False
@@ -424,12 +400,32 @@ Begin Window KajuUpdateWindow
    End
    Begin Kaju.HTTPSocketAsync hsSocket
       AllowCertificateValidation=   False
-      Enabled         =   True
       HTTPStatusCode  =   0
       Index           =   -2147483648
       LockedInPosition=   False
       Scope           =   2
       TabPanelIndex   =   0
+   End
+   Begin HTMLViewer hvNotes
+      AutoDeactivate  =   True
+      Enabled         =   True
+      Height          =   445
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Left            =   149
+      LockBottom      =   False
+      LockedInPosition=   True
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Renderer        =   1
+      Scope           =   2
+      TabIndex        =   1
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Top             =   84
+      Visible         =   True
+      Width           =   631
    End
 End
 #tag EndWindow
@@ -590,6 +586,11 @@ End
 		  // Set up the menu with the available updates.
 		  // It will set up the rest of the controls.
 		  //
+		  // NOTE: Linux requires there to be an initial value in 
+		  // the pop-up menu or the Window won't draw
+		  // correctly.
+		  //
+		  pumUpdates.DeleteAllRows
 		  
 		  for i as integer = 0 to Updates.Ubound
 		    dim update as Kaju.UpdateInformation = updates( i )
@@ -1012,41 +1013,6 @@ End
 
 #tag EndWindowCode
 
-#tag Events hvNotes
-	#tag Event
-		Function NewWindow() As Object
-		  return hvNewWindow
-		  
-		End Function
-	#tag EndEvent
-	#tag Event
-		Function CancelLoad(URL as String) As Boolean
-		  #pragma unused URL
-		  
-		  dim r as boolean = not Loading
-		  Loading = false
-		  return r
-		  
-		End Function
-	#tag EndEvent
-	#tag Event
-		Sub Error(errorNumber as Integer, errorMessage as String)
-		  #pragma unused errorMessage
-		  
-		  #if TargetMacOS then
-		    const kCancelledCode as integer = -999
-		  #else
-		    const kCancelledCode as integer = -9999999999
-		  #endif
-		  
-		  if errorNumber <> kCancelledCode then
-		    break
-		  end if
-		  
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events btnOK
 	#tag Event
 		Sub Action()
@@ -1315,6 +1281,41 @@ End
 		  pbProgress.Value = bytesReceived
 		  
 		  tmrTimeout.Reset
+		  
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events hvNotes
+	#tag Event
+		Function NewWindow() As Object
+		  return hvNewWindow
+		  
+		End Function
+	#tag EndEvent
+	#tag Event
+		Function CancelLoad(URL as String) As Boolean
+		  #pragma unused URL
+		  
+		  dim r as boolean = not Loading
+		  Loading = false
+		  return r
+		  
+		End Function
+	#tag EndEvent
+	#tag Event
+		Sub Error(errorNumber as Integer, errorMessage as String)
+		  #pragma unused errorMessage
+		  
+		  #if TargetMacOS then
+		    const kCancelledCode as integer = -999
+		  #else
+		    const kCancelledCode as integer = -9999999999
+		  #endif
+		  
+		  if errorNumber <> kCancelledCode then
+		    break
+		  end if
 		  
 		  
 		End Sub
