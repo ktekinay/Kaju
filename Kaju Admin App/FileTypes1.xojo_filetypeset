@@ -8,10 +8,12 @@
 		MacType=
 		Name=KajuDocument
 		UTI=com.mactechnologies.kajudocument
-		UTIConformsTo=
+		UTIConformsTo=,public.data
 		Description=
 		MimeType=
 		Imported=True
+		HandlerRank=&h9
+		UTIPhysicalType=public.data
 	#tag EndFileType
 
 	#tag FileType
@@ -22,10 +24,12 @@
 		MacType=TEXT
 		Name=text/html
 		UTI=public.html
-		UTIConformsTo=
+		UTIConformsTo=,public.data
 		Description=
 		MimeType=
 		Imported=True
+		HandlerRank=&h9
+		UTIPhysicalType=public.data
 	#tag EndFileType
 
 	#tag FileType
@@ -36,10 +40,12 @@
 		MacType=????
 		Name=special/any
 		UTI=
-		UTIConformsTo=
+		UTIConformsTo=,public.data
 		Description=
 		MimeType=
 		Imported=True
+		HandlerRank=&h9
+		UTIPhysicalType=public.data
 	#tag EndFileType
 
 	#tag FileType
@@ -50,10 +56,12 @@
 		MacType=ZIP 
 		Name=application/zip
 		UTI=
-		UTIConformsTo=
+		UTIConformsTo=,public.data
 		Description=
 		MimeType=
 		Imported=True
+		HandlerRank=&h9
+		UTIPhysicalType=public.data
 	#tag EndFileType
 
 #tag EndFileTypeSet

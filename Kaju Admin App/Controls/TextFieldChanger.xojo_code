@@ -16,6 +16,14 @@ Inherits TextField
 
 	#tag ViewBehavior
 		#tag ViewProperty
+			Name="Text"
+			Visible=true
+			Group="Initial State"
+			InitialValue=""
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="AllowAutoDeactivate"
 			Visible=true
 			Group="Appearance"
@@ -96,14 +104,6 @@ Inherits TextField
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Hint"
-			Visible=true
-			Group="Initial State"
-			InitialValue=""
-			Type="String"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Value"
 			Visible=true
 			Group="Initial State"
 			InitialValue=""

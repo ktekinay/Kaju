@@ -16,6 +16,27 @@ Inherits TextArea
 
 	#tag ViewBehavior
 		#tag ViewProperty
+			Name="Text"
+			Visible=true
+			Group="Initial State"
+			InitialValue=""
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="UnicodeMode"
+			Visible=true
+			Group="Selection Behavior"
+			InitialValue="0"
+			Type="TextArea.UnicodeModes"
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - Native"
+				"1 - Characters"
+				"2 - Codepoints"
+			#tag EndEnumValues
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="AllowAutoDeactivate"
 			Visible=true
 			Group="Appearance"
@@ -117,14 +138,6 @@ Inherits TextArea
 				"3 - Inch"
 				"4 - Millimeter"
 			#tag EndEnumValues
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Value"
-			Visible=true
-			Group="Initial State"
-			InitialValue=""
-			Type="String"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AllowTabs"

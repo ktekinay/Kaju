@@ -279,6 +279,7 @@ Begin Window KajuUpdateWindow
       Scope           =   2
       TabIndex        =   8
       TabPanelIndex   =   0
+      TabStop         =   True
       Top             =   555
       Transparent     =   False
       Value           =   0.0
@@ -289,6 +290,7 @@ Begin Window KajuUpdateWindow
       Arguments       =   ""
       Backend         =   ""
       Canonical       =   False
+      Enabled         =   True
       ErrorCode       =   0
       Index           =   -2147483648
       InitialParent   =   ""
@@ -390,6 +392,7 @@ Begin Window KajuUpdateWindow
       Width           =   101
    End
    Begin Timer tmrTimeout
+      Enabled         =   True
       Index           =   -2147483648
       InitialParent   =   ""
       LockedInPosition=   False
@@ -400,6 +403,7 @@ Begin Window KajuUpdateWindow
    End
    Begin Kaju.HTTPSocketAsync hsSocket
       AllowCertificateValidation=   False
+      Enabled         =   True
       HTTPStatusCode  =   0
       Index           =   -2147483648
       LockedInPosition=   False
@@ -1288,7 +1292,7 @@ End
 #tag EndEvents
 #tag Events hvNotes
 	#tag Event
-		Function NewWindow() As Object
+		Function NewWindow() As HTMLViewer
 		  return hvNewWindow
 		  
 		End Function
