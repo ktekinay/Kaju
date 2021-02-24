@@ -97,7 +97,7 @@ Begin Window WndAdmin
       LockRight       =   False
       LockTop         =   False
       Scope           =   2
-      TabIndex        =   5
+      TabIndex        =   12
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
@@ -129,7 +129,7 @@ Begin Window WndAdmin
       LockRight       =   False
       LockTop         =   False
       Scope           =   2
-      TabIndex        =   6
+      TabIndex        =   13
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
@@ -169,7 +169,7 @@ Begin Window WndAdmin
       Password        =   False
       ReadOnly        =   False
       Scope           =   2
-      TabIndex        =   3
+      TabIndex        =   5
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   ""
@@ -204,7 +204,7 @@ Begin Window WndAdmin
       Multiline       =   False
       Scope           =   2
       Selectable      =   False
-      TabIndex        =   12
+      TabIndex        =   4
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Version:"
@@ -238,7 +238,7 @@ Begin Window WndAdmin
       Scope           =   2
       SmallTabs       =   False
       TabDefinition   =   "Release Notes\rBinaries\r64-bit Binaries\rImage"
-      TabIndex        =   4
+      TabIndex        =   10
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
@@ -284,7 +284,7 @@ Begin Window WndAdmin
          ScrollbarHorizontal=   False
          ScrollbarVertical=   True
          Styled          =   False
-         TabIndex        =   0
+         TabIndex        =   9
          TabPanelIndex   =   1
          TabStop         =   True
          Text            =   ""
@@ -295,6 +295,7 @@ Begin Window WndAdmin
          Top             =   194
          Transparent     =   False
          Underline       =   False
+         UnicodeMode     =   0
          UseFocusRing    =   True
          Visible         =   True
          Width           =   613
@@ -314,7 +315,7 @@ Begin Window WndAdmin
          LockTop         =   False
          Renderer        =   1
          Scope           =   2
-         TabIndex        =   1
+         TabIndex        =   12
          TabPanelIndex   =   1
          TabStop         =   True
          Top             =   408
@@ -341,7 +342,7 @@ Begin Window WndAdmin
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
-         TabIndex        =   11
+         TabIndex        =   10
          TabPanelIndex   =   1
          TabStop         =   True
          Text            =   "Preview:"
@@ -376,7 +377,7 @@ Begin Window WndAdmin
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
-         TabIndex        =   10
+         TabIndex        =   0
          TabPanelIndex   =   1
          TabStop         =   True
          Text            =   "Release Notes (HTML):"
@@ -420,7 +421,7 @@ Begin Window WndAdmin
          Password        =   False
          ReadOnly        =   False
          Scope           =   2
-         TabIndex        =   1
+         TabIndex        =   4
          TabPanelIndex   =   4
          TabStop         =   True
          Text            =   ""
@@ -518,7 +519,7 @@ Begin Window WndAdmin
          LockTop         =   True
          Renderer        =   1
          Scope           =   2
-         TabIndex        =   2
+         TabIndex        =   5
          TabPanelIndex   =   4
          TabStop         =   True
          Top             =   257
@@ -555,7 +556,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          Scope           =   2
-         TabIndex        =   7
+         TabIndex        =   6
          TabPanelIndex   =   1
          TabStop         =   True
          TextColor       =   &c00000000
@@ -599,7 +600,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          Scope           =   2
-         TabIndex        =   8
+         TabIndex        =   7
          TabPanelIndex   =   1
          TabStop         =   True
          TextColor       =   &c00000000
@@ -643,7 +644,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          Scope           =   2
-         TabIndex        =   9
+         TabIndex        =   8
          TabPanelIndex   =   1
          TabStop         =   True
          TextColor       =   &c00000000
@@ -687,7 +688,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          Scope           =   2
-         TabIndex        =   2
+         TabIndex        =   1
          TabPanelIndex   =   1
          TabStop         =   True
          TextColor       =   &c00000000
@@ -731,7 +732,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          Scope           =   2
-         TabIndex        =   3
+         TabIndex        =   2
          TabPanelIndex   =   1
          TabStop         =   True
          TextColor       =   &c00000000
@@ -775,7 +776,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          Scope           =   2
-         TabIndex        =   4
+         TabIndex        =   3
          TabPanelIndex   =   1
          TabStop         =   True
          TextColor       =   &c00000000
@@ -819,7 +820,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          Scope           =   2
-         TabIndex        =   5
+         TabIndex        =   4
          TabPanelIndex   =   1
          TabStop         =   True
          TextColor       =   &c00000000
@@ -863,7 +864,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          Scope           =   2
-         TabIndex        =   6
+         TabIndex        =   5
          TabPanelIndex   =   1
          TabStop         =   True
          TextColor       =   &c00000000
@@ -967,7 +968,7 @@ Begin Window WndAdmin
          LockTop         =   False
          Scope           =   2
          State           =   0
-         TabIndex        =   12
+         TabIndex        =   11
          TabPanelIndex   =   1
          TabStop         =   True
          TextFont        =   "SmallSystem"
@@ -1000,7 +1001,7 @@ Begin Window WndAdmin
          LockRight       =   True
          LockTop         =   True
          Scope           =   2
-         TabIndex        =   4
+         TabIndex        =   2
          TabPanelIndex   =   4
          TabStop         =   True
          TextFont        =   "System"
@@ -1032,7 +1033,7 @@ Begin Window WndAdmin
          Multiline       =   False
          Scope           =   2
          Selectable      =   False
-         TabIndex        =   5
+         TabIndex        =   1
          TabPanelIndex   =   4
          TabStop         =   True
          Text            =   "Scale:"
@@ -1076,7 +1077,7 @@ Begin Window WndAdmin
       Password        =   False
       ReadOnly        =   False
       Scope           =   2
-      TabIndex        =   1
+      TabIndex        =   2
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   ""
@@ -1111,7 +1112,7 @@ Begin Window WndAdmin
       Multiline       =   False
       Scope           =   2
       Selectable      =   False
-      TabIndex        =   11
+      TabIndex        =   1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "App Name:"
@@ -1146,7 +1147,7 @@ Begin Window WndAdmin
       LockTop         =   True
       Scope           =   2
       State           =   0
-      TabIndex        =   2
+      TabIndex        =   3
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
@@ -1158,15 +1159,6 @@ Begin Window WndAdmin
       Value           =   False
       Visible         =   True
       Width           =   180
-   End
-   Begin Timer tmrUpdateReleaseNotesPreview
-      Index           =   -2147483648
-      InitialParent   =   ""
-      LockedInPosition=   False
-      Mode            =   0
-      Period          =   750
-      Scope           =   2
-      TabPanelIndex   =   0
    End
    Begin HTMLViewer hvNewWindow
       AutoDeactivate  =   True
@@ -1182,12 +1174,22 @@ Begin Window WndAdmin
       LockTop         =   True
       Renderer        =   0
       Scope           =   2
-      TabIndex        =   15
+      TabIndex        =   11
       TabPanelIndex   =   0
       TabStop         =   True
       Top             =   156
       Visible         =   False
       Width           =   300
+   End
+   Begin Timer tmrUpdateReleaseNotesPreview
+      Enabled         =   True
+      Index           =   -2147483648
+      InitialParent   =   ""
+      LockedInPosition=   False
+      Mode            =   0
+      Period          =   750
+      Scope           =   2
+      TabPanelIndex   =   0
    End
    Begin PushButton btnCopyPublicKey
       AutoDeactivate  =   True
@@ -1209,7 +1211,7 @@ Begin Window WndAdmin
       LockRight       =   False
       LockTop         =   False
       Scope           =   2
-      TabIndex        =   8
+      TabIndex        =   15
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
@@ -1222,6 +1224,7 @@ Begin Window WndAdmin
       Width           =   186
    End
    Begin Timer tmrUpdateImagePreview
+      Enabled         =   True
       Index           =   -2147483648
       InitialParent   =   ""
       LockedInPosition=   False
@@ -1250,7 +1253,7 @@ Begin Window WndAdmin
       Multiline       =   True
       Scope           =   2
       Selectable      =   False
-      TabIndex        =   14
+      TabIndex        =   7
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "None"
@@ -1285,7 +1288,7 @@ Begin Window WndAdmin
       Multiline       =   False
       Scope           =   2
       Selectable      =   False
-      TabIndex        =   13
+      TabIndex        =   6
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Platforms:"
@@ -1320,7 +1323,7 @@ Begin Window WndAdmin
       LockRight       =   True
       LockTop         =   False
       Scope           =   2
-      TabIndex        =   10
+      TabIndex        =   17
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
@@ -1352,7 +1355,7 @@ Begin Window WndAdmin
       LockRight       =   False
       LockTop         =   False
       Scope           =   2
-      TabIndex        =   7
+      TabIndex        =   14
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "SmallSystem"
@@ -1394,7 +1397,7 @@ Begin Window WndAdmin
       LockRight       =   True
       LockTop         =   False
       Scope           =   2
-      TabIndex        =   9
+      TabIndex        =   16
       TabPanelIndex   =   0
       TabStop         =   True
       TextColor       =   &c00000000
@@ -1437,7 +1440,7 @@ Begin Window WndAdmin
       Password        =   False
       ReadOnly        =   False
       Scope           =   2
-      TabIndex        =   16
+      TabIndex        =   9
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   ""
@@ -1472,7 +1475,7 @@ Begin Window WndAdmin
       Multiline       =   False
       Scope           =   2
       Selectable      =   False
-      TabIndex        =   17
+      TabIndex        =   8
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Min. Req. Version:"
@@ -1508,6 +1511,7 @@ Begin Window WndAdmin
       VersionAsDouble =   0.0
    End
    Begin Timer tmrAdjustControls
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Mode            =   0
@@ -1700,8 +1704,16 @@ End
 		    lblPlatform.Text = join( Platforms, ", " )
 		  end if
 		  
-		  
 		  UpdateWindowTitle
+		  
+		  //
+		  // Do stuff for the first run here
+		  //
+		  if IsFirstRun then
+		    lbVersions.SetFocus
+		    
+		    IsFirstRun = false
+		  end if
 		  
 		End Sub
 	#tag EndMethod
@@ -2234,6 +2246,10 @@ End
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h21
+		Private IsFirstRun As Boolean = True
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private LastVersionRow As Integer = -1
 	#tag EndProperty
 
@@ -2351,7 +2367,7 @@ End
 #tag EndEvents
 #tag Events hvReleaseNotesPreview
 	#tag Event
-		Function NewWindow() As Object
+		Function NewWindow() As HTMLViewer
 		  return hvNewWindow
 		End Function
 	#tag EndEvent
@@ -2392,7 +2408,7 @@ End
 #tag EndEvents
 #tag Events hvImagePreview
 	#tag Event
-		Function NewWindow() As Object
+		Function NewWindow() As HTMLViewer
 		  return hvNewWindow
 		End Function
 	#tag EndEvent
@@ -2454,6 +2470,14 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events hvNewWindow
+	#tag Event
+		Function CancelLoad(URL as String) As Boolean
+		  ShowURL( URL )
+		  return true
+		End Function
+	#tag EndEvent
+#tag EndEvents
 #tag Events tmrUpdateReleaseNotesPreview
 	#tag Event
 		Sub Action()
@@ -2474,14 +2498,6 @@ End
 		  //
 		  
 		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events hvNewWindow
-	#tag Event
-		Function CancelLoad(URL as String) As Boolean
-		  ShowURL( URL )
-		  return true
-		End Function
 	#tag EndEvent
 #tag EndEvents
 #tag Events btnCopyPublicKey
