@@ -374,6 +374,8 @@ This project was designed and implemented by:
 
 With thanks to John Hansen, Paul Lefebvre, Scott Boss, and Vidal van Bergen.
 
+With thanks to Julia Truchsess for designing the Admin app icon. (I didn't even ask!)
+
 Translations to other languages by:
 
 * Sascha Schneppmueller (German)
@@ -419,6 +421,11 @@ There are two places to look for strings that need translation:
 Add a translation for each, then submit a pull request as outlined above.
 
 ## Release Notes
+
+2.2 (____)
+
+* Admin app icon, designed by Julia Truchsess.
+* Adjust Admin app tab order and made sure the Versions Listbox was selected when opened.
 
 2.1 (July 3, 2020)
 
